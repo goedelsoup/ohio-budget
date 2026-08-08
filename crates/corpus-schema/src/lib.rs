@@ -272,15 +272,102 @@ pub struct CatalogEntry {
 /// silent. The validator rejects float-typed money anywhere it appears.
 pub type Cents = i64;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+/// Stages an Ohio appropriation bill passes through.
+///
+/// Genesis modelled six. The LSC appropriation spreadsheet publishes nine, distinguishing a
+/// chamber's substitute bill, its committee-reported version, and its floor-passed version —
+/// which are frequently different figures. The four intermediate variants were added after
+/// reading the source rather than reasoned about in advance, and dropping them would discard
+/// exactly the resolution that makes stage attribution possible.
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
+)]
 #[serde(rename_all = "kebab-case")]
 pub enum BillStage {
     AsIntroduced,
+    HouseSubstitute,
+    HouseReported,
     AsPassedHouse,
+    SenateSubstitute,
+    SenateReported,
     AsPassedSenate,
     ConferenceReport,
     AsEnacted,
     PostVeto,
+}
+
+impl BillStage {
+    /// Corpus spelling, matching the `stage` property on bill-version and appropriation.
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            BillStage::AsIntroduced => "as-introduced",
+            BillStage::HouseSubstitute => "house-substitute",
+            BillStage::HouseReported => "house-reported",
+            BillStage::AsPassedHouse => "as-passed-house",
+            BillStage::SenateSubstitute => "senate-substitute",
+            BillStage::SenateReported => "senate-reported",
+            BillStage::AsPassedSenate => "as-passed-senate",
+            BillStage::ConferenceReport => "conference-report",
+            BillStage::AsEnacted => "as-enacted",
+            BillStage::PostVeto => "post-veto",
+        }
+    }
+
+    /// Parses a published stage label onto the corpus vocabulary.
+    ///
+    /// Both the General Assembly's record and LSC's spreadsheet headers name these stages,
+    /// in several spellings each. Keeping the vocabulary here means a source that invents a
+    /// new spelling is fixed once rather than in every connector.
+    ///
+    /// Returns `None` rather than guessing: a stage guessed wrong puts figures on the wrong
+    /// node, which is worse than a column the caller has to classify by hand.
+    pub fn parse_label(raw: &str) -> Option<BillStage> {
+        let n: String = raw
+            .to_ascii_lowercase()
+            .chars()
+            .map(|c| if c.is_ascii_alphanumeric() { c } else { ' ' })
+            .collect();
+        let n = n.split_whitespace().collect::<Vec<_>>().join(" ");
+        match n.as_str() {
+            "as introduced" | "introduced" | "as filed" => Some(BillStage::AsIntroduced),
+            "house substitute" | "substitute house bill" | "sub house" => {
+                Some(BillStage::HouseSubstitute)
+            }
+            "house reported" | "as reported by house finance" => Some(BillStage::HouseReported),
+            "as passed by the house" | "as passed house" | "house passed" => {
+                Some(BillStage::AsPassedHouse)
+            }
+            "senate substitute" | "sub senate" => Some(BillStage::SenateSubstitute),
+            "senate reported" | "as reported by senate finance" => Some(BillStage::SenateReported),
+            "as passed by the senate" | "as passed senate" | "senate passed" => {
+                Some(BillStage::AsPassedSenate)
+            }
+            "conference report" | "as reported by conference committee" => {
+                Some(BillStage::ConferenceReport)
+            }
+            "as enacted" | "enacted" | "as signed by the governor" | "final" => {
+                Some(BillStage::AsEnacted)
+            }
+            "post veto" | "as vetoed" | "after line item veto" => Some(BillStage::PostVeto),
+            _ => None,
+        }
+    }
+
+    /// Order in which a bill passes through them. Declaration order is the sequence.
+    pub fn sequence() -> [BillStage; 10] {
+        [
+            BillStage::AsIntroduced,
+            BillStage::HouseSubstitute,
+            BillStage::HouseReported,
+            BillStage::AsPassedHouse,
+            BillStage::SenateSubstitute,
+            BillStage::SenateReported,
+            BillStage::AsPassedSenate,
+            BillStage::ConferenceReport,
+            BillStage::AsEnacted,
+            BillStage::PostVeto,
+        ]
+    }
 }
 
 /// One appropriation figure as published in a Legislative Service Commission comparison

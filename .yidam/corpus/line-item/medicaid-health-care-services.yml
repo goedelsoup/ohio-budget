@@ -20,12 +20,13 @@ description: |
 
   [open] The code, the predecessor code, and the effective date of the transition are all
   unverified. No code is guessed here.
+  ALI 651525, agency MCD, general revenue fund. [verified]
 properties:
-  name: Medicaid Health Care Services
-  current_code: "[open] pending verification"
+  name: "Medicaid Health Care Services [verified]"
+  current_code: "651525 [verified]"
   historical_codes: |
     [open] Pre-separation codes under Job and Family Services not yet reconstructed.
-  agency_code: "[open] three-letter code pending verification"
+  agency_code: "MCD [verified]"
   purpose: |
     Payment for Medicaid-covered health care services, including managed care capitation and
     fee-for-service claims.
@@ -41,3 +42,5 @@ links:
     relationship: draws-from
   - target: ./medicaid-services-odjfs.yml
     relationship: succeeds
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

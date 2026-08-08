@@ -18,11 +18,17 @@ description: |
   alone. It shows up as a smaller number with no apparent decision attached.
 
   [open] The code, and the percentage by biennium across the window, are unverified.
+  ALI 110969. The source assigns it to agency `RDF`, revenue distribution funds, not to
+  the Department of Taxation as this node asserted. [verified] RDF is an accounting
+  construct rather than a department, so the belongs-to edge is left in place and
+  flagged: [open] which department administers the distribution, as distinct from which
+  agency code carries the appropriation, is now an open question rather than an
+  assumption.
 properties:
-  name: Local Government Fund Distribution
-  current_code: "[open] pending verification"
+  name: "Local Government Fund [verified]"
+  current_code: "110969 [verified]"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "RDF [verified]"
   purpose: |
     Statutory distribution to county undivided local government funds and to municipalities
     and townships.
@@ -36,3 +42,5 @@ links:
     relationship: draws-from
   - target: ../agency/department-of-taxation.yml
     relationship: belongs-to
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

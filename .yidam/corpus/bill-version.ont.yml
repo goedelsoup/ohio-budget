@@ -10,7 +10,14 @@ description: |
 properties:
   - name: stage
     type: string
-    description: as-introduced | as-passed-house | as-passed-senate | conference-report | as-enacted | post-veto
+    description: |
+      as-introduced | house-substitute | house-reported | as-passed-house |
+      senate-substitute | senate-reported | as-passed-senate | conference-report |
+      as-enacted | post-veto
+
+      The four intermediate variants were added after reading the LSC appropriation
+      spreadsheet, which publishes all nine. A chamber's substitute, its committee-reported
+      version, and its floor-passed version are frequently different figures. [verified]
   - name: stage_date
     type: date
     description: Date this version was produced or acted on

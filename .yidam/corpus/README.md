@@ -92,12 +92,12 @@ Sorted by: kind, then alphabetically.
 | [medicaid-health-care-services-fy2018-19-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2018-19-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2018-19, As Enacted | 6 | 29 |
 | [medicaid-health-care-services-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2020-21-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2020-21, As Enacted | 7 | 34 |
 | [medicaid-health-care-services-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2024-25-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2024-25, As Enacted | 7 | 35 |
-| [medicaid-health-care-services-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2026-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2026, As Enacted | 6 | 41 |
+| [medicaid-health-care-services-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2026-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2026, As Enacted | 7 | 46 |
 | [medicaid-services-odjfs-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-odjfs-fy2012-13-as-enacted.yml) | appropriation | Medicaid Services (JFS) — FY2012-13, As Enacted | 6 | 32 |
 | [public-library-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2010-11, As Enacted | 7 | 32 |
 | [public-library-fund-distribution-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2012-13-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2012-13, As Enacted | 6 | 31 |
 | [state-share-of-instruction-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2024-25-as-enacted.yml) | appropriation | State Share of Instruction — FY2024-25, As Enacted | 7 | 31 |
-| [state-share-of-instruction-fy2026-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2026-as-enacted.yml) | appropriation | State Share of Instruction — FY2026, As Enacted | 6 | 26 |
+| [state-share-of-instruction-fy2026-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2026-as-enacted.yml) | appropriation | State Share of Instruction — FY2026, As Enacted | 7 | 32 |
 | [hb1-128th.yml](.yidam/corpus/bill/hb1-128th.yml) | bill | House Bill 1 (128th General Assembly) | 3 | 29 |
 | [hb110-134th.yml](.yidam/corpus/bill/hb110-134th.yml) | bill | House Bill 110 (134th General Assembly) | 3 | 30 |
 | [hb153-129th.yml](.yidam/corpus/bill/hb153-129th.yml) | bill | House Bill 153 (129th General Assembly) | 3 | 31 |
@@ -189,7 +189,7 @@ Sorted by: kind, then alphabetically.
 | [hamilton-county.yml](.yidam/corpus/jurisdiction/hamilton-county.yml) | jurisdiction | Hamilton County | 1 | 18 |
 | [montgomery-county.yml](.yidam/corpus/jurisdiction/montgomery-county.yml) | jurisdiction | Montgomery County | 1 | 17 |
 | [behavioral-health-medicaid.yml](.yidam/corpus/line-item/behavioral-health-medicaid.yml) | line-item | Behavioral Health Medicaid Services | 3 | 28 |
-| [community-schools-funding.yml](.yidam/corpus/line-item/community-schools-funding.yml) | line-item | Community Schools Funding | 3 | 26 |
+| [community-schools-funding.yml](.yidam/corpus/line-item/community-schools-funding.yml) | line-item | Community Schools Funding | 4 | 30 |
 | [developmental-disabilities-services.yml](.yidam/corpus/line-item/developmental-disabilities-services.yml) | line-item | Developmental Disabilities Medicaid Services | 3 | 31 |
 | [disability-financial-assistance.yml](.yidam/corpus/line-item/disability-financial-assistance.yml) | line-item | Disability Financial Assistance | 3 | 27 |
 | [early-childhood-education.yml](.yidam/corpus/line-item/early-childhood-education.yml) | line-item | Early Childhood Education | 3 | 30 |
@@ -197,16 +197,16 @@ Sorted by: kind, then alphabetically.
 | [highway-construction.yml](.yidam/corpus/line-item/highway-construction.yml) | line-item | Highway Construction | 3 | 37 |
 | [highway-maintenance.yml](.yidam/corpus/line-item/highway-maintenance.yml) | line-item | Highway Maintenance | 3 | 30 |
 | [highway-patrol-operations.yml](.yidam/corpus/line-item/highway-patrol-operations.yml) | line-item | Highway Patrol Operations | 3 | 26 |
-| [institutional-operations.yml](.yidam/corpus/line-item/institutional-operations.yml) | line-item | Institutional Operations | 3 | 29 |
-| [local-government-fund-distribution.yml](.yidam/corpus/line-item/local-government-fund-distribution.yml) | line-item | Local Government Fund Distribution | 3 | 38 |
+| [institutional-operations.yml](.yidam/corpus/line-item/institutional-operations.yml) | line-item | Institutional Operations | 4 | 32 |
+| [local-government-fund-distribution.yml](.yidam/corpus/line-item/local-government-fund-distribution.yml) | line-item | Local Government Fund Distribution | 4 | 46 |
 | [medicaid-health-care-services-federal.yml](.yidam/corpus/line-item/medicaid-health-care-services-federal.yml) | line-item | Medicaid Health Care Services (Federal Share) | 3 | 34 |
-| [medicaid-health-care-services.yml](.yidam/corpus/line-item/medicaid-health-care-services.yml) | line-item | Medicaid Health Care Services | 4 | 43 |
+| [medicaid-health-care-services.yml](.yidam/corpus/line-item/medicaid-health-care-services.yml) | line-item | Medicaid Health Care Services | 5 | 46 |
 | [medicaid-services-odjfs.yml](.yidam/corpus/line-item/medicaid-services-odjfs.yml) | line-item | Medicaid Services (Job and Family Services) | 4 | 37 |
 | [property-tax-rollback-reimbursement.yml](.yidam/corpus/line-item/property-tax-rollback-reimbursement.yml) | line-item | Property Tax Rollback Reimbursement | 3 | 34 |
-| [public-library-fund-distribution.yml](.yidam/corpus/line-item/public-library-fund-distribution.yml) | line-item | Public Library Fund Distribution | 3 | 29 |
-| [pupil-transportation.yml](.yidam/corpus/line-item/pupil-transportation.yml) | line-item | Pupil Transportation | 3 | 31 |
-| [special-education.yml](.yidam/corpus/line-item/special-education.yml) | line-item | Special Education Enhancements | 3 | 27 |
-| [state-share-of-instruction.yml](.yidam/corpus/line-item/state-share-of-instruction.yml) | line-item | State Share of Instruction | 3 | 30 |
+| [public-library-fund-distribution.yml](.yidam/corpus/line-item/public-library-fund-distribution.yml) | line-item | Public Library Fund Distribution | 4 | 32 |
+| [pupil-transportation.yml](.yidam/corpus/line-item/pupil-transportation.yml) | line-item | Pupil Transportation | 4 | 34 |
+| [special-education.yml](.yidam/corpus/line-item/special-education.yml) | line-item | Special Education Enhancements | 4 | 30 |
+| [state-share-of-instruction.yml](.yidam/corpus/line-item/state-share-of-instruction.yml) | line-item | State Share of Instruction | 4 | 35 |
 | [tangible-personal-property-reimbursement.yml](.yidam/corpus/line-item/tangible-personal-property-reimbursement.yml) | line-item | Tangible Personal Property Tax Reimbursement | 3 | 31 |
 | [adult-corrections.yml](.yidam/corpus/program/adult-corrections.yml) | program | Adult Corrections | 2 | 30 |
 | [behavioral-health-services.yml](.yidam/corpus/program/behavioral-health-services.yml) | program | Behavioral Health Services | 2 | 25 |

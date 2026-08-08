@@ -8,11 +8,12 @@ description: |
   pupil is the headline; the categorical weights determine what a district with an unusual
   population profile actually receives, and two districts with identical enrollment can receive
   materially different amounts because of them.
+  ALI 200540, named "Special Education Enhancements" in the source. [verified]
 properties:
-  name: Special Education Enhancements
-  current_code: "[open] pending verification"
+  name: "Special Education Enhancements [verified]"
+  current_code: "200540 [verified]"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "EDU [verified]"
   purpose: |
     Additional state support for the excess cost of educating students with disabilities.
   first_period: "[open] not yet reconstructed"
@@ -25,3 +26,5 @@ links:
     relationship: belongs-to
   - target: ../fund/general-revenue-fund.yml
     relationship: draws-from
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

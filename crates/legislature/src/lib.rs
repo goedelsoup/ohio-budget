@@ -79,29 +79,7 @@ pub fn document_url(base: &str, bill: &BillRef) -> String {
 /// Normalizing here rather than at the call site means the vocabulary lives in exactly one
 /// place when it inevitably grows.
 pub fn parse_stage(raw: &str) -> Option<BillStage> {
-    let n: String = raw
-        .to_ascii_lowercase()
-        .chars()
-        .map(|c| if c.is_ascii_alphanumeric() { c } else { ' ' })
-        .collect();
-    let n = n.split_whitespace().collect::<Vec<_>>().join(" ");
-    match n.as_str() {
-        "as introduced" | "introduced" | "as filed" => Some(BillStage::AsIntroduced),
-        "as passed by the house" | "as passed house" | "house passed" | "substitute house bill" => {
-            Some(BillStage::AsPassedHouse)
-        }
-        "as passed by the senate" | "as passed senate" | "senate passed" => {
-            Some(BillStage::AsPassedSenate)
-        }
-        "conference report"
-        | "as reported by conference committee"
-        | "conference committee report" => Some(BillStage::ConferenceReport),
-        "as enacted" | "enacted" | "as signed by the governor" | "final" => {
-            Some(BillStage::AsEnacted)
-        }
-        "post veto" | "as vetoed" | "after line item veto" => Some(BillStage::PostVeto),
-        _ => None,
-    }
+    BillStage::parse_label(raw)
 }
 
 /// Where bill records come from.
@@ -183,15 +161,7 @@ impl Source for HttpSource {
 /// Returned rather than written, so that reconciling a fetch against the corpus is a
 /// reviewable proposal instead of a side effect.
 pub fn version_node_slug(bill: &BillRef, stage: BillStage) -> String {
-    let suffix = match stage {
-        BillStage::AsIntroduced => "as-introduced",
-        BillStage::AsPassedHouse => "as-passed-house",
-        BillStage::AsPassedSenate => "as-passed-senate",
-        BillStage::ConferenceReport => "conference-report",
-        BillStage::AsEnacted => "as-enacted",
-        BillStage::PostVeto => "post-veto",
-    };
-    format!("{}-{}", bill.slug(), suffix)
+    format!("{}-{}", bill.slug(), stage.as_str())
 }
 
 /// Stages present in a fetched record that the corpus does not yet hold a node for.

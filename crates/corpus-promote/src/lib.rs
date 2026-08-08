@@ -20,16 +20,13 @@
 use corpus_schema::{BillStage, CatalogEntry, LscComparisonRow};
 use corpus_validate::{normalize_join, Corpus, LoadedInstance, FIXTURE_MARKER};
 
-/// Corpus spelling of a bill stage. Kept here so the mapping lives in one place.
+/// Corpus spelling of a bill stage.
+///
+/// Delegates to the schema crate so the vocabulary lives in exactly one place — when four
+/// stages were added after reading the real source, this was one of two call sites the
+/// compiler flagged rather than one of two that silently disagreed.
 pub fn stage_str(s: BillStage) -> &'static str {
-    match s {
-        BillStage::AsIntroduced => "as-introduced",
-        BillStage::AsPassedHouse => "as-passed-house",
-        BillStage::AsPassedSenate => "as-passed-senate",
-        BillStage::ConferenceReport => "conference-report",
-        BillStage::AsEnacted => "as-enacted",
-        BillStage::PostVeto => "post-veto",
-    }
+    s.as_str()
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

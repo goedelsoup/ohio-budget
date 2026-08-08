@@ -24,6 +24,7 @@
 //! accepts a value it cannot represent exactly, produces totals that are wrong by amounts no
 //! downstream check can detect. It refuses rather than approximates.
 
+pub mod columns;
 pub mod geometry;
 #[cfg(feature = "pdf")]
 pub mod pdf;

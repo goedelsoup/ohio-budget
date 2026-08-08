@@ -12,11 +12,12 @@ description: |
   only foundation funding.
 
   [open] The code and the transportation formula's basis are unreconstructed.
+  ALI 200502, agency EDU. [verified]
 properties:
-  name: Pupil Transportation
-  current_code: "[open] pending verification"
+  name: "Pupil Transportation [verified]"
+  current_code: "200502 [verified]"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "EDU [verified]"
   purpose: |
     State share of school district pupil transportation costs.
   first_period: "[open] predates the corpus window"
@@ -29,3 +30,5 @@ links:
     relationship: belongs-to
   - target: ../fund/general-revenue-fund.yml
     relationship: draws-from
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

@@ -55,10 +55,15 @@
   },
   "definitions": {
     "BillStage": {
+      "description": "Stages an Ohio appropriation bill passes through.\n\nGenesis modelled six. The LSC appropriation spreadsheet publishes nine, distinguishing a chamber's substitute bill, its committee-reported version, and its floor-passed version — which are frequently different figures. The four intermediate variants were added after reading the source rather than reasoned about in advance, and dropping them would discard exactly the resolution that makes stage attribution possible.",
       "type": "string",
       "enum": [
         "as-introduced",
+        "house-substitute",
+        "house-reported",
         "as-passed-house",
+        "senate-substitute",
+        "senate-reported",
         "as-passed-senate",
         "conference-report",
         "as-enacted",

@@ -11,11 +11,14 @@ description: |
   why `formula_basis` is a property rather than a flag.
 
   [open] The formula's components and their weights across the window are unreconstructed.
+  ALI 235501, agency BOR — the Board of Regents code persists as the agency identifier
+  despite the department's renaming, which is itself evidence for the mildness of that
+  reorganization. [verified]
 properties:
-  name: State Share of Instruction
-  current_code: "[open] pending verification"
+  name: "State Share of Instruction [verified]"
+  current_code: "235501 [verified]"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "BOR [verified]"
   purpose: |
     Operating subsidy to state-supported institutions of higher education.
   first_period: "[open] predates the corpus window"
@@ -28,3 +31,5 @@ links:
     relationship: belongs-to
   - target: ../fund/general-revenue-fund.yml
     relationship: draws-from
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

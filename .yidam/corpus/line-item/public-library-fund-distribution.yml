@@ -10,11 +10,12 @@ description: |
   cut. Which of those is true is an empirical question, and it needs both nodes to be asked.
 
   [open] The percentage by biennium is unreconstructed.
+  ALI 110965, agency RDF. [verified]
 properties:
-  name: Public Library Fund Distribution
-  current_code: "[open] pending verification"
+  name: "Public Library Fund [verified]"
+  current_code: "110965 [verified]"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "RDF [verified]"
   purpose: |
     Distribution to public library systems under the statutory formula.
   first_period: "[open] predates the corpus window"
@@ -27,3 +28,5 @@ links:
     relationship: belongs-to
   - target: ../fund/public-library-fund.yml
     relationship: draws-from
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

@@ -4,13 +4,17 @@ description: |
   Higher education subsidy authority for FY2026, giving the completion-weighted formula a
   current-period point to sit alongside its
   [FY2024-25 predecessor](./state-share-of-instruction-fy2024-25-as-enacted.yml).
+  Enacted at $2,156,383,406 for FY2026. Roughly a quarter of foundation funding, which is
+  the scale relationship between the state's higher and primary-secondary education
+  commitments. [verified]
 properties:
-  amount: "[open] pending the lsc connector"
+  amount: "$2,156,383,406.00"
   period_label: FY2026
   stage: as-enacted
   measure: appropriated
   source_document: |
-    [open] Not yet catalogued.
+    LSC appropriation spreadsheet, HB 96 as enacted, sheet EN. Committed at
+    .yidam/sources/lsc/ with sha256 8153e8f5. [verified]
 links:
   - target: ../appropriation.ont.yml
     relationship: instance-of
@@ -23,4 +27,6 @@ links:
   - target: ../bill-version/hb96-as-enacted.yml
     relationship: stated-in
   - target: ../../catalog/ga-bill-record.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites

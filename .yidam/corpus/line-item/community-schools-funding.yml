@@ -7,11 +7,13 @@ description: |
   the resident district's foundation funding. [inference] A district's published foundation
   figure and what it retains are therefore different numbers, and the corpus cannot currently
   distinguish them — which is a real limitation on any per-district claim it makes.
+  ALI 200455, named "Community Schools and Choice Programs" in the source — broader than
+  the community-schools framing this node was written under. [verified]
 properties:
-  name: Community Schools Funding
-  current_code: "[open] pending verification"
+  name: "Community Schools and Choice Programs [verified]"
+  current_code: "200455 [verified]"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "EDU [verified]"
   purpose: |
     State funding for community schools, deducted from resident district amounts.
   first_period: "[open] not yet reconstructed"
@@ -24,3 +26,5 @@ links:
     relationship: belongs-to
   - target: ../fund/general-revenue-fund.yml
     relationship: draws-from
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
