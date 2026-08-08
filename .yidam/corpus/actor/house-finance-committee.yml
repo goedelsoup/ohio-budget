@@ -24,8 +24,12 @@ description: |
   proposal, and it is — but the rewriting is finished before the floor sees it, so a reader
   comparing the introduced and passed versions gets the right answer for the wrong reason.
 
-  [open] Whether the pattern holds across earlier biennia is unmeasured; only FY2026 has been
-  extracted.
+  [open] Whether the pattern holds across earlier biennia is unmeasured, and is currently
+  **blocked** rather than merely undone. LSC changed its publication format between the 135th
+  and 136th General Assemblies: HB 96's as-enacted spreadsheet accumulates all nine stages,
+  while HB 33's carries enacted columns only. The comparison documents are narrative and hold
+  no figures. Testing this across biennia needs the per-stage spreadsheets published during
+  the 2023 session, which the current budget pages do not serve. [verified]
 properties:
   name: House Finance Committee
   role_type: committee

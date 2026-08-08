@@ -52,10 +52,10 @@ Sorted by: kind, then alphabetically.
 | [conference-committee.yml](.yidam/corpus/actor/conference-committee.yml) | actor | Conference Committee | 2 | 35 |
 | [controlling-board.yml](.yidam/corpus/actor/controlling-board.yml) | actor | Controlling Board | 1 | 31 |
 | [governor.yml](.yidam/corpus/actor/governor.yml) | actor | Governor of Ohio | 2 | 44 |
-| [house-finance-committee.yml](.yidam/corpus/actor/house-finance-committee.yml) | actor | House Finance Committee | 2 | 42 |
+| [house-finance-committee.yml](.yidam/corpus/actor/house-finance-committee.yml) | actor | House Finance Committee | 2 | 46 |
 | [legislative-service-commission.yml](.yidam/corpus/actor/legislative-service-commission.yml) | actor | Legislative Service Commission | 2 | 29 |
 | [office-of-budget-and-management.yml](.yidam/corpus/actor/office-of-budget-and-management.yml) | actor | Office of Budget and Management | 1 | 33 |
-| [senate-finance-committee.yml](.yidam/corpus/actor/senate-finance-committee.yml) | actor | Senate Finance Committee | 2 | 34 |
+| [senate-finance-committee.yml](.yidam/corpus/actor/senate-finance-committee.yml) | actor | Senate Finance Committee | 2 | 36 |
 | [department-of-education-and-workforce.yml](.yidam/corpus/agency/department-of-education-and-workforce.yml) | agency | Ohio Department of Education and Workforce | 3 | 35 |
 | [department-of-education.yml](.yidam/corpus/agency/department-of-education.yml) | agency | Ohio Department of Education | 1 | 29 |
 | [department-of-higher-education.yml](.yidam/corpus/agency/department-of-higher-education.yml) | agency | Ohio Department of Higher Education | 2 | 26 |

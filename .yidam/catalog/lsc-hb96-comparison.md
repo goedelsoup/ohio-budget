@@ -2,40 +2,51 @@
 slug: lsc-hb96-comparison
 name: Legislative Service Commission comparison document, HB 96 (136th General Assembly)
 source_type: legislative-document
-location: Legislative Service Commission budget publications for the 136th General Assembly
+location: https://www.lsc.ohio.gov/assets/legislation/136/hb96/en0/files/hb96-edu-comparison-document-as-enacted-136th-general-assembly.pdf
 publisher: Ohio Legislative Service Commission
-content_committed: false
+content_committed: true
 feeds:
-  - appropriation
+  - budget-action
   - bill-version
-  - line-item
 ---
 
 # LSC comparison document — HB 96
 
-The Legislative Service Commission publishes, for each stage of an appropriation bill, a
-document setting out every line item's amount as it stood at that stage. It is the
-authoritative answer to the question this corpus asks most often: what did this line stand
-at when this body acted.
+- **Retrieved:** 2026-08-08
+- **Committed at:** [`.yidam/sources/lsc/hb96-edu-comparison-document-as-enacted-136th.pdf`](../sources/lsc/hb96-edu-comparison-document-as-enacted-136th.pdf) (Education and Workforce)
+- **sha256:** `8ec8ec5c842fb697f68787e60c7490e5b7921f2a30bd8e1531558c1991a1a52f`
 
-## Why this entry is first
+## This entry previously described the wrong document
 
-Every `amount` field in the corpus is currently `[open]`, and nearly all of them are waiting
-on this one source. It is the highest-leverage catalog entry in the repository.
+It claimed this source supplies "the amount, per line item, per stage" and fed
+`appropriation` and `line-item`. **That was wrong, and reading the document is what showed
+it.** A comparison document compares *provisions*, not figures. It is four columns of prose —
+Executive, As Passed By House, As Passed By Senate, As Enacted — with one entry per policy
+provision and no dollar amounts at all.
 
-## Content is not committed
+The numeric stage series comes from the
+[appropriation spreadsheet](./lsc-hb96-appropriation-spreadsheet.md), which was catalogued
+separately and does carry every stage.
 
-`content_committed: false`. This entry registers the source; it does not contain it.
+## What it is actually for
 
-That distinction is load-bearing and easy to lose. Registering a source does **not** license
-promoting a claim from `[inference]` to `[verified]` — verification requires the source
-content to be committed and citable, so that a later reader can check the figure rather than
-check that a document was named. Until extraction runs and its output is committed, a node
-citing this entry is saying *this is where the answer will come from*, not *this is
-established*.
+The `stated_justification` field on every [`budget-action`](../corpus/budget-action.ont.yml)
+node in this corpus is `[open]`. This is the source that closes them. Where the spreadsheet
+says foundation funding moved +$92,250,000 at the House substitute, this document says what
+changed in the formula — base cost per pupil, career-technical base cost, the disadvantaged
+pupil calculation, the treatment of temporary transitional aid.
 
-## Extraction
+That division is worth stating plainly because it maps onto a distinction the corpus already
+makes: the spreadsheet carries the arithmetic, this carries the decision. For a formula
+program those are different things, and the genesis note on the House amendment said the
+decision matters more.
 
-Feeds [`lsc-comparison-row`](../schemas/extraction/lsc-comparison-row.schema.json) records
-via the [`lsc`](../../crates/lsc/) connector. Published as PDF with tabular figures, so
-extraction is the hard part and table structure may vary across biennia.
+## Extraction caution
+
+The four stage columns are adjacent with no whitespace river between Executive and As Passed
+By House, so `lsc::geometry` merges them regardless of how the river threshold is tuned —
+verified at 1.2, 0.5, 0.35, and 0.2. Lowering it further fragments other columns instead.
+
+The document separates its own columns with a literal `|` character in the body text. An
+extractor for this document type should split on that rather than on whitespace geometry.
+That is a per-document-type strategy, not a tuning value, and it is not yet implemented.

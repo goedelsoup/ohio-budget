@@ -18,7 +18,9 @@ description: |
   The Senate floor, like the House floor, changed nothing: zero line items between the reported
   and passed versions. [verified] Both chambers finish their work in committee.
 
-  [open] Whether this holds across earlier biennia is unmeasured.
+  [open] Whether this holds across earlier biennia is unmeasured and currently blocked — see
+  [house-finance-committee](./house-finance-committee.yml) for why the FY2024 series is not
+  reachable from published sources.
 properties:
   name: Senate Finance Committee
   role_type: committee
