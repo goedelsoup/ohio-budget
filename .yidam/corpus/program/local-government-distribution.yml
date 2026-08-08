@@ -1,0 +1,51 @@
+class: program
+label: Local Government Fund Distribution
+description: |
+  The statutory distribution of a share of state tax receipts to counties, municipalities,
+  and townships, administered by the
+  [Department of Taxation](../agency/department-of-taxation.yml) and flowing through the
+  [local government fund](../fund/local-government-fund.yml). [inference]
+
+  This program is the corpus's clearest case of money that moves without a decision being
+  made. Its size is a product of two things — the statutory percentage and how much tax the
+  state collected — and neither is set during budget deliberation. Nothing in an
+  appropriation document records a choice about it, because the choice lives in the
+  percentage set in law.
+
+  That is why the FY2012-13 reduction to that percentage is the most consequential local
+  finance event in this corpus's window and simultaneously the hardest to see. It appears in
+  the data as a smaller number with no decision attached. Anyone reading appropriation
+  figures alone would record a decline and find no cause for it.
+
+  It draws on the [personal income tax](../revenue-source/personal-income-tax.yml) and
+  [sales and use tax](../revenue-source/sales-and-use-tax.yml) directly rather than
+  competing for general revenue, which is the second instance in the corpus of the approved
+  `program →[draws-from]→ revenue-source` edge — and a different flavor from the first. The
+  [highway](./highway-system-preservation.yml) case is a constitutional restriction; this one
+  is a statutory formula, which the General Assembly can and did change. The edge is the same;
+  the durability is not.
+
+  [open] The percentage by biennium across the window is unreconstructed, and it is the
+  single most valuable series the `orc` connector could produce.
+properties:
+  name: Local Government Fund Distribution
+  policy_area: other
+  authorizing_statute: ORC Chapter 131 [inference]
+  formula_basis: |
+    A statutory percentage of general revenue fund tax receipts, allocated among county
+    undivided local government funds and then to municipalities and townships. [inference]
+  federal_participation: |
+    None. Entirely state-source money.
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: funded-by
+  - target: ../jurisdiction/franklin-county.yml
+    relationship: serves
+  - target: ../revenue-source/sales-and-use-tax.yml
+    relationship: draws-from
+  - target: ../revenue-source/personal-income-tax.yml
+    relationship: draws-from
+  - target: ../../catalog/orc-chapter-131.md
+    relationship: cites

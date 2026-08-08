@@ -1,0 +1,44 @@
+class: forecast
+label: Medicaid Caseload Projection — FY2026
+description: |
+  A projection of Medicaid enrollment by eligibility category for FY2026, of the kind
+  prepared to size the [Medicaid appropriation](../appropriation/medicaid-health-care-services-fy2026-as-enacted.yml).
+  [inference]
+
+  This node closes the loop the genesis corpus left open. The approved
+  `budget-action →[triggered-by]→ forecast` edge had no valid target: the only seeded
+  forecast was a revenue estimate, and Medicaid adjustments follow **enrollment** revisions
+  rather than revenue revisions. Pointing the
+  [controlling board transfer](../budget-action/controlling-board-medicaid-transfer.yml) at
+  a revenue estimate would have been structurally tidy and substantively wrong.
+
+  With this node the structural claim becomes checkable rather than narrated: if an
+  execution-phase Medicaid adjustment traces to a caseload revision, the graph shows it; if
+  it traces to nothing, that absence is also visible.
+
+  Note this forecast carries no `projects` edge. That edge targets a revenue instrument, and
+  a caseload projection has none — it projects people, not money. The absence is correct
+  rather than incomplete.
+
+  [open] The projected figure, issue date, and assumptions are unfilled. Whether caseload
+  projections are published on a schedule or only within budget documents is also unresolved,
+  and determines whether this can ever be more than a per-biennium snapshot.
+properties:
+  forecast_type: caseload-projection
+  projected_amount: "[open] enrollment count, pending the obm connector"
+  horizon: |
+    The FY2026-27 biennium, by eligibility category.
+  variance_from_actual: |
+    [open] Not computable until FY2026 closes on June 30, 2026.
+  assumptions: |
+    [open] Economic conditions, eligibility policy, and federal match structure. Not yet
+    reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

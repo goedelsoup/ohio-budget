@@ -41,3 +41,5 @@ links:
     relationship: occurs-in
   - target: ../jurisdiction/columbus-city-school-district.yml
     relationship: paid-to
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

@@ -1,0 +1,28 @@
+class: bill-version
+label: HB 54 As Enacted
+description: |
+  The FY2026-27 transportation budget as enacted in spring 2025. [inference]
+
+  Seeded so that the transportation instrument family is represented by more than a bare
+  bill node. Its practical value is as a contrast case: this version was enacted months
+  before [HB 96 as enacted](./hb96-as-enacted.yml) covering the same biennium, which makes
+  concrete the fact that "the FY2026-27 budget" names at least two documents settled at
+  different times under different pressures.
+
+  [open] The enactment date is not verified. Ohio practice is to settle transportation
+  appropriations by the end of March in odd-numbered years, [inference] but the specific
+  date for this bill has not been established, and the `stage_date` property is left
+  unfilled rather than guessed.
+properties:
+  stage: as-enacted
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "yes"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb54-136th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

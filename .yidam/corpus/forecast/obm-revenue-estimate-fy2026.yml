@@ -41,3 +41,5 @@ links:
     relationship: covers
   - target: ../actor/office-of-budget-and-management.yml
     relationship: issued-by
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

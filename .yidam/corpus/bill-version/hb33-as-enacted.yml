@@ -1,0 +1,31 @@
+class: bill-version
+label: HB 33 As Enacted
+description: |
+  [HB 33](../bill/hb33-135th.yml) as it became law in July 2023, after line-item vetoes.
+  [inference]
+
+  Seeded to give the FY2024-25 appropriations something to be stated in. Without it, the
+  [foundation funding figure for that biennium](../appropriation/foundation-funding-fy2024-25-as-enacted.yml)
+  was an amount attributed to a bill with no version attached — which is exactly the
+  ambiguity the bill-version class exists to remove, since "HB 33 appropriated X" is
+  underdetermined between the proposal, each chamber's version, and the enacted text.
+
+  This is a single-stage seed. The introduced, House, and Senate versions of HB 33 are not
+  present, so no stage-delta is computable for the FY2024-25 biennium — only the
+  cross-biennium comparison against [HB 96 as enacted](./hb96-as-enacted.yml), which is
+  what this node is for.
+properties:
+  stage: as-enacted
+  stage_date: 2023-07-04
+  chamber: none
+  document_reference: |
+    Enacted bill text and the governor's veto message. [open] Not yet catalogued; the
+    catalog holds an entry for the HB 96 comparison document but not yet for HB 33.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb33-135th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

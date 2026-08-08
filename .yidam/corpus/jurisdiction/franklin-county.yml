@@ -1,0 +1,34 @@
+class: jurisdiction
+label: Franklin County
+description: |
+  Ohio's most populous county, containing Columbus. [inference]
+
+  Seeded as the counterpart to
+  [Columbus City School District](./columbus-city-school-district.yml), and for a reason
+  that goes beyond symmetry: the two receive state money through entirely different
+  mechanisms and would respond in opposite directions to the same policy change.
+
+  The school district receives [foundation funding](../line-item/foundation-funding.yml)
+  through a formula designed to be **inverse** to local property wealth — a district in a
+  wealthy area receives less. The county receives
+  [local government fund distribution](../program/local-government-distribution.yml), whose
+  size follows a statutory percentage of state tax receipts and therefore rises and falls
+  with the state's collections rather than with local need.
+
+  That contrast is the whole reason the incidence framing was ranked fourth but not dropped.
+  A claim that Ohio "cut local funding" means something different for each of these
+  recipients, and the corpus can now distinguish them.
+
+  [open] Population and the county's local government fund receipts are unpopulated, pending
+  the `district-finance` and `obm` connectors.
+properties:
+  name: Franklin County
+  jurisdiction_type: county
+  identifier: "[open] FIPS code pending verification"
+  county: Franklin
+  population_basis: |
+    [open] Population figure and vintage not yet populated. The distribution formula's
+    vintage matters as much as the number.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

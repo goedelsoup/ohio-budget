@@ -41,3 +41,5 @@ links:
     relationship: covers
   - target: ../expenditure/foundation-funding-fy2024-disbursed.yml
     relationship: realized-by
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in

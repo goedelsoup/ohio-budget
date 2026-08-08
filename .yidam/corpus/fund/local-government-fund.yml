@@ -27,3 +27,5 @@ properties:
 links:
   - target: ../fund.ont.yml
     relationship: instance-of
+  - target: ../../catalog/orc-chapter-131.md
+    relationship: cites

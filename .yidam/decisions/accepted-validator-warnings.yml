@@ -1,0 +1,74 @@
+id: accepted-validator-warnings
+summary: >-
+  Six corpus-validate warnings are accepted as accurate descriptions of real gaps rather
+  than defects to be silenced by adding edges.
+context: |
+  corpus-validate reports two warning-severity rules that describe connectivity rather than
+  correctness:
+
+    orphan-in       no incoming domain links — nothing in the corpus points at this node
+    no-domain-link  the node's only link is to its own class file
+
+  Neither is an error, and neither should be. The prelude's definition of an orphan is a node
+  with no incoming *or* outgoing edges; every node flagged here has outgoing edges and is
+  reachable when traversing forward. The warnings mark asymmetry, which is a prompt to look,
+  not a fault.
+
+  After the first expansion pass the count fell from nine to six. The four that closed did so
+  because a genuinely missing node was added — bill versions for HB 33 and HB 54, a Medicaid
+  caseload projection, a local government distribution program and the county it serves — not
+  because an edge was invented to satisfy the checker.
+
+  The remaining six were examined individually and are recorded here so that a later
+  contributor does not "fix" them by asserting relationships the domain does not support.
+decision: |
+  Accepted, with the reason for each:
+
+    appropriation/foundation-funding-fy2024-25-as-enacted    orphan-in
+    appropriation/foundation-funding-fy2026-as-enacted       orphan-in
+      Nothing points at an appropriation except a budget-action that modifies it. Neither of
+      these was modified by any action the corpus records. Adding a modifies edge to silence
+      the warning would assert that a specific line was amended or vetoed — a factual claim,
+      currently unknown, and exactly the kind of plausible fabrication this repository's
+      [open]-over-guessing policy exists to prevent.
+
+    bill-version/hb54-as-enacted                             orphan-in
+      No appropriation is seeded against the transportation budget yet. The node is correct
+      and simply awaits transportation line items. This closes on its own with real content.
+
+    forecast/obm-revenue-estimate-fy2026                     orphan-in
+      A forecast acquires an incoming edge when a budget-action is triggered-by it. No
+      recorded action traces to this revenue estimate. The Medicaid caseload projection does
+      have such an edge, because a Medicaid adjustment following an enrollment revision is
+      the documented pattern; the revenue estimate has no equivalent, and inventing one
+      would fabricate a causal claim.
+
+    fund/highway-operating-fund                              no-domain-link
+    fund/local-government-fund                               no-domain-link
+      The fund class declares exactly one outgoing edge, transfers-to another fund. Neither
+      of these funds transfers to another fund: the highway fund is a constitutionally
+      restricted terminus, and the local government fund distributes outward to jurisdictions
+      rather than to funds. Both are legitimately sinks in fund-to-fund terms.
+
+  No suppression mechanism was added to the validator. These warnings should keep appearing.
+rationale: |
+  The temptation a linter creates is to optimize the number rather than the corpus. Every one
+  of these six could be zeroed in about ten minutes by adding edges, and every such edge
+  would be a claim about Ohio's budget that nobody has checked — which is strictly worse than
+  the warning it removes, because a warning is visible and a false edge is not.
+
+  The distinction that matters is between a warning caused by a missing *node* and one caused
+  by a missing *fact*. The four that closed in this pass were the first kind: the graph was
+  incomplete, real nodes were owed, and adding them improved the corpus independent of the
+  checker. The six that remain are the second kind: the graph is as complete as the evidence
+  allows, and the missing edges are missing because the facts behind them are unknown.
+
+  Recording this as a decision rather than as a suppression list is deliberate. A suppression
+  would make the warnings disappear and the reasoning with them. A decision record leaves the
+  signal in place and explains it, so the next contributor to run the validator can tell in
+  one read which warnings are known and why — and can notice if a new one appears that this
+  record does not cover.
+
+  Two of the six carry a natural closing condition. The transportation bill version closes
+  when transportation line items are seeded; the two appropriations close if extraction shows
+  they were in fact amended. Neither should be forced.

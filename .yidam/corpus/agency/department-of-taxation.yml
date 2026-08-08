@@ -1,0 +1,32 @@
+class: agency
+label: Ohio Department of Taxation
+description: |
+  The agency that administers Ohio's tax law and computes the statutory distributions of tax
+  receipts to local government. [inference]
+
+  It is seeded to close a gap the genesis corpus left visible: the
+  [local government fund distribution line item](../line-item/local-government-fund-distribution.yml)
+  had no agency holding it, which made it the only line item in the corpus whose authority
+  belonged to nobody.
+
+  It also occupies a position none of the other three agencies do. Medicaid, Education and
+  Workforce, and Transportation each spend money on a program they run. This agency's
+  distribution role is computational rather than programmatic — it determines what counties
+  and municipalities receive by applying a formula, without discretion over the result. That
+  makes it the clearest case in the corpus of an appropriation that is not a decision, and
+  the reason the [local government distribution](../program/local-government-distribution.yml)
+  program is modeled separately from the agency at all.
+
+  [inference] The agency's identity was stable across the corpus window, unlike Medicaid and
+  Education, so its line items should not require lineage resolution.
+properties:
+  name: Ohio Department of Taxation
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    No reorganization within the corpus window. [inference]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/local-government-distribution.yml
+    relationship: administers

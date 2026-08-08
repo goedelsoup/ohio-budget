@@ -30,3 +30,5 @@ links:
     relationship: instance-of
   - target: ../fiscal-period/fy2026-27.yml
     relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

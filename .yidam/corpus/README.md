@@ -54,36 +54,42 @@ Sorted by: kind, then alphabetically.
 | [office-of-budget-and-management.yml](.yidam/corpus/actor/office-of-budget-and-management.yml) | actor | Office of Budget and Management | 1 | 33 |
 | [department-of-education-and-workforce.yml](.yidam/corpus/agency/department-of-education-and-workforce.yml) | agency | Ohio Department of Education and Workforce | 2 | 33 |
 | [department-of-medicaid.yml](.yidam/corpus/agency/department-of-medicaid.yml) | agency | Ohio Department of Medicaid | 2 | 34 |
+| [department-of-taxation.yml](.yidam/corpus/agency/department-of-taxation.yml) | agency | Ohio Department of Taxation | 2 | 32 |
 | [department-of-transportation.yml](.yidam/corpus/agency/department-of-transportation.yml) | agency | Ohio Department of Transportation | 2 | 26 |
-| [foundation-funding-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-25-as-enacted.yml) | appropriation | Foundation Funding — FY2024-25, As Enacted | 5 | 43 |
-| [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 5 | 37 |
-| [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 5 | 33 |
-| [medicaid-health-care-services-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2026-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2026, As Enacted | 5 | 39 |
+| [foundation-funding-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-25-as-enacted.yml) | appropriation | Foundation Funding — FY2024-25, As Enacted | 6 | 45 |
+| [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 6 | 39 |
+| [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 6 | 35 |
+| [medicaid-health-care-services-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2026-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2026, As Enacted | 6 | 41 |
 | [hb33-135th.yml](.yidam/corpus/bill/hb33-135th.yml) | bill | House Bill 33 (135th General Assembly) | 2 | 31 |
 | [hb54-136th.yml](.yidam/corpus/bill/hb54-136th.yml) | bill | House Bill 54 (136th General Assembly) | 2 | 31 |
-| [hb96-136th.yml](.yidam/corpus/bill/hb96-136th.yml) | bill | House Bill 96 (136th General Assembly) | 2 | 32 |
+| [hb96-136th.yml](.yidam/corpus/bill/hb96-136th.yml) | bill | House Bill 96 (136th General Assembly) | 3 | 34 |
+| [hb33-as-enacted.yml](.yidam/corpus/bill-version/hb33-as-enacted.yml) | bill-version | HB 33 As Enacted | 3 | 31 |
+| [hb54-as-enacted.yml](.yidam/corpus/bill-version/hb54-as-enacted.yml) | bill-version | HB 54 As Enacted | 3 | 28 |
 | [hb96-as-enacted.yml](.yidam/corpus/bill-version/hb96-as-enacted.yml) | bill-version | HB 96 As Enacted | 3 | 31 |
 | [hb96-as-introduced.yml](.yidam/corpus/bill-version/hb96-as-introduced.yml) | bill-version | HB 96 As Introduced | 2 | 29 |
 | [hb96-as-passed-house.yml](.yidam/corpus/bill-version/hb96-as-passed-house.yml) | bill-version | HB 96 As Passed by the House | 3 | 31 |
-| [controlling-board-medicaid-transfer.yml](.yidam/corpus/budget-action/controlling-board-medicaid-transfer.yml) | budget-action | Controlling Board Transfer — Medicaid | 3 | 41 |
+| [controlling-board-medicaid-transfer.yml](.yidam/corpus/budget-action/controlling-board-medicaid-transfer.yml) | budget-action | Controlling Board Transfer — Medicaid | 5 | 45 |
 | [hb96-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-house-amendment-foundation-funding.yml) | budget-action | House Amendment to Foundation Funding, HB 96 | 4 | 40 |
 | [hb96-line-item-veto.yml](.yidam/corpus/budget-action/hb96-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 96 | 3 | 37 |
-| [foundation-funding-fy2024-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-disbursed.yml) | expenditure | Foundation Funding Disbursement to Columbus City Schools — FY2024-25 | 4 | 43 |
+| [foundation-funding-fy2024-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-disbursed.yml) | expenditure | Foundation Funding Disbursement to Columbus City Schools — FY2024-25 | 5 | 45 |
 | [fy2024-25.yml](.yidam/corpus/fiscal-period/fy2024-25.yml) | fiscal-period | FY2024-25 Biennium | 2 | 22 |
 | [fy2026-27.yml](.yidam/corpus/fiscal-period/fy2026-27.yml) | fiscal-period | FY2026-27 Biennium | 2 | 23 |
 | [fy2026.yml](.yidam/corpus/fiscal-period/fy2026.yml) | fiscal-period | Fiscal Year 2026 | 2 | 22 |
-| [obm-revenue-estimate-fy2026.yml](.yidam/corpus/forecast/obm-revenue-estimate-fy2026.yml) | forecast | Executive Revenue Estimate — FY2026, Personal Income Tax | 4 | 43 |
-| [budget-stabilization-fund.yml](.yidam/corpus/fund/budget-stabilization-fund.yml) | fund | Budget Stabilization Fund | 2 | 33 |
+| [medicaid-caseload-fy2026.yml](.yidam/corpus/forecast/medicaid-caseload-fy2026.yml) | forecast | Medicaid Caseload Projection — FY2026 | 4 | 44 |
+| [obm-revenue-estimate-fy2026.yml](.yidam/corpus/forecast/obm-revenue-estimate-fy2026.yml) | forecast | Executive Revenue Estimate — FY2026, Personal Income Tax | 5 | 45 |
+| [budget-stabilization-fund.yml](.yidam/corpus/fund/budget-stabilization-fund.yml) | fund | Budget Stabilization Fund | 3 | 35 |
 | [general-revenue-fund.yml](.yidam/corpus/fund/general-revenue-fund.yml) | fund | General Revenue Fund | 3 | 34 |
 | [highway-operating-fund.yml](.yidam/corpus/fund/highway-operating-fund.yml) | fund | Highway Operating Fund | 1 | 28 |
-| [local-government-fund.yml](.yidam/corpus/fund/local-government-fund.yml) | fund | Local Government Fund | 1 | 29 |
+| [local-government-fund.yml](.yidam/corpus/fund/local-government-fund.yml) | fund | Local Government Fund | 2 | 31 |
 | [columbus-city-school-district.yml](.yidam/corpus/jurisdiction/columbus-city-school-district.yml) | jurisdiction | Columbus City School District | 1 | 33 |
+| [franklin-county.yml](.yidam/corpus/jurisdiction/franklin-county.yml) | jurisdiction | Franklin County | 1 | 34 |
 | [foundation-funding.yml](.yidam/corpus/line-item/foundation-funding.yml) | line-item | Foundation Funding | 3 | 41 |
 | [highway-construction.yml](.yidam/corpus/line-item/highway-construction.yml) | line-item | Highway Construction | 3 | 37 |
-| [local-government-fund-distribution.yml](.yidam/corpus/line-item/local-government-fund-distribution.yml) | line-item | Local Government Fund Distribution | 2 | 36 |
+| [local-government-fund-distribution.yml](.yidam/corpus/line-item/local-government-fund-distribution.yml) | line-item | Local Government Fund Distribution | 3 | 38 |
 | [medicaid-health-care-services.yml](.yidam/corpus/line-item/medicaid-health-care-services.yml) | line-item | Medicaid Health Care Services | 3 | 41 |
 | [fair-school-funding-plan.yml](.yidam/corpus/program/fair-school-funding-plan.yml) | program | Fair School Funding Plan | 3 | 41 |
 | [highway-system-preservation.yml](.yidam/corpus/program/highway-system-preservation.yml) | program | Highway System Preservation | 3 | 37 |
+| [local-government-distribution.yml](.yidam/corpus/program/local-government-distribution.yml) | program | Local Government Fund Distribution | 6 | 51 |
 | [medicaid.yml](.yidam/corpus/program/medicaid.yml) | program | Ohio Medicaid | 2 | 36 |
 | [motor-fuel-tax.yml](.yidam/corpus/revenue-source/motor-fuel-tax.yml) | revenue-source | Ohio Motor Fuel Tax | 2 | 37 |
 | [personal-income-tax.yml](.yidam/corpus/revenue-source/personal-income-tax.yml) | revenue-source | Ohio Personal Income Tax | 3 | 36 |

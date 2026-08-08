@@ -31,3 +31,5 @@ links:
     relationship: instance-of
   - target: ./general-revenue-fund.yml
     relationship: transfers-to
+  - target: ../../catalog/orc-chapter-131.md
+    relationship: cites

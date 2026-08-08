@@ -34,3 +34,5 @@ links:
     relationship: instance-of
   - target: ../fund/local-government-fund.yml
     relationship: draws-from
+  - target: ../agency/department-of-taxation.yml
+    relationship: belongs-to

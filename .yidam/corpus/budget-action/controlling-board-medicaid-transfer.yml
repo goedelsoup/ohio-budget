@@ -39,3 +39,7 @@ links:
     relationship: modifies
   - target: ../actor/controlling-board.yml
     relationship: taken-by
+  - target: ../forecast/medicaid-caseload-fy2026.yml
+    relationship: triggered-by
+  - target: ../../catalog/controlling-board-minutes.md
+    relationship: cites
