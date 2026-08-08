@@ -1,0 +1,20 @@
+[package]
+name = "corpus-promote"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Proposes corpus updates from validated connector extraction records"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_yaml.workspace = true
+walkdir.workspace = true
+corpus-schema = { path = "../corpus-schema" }
+corpus-validate = { path = "../corpus-validate" }
+lsc = { path = "../lsc" }
+
+[[bin]]
+name = "corpus-promote"
+path = "src/main.rs"

@@ -1,39 +1,50 @@
 # lsc
 
-**Capability type:** connector. **Status:** stub — not implemented.
+**Capability type:** connector. **Status:** implemented downstream of PDF extraction.
 
-Retrieves Legislative Service Commission budget analyses and stage-comparison documents — the
-authoritative record of what a line item stood at when a body acted.
+Parses Legislative Service Commission comparison documents into
+[`lsc-comparison-row`](../../.yidam/schemas/extraction/lsc-comparison-row.schema.json) records
+— one appropriation figure, for one line item, at one stage, for one fiscal year.
 
 ## Feeds
 
 | Class | What it supplies |
 |---|---|
 | [`appropriation`](../../.yidam/corpus/appropriation.ont.yml) | The amount, per line item, per stage, per period |
-| [`bill-version`](../../.yidam/corpus/bill-version.ont.yml) | Document references fixing each stage's figures |
+| [`bill-version`](../../.yidam/corpus/bill-version.ont.yml) | Document references fixing each stage |
 | [`line-item`](../../.yidam/corpus/line-item.ont.yml) | Codes, titles, agency and fund assignment |
 
-## The load-bearing connector
+## The division of labour
 
-Every `amount` field in the seed corpus is `[open]` pending this connector. It is the single
-largest determinant of whether this repository becomes useful, and it is deliberately **not**
-built first: its content is locked in PDF tables, and standing up
-[`legislature`](../legislature/) first means there is somewhere to put the figures when
-extraction works.
+The documents are PDFs. PDF text extraction is **not** done here — it belongs in a Python
+package where the ecosystem is mature, and its output is delimited text. Everything downstream
+of that is implemented and tested here, because that is where the errors that matter occur.
 
-Table extraction from PDF may justify a Python package rather than a Rust crate — see
-[`packages/`](../../packages/).
+## Money
 
-## Interface sketch
+`parse_money_to_cents` is the most safety-critical function in this repository. Budget figures
+are summed across thousands of line items, so a parser that silently rounds produces totals
+wrong by amounts nothing downstream can detect.
 
-```
-fetch_comparison(assembly: u16, bill: &str, stage: Stage) -> Result<Vec<AppropriationRow>>
-fetch_agency_analysis(assembly: u16, agency_code: &str) -> Result<AgencyAnalysis>
-```
+It accepts the published forms — `$1,234,567.89`, `(1,234.56)` and `-1,234.56` for negatives —
+and refuses three things rather than approximating:
 
-## Open questions
+- **More than two decimal places.** Cents cannot represent the value exactly, and rounding here
+  would be invisible.
+- **Empty cells.** An absent figure is not zero. Callers get an explicit blank outcome.
+- **Anything non-numeric.** `n/a` is reported, never coerced.
 
-- [open] Whether table structure is stable enough across years for one extractor, or whether
-  each biennium's documents need their own handling.
-- [open] Whether line item codes appear in the documents in a form that survives extraction, or
-  must be reconciled against another source.
+## Nothing is dropped
+
+`normalize` returns one outcome per cell that should have held a figure: a parsed row, a
+recorded blank, or a recorded parse failure with its reason. An extraction run can therefore
+report its own coverage, rather than returning fewer records than the document contained and
+leaving nobody to notice.
+
+A row whose cell count disagrees with the header is an error, not a truncation — a misaligned
+row in a budget table puts figures in the wrong fiscal year.
+
+## Open
+
+- [open] Whether table structure is stable enough across biennia for one column map, or whether
+  each year's documents need their own.

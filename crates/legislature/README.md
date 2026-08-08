@@ -1,9 +1,9 @@
 # legislature
 
-**Capability type:** connector. **Status:** stub — not implemented.
+**Capability type:** connector. **Status:** implemented, offline. Network retrieval pending.
 
-Retrieves bill metadata, text, and stage history from the Ohio General Assembly's published
-record.
+Retrieves bill metadata, text references, and stage history from the Ohio General Assembly's
+published record.
 
 ## Feeds
 
@@ -13,23 +13,27 @@ record.
 | [`bill-version`](../../.yidam/corpus/bill-version.ont.yml) | Stage, date, chamber, document reference |
 | [`budget-action`](../../.yidam/corpus/budget-action.ont.yml) | Amendment events and their dates |
 
-## Why this one is built first
+## What is implemented
 
-It is the structured, stable source among the seven, and it produces the skeleton the other
-connectors hang their figures on. Nothing in [`lsc`](../lsc/) can be attached to a version that
-does not yet exist as a node.
+Everything except the network call. `BillRef` keys on the (assembly, number) pair, because bill
+numbers recur across General Assemblies for unrelated legislation and `HB 96` alone identifies
+nothing. `parse_stage` normalizes the published record's several spellings of each stage onto
+the corpus's single vocabulary, and returns `None` rather than guessing when it meets one it
+does not know — a stage guessed wrong puts figures on the wrong node.
 
-## Interface sketch
+`version_node_slug` and `missing_version_slugs` reconcile a fetched record against the corpus
+and report which `bill-version` nodes are missing. They return findings; they do not write.
 
-```
-fetch_bill(assembly: u16, number: &str) -> Result<Bill>
-fetch_versions(assembly: u16, number: &str) -> Result<Vec<BillVersion>>
-```
+## HttpSource fails rather than falling back
 
-Offline mode falls back to committed fixtures, per the connector conventions in
-[directory guidelines](../../.yidam/.vendor/prelude/guidelines/directories.md#crates).
+`HttpSource` returns an error naming the URL it would have fetched. It deliberately does not
+fall back to fixtures. A connector that silently serves synthetic data when the network is
+unavailable would put fabricated figures into a run that believed it fetched them — and the
+resulting corpus would be indistinguishable from one built on real data.
 
-## Open questions
+Implementing it is a thin wrapper over `document_url`, which is pure and tested.
+
+## Open
 
 - [open] Whether stage history is exposed in a stable machine-readable form, or must be derived
-  from document listings.
+  from document listings. This decides whether the HTTP source is a client or a scraper.

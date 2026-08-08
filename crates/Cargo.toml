@@ -3,6 +3,9 @@ resolver = "2"
 members = [
     "corpus-schema",
     "corpus-validate",
+    "corpus-promote",
+    "legislature",
+    "lsc",
 ]
 
 [workspace.package]

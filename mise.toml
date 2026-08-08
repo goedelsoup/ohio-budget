@@ -44,6 +44,10 @@ run = "cargo clippy --workspace --manifest-path crates/Cargo.toml -- -D warnings
 description = "Regenerate .yidam/schemas/ from the Rust types in crates/corpus-schema."
 run = "cargo run -q --manifest-path crates/Cargo.toml --bin emit-schemas -- .yidam/schemas"
 
+[tasks.promote]
+description = "Report what an extraction run would change in the corpus. Writes nothing."
+run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-promote -- ."
+
 [tasks.validate]
 description = "Check corpus instances against their class definitions. Exits non-zero on errors."
 run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- ."
