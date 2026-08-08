@@ -288,6 +288,106 @@ pub fn decomposable(corpus: &Corpus) -> Vec<(String, String)> {
         .collect()
 }
 
+// ─── aggregate movement across a whole extraction ────────────────────────────
+
+/// How much money moved at one transition, across every line item in a document.
+#[derive(Debug, Clone, PartialEq)]
+pub struct StageMovement {
+    pub from: BillStage,
+    pub to: BillStage,
+    /// Line items whose figure changed at this transition.
+    pub line_items_moved: usize,
+    /// Sum of absolute movement. This is the measure of *activity* — a chamber that adds a
+    /// billion to one line and removes a billion from another has done a great deal, and a
+    /// net figure would report zero.
+    pub gross_cents: i64,
+    /// Signed sum. The measure of *direction*.
+    pub net_cents: i64,
+    pub largest_increase: Option<(String, i64)>,
+    pub largest_decrease: Option<(String, i64)>,
+}
+
+/// Aggregates stage-to-stage movement across every line item in an extraction.
+///
+/// Answers at full scale what a single line item can only suggest: which step of the process
+/// actually moves money. Gross and net are both reported because they answer different
+/// questions and a chamber can be extremely active while netting to nothing.
+pub fn aggregate(
+    rows: &[corpus_schema::LscComparisonRow],
+    fiscal_year: &str,
+) -> Vec<StageMovement> {
+    use std::collections::BTreeMap;
+
+    // line item -> stage -> amount
+    let mut by_item: BTreeMap<&str, BTreeMap<BillStage, i64>> = BTreeMap::new();
+    for r in rows.iter().filter(|r| r.fiscal_year == fiscal_year) {
+        by_item
+            .entry(r.line_item_code.as_str())
+            .or_default()
+            .insert(r.stage, r.amount_cents);
+    }
+
+    let seq = BillStage::sequence();
+    let mut out = Vec::new();
+    for w in seq.windows(2) {
+        let (from, to) = (w[0], w[1]);
+        let mut m = StageMovement {
+            from,
+            to,
+            line_items_moved: 0,
+            gross_cents: 0,
+            net_cents: 0,
+            largest_increase: None,
+            largest_decrease: None,
+        };
+        for (code, stages) in &by_item {
+            let (Some(a), Some(b)) = (stages.get(&from), stages.get(&to)) else {
+                continue;
+            };
+            let d = b - a;
+            if d == 0 {
+                continue;
+            }
+            m.line_items_moved += 1;
+            m.gross_cents += d.abs();
+            m.net_cents += d;
+            if d > 0 && m.largest_increase.as_ref().is_none_or(|(_, v)| d > *v) {
+                m.largest_increase = Some((code.to_string(), d));
+            }
+            if d < 0 && m.largest_decrease.as_ref().is_none_or(|(_, v)| d < *v) {
+                m.largest_decrease = Some((code.to_string(), d));
+            }
+        }
+        out.push(m);
+    }
+    out
+}
+
+pub fn render_aggregate(m: &[StageMovement], fiscal_year: &str) -> String {
+    let total: i64 = m.iter().map(|x| x.gross_cents).sum();
+    let mut s = format!(
+        "stage movement across all line items, {fiscal_year}\n\
+         (gross = total absolute movement; net = direction)\n\n"
+    );
+    for x in m {
+        let share = if total > 0 {
+            x.gross_cents as f64 / total as f64 * 100.0
+        } else {
+            0.0
+        };
+        s.push_str(&format!(
+            "  {:>18} -> {:<18} {:>5} item(s)  gross {:>16}  net {:>+16}  {:>5.1}%\n",
+            x.from.as_str(),
+            x.to.as_str(),
+            x.line_items_moved,
+            x.gross_cents,
+            x.net_cents,
+            share
+        ));
+    }
+    s
+}
+
 pub fn run(repo_root: &std::path::Path) -> Result<String> {
     let corpus = corpus_validate::load(repo_root)?;
     let mut out = String::new();
@@ -362,6 +462,80 @@ links:
             "c/line-item/ff.yml",
             "class: line-item\nlabel: FF\ndescription: d\n",
         )]
+    }
+
+    fn row(code: &str, stage: BillStage, fy: &str, cents: i64) -> corpus_schema::LscComparisonRow {
+        corpus_schema::LscComparisonRow {
+            bill_number: "HB 96".into(),
+            general_assembly: "136th".into(),
+            stage,
+            agency_code: "EDU".into(),
+            line_item_code: code.into(),
+            line_item_name: "x".into(),
+            fund_group: "GRF".into(),
+            fund_code: "GRF".into(),
+            fiscal_year: fy.into(),
+            amount_cents: cents,
+            provenance: corpus_schema::Provenance {
+                catalog_slug: "c".into(),
+                document_ref: "d".into(),
+                locator: None,
+                retrieved: "2026-08-08".into(),
+            },
+        }
+    }
+
+    #[test]
+    fn aggregate_separates_activity_from_direction() {
+        // Two line items moving in opposite directions by the same amount: a great deal of
+        // activity, and a net of zero. Reporting only net would say nothing happened.
+        let rows = vec![
+            row("a", BillStage::AsIntroduced, "FY2026", 100),
+            row("a", BillStage::HouseSubstitute, "FY2026", 200),
+            row("b", BillStage::AsIntroduced, "FY2026", 100),
+            row("b", BillStage::HouseSubstitute, "FY2026", 0),
+        ];
+        let m = aggregate(&rows, "FY2026");
+        let step = m
+            .iter()
+            .find(|x| x.to == BillStage::HouseSubstitute)
+            .unwrap();
+        assert_eq!(step.line_items_moved, 2);
+        assert_eq!(step.gross_cents, 200);
+        assert_eq!(step.net_cents, 0);
+        assert_eq!(step.largest_increase.as_ref().unwrap().0, "a");
+        assert_eq!(step.largest_decrease.as_ref().unwrap().0, "b");
+    }
+
+    #[test]
+    fn aggregate_ignores_other_fiscal_years() {
+        let rows = vec![
+            row("a", BillStage::AsIntroduced, "FY2026", 100),
+            row("a", BillStage::HouseSubstitute, "FY2026", 200),
+            row("a", BillStage::AsIntroduced, "FY2027", 500),
+            row("a", BillStage::HouseSubstitute, "FY2027", 900),
+        ];
+        let m = aggregate(&rows, "FY2026");
+        let step = m
+            .iter()
+            .find(|x| x.to == BillStage::HouseSubstitute)
+            .unwrap();
+        assert_eq!(step.gross_cents, 100);
+    }
+
+    #[test]
+    fn an_unchanged_line_item_is_not_counted_as_movement() {
+        let rows = vec![
+            row("a", BillStage::AsIntroduced, "FY2026", 100),
+            row("a", BillStage::HouseSubstitute, "FY2026", 100),
+        ];
+        let m = aggregate(&rows, "FY2026");
+        let step = m
+            .iter()
+            .find(|x| x.to == BillStage::HouseSubstitute)
+            .unwrap();
+        assert_eq!(step.line_items_moved, 0);
+        assert_eq!(step.gross_cents, 0);
     }
 
     #[test]

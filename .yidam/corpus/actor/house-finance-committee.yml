@@ -12,9 +12,20 @@ description: |
   position in the sequence does not. Actions attributed to it remain comparable across
   General Assemblies.
 
-  [open] Whether House-stage changes are systematically larger than Senate-stage changes
-  across the window is an empirical question this corpus is structured to answer and has not
-  yet answered.
+  **Answered for FY2026.** Measured across all 1,528 line items in HB 96, the House substitute
+  carries 51.3% of the bill's total movement — $4.18 billion gross — against the Senate
+  substitute's 17.0%. House-stage changes are larger, and by a wide margin. [verified]
+
+  A second result was not anticipated: **the House floor changed nothing at all.** Between the
+  committee-reported version and the version passed by the House, zero line items and zero
+  dollars moved. Every figure this chamber altered, it altered in committee.
+
+  That reframes the role. The corpus modelled it as the body that rewrites the executive
+  proposal, and it is — but the rewriting is finished before the floor sees it, so a reader
+  comparing the introduced and passed versions gets the right answer for the wrong reason.
+
+  [open] Whether the pattern holds across earlier biennia is unmeasured; only FY2026 has been
+  extracted.
 properties:
   name: House Finance Committee
   role_type: committee
@@ -27,3 +38,5 @@ properties:
 links:
   - target: ../actor.ont.yml
     relationship: instance-of
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

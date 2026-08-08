@@ -15,11 +15,18 @@ description: |
   [inference] Any apparent increase between as-passed and as-enacted is therefore never
   attributable to a veto, and must have another explanation.
 
-  [open] The number of vetoes, the items struck, and their aggregate dollar effect are
-  unreconstructed. The governor's veto message is the primary source and is not yet catalogued.
-  This node is modeled as a single action covering the veto event; if the extracted record
-  warrants per-item granularity, it should be split into one node per struck item rather than
-  edited.
+  **The aggregate dollar effect is now settled: zero.** Comparing the conference report against
+  the enacted text across all 1,528 line items in the appropriation spreadsheet, not one amount
+  differs. [verified] These vetoes changed no appropriation figure anywhere in the bill.
+
+  That bounds them rather than dismissing them. An item veto can strike language without
+  touching a figure, [inference] and Ohio operating budgets carry a great deal of language. But
+  for any analysis of where money went, the conference committee was the last actor to move it.
+
+  [open] The number of vetoes and the items struck remain unreconstructed; the veto message is
+  the primary source and is not catalogued. This node is modeled as a single action covering the
+  veto event; if the extracted record warrants per-item granularity, it should be split into one
+  node per struck item rather than edited.
 properties:
   action_type: line-item-veto
   action_date: 2025-06-30

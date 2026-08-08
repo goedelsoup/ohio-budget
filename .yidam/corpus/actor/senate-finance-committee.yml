@@ -10,8 +10,15 @@ description: |
   and enactment was attributable only in aggregate. The Senate's revisions are frequently
   substantial and pull in different directions from the House's on the same items. [inference]
 
-  [open] Whether Senate-stage changes are systematically smaller than House-stage ones across
-  the window is an empirical question the corpus is now shaped to answer.
+  **Answered for FY2026.** Senate-stage changes are smaller: 17.0% of the bill's total movement
+  against the House substitute's 51.3%. [verified] But the Senate touched *more* line items —
+  213 against 136 — so it made many smaller adjustments where the House made fewer larger ones.
+  Magnitude and breadth point opposite ways, and either alone would mislead.
+
+  The Senate floor, like the House floor, changed nothing: zero line items between the reported
+  and passed versions. [verified] Both chambers finish their work in committee.
+
+  [open] Whether this holds across earlier biennia is unmeasured.
 properties:
   name: Senate Finance Committee
   role_type: committee
@@ -23,3 +30,5 @@ properties:
 links:
   - target: ../actor.ont.yml
     relationship: instance-of
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

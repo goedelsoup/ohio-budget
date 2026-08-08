@@ -15,6 +15,18 @@ description: |
 
   This is a role, not a person or an office. Its `held_by` property records occupancy, so
   that a change of governor does not sever the history of actions taken in the role.
+
+  **A finding that qualifies all of the above.** Across all 1,528 line items in HB 96, the
+  conference report amount and the enacted amount are identical for every one: zero line items,
+  zero dollars. [verified] These line-item vetoes changed no appropriation figure in the bill.
+
+  That does not make them inconsequential — an item veto can strike language without touching a
+  figure, and Ohio operating budgets carry substantial policy language. [inference] What it
+  means is that for the dollars, the enacted text is indistinguishable from the conference
+  report, and any analysis of where money went can treat the conference committee as the last
+  actor that moved it.
+
+  [open] What the vetoes did strike is unreconstructed; the veto message is not catalogued.
 properties:
   name: Governor of Ohio
   role_type: executive
@@ -28,3 +40,5 @@ properties:
 links:
   - target: ../actor.ont.yml
     relationship: instance-of
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

@@ -13,6 +13,13 @@ description: |
   The [`stated_justification`](../budget-action.ont.yml) field will often be legitimately empty
   for conference-stage actions, and an empty justification here means something different from
   an unextracted one.
+
+  **And it matters more than expected.** This role carries 15.3% of HB 96's total movement
+  across 79 line items — comparable to the Senate substitute's 17.0% — and it is the last stage
+  at which any dollar figure changes, since the vetoes moved nothing. [verified]
+
+  So the least documented actor in the process is, for the dollars, the final one. Where the
+  chambers leave a record of committee deliberation, this stage produces a report and a vote.
 properties:
   name: Conference Committee
   role_type: committee
@@ -24,3 +31,5 @@ properties:
 links:
   - target: ../actor.ont.yml
     relationship: instance-of
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
