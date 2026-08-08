@@ -16,17 +16,28 @@ description: |
   This is a role, not a person or an office. Its `held_by` property records occupancy, so
   that a change of governor does not sever the history of actions taken in the role.
 
-  **A finding that qualifies all of the above.** Across all 1,528 line items in HB 96, the
-  conference report amount and the enacted amount are identical for every one: zero line items,
-  zero dollars. [verified] These line-item vetoes changed no appropriation figure in the bill.
+  **What this role struck in HB 96 is now partly reconstructed.** LSC's comparison document
+  annotates vetoed text inline; the education document alone carries 56 struck passages across 8
+  provisions, including an entire Nonchartered Educational Savings Account Program that the
+  House created and the governor removed. [verified] The inference that an item veto can strike
+  language without touching a figure is no longer an inference — here it is what most of them
+  did.
 
-  That does not make them inconsequential — an item veto can strike language without touching a
-  figure, and Ohio operating budgets carry substantial policy language. [inference] What it
-  means is that for the dollars, the enacted text is indistinguishable from the conference
-  report, and any analysis of where money went can treat the conference committee as the last
-  actor that moved it.
+  **A claim recorded here earlier has been withdrawn.** This node said that across all 1,528
+  line items the vetoes changed no appropriation figure, and treated that as settled. The
+  underlying observation holds — the spreadsheet's conference-report and as-enacted columns are
+  identical for every line item [verified] — but it does not support the conclusion drawn from
+  it. Whether the as-enacted column is taken before or after the governor acts is not stated by
+  the source, and if both chambers adopted the conference report unamended, a pre-veto column
+  would be identical to it for reasons having nothing to do with vetoes. [inference] See
+  [the veto action](../budget-action/hb96-line-item-veto.yml) for the probe that sharpens this.
 
-  [open] What the vetoes did strike is unreconstructed; the veto message is not catalogued.
+  The structural point the node was making survives intact and did not need the withdrawn claim:
+  the enacted budget is the legislature's bill minus the executive's strikes, so a corpus
+  modelling only "as passed" and "as enacted" shows a discontinuity it cannot explain. That is
+  true whether or not any strike moved a dollar.
+
+  [open] The reasons given per item remain unreconstructed; the veto message is not catalogued.
 properties:
   name: Governor of Ohio
   role_type: executive
@@ -41,4 +52,6 @@ links:
   - target: ../actor.ont.yml
     relationship: instance-of
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-comparison.md
     relationship: cites

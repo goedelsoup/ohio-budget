@@ -15,10 +15,16 @@ description: |
   an unextracted one.
 
   **And it matters more than expected.** This role carries 15.3% of HB 96's total movement
-  across 79 line items — comparable to the Senate substitute's 17.0% — and it is the last stage
-  at which any dollar figure changes, since the vetoes moved nothing. [verified]
+  across 79 line items — comparable to the Senate substitute's 17.0%. [verified]
 
-  So the least documented actor in the process is, for the dollars, the final one. Where the
+  It was also recorded here as the last stage at which any dollar figure changes, on the
+  grounds that the vetoes moved nothing. That rested on the spreadsheet's conference and
+  as-enacted columns being identical, which is verified, and on those columns straddling the
+  veto, which is not. The narrower claim is withdrawn; see
+  [the veto action](../budget-action/hb96-line-item-veto.yml).
+
+  What survives is the substantive point, which never needed it: among the legislative stages
+  this is the last one that moves money, and it is the least documented of them. Where the
   chambers leave a record of committee deliberation, this stage produces a report and a vote.
 properties:
   name: Conference Committee

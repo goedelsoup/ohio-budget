@@ -429,10 +429,29 @@ pub struct LscProvisionRow {
     /// position therefore attributes to a **chamber**, not to the substitute or committee
     /// report within it.
     pub stage: BillStage,
-    /// The column's prose, as printed.
+    /// The column's prose, as printed, less any veto annotation.
     pub position: String,
     /// True where the position only cross-references an earlier stage without qualifying it.
     pub concurs: bool,
+    /// Fragments of this passage the governor struck by line-item veto.
+    ///
+    /// Carried separately from `position` because the two have different authors: the position
+    /// is what a chamber did, these are what the executive then removed from it. `position`
+    /// keeps the struck words, because the chamber did pass them.
+    ///
+    /// A list rather than a flag because a veto need not take a whole passage. Four in HB 96's
+    /// education comparison document are mid-sentence — `of up to $10,000` lifted out of a
+    /// grant provision that otherwise stands.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub vetoed_spans: Vec<String>,
+    /// A veto annotation opened in this passage and closed outside it, so the extent of the
+    /// strike is not established from this record alone.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub veto_extent_uncertain: bool,
+    /// Whether the provision's own heading marked it struck — `**VETOED**` or
+    /// `**PARTIALLY VETOED**`. Independent of `vetoed`, which is per passage.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub provision_veto: Option<String>,
     pub provenance: Provenance,
 }
 

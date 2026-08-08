@@ -15,25 +15,57 @@ description: |
   [inference] Any apparent increase between as-passed and as-enacted is therefore never
   attributable to a veto, and must have another explanation.
 
-  **The aggregate dollar effect is now settled: zero.** Comparing the conference report against
-  the enacted text across all 1,528 line items in the appropriation spreadsheet, not one amount
-  differs. [verified] These vetoes changed no appropriation figure anywhere in the bill.
+  **What the vetoes struck is now partly reconstructed.** LSC's comparison document annotates
+  struck text inline, and the education document alone carries **56 struck passages across 8
+  provisions**. [verified] They are language, not figures: eligibility rules, administrative
+  duties, award formulas, tax levy mechanics. The largest is
+  [EDUCD118](../../catalog/lsc-hb96-comparison.md), an entire Nonchartered Educational Savings
+  Account Program — created by the House, absent from the Senate's version, restored at
+  enactment, and then struck whole. [verified]
 
-  That bounds them rather than dismissing them. An item veto can strike language without
-  touching a figure, [inference] and Ohio operating budgets carry a great deal of language. But
-  for any analysis of where money went, the conference committee was the last actor to move it.
+  Four strikes are mid-sentence rather than whole-passage. The governor removed `of up to
+  $10,000` from a research grant provision and left the rest of it standing. [verified] An item
+  veto is finer-grained than "item" suggests.
 
-  [open] The number of vetoes and the items struck remain unreconstructed; the veto message is
-  the primary source and is not catalogued. This node is modeled as a single action covering the
-  veto event; if the extracted record warrants per-item granularity, it should be split into one
+  **This node previously claimed the aggregate dollar effect was settled at zero. That claim was
+  overstated and is withdrawn.** What is verified is narrower: across all 1,528 line items, the
+  spreadsheet's conference-report column and its as-enacted column are identical. [verified]
+  Whether that means the vetoes moved no money depends on something the source does not state —
+  whether LSC's as-enacted column is taken before or after the governor acts.
+
+  The observation cannot settle it, and that is the point. If both chambers adopted the
+  conference report unamended, then the bill *as passed* is the conference report, and a
+  pre-veto column would be identical to it for exactly the same reason. Perfect identity across
+  1,528 line items is what a post-veto column with no monetary vetoes looks like, and it is
+  equally what a pre-veto column looks like. [inference]
+
+  [open] One probe sharpens the question without answering it. Line item 800639, Fire Department
+  Grants, gains exactly $8,000,000 at the senate-reported stage and carries that figure
+  unchanged into as-enacted. [verified] Contemporary reporting describes an $8 million
+  fire-department grant increase among the items sent to the governor for line-item veto, but
+  that is a secondary source and describes what was *sent*, not what was struck. If that veto
+  was exercised against the appropriation, the as-enacted column must be pre-veto.
+
+  Settling this needs the veto message, which is not catalogued, or a spreadsheet LSC states to
+  be post-veto. Until then no claim in this corpus should rest on the enacted column being the
+  post-veto figure.
+
+  This node is modeled as a single action covering the veto event. Reporting puts the count at
+  67 provisions across the whole bill; [inference] the 8 above are only those falling in the
+  education comparison document. If per-item granularity is wanted, it should be split into one
   node per struck item rather than edited.
 properties:
   action_type: line-item-veto
   action_date: 2025-06-30
   direction: decrease
-  amount_delta: "[open] aggregate effect not yet reconstructed"
+  amount_delta: "[open] not reconstructed; see the description for why the spreadsheet cannot settle it"
   stated_justification: |
-    [open] The governor's veto message states a rationale per item. Not yet catalogued.
+    [open] The governor's veto message states a rationale per item and is not catalogued.
+
+    What is reconstructed is the *content* struck, not the reason for striking it. From the LSC
+    comparison document, 56 passages across 8 provisions, of which the largest is the whole
+    Nonchartered Educational Savings Account Program (EDUCD118) and the finest is the phrase
+    "of up to $10,000" lifted from a research grant award (BORCD109). [verified]
   phase: executive
 links:
   - target: ../budget-action.ont.yml
@@ -43,4 +75,6 @@ links:
   - target: ../actor/governor.yml
     relationship: taken-by
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-comparison.md
     relationship: cites

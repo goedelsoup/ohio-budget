@@ -105,8 +105,8 @@ fn main() -> Result<()> {
             bail!("no provision {code} in this document");
         };
         println!(
-            "\n=== {code} {} ===\nsection {:?}, page {}",
-            p.title, p.section, p.page
+            "\n=== {code} {} ===\nsection {:?}, page {}, heading veto marker: {:?}",
+            p.title, p.section, p.page, p.veto_status
         );
         for (i, pos) in p.positions.iter().enumerate() {
             if changed_only && pos.is_unchanged_after_executive() {
@@ -114,8 +114,20 @@ fn main() -> Result<()> {
             }
             println!("\n--- entry {i} (page {}) ---", pos.page);
             for (c, cell) in pos.cells.iter().enumerate() {
-                if !cell.trim().is_empty() {
-                    println!("  [{}] {cell}", doc.columns[c].label);
+                if cell.trim().is_empty() {
+                    continue;
+                }
+                let split = lsc::comparison::split_inline_veto(cell);
+                println!("  [{}] {}", doc.columns[c].label, split.text);
+                for s in &split.struck {
+                    println!(
+                        "        VETOED{}: {s}",
+                        if split.unterminated {
+                            " (extent uncertain)"
+                        } else {
+                            ""
+                        }
+                    );
                 }
             }
         }

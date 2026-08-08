@@ -159,12 +159,104 @@ pub fn is_bare_concurrence(cell: &str) -> bool {
     )
 }
 
+/// Whether the governor struck this provision, as marked on its heading.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum VetoStatus {
+    NotVetoed,
+    Vetoed,
+    PartiallyVetoed,
+}
+
+/// Splits a `**VETOED**` or `**PARTIALLY VETOED**` marker off a provision heading.
+///
+/// LSC marks vetoes twice and independently: once on the heading, for the provision as a
+/// whole, and once inline around each struck passage. Both are read, because they answer
+/// different questions — the heading says whether the provision survived, the inline markers
+/// say which parts of it did not.
+pub fn split_veto_marker(title: &str) -> (VetoStatus, String) {
+    let t = title.trim();
+    for (marker, status) in [
+        ("**PARTIALLY VETOED**", VetoStatus::PartiallyVetoed),
+        ("**VETOED**", VetoStatus::Vetoed),
+    ] {
+        if let Some(rest) = t.strip_prefix(marker) {
+            return (status, rest.trim().to_string());
+        }
+    }
+    (VetoStatus::NotVetoed, t.to_string())
+}
+
+/// A position separated from the veto annotations written over it.
+#[derive(Debug, Clone, PartialEq, Default)]
+pub struct VetoSplit {
+    /// What the chamber passed, annotations removed — **including** the struck text, because
+    /// the chamber did pass it. The veto is a later act by a different actor.
+    pub text: String,
+    /// The fragments the governor struck, in document order.
+    pub struck: Vec<String>,
+    /// A marker opened and never closed within this position.
+    pub unterminated: bool,
+}
+
+impl VetoSplit {
+    pub fn any_struck(&self) -> bool {
+        !self.struck.is_empty()
+    }
+}
+
+/// Separates `[***VETOED: … ***]` annotations from the position they were written over.
+///
+/// The wrapper is LSC's annotation, not the legislature's words. Keeping it inline would mean
+/// every downstream match on a position has to know the marker exists, and would blur the
+/// distinction this record is for: the position is what a chamber did, the annotation is what
+/// the executive then did to it.
+///
+/// A position may carry **several** markers, and they need not wrap the whole cell. Four
+/// passages in HB 96's education comparison document are struck mid-sentence — the governor
+/// removed `of up to $10,000` from a grant provision and left the rest standing. Treating the
+/// marker as a whole-cell wrapper, which an earlier version of this did, left those four
+/// unparsed with the raw marker sitting in the stored text.
+pub fn split_inline_veto(cell: &str) -> VetoSplit {
+    const OPEN: &str = "[***VETOED:";
+    const CLOSE: &str = "***]";
+
+    let mut out = VetoSplit::default();
+    let mut rest = cell.trim();
+    while let Some(at) = rest.find(OPEN) {
+        out.text.push_str(&rest[..at]);
+        let after = &rest[at + OPEN.len()..];
+        match after.find(CLOSE) {
+            Some(end) => {
+                let inner = after[..end].trim();
+                out.text.push_str(inner);
+                out.struck.push(inner.to_string());
+                rest = &after[end + CLOSE.len()..];
+            }
+            None => {
+                // The annotation runs past the end of this position. Reported rather than
+                // dropped: the struck text is real and the boundary is what is unknown.
+                let inner = after.trim();
+                out.text.push_str(inner);
+                out.struck.push(inner.to_string());
+                out.unterminated = true;
+                rest = "";
+                break;
+            }
+        }
+    }
+    out.text.push_str(rest);
+    out.text = out.text.split_whitespace().collect::<Vec<_>>().join(" ");
+    out
+}
+
 /// A provision and the positions taken on it.
 #[derive(Debug, Clone, PartialEq)]
 pub struct Provision {
     /// LSC's own identifier, e.g. `EDUCD19`. `None` where the heading did not carry one.
     pub code: Option<String>,
     pub title: String,
+    /// Whether the heading marked the provision as struck.
+    pub veto_status: VetoStatus,
     /// The section heading in force, e.g. `School Funding`.
     pub section: Option<String>,
     pub page: u32,
@@ -372,9 +464,11 @@ pub fn assemble(pages: &[(u32, Vec<Glyph>)], opts: &RuleOptions) -> Result<Compa
                 if let Some(p) = cur.take() {
                     provisions.push(p);
                 }
+                let (veto_status, title) = split_veto_marker(&title);
                 cur = Some(Provision {
                     code: Some(code),
                     title,
+                    veto_status,
                     section: section.clone(),
                     page,
                     citations: Vec::new(),
@@ -484,6 +578,7 @@ pub fn to_rows(doc: &ComparisonDocument, ctx: &DocumentContext) -> ProvisionRepo
                     report.empty_cells += 1;
                     continue;
                 }
+                let split = split_inline_veto(cell);
                 report.rows.push(LscProvisionRow {
                     bill_number: ctx.bill_number.clone(),
                     general_assembly: ctx.general_assembly.clone(),
@@ -492,8 +587,15 @@ pub fn to_rows(doc: &ComparisonDocument, ctx: &DocumentContext) -> ProvisionRepo
                     section: p.section.clone(),
                     entry_index,
                     stage,
-                    position: cell.trim().to_string(),
-                    concurs: is_bare_concurrence(cell),
+                    concurs: is_bare_concurrence(&split.text),
+                    position: split.text,
+                    vetoed_spans: split.struck,
+                    veto_extent_uncertain: split.unterminated,
+                    provision_veto: match p.veto_status {
+                        VetoStatus::NotVetoed => None,
+                        VetoStatus::Vetoed => Some("vetoed".into()),
+                        VetoStatus::PartiallyVetoed => Some("partially-vetoed".into()),
+                    },
                     provenance: provenance.clone(),
                 });
             }
@@ -808,6 +910,97 @@ mod tests {
             ],
         };
         assert!(unchanged.is_unchanged_after_executive());
+    }
+
+    #[test]
+    fn a_veto_marker_is_read_off_the_heading_and_leaves_a_clean_title() {
+        assert_eq!(
+            split_veto_marker("**VETOED** Nonchartered educational savings account program"),
+            (
+                VetoStatus::Vetoed,
+                "Nonchartered educational savings account program".to_string()
+            )
+        );
+        assert_eq!(
+            split_veto_marker("**PARTIALLY VETOED** School district property tax replacement"),
+            (
+                VetoStatus::PartiallyVetoed,
+                "School district property tax replacement".to_string()
+            )
+        );
+        // `PARTIALLY VETOED` must be tried first: it also starts with the shorter marker's
+        // text once the leading asterisks are past, and matching that first would report a
+        // whole provision struck when only part of it was.
+        assert_eq!(
+            split_veto_marker("Career-tech associated services funding"),
+            (
+                VetoStatus::NotVetoed,
+                "Career-tech associated services funding".to_string()
+            )
+        );
+    }
+
+    #[test]
+    fn a_whole_passage_veto_separates_the_annotation_from_the_chambers_words() {
+        let s = split_inline_veto(
+            "[***VETOED: Establishes the Nonchartered Educational Savings Account Program.***]",
+        );
+        assert_eq!(s.struck.len(), 1);
+        assert_eq!(
+            s.text,
+            "Establishes the Nonchartered Educational Savings Account Program."
+        );
+        assert!(!s.unterminated);
+
+        let plain = split_inline_veto("Same as the Executive.");
+        assert!(!plain.any_struck());
+        assert_eq!(plain.text, "Same as the Executive.");
+    }
+
+    #[test]
+    fn a_mid_sentence_veto_keeps_the_surviving_text_around_it() {
+        // The real case: the governor lifted a dollar cap out of a grant provision that
+        // otherwise stands. An earlier version treated the marker as a whole-cell wrapper and
+        // left four passages unparsed with the raw annotation inside them.
+        let s = split_inline_veto(
+            "(1) Award competitive grants [***VETOED: of up to $10,000***] to faculty whose \
+             research aligns with the agenda.",
+        );
+        assert_eq!(s.struck, vec!["of up to $10,000"]);
+        assert_eq!(
+            s.text,
+            "(1) Award competitive grants of up to $10,000 to faculty whose research aligns \
+             with the agenda.",
+            "the position must still read as the chamber passed it"
+        );
+    }
+
+    #[test]
+    fn several_strikes_in_one_passage_are_all_recovered() {
+        let s = split_inline_veto(
+            "Redirects interest from: H2Ohio Fund, [***VETOED: Brownfield Fund***], \
+             Liquor Fund, [***VETOED: Second Chance Fund***].",
+        );
+        assert_eq!(s.struck, vec!["Brownfield Fund", "Second Chance Fund"]);
+    }
+
+    #[test]
+    fn an_unclosed_annotation_is_flagged_rather_than_dropped() {
+        // These occur where a struck passage runs past the end of an entry. The struck text
+        // is real; what is unknown is where it stops.
+        let s = split_inline_veto("Redirects earnings from [***VETOED: the Brownfield");
+        assert!(s.unterminated);
+        assert_eq!(s.struck, vec!["the Brownfield"]);
+        assert_eq!(s.text, "Redirects earnings from the Brownfield");
+    }
+
+    #[test]
+    fn concurrence_is_judged_after_the_veto_wrapper_comes_off() {
+        // Otherwise a struck cross-reference reads as a change, because the wrapper makes the
+        // text stop matching the concurrence phrases.
+        let s = split_inline_veto("[***VETOED: Same as the Executive.***]");
+        assert!(s.any_struck());
+        assert!(is_bare_concurrence(&s.text));
     }
 
     #[test]

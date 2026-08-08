@@ -32,7 +32,7 @@
       "type": "string"
     },
     "position": {
-      "description": "The column's prose, as printed.",
+      "description": "The column's prose, as printed, less any veto annotation.",
       "type": "string"
     },
     "provenance": {
@@ -44,6 +44,13 @@
     },
     "provision_title": {
       "type": "string"
+    },
+    "provision_veto": {
+      "description": "Whether the provision's own heading marked it struck — `**VETOED**` or `**PARTIALLY VETOED**`. Independent of `vetoed`, which is per passage.",
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "section": {
       "description": "The section heading the provision sits under, e.g. `School Funding`.",
@@ -59,6 +66,17 @@
           "$ref": "#/definitions/BillStage"
         }
       ]
+    },
+    "veto_extent_uncertain": {
+      "description": "A veto annotation opened in this passage and closed outside it, so the extent of the strike is not established from this record alone.",
+      "type": "boolean"
+    },
+    "vetoed_spans": {
+      "description": "Fragments of this passage the governor struck by line-item veto.\n\nCarried separately from `position` because the two have different authors: the position is what a chamber did, these are what the executive then removed from it. `position` keeps the struck words, because the chamber did pass them.\n\nA list rather than a flag because a veto need not take a whole passage. Four in HB 96's education comparison document are mid-sentence — `of up to $10,000` lifted out of a grant provision that otherwise stands.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "definitions": {

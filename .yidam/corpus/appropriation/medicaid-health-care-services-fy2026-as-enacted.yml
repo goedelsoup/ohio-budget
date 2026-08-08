@@ -16,11 +16,16 @@ description: |
   rather than uniformly. A single calculator produces the number; interpreting it requires
   knowing whether the line item is discretionary, formula-driven, or entitlement-driven.
 
-  [open] The amount is unfilled. Note also that a general revenue figure for this line item is
-  roughly half the all-funds figure, since federal match flows through separate accounts —
-  quoting one for the other is the most common Medicaid reporting error. [inference]
   Enacted at $20,192,404,766 for FY2026 in general revenue — roughly 2.4 times foundation
   funding, and the largest single general revenue line item in the corpus. [verified]
+
+  A general revenue figure for this line item is roughly half the all-funds figure, since
+  federal match flows through separate accounts; quoting one for the other is the most common
+  Medicaid reporting error. [inference] The figure above is general revenue, and the sheet it
+  came from is named in `source_document` so the two cannot be confused.
+
+  A stale `[open]` saying the amount was unfilled sat above that verified figure until the
+  validator gained a rule for the contradiction.
 properties:
   amount: "$20,192,404,766.00"
   period_label: FY2026

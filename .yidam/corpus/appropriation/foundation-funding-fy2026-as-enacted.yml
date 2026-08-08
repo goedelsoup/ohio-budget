@@ -16,10 +16,17 @@ description: |
   be true at once. That is not a paradox; it is why this corpus models programs separately from
   the line items that fund them.
 
-  [open] The amount is unfilled, pending the LSC comparison document for the enacted bill.
-  Enacted at $8,457,598,772 for FY2026 — identical to the conference report, which
-  establishes that foundation funding was not among the governor's line-item vetoes.
-  [verified]
+  Enacted at $8,457,598,772 for FY2026 — identical to the conference report figure. [verified]
+
+  That identity was previously read as establishing that foundation funding escaped the
+  governor's line-item vetoes. It does not, and the claim is withdrawn. Whether LSC's as-enacted
+  column is taken before or after the governor acts is not stated by the source, and if the
+  conference report was adopted unamended the two columns would match regardless. [inference]
+  See [the veto action](../budget-action/hb96-line-item-veto.yml).
+
+  The stale `[open]` above this, saying the amount was unfilled and awaiting the comparison
+  document, was left behind when the figure was filled from the spreadsheet. It was wrong on
+  both counts: the amount was filled, and comparison documents carry no per-line-item figures.
 properties:
   amount: "$8,457,598,772.00"
   period_label: FY2026

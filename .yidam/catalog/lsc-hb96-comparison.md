@@ -99,6 +99,31 @@ a well-formed table of the wrong shape — three columns, with the executive pro
 House's position fused into a single cell. That is worse than a refusal, and it is why the
 ruled reader does not fall back to river detection.
 
+## It also records the line-item vetoes
+
+The document marks vetoes twice, independently, and both are extracted:
+
+- on a provision **heading**, as a `**VETOED**` or `**PARTIALLY VETOED**` prefix — whether the
+  provision survived;
+- **inline**, as `[***VETOED: … ***]` around each struck passage — which parts did not.
+
+In this document: 8 provisions marked, **56 struck passages**, all recovered with none left
+unterminated. The count matches an independent scan of the document's raw text.
+
+Four strikes are mid-sentence rather than whole-passage — the governor removed `of up to
+$10,000` from a research grant provision and left the rest standing. An extractor treating the
+marker as a whole-cell wrapper, which the first version here did, leaves those four unparsed
+with the raw annotation sitting inside the stored text.
+
+`LscProvisionRow.position` keeps the struck words, because the chamber did pass them; the
+strikes are listed separately in `vetoed_spans`. The position is what a chamber did, the spans
+are what the executive then removed.
+
+**This does not establish the vetoes' dollar effect**, and a claim resting on it was withdrawn
+from three nodes. This document says what language was struck; it does not say whether the
+appropriation spreadsheet's as-enacted column is taken before or after the governor acts. See
+[the veto action](../corpus/budget-action/hb96-line-item-veto.yml).
+
 ## What its figures are and are not
 
 `Fiscal effect:` sentences quote dollar amounts. Those are **distribution estimates for a

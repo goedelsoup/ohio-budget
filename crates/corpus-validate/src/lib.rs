@@ -150,6 +150,34 @@ fn is_identifier_property(key: &str) -> bool {
     )
 }
 
+/// Is this value still a placeholder rather than a figure?
+fn is_open_placeholder(value: &ScalarValue) -> bool {
+    value
+        .as_text()
+        .is_some_and(|t| t.trim_start().starts_with("[open]"))
+}
+
+/// Does the body claim a value has not been filled in yet?
+///
+/// Narrow on purpose. This exists because a specific defect recurred: when amounts were filled
+/// in bulk from the appropriation spreadsheet, the verified figure was appended to the node
+/// body and the sentence above it saying the amount was unfilled was left in place. Two nodes
+/// carried both at once, one of them also naming a source that does not hold the figure.
+///
+/// Neither statement is detectably wrong on its own — the property looks fine, the prose looks
+/// fine — and nothing else in this validator reads the body against the properties. A reader
+/// hitting the contradiction cannot tell which half is stale.
+fn says_value_is_unfilled(body: &str) -> Option<&'static str> {
+    const PHRASES: [&str; 4] = [
+        "amount is unfilled",
+        "figure is unfilled",
+        "amount is not yet filled",
+        "amount is still unfilled",
+    ];
+    let lower = body.to_ascii_lowercase();
+    PHRASES.into_iter().find(|p| lower.contains(p))
+}
+
 fn looks_like_money(key: &str) -> bool {
     let k = key.to_ascii_lowercase();
     ["amount", "cents", "delta", "dollars", "balance", "cost"]
@@ -359,6 +387,19 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
                         "property '{key}' holds a float; money must be integer cents or an explicit string"
                     ),
                 });
+            }
+            if looks_like_money(key) && !is_open_placeholder(value) {
+                if let Some(phrase) = says_value_is_unfilled(&inst.inst.description) {
+                    findings.push(Finding {
+                        path: p.clone(),
+                        rule: "body-contradicts-filled-property",
+                        severity: Severity::Error,
+                        message: format!(
+                            "property '{key}' holds a value but the body still says {phrase:?}; \
+                             one of the two is wrong and a reader has no way to tell which"
+                        ),
+                    });
+                }
             }
         }
 
@@ -1022,6 +1063,65 @@ links:
         assert!(
             findings.iter().any(|f| f.rule == "float-money"),
             "binary floats cannot represent cents exactly and compound silently across sums"
+        );
+    }
+
+    #[test]
+    fn a_body_saying_the_amount_is_unfilled_over_a_filled_amount_is_rejected() {
+        // The real defect: amounts were filled in bulk from the spreadsheet by appending the
+        // verified figure to the body, leaving the sentence above it saying the amount was
+        // unfilled. Two nodes carried both at once and nothing detected it, because each half
+        // is well-formed on its own.
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/expenditure/e.yml",
+            r#"
+class: expenditure
+label: E
+description: |
+  [open] The amount is unfilled, pending the connector.
+  Disbursed $1,234.00 in FY2026. [verified]
+properties:
+  amount: "$1,234.00"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run(classes, paths, insts);
+        assert!(
+            findings
+                .iter()
+                .any(|f| f.rule == "body-contradicts-filled-property"),
+            "{findings:?}"
+        );
+    }
+
+    #[test]
+    fn a_body_saying_the_amount_is_unfilled_over_an_open_amount_is_fine() {
+        // The same sentence is correct while the placeholder is still there, and several
+        // nodes legitimately carry it.
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/expenditure/e.yml",
+            r#"
+class: expenditure
+label: E
+description: |
+  [open] The amount is unfilled, pending the obm connector.
+properties:
+  amount: "[open] pending the obm connector"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run(classes, paths, insts);
+        assert!(
+            !findings
+                .iter()
+                .any(|f| f.rule == "body-contradicts-filled-property"),
+            "{findings:?}"
         );
     }
 
