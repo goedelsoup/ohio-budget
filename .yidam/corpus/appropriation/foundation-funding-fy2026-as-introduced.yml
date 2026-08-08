@@ -13,13 +13,15 @@ description: |
 
   [open] The amount is unfilled. It appears in the LSC comparison document for this stage,
   which is not yet catalogued.
+  The executive proposed $8,424,986,974 for FY2026. [verified]
 properties:
-  amount: "[open] pending the lsc connector"
+  amount: "$8,424,986,974.00"
   period_label: FY2026
   stage: as-introduced
   measure: appropriated
   source_document: |
-    LSC comparison document for HB 96 as introduced. [open] Not yet catalogued.
+    LSC appropriation spreadsheet, HB 96 as enacted, sheet ENGRF, ALI 200550.
+    Committed at .yidam/sources/lsc/ with sha256 8153e8f5. [verified]
 links:
   - target: ../appropriation.ont.yml
     relationship: instance-of
@@ -32,4 +34,6 @@ links:
   - target: ../fiscal-period/fy2026.yml
     relationship: covers
   - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites

@@ -13,7 +13,10 @@ properties:
     description: Official name of the agency
   - name: agency_code
     type: string
-    description: Numeric agency code used to prefix its line items
+    description: |
+      Three-letter agency code as used by the Legislative Service Commission, e.g. EDU, ADJ.
+      Not numeric: the digits leading a line item code belong to the line item, not the agency,
+      and this corpus conflated the two until the appropriation spreadsheet was read. [verified]
   - name: cabinet_status
     type: string
     description: cabinet | non-cabinet | board-or-commission | elected-office | judicial | legislative

@@ -74,10 +74,10 @@ Sorted by: kind, then alphabetically.
 | [foundation-funding-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-21-as-enacted.yml) | appropriation | Foundation Funding — FY2020-21, As Enacted | 7 | 34 |
 | [foundation-funding-fy2022-23-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-23-as-enacted.yml) | appropriation | Foundation Funding — FY2022-23, As Enacted | 7 | 33 |
 | [foundation-funding-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-25-as-enacted.yml) | appropriation | Foundation Funding — FY2024-25, As Enacted | 6 | 45 |
-| [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 7 | 41 |
-| [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 6 | 35 |
-| [foundation-funding-fy2026-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-senate.yml) | appropriation | Foundation Funding — FY2026, As Passed by the Senate | 6 | 29 |
-| [foundation-funding-fy2026-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-conference-report.yml) | appropriation | Foundation Funding — FY2026, Conference Report | 6 | 29 |
+| [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 8 | 47 |
+| [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 7 | 39 |
+| [foundation-funding-fy2026-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-senate.yml) | appropriation | Foundation Funding — FY2026, As Passed by the Senate | 7 | 34 |
+| [foundation-funding-fy2026-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-conference-report.yml) | appropriation | Foundation Funding — FY2026, Conference Report | 7 | 34 |
 | [institutional-operations-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2020-21-as-enacted.yml) | appropriation | Institutional Operations — FY2020-21, As Enacted | 7 | 31 |
 | [institutional-operations-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2024-25-as-enacted.yml) | appropriation | Institutional Operations — FY2024-25, As Enacted | 7 | 32 |
 | [local-government-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2010-11, As Enacted | 5 | 31 |
@@ -135,7 +135,7 @@ Sorted by: kind, then alphabetically.
 | [hb33-line-item-veto.yml](.yidam/corpus/budget-action/hb33-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 33 | 4 | 30 |
 | [hb59-medicaid-agency-transfer.yml](.yidam/corpus/budget-action/hb59-medicaid-agency-transfer.yml) | budget-action | Medicaid Transfer to a Separate Department, HB 59 | 4 | 30 |
 | [hb96-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-house-amendment-foundation-funding.yml) | budget-action | House Amendment to Foundation Funding, HB 96 | 4 | 40 |
-| [hb96-line-item-veto.yml](.yidam/corpus/budget-action/hb96-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 96 | 3 | 37 |
+| [hb96-line-item-veto.yml](.yidam/corpus/budget-action/hb96-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 96 | 4 | 39 |
 | [hb96-senate-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-senate-amendment-foundation-funding.yml) | budget-action | Senate Amendment to Foundation Funding, HB 96 | 5 | 29 |
 | [foundation-funding-fy2020-21-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2020-21-actual.yml) | expenditure | Foundation Funding — FY2020-21 Actual | 4 | 28 |
 | [foundation-funding-fy2022-23-disbursed-cleveland.yml](.yidam/corpus/expenditure/foundation-funding-fy2022-23-disbursed-cleveland.yml) | expenditure | Foundation Funding Disbursement to Cleveland Metropolitan Schools — FY2022-23 | 5 | 33 |
@@ -193,7 +193,7 @@ Sorted by: kind, then alphabetically.
 | [developmental-disabilities-services.yml](.yidam/corpus/line-item/developmental-disabilities-services.yml) | line-item | Developmental Disabilities Medicaid Services | 3 | 31 |
 | [disability-financial-assistance.yml](.yidam/corpus/line-item/disability-financial-assistance.yml) | line-item | Disability Financial Assistance | 3 | 27 |
 | [early-childhood-education.yml](.yidam/corpus/line-item/early-childhood-education.yml) | line-item | Early Childhood Education | 3 | 30 |
-| [foundation-funding.yml](.yidam/corpus/line-item/foundation-funding.yml) | line-item | Foundation Funding | 3 | 41 |
+| [foundation-funding.yml](.yidam/corpus/line-item/foundation-funding.yml) | line-item | Foundation Funding | 4 | 45 |
 | [highway-construction.yml](.yidam/corpus/line-item/highway-construction.yml) | line-item | Highway Construction | 3 | 37 |
 | [highway-maintenance.yml](.yidam/corpus/line-item/highway-maintenance.yml) | line-item | Highway Maintenance | 3 | 30 |
 | [highway-patrol-operations.yml](.yidam/corpus/line-item/highway-patrol-operations.yml) | line-item | Highway Patrol Operations | 3 | 26 |

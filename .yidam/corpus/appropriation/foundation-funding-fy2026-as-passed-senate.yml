@@ -7,13 +7,16 @@ description: |
   breaks the corpus's largest attribution gap into steps. Previously the distance between the
   House-passed and enacted amounts covered Senate action, conference reconciliation, and the
   governor's vetoes as one undifferentiated movement.
+  The Senate passed $8,447,098,772 for FY2026 — below the House's $8,518,736,974, and above
+  the executive proposal. [verified]
 properties:
-  amount: "[open] pending the lsc connector"
+  amount: "$8,447,098,772.00"
   period_label: FY2026
   stage: as-passed-senate
   measure: appropriated
   source_document: |
-    [open] Not yet catalogued.
+    LSC appropriation spreadsheet, HB 96 as enacted, sheet ENGRF, ALI 200550.
+    Committed at .yidam/sources/lsc/ with sha256 8153e8f5. [verified]
 links:
   - target: ../appropriation.ont.yml
     relationship: instance-of
@@ -26,4 +29,6 @@ links:
   - target: ../bill-version/hb96-as-passed-senate.yml
     relationship: stated-in
   - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites

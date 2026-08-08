@@ -15,17 +15,19 @@ description: |
   Department of Education was restructured into the
   [Department of Education and Workforce](../agency/department-of-education-and-workforce.yml).
 
-  Its code is stated as 200550 with an `[inference]` tag — this is the one line item code in
-  the seed corpus asserted with any confidence, and it is still unverified. [open] Whether the
-  code held constant across the education restructuring is exactly the kind of question the
-  `lineage` calculator exists to raise.
+  Its code is 200550 and its name in the source is "Foundation Funding - All Students", held
+  by agency `EDU`, drawn from the general revenue fund. [verified] This was carried as an
+  `[inference]` from genesis until the appropriation spreadsheet was read, and it held.
+
+  [open] Whether the code survived the education restructuring unchanged is still open, and is
+  exactly the kind of question the `lineage` calculator exists to raise.
 properties:
-  name: Foundation Funding
-  current_code: "200550 [inference]"
+  name: Foundation Funding - All Students [verified]
+  current_code: "200550 [verified]"
   historical_codes: |
     [open] Not yet reconstructed. Whether the code survived the FY2024-25 education
     restructuring unchanged is unverified.
-  agency_code: "200 [inference]"
+  agency_code: "EDU [verified]"
   purpose: |
     Distribution of the state share of school district operating costs, computed under the
     school funding formula.
@@ -39,3 +41,5 @@ links:
     relationship: belongs-to
   - target: ../fund/general-revenue-fund.yml
     relationship: draws-from
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

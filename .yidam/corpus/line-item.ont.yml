@@ -19,7 +19,9 @@ properties:
     description: Prior codes with the periods in which each was in force
   - name: agency_code
     type: string
-    description: Numeric agency code prefixing the line item
+    description: |
+      Three-letter code of the agency holding this line item, e.g. EDU. The leading digits of
+      current_code are part of the line item code and are not an agency identifier.
   - name: purpose
     type: text
     description: What the line item funds, in the terms used by the enacting bill

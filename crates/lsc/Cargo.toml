@@ -13,10 +13,20 @@ serde_yaml.workspace = true
 corpus-schema = { path = "../corpus-schema" }
 pdf-extract = { version = "0.12", optional = true }
 euclid = { version = "0.20", optional = true }
+calamine = { version = "0.26", optional = true }
 
 [features]
 # Reading PDF bytes pulls the font and CMap stack. The geometry that turns positioned
 # glyphs into a table is pure and always available, so `--no-default-features` still
 # gives everything that is testable without a document.
-default = ["pdf"]
+default = ["pdf", "xlsx"]
 pdf = ["dep:pdf-extract", "dep:euclid"]
+# The appropriation spreadsheet is published as xlsx as well as PDF, and the xlsx is the
+# better source: same authority, structured, and free of the font-decoding problem the
+# spreadsheet PDF has.
+xlsx = ["dep:calamine"]
+
+[[bin]]
+name = "lsc-extract"
+path = "src/main.rs"
+required-features = ["pdf"]

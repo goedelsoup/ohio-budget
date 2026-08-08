@@ -35,3 +35,5 @@ links:
     relationship: applies-to
   - target: ../actor/governor.yml
     relationship: taken-by
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

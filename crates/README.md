@@ -44,8 +44,11 @@ Fields per crate: name, capability type (connector/calculator/feature-engineerin
 | [corpus-promote](corpus-promote/) | Proposes corpus updates from validated connector extraction records |
 | [corpus-schema](corpus-schema/) | Typed definitions for Ohio budget corpus files and connector extraction records |
 | [corpus-validate](corpus-validate/) | Validates the Ohio budget corpus against its own ontology |
+| [gap](gap/) | Computes appropriated authority against actual disbursement |
 | [legislature](legislature/) | Connector for the Ohio General Assembly bill record |
+| [lineage](lineage/) | Proposes line item succession candidates across renumberings |
 | [lsc](lsc/) | Connector for Legislative Service Commission comparison documents |
+| [real-dollars](real-dollars/) | Restates nominal budget amounts in constant dollars |
 <!-- /REGEN -->
 
 ## Index status

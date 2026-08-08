@@ -22,7 +22,7 @@ properties:
   name: Highway Construction
   current_code: "[open] pending verification"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "775 [inference]"
+  agency_code: "[open] three-letter code pending verification"
   purpose: |
     Construction, reconstruction, and major rehabilitation of the state highway system.
   first_period: "[open] predates the corpus window"

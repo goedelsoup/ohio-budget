@@ -27,6 +27,8 @@
 pub mod geometry;
 #[cfg(feature = "pdf")]
 pub mod pdf;
+#[cfg(feature = "xlsx")]
+pub mod xlsx;
 
 use std::path::{Path, PathBuf};
 

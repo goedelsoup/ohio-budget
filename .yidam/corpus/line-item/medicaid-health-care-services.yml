@@ -25,7 +25,7 @@ properties:
   current_code: "[open] pending verification"
   historical_codes: |
     [open] Pre-separation codes under Job and Family Services not yet reconstructed.
-  agency_code: "651 [inference]"
+  agency_code: "[open] three-letter code pending verification"
   purpose: |
     Payment for Medicaid-covered health care services, including managed care capitation and
     fee-for-service claims.

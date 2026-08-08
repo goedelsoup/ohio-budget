@@ -17,13 +17,17 @@ description: |
   the line items that fund them.
 
   [open] The amount is unfilled, pending the LSC comparison document for the enacted bill.
+  Enacted at $8,457,598,772 for FY2026 — identical to the conference report, which
+  establishes that foundation funding was not among the governor's line-item vetoes.
+  [verified]
 properties:
-  amount: "[open] pending the lsc connector"
+  amount: "$8,457,598,772.00"
   period_label: FY2026
   stage: as-enacted
   measure: appropriated
   source_document: |
-    LSC comparison document for HB 96 as enacted. [open] Not yet catalogued.
+    LSC appropriation spreadsheet, HB 96 as enacted, sheet ENGRF, ALI 200550.
+    Committed at .yidam/sources/lsc/ with sha256 8153e8f5. [verified]
 links:
   - target: ../appropriation.ont.yml
     relationship: instance-of
@@ -39,3 +43,5 @@ links:
     relationship: cites
   - target: ../expenditure/foundation-funding-fy2026-disbursed.yml
     relationship: realized-by
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

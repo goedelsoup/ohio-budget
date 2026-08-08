@@ -13,7 +13,7 @@ description: |
   this agency's money.
 properties:
   name: Ohio Department of Transportation
-  agency_code: "775 [inference]"
+  agency_code: "[open] three-letter code, not the 775 previously assumed"
   cabinet_status: cabinet
   established: 1972-01-01
   predecessor: |

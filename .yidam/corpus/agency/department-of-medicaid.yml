@@ -21,7 +21,7 @@ description: |
   property and becomes an edge when Job and Family Services is added.
 properties:
   name: Ohio Department of Medicaid
-  agency_code: "651 [inference]"
+  agency_code: "[open] three-letter code, not the 651 previously assumed"
   cabinet_status: cabinet
   established: 2013-07-01
   predecessor: |
