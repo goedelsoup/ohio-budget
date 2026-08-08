@@ -15,17 +15,46 @@ description: |
   Re-pointed from as-passed-senate for the same reason as its House counterpart — the Senate's
   floor delta is zero and the money moved at the substitute stage.
 
-  [open] The stated justification is unreconstructed. Whether the reduction reflected a
-  different view of the phase-in schedule or of the revenue available to fund it is exactly the
-  question this node exists to hold open.
+  **This node's open question is answered, and neither of the two answers it offered was
+  right.** It asked whether the reduction reflected a different view of the phase-in schedule
+  or of the revenue available to fund it. Both are questions about the size of the pot. The
+  answer is about its division: the Senate rewrote the disadvantaged pupil impact aid
+  calculation, weighting the FY2025 reported economically-disadvantaged ADM at 75% for FY2026
+  and 65% for FY2027 against directly-certified ADM at 25% and 35%. [verified] That changes
+  which districts count as having disadvantaged students, and by how much.
+
+  **The reduction did not fall on traditional school districts.** Against the $72.9 million the
+  Senate took out of line item 200550, LSC reports the estimated allocation to traditional
+  districts *rising* $1.0 million over the House. [verified] The two move in opposite
+  directions because ALI 200550 also funds community schools, STEM schools, and joint
+  vocational districts — so the Senate's cut fell on those recipients, not on the districts the
+  headline figure appears to describe.
+
+  Read as a cut to school funding this action is the largest in the FY2026 series. Read as what
+  it did, it is a reallocation between recipient classes that left the class most readers have
+  in mind marginally better off. See
+  [appropriation-is-not-distribution](../../decisions/appropriation-is-not-distribution.yml).
 properties:
   action_type: amendment
   action_date: "[open] spring 2025, pending verification"
   direction: decrease
   amount_delta: "-$72,888,202.00"
   stated_justification: |
-    [open] Not reconstructed. Senate Finance statements and the LSC bill analysis are the
-    sources.
+    From the LSC comparison document, provision EDUCD26 (Traditional school district funding
+    formula), As Passed By Senate column: "Requires DEW, for FY 2026 and FY 2027, to calculate
+    a district's disadvantaged pupil impact aid (DPIA) by using a weighted count of
+    economically disadvantaged students equal to the sum of (a) the economically disadvantaged
+    ADM reported for the district for FY 2025, as of June 1, 2025, multiplied by 75% for FY
+    2026 and 65% for FY 2027, and (b) the directly certified economically disadvantaged ADM for
+    the fiscal year multiplied by 25% for FY 2026 and 35% for FY 2027." [verified]
+
+    The Senate also declined to adopt the House's temporary foundation funding construction,
+    returning to the executive's formula as the distribution itself. [verified]
+
+    Stated fiscal effect: "Increases the estimated allocation of funding to traditional school
+    districts by $1.0 million in FY 2026, to $8.22 billion, and by $13.2 million in FY 2027, to
+    $8.31 billion, compared to the House." [verified] A distribution estimate, not this line
+    item's authority — and of the opposite sign to it.
   phase: legislative
 links:
   - target: ../budget-action.ont.yml
@@ -37,4 +66,6 @@ links:
   - target: ../actor/senate-finance-committee.yml
     relationship: taken-by
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-comparison.md
     relationship: cites

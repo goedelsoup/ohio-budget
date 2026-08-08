@@ -1,21 +1,33 @@
-//! Connector for Legislative Service Commission comparison documents.
+//! Connector for Legislative Service Commission budget publications.
 //!
-//! The load-bearing connector: every `[open]` amount in the corpus is waiting on one of these
-//! documents. Produces [`LscComparisonRow`] records — one appropriation figure, for one line
-//! item, at one stage, for one fiscal year.
+//! The load-bearing connector. LSC publishes two things this corpus needs, and they are not
+//! interchangeable:
 //!
-//! # What is implemented and what is not
+//! - the **appropriation spreadsheet**, which carries one figure per line item per stage per
+//!   fiscal year. Read by [`xlsx`] and [`columns`] into [`LscComparisonRow`] records. This is
+//!   where every amount in the corpus comes from.
+//! - the **comparison document**, which carries one paragraph of prose per provision per
+//!   chamber. Read by [`ruled`] and [`comparison`] into [`corpus_schema::LscProvisionRow`]
+//!   records. This is where every `stated_justification` comes from.
 //!
-//! The documents are published as PDFs with tabular figures, and the whole path is
-//! implemented here: glyph extraction, table reconstruction, money parsing, column mapping,
-//! fiscal-year fan-out, and normalization into typed records.
+//! The spreadsheet says what a figure became; the comparison document says why. Keeping them
+//! apart matters more than it sounds, because the comparison document also quotes dollar
+//! amounts and those amounts are **distribution estimates for a recipient class**, not
+//! appropriation authority. For HB 96's FY2026 school funding the two move in opposite
+//! directions at two of three transitions. See [`comparison`] and the
+//! `appropriation-is-not-distribution` decision record.
 //!
-//! # PDF
+//! # Table geometry
 //!
-//! [`geometry`] reconstructs table structure from positioned glyphs, and [`pdf`] (behind the
-//! `pdf` feature) reads those glyphs out of a document. Both produce the same [`RawTable`]
-//! that [`parse_delimited`] does, so a PDF and a hand-written file are indistinguishable to
-//! everything downstream.
+//! A PDF holds characters at coordinates, not tables, so recovering cells is a geometry
+//! problem — and the two publications need different algorithms. [`geometry`] finds columns as
+//! whitespace **rivers**, which is right for the spreadsheet. [`ruled`] reads the column
+//! separators the comparison document **draws for itself**, which is the only thing that works
+//! when two columns are set 0.44 points apart. [`pdf`] (behind the `pdf` feature) supplies the
+//! positioned glyphs both consume.
+//!
+//! [`geometry`] produces the same [`RawTable`] that [`parse_delimited`] does, so a PDF and a
+//! hand-written file are indistinguishable to everything downstream.
 //!
 //! # Money
 //!
@@ -25,10 +37,12 @@
 //! downstream check can detect. It refuses rather than approximates.
 
 pub mod columns;
+pub mod comparison;
 pub mod extract;
 pub mod geometry;
 #[cfg(feature = "pdf")]
 pub mod pdf;
+pub mod ruled;
 #[cfg(feature = "xlsx")]
 pub mod xlsx;
 

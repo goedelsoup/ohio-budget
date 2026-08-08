@@ -11,9 +11,13 @@ description: |
   phase-in step and which base year the executive chose to fund. [inference] Those choices are
   more consequential than the dollar figure itself, and they are not visible in the figure.
 
-  [open] The amount is unfilled. It appears in the LSC comparison document for this stage,
-  which is not yet catalogued.
   The executive proposed $8,424,986,974 for FY2026. [verified]
+
+  This node carried a stale `[open]` line directly above that figure, saying the amount was
+  unfilled and would be found in the comparison document. It was wrong twice: the amount had
+  been filled from the appropriation spreadsheet several commits earlier, and the comparison
+  document does not carry per-line-item amounts at any stage. The claim survived because
+  nothing reads a node's prose against its own properties.
 properties:
   amount: "$8,424,986,974.00"
   period_label: FY2026
@@ -33,7 +37,5 @@ links:
     relationship: stated-in
   - target: ../fiscal-period/fy2026.yml
     relationship: covers
-  - target: ../../catalog/lsc-hb96-comparison.md
-    relationship: cites
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites

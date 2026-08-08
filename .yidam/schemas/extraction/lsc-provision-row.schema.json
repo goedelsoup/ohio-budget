@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LscProvisionRow",
+  "description": "The position one stage took on one provision, as printed in an LSC comparison document.\n\nThe companion to [`LscComparisonRow`] and its opposite in kind. That record carries what a figure became; this one carries why. Together they are the two halves of a `budget-action`: the spreadsheet supplies `amount_delta`, this supplies `stated_justification`, and until now the second has been `[open]` on every action node in the corpus.\n\n# This record is not a figure and must not be read as one\n\nA position is prose, and where it quotes a dollar amount that amount is usually a **distribution estimate** rather than an appropriation. The two come apart, and not by a rounding margin: for HB 96 foundation funding in FY2026 the House raised line item 200550's authority by $93,750,000 while this document reports the allocation to traditional districts rising $132,400,000 — because the same line item also funds community schools, STEM schools, and joint vocational districts, and the House shifted the split as well as the total. Subtracting one from the other is the recipient-slice-against-whole-line comparison the `gap` calculator already refuses to perform.\n\nSo no amount is parsed out of `position`. It is stored as written, and any figure inside it is the document's claim about distribution, not this repository's claim about authority.",
+  "type": "object",
+  "required": [
+    "bill_number",
+    "concurs",
+    "entry_index",
+    "general_assembly",
+    "position",
+    "provenance",
+    "provision_code",
+    "provision_title",
+    "stage"
+  ],
+  "properties": {
+    "bill_number": {
+      "type": "string"
+    },
+    "concurs": {
+      "description": "True where the position only cross-references an earlier stage without qualifying it.",
+      "type": "boolean"
+    },
+    "entry_index": {
+      "description": "Index of the entry within the provision, in document order. A provision is compared point by point, and the points are not independently named.",
+      "type": "integer",
+      "format": "uint",
+      "minimum": 0.0
+    },
+    "general_assembly": {
+      "type": "string"
+    },
+    "position": {
+      "description": "The column's prose, as printed.",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/definitions/Provenance"
+    },
+    "provision_code": {
+      "description": "LSC's identifier for the provision, e.g. `EDUCD26`.",
+      "type": "string"
+    },
+    "provision_title": {
+      "type": "string"
+    },
+    "section": {
+      "description": "The section heading the provision sits under, e.g. `School Funding`.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stage": {
+      "description": "Which stage's column this position was printed in.\n\nA comparison document has four columns against the spreadsheet's nine stages, so this is always one of as-introduced, as-passed-house, as-passed-senate, or as-enacted. A position therefore attributes to a **chamber**, not to the substitute or committee report within it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BillStage"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "BillStage": {
+      "description": "Stages an Ohio appropriation bill passes through.\n\nGenesis modelled six. The LSC appropriation spreadsheet publishes nine, distinguishing a chamber's substitute bill, its committee-reported version, and its floor-passed version — which are frequently different figures. The four intermediate variants were added after reading the source rather than reasoned about in advance, and dropping them would discard exactly the resolution that makes stage attribution possible.",
+      "type": "string",
+      "enum": [
+        "as-introduced",
+        "house-substitute",
+        "house-reported",
+        "as-passed-house",
+        "senate-substitute",
+        "senate-reported",
+        "as-passed-senate",
+        "conference-report",
+        "as-enacted",
+        "post-veto"
+      ]
+    },
+    "Provenance": {
+      "description": "Where an extracted value came from, carried on every extraction record.\n\nWithout this a value cannot be promoted from `[inference]` to `[verified]`, since verification is defined as resting on a committed, citable source.",
+      "type": "object",
+      "required": [
+        "catalog_slug",
+        "document_ref",
+        "retrieved"
+      ],
+      "properties": {
+        "catalog_slug": {
+          "description": "Slug of the catalog entry describing the source, e.g. `lsc-hb96-comparison`.",
+          "type": "string"
+        },
+        "document_ref": {
+          "description": "Stable locator for the document itself.",
+          "type": "string"
+        },
+        "locator": {
+          "description": "Where inside the document — page, table, or row identifier.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved": {
+          "description": "ISO-8601 date the source was retrieved.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

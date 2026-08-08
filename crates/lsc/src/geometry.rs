@@ -87,7 +87,10 @@ pub struct Row {
     pub glyphs: Vec<Glyph>,
 }
 
-fn median_font_size(glyphs: &[Glyph]) -> f64 {
+pub(crate) fn median_font_size(glyphs: &[Glyph]) -> f64 {
+    if glyphs.is_empty() {
+        return 1.0;
+    }
     let mut sizes: Vec<f64> = glyphs.iter().map(|g| g.font_size).collect();
     sizes.sort_by(|a, b| a.partial_cmp(b).unwrap());
     let m = sizes[sizes.len() / 2];
@@ -202,7 +205,7 @@ pub fn columns_from_rivers(rows: &[Row], rivers: &[(f64, f64)]) -> Vec<(f64, f64
     cols
 }
 
-fn cell_text(glyphs: &[&Glyph], space_gap: f64) -> String {
+pub(crate) fn cell_text(glyphs: &[&Glyph], space_gap: f64) -> String {
     let mut s = String::new();
     let mut prev_right: Option<f64> = None;
     for g in glyphs {

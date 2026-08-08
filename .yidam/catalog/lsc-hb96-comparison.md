@@ -18,35 +18,91 @@ feeds:
 
 ## This entry previously described the wrong document
 
-It claimed this source supplies "the amount, per line item, per stage" and fed
-`appropriation` and `line-item`. **That was wrong, and reading the document is what showed
-it.** A comparison document compares *provisions*, not figures. It is four columns of prose —
-Executive, As Passed By House, As Passed By Senate, As Enacted — with one entry per policy
-provision and no dollar amounts at all.
+This entry has now been wrong twice, in opposite directions, and both corrections came from
+reading further into the document rather than from any external check.
 
-The numeric stage series comes from the
-[appropriation spreadsheet](./lsc-hb96-appropriation-spreadsheet.md), which was catalogued
-separately and does carry every stage.
+**At genesis** it claimed the source supplies "the amount, per line item, per stage" and fed
+`appropriation` and `line-item`. It does not. A comparison document compares *provisions*: four
+columns of prose — Executive, As Passed By House, As Passed By Senate, As Enacted — with one
+entry per point of one provision.
+
+**The correction then overshot**, saying the document held "no dollar amounts at all". It holds
+a great many, in `Fiscal effect:` sentences appended to provisions, and they are the figures
+this entry's own analysis now rests on. What is true is narrower and more useful: the amounts
+here are **distribution estimates**, not appropriation authority, and the per-line-item stage
+series still comes from the
+[appropriation spreadsheet](./lsc-hb96-appropriation-spreadsheet.md).
 
 ## What it is actually for
 
 The `stated_justification` field on every [`budget-action`](../corpus/budget-action.ont.yml)
-node in this corpus is `[open]`. This is the source that closes them. Where the spreadsheet
-says foundation funding moved +$92,250,000 at the House substitute, this document says what
-changed in the formula — base cost per pupil, career-technical base cost, the disadvantaged
-pupil calculation, the treatment of temporary transitional aid.
+node in this corpus was `[open]`. This is the source that closes them, and for HB 96 foundation
+funding it now has.
 
-That division is worth stating plainly because it maps onto a distinction the corpus already
-makes: the spreadsheet carries the arithmetic, this carries the decision. For a formula
-program those are different things, and the genesis note on the House amendment said the
-decision matters more.
+The earlier draft of this section guessed at the content and got the attributions wrong. It
+said the document shows the House changing "base cost per pupil, career-technical base cost,
+the disadvantaged pupil calculation, the treatment of temporary transitional aid". Reading
+provision EDUCD26:
 
-## Extraction caution
+- the FY2024 statewide average **base cost per pupil** and **career-technical base cost** were
+  the *Executive's* changes; the House recorded "Same as the Executive" on both;
+- the **disadvantaged pupil impact aid** recalculation was the *Senate's*, and the House had no
+  provision on it at all;
+- what the House actually did was retain the executive's foundation aid calculations "only for
+  purposes of calculating a district's **temporary foundation funding**" — not "temporary
+  transitional aid", which is a different thing that this entry invented.
 
-The four stage columns are adjacent with no whitespace river between Executive and As Passed
-By House, so `lsc::geometry` merges them regardless of how the river threshold is tuned —
-verified at 1.2, 0.5, 0.35, and 0.2. Lowering it further fragments other columns instead.
+Three of four attributions went to the wrong chamber. That is the failure mode of writing a
+catalog entry from what a document ought to contain: the entry stays plausible, cites a real
+source, and misassigns the decisions.
 
-The document separates its own columns with a literal `|` character in the body text. An
-extractor for this document type should split on that rather than on whitespace geometry.
-That is a per-document-type strategy, not a tuning value, and it is not yet implemented.
+The division it drew is still right, and is the reason to hold both sources: the spreadsheet
+carries the arithmetic, this carries the decision.
+
+## Extraction
+
+Implemented in [`lsc::ruled`](../../crates/lsc/src/ruled.rs) and
+[`lsc::comparison`](../../crates/lsc/src/comparison.rs). Read with
+`lsc-comparison <pdf> [--provision CODE] [--changed] [--emit FILE]`.
+
+Coverage on this document: **212 pages, 0 refused, 165 provisions, 781 entries, 3,124
+records.** Every column of every entry carried text; no provision lacked an LSC code; all four
+column headings mapped to stages. The 781 entries match the 781 drawn rule rows counted
+independently of the parser.
+
+### The previous note here described the wrong mechanism
+
+It said the document "separates its own columns with a literal `|` character in the body text"
+and that an extractor should split on that. The `|` glyphs are real, but they are not inline
+separators — they are **column rules**, drawn on their own baseline beneath the first line of
+each entry, three per entry at x = 251.9, 499.4, and 746.9. They appear at those exact
+coordinates on all 781 entries across all 212 pages without deviation.
+
+That makes them better than the note supposed. Splitting text on a delimiter recovers columns;
+reading the rules recovers the column *boundaries*, which additionally survives a column that
+prints nothing on a page, and the same glyphs delimit the entries.
+
+### Why river detection is not merely imperfect here
+
+Measured across the first forty pages at a 12pt body font:
+
+| boundary | left column ends | right column starts | gutter |
+|---|---|---|---|
+| Executive → As Passed By House | 251.62 | 252.06 | **0.44** |
+| As Passed By House → As Passed By Senate | 494.96 | 513.00 | 18.04 |
+| As Passed By Senate → As Enacted | 737.51 | 762.48 | 24.97 |
+
+Only the first boundary is flush. The earlier note said there was no river between Executive
+and As Passed By House, which was right, and inferred that the whole table was unreadable by
+geometry, which was wrong. Rivers find the two wide gutters and miss the narrow one, returning
+a well-formed table of the wrong shape — three columns, with the executive proposal and the
+House's position fused into a single cell. That is worse than a refusal, and it is why the
+ruled reader does not fall back to river detection.
+
+## What its figures are and are not
+
+`Fiscal effect:` sentences quote dollar amounts. Those are **distribution estimates for a
+recipient class**, not appropriation authority, and across HB 96's FY2026 school funding the
+two move in opposite directions at two of three transitions. They are never differenced
+against spreadsheet figures — see
+[appropriation-is-not-distribution](../decisions/appropriation-is-not-distribution.yml).

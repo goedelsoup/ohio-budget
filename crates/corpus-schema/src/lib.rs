@@ -389,6 +389,53 @@ pub struct LscComparisonRow {
     pub provenance: Provenance,
 }
 
+/// The position one stage took on one provision, as printed in an LSC comparison document.
+///
+/// The companion to [`LscComparisonRow`] and its opposite in kind. That record carries what a
+/// figure became; this one carries why. Together they are the two halves of a `budget-action`:
+/// the spreadsheet supplies `amount_delta`, this supplies `stated_justification`, and until
+/// now the second has been `[open]` on every action node in the corpus.
+///
+/// # This record is not a figure and must not be read as one
+///
+/// A position is prose, and where it quotes a dollar amount that amount is usually a
+/// **distribution estimate** rather than an appropriation. The two come apart, and not by a
+/// rounding margin: for HB 96 foundation funding in FY2026 the House raised line item 200550's
+/// authority by $93,750,000 while this document reports the allocation to traditional
+/// districts rising $132,400,000 — because the same line item also funds community schools,
+/// STEM schools, and joint vocational districts, and the House shifted the split as well as
+/// the total. Subtracting one from the other is the recipient-slice-against-whole-line
+/// comparison the `gap` calculator already refuses to perform.
+///
+/// So no amount is parsed out of `position`. It is stored as written, and any figure inside it
+/// is the document's claim about distribution, not this repository's claim about authority.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+pub struct LscProvisionRow {
+    pub bill_number: String,
+    pub general_assembly: String,
+    /// LSC's identifier for the provision, e.g. `EDUCD26`.
+    pub provision_code: String,
+    pub provision_title: String,
+    /// The section heading the provision sits under, e.g. `School Funding`.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub section: Option<String>,
+    /// Index of the entry within the provision, in document order. A provision is compared
+    /// point by point, and the points are not independently named.
+    pub entry_index: usize,
+    /// Which stage's column this position was printed in.
+    ///
+    /// A comparison document has four columns against the spreadsheet's nine stages, so this
+    /// is always one of as-introduced, as-passed-house, as-passed-senate, or as-enacted. A
+    /// position therefore attributes to a **chamber**, not to the substitute or committee
+    /// report within it.
+    pub stage: BillStage,
+    /// The column's prose, as printed.
+    pub position: String,
+    /// True where the position only cross-references an earlier stage without qualifying it.
+    pub concurs: bool,
+    pub provenance: Provenance,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "kebab-case")]
 pub enum ExpenditureBasis {

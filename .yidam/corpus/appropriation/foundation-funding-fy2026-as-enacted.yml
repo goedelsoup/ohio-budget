@@ -39,8 +39,6 @@ links:
     relationship: stated-in
   - target: ../fiscal-period/fy2026.yml
     relationship: covers
-  - target: ../../catalog/lsc-hb96-comparison.md
-    relationship: cites
   - target: ../expenditure/foundation-funding-fy2026-disbursed.yml
     relationship: realized-by
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md

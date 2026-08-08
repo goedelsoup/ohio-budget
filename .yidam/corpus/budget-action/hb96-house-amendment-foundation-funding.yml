@@ -16,20 +16,44 @@ description: |
   re-pointed. Attributing it to floor passage would have credited the wrong step of the
   chamber's own process, and nothing but the arithmetic would have contradicted it.
 
-  For a formula program the amendment's substance may still not be the dollar figure. An
-  amendment can raise the appropriation while slowing the phase-in, producing a larger number
-  and less money reaching districts. [inference] The dollar delta is now known; the decision
-  behind it is not.
+  **The genesis note guessed the mechanism, and was close enough to be worth recording.** It
+  said an amendment can raise the appropriation while changing how the money reaches districts,
+  so that the dollar figure and the substance come apart. That is what happened, by a route the
+  note did not name: the House kept the executive's foundation aid calculations but used them
+  "only for purposes of calculating a district's *temporary foundation funding*". [verified]
+  The formula was retained as an input to a different distribution rather than as the
+  distribution itself.
 
-  [open] The stated justification is unreconstructed. Committee statements and the bill
-  analysis are the sources.
+  **The figure this action carries is authority, and it is not the figure the House was
+  arguing about.** LSC's comparison document reports the House raising the estimated allocation
+  to traditional school districts by $132.4 million in FY2026 — against the $93.75 million by
+  which it raised line item 200550 across the same span. [verified] Both are right. ALI 200550
+  also funds community schools, STEM schools, and joint vocational districts, so the House
+  raised the line and shifted the split toward traditional districts at the same time. The two
+  figures must not be differenced; see
+  [appropriation-is-not-distribution](../../decisions/appropriation-is-not-distribution.yml).
 properties:
   action_type: amendment
   action_date: "[open] spring 2025, pending verification"
   direction: increase
   amount_delta: "$92,250,000.00"
   stated_justification: |
-    [open] Not reconstructed. Committee statements and the LSC bill analysis are the sources.
+    From the LSC comparison document, provision EDUCD26 (Traditional school district funding
+    formula), As Passed By House column: "Same as the Executive, but makes the following
+    changes and uses the foundation aid calculations only for purposes of calculating a
+    district's 'temporary foundation funding' described below". [verified]
+
+    The House additionally eliminated supplemental targeted assistance beginning in FY2026,
+    provided a base funding supplement equal to enrolled ADM times $20 in FY2026 and $30 in
+    FY2027, and required districts to spend at least their FY2025 amounts in each of six
+    categories — special education, disadvantaged pupil impact aid, English learner, gifted,
+    career-technical, and student wellness and success — out of the temporary foundation
+    funding they receive. [verified]
+
+    Stated fiscal effect: "Increases the estimated allocation of funding to traditional school
+    districts by $132.4 million in FY 2026, to $8.22 billion, and by $250.9 million in FY 2027,
+    to $8.30 billion, compared to the executive proposal." [verified] This is a distribution
+    estimate, not this line item's authority.
   phase: legislative
 links:
   - target: ../budget-action.ont.yml
@@ -41,4 +65,6 @@ links:
   - target: ../actor/house-finance-committee.yml
     relationship: taken-by
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-comparison.md
     relationship: cites

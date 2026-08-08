@@ -28,7 +28,5 @@ links:
     relationship: covers
   - target: ../bill-version/hb96-conference-report.yml
     relationship: stated-in
-  - target: ../../catalog/lsc-hb96-comparison.md
-    relationship: cites
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites

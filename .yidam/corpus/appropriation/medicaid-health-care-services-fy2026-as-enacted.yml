@@ -40,7 +40,5 @@ links:
     relationship: stated-in
   - target: ../fiscal-period/fy2026.yml
     relationship: covers
-  - target: ../../catalog/lsc-hb96-comparison.md
-    relationship: cites
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites

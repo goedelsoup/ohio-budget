@@ -407,6 +407,17 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
                         message: format!("cites '{}', which is not a catalog entry", link.target),
                     });
                 }
+                // A rule checking that the cited entry's `feeds` includes this node's class was
+                // written here and removed. It fired 44 times, and reading them showed the
+                // premise was wrong: `feeds` names what a source primarily populates, not who
+                // may cite it. The governor node cites the appropriation spreadsheet to support
+                // a finding about vetoes, and every `budget-action` cites it for `amount_delta`;
+                // both are correct and neither class is in its `feeds`.
+                //
+                // The defect that prompted it is not mechanically detectable. Five appropriation
+                // nodes cited a comparison document because the *catalog entry* said comparison
+                // documents carry per-stage amounts, and it was wrong about the document. No
+                // check over the corpus can find that — only reading the source can.
                 continue;
             }
 

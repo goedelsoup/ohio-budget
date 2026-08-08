@@ -30,3 +30,8 @@ xlsx = ["dep:calamine"]
 name = "lsc-extract"
 path = "src/main.rs"
 required-features = ["pdf"]
+
+[[bin]]
+name = "lsc-comparison"
+path = "src/bin/lsc-comparison.rs"
+required-features = ["pdf"]

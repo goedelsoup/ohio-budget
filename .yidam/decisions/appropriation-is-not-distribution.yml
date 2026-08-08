@@ -1,0 +1,73 @@
+id: appropriation-is-not-distribution
+summary: >-
+  The comparison document's dollar figures measure distribution to a recipient class, not
+  appropriation authority. Across HB 96's FY2026 school funding, the two move in opposite
+  directions at two of three transitions. They must never be differenced against each other.
+context: |
+  The `comparison` connector now reads LSC comparison documents, which supply the
+  `stated_justification` that every `budget-action` node has carried `[open]` since genesis.
+  Those documents also quote dollar figures, in `Fiscal effect:` sentences attached to
+  provisions. The obvious next move is to reconcile those figures against the appropriation
+  spreadsheet, and the obvious expectation is that they agree.
+
+  They do not, and not by a rounding margin. Line item 200550, Foundation Funding — All
+  Students, FY2026, against the comparison document's estimated allocation to traditional
+  school districts:
+
+    stage              ALI 200550 authority   auth delta   trad-district delta   direction
+    Executive                       $8.425B
+    As Passed House                 $8.519B     +$93.75M              +$132.4M   same
+    As Passed Senate                $8.447B     -$71.64M                +$1.0M   OPPOSITE
+    As Enacted                      $8.458B     +$10.50M               -$69.4M   OPPOSITE
+
+  Every authority figure is [verified] from the as-enacted appropriation spreadsheet; every
+  distribution figure is [verified] from the comparison document's own `Fiscal effect:` text.
+
+  The explanation is not error in either source. ALI 200550 funds traditional districts *and*
+  community schools, STEM schools, and joint vocational districts. The line item is the
+  authority; the allocation to traditional districts is one slice of it. A chamber can raise
+  the line and shift the split, or cut the line and hold one recipient class harmless, and
+  both happened here — the Senate cut $71.6M of authority while leaving traditional districts
+  $1.0M better off, which means the cut fell entirely on the other recipients of the same
+  line.
+decision: |
+  The two figures are different quantities and are never differenced, summed, or reconciled
+  against each other anywhere in this repository.
+
+  Concretely:
+
+  - `LscProvisionRow.position` stores the comparison document's prose **as written**. No
+    amount is parsed out of it. A figure inside a position is the document's claim about
+    distribution, not this repository's claim about authority.
+  - `budget-action.amount_delta` continues to come from the appropriation spreadsheet alone.
+  - `budget-action.stated_justification` comes from the comparison document alone.
+  - A `budget-action` node whose description quotes a distribution figure must name it as
+    such in the same sentence.
+
+  This is the case the `gap` calculator already refuses to compute — a recipient slice against
+  a whole line — arriving from a direction that was not anticipated. `gap` refuses when asked
+  directly. Nothing was stopping a *node author* from doing the same subtraction by hand and
+  committing the result as a verified figure, which is how this would actually have entered
+  the corpus.
+rationale: |
+  The failure mode this closes is specific and quiet. Both figures are correct, both are
+  citable to a committed primary source, and both are about foundation funding in FY2026. A
+  reader with the spreadsheet in one hand and the comparison document in the other, trying to
+  explain the House's +$93.75M with the document's +$132.4M, gets a $38.65M discrepancy and no
+  indication that the question was malformed. The most likely response is to assume one source
+  is stale and pick the other — which discards a real fact rather than resolving it.
+
+  The opposite-direction cases are what make this worth a decision record rather than a code
+  comment. Where both figures move the same way, an analyst who conflates them is wrong about
+  magnitude. Where they move opposite ways, they are wrong about **who did what to whom**: the
+  Senate reads as cutting school funding by $71.6M when what it did was cut other recipients
+  and leave traditional districts marginally better off. That is not a smaller error of the
+  same kind. It reverses the finding.
+
+  Recording it also resolves an open question the corpus had already posed. The Senate
+  amendment node asked whether the reduction reflected a different view of the phase-in
+  schedule or of available revenue. It was neither. The Senate changed the disadvantaged pupil
+  impact aid calculation — the weighting between reported and directly-certified economically
+  disadvantaged ADM — which is a change to *who counts*, and it moved money between recipient
+  classes rather than into or out of education. Both hypotheses the node offered were about
+  the size of the pot. The answer was about its division.
