@@ -36,7 +36,38 @@ fn cell_text(d: &Data) -> String {
     }
 }
 
-/// Reads one worksheet into a table, taking the first non-empty row as headers.
+/// Scores a row on how well it works as a header.
+///
+/// Taking the first non-empty row is wrong on real workbooks: the HB 33 spreadsheet with
+/// actual expenditures opens with a title row ("Main Operating Budget as of September 30,
+/// 2024") and puts the real headers on the row below. Guessing wrong there shifts every
+/// figure by a row and produces a table that parses cleanly and is entirely false.
+///
+/// So the header row is the one whose cells classify best, which is a property of the
+/// content rather than of the position.
+fn header_score(row: &[String]) -> usize {
+    use crate::columns::{classify_header, ColumnKind};
+    row.iter()
+        .map(|h| match classify_header(h) {
+            ColumnKind::Identity(_) => 3,
+            ColumnKind::Appropriation { .. } | ColumnKind::Actual { .. } => 2,
+            ColumnKind::Estimate { .. } | ColumnKind::UnknownStage { .. } => 1,
+            ColumnKind::Other => 0,
+        })
+        .sum()
+}
+
+/// Finds the header row among the first `search_depth` rows.
+pub fn find_header_row(rows: &[Vec<String>], search_depth: usize) -> Option<usize> {
+    rows.iter()
+        .take(search_depth)
+        .enumerate()
+        .max_by_key(|(i, r)| (header_score(r), std::cmp::Reverse(*i)))
+        .filter(|(_, r)| header_score(r) > 0)
+        .map(|(i, _)| i)
+}
+
+/// Reads one worksheet into a table, detecting which row carries the headers.
 pub fn sheet_to_table(path: &std::path::Path, sheet: &str) -> Result<RawTable> {
     let mut wb = open_workbook_auto(path).with_context(|| format!("opening {}", path.display()))?;
     let range = wb
@@ -74,4 +105,51 @@ pub fn sheet_to_table(path: &std::path::Path, sheet: &str) -> Result<RawTable> {
 pub fn sheet_names(path: &std::path::Path) -> Result<Vec<String>> {
     let wb = open_workbook_auto(path).with_context(|| format!("opening {}", path.display()))?;
     Ok(wb.sheet_names().to_vec())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn row(cells: &[&str]) -> Vec<String> {
+        cells.iter().map(|s| s.to_string()).collect()
+    }
+
+    #[test]
+    fn a_title_row_is_not_mistaken_for_headers() {
+        // The HB 33 actuals workbook opens with a title and puts headers on the next row.
+        // Getting this wrong shifts every figure by a row and still parses cleanly.
+        let rows = vec![
+            row(&["Main Operating Budget as of September 30, 2024", "", "", ""]),
+            row(&["Agency", "Fund Group", "ALI", "FY 2024"]),
+            row(&["EDU", "GRF", "200550", "7975003596.89"]),
+        ];
+        assert_eq!(find_header_row(&rows, 10), Some(1));
+    }
+
+    #[test]
+    fn a_header_row_at_the_top_is_still_found() {
+        let rows = vec![
+            row(&["Agency", "Fund Group", "ALI", "ALI Name", "FY 2024"]),
+            row(&["EDU", "GRF", "200550", "Foundation Funding", "1.00"]),
+        ];
+        assert_eq!(find_header_row(&rows, 10), Some(0));
+    }
+
+    #[test]
+    fn a_sheet_with_no_recognisable_header_returns_none() {
+        let rows = vec![row(&["notes", "", ""]), row(&["free text", "", ""])];
+        assert_eq!(find_header_row(&rows, 10), None);
+    }
+
+    #[test]
+    fn the_earlier_row_wins_a_tie() {
+        // Repeated header rows appear where a table continues across a page break.
+        let rows = vec![
+            row(&["Agency", "ALI", "FY 2024"]),
+            row(&["EDU", "200550", "1.00"]),
+            row(&["Agency", "ALI", "FY 2024"]),
+        ];
+        assert_eq!(find_header_row(&rows, 10), Some(0));
+    }
 }

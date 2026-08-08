@@ -74,6 +74,7 @@ Sorted by: kind, then alphabetically.
 | [foundation-funding-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-21-as-enacted.yml) | appropriation | Foundation Funding — FY2020-21, As Enacted | 7 | 34 |
 | [foundation-funding-fy2022-23-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-23-as-enacted.yml) | appropriation | Foundation Funding — FY2022-23, As Enacted | 7 | 33 |
 | [foundation-funding-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-25-as-enacted.yml) | appropriation | Foundation Funding — FY2024-25, As Enacted | 6 | 45 |
+| [foundation-funding-fy2024-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-as-enacted.yml) | appropriation | Foundation Funding — FY2024, As Enacted | 7 | 38 |
 | [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 8 | 47 |
 | [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 7 | 39 |
 | [foundation-funding-fy2026-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-senate.yml) | appropriation | Foundation Funding — FY2026, As Passed by the Senate | 7 | 34 |
@@ -139,6 +140,7 @@ Sorted by: kind, then alphabetically.
 | [hb96-senate-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-senate-amendment-foundation-funding.yml) | budget-action | Senate Amendment to Foundation Funding, HB 96 | 5 | 29 |
 | [foundation-funding-fy2020-21-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2020-21-actual.yml) | expenditure | Foundation Funding — FY2020-21 Actual | 4 | 28 |
 | [foundation-funding-fy2022-23-disbursed-cleveland.yml](.yidam/corpus/expenditure/foundation-funding-fy2022-23-disbursed-cleveland.yml) | expenditure | Foundation Funding Disbursement to Cleveland Metropolitan Schools — FY2022-23 | 5 | 33 |
+| [foundation-funding-fy2024-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-actual.yml) | expenditure | Foundation Funding — FY2024 Actual | 4 | 38 |
 | [foundation-funding-fy2024-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-disbursed.yml) | expenditure | Foundation Funding Disbursement to Columbus City Schools — FY2024-25 | 5 | 45 |
 | [foundation-funding-fy2026-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2026-disbursed.yml) | expenditure | Foundation Funding — FY2026 Disbursed | 4 | 28 |
 | [institutional-operations-fy2020-21-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2020-21-actual.yml) | expenditure | Institutional Operations — FY2020-21 Actual | 5 | 29 |

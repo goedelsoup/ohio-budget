@@ -1,0 +1,38 @@
+class: appropriation
+label: Foundation Funding — FY2024, As Enacted
+description: |
+  School funding authority for FY2024, appropriated by [HB 33](../bill/hb33-135th.yml).
+  $7,967,250,000. [verified]
+
+  Seeded because it completes the first computable gap in this repository. FY2024 is closed,
+  its actual is published, and the authority behind it is in the budget that granted it — so
+  for the first time both sides of the corpus's central question exist for the same line item
+  in the same period.
+
+  Note the [FY2024 actual](../expenditure/foundation-funding-fy2024-actual.yml) **exceeds**
+  this figure. That is not an error and not overspending in the ordinary sense: an enacted
+  appropriation is not the last word, and the difference is what the execution phase moved.
+  The corpus models that phase precisely so this result is legible rather than surprising.
+properties:
+  amount: "$7,967,250,000.00"
+  period_label: FY2024
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 33 as enacted, ALI 200550, column "Enacted FY 2024".
+    Committed at .yidam/sources/lsc/ with sha256 140d62e9. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../expenditure/foundation-funding-fy2024-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

@@ -44,8 +44,27 @@ Variance in dollars and percent, plus reversion rate where authority lapsed unsp
 ## Running it
 
 `mise run gap` reports every (line item, period) pair the corpus could compute a gap for, and
-why each is blocked. As of the current corpus: **0 computable, 7 blocked on `[open]` amounts,
+why each is blocked. As of the current corpus: **1 computable, 7 blocked on `[open]` amounts,
 5 refused.**
+
+## The first result
+
+```
+COMPUTED foundation-funding FY2024: variance -775359689 cents (-0.1%)
+  distribution follows a formula; a divergence is evidence about the
+  formula's inputs rather than about execution
+```
+
+Enacted authority was $7,967,250,000; actual spending was $7,975,003,596.89. Spending exceeded
+enacted authority by **$7,753,596.89**, about a tenth of one percent.
+
+Two things about that are worth more than the number. First, the sign: a gap is usually
+discussed as authority left unspent, and this one runs the other way, which means enacted
+authority was not the operative limit at year end and something in the execution phase moved
+it. Second, the reading attached to it is not decoration — foundation funding is
+formula-driven, so a divergence here is evidence that the formula's inputs came in above the
+estimate the appropriation was sized on, **not** evidence about anyone's spending discipline.
+The identical number on a discretionary line would mean something else entirely.
 
 All five refusals are the recipient-slice guard firing on real data — the corpus holds
 district- and county-level disbursements against whole-line appropriations, and differencing

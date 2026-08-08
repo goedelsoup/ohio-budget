@@ -1,0 +1,38 @@
+class: expenditure
+label: Foundation Funding — FY2024 Actual
+description: |
+  School funding actually disbursed in FY2024. $7,975,003,596.89. [verified]
+
+  The first closed-book actual in this corpus, and the figure that makes its central question
+  answerable for one line item: set against
+  [what HB 33 appropriated](../appropriation/foundation-funding-fy2024-as-enacted.yml),
+  spending exceeded enacted authority by $7,753,596.89 — about a tenth of one percent.
+
+  The sign is the interesting part. A gap is usually discussed as authority left unspent, and
+  this one runs the other way. Enacted authority was not the operative limit by year end,
+  which means something in the execution phase moved it: a controlling board action, a
+  supplemental, or a transfer. [inference] The corpus can now pose that question precisely,
+  and cannot yet answer it — no execution-phase action for this line item is extracted.
+
+  Note also that this figure is reported by the Legislative Service Commission rather than by
+  the Office of Budget and Management. Two authorities publish actuals and they need not
+  agree; the [`obm`](../../crates/obm/) connector remains unbuilt, so no cross-check exists.
+  [open]
+properties:
+  amount: "$7,975,003,596.89"
+  basis: actual-closed
+  period_label: FY2024
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 33, ALI 200550, column
+    "FY 2024". Stated as of September 30, 2024. Committed at .yidam/sources/lsc/ with
+    sha256 c979accc. [verified]
+  reversion: "[open] none implied; spending exceeded enacted authority"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2024.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-actuals.md
+    relationship: cites

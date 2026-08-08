@@ -22,6 +22,8 @@ Sorted by: type, then slug.
 |---|---|---|
 | [controlling-board-minutes.md](controlling-board-minutes.md) | — | 3 |
 | [ga-bill-record.md](ga-bill-record.md) | — | 49 |
+| [lsc-hb33-actuals.md](lsc-hb33-actuals.md) | — | 1 |
+| [lsc-hb33-appropriation-spreadsheet.md](lsc-hb33-appropriation-spreadsheet.md) | — | 1 |
 | [lsc-hb96-appropriation-spreadsheet.md](lsc-hb96-appropriation-spreadsheet.md) | — | 16 |
 | [lsc-hb96-comparison.md](lsc-hb96-comparison.md) | — | 9 |
 | [obm-annual-report.md](obm-annual-report.md) | — | 22 |
