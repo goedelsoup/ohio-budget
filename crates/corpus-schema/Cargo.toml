@@ -1,0 +1,18 @@
+[package]
+name = "corpus-schema"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Typed definitions for Ohio budget corpus files and connector extraction records"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+schemars.workspace = true
+
+[[bin]]
+name = "emit-schemas"
+path = "src/bin/emit_schemas.rs"

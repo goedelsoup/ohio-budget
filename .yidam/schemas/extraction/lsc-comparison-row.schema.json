@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LscComparisonRow",
+  "description": "One appropriation figure as published in a Legislative Service Commission comparison document. The load-bearing extraction record: every `[open]` amount in the corpus is waiting on one of these.",
+  "type": "object",
+  "required": [
+    "agency_code",
+    "amount_cents",
+    "bill_number",
+    "fiscal_year",
+    "fund_code",
+    "fund_group",
+    "general_assembly",
+    "line_item_code",
+    "line_item_name",
+    "provenance",
+    "stage"
+  ],
+  "properties": {
+    "agency_code": {
+      "type": "string"
+    },
+    "amount_cents": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "bill_number": {
+      "type": "string"
+    },
+    "fiscal_year": {
+      "description": "Fiscal year the figure applies to, e.g. `FY2026`.",
+      "type": "string"
+    },
+    "fund_code": {
+      "type": "string"
+    },
+    "fund_group": {
+      "type": "string"
+    },
+    "general_assembly": {
+      "type": "string"
+    },
+    "line_item_code": {
+      "type": "string"
+    },
+    "line_item_name": {
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/definitions/Provenance"
+    },
+    "stage": {
+      "$ref": "#/definitions/BillStage"
+    }
+  },
+  "definitions": {
+    "BillStage": {
+      "type": "string",
+      "enum": [
+        "as-introduced",
+        "as-passed-house",
+        "as-passed-senate",
+        "conference-report",
+        "as-enacted",
+        "post-veto"
+      ]
+    },
+    "Provenance": {
+      "description": "Where an extracted value came from, carried on every extraction record.\n\nWithout this a value cannot be promoted from `[inference]` to `[verified]`, since verification is defined as resting on a committed, citable source.",
+      "type": "object",
+      "required": [
+        "catalog_slug",
+        "document_ref",
+        "retrieved"
+      ],
+      "properties": {
+        "catalog_slug": {
+          "description": "Slug of the catalog entry describing the source, e.g. `lsc-hb96-comparison`.",
+          "type": "string"
+        },
+        "document_ref": {
+          "description": "Stable locator for the document itself.",
+          "type": "string"
+        },
+        "locator": {
+          "description": "Where inside the document — page, table, or row identifier.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved": {
+          "description": "ISO-8601 date the source was retrieved.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

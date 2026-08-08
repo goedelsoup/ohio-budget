@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CorpusInstance",
+  "description": "A concrete object of some class.",
+  "type": "object",
+  "required": [
+    "class",
+    "description",
+    "label"
+  ],
+  "properties": {
+    "class": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "links": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Link"
+      }
+    },
+    "properties": {
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ScalarValue"
+      }
+    }
+  },
+  "definitions": {
+    "Link": {
+      "type": "object",
+      "required": [
+        "relationship",
+        "target"
+      ],
+      "properties": {
+        "relationship": {
+          "type": "string"
+        },
+        "target": {
+          "description": "Repository-relative-to-this-file path, e.g. `../fund/general-revenue-fund.yml`.",
+          "type": "string"
+        }
+      }
+    },
+    "ScalarValue": {
+      "description": "A YAML scalar as it appears in a corpus instance's `properties` map.\n\nOrdering is load-bearing: serde tries these variants in declaration order, so `Int` must precede `Float` (otherwise every integer deserializes as a float) and `Text` must come last (otherwise it swallows everything).",
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer",
+          "format": "int64"
+        },
+        {
+          "type": "number",
+          "format": "double"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  }
+}

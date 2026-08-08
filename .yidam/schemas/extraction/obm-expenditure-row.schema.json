@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ObmExpenditureRow",
+  "description": "One disbursement figure from Office of Budget and Management reporting.",
+  "type": "object",
+  "required": [
+    "agency_code",
+    "amount_cents",
+    "basis",
+    "fiscal_year",
+    "fund_code",
+    "line_item_code",
+    "provenance"
+  ],
+  "properties": {
+    "agency_code": {
+      "type": "string"
+    },
+    "amount_cents": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "basis": {
+      "$ref": "#/definitions/ExpenditureBasis"
+    },
+    "fiscal_year": {
+      "type": "string"
+    },
+    "fund_code": {
+      "type": "string"
+    },
+    "line_item_code": {
+      "type": "string"
+    },
+    "period_month": {
+      "description": "Month within the fiscal year, 1-12, where the report is monthly.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "uint8",
+      "minimum": 0.0
+    },
+    "provenance": {
+      "$ref": "#/definitions/Provenance"
+    },
+    "reversion_cents": {
+      "description": "Authority that lapsed unspent, where the report states it.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int64"
+    }
+  },
+  "definitions": {
+    "ExpenditureBasis": {
+      "oneOf": [
+        {
+          "description": "In-year reporting; provisional.",
+          "type": "string",
+          "enum": [
+            "disbursed"
+          ]
+        },
+        {
+          "description": "From the closed books; final.",
+          "type": "string",
+          "enum": [
+            "actual-closed"
+          ]
+        }
+      ]
+    },
+    "Provenance": {
+      "description": "Where an extracted value came from, carried on every extraction record.\n\nWithout this a value cannot be promoted from `[inference]` to `[verified]`, since verification is defined as resting on a committed, citable source.",
+      "type": "object",
+      "required": [
+        "catalog_slug",
+        "document_ref",
+        "retrieved"
+      ],
+      "properties": {
+        "catalog_slug": {
+          "description": "Slug of the catalog entry describing the source, e.g. `lsc-hb96-comparison`.",
+          "type": "string"
+        },
+        "document_ref": {
+          "description": "Stable locator for the document itself.",
+          "type": "string"
+        },
+        "locator": {
+          "description": "Where inside the document — page, table, or row identifier.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved": {
+          "description": "ISO-8601 date the source was retrieved.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

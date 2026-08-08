@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DecisionRecord",
+  "type": "object",
+  "required": [
+    "context",
+    "decision",
+    "id",
+    "rationale",
+    "summary"
+  ],
+  "properties": {
+    "context": {
+      "type": "string"
+    },
+    "corpus_depth": {
+      "description": "Present only on the ontology decision; target instance count for initial seeding.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "uint32",
+      "minimum": 0.0
+    },
+    "decision": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    }
+  }
+}

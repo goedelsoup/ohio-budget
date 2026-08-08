@@ -1,0 +1,18 @@
+[package]
+name = "corpus-validate"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Validates the Ohio budget corpus against its own ontology"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_yaml.workspace = true
+walkdir.workspace = true
+corpus-schema = { path = "../corpus-schema" }
+
+[[bin]]
+name = "corpus-validate"
+path = "src/main.rs"

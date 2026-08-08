@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ControllingBoardRequest",
+  "description": "One request acted on by the Controlling Board — the execution-phase record.",
+  "type": "object",
+  "required": [
+    "agency_code",
+    "amount_delta_cents",
+    "disposition",
+    "meeting_date",
+    "provenance",
+    "request_id",
+    "stated_justification"
+  ],
+  "properties": {
+    "agency_code": {
+      "type": "string"
+    },
+    "amount_delta_cents": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "disposition": {
+      "$ref": "#/definitions/ControllingBoardDisposition"
+    },
+    "line_item_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "meeting_date": {
+      "description": "ISO-8601 meeting date.",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/definitions/Provenance"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "stated_justification": {
+      "description": "The reason the agency gave, quoted or closely summarized. Not an inferred motive.",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "ControllingBoardDisposition": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "denied",
+        "withdrawn",
+        "tabled"
+      ]
+    },
+    "Provenance": {
+      "description": "Where an extracted value came from, carried on every extraction record.\n\nWithout this a value cannot be promoted from `[inference]` to `[verified]`, since verification is defined as resting on a committed, citable source.",
+      "type": "object",
+      "required": [
+        "catalog_slug",
+        "document_ref",
+        "retrieved"
+      ],
+      "properties": {
+        "catalog_slug": {
+          "description": "Slug of the catalog entry describing the source, e.g. `lsc-hb96-comparison`.",
+          "type": "string"
+        },
+        "document_ref": {
+          "description": "Stable locator for the document itself.",
+          "type": "string"
+        },
+        "locator": {
+          "description": "Where inside the document — page, table, or row identifier.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved": {
+          "description": "ISO-8601 date the source was retrieved.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

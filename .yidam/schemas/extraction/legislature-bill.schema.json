@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LegislatureBill",
+  "description": "Bill metadata and stage history from the General Assembly's published record.",
+  "type": "object",
+  "required": [
+    "bill_number",
+    "general_assembly",
+    "instrument_type",
+    "provenance"
+  ],
+  "properties": {
+    "bill_number": {
+      "type": "string"
+    },
+    "enacted_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "general_assembly": {
+      "type": "string"
+    },
+    "instrument_type": {
+      "type": "string"
+    },
+    "introduced_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenance": {
+      "$ref": "#/definitions/Provenance"
+    },
+    "versions": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LegislatureBillVersion"
+      }
+    }
+  },
+  "definitions": {
+    "BillStage": {
+      "type": "string",
+      "enum": [
+        "as-introduced",
+        "as-passed-house",
+        "as-passed-senate",
+        "conference-report",
+        "as-enacted",
+        "post-veto"
+      ]
+    },
+    "LegislatureBillVersion": {
+      "type": "object",
+      "required": [
+        "chamber",
+        "document_ref",
+        "stage",
+        "stage_date"
+      ],
+      "properties": {
+        "chamber": {
+          "type": "string"
+        },
+        "document_ref": {
+          "type": "string"
+        },
+        "stage": {
+          "$ref": "#/definitions/BillStage"
+        },
+        "stage_date": {
+          "description": "ISO-8601 date the version was produced or acted on.",
+          "type": "string"
+        }
+      }
+    },
+    "Provenance": {
+      "description": "Where an extracted value came from, carried on every extraction record.\n\nWithout this a value cannot be promoted from `[inference]` to `[verified]`, since verification is defined as resting on a committed, citable source.",
+      "type": "object",
+      "required": [
+        "catalog_slug",
+        "document_ref",
+        "retrieved"
+      ],
+      "properties": {
+        "catalog_slug": {
+          "description": "Slug of the catalog entry describing the source, e.g. `lsc-hb96-comparison`.",
+          "type": "string"
+        },
+        "document_ref": {
+          "description": "Stable locator for the document itself.",
+          "type": "string"
+        },
+        "locator": {
+          "description": "Where inside the document — page, table, or row identifier.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved": {
+          "description": "ISO-8601 date the source was retrieved.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

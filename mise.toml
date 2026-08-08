@@ -19,3 +19,47 @@ rust = { version = "1.88.0", components = "rustfmt,clippy" }
 [tasks.yidam-build]
 description = "Compile and install the yidam binary from the vendored CLI to ~/.cargo/bin."
 run = "cargo install --path .yidam/.vendor/cli"
+
+# ── domain computer (crates/) ─────────────────────────────────────────────
+
+[tasks.build]
+description = "Build the domain computer."
+run = "cargo build --workspace --manifest-path crates/Cargo.toml"
+
+[tasks.test]
+description = "Run domain computer tests."
+run = "cargo test --workspace --manifest-path crates/Cargo.toml"
+
+[tasks.fmt]
+description = "Format the domain computer."
+run = "cargo fmt --all --manifest-path crates/Cargo.toml"
+
+[tasks.lint]
+description = "Clippy across the domain computer."
+run = "cargo clippy --workspace --manifest-path crates/Cargo.toml -- -D warnings"
+
+# ── corpus validation ─────────────────────────────────────────────────────
+
+[tasks.schemas]
+description = "Regenerate .yidam/schemas/ from the Rust types in crates/corpus-schema."
+run = "cargo run -q --manifest-path crates/Cargo.toml --bin emit-schemas -- .yidam/schemas"
+
+[tasks.validate]
+description = "Check corpus instances against their class definitions. Exits non-zero on errors."
+run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- ."
+
+# ── gate ──────────────────────────────────────────────────────────────────
+# `validate` catches what `yidam graph-check` cannot: relationships an instance
+# asserts that its class never declared. Both run; they check different things.
+
+[tasks.ci]
+description = "Full gate: format, lint, test, validate the corpus, and check graph integrity."
+run = [
+  "cargo fmt --all --manifest-path crates/Cargo.toml -- --check",
+  "cargo clippy --workspace --manifest-path crates/Cargo.toml -- -D warnings",
+  "cargo test --workspace --manifest-path crates/Cargo.toml",
+  "cargo run -q --manifest-path crates/Cargo.toml --bin emit-schemas -- .yidam/schemas",
+  "git diff --exit-code -- .yidam/schemas",
+  "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- .",
+  "yidam graph-check",
+]

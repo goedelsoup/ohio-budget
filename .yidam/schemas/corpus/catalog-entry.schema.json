@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CatalogEntry",
+  "description": "Frontmatter of a catalog entry. The body carries the human description.\n\nA catalog entry describes a source; it does not itself verify anything. A claim may only be tagged `[verified]` once the source content is committed, not merely once the source is registered here.",
+  "type": "object",
+  "required": [
+    "content_committed",
+    "location",
+    "name",
+    "publisher",
+    "slug",
+    "source_type"
+  ],
+  "properties": {
+    "access_constraints": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_committed": {
+      "description": "Whether the source content itself has been committed to this repository, as opposed to the source merely being registered.",
+      "type": "boolean"
+    },
+    "feeds": {
+      "description": "Corpus classes this source can supply values for.",
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "location": {
+      "description": "URL, citation, or access method.",
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "source_type": {
+      "$ref": "#/definitions/SourceType"
+    }
+  },
+  "definitions": {
+    "SourceType": {
+      "type": "string",
+      "enum": [
+        "statute",
+        "legislative-document",
+        "financial-report",
+        "dataset",
+        "api",
+        "minutes",
+        "paper",
+        "other"
+      ]
+    }
+  }
+}
