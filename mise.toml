@@ -11,3 +11,11 @@
 
 [tools]
 rust = { version = "1.88.0", components = "rustfmt,clippy" }
+
+# Override. mise.yidam.toml ships `cargo install --path yidam/cli`, but the
+# bootstrap vendor step moves yidam/ to .yidam/.vendor/, so that path is dead in
+# every bootstrapped repo. Overridden here rather than edited there because
+# re-running overlay replaces mise.yidam.toml wholesale.
+[tasks.yidam-build]
+description = "Compile and install the yidam binary from the vendored CLI to ~/.cargo/bin."
+run = "cargo install --path .yidam/.vendor/cli"
