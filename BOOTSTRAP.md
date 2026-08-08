@@ -13,7 +13,7 @@ This is not a software project. It is a research instrument.
 
 ## Execute
 
-Read the [bootstrap skill](yidam/prelude/skills/bootstrap.md) and follow it from **Step 0**.
+Read the [bootstrap skill](.yidam/.vendor/prelude/skills/bootstrap.md) and follow it from **Step 0**.
 Do not read any other file first — not SCRIPTURE.md, not the prelude, nothing. The skill
 specifies exactly what to read and in what order.
 
