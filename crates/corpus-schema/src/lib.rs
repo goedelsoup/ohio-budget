@@ -232,6 +232,14 @@ pub struct DecisionRecord {
 pub enum SourceType {
     Statute,
     LegislativeDocument,
+    /// Issued by the executive in its own voice — a veto message, an executive order, a budget
+    /// submission.
+    ///
+    /// Added when the HB 96 veto message was committed and nothing fitted it. The corpus models
+    /// the executive as an actor with its own powers, so filing its statements under
+    /// `legislative-document` would misattribute them and `other` would hide a whole phase of
+    /// the budget cycle behind a catch-all.
+    ExecutiveDocument,
     FinancialReport,
     Dataset,
     Api,

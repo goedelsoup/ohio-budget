@@ -49,16 +49,27 @@
   },
   "definitions": {
     "SourceType": {
-      "type": "string",
-      "enum": [
-        "statute",
-        "legislative-document",
-        "financial-report",
-        "dataset",
-        "api",
-        "minutes",
-        "paper",
-        "other"
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "statute",
+            "legislative-document",
+            "financial-report",
+            "dataset",
+            "api",
+            "minutes",
+            "paper",
+            "other"
+          ]
+        },
+        {
+          "description": "Issued by the executive in its own voice — a veto message, an executive order, a budget submission.\n\nAdded when the HB 96 veto message was committed and nothing fitted it. The corpus models the executive as an actor with its own powers, so filing its statements under `legislative-document` would misattribute them and `other` would hide a whole phase of the budget cycle behind a catch-all.",
+          "type": "string",
+          "enum": [
+            "executive-document"
+          ]
+        }
       ]
     }
   }

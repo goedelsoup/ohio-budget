@@ -49,6 +49,26 @@ decision: |
   directly. Nothing was stopping a *node author* from doing the same subtraction by hand and
   committing the result as a verified figure, which is how this would actually have entered
   the corpus.
+confirmed_by: |
+  Recorded from the House and Senate amendments. The governor's veto message, committed
+  afterwards, is a third independent instance and the first from the executive branch.
+
+  Across all 67 vetoed items, not one struck an appropriation amount — and yet the vetoes moved
+  money. Item 6 removed a set-aside directing 5% of State Share of Instruction to 90-credit-hour
+  degree programmes and College Credit Plus pathways. Item 19 removed three dredging earmarks
+  from the GRF Parks and Recreation line, with the administration redirecting the projects to
+  the Waterways Safety Fund. Item 22 removed a bar on distributing line item 440672 to youth
+  shelters that "promote or affirm social gender transition". [verified]
+
+  Every line item total is unchanged by all three. An item-level diff of the bill before and
+  after the veto returns nothing, while 5% of a multi-hundred-million-dollar appropriation
+  changes destination.
+
+  This is worth noting because it generalizes the decision beyond where it was drawn. The rule
+  was written about *published estimates* disagreeing with appropriations. The veto message
+  shows the same gap opening inside the statute itself: the amount and its distribution are
+  separately amendable, by different actors, at different stages, and a corpus that tracks only
+  amounts is blind to one of them.
 rationale: |
   The failure mode this closes is specific and quiet. Both figures are correct, both are
   citable to a committed primary source, and both are about foundation funding in FY2026. A

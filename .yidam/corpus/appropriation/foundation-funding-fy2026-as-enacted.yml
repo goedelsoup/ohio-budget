@@ -18,11 +18,11 @@ description: |
 
   Enacted at $8,457,598,772 for FY2026 — identical to the conference report figure. [verified]
 
-  That identity was previously read as establishing that foundation funding escaped the
-  governor's line-item vetoes. It does not, and the claim is withdrawn. Whether LSC's as-enacted
-  column is taken before or after the governor acts is not stated by the source, and if the
-  conference report was adopted unamended the two columns would match regardless. [inference]
-  See [the veto action](../budget-action/hb96-line-item-veto.yml).
+  Foundation funding was not among the governor's line-item vetoes. [verified] That is now
+  established from the [veto message](../../catalog/governor-hb96-veto-messages.md), which names
+  every one of the 67 items; none concerns this line. It was previously inferred from the
+  conference and as-enacted columns matching, which could not support it — those columns would
+  match whether or not a veto had touched the line.
 
   The stale `[open]` above this, saying the amount was unfilled and awaiting the comparison
   document, was left behind when the figure was filled from the spreadsheet. It was wrong on
@@ -49,4 +49,6 @@ links:
   - target: ../expenditure/foundation-funding-fy2026-disbursed.yml
     relationship: realized-by
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/governor-hb96-veto-messages.md
     relationship: cites

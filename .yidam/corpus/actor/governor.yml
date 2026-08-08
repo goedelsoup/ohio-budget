@@ -23,21 +23,27 @@ description: |
   language without touching a figure is no longer an inference — here it is what most of them
   did.
 
-  **A claim recorded here earlier has been withdrawn.** This node said that across all 1,528
-  line items the vetoes changed no appropriation figure, and treated that as settled. The
-  underlying observation holds — the spreadsheet's conference-report and as-enacted columns are
-  identical for every line item [verified] — but it does not support the conclusion drawn from
-  it. Whether the as-enacted column is taken before or after the governor acts is not stated by
-  the source, and if both chambers adopted the conference report unamended, a pre-veto column
-  would be identical to it for reasons having nothing to do with vetoes. [inference] See
-  [the veto action](../budget-action/hb96-line-item-veto.yml) for the probe that sharpens this.
+  **Across all 67 items, not one struck an appropriation amount.** [verified] The
+  [veto message](../../catalog/governor-hb96-veto-messages.md) is committed, and every item
+  deletes statutory or temporary-law language rather than a figure.
 
-  The structural point the node was making survives intact and did not need the withdrawn claim:
-  the enacted budget is the legislature's bill minus the executive's strikes, so a corpus
-  modelling only "as passed" and "as enacted" shows a discontinuity it cannot explain. That is
-  true whether or not any strike moved a dollar.
+  That claim was asserted here from the spreadsheet, withdrawn as unsupported, and reinstated
+  from the veto message — the same conclusion resting on evidence that can actually carry it.
+  The column comparison never could: a pre-veto column would be identical to the conference
+  report for reasons having nothing to do with vetoes.
 
-  [open] The reasons given per item remain unreconstructed; the veto message is not catalogued.
+  **The more useful finding is that this role moves money without moving any figure.** Item 6
+  struck a set-aside directing 5% of State Share of Instruction to particular programmes; item
+  19 struck three dredging earmarks and redirected the projects to another fund; item 22 struck
+  a restriction on who may receive line item 440672. [verified] Every line item's total came
+  through unchanged.
+
+  So the item veto's reach is understated by any figure-level account of it. The power to strike
+  language inside an appropriation is the power to redirect the appropriation, and in this bill
+  that is almost entirely how it was used.
+
+  [open] 64 of the 67 rationales are not yet transcribed into the corpus. They belong in one
+  node per item.
 properties:
   name: Governor of Ohio
   role_type: executive
@@ -54,4 +60,6 @@ links:
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites
   - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites
+  - target: ../../catalog/governor-hb96-veto-messages.md
     relationship: cites

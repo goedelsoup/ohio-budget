@@ -17,15 +17,18 @@ description: |
   **And it matters more than expected.** This role carries 15.3% of HB 96's total movement
   across 79 line items — comparable to the Senate substitute's 17.0%. [verified]
 
-  It was also recorded here as the last stage at which any dollar figure changes, on the
-  grounds that the vetoes moved nothing. That rested on the spreadsheet's conference and
-  as-enacted columns being identical, which is verified, and on those columns straddling the
-  veto, which is not. The narrower claim is withdrawn; see
-  [the veto action](../budget-action/hb96-line-item-veto.yml).
+  It is also the last stage at which any appropriation figure changes. That was asserted here
+  from the spreadsheet's columns, withdrawn when the columns turned out unable to support it,
+  and now holds on the [veto message](../../catalog/governor-hb96-veto-messages.md): none of the
+  governor's 67 items struck an amount. [verified]
 
-  What survives is the substantive point, which never needed it: among the legislative stages
-  this is the last one that moves money, and it is the least documented of them. Where the
-  chambers leave a record of committee deliberation, this stage produces a report and a vote.
+  The qualification is real, though. Vetoes moved money *within* line items — a 5% set-aside on
+  State Share of Instruction, three dredging earmarks, a recipient restriction — so this role is
+  the last to move a **figure**, not the last to move money. [verified]
+
+  What was true regardless: among the legislative stages this is the last one that moves money,
+  and it is the least documented of them. Where the chambers leave a record of committee
+  deliberation, this stage produces a report and a vote.
 properties:
   name: Conference Committee
   role_type: committee

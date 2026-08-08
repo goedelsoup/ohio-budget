@@ -27,45 +27,70 @@ description: |
   $10,000` from a research grant provision and left the rest of it standing. [verified] An item
   veto is finer-grained than "item" suggests.
 
-  **This node previously claimed the aggregate dollar effect was settled at zero. That claim was
-  overstated and is withdrawn.** What is verified is narrower: across all 1,528 line items, the
-  spreadsheet's conference-report column and its as-enacted column are identical. [verified]
-  Whether that means the vetoes moved no money depends on something the source does not state —
-  whether LSC's as-enacted column is taken before or after the governor acts.
+  **No appropriation amount was struck.** The
+  [veto message](../../catalog/governor-hb96-veto-messages.md) is now committed, and across all
+  **67 items** not one deletes an appropriation figure. Every item strikes statutory or
+  temporary-law language, and no rationale in the document describes reducing or eliminating an
+  appropriation. [verified]
 
-  The observation cannot settle it, and that is the point. If both chambers adopted the
-  conference report unamended, then the bill *as passed* is the conference report, and a
-  pre-veto column would be identical to it for exactly the same reason. Perfect identity across
-  1,528 line items is what a post-veto column with no monetary vetoes looks like, and it is
-  equally what a pre-veto column looks like. [inference]
+  This claim was made here before, withdrawn, and is now reinstated on different grounds. The
+  original basis was that the spreadsheet's conference-report and as-enacted columns are
+  identical across 1,528 line items — true, but unable to support the conclusion, since a
+  pre-veto column would look identical for reasons having nothing to do with vetoes. The veto
+  message settles it directly by saying what was struck. The corpus reached the right answer
+  from bad evidence, which is worth recording as its own kind of error.
 
-  [open] One probe sharpens the question without answering it. Line item 800639, Fire Department
-  Grants, gains exactly $8,000,000 at the senate-reported stage and carries that figure
-  unchanged into as-enacted. [verified] Contemporary reporting describes an $8 million
-  fire-department grant increase among the items sent to the governor for line-item veto, but
-  that is a secondary source and describes what was *sent*, not what was struck. If that veto
-  was exercised against the appropriation, the as-enacted column must be pre-veto.
+  **But the vetoes did move money, and that is the finding.** At least three struck the
+  *distribution* inside a line item while leaving its total alone: [verified]
 
-  Settling this needs the veto message, which is not catalogued, or a spreadsheet LSC states to
-  be post-veto. Until then no claim in this corpus should rest on the enacted column being the
-  post-veto figure.
+  - item 6 removed a set-aside directing 5% of State Share of Instruction to 90-credit-hour
+    degree programmes and College Credit Plus pathways;
+  - item 19 removed three dredging earmarks from the GRF Parks and Recreation line, the
+    administration directing ODNR to fund the projects from the Waterways Safety Fund instead;
+  - item 22 removed a bar on distributing line item 440672 to youth shelters that "promote or
+    affirm social gender transition".
 
-  This node is modeled as a single action covering the veto event. Reporting puts the count at
-  67 provisions across the whole bill; [inference] the 8 above are only those falling in the
-  education comparison document. If per-item granularity is wanted, it should be split into one
-  node per struck item rather than edited.
+  So "no appropriation figure changed" and "no money moved" are different claims, and only the
+  first is true. An item-level comparison of the bill before and after the veto shows nothing at
+  all while 5% of a multi-hundred-million-dollar line changes destination. This is the third
+  independent instance of
+  [appropriation-is-not-distribution](../../decisions/appropriation-is-not-distribution.yml),
+  and the first arriving from the executive rather than the legislature.
+
+  A probe recorded here earlier is also resolved. Line item 800639, Fire Department Grants,
+  gains $8,000,000 at the senate-reported stage and carries it into as-enacted; reporting had
+  described an $8 million fire-department increase among items sent to the governor for veto.
+  **No item in the veto message concerns fire department grants.** [verified] It was sent, not
+  struck — the secondary source described what was asked for, not what was done.
+
+  This node is modeled as a single action covering the veto event. With the message committed,
+  splitting it into 67 nodes is now possible; it should be a split rather than an edit.
 properties:
   action_type: line-item-veto
   action_date: 2025-06-30
   direction: decrease
-  amount_delta: "[open] not reconstructed; see the description for why the spreadsheet cannot settle it"
+  amount_delta: "$0.00"
   stated_justification: |
-    [open] The governor's veto message states a rationale per item and is not catalogued.
+    Each of the 67 items carries its own reason, closing with "Therefore, a veto of this item is
+    in the public interest." Three, matching provisions the comparison connector extracts:
+    [verified]
 
-    What is reconstructed is the *content* struck, not the reason for striking it. From the LSC
-    comparison document, 56 passages across 8 provisions, of which the largest is the whole
-    Nonchartered Educational Savings Account Program (EDUCD118) and the finest is the phrase
-    "of up to $10,000" lifted from a research grant award (BORCD109). [verified]
+    Item 27, the Nonchartered Educational Savings Account Program: nonchartered nonpublic
+    schools decline state chartering "due to truly held religious beliefs" and are subject to
+    far fewer requirements, so "infusing significant state funding to support NCNP schools is
+    contrary to the long-standing public policy that differentiates between chartered nonpublic
+    schools and nonchartered nonpublic schools."
+
+    Item 5, the Ohio Higher Education Research Public Policy Consortium: capping awards at
+    $10,000 "would be detrimental to attracting research proposals and may prevent strong
+    proposal submissions."
+
+    Item 6, the State Share of Instruction set-aside: while supporting the expansion of College
+    Credit Plus and 90-credit-hour degrees, requiring 5% of SSI to be allocated on that basis
+    was not accepted.
+
+    [open] The remaining 64 are not transcribed here. They belong in one node per item rather
+    than in this field.
   phase: executive
 links:
   - target: ../budget-action.ont.yml
@@ -77,4 +102,6 @@ links:
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites
   - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites
+  - target: ../../catalog/governor-hb96-veto-messages.md
     relationship: cites
