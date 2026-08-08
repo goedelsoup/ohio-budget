@@ -1,0 +1,24 @@
+class: agency
+label: Ohio Department of Mental Health and Addiction Services
+description: |
+  The agency administering behavioral health services, a substantial share of which are
+  Medicaid-funded. [inference]
+
+  This is the second agency outside the Department of Medicaid holding Medicaid money, after
+  [developmental disabilities](./developmental-disabilities.yml). Two such agencies establish
+  the pattern that one could not: Medicaid is not a department's budget, it is a payment
+  mechanism spread across several, and any total assembled from one department's line items is
+  incomplete by construction rather than by oversight.
+
+  [open] The agency code is unverified.
+properties:
+  name: Ohio Department of Mental Health and Addiction Services
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    No reorganization within the corpus window. [inference]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/behavioral-health-services.yml
+    relationship: administers

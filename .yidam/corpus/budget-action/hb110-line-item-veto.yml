@@ -1,0 +1,28 @@
+class: budget-action
+label: Line-Item Vetoes, HB 110
+description: |
+  The governor's vetoes against [HB 110](../bill/hb110-134th.yml), the budget that enacted
+  the Fair School Funding Plan. [inference]
+
+  The third veto event in the corpus, and with three the pattern is established well enough to
+  say something: an Ohio operating budget is not finished when the legislature passes it, and an
+  analysis that treats the enacted text as the legislature's product is wrong by whatever the
+  governor struck. Whether anything school-funding-related was struck here is unknown and
+  material to the phase-in question. [open]
+properties:
+  action_type: line-item-veto
+  action_date: 2021-06-30
+  direction: decrease
+  amount_delta: "[open] not reconstructed"
+  stated_justification: |
+    [open] Not reconstructed.
+  phase: executive
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb110-as-enacted.yml
+    relationship: applies-to
+  - target: ../actor/governor.yml
+    relationship: taken-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

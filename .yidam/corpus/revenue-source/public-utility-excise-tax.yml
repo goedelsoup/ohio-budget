@@ -1,0 +1,25 @@
+class: revenue-source
+label: Public Utility Excise Tax
+description: |
+  An excise on the gross receipts of certain public utilities. [inference]
+
+  Seeded as a small, stable instrument — the kind that makes up the long tail of state revenue
+  and is invisible in any account that lists only the big three. Its inclusion is a hedge
+  against a specific distortion: a corpus holding only income, sales, and commercial activity
+  tax would imply those three are the state's revenue, and a structural balance computed on
+  that basis would be wrong by whatever the tail amounts to.
+
+  [open] Rate, base, and receipts are unreconstructed.
+properties:
+  name: Public Utility Excise Tax
+  instrument_type: tax
+  statutory_basis: "[open] pending verification"
+  rate_basis: |
+    A percentage of gross receipts, varying by utility type. [inference]
+  disposition: |
+    Credited principally to the general revenue fund. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/general-revenue-fund.yml
+    relationship: deposits-into

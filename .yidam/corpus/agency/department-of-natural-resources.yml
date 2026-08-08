@@ -1,0 +1,21 @@
+class: agency
+label: Ohio Department of Natural Resources
+description: |
+  The agency managing state parks, forests, wildlife, and water resources. [inference]
+
+  Seeded as a general revenue agency with substantial dedicated-purpose and federal funding
+  alongside it, and comparatively little of the entitlement dynamics that dominate the corpus's
+  larger agencies. It is the control case: an agency whose appropriation genuinely is a
+  discretionary decision, against which Medicaid's and corrections' can be read as the
+  exceptions they are.
+
+  [open] The agency code is unverified.
+properties:
+  name: Ohio Department of Natural Resources
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    No reorganization within the corpus window. [inference]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of

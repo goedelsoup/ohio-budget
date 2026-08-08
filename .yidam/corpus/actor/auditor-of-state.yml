@@ -1,0 +1,27 @@
+class: actor
+label: Auditor of State
+description: |
+  The independently elected office that audits state and local financial statements. [inference]
+
+  Seeded as the second observer alongside the
+  [Legislative Service Commission](./legislative-service-commission.yml), and for a different
+  reason. The LSC records what the legislature did; this office attests to what the numbers
+  say afterwards. An [`expenditure`](../expenditure/) figure on an `actual-closed` basis rests
+  on an audited statement, so this role stands behind the entire back half of the corpus's
+  central question.
+
+  It also audits the local entities the state distributes to, which makes it the natural source
+  for any future claim about what a jurisdiction actually received rather than what the state
+  recorded sending.
+properties:
+  name: Auditor of State
+  role_type: analytic-office
+  authority_basis: |
+    Constitutional office with statutory audit duties over state and local entities.
+    [inference]
+  held_by: |
+    An independently elected officeholder. [open] Succession not reconstructed.
+  phase_active: reporting and attestation
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of

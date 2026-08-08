@@ -1,0 +1,29 @@
+class: budget-action
+label: Acceleration of Tangible Personal Property Reimbursement Phase-Out, HB 153
+description: |
+  The provision in [HB 153](../bill/hb153-129th.yml) accelerating the phase-out of
+  reimbursements for the eliminated tangible personal property tax. [inference]
+
+  Seeded because it is the second withdrawal in the same bill as the
+  [local government fund reduction](./hb153-local-government-fund-reduction.yml), and because
+  the two are routinely discussed as one event. They were not one event: they hit overlapping
+  but different sets of recipients on different schedules, and school districts were affected by
+  this one more than by the fund reduction. [inference]
+
+  Treating them as a single cut overstates what happened to some recipients and understates it
+  for others.
+properties:
+  action_type: amendment
+  action_date: 2011-06-30
+  direction: decrease
+  amount_delta: "[open] not reconstructed"
+  stated_justification: |
+    [open] Not reconstructed.
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb153-as-enacted.yml
+    relationship: applies-to
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

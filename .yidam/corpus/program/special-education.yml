@@ -1,0 +1,26 @@
+class: program
+label: Special Education
+description: |
+  Additional state support for the excess cost of educating students with disabilities,
+  distributed by disability category on top of the base formula amount. [inference]
+
+  Seeded because it is the clearest case in the corpus of a formula whose weights matter more
+  than its base. Two districts with identical enrollment and identical base cost can receive
+  materially different amounts, and a per-pupil comparison that ignores the weighting will read
+  that difference as inequity when it may be the formula working as designed — or as the
+  formula working when it is not. Distinguishing those requires the weights.
+properties:
+  name: Special Education
+  policy_area: primary-secondary-education
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    Categorical weights by disability type, applied on top of base cost. [inference]
+  federal_participation: |
+    Federal special education funding flows through separate line items. [inference]
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/special-education.yml
+    relationship: funded-by
+  - target: ../jurisdiction/cincinnati-public-schools.yml
+    relationship: serves

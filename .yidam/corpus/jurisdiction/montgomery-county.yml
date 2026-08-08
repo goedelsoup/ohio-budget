@@ -1,0 +1,17 @@
+class: jurisdiction
+label: Montgomery County
+description: |
+  A populous county containing Dayton. [inference] Seeded to give the county set enough
+  members that a per-capita comparison across them is meaningful rather than anecdotal.
+
+  [open] Population, identifier, and receipts are unpopulated.
+properties:
+  name: Montgomery County
+  jurisdiction_type: county
+  identifier: "[open] pending verification"
+  county: Montgomery
+  population_basis: |
+    [open] Figure and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

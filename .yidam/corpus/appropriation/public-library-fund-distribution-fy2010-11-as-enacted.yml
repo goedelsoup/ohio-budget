@@ -1,0 +1,32 @@
+class: appropriation
+label: Public Library Fund Distribution — FY2010-11, As Enacted
+description: |
+  The pre-reduction public library fund figure.
+
+  The *before* half of the library pair, matching the
+  [local government fund's](./local-government-fund-distribution-fy2010-11-as-enacted.yml).
+  Having both pairs is what allows the two reductions to be compared as proportions — and
+  therefore what distinguishes a general shift of weight onto local entities from a targeted
+  cut to one of them.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2010-11
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/public-library-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/public-library-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2010-11.yml
+    relationship: covers
+  - target: ../bill-version/hb1-as-enacted.yml
+    relationship: stated-in
+  - target: ../expenditure/public-library-fund-fy2012-13-disbursed-columbus.yml
+    relationship: realized-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

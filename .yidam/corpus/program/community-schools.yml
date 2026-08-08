@@ -1,0 +1,23 @@
+class: program
+label: Community Schools
+description: |
+  State funding for community schools, which follows the student and is deducted from the
+  resident district's foundation amount. [inference]
+
+  This program is why a district's published foundation funding figure and the money it retains
+  are different numbers. The corpus currently models the first and not the second, which means
+  every per-district claim it can make is about gross state support rather than net — a
+  limitation worth stating plainly rather than discovering later.
+properties:
+  name: Community Schools
+  policy_area: primary-secondary-education
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    Per-pupil amount following enrollment, deducted from the resident district. [inference]
+  federal_participation: |
+    None directly. [inference]
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/community-schools-funding.yml
+    relationship: funded-by

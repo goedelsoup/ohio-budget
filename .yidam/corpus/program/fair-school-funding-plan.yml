@@ -41,3 +41,5 @@ links:
     relationship: serves
   - target: ../line-item/pupil-transportation.yml
     relationship: funded-by
+  - target: ../line-item/special-education.yml
+    relationship: funded-by

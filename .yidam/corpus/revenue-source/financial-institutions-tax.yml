@@ -1,0 +1,27 @@
+class: revenue-source
+label: Financial Institutions Tax
+description: |
+  A tax on financial institutions enacted during the corpus window, replacing the corporate
+  franchise tax as it applied to banks. [inference]
+
+  Seeded as the second instrument swap inside the window, after the
+  [commercial activity tax](./commercial-activity-tax.yml). Both replaced older taxes, and both
+  make a series that keys on instrument names break at the changeover — a chart of "corporate
+  franchise tax receipts" simply ends, and a reader without the replacement in view would read
+  a collapse.
+
+  [open] The effective date, rate basis, and whether the swap was revenue-neutral as designed
+  are unreconstructed.
+properties:
+  name: Financial Institutions Tax
+  instrument_type: tax
+  statutory_basis: "[open] pending verification"
+  rate_basis: |
+    Applied to total equity capital rather than to income. [inference]
+  disposition: |
+    Credited to the general revenue fund. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/general-revenue-fund.yml
+    relationship: deposits-into

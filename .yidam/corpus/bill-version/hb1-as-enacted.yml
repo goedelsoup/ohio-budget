@@ -1,0 +1,24 @@
+class: bill-version
+label: HB 1 As Enacted
+description: |
+  [HB 1](../bill/hb1-128th.yml) as it became law. [inference]
+
+  It is the earliest document in the corpus and the anchor of every long series. A claim
+  that something has risen or fallen since FY2010 is a claim reaching back to this text.
+
+  [open] Figures are unextracted, and no intermediate stages are seeded, so no stage-delta is
+  computable for this bill.
+properties:
+  stage: as-enacted
+  stage_date: 2009-07-17
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb1-128th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

@@ -1,0 +1,29 @@
+class: forecast
+label: Medicaid Caseload Projection — FY2014-15
+description: |
+  Projected Medicaid enrollment for the biennium in which eligibility was extended to the
+  expansion population. [inference]
+
+  Seeded as the corpus's earliest caseload projection and its first test of a projection made
+  under genuine uncertainty: nobody knew how many newly eligible Ohioans would enroll. Its
+  variance is the cleanest available measure of how a major eligibility change was forecast, as
+  distinct from how an economic shock was.
+properties:
+  forecast_type: caseload-projection
+  issued_date: "[open] pending the obm connector"
+  projected_amount: "[open] pending the obm connector"
+  horizon: |
+    [open] Not reconstructed.
+  variance_from_actual: |
+    [open] Computable once extraction supplies both the projection and the outturn.
+  assumptions: |
+    [open] Not reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2014-15.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

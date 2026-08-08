@@ -1,0 +1,27 @@
+class: bill-version
+label: HB 110 As Introduced
+description: |
+  The executive proposal for FY2022-23, before the legislature wrote the
+  [Fair School Funding Plan](../program/fair-school-funding-plan.yml) into it. [inference]
+
+  Seeded because the plan's origin is contested in a way the corpus should be able to examine:
+  it emerged from years of legislative work rather than from the executive budget, so the
+  distance between this version and
+  [as enacted](./hb110-as-enacted.yml) is unusually large on education lines and unusually
+  attributable to the General Assembly rather than the governor.
+
+  [open] Figures are unextracted.
+properties:
+  stage: as-introduced
+  stage_date: "[open] pending verification"
+  chamber: executive
+  document_reference: |
+    As-introduced bill text and the LSC analysis for this stage. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb110-134th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

@@ -1,0 +1,27 @@
+class: line-item
+label: Disability Financial Assistance
+description: |
+  Cash assistance for disabled adults who do not qualify for federal disability benefits.
+  [inference]
+
+  A small, entirely state-funded line item, seeded as a contrast to the corpus's federally
+  matched programs. Where a Medicaid dollar draws a federal dollar, a dollar cut here saves the
+  state a dollar and costs a recipient a dollar — the leverage is absent, which changes the
+  arithmetic of cutting it.
+properties:
+  name: Disability Financial Assistance
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Cash assistance for disabled adults ineligible for federal benefits.
+  first_period: "[open] not yet reconstructed"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/job-and-family-services.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

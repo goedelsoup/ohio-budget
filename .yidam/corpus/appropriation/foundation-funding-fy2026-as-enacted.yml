@@ -37,3 +37,5 @@ links:
     relationship: covers
   - target: ../../catalog/lsc-hb96-comparison.md
     relationship: cites
+  - target: ../expenditure/foundation-funding-fy2026-disbursed.yml
+    relationship: realized-by

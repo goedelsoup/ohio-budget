@@ -1,0 +1,28 @@
+class: expenditure
+label: Local Government Fund Disbursement to Cuyahoga County — FY2010-11
+description: |
+  Local government fund money received by
+  [Cuyahoga County](../jurisdiction/cuyahoga-county.yml) before the share was reduced.
+
+  The *before* half of the corpus's only recipient-level pair. Differenced against the
+  [FY2012-13 figure](./local-government-fund-fy2012-13-disbursed-cuyahoga.yml) it gives the
+  reduction a number attached to a named place — which is the form in which a fiscal decision
+  becomes legible to the people it affected.
+properties:
+  amount: "[open] pending the obm connector"
+  basis: actual-closed
+  period_label: FY2010-11
+  reporting_source: |
+    OBM financial reporting. [open] Not yet extracted.
+  reversion: "[open] not reported at this granularity"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2010-11.yml
+    relationship: occurs-in
+  - target: ../jurisdiction/cuyahoga-county.yml
+    relationship: paid-to
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

@@ -1,0 +1,31 @@
+class: line-item
+label: Tangible Personal Property Tax Reimbursement
+description: |
+  State reimbursement to local governments and school districts for revenue lost when the
+  tangible personal property tax on business equipment was eliminated in favour of the
+  [commercial activity tax](../revenue-source/commercial-activity-tax.yml). [inference]
+
+  This is the other half of the swap, and the half that expired. The reimbursements were phased
+  down during the corpus window, so a local entity experienced the elimination of a tax it used
+  to receive, a period of being made whole, and then the withdrawal of that too. [inference]
+
+  Reading the [local government fund](./local-government-fund-distribution.yml) reduction
+  without this line item in view understates what happened to local finance in the same period,
+  because two separate withdrawals overlapped.
+properties:
+  name: Tangible Personal Property Tax Reimbursement
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Reimbursement to local governments and school districts for the eliminated tangible personal property tax.
+  first_period: "[open] not yet reconstructed"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-taxation.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

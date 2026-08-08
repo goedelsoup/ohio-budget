@@ -1,0 +1,29 @@
+class: budget-action
+label: Senate Amendment to Foundation Funding, HB 96
+description: |
+  The Senate's change to the House-passed foundation funding figure in
+  [HB 96](../bill/hb96-136th.yml). [inference]
+
+  Completes the attribution chain for the corpus's most fully modeled line. With the House
+  amendment, this, and the [veto](./hb96-line-item-veto.yml) all present, and appropriation
+  nodes at four stages, foundation funding in FY2026 is the one figure whose entire journey the
+  corpus can decompose — once the amounts exist.
+properties:
+  action_type: amendment
+  action_date: "[open] spring 2025, pending verification"
+  direction: "[open] not reconstructed"
+  amount_delta: "[open] not reconstructed"
+  stated_justification: |
+    [open] Not reconstructed.
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb96-as-passed-senate.yml
+    relationship: applies-to
+  - target: ../appropriation/foundation-funding-fy2026-as-passed-senate.yml
+    relationship: modifies
+  - target: ../actor/senate-finance-committee.yml
+    relationship: taken-by
+  - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites

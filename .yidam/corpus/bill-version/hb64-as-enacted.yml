@@ -1,0 +1,24 @@
+class: bill-version
+label: HB 64 As Enacted
+description: |
+  [HB 64](../bill/hb64-131st.yml) as it became law. [inference]
+
+  Seeded to give the FY2016-17 appropriations somewhere to be stated in. No distinguishing
+  claim is attached, which is itself the point — a series needs its ordinary years.
+
+  [open] Figures are unextracted, and no intermediate stages are seeded, so no stage-delta is
+  computable for this bill.
+properties:
+  stage: as-enacted
+  stage_date: 2015-06-30
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb64-131st.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

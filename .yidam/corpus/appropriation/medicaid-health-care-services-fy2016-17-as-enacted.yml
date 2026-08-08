@@ -1,0 +1,29 @@
+class: appropriation
+label: Medicaid Health Care Services — FY2016-17, As Enacted
+description: |
+  General revenue Medicaid authority for FY2016-17.
+
+  Extends the post-separation Medicaid series. Read together with the
+  [pre-separation figure](./medicaid-services-odjfs-fy2012-13-as-enacted.yml), the full series
+  spans the agency reorganization — but only through an asserted lineage edge, so any trend
+  drawn across it inherits that assertion's uncertainty.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2016-17
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2016-17.yml
+    relationship: covers
+  - target: ../bill-version/hb64-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

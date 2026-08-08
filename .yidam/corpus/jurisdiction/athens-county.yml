@@ -1,0 +1,22 @@
+class: jurisdiction
+label: Athens County
+description: |
+  A rural Appalachian county with a comparatively weak property tax base. [inference]
+
+  The corpus's first non-metropolitan jurisdiction, and the one that makes the incidence
+  question sharp. A proportional cut to a formula distribution lands differently where local
+  replacement capacity is weakest, and every other jurisdiction seeded so far is urban. Without
+  a rural case the corpus would systematically describe only the half of Ohio that has
+  alternatives.
+
+  [open] Population, identifier, and receipts are unpopulated.
+properties:
+  name: Athens County
+  jurisdiction_type: county
+  identifier: "[open] pending verification"
+  county: Athens
+  population_basis: |
+    [open] Figure and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

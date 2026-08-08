@@ -1,0 +1,26 @@
+class: line-item
+label: Community Schools Funding
+description: |
+  State funding for community schools. [inference]
+
+  Seeded because its money is not additional: amounts follow the student and are deducted from
+  the resident district's foundation funding. [inference] A district's published foundation
+  figure and what it retains are therefore different numbers, and the corpus cannot currently
+  distinguish them — which is a real limitation on any per-district claim it makes.
+properties:
+  name: Community Schools Funding
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    State funding for community schools, deducted from resident district amounts.
+  first_period: "[open] not yet reconstructed"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-education-and-workforce.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

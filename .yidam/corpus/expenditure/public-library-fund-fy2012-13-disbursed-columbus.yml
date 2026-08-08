@@ -1,0 +1,28 @@
+class: expenditure
+label: Public Library Fund Disbursement to Columbus Metropolitan Library — FY2012-13
+description: |
+  Public library fund money received by
+  [Columbus Metropolitan Library](../jurisdiction/columbus-metropolitan-library.yml) in the
+  biennium the share was reduced.
+
+  The library thread's first recipient-level figure. Its value is comparative: a library system
+  has narrower revenue alternatives than a county, so the same proportional reduction should
+  bind harder here — a claim the corpus can now state and, once extracted, test.
+properties:
+  amount: "[open] pending the obm connector"
+  basis: actual-closed
+  period_label: FY2012-13
+  reporting_source: |
+    OBM financial reporting. [open] Not yet extracted.
+  reversion: "[open] not reported at this granularity"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/public-library-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2012-13.yml
+    relationship: occurs-in
+  - target: ../jurisdiction/columbus-metropolitan-library.yml
+    relationship: paid-to
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

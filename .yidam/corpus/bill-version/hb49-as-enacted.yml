@@ -1,0 +1,24 @@
+class: bill-version
+label: HB 49 As Enacted
+description: |
+  [HB 49](../bill/hb49-132nd.yml) as it became law. [inference]
+
+  The last enacted operating text before the pandemic, and therefore the reference version
+  for any "since before 2020" comparison.
+
+  [open] Figures are unextracted, and no intermediate stages are seeded, so no stage-delta is
+  computable for this bill.
+properties:
+  stage: as-enacted
+  stage_date: 2017-06-30
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb49-132nd.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

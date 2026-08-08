@@ -1,0 +1,18 @@
+class: jurisdiction
+label: Cincinnati Public Schools
+description: |
+  A large urban district. [inference] Third of the corpus's urban districts, and seeded for
+  the same reason as Hamilton County: distinguishing formula effects from local ones needs more
+  than a pair.
+
+  [open] Population, identifier, and receipts are unpopulated.
+properties:
+  name: Cincinnati Public Schools
+  jurisdiction_type: school-district
+  identifier: "[open] pending verification"
+  county: Hamilton
+  population_basis: |
+    [open] Figure and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

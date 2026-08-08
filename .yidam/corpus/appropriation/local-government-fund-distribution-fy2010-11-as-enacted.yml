@@ -27,3 +27,5 @@ links:
     relationship: draws-from
   - target: ../fiscal-period/fy2010-11.yml
     relationship: covers
+  - target: ../expenditure/local-government-fund-fy2010-11-disbursed-cuyahoga.yml
+    relationship: realized-by

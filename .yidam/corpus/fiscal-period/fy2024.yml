@@ -1,0 +1,19 @@
+class: fiscal-period
+label: Fiscal Year 2024
+description: |
+  The state fiscal year running 2023-07-01 through 2024-06-30.
+
+  Seeded because financial reporting closes annually while appropriation is biennial,
+  so an actual-closed figure belongs to a year even when the authority behind it was
+  granted for two.
+properties:
+  label: FY2024
+  period_type: fiscal-year
+  start_date: 2023-07-01
+  end_date: 2024-06-30
+  general_assembly: 135th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2024-25.yml
+    relationship: contained-by

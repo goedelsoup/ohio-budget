@@ -41,8 +41,11 @@ Fields per crate: name, capability type (connector/calculator/feature-engineerin
 | Crate | Description |
 |---|---|
 | [—](crates/) | — |
+| [corpus-promote](corpus-promote/) | Proposes corpus updates from validated connector extraction records |
 | [corpus-schema](corpus-schema/) | Typed definitions for Ohio budget corpus files and connector extraction records |
 | [corpus-validate](corpus-validate/) | Validates the Ohio budget corpus against its own ontology |
+| [legislature](legislature/) | Connector for the Ohio General Assembly bill record |
+| [lsc](lsc/) | Connector for Legislative Service Commission comparison documents |
 <!-- /REGEN -->
 
 ## Index status

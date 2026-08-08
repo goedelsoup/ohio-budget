@@ -32,3 +32,5 @@ links:
     relationship: administers
   - target: ../program/public-library-fund-distribution.yml
     relationship: administers
+  - target: ../program/local-government-distribution.yml
+    relationship: administers

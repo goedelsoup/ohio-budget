@@ -1,0 +1,31 @@
+class: forecast
+label: Executive Revenue Estimate — FY2012-13, Personal Income Tax
+description: |
+  The revenue estimate underlying [HB 153](../bill/hb153-129th.yml), issued as the state was
+  emerging from the recession. [inference]
+
+  Seeded because the local government fund reduction was justified at the time partly by the
+  state's own fiscal position. [inference] Whether that position was as projected is a question
+  this node makes answerable — and it is the difference between a reduction that responded to
+  circumstances and one that was a policy preference given cover by them.
+properties:
+  forecast_type: revenue-estimate
+  issued_date: "[open] pending the obm connector"
+  projected_amount: "[open] pending the obm connector"
+  horizon: |
+    [open] Not reconstructed.
+  variance_from_actual: |
+    [open] Computable once extraction supplies both the projection and the outturn.
+  assumptions: |
+    [open] Not reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2012-13.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by
+  - target: ../revenue-source/personal-income-tax.yml
+    relationship: projects
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

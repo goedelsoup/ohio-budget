@@ -1,0 +1,25 @@
+class: program
+label: Behavioral Health Services
+description: |
+  Mental health and addiction treatment services, largely Medicaid-funded and administered
+  by [Mental Health and Addiction Services](../agency/mental-health-and-addiction-services.yml).
+  [inference]
+
+  Its budgetary interest is that it sits at the intersection of three of the corpus's threads:
+  it is Medicaid money, it is administered outside the Medicaid department, and demand for it
+  interacts with [corrections](./adult-corrections.yml) in ways that make each program's costs
+  partly a function of the other's capacity. [inference] The corpus cannot currently express
+  that interaction, and naming it here marks the gap.
+properties:
+  name: Behavioral Health Services
+  policy_area: human-services
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    Service costs by enrolled individual, matched federally where Medicaid-eligible. [inference]
+  federal_participation: |
+    Federal Medicaid match where services are Medicaid-covered. [inference]
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/behavioral-health-medicaid.yml
+    relationship: funded-by

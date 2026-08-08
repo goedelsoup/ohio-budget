@@ -1,0 +1,21 @@
+class: agency
+label: Ohio Department of Public Safety
+description: |
+  The agency covering the state highway patrol, emergency management, and motor vehicle
+  administration. [inference]
+
+  Seeded because most of its funding is not general revenue: highway patrol operations draw on
+  motor vehicle related dedicated funds subject to the same constitutional restriction as
+  [highway money](../fund/highway-operating-fund.yml). [inference] It is therefore a second
+  case where an apparent budget choice is foreclosed by fund structure rather than made.
+
+  [open] The agency code is unverified.
+properties:
+  name: Ohio Department of Public Safety
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    No reorganization within the corpus window. [inference]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of

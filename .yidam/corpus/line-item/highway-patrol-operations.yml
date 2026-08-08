@@ -1,0 +1,26 @@
+class: line-item
+label: Highway Patrol Operations
+description: |
+  Operation of the state highway patrol, funded substantially from motor vehicle related
+  dedicated revenue rather than from general revenue. [inference]
+
+  Seeded as a second case where fund structure forecloses an apparent choice. Money here cannot
+  be redirected to general operating needs, so a comparison of "public safety spending" against
+  "education spending" as competing priorities is not describing a real tradeoff.
+properties:
+  name: Highway Patrol Operations
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Operation of the state highway patrol.
+  first_period: "[open] not yet reconstructed"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-public-safety.yml
+    relationship: belongs-to
+  - target: ../fund/highway-operating-fund.yml
+    relationship: draws-from

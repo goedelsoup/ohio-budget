@@ -1,0 +1,19 @@
+class: fiscal-period
+label: Fiscal Year 2020
+description: |
+  The state fiscal year running 2019-07-01 through 2020-06-30.
+
+  The year the executive reduction landed. Its appropriated figures and its
+  outturn diverge more than any other year in the window, and for reasons that have
+  nothing to do with spending discipline. [inference]
+properties:
+  label: FY2020
+  period_type: fiscal-year
+  start_date: 2019-07-01
+  end_date: 2020-06-30
+  general_assembly: 133rd
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2020-21.yml
+    relationship: contained-by

@@ -1,0 +1,22 @@
+class: jurisdiction
+label: City of Toledo
+description: |
+  A major municipality, and the corpus's first city as distinct from a county or district.
+  [inference]
+
+  Municipalities receive local government fund money through their county's undivided fund on
+  terms set locally, so the path from a state percentage to a city's receipts has a step the
+  state does not control. That intermediate step is invisible in the corpus as modeled, and
+  naming it here is the point of seeding a municipality at all.
+
+  [open] Population, identifier, and receipts are unpopulated.
+properties:
+  name: City of Toledo
+  jurisdiction_type: municipality
+  identifier: "[open] pending verification"
+  county: Lucas
+  population_basis: |
+    [open] Figure and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

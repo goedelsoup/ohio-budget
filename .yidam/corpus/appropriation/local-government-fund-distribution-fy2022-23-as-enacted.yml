@@ -1,0 +1,31 @@
+class: appropriation
+label: Local Government Fund Distribution — FY2022-23, As Enacted
+description: |
+  Local government fund distribution authority for FY2022-23.
+
+  Completes the post-reduction half of the corpus's most important series. With FY2010-11
+  through FY2024-25 now present, the question stops being whether the share was cut — that is
+  settled — and becomes whether it was ever restored. A flat series after FY2013 answers it one
+  way; a gradual recovery answers it another, and the two imply very different things about what
+  the [FY2012-13 decision](../budget-action/hb153-local-government-fund-reduction.yml) actually
+  was.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2022-23
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2022-23.yml
+    relationship: covers
+  - target: ../bill-version/hb110-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

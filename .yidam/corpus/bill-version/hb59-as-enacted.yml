@@ -1,0 +1,26 @@
+class: bill-version
+label: HB 59 As Enacted
+description: |
+  [HB 59](../bill/hb59-130th.yml) as it became law. [inference]
+
+  The text that separated the [Department of Medicaid](../agency/department-of-medicaid.yml)
+  from Job and Family Services, and therefore the document the corpus's largest lineage
+  assertion rests on. Confirming that the pre-2013 Medicaid line item continues in the post-2013
+  one means reading this.
+
+  [open] Figures are unextracted, and no intermediate stages are seeded, so no stage-delta is
+  computable for this bill.
+properties:
+  stage: as-enacted
+  stage_date: 2013-06-30
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb59-130th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

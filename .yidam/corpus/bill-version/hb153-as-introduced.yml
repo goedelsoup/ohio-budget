@@ -1,0 +1,25 @@
+class: bill-version
+label: HB 153 As Introduced
+description: |
+  The executive proposal for FY2012-13, before legislative amendment. [inference]
+
+  This is the version that would settle who reduced the
+  [local government fund](../fund/local-government-fund.yml) share. The corpus currently records
+  the reduction with no actor attributed, precisely because it cannot yet say whether the final
+  percentage was proposed here or set later. Extracting this version answers it.
+
+  [open] Figures are unextracted.
+properties:
+  stage: as-introduced
+  stage_date: "[open] pending verification"
+  chamber: executive
+  document_reference: |
+    As-introduced bill text and the LSC analysis for this stage. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb153-129th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

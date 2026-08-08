@@ -1,0 +1,30 @@
+class: budget-action
+label: Medicaid Transfer to a Separate Department, HB 59
+description: |
+  The provision in [HB 59](../bill/hb59-130th.yml) moving Medicaid administration and its
+  appropriations from Job and Family Services to a new Department of Medicaid. [inference]
+
+  Classified as a technical correction in the corpus's vocabulary because it moved no money in
+  net — the same benefits were funded before and after. That classification is doing real work:
+  it marks the FY2014 discontinuity in every Medicaid series as organizational rather than
+  fiscal, which is precisely the distinction a code-keyed query cannot make.
+
+  This is the action behind the corpus's largest lineage assertion, and confirming that
+  assertion means reading the version this applies to.
+properties:
+  action_type: technical-correction
+  action_date: 2013-06-30
+  direction: reallocate
+  amount_delta: "[open] not reconstructed"
+  stated_justification: |
+    [open] Not reconstructed.
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: applies-to
+  - target: ../appropriation/medicaid-services-odjfs-fy2012-13-as-enacted.yml
+    relationship: modifies
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

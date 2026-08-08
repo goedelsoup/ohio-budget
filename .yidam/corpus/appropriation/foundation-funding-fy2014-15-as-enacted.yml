@@ -1,0 +1,29 @@
+class: appropriation
+label: Foundation Funding — FY2014-15, As Enacted
+description: |
+  School funding authority for FY2014-15.
+
+  One point in a continuous series. Its analytical value is not in the figure alone but
+  in its position: a single biennium's number says nothing, and the series says what changed. With the FY2010-11 through FY2026 points now seeded, foundation funding is the first
+  line item in the corpus with a continuous eight-biennium series — which is what
+  [`real-dollars`](../../skills/real-dollars.md) and the phase-in question both need.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2014-15
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2014-15.yml
+    relationship: covers
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

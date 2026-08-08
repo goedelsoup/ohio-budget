@@ -1,0 +1,27 @@
+class: line-item
+label: Special Education Enhancements
+description: |
+  State support for the additional cost of educating students with disabilities, distributed
+  by category of disability on top of the base formula amount. [inference]
+
+  Seeded because it is where the school funding formula's weighting logic lives. Base cost per
+  pupil is the headline; the categorical weights determine what a district with an unusual
+  population profile actually receives, and two districts with identical enrollment can receive
+  materially different amounts because of them.
+properties:
+  name: Special Education Enhancements
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Additional state support for the excess cost of educating students with disabilities.
+  first_period: "[open] not yet reconstructed"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-education-and-workforce.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

@@ -1,0 +1,26 @@
+class: appropriation
+label: State Share of Instruction — FY2026, As Enacted
+description: |
+  Higher education subsidy authority for FY2026, giving the completion-weighted formula a
+  current-period point to sit alongside its
+  [FY2024-25 predecessor](./state-share-of-instruction-fy2024-25-as-enacted.yml).
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2026
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/state-share-of-instruction.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers
+  - target: ../bill-version/hb96-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

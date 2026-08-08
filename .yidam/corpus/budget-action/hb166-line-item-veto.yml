@@ -1,0 +1,27 @@
+class: budget-action
+label: Line-Item Vetoes, HB 166
+description: |
+  The governor's vetoes against [HB 166](../bill/hb166-133rd.yml). [inference]
+
+  Seeded to complete the veto record for the biennia the corpus holds enacted versions of. Its
+  interest is chronological: this budget was vetoed in July 2019 and then
+  [cut again by executive action](./fy2020-executive-reduction.yml) the following spring, which
+  makes FY2020-21 the one biennium where the executive reduced the same budget twice by two
+  different mechanisms.
+properties:
+  action_type: line-item-veto
+  action_date: 2019-07-18
+  direction: decrease
+  amount_delta: "[open] not reconstructed"
+  stated_justification: |
+    [open] Not reconstructed.
+  phase: executive
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb166-as-enacted.yml
+    relationship: applies-to
+  - target: ../actor/governor.yml
+    relationship: taken-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

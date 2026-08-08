@@ -1,0 +1,18 @@
+class: jurisdiction
+label: Hamilton County
+description: |
+  Ohio's third most populous county, containing Cincinnati. [inference] Seeded as a third
+  county so that a change in the local government fund formula can be distinguished from
+  something particular to one place — two points establish a line, three test it.
+
+  [open] Population, identifier, and receipts are unpopulated.
+properties:
+  name: Hamilton County
+  jurisdiction_type: county
+  identifier: "[open] pending verification"
+  county: Hamilton
+  population_basis: |
+    [open] Figure and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

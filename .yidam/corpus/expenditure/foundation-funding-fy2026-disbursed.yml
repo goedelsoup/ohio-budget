@@ -1,0 +1,28 @@
+class: expenditure
+label: Foundation Funding — FY2026 Disbursed
+description: |
+  In-year foundation funding disbursement for the open FY2026 year.
+
+  The corpus's only expenditure on a `disbursed` rather than `actual-closed` basis, and it is
+  seeded to make the distinction impossible to overlook. Any gap computed against this figure is
+  provisional — the year has not closed, the books will move, and a chart drawn from it today
+  will not match one drawn after closing.
+
+  [`gap`](../../skills/gap.md) must refuse to mix this with closed figures, which is why `basis`
+  is a required property rather than a note.
+properties:
+  amount: "[open] pending the obm connector"
+  basis: disbursed
+  period_label: FY2026
+  reporting_source: |
+    OBM financial reporting. [open] Not yet extracted.
+  reversion: "[open] not applicable before close"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2026.yml
+    relationship: occurs-in
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

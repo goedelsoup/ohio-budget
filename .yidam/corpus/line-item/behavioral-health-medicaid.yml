@@ -1,0 +1,28 @@
+class: line-item
+label: Behavioral Health Medicaid Services
+description: |
+  Medicaid-funded behavioral health services appropriated to
+  [Mental Health and Addiction Services](../agency/mental-health-and-addiction-services.yml)
+  rather than to the Department of Medicaid. [inference]
+
+  The second Medicaid line item outside the Medicaid department, after
+  [developmental disabilities](./developmental-disabilities-services.yml). Together they make
+  the point structural: a Medicaid total assembled from one agency understates the program, and
+  the size of the understatement is not knowable without enumerating the other agencies.
+properties:
+  name: Behavioral Health Medicaid Services
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Medicaid-funded behavioral health and addiction services.
+  first_period: "[open] not yet reconstructed"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/mental-health-and-addiction-services.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

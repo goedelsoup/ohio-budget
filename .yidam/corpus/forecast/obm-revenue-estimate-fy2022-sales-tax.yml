@@ -1,0 +1,31 @@
+class: forecast
+label: Executive Revenue Estimate — FY2022-23, Sales and Use Tax
+description: |
+  The sales tax estimate underlying [HB 110](../bill/hb110-134th.yml). [inference]
+
+  Its interest is that it was made in early 2021, when consumption patterns were still
+  disrupted and forecasting was unusually hard. [inference] Comparing its variance against the
+  [FY2020-21 income tax estimate's](./obm-revenue-estimate-fy2020-income-tax.yml) would show
+  whether the forecasting failure of the pandemic was concentrated in one instrument or general
+  — a question with real implications for how much confidence any projection deserves.
+properties:
+  forecast_type: revenue-estimate
+  issued_date: "[open] pending the obm connector"
+  projected_amount: "[open] pending the obm connector"
+  horizon: |
+    [open] Not reconstructed.
+  variance_from_actual: |
+    [open] Computable once extraction supplies both the projection and the outturn.
+  assumptions: |
+    [open] Not reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2022-23.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by
+  - target: ../revenue-source/sales-and-use-tax.yml
+    relationship: projects
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

@@ -1,0 +1,31 @@
+class: budget-action
+label: Controlling Board Transfer — Medicaid, FY2024
+description: |
+  A post-enactment Medicaid adjustment in the closed FY2024-25 biennium. [inference]
+
+  Seeded against a closed period, unlike the
+  [FY2026 transfer](./controlling-board-medicaid-transfer.yml). The difference matters: this one
+  can in principle be reconciled against final figures, so it is the execution-phase action most
+  likely to become verifiable first.
+
+  Its `triggered-by` edge points at the FY2024-25 caseload projection, which makes the
+  hypothesis explicit — the adjustment followed an enrollment revision — rather than assumed.
+properties:
+  action_type: controlling-board-transfer
+  action_date: "[open] pending the controlling-board connector"
+  direction: "[open] typically increase"
+  amount_delta: "[open] not reconstructed"
+  stated_justification: |
+    [open] Not reconstructed.
+  phase: execution
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../appropriation/medicaid-health-care-services-fy2024-25-as-enacted.yml
+    relationship: modifies
+  - target: ../actor/controlling-board.yml
+    relationship: taken-by
+  - target: ../forecast/medicaid-caseload-fy2024.yml
+    relationship: triggered-by
+  - target: ../../catalog/controlling-board-minutes.md
+    relationship: cites

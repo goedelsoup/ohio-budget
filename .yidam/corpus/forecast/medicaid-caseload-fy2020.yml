@@ -1,0 +1,28 @@
+class: forecast
+label: Medicaid Caseload Projection — FY2020-21
+description: |
+  Projected Medicaid enrollment for the pandemic biennium. [inference]
+
+  The projection most likely to have been wrong by the largest margin in the corpus window, and
+  therefore the most informative once extracted. Enrollment rose sharply as employment fell, and
+  federal continuous-coverage requirements changed disenrollment behaviour. [inference] Neither
+  was foreseeable when the projection was made.
+properties:
+  forecast_type: caseload-projection
+  issued_date: "[open] pending the obm connector"
+  projected_amount: "[open] pending the obm connector"
+  horizon: |
+    [open] Not reconstructed.
+  variance_from_actual: |
+    [open] Computable once extraction supplies both the projection and the outturn.
+  assumptions: |
+    [open] Not reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2020-21.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites
