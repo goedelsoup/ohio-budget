@@ -127,6 +127,29 @@ fn is_catalog_path(path: &Path) -> bool {
         == Some("catalog")
 }
 
+/// Properties whose value is an identifier that something downstream matches on.
+///
+/// A claim tag belongs in prose. Inside one of these it is not merely untidy: it silently
+/// breaks equality. `current_code: "200550 [verified]"` matches no extraction row carrying
+/// `200550`, and the failure is invisible — the promotion tool simply reports zero matches
+/// and a reader concludes the source lacks the line item.
+///
+/// That happened. Nine line items were verified against a real spreadsheet, the tag was
+/// written into the code property, and the next extraction run matched none of them.
+fn is_identifier_property(key: &str) -> bool {
+    matches!(
+        key,
+        "current_code"
+            | "agency_code"
+            | "fund_number"
+            | "fund_code"
+            | "identifier"
+            | "bill_number"
+            | "request_id"
+            | "line_item_code"
+    )
+}
+
 fn looks_like_money(key: &str) -> bool {
     let k = key.to_ascii_lowercase();
     ["amount", "cents", "delta", "dollars", "balance", "cost"]
@@ -303,6 +326,29 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
                         inst.inst.class
                     ),
                 });
+            }
+            if is_identifier_property(key) {
+                if let Some(text) = value.as_text() {
+                    let t = text.trim();
+                    // A bare [open] placeholder is the established way to say "no value yet".
+                    // A value *plus* a tag is the problem.
+                    let is_placeholder = t.starts_with("[open]");
+                    let tagged = ["[verified]", "[inference]", "[open]"]
+                        .iter()
+                        .any(|m| t.contains(m));
+                    if tagged && !is_placeholder {
+                        findings.push(Finding {
+                            path: p.clone(),
+                            rule: "claim-tag-in-identifier",
+                            severity: Severity::Error,
+                            message: format!(
+                                "property '{key}' is an identifier and carries a claim tag; the \
+                                 tag belongs in the node body, because a tag inside a value \
+                                 silently breaks every downstream match on it"
+                            ),
+                        });
+                    }
+                }
             }
             if looks_like_money(key) && value.is_float() {
                 findings.push(Finding {
@@ -891,6 +937,58 @@ links:
             .find(|f| f.rule == "undeclared-property")
             .expect("must flag undeclared property");
         assert!(f.message.contains("invented"));
+    }
+
+    #[test]
+    fn a_claim_tag_inside_an_identifier_is_rejected() {
+        // Regression for a real failure: nine line items were verified against a real
+        // spreadsheet and the tag was written into the code property, so the next extraction
+        // run matched none of them and reported zero proposals. The break was silent.
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/fund/a.yml",
+            r#"
+class: fund
+label: A
+description: d
+properties:
+  fund_number: "5000 [verified]"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run(classes, paths, insts);
+        let f = findings
+            .iter()
+            .find(|f| f.rule == "claim-tag-in-identifier")
+            .expect("a tag inside an identifier silently breaks every downstream match");
+        assert_eq!(f.severity, Severity::Error);
+    }
+
+    #[test]
+    fn a_bare_open_placeholder_in_an_identifier_is_allowed() {
+        // "[open] pending verification" says there is no value yet, which is the established
+        // convention and breaks nothing — there is no identifier to match on.
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/fund/a.yml",
+            r#"
+class: fund
+label: A
+description: d
+properties:
+  fund_number: "[open] pending verification"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run(classes, paths, insts);
+        assert!(
+            !findings.iter().any(|f| f.rule == "claim-tag-in-identifier"),
+            "{findings:?}"
+        );
     }
 
     #[test]

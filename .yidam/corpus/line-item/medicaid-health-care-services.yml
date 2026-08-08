@@ -23,10 +23,10 @@ description: |
   ALI 651525, agency MCD, general revenue fund. [verified]
 properties:
   name: "Medicaid Health Care Services [verified]"
-  current_code: "651525 [verified]"
+  current_code: "651525"
   historical_codes: |
     [open] Pre-separation codes under Job and Family Services not yet reconstructed.
-  agency_code: "MCD [verified]"
+  agency_code: "MCD"
   purpose: |
     Payment for Medicaid-covered health care services, including managed care capitation and
     fee-for-service claims.

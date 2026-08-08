@@ -13,9 +13,9 @@ description: |
   ALI 501321, agency DRC. [verified]
 properties:
   name: "Institutional Operations [verified]"
-  current_code: "501321 [verified]"
+  current_code: "501321"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "DRC [verified]"
+  agency_code: "DRC"
   purpose: |
     Operation of state correctional institutions, including staffing and inmate services.
   first_period: "[open] predates the corpus window"

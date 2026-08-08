@@ -16,9 +16,9 @@ description: |
   reorganization. [verified]
 properties:
   name: "State Share of Instruction [verified]"
-  current_code: "235501 [verified]"
+  current_code: "235501"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "BOR [verified]"
+  agency_code: "BOR"
   purpose: |
     Operating subsidy to state-supported institutions of higher education.
   first_period: "[open] predates the corpus window"

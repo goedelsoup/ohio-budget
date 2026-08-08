@@ -11,9 +11,9 @@ description: |
   the community-schools framing this node was written under. [verified]
 properties:
   name: "Community Schools and Choice Programs [verified]"
-  current_code: "200455 [verified]"
+  current_code: "200455"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "EDU [verified]"
+  agency_code: "EDU"
   purpose: |
     State funding for community schools, deducted from resident district amounts.
   first_period: "[open] not yet reconstructed"

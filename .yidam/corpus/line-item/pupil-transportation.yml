@@ -15,9 +15,9 @@ description: |
   ALI 200502, agency EDU. [verified]
 properties:
   name: "Pupil Transportation [verified]"
-  current_code: "200502 [verified]"
+  current_code: "200502"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "EDU [verified]"
+  agency_code: "EDU"
   purpose: |
     State share of school district pupil transportation costs.
   first_period: "[open] predates the corpus window"

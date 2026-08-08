@@ -21,7 +21,16 @@ fn main() -> Result<()> {
     }
 
     let corpus = corpus_validate::load(&repo_root)?;
-    let rows = lsc::FixtureSource::from_repo(&repo_root).fetch_all()?;
+    // Fixtures by default; a real extraction when one is supplied. Keeping fixtures as the
+    // default means the guard against synthetic provenance is exercised on every plain run.
+    let rows: Vec<corpus_schema::LscComparisonRow> = match std::env::var("ROWS") {
+        Ok(path) => {
+            let text = std::fs::read_to_string(&path)?;
+            println!("reading extracted rows from {path}");
+            serde_yaml::from_str(&text)?
+        }
+        Err(_) => lsc::FixtureSource::from_repo(&repo_root).fetch_all()?,
+    };
 
     println!(
         "loaded {} appropriation node(s) and {} extraction row(s)\n",

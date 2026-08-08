@@ -23,11 +23,11 @@ description: |
   exactly the kind of question the `lineage` calculator exists to raise.
 properties:
   name: Foundation Funding - All Students [verified]
-  current_code: "200550 [verified]"
+  current_code: "200550"
   historical_codes: |
     [open] Not yet reconstructed. Whether the code survived the FY2024-25 education
     restructuring unchanged is unverified.
-  agency_code: "EDU [verified]"
+  agency_code: "EDU"
   purpose: |
     Distribution of the state share of school district operating costs, computed under the
     school funding formula.

@@ -20,7 +20,7 @@ description: |
   [open] Whether and how the restructuring affected line item codes is not yet verified.
 properties:
   name: Ohio Department of Education and Workforce
-  agency_code: "EDU [verified] — LSC uses EDU in the HB 96 spreadsheet"
+  agency_code: "EDU— LSC uses EDU in the HB 96 spreadsheet"
   cabinet_status: cabinet
   established: 2023-10-03
   predecessor: |

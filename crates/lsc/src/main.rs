@@ -60,9 +60,54 @@ fn main() -> Result<()> {
             ),
             Err(e) => println!("column mapping failed: {e}"),
         }
-        println!("{} data row(s)\n", t.rows.len());
-        for (n, row) in t.rows.iter().take(max_rows).enumerate() {
-            println!("{n:>3} {row:?}");
+        println!("{} data row(s)", t.rows.len());
+
+        let plan = lsc::columns::ColumnPlan::of(&t.headers);
+        println!(
+            "plan: {} appropriation column(s), {} actual, {} estimate skipped, {} unclassified",
+            plan.appropriation_columns().len(),
+            plan.actual_columns().len(),
+            plan.kinds
+                .iter()
+                .filter(|k| matches!(k, lsc::columns::ColumnKind::Estimate { .. }))
+                .count(),
+            plan.unclassified().len()
+        );
+
+        let ctx = lsc::extract::ExtractionContext {
+            bill_number: std::env::var("BILL").unwrap_or_else(|_| "HB 96".into()),
+            general_assembly: std::env::var("GA").unwrap_or_else(|_| "136th".into()),
+            provenance: corpus_schema::Provenance {
+                catalog_slug: std::env::var("CATALOG")
+                    .unwrap_or_else(|_| "lsc-hb96-appropriation-spreadsheet".into()),
+                document_ref: format!("sheet {sheet}"),
+                locator: None,
+                retrieved: std::env::var("RETRIEVED").unwrap_or_else(|_| "2026-08-08".into()),
+            },
+        };
+        let rep = lsc::extract::extract(&t, &plan, &ctx);
+        println!(
+            "extracted: {} appropriation(s), {} actual(s), {} blank(s), {} failure(s)",
+            rep.appropriations.len(),
+            rep.actuals.len(),
+            rep.blanks,
+            rep.failures.len()
+        );
+        for (fy, label) in &rep.unclassified_columns {
+            println!("  SKIPPED unclassified column {label:?} {fy}");
+        }
+        for e in &rep.estimate_columns_skipped {
+            println!("  SKIPPED estimate column {e:?}");
+        }
+        for f in rep.failures.iter().take(5) {
+            println!(
+                "  FAILED {} {} {:?}: {}",
+                f.line_item_code, f.fiscal_year, f.raw, f.reason
+            );
+        }
+        if let Ok(out) = std::env::var("EMIT") {
+            std::fs::write(&out, serde_yaml::to_string(&rep.appropriations)?)?;
+            println!("\nwrote {} row(s) to {out}", rep.appropriations.len());
         }
         return Ok(());
     }

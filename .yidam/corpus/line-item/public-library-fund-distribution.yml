@@ -13,9 +13,9 @@ description: |
   ALI 110965, agency RDF. [verified]
 properties:
   name: "Public Library Fund [verified]"
-  current_code: "110965 [verified]"
+  current_code: "110965"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "RDF [verified]"
+  agency_code: "RDF"
   purpose: |
     Distribution to public library systems under the statutory formula.
   first_period: "[open] predates the corpus window"

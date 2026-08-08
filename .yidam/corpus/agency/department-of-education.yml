@@ -20,7 +20,7 @@ description: |
   this agency.
 properties:
   name: Ohio Department of Education
-  agency_code: "200 [inference]"
+  agency_code: "200"
   cabinet_status: board-or-commission
   predecessor: |
     Predates the corpus window under State Board of Education governance. [inference]

@@ -26,9 +26,9 @@ description: |
   assumption.
 properties:
   name: "Local Government Fund [verified]"
-  current_code: "110969 [verified]"
+  current_code: "110969"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "RDF [verified]"
+  agency_code: "RDF"
   purpose: |
     Statutory distribution to county undivided local government funds and to municipalities
     and townships.

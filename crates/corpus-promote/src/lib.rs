@@ -17,6 +17,8 @@
 //!    Registering a source is not the same as committing it, so such a proposal fills the
 //!    amount and leaves the claim at `[inference]`.
 
+use std::collections::BTreeMap;
+
 use corpus_schema::{BillStage, CatalogEntry, LscComparisonRow};
 use corpus_validate::{normalize_join, Corpus, LoadedInstance, FIXTURE_MARKER};
 
@@ -221,6 +223,9 @@ pub fn propose_from_lsc(corpus: &Corpus, rows: &[LscComparisonRow]) -> Promotion
     report
 }
 
+/// How many distinct unmatched line items to name before summarizing the tail.
+const UNMATCHED_SHOWN: usize = 12;
+
 /// Renders a report for a human to read before anything is written.
 pub fn render(report: &PromotionReport) -> String {
     let mut s = String::new();
@@ -258,11 +263,38 @@ pub fn render(report: &PromotionReport) -> String {
             r.line_item_code, r.fiscal_year, r.reason
         ));
     }
-    for u in &report.unmatched_rows {
+    // A real extraction run produces tens of thousands of unmatched rows — one per line
+    // item the corpus does not model, times every stage and fiscal year. Listing them all
+    // buries the proposals, so they are summarized by line item and the tail is counted.
+    if !report.unmatched_rows.is_empty() {
+        let mut by_item: BTreeMap<(&str, &str), usize> = BTreeMap::new();
+        for u in &report.unmatched_rows {
+            *by_item
+                .entry((u.line_item_code.as_str(), u.line_item_name.as_str()))
+                .or_default() += 1;
+        }
         s.push_str(&format!(
-            "\n  UNMATCHED {} {} {} {} — {}\n",
-            u.line_item_code, u.line_item_name, u.fiscal_year, u.stage, u.reason
+            "
+{} unmatched row(s) across {} line item(s) the corpus does not model:
+",
+            report.unmatched_rows.len(),
+            by_item.len()
         ));
+        let mut items: Vec<_> = by_item.into_iter().collect();
+        items.sort_by(|a, b| b.1.cmp(&a.1).then(a.0.cmp(&b.0)));
+        for ((code, name), n) in items.iter().take(UNMATCHED_SHOWN) {
+            s.push_str(&format!(
+                "    {code:<10} {name:<48} {n} row(s)
+"
+            ));
+        }
+        if items.len() > UNMATCHED_SHOWN {
+            s.push_str(&format!(
+                "    ... and {} more line item(s)
+",
+                items.len() - UNMATCHED_SHOWN
+            ));
+        }
     }
     s
 }

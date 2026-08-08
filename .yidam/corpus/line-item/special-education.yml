@@ -11,9 +11,9 @@ description: |
   ALI 200540, named "Special Education Enhancements" in the source. [verified]
 properties:
   name: "Special Education Enhancements [verified]"
-  current_code: "200540 [verified]"
+  current_code: "200540"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "EDU [verified]"
+  agency_code: "EDU"
   purpose: |
     Additional state support for the excess cost of educating students with disabilities.
   first_period: "[open] not yet reconstructed"

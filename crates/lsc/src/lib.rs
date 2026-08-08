@@ -25,6 +25,7 @@
 //! downstream check can detect. It refuses rather than approximates.
 
 pub mod columns;
+pub mod extract;
 pub mod geometry;
 #[cfg(feature = "pdf")]
 pub mod pdf;
