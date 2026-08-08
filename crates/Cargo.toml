@@ -6,6 +6,9 @@ members = [
     "corpus-promote",
     "legislature",
     "lsc",
+    "real-dollars",
+    "gap",
+    "lineage",
 ]
 
 [workspace.package]

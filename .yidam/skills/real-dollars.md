@@ -5,7 +5,7 @@ description: Restate nominal appropriation and expenditure amounts in constant d
 
 # Skill: real-dollars
 
-**Status:** stub. Not runnable — amounts are `[open]` and no deflator series is catalogued.
+**Status:** implemented in [`crates/real-dollars`](../../crates/real-dollars/).
 
 Deflates nominal amounts to a constant-dollar basis.
 
@@ -39,3 +39,18 @@ That standing is recorded as a condition of approval in
    deflator.
 4. **Nominal is correct for some questions.** Debt service and statutory dollar thresholds are
    nominal quantities. Do not deflate reflexively.
+
+## No deflator ships with it
+
+Deliberately. Which index to use is a modeling decision — a general price index and a
+state-and-local-government-purchases index give materially different answers for a budget
+series — so `Deflator` must be supplied and must name its base period and series. A result
+carries both, and `Real::label()` exists so a constant-dollar figure is never quoted as a bare
+number.
+
+Three refusals, each with a test: a period outside the index errors rather than extrapolating;
+a series containing any uncovered period fails whole rather than partly deflating, because a
+chart mixing nominal and real points looks fine; and `is_nominal_by_nature` flags debt service
+and statutory thresholds, which must not be deflated at all.
+
+[`gap::gap_trend`](../../crates/gap/) refuses any cross-period comparison without one.

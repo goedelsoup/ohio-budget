@@ -48,6 +48,14 @@ run = "cargo run -q --manifest-path crates/Cargo.toml --bin emit-schemas -- .yid
 description = "Report what an extraction run would change in the corpus. Writes nothing."
 run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-promote -- ."
 
+[tasks.lineage]
+description = "Propose line item succession candidates for review. Writes nothing."
+run = "cargo run -q --manifest-path crates/Cargo.toml --bin lineage -- ."
+
+[tasks.gap]
+description = "Report which appropriated-vs-actual gaps are computable, and what blocks the rest."
+run = "cargo run -q --manifest-path crates/Cargo.toml --bin gap-report -- ."
+
 [tasks.validate]
 description = "Check corpus instances against their class definitions. Exits non-zero on errors."
 run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- ."

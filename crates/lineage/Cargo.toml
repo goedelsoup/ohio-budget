@@ -1,0 +1,18 @@
+[package]
+name = "lineage"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Proposes line item succession candidates across renumberings"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_yaml.workspace = true
+corpus-schema = { path = "../corpus-schema" }
+corpus-validate = { path = "../corpus-validate" }
+
+[[bin]]
+name = "lineage"
+path = "src/main.rs"

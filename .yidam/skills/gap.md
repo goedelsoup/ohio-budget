@@ -40,3 +40,16 @@ Variance in dollars and percent, plus reversion rate where authority lapsed unsp
 4. **Do not interpret the number uniformly.** A gap on an entitlement-driven line item is
    evidence about forecasting; on a discretionary one it may be evidence about execution. The
    calculator produces the figure; reading it requires knowing the line item's character.
+
+## Running it
+
+`mise run gap` reports every (line item, period) pair the corpus could compute a gap for, and
+why each is blocked. As of the current corpus: **0 computable, 7 blocked on `[open]` amounts,
+5 refused.**
+
+All five refusals are the recipient-slice guard firing on real data — the corpus holds
+district- and county-level disbursements against whole-line appropriations, and differencing
+those is wrong by orders of magnitude while looking entirely reasonable.
+
+That report is the repository's own inventory of what extraction has to deliver before its
+central question can be answered at all.
