@@ -1,0 +1,51 @@
+# SYNTHETIC — not real Ohio budget data. See ../README.md.
+# Approved and non-approved dispositions, so extraction does not assume every
+# request took effect. A denied or withdrawn request moved no money but is still
+# part of the record and still evidence about what an agency asked for.
+
+- request_id: SYNTHETIC-CB-2026-0142
+  meeting_date: "1970-01-01"
+  agency_code: "651"
+  line_item_code: "651525"
+  amount_delta_cents: 41500000000
+  disposition: approved
+  stated_justification: >-
+    Synthetic fixture. Increase requested to align appropriation authority with
+    revised managed care caseload projections for the second half of the year.
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-cb-minutes-0142
+    locator: "item 7"
+    retrieved: "1970-01-01"
+
+# Withdrawn: the delta must not be applied. A parser that keys only on
+# amount_delta_cents and ignores disposition will overstate execution-phase movement.
+- request_id: SYNTHETIC-CB-2026-0143
+  meeting_date: "1970-01-01"
+  agency_code: "651"
+  line_item_code: "651525"
+  amount_delta_cents: 12000000000
+  disposition: withdrawn
+  stated_justification: >-
+    Synthetic fixture. Request withdrawn by the agency before the board acted.
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-cb-minutes-0143
+    locator: "item 2"
+    retrieved: "1970-01-01"
+
+# A transfer with no line item stated — some requests operate at fund level.
+# The optional field exists because of this case.
+- request_id: SYNTHETIC-CB-2026-0151
+  meeting_date: "1970-01-01"
+  agency_code: "200"
+  amount_delta_cents: -8750000000
+  disposition: approved
+  stated_justification: >-
+    Synthetic fixture. Transfer of unexpended balance between funds at fiscal
+    year end.
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-cb-minutes-0151
+    locator: "item 19"
+    retrieved: "1970-01-01"

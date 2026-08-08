@@ -1,0 +1,47 @@
+# SYNTHETIC — not real Ohio budget data. See ../README.md.
+# Both bases and a reversion, so `gap` can be tested against a closed period and
+# so mixed-basis comparison can be detected rather than silently performed.
+
+# Closed-book figure: final, and the only basis a settled gap may use.
+- agency_code: "200"
+  line_item_code: "200550"
+  fund_code: "5000"
+  fiscal_year: FY2024
+  basis: actual-closed
+  amount_cents: 762400000000
+  reversion_cents: 3100000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-annual-report-fy2024
+    locator: "schedule of appropriations, line 212"
+    retrieved: "1970-01-01"
+
+# In-year monthly figure for the same line item and year. Deliberately disagrees
+# with the closed-book total above — that disagreement is normal, and code that
+# sums these alongside actual-closed figures is wrong.
+- agency_code: "200"
+  line_item_code: "200550"
+  fund_code: "5000"
+  fiscal_year: FY2024
+  period_month: 12
+  basis: disbursed
+  amount_cents: 759800000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-monthly-report-fy2024-06
+    locator: "GRF disbursements, line 212"
+    retrieved: "1970-01-01"
+
+# A line item with no reversion reported, so the optional field is exercised as absent
+# rather than as zero. Absent and zero are different claims.
+- agency_code: "651"
+  line_item_code: "651525"
+  fund_code: "5000"
+  fiscal_year: FY2024
+  basis: actual-closed
+  amount_cents: 1987600000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-annual-report-fy2024
+    locator: "schedule of appropriations, line 640"
+    retrieved: "1970-01-01"

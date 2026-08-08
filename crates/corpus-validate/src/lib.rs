@@ -89,6 +89,9 @@ fn target_class_of(path: &Path) -> Option<(String, bool)> {
     Some((parent.to_string(), false))
 }
 
+/// Provenance slug carried by every record under `.yidam/fixtures/`.
+pub const FIXTURE_MARKER: &str = "synthetic-fixture";
+
 fn looks_like_money(key: &str) -> bool {
     let k = key.to_ascii_lowercase();
     ["amount", "cents", "delta", "dollars", "balance", "cost"]
@@ -365,6 +368,27 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
                     message: "claims [verified] but links no catalog entry; verification requires a committed primary source".into(),
                 });
             }
+        }
+
+        // Fixture data is fabricated. If it reaches a corpus node it becomes a made-up
+        // fact wearing the costume of an extracted one — indistinguishable downstream from
+        // a real figure, and citable. The boundary is enforced here rather than trusted.
+        let property_text: String = inst
+            .inst
+            .properties
+            .values()
+            .filter_map(ScalarValue::as_text)
+            .collect::<Vec<_>>()
+            .join(" ");
+        if body.contains(FIXTURE_MARKER) || property_text.contains(FIXTURE_MARKER) {
+            findings.push(Finding {
+                path: p.clone(),
+                rule: "fixture-data-in-corpus",
+                severity: Severity::Error,
+                message: format!(
+                    "references '{FIXTURE_MARKER}'; fixture values are synthetic and must never become corpus facts"
+                ),
+            });
         }
 
         for token in scan_claim_tags(&body) {
@@ -770,6 +794,31 @@ links:
         )];
         let findings = run(classes, paths, insts);
         assert!(findings.iter().any(|f| f.rule == "verified-without-source"));
+    }
+
+    #[test]
+    fn fixture_data_in_a_corpus_node_is_rejected() {
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/fund/a.yml",
+            r#"
+class: fund
+label: A
+description: |
+  Balance taken from the connector run.
+properties:
+  name: "from synthetic-fixture run"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run(classes, paths, insts);
+        let f = findings
+            .iter()
+            .find(|f| f.rule == "fixture-data-in-corpus")
+            .expect("synthetic fixture values must never become corpus facts");
+        assert_eq!(f.severity, Severity::Error);
     }
 
     #[test]

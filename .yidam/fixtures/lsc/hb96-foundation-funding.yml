@@ -1,0 +1,85 @@
+# SYNTHETIC — not real Ohio budget data. See ../README.md.
+# One line item across three stages, so stage-delta has a series to difference.
+- bill_number: HB 96
+  general_assembly: 136th
+  stage: as-introduced
+  agency_code: "200"
+  line_item_code: "200550"
+  line_item_name: Foundation Funding
+  fund_group: general
+  fund_code: "5000"
+  fiscal_year: FY2026
+  amount_cents: 800000000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-hb96-as-introduced
+    locator: "table 1, row 14"
+    retrieved: "1970-01-01"
+
+- bill_number: HB 96
+  general_assembly: 136th
+  stage: as-passed-house
+  agency_code: "200"
+  line_item_code: "200550"
+  line_item_name: Foundation Funding
+  fund_group: general
+  fund_code: "5000"
+  fiscal_year: FY2026
+  amount_cents: 823500000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-hb96-as-passed-house
+    locator: "table 1, row 14"
+    retrieved: "1970-01-01"
+
+- bill_number: HB 96
+  general_assembly: 136th
+  stage: as-enacted
+  agency_code: "200"
+  line_item_code: "200550"
+  line_item_name: Foundation Funding
+  fund_group: general
+  fund_code: "5000"
+  fiscal_year: FY2026
+  amount_cents: 818200000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-hb96-as-enacted
+    locator: "table 1, row 14"
+    retrieved: "1970-01-01"
+
+# Second fiscal year of the same biennium, to check that a parser keys on
+# (line item, stage, fiscal year) rather than collapsing years.
+- bill_number: HB 96
+  general_assembly: 136th
+  stage: as-enacted
+  agency_code: "200"
+  line_item_code: "200550"
+  line_item_name: Foundation Funding
+  fund_group: general
+  fund_code: "5000"
+  fiscal_year: FY2027
+  amount_cents: 831000000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-hb96-as-enacted
+    locator: "table 1, row 15"
+    retrieved: "1970-01-01"
+
+# A different line item under a different agency and fund group, so grouping
+# logic is exercised rather than assumed.
+- bill_number: HB 96
+  general_assembly: 136th
+  stage: as-enacted
+  agency_code: "651"
+  line_item_code: "651525"
+  line_item_name: Medicaid Health Care Services
+  fund_group: general
+  fund_code: "5000"
+  fiscal_year: FY2026
+  amount_cents: 2140000000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-hb96-as-enacted
+    locator: "table 9, row 3"
+    retrieved: "1970-01-01"

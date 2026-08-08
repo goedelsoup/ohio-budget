@@ -1,0 +1,40 @@
+# SYNTHETIC — not real Ohio budget data. See ../README.md.
+# A partial stage list, so downstream code handles missing intermediate versions
+# rather than assuming a complete chain. The corpus itself has this shape: HB 96 is
+# seeded as introduced, as passed by the House, and as enacted, with the Senate and
+# conference stages absent — so stage-delta must report unattributed aggregate
+# movement across that span rather than distributing it.
+
+- bill_number: HB 96
+  general_assembly: 136th
+  instrument_type: operating
+  introduced_date: "1970-01-01"
+  enacted_date: "1970-01-01"
+  versions:
+    - stage: as-introduced
+      stage_date: "1970-01-01"
+      chamber: executive
+      document_ref: SYNTHETIC-hb96-as-introduced
+    - stage: as-passed-house
+      stage_date: "1970-01-01"
+      chamber: house
+      document_ref: SYNTHETIC-hb96-as-passed-house
+    - stage: as-enacted
+      stage_date: "1970-01-01"
+      chamber: none
+      document_ref: SYNTHETIC-hb96-as-enacted
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-ga-bill-record-hb96
+    retrieved: "1970-01-01"
+
+# A bill with no versions and no enactment date — in progress, or simply not yet
+# extracted. Both optional fields absent at once.
+- bill_number: HB 54
+  general_assembly: 136th
+  instrument_type: transportation
+  versions: []
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-ga-bill-record-hb54
+    retrieved: "1970-01-01"
