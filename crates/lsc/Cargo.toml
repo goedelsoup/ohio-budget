@@ -11,3 +11,12 @@ anyhow.workspace = true
 serde.workspace = true
 serde_yaml.workspace = true
 corpus-schema = { path = "../corpus-schema" }
+pdf-extract = { version = "0.12", optional = true }
+euclid = { version = "0.20", optional = true }
+
+[features]
+# Reading PDF bytes pulls the font and CMap stack. The geometry that turns positioned
+# glyphs into a table is pure and always available, so `--no-default-features` still
+# gives everything that is testable without a document.
+default = ["pdf"]
+pdf = ["dep:pdf-extract", "dep:euclid"]

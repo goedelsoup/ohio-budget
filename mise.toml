@@ -62,6 +62,7 @@ run = [
   "cargo fmt --all --manifest-path crates/Cargo.toml -- --check",
   "cargo clippy --workspace --manifest-path crates/Cargo.toml -- -D warnings",
   "cargo test --workspace --manifest-path crates/Cargo.toml",
+  "cargo test -p lsc --no-default-features --manifest-path crates/Cargo.toml",
   "cargo run -q --manifest-path crates/Cargo.toml --bin emit-schemas -- .yidam/schemas",
   "git diff --exit-code -- .yidam/schemas",
   "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- .",

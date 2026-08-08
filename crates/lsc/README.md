@@ -1,6 +1,6 @@
 # lsc
 
-**Capability type:** connector. **Status:** implemented downstream of PDF extraction.
+**Capability type:** connector. **Status:** implemented end to end, offline.
 
 Parses Legislative Service Commission comparison documents into
 [`lsc-comparison-row`](../../.yidam/schemas/extraction/lsc-comparison-row.schema.json) records
@@ -14,11 +14,31 @@ Parses Legislative Service Commission comparison documents into
 | [`bill-version`](../../.yidam/corpus/bill-version.ont.yml) | Document references fixing each stage |
 | [`line-item`](../../.yidam/corpus/line-item.ont.yml) | Codes, titles, agency and fund assignment |
 
-## The division of labour
+## From PDF to typed record
 
-The documents are PDFs. PDF text extraction is **not** done here — it belongs in a Python
-package where the ecosystem is mature, and its output is delimited text. Everything downstream
-of that is implemented and tested here, because that is where the errors that matter occur.
+The whole path is here. `pdf::extract_pages` reads positioned glyphs out of a document;
+`geometry::to_table` reconstructs the table; the rest of the crate turns that into typed
+records. A PDF and a hand-written delimited file both produce a `RawTable`, so they are
+indistinguishable to everything downstream.
+
+### Columns are found by whitespace, not by alignment
+
+A PDF stores characters at coordinates, not cells, so columns have to be recovered. The
+obvious approach — cluster cells by where they start — fails on precisely the columns that
+matter here: **currency in budget tables is right-aligned**, so `$12.00` and
+`$812,345,678.00` in the same column begin far apart and end together. Clustering on start
+splits that column; clustering on end breaks the text columns instead.
+
+So columns are found as vertical **rivers**: bands of x where no glyph appears on any row.
+That looks for the gap *between* columns rather than the edge of any one, and handles left,
+right, and centre alignment without being told which is which. `right_aligned_currency_stays_one_column`
+is the regression test for it.
+
+### The `pdf` feature
+
+Reading PDF bytes pulls the font and CMap stack, so it sits behind a feature that is on by
+default. `--no-default-features` still builds and tests the geometry, which is the part with
+the interesting failure modes and needs no document to exercise.
 
 ## Money
 

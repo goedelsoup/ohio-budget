@@ -7,16 +7,28 @@ served by Python, TypeScript, or another runtime than Rust.
 The connector/calculator/feature-engineering distinction applies here equally — see
 [packages conventions](../.yidam/.vendor/prelude/guidelines/directories.md#packages).
 
-The domain computer is Rust-only at genesis. Two future needs are likely to justify a
-Python package rather than a crate, and neither is concrete yet:
+The domain computer is Rust-only, and one anticipated exception turned out not to be one.
 
-- **Document extraction.** Legislative Service Commission budget analyses and comparison
-  documents are published as PDFs with tabular appropriation figures. Table extraction
-  from PDF has a substantially more mature Python ecosystem than Rust one.
-- **Jurisdictional joins.** Attaching expenditures to counties and school districts is a
-  geospatial and record-linkage problem, and the reference implementations live in Python.
+**Document extraction was expected to need Python and does not.** The genesis note here
+claimed that extracting tables from Legislative Service Commission PDFs belonged in Python,
+because the table-extraction ecosystem is more mature there. That reasoning conflated two
+different problems. Getting characters out of a PDF is a library call in either language.
+Recovering a *table* — deciding which positioned text runs form which cells — is a geometry
+problem, and writing it directly in [`lsc::geometry`](../crates/lsc/src/geometry.rs) turned
+out to be better than delegating it, because budget tables have a specific property that
+general-purpose extractors handle poorly: currency is right-aligned, so the columns that
+matter most cannot be found by clustering on where cells start. Owning the algorithm meant
+being able to encode that and test it.
 
-Add a package when one of these becomes real work rather than an anticipated need.
+**Jurisdictional joins remain the open case.** Attaching expenditures to counties and school
+districts is a geospatial and record-linkage problem, and the reference implementations live
+in Python. This becomes real work when the
+[`district-finance`](../crates/district-finance/) connector does, which is deferred with the
+rest of the incidence framing.
+
+Add a package when a need is concrete. The lesson from the extraction case is worth keeping:
+"the ecosystem is more mature there" is a claim about a whole problem, and the part of the
+problem that actually mattered here was one this repository wanted to own.
 
 ## Packages
 

@@ -6,11 +6,16 @@
 //!
 //! # What is implemented and what is not
 //!
-//! The documents are published as PDFs with tabular figures. PDF text extraction is not done
-//! here; it belongs in a Python package where the ecosystem is mature, and its output is
-//! delimited text. Everything downstream of that — money parsing, column mapping, fiscal-year
-//! fan-out, and normalization into typed records — is implemented and tested, because that is
-//! where the errors that matter actually occur.
+//! The documents are published as PDFs with tabular figures, and the whole path is
+//! implemented here: glyph extraction, table reconstruction, money parsing, column mapping,
+//! fiscal-year fan-out, and normalization into typed records.
+//!
+//! # PDF
+//!
+//! [`geometry`] reconstructs table structure from positioned glyphs, and [`pdf`] (behind the
+//! `pdf` feature) reads those glyphs out of a document. Both produce the same [`RawTable`]
+//! that [`parse_delimited`] does, so a PDF and a hand-written file are indistinguishable to
+//! everything downstream.
 //!
 //! # Money
 //!
@@ -18,6 +23,10 @@
 //! figures are summed across thousands of line items; a parser that silently rounds, or that
 //! accepts a value it cannot represent exactly, produces totals that are wrong by amounts no
 //! downstream check can detect. It refuses rather than approximates.
+
+pub mod geometry;
+#[cfg(feature = "pdf")]
+pub mod pdf;
 
 use std::path::{Path, PathBuf};
 
