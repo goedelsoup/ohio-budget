@@ -1,0 +1,27 @@
+class: bill-version
+label: HB 96 Senate Substitute
+description: |
+  [HB 96](../bill/hb96-136th.yml) at the senate substitute stage. [verified]
+
+  The Senate substitute cut $72,888,202 from the House-passed figure — the largest reduction
+  in the series, and larger in magnitude than anything the conference or the governor did.
+
+  Seeded from the LSC appropriation spreadsheet, which publishes all nine stages. The corpus
+  modelled six until that source was read; the intermediate stages are where committee work
+  is visible as distinct from floor action.
+properties:
+  stage: senate-substitute
+  stage_date: "[open] 2025, pending verification"
+  chamber: senate
+  document_reference: |
+    LSC appropriation spreadsheet, HB 96 as enacted, column "Senate Substitute FY 2026". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-as-passed-house.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

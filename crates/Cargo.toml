@@ -9,6 +9,7 @@ members = [
     "real-dollars",
     "gap",
     "lineage",
+    "stage-delta",
 ]
 
 [workspace.package]

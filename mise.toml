@@ -56,6 +56,10 @@ run = "cargo run -q --manifest-path crates/Cargo.toml --bin lineage -- ."
 description = "Report which appropriated-vs-actual gaps are computable, and what blocks the rest."
 run = "cargo run -q --manifest-path crates/Cargo.toml --bin gap-report -- ."
 
+[tasks.stage-delta]
+description = "Decompose appropriation movement across bill stages and attribute each step."
+run = "cargo run -q --manifest-path crates/Cargo.toml --bin stage-delta -- ."
+
 [tasks.validate]
 description = "Check corpus instances against their class definitions. Exits non-zero on errors."
 run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- ."

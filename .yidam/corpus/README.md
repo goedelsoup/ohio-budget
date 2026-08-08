@@ -77,8 +77,13 @@ Sorted by: kind, then alphabetically.
 | [foundation-funding-fy2024-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-as-enacted.yml) | appropriation | Foundation Funding — FY2024, As Enacted | 7 | 38 |
 | [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 8 | 47 |
 | [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 7 | 39 |
+| [foundation-funding-fy2026-as-passed-house.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-house.yml) | appropriation | Foundation Funding — FY2026, As Passed by the House | 6 | 29 |
 | [foundation-funding-fy2026-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-senate.yml) | appropriation | Foundation Funding — FY2026, As Passed by the Senate | 7 | 34 |
 | [foundation-funding-fy2026-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-conference-report.yml) | appropriation | Foundation Funding — FY2026, Conference Report | 7 | 34 |
+| [foundation-funding-fy2026-house-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-house-reported.yml) | appropriation | Foundation Funding — FY2026, House Reported | 6 | 29 |
+| [foundation-funding-fy2026-house-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-house-substitute.yml) | appropriation | Foundation Funding — FY2026, House Substitute | 6 | 29 |
+| [foundation-funding-fy2026-senate-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-senate-reported.yml) | appropriation | Foundation Funding — FY2026, Senate Reported | 6 | 29 |
+| [foundation-funding-fy2026-senate-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-senate-substitute.yml) | appropriation | Foundation Funding — FY2026, Senate Substitute | 6 | 29 |
 | [institutional-operations-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2020-21-as-enacted.yml) | appropriation | Institutional Operations — FY2020-21, As Enacted | 7 | 31 |
 | [institutional-operations-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2024-25-as-enacted.yml) | appropriation | Institutional Operations — FY2024-25, As Enacted | 7 | 32 |
 | [local-government-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2010-11, As Enacted | 5 | 31 |
@@ -122,9 +127,13 @@ Sorted by: kind, then alphabetically.
 | [hb64-as-enacted.yml](.yidam/corpus/bill-version/hb64-as-enacted.yml) | bill-version | HB 64 As Enacted | 3 | 24 |
 | [hb96-as-enacted.yml](.yidam/corpus/bill-version/hb96-as-enacted.yml) | bill-version | HB 96 As Enacted | 3 | 31 |
 | [hb96-as-introduced.yml](.yidam/corpus/bill-version/hb96-as-introduced.yml) | bill-version | HB 96 As Introduced | 2 | 29 |
-| [hb96-as-passed-house.yml](.yidam/corpus/bill-version/hb96-as-passed-house.yml) | bill-version | HB 96 As Passed by the House | 3 | 31 |
+| [hb96-as-passed-house.yml](.yidam/corpus/bill-version/hb96-as-passed-house.yml) | bill-version | HB 96 As Passed by the House | 4 | 33 |
 | [hb96-as-passed-senate.yml](.yidam/corpus/bill-version/hb96-as-passed-senate.yml) | bill-version | HB 96 As Passed by the Senate | 4 | 31 |
 | [hb96-conference-report.yml](.yidam/corpus/bill-version/hb96-conference-report.yml) | bill-version | HB 96 Conference Report | 4 | 33 |
+| [hb96-house-reported.yml](.yidam/corpus/bill-version/hb96-house-reported.yml) | bill-version | HB 96 House Reported | 4 | 27 |
+| [hb96-house-substitute.yml](.yidam/corpus/bill-version/hb96-house-substitute.yml) | bill-version | HB 96 House Substitute | 4 | 27 |
+| [hb96-senate-reported.yml](.yidam/corpus/bill-version/hb96-senate-reported.yml) | bill-version | HB 96 Senate Reported | 4 | 27 |
+| [hb96-senate-substitute.yml](.yidam/corpus/bill-version/hb96-senate-substitute.yml) | bill-version | HB 96 Senate Substitute | 4 | 27 |
 | [controlling-board-fy2024-medicaid-transfer.yml](.yidam/corpus/budget-action/controlling-board-fy2024-medicaid-transfer.yml) | budget-action | Controlling Board Transfer — Medicaid, FY2024 | 5 | 31 |
 | [controlling-board-medicaid-transfer.yml](.yidam/corpus/budget-action/controlling-board-medicaid-transfer.yml) | budget-action | Controlling Board Transfer — Medicaid | 5 | 45 |
 | [fy2020-executive-reduction.yml](.yidam/corpus/budget-action/fy2020-executive-reduction.yml) | budget-action | Executive Spending Reduction, FY2020 | 5 | 39 |
@@ -135,9 +144,9 @@ Sorted by: kind, then alphabetically.
 | [hb166-line-item-veto.yml](.yidam/corpus/budget-action/hb166-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 166 | 4 | 27 |
 | [hb33-line-item-veto.yml](.yidam/corpus/budget-action/hb33-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 33 | 4 | 30 |
 | [hb59-medicaid-agency-transfer.yml](.yidam/corpus/budget-action/hb59-medicaid-agency-transfer.yml) | budget-action | Medicaid Transfer to a Separate Department, HB 59 | 4 | 30 |
-| [hb96-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-house-amendment-foundation-funding.yml) | budget-action | House Amendment to Foundation Funding, HB 96 | 4 | 40 |
+| [hb96-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-house-amendment-foundation-funding.yml) | budget-action | House Substitute Amendment to Foundation Funding, HB 96 | 5 | 44 |
 | [hb96-line-item-veto.yml](.yidam/corpus/budget-action/hb96-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 96 | 4 | 39 |
-| [hb96-senate-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-senate-amendment-foundation-funding.yml) | budget-action | Senate Amendment to Foundation Funding, HB 96 | 5 | 29 |
+| [hb96-senate-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-senate-amendment-foundation-funding.yml) | budget-action | Senate Substitute Amendment to Foundation Funding, HB 96 | 5 | 40 |
 | [foundation-funding-fy2020-21-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2020-21-actual.yml) | expenditure | Foundation Funding — FY2020-21 Actual | 4 | 28 |
 | [foundation-funding-fy2022-23-disbursed-cleveland.yml](.yidam/corpus/expenditure/foundation-funding-fy2022-23-disbursed-cleveland.yml) | expenditure | Foundation Funding Disbursement to Cleveland Metropolitan Schools — FY2022-23 | 5 | 33 |
 | [foundation-funding-fy2024-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-actual.yml) | expenditure | Foundation Funding — FY2024 Actual | 4 | 38 |

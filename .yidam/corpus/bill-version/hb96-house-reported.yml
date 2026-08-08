@@ -1,0 +1,27 @@
+class: bill-version
+label: HB 96 House Reported
+description: |
+  [HB 96](../bill/hb96-136th.yml) at the house reported stage. [verified]
+
+  Reported out of House Finance with a further $1,500,000 added. The gap between a chamber's
+  substitute and what it reports is committee work, and it is small here.
+
+  Seeded from the LSC appropriation spreadsheet, which publishes all nine stages. The corpus
+  modelled six until that source was read; the intermediate stages are where committee work
+  is visible as distinct from floor action.
+properties:
+  stage: house-reported
+  stage_date: "[open] 2025, pending verification"
+  chamber: house
+  document_reference: |
+    LSC appropriation spreadsheet, HB 96 as enacted, column "House Reported FY 2026". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-house-substitute.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

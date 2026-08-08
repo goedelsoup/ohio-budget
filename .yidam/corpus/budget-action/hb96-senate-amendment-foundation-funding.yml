@@ -1,29 +1,40 @@
 class: budget-action
-label: Senate Amendment to Foundation Funding, HB 96
+label: Senate Substitute Amendment to Foundation Funding, HB 96
 description: |
-  The Senate's change to the House-passed foundation funding figure in
-  [HB 96](../bill/hb96-136th.yml). [inference]
+  The Senate's change to the House-passed
+  [foundation funding](../line-item/foundation-funding.yml) figure, incorporated into
+  [HB 96's Senate substitute](../bill-version/hb96-senate-substitute.yml). -$72,888,202.
+  [verified]
 
-  Completes the attribution chain for the corpus's most fully modeled line. With the House
-  amendment, this, and the [veto](./hb96-line-item-veto.yml) all present, and appropriation
-  nodes at four stages, foundation funding in FY2026 is the one figure whose entire journey the
-  corpus can decompose — once the amounts exist.
+  The largest single move in the FY2026 series, and larger in magnitude than the conference
+  adjustment and the governor's action combined. It is also the step that makes the corpus's
+  priority-2 question worth asking: the House raised school funding by $92 million, the Senate
+  took back $73 million of it, conference restored $10 million, and the executive left it
+  alone. The enacted figure is the residue of a disagreement, not anyone's proposal.
+
+  Re-pointed from as-passed-senate for the same reason as its House counterpart — the Senate's
+  floor delta is zero and the money moved at the substitute stage.
+
+  [open] The stated justification is unreconstructed. Whether the reduction reflected a
+  different view of the phase-in schedule or of the revenue available to fund it is exactly the
+  question this node exists to hold open.
 properties:
   action_type: amendment
   action_date: "[open] spring 2025, pending verification"
-  direction: "[open] not reconstructed"
-  amount_delta: "[open] not reconstructed"
+  direction: decrease
+  amount_delta: "-$72,888,202.00"
   stated_justification: |
-    [open] Not reconstructed.
+    [open] Not reconstructed. Senate Finance statements and the LSC bill analysis are the
+    sources.
   phase: legislative
 links:
   - target: ../budget-action.ont.yml
     relationship: instance-of
-  - target: ../bill-version/hb96-as-passed-senate.yml
+  - target: ../bill-version/hb96-senate-substitute.yml
     relationship: applies-to
-  - target: ../appropriation/foundation-funding-fy2026-as-passed-senate.yml
+  - target: ../appropriation/foundation-funding-fy2026-senate-substitute.yml
     relationship: modifies
   - target: ../actor/senate-finance-committee.yml
     relationship: taken-by
-  - target: ../../catalog/lsc-hb96-comparison.md
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites

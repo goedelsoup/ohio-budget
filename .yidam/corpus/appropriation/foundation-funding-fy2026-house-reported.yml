@@ -1,0 +1,29 @@
+class: appropriation
+label: Foundation Funding — FY2026, House Reported
+description: |
+  $8,518,736,974 at the house reported stage. [verified]
+
+  One checkpoint in the corpus's only complete nine-stage series. Its value is not the figure
+  but the difference from its neighbours, which is what
+  [`stage-delta`](../../skills/stage-delta.md) reads.
+properties:
+  amount: "$8,518,736,974.00"
+  period_label: FY2026
+  stage: house-reported
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 96 as enacted, sheet EN, ALI 200550, column
+    "House Reported FY 2026". Committed at .yidam/sources/lsc/ with sha256 8153e8f5. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers
+  - target: ../bill-version/hb96-house-reported.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,31 +1,33 @@
 class: bill-version
 label: HB 96 As Passed by the House
 description: |
-  HB 96 after House committee and floor action, as passed to the Senate. [inference]
+  HB 96 as passed to the Senate, after House committee and floor action. [verified]
 
-  In Ohio operating budgets the House substitute is typically the largest single rewrite of
-  the executive proposal, [inference] which makes the difference between this version and
-  [as introduced](./hb96-as-introduced.yml) the highest-yield comparison in the bill's
-  history. Whether that generalization holds across the full corpus window is an open
-  empirical question rather than an established fact. [open]
+  The genesis note here claimed the House substitute is typically the largest single rewrite
+  of the executive proposal. For this bill that holds: the substitute added $92,250,000 to
+  foundation funding, against $1,500,000 more at committee report and nothing at all on the
+  floor. [verified] Whether it generalizes across the window is still open. [open]
 
-  This version is seeded without its Senate and conference successors, so the chain from here
-  to [as enacted](./hb96-as-enacted.yml) covers three distinct sets of changes at once —
-  Senate action, conference resolution, and executive veto. Any `stage-delta` result across
-  that hop reports aggregate movement and cannot attribute it. Closing that gap is the
-  clearest next expansion of this class.
+  This version now sits in a complete chain. It supersedes
+  [house-reported](./hb96-house-reported.yml) rather than jumping from as-introduced, and its
+  successor is [senate-substitute](./hb96-senate-substitute.yml) rather than
+  as-passed-senate — the four intermediate stages were added once the LSC spreadsheet showed
+  the process has nine, not six. `stage-delta` over foundation funding FY2026 therefore
+  attributes every step rather than reporting an aggregate.
 properties:
   stage: as-passed-house
   stage_date: "[open] spring 2025, exact date pending verification"
   chamber: house
   document_reference: |
-    The House-passed bill text and the LSC comparison document for this stage. [open] Not yet
-    catalogued.
+    LSC appropriation spreadsheet, HB 96 as enacted, column "House Passed FY 2026".
+    [verified]
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml
     relationship: instance-of
   - target: ../bill/hb96-136th.yml
     relationship: version-of
-  - target: ./hb96-as-introduced.yml
+  - target: ./hb96-house-reported.yml
     relationship: supersedes
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,40 +1,44 @@
 class: budget-action
-label: House Amendment to Foundation Funding, HB 96
+label: House Substitute Amendment to Foundation Funding, HB 96
 description: |
-  The House Finance Committee's change to the executive proposal's
+  The House's change to the executive proposal's
   [foundation funding](../line-item/foundation-funding.yml) figure, incorporated into
-  [HB 96 as passed by the House](../bill-version/hb96-as-passed-house.yml). [inference]
+  [HB 96's House substitute](../bill-version/hb96-house-substitute.yml). +$92,250,000.
+  [verified]
 
-  This node is seeded as the legislative-phase exemplar. In Ohio operating budgets the House
-  substitute is typically the largest single rewrite of the executive proposal, [inference] and
-  school funding is typically among the most contested items within it.
+  This node was seeded at genesis as the legislative-phase exemplar, asserting from general
+  pattern that the House substitute is where the largest single rewrite happens. The real
+  figures bear that out for this bill: +$92,250,000 at the substitute, a further $1,500,000
+  at committee report, and nothing at all on the floor.
 
-  For a formula program the amendment's substance is often not the dollar figure at all but the
-  phase-in step and base year the formula computes against. [inference] An amendment can raise
-  the appropriation while slowing the phase-in, producing a larger number and less money
-  reaching districts than the schedule would have delivered. Recording only `amount_delta` for
-  such an action would capture the arithmetic and miss the decision, which is why
-  `stated_justification` is a first-class property.
+  It was originally attached to as-passed-house. `stage-delta` run against real figures showed
+  that step's delta is exactly zero, and the money moved one stage earlier — so the action was
+  re-pointed. Attributing it to floor passage would have credited the wrong step of the
+  chamber's own process, and nothing but the arithmetic would have contradicted it.
 
-  [open] The direction, magnitude, and stated justification are all unreconstructed. This node
-  asserts that an amendment occurred at this stage — itself an `[inference]` from the general
-  pattern rather than a verified fact about HB 96 specifically — and provides the structure for
-  the `legislature` and `lsc` connectors to fill.
+  For a formula program the amendment's substance may still not be the dollar figure. An
+  amendment can raise the appropriation while slowing the phase-in, producing a larger number
+  and less money reaching districts. [inference] The dollar delta is now known; the decision
+  behind it is not.
+
+  [open] The stated justification is unreconstructed. Committee statements and the bill
+  analysis are the sources.
 properties:
   action_type: amendment
   action_date: "[open] spring 2025, pending verification"
-  direction: "[open] not yet reconstructed"
-  amount_delta: "[open] pending the lsc connector"
+  direction: increase
+  amount_delta: "$92,250,000.00"
   stated_justification: |
-    [open] Not yet reconstructed. Committee statements and the LSC comparison document are the
-    sources.
+    [open] Not reconstructed. Committee statements and the LSC bill analysis are the sources.
   phase: legislative
 links:
   - target: ../budget-action.ont.yml
     relationship: instance-of
-  - target: ../bill-version/hb96-as-passed-house.yml
+  - target: ../bill-version/hb96-house-substitute.yml
     relationship: applies-to
-  - target: ../appropriation/foundation-funding-fy2026-as-introduced.yml
+  - target: ../appropriation/foundation-funding-fy2026-house-substitute.yml
     relationship: modifies
   - target: ../actor/house-finance-committee.yml
     relationship: taken-by
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

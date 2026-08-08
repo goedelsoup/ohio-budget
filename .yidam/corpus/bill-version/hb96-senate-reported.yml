@@ -1,0 +1,27 @@
+class: bill-version
+label: HB 96 Senate Reported
+description: |
+  [HB 96](../bill/hb96-136th.yml) at the senate reported stage. [verified]
+
+  Reported out of Senate Finance with $1,250,000 restored, almost exactly mirroring the
+  House committee's own $1,500,000 addition at the same point in its chamber.
+
+  Seeded from the LSC appropriation spreadsheet, which publishes all nine stages. The corpus
+  modelled six until that source was read; the intermediate stages are where committee work
+  is visible as distinct from floor action.
+properties:
+  stage: senate-reported
+  stage_date: "[open] 2025, pending verification"
+  chamber: senate
+  document_reference: |
+    LSC appropriation spreadsheet, HB 96 as enacted, column "Senate Reported FY 2026". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-senate-substitute.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

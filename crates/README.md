@@ -49,6 +49,7 @@ Fields per crate: name, capability type (connector/calculator/feature-engineerin
 | [lineage](lineage/) | Proposes line item succession candidates across renumberings |
 | [lsc](lsc/) | Connector for Legislative Service Commission comparison documents |
 | [real-dollars](real-dollars/) | Restates nominal budget amounts in constant dollars |
+| [stage-delta](stage-delta/) | Decomposes an appropriation's movement across bill stages and attributes each step |
 <!-- /REGEN -->
 
 ## Index status

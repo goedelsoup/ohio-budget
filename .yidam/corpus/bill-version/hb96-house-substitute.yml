@@ -1,0 +1,27 @@
+class: bill-version
+label: HB 96 House Substitute
+description: |
+  [HB 96](../bill/hb96-136th.yml) at the house substitute stage. [verified]
+
+  The House substitute — the first legislative rewrite, and the largest single move in the
+  series at +$92,250,000 over the executive proposal.
+
+  Seeded from the LSC appropriation spreadsheet, which publishes all nine stages. The corpus
+  modelled six until that source was read; the intermediate stages are where committee work
+  is visible as distinct from floor action.
+properties:
+  stage: house-substitute
+  stage_date: "[open] 2025, pending verification"
+  chamber: house
+  document_reference: |
+    LSC appropriation spreadsheet, HB 96 as enacted, column "House Substitute FY 2026". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-as-introduced.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
