@@ -13,7 +13,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Component, Path, PathBuf};
 
 use anyhow::{Context, Result};
-use corpus_schema::{ClassDefinition, CorpusInstance, Direction, ScalarValue};
+use corpus_schema::{CatalogEntry, ClassDefinition, CorpusInstance, Direction, ScalarValue};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Severity {
@@ -47,6 +47,23 @@ pub struct LoadedInstance {
     pub inst: CorpusInstance,
 }
 
+/// A catalog entry as found on disk, parsed or not.
+#[derive(Debug, Clone)]
+pub struct LoadedCatalog {
+    pub rel_path: String,
+    pub abs_path: PathBuf,
+    /// Filename stem, which must equal the frontmatter slug.
+    pub file_slug: String,
+    pub parsed: Result<CatalogEntry, String>,
+}
+
+/// Splits YAML frontmatter from a markdown body.
+pub fn split_frontmatter(text: &str) -> Option<&str> {
+    let rest = text.strip_prefix("---\n")?;
+    let end = rest.find("\n---")?;
+    Some(&rest[..end])
+}
+
 /// Everything the rules operate over.
 #[derive(Debug, Clone, Default)]
 pub struct Corpus {
@@ -54,6 +71,10 @@ pub struct Corpus {
     /// Resolved paths of the `<class>.ont.yml` files, so `instance-of` links can be
     /// distinguished from links to nonexistent nodes.
     pub class_paths: BTreeSet<PathBuf>,
+    /// Resolved paths of catalog entries. Provenance edges point here, and they are the
+    /// only links in the corpus that cross out of the class system.
+    pub catalog_paths: BTreeSet<PathBuf>,
+    pub catalog: Vec<LoadedCatalog>,
     pub instances: Vec<LoadedInstance>,
 }
 
@@ -91,6 +112,20 @@ fn target_class_of(path: &Path) -> Option<(String, bool)> {
 
 /// Provenance slug carried by every record under `.yidam/fixtures/`.
 pub const FIXTURE_MARKER: &str = "synthetic-fixture";
+
+/// The one relationship permitted from a corpus node to a catalog entry.
+///
+/// Provenance is cross-cutting: every class may cite a source, so declaring a `cites` edge
+/// on all fourteen classes would be noise. It is special-cased here instead, and pinned to
+/// a single relationship name so provenance edges stay greppable.
+pub const CITES: &str = "cites";
+
+fn is_catalog_path(path: &Path) -> bool {
+    path.parent()
+        .and_then(|p| p.file_name())
+        .and_then(|n| n.to_str())
+        == Some("catalog")
+}
 
 fn looks_like_money(key: &str) -> bool {
     let k = key.to_ascii_lowercase();
@@ -161,10 +196,48 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
     let Corpus {
         classes,
         class_paths: class_def_paths,
+        catalog_paths,
+        catalog,
         instances,
     } = corpus;
     let mut findings = Vec::new();
     let known_instances: BTreeSet<&PathBuf> = instances.iter().map(|i| &i.abs_path).collect();
+
+    // A catalog entry whose frontmatter does not parse is not a provenance anchor — it is a
+    // document that looks like one, which is worse than an absent entry.
+    for c in catalog {
+        match &c.parsed {
+            Err(e) => findings.push(Finding {
+                path: c.rel_path.clone(),
+                rule: "bad-catalog-frontmatter",
+                severity: Severity::Error,
+                message: format!("frontmatter does not parse as a catalog entry: {e}"),
+            }),
+            Ok(entry) => {
+                if entry.slug != c.file_slug {
+                    findings.push(Finding {
+                        path: c.rel_path.clone(),
+                        rule: "catalog-slug-mismatch",
+                        severity: Severity::Error,
+                        message: format!(
+                            "frontmatter slug '{}' does not match filename '{}'",
+                            entry.slug, c.file_slug
+                        ),
+                    });
+                }
+                for feed in &entry.feeds {
+                    if !classes.contains_key(feed) {
+                        findings.push(Finding {
+                            path: c.rel_path.clone(),
+                            rule: "catalog-unknown-feed",
+                            severity: Severity::Error,
+                            message: format!("feeds '{feed}', which is not a corpus class"),
+                        });
+                    }
+                }
+            }
+        }
+    }
 
     // Incoming domain links, keyed by resolved target path. Computed with normalized
     // paths so cross-class links actually register.
@@ -172,6 +245,9 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
     for inst in instances {
         let dir = inst.abs_path.parent().unwrap_or(&inst.abs_path);
         for link in inst.inst.domain_links() {
+            if link.relationship == CITES {
+                continue;
+            }
             *incoming
                 .entry(normalize_join(dir, &link.target))
                 .or_insert(0) += 1;
@@ -260,6 +336,30 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
                             inst.inst.class, link.target
                         ),
                     }),
+                }
+                continue;
+            }
+
+            // Provenance edges leave the class system, so the declaration check does not
+            // apply to them. They are still checked for relationship name and resolution.
+            if is_catalog_path(&resolved) || link.relationship == CITES {
+                if link.relationship != CITES {
+                    findings.push(Finding {
+                        path: p.clone(),
+                        rule: "bad-catalog-relationship",
+                        severity: Severity::Error,
+                        message: format!(
+                            "'{}' points at a catalog entry; provenance edges must use '{CITES}'",
+                            link.relationship
+                        ),
+                    });
+                } else if !catalog_paths.contains(&resolved) {
+                    findings.push(Finding {
+                        path: p.clone(),
+                        rule: "broken-link",
+                        severity: Severity::Error,
+                        message: format!("cites '{}', which is not a catalog entry", link.target),
+                    });
                 }
                 continue;
             }
@@ -355,11 +455,7 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
         // reports the stronger requirement in the message.
         let body = format!("{} {}", inst.inst.label, inst.inst.description);
         if body.contains("[verified]") {
-            let cites_catalog = inst
-                .inst
-                .links
-                .iter()
-                .any(|l| l.target.contains("/catalog/"));
+            let cites_catalog = inst.inst.links.iter().any(|l| l.relationship == CITES);
             if !cites_catalog {
                 findings.push(Finding {
                     path: p.clone(),
@@ -411,12 +507,51 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
 }
 
 /// Reads the corpus from disk.
-pub fn load(corpus_root: &Path, repo_root: &Path) -> Result<Corpus> {
+pub fn load(repo_root: &Path) -> Result<Corpus> {
+    let corpus_root = repo_root.join(".yidam").join("corpus");
+    let catalog_root = repo_root.join(".yidam").join("catalog");
     let mut classes = BTreeMap::new();
     let mut class_paths = BTreeSet::new();
+    let mut catalog_paths = BTreeSet::new();
     let mut instances = Vec::new();
 
-    for entry in walkdir::WalkDir::new(corpus_root)
+    let mut catalog = Vec::new();
+    if catalog_root.is_dir() {
+        for entry in walkdir::WalkDir::new(&catalog_root)
+            .into_iter()
+            .filter_map(|e| e.ok())
+            .filter(|e| e.file_type().is_file())
+        {
+            let path = entry.path();
+            let name = path
+                .file_name()
+                .and_then(|n| n.to_str())
+                .unwrap_or_default();
+            if !name.ends_with(".md") || name == "README.md" {
+                continue;
+            }
+            let abs = normalize_join(Path::new(""), &path.to_string_lossy());
+            catalog_paths.insert(abs.clone());
+            let text = std::fs::read_to_string(path)
+                .with_context(|| format!("reading {}", path.display()))?;
+            let parsed = match split_frontmatter(&text) {
+                None => Err("no YAML frontmatter delimited by ---".to_string()),
+                Some(fm) => serde_yaml::from_str::<CatalogEntry>(fm).map_err(|e| e.to_string()),
+            };
+            catalog.push(LoadedCatalog {
+                rel_path: path
+                    .strip_prefix(repo_root)
+                    .unwrap_or(path)
+                    .to_string_lossy()
+                    .to_string(),
+                abs_path: abs,
+                file_slug: name.trim_end_matches(".md").to_string(),
+                parsed,
+            });
+        }
+    }
+
+    for entry in walkdir::WalkDir::new(&corpus_root)
         .into_iter()
         .filter_map(|e| e.ok())
         .filter(|e| e.file_type().is_file())
@@ -456,6 +591,8 @@ pub fn load(corpus_root: &Path, repo_root: &Path) -> Result<Corpus> {
     Ok(Corpus {
         classes,
         class_paths,
+        catalog_paths,
+        catalog,
         instances,
     })
 }
@@ -489,6 +626,8 @@ mod tests {
         check(&Corpus {
             classes,
             class_paths,
+            catalog_paths: BTreeSet::new(),
+            catalog: Vec::new(),
             instances,
         })
     }
@@ -794,6 +933,97 @@ links:
         )];
         let findings = run(classes, paths, insts);
         assert!(findings.iter().any(|f| f.rule == "verified-without-source"));
+    }
+
+    fn run_with_catalog(
+        classes: BTreeMap<String, ClassDefinition>,
+        class_paths: BTreeSet<PathBuf>,
+        catalog_paths: BTreeSet<PathBuf>,
+        instances: Vec<LoadedInstance>,
+    ) -> Vec<Finding> {
+        check(&Corpus {
+            classes,
+            class_paths,
+            catalog_paths,
+            catalog: Vec::new(),
+            instances,
+        })
+    }
+
+    fn citing_instance() -> LoadedInstance {
+        instance(
+            "corpus/fund/a.yml",
+            r#"
+class: fund
+label: A
+description: d
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+  - target: ../catalog/orc-131.md
+    relationship: cites
+"#,
+        )
+    }
+
+    #[test]
+    fn cites_to_catalog_needs_no_declared_edge() {
+        // Provenance is cross-cutting. Declaring a `cites` edge on all fourteen classes
+        // would be noise, so the rule is special-cased rather than restated per class.
+        let (classes, paths) = fixture();
+        let mut catalog = BTreeSet::new();
+        catalog.insert(PathBuf::from("corpus/catalog/orc-131.md"));
+        let findings = run_with_catalog(classes, paths, catalog, vec![citing_instance()]);
+        assert!(
+            findings.iter().all(|f| f.severity != Severity::Error),
+            "unexpected errors: {findings:?}"
+        );
+    }
+
+    #[test]
+    fn cites_to_a_missing_catalog_entry_is_broken() {
+        let (classes, paths) = fixture();
+        let findings = run_with_catalog(classes, paths, BTreeSet::new(), vec![citing_instance()]);
+        assert!(findings
+            .iter()
+            .any(|f| f.rule == "broken-link" && f.severity == Severity::Error));
+    }
+
+    #[test]
+    fn non_cites_relationship_to_catalog_is_rejected() {
+        let (classes, paths) = fixture();
+        let mut catalog = BTreeSet::new();
+        catalog.insert(PathBuf::from("corpus/catalog/orc-131.md"));
+        let insts = vec![instance(
+            "corpus/fund/a.yml",
+            r#"
+class: fund
+label: A
+description: d
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+  - target: ../catalog/orc-131.md
+    relationship: draws-from
+"#,
+        )];
+        let findings = run_with_catalog(classes, paths, catalog, insts);
+        assert!(findings
+            .iter()
+            .any(|f| f.rule == "bad-catalog-relationship"));
+    }
+
+    #[test]
+    fn a_provenance_edge_is_not_a_domain_link() {
+        // A node that only cites a source is still unconnected to the graph.
+        let (classes, paths) = fixture();
+        let mut catalog = BTreeSet::new();
+        catalog.insert(PathBuf::from("corpus/catalog/orc-131.md"));
+        let findings = run_with_catalog(classes, paths, catalog, vec![citing_instance()]);
+        assert!(
+            findings.iter().any(|f| f.rule == "no-domain-link"),
+            "citing a source does not connect a node to the corpus: {findings:?}"
+        );
     }
 
     #[test]

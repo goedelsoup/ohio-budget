@@ -18,7 +18,13 @@ Fields per entry: slug, source type (paper/dataset/API/database/other), descript
                   corpus citation count (used-by).
 Sorted by: type, then slug.
 -->
-_No catalog entries yet._
+| Entry | Description | Citations |
+|---|---|---|
+| [controlling-board-minutes.md](controlling-board-minutes.md) | — | 1 |
+| [ga-bill-record.md](ga-bill-record.md) | — | 3 |
+| [lsc-hb96-comparison.md](lsc-hb96-comparison.md) | — | 3 |
+| [obm-annual-report.md](obm-annual-report.md) | — | 3 |
+| [orc-chapter-131.md](orc-chapter-131.md) | — | 3 |
 <!-- /REGEN -->
 
 ## Adding a source

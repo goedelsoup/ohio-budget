@@ -18,7 +18,7 @@ fn main() -> Result<()> {
         bail!("no corpus at {}", corpus_root.display());
     }
 
-    let corpus = load(&corpus_root, &repo_root)?;
+    let corpus = load(&repo_root)?;
     let findings = check(&corpus);
 
     let errors = findings
