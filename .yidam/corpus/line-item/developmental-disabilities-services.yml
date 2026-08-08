@@ -1,0 +1,31 @@
+class: line-item
+label: Developmental Disabilities Medicaid Services
+description: |
+  Medicaid waiver services for Ohioans with developmental disabilities, appropriated to
+  the [Department of Developmental Disabilities](../agency/developmental-disabilities.yml)
+  rather than to the Department of Medicaid. [inference]
+
+  Seeded to make concrete a fact that otherwise stays in prose: Medicaid spending is spread
+  across several agencies, so a Medicaid total assembled from one department's line items is
+  incomplete. Anyone summing "the Medicaid line items" without this one — and its behavioral
+  health equivalent, not yet seeded — will understate the program.
+
+  [open] The code, and the full set of agencies holding Medicaid-funded line items, are
+  unverified.
+properties:
+  name: Developmental Disabilities Medicaid Services
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Medicaid waiver services delivered through county boards of developmental disabilities.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/developmental-disabilities.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

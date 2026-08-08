@@ -1,0 +1,34 @@
+class: revenue-source
+label: Federal Medicaid Match
+description: |
+  Federal reimbursement of a share of Ohio's Medicaid expenditures, paid at a rate that varies
+  by eligibility category. [inference] It is not a tax and Ohio does not set its rate, but it
+  behaves as a revenue source in every way this corpus cares about: it arrives, it lands in a
+  fund, and it finances appropriations.
+
+  Modeling it explicitly resolves the most common error in reading Ohio Medicaid figures. The
+  all-funds Medicaid number is roughly double the state-share number because this flows through
+  state accounts, and the two are quoted interchangeably in public discussion. [inference] With
+  the match as its own node, "Medicaid costs X" becomes a question the graph forces you to
+  qualify.
+
+  It also carries a distinctive risk. A change in the federal match rate alters Ohio's own
+  obligation without any Ohio decision, and without any appropriation changing. That is a
+  structural exposure invisible to any analysis that looks only at state instruments.
+
+  [open] Match rate history across the window, including the enhanced rate for the expansion
+  population, is not reconstructed.
+properties:
+  name: Federal Medicaid Match
+  instrument_type: federal-grant
+  statutory_basis: Federal Social Security Act; rate set outside Ohio law [inference]
+  rate_basis: |
+    A federally determined matching percentage varying by eligibility category, with an
+    enhanced rate for the expansion population. [inference]
+  disposition: |
+    Credited to federal fund group accounts supporting Medicaid appropriations. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/federal-medicaid-match-fund.yml
+    relationship: deposits-into

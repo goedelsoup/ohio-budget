@@ -1,0 +1,30 @@
+class: line-item
+label: Highway Maintenance
+description: |
+  Routine maintenance of the state highway system — resurfacing, snow and ice control,
+  bridge inspection. [inference]
+
+  Seeded alongside [highway construction](./highway-construction.yml) because the split between
+  building and maintaining is the substance of most transportation budget argument, and a single
+  transportation line item cannot represent it. Deferred maintenance is also the clearest case in
+  the corpus of an obligation that does not appear as one: reducing this line produces a saving
+  now and a larger cost later, and nothing in an appropriation document records the second.
+
+  [open] The code and the maintenance-versus-construction split are unreconstructed.
+properties:
+  name: Highway Maintenance
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Routine maintenance and preservation of the state highway system.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-transportation.yml
+    relationship: belongs-to
+  - target: ../fund/highway-operating-fund.yml
+    relationship: draws-from

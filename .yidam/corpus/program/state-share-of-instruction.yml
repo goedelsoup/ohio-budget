@@ -1,0 +1,26 @@
+class: program
+label: State Share of Instruction
+description: |
+  The state's operating subsidy to public universities and community colleges, distributed by a
+  formula weighted toward course and degree completion. [inference]
+
+  Seeded as the counterweight to the corpus's school funding material. Both are formula programs
+  in education, and they point in opposite directions: primary and secondary funding compensates
+  for weak local capacity, while this one rewards institutional output. Holding both prevents the
+  corpus from encoding "formula" as a synonym for "equalizing".
+
+  [open] Whether the completion weighting changed across the window, and with what effect on
+  which institutions, is unexamined.
+properties:
+  name: State Share of Instruction
+  policy_area: higher-education
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    Weighted toward course and degree completion rather than enrollment alone. [inference]
+  federal_participation: |
+    None directly.
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/state-share-of-instruction.yml
+    relationship: funded-by

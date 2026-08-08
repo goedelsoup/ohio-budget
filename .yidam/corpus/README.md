@@ -48,49 +48,123 @@ Sorted by: kind, then alphabetically.
 -->
 | Instance | Class | Label | Links out | Lines |
 |---|---|---|---|---|
+| [conference-committee.yml](.yidam/corpus/actor/conference-committee.yml) | actor | Conference Committee | 1 | 26 |
 | [controlling-board.yml](.yidam/corpus/actor/controlling-board.yml) | actor | Controlling Board | 1 | 31 |
 | [governor.yml](.yidam/corpus/actor/governor.yml) | actor | Governor of Ohio | 1 | 30 |
 | [house-finance-committee.yml](.yidam/corpus/actor/house-finance-committee.yml) | actor | House Finance Committee | 1 | 29 |
+| [legislative-service-commission.yml](.yidam/corpus/actor/legislative-service-commission.yml) | actor | Legislative Service Commission | 2 | 29 |
 | [office-of-budget-and-management.yml](.yidam/corpus/actor/office-of-budget-and-management.yml) | actor | Office of Budget and Management | 1 | 33 |
-| [department-of-education-and-workforce.yml](.yidam/corpus/agency/department-of-education-and-workforce.yml) | agency | Ohio Department of Education and Workforce | 2 | 33 |
-| [department-of-medicaid.yml](.yidam/corpus/agency/department-of-medicaid.yml) | agency | Ohio Department of Medicaid | 2 | 34 |
-| [department-of-taxation.yml](.yidam/corpus/agency/department-of-taxation.yml) | agency | Ohio Department of Taxation | 2 | 32 |
+| [senate-finance-committee.yml](.yidam/corpus/actor/senate-finance-committee.yml) | actor | Senate Finance Committee | 1 | 25 |
+| [department-of-education-and-workforce.yml](.yidam/corpus/agency/department-of-education-and-workforce.yml) | agency | Ohio Department of Education and Workforce | 3 | 35 |
+| [department-of-education.yml](.yidam/corpus/agency/department-of-education.yml) | agency | Ohio Department of Education | 1 | 29 |
+| [department-of-higher-education.yml](.yidam/corpus/agency/department-of-higher-education.yml) | agency | Ohio Department of Higher Education | 2 | 26 |
+| [department-of-medicaid.yml](.yidam/corpus/agency/department-of-medicaid.yml) | agency | Ohio Department of Medicaid | 3 | 36 |
+| [department-of-taxation.yml](.yidam/corpus/agency/department-of-taxation.yml) | agency | Ohio Department of Taxation | 3 | 34 |
 | [department-of-transportation.yml](.yidam/corpus/agency/department-of-transportation.yml) | agency | Ohio Department of Transportation | 2 | 26 |
+| [developmental-disabilities.yml](.yidam/corpus/agency/developmental-disabilities.yml) | agency | Ohio Department of Developmental Disabilities | 2 | 28 |
+| [job-and-family-services.yml](.yidam/corpus/agency/job-and-family-services.yml) | agency | Ohio Department of Job and Family Services | 1 | 29 |
+| [rehabilitation-and-correction.yml](.yidam/corpus/agency/rehabilitation-and-correction.yml) | agency | Ohio Department of Rehabilitation and Correction | 2 | 28 |
+| [foundation-funding-fy2022-23-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-23-as-enacted.yml) | appropriation | Foundation Funding — FY2022-23, As Enacted | 7 | 33 |
 | [foundation-funding-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-25-as-enacted.yml) | appropriation | Foundation Funding — FY2024-25, As Enacted | 6 | 45 |
 | [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 6 | 39 |
 | [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 6 | 35 |
+| [foundation-funding-fy2026-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-senate.yml) | appropriation | Foundation Funding — FY2026, As Passed by the Senate | 6 | 29 |
+| [foundation-funding-fy2026-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-conference-report.yml) | appropriation | Foundation Funding — FY2026, Conference Report | 6 | 29 |
+| [institutional-operations-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2024-25-as-enacted.yml) | appropriation | Institutional Operations — FY2024-25, As Enacted | 7 | 32 |
+| [local-government-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2010-11, As Enacted | 4 | 29 |
+| [local-government-fund-distribution-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2012-13-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2012-13, As Enacted | 7 | 33 |
+| [medicaid-health-care-services-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2024-25-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2024-25, As Enacted | 7 | 35 |
 | [medicaid-health-care-services-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2026-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2026, As Enacted | 6 | 41 |
+| [medicaid-services-odjfs-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-odjfs-fy2012-13-as-enacted.yml) | appropriation | Medicaid Services (JFS) — FY2012-13, As Enacted | 6 | 32 |
+| [public-library-fund-distribution-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2012-13-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2012-13, As Enacted | 6 | 31 |
+| [state-share-of-instruction-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2024-25-as-enacted.yml) | appropriation | State Share of Instruction — FY2024-25, As Enacted | 7 | 31 |
+| [hb1-128th.yml](.yidam/corpus/bill/hb1-128th.yml) | bill | House Bill 1 (128th General Assembly) | 3 | 29 |
+| [hb110-134th.yml](.yidam/corpus/bill/hb110-134th.yml) | bill | House Bill 110 (134th General Assembly) | 3 | 30 |
+| [hb153-129th.yml](.yidam/corpus/bill/hb153-129th.yml) | bill | House Bill 153 (129th General Assembly) | 3 | 31 |
+| [hb166-133rd.yml](.yidam/corpus/bill/hb166-133rd.yml) | bill | House Bill 166 (133rd General Assembly) | 3 | 30 |
 | [hb33-135th.yml](.yidam/corpus/bill/hb33-135th.yml) | bill | House Bill 33 (135th General Assembly) | 2 | 31 |
+| [hb49-132nd.yml](.yidam/corpus/bill/hb49-132nd.yml) | bill | House Bill 49 (132nd General Assembly) | 3 | 27 |
 | [hb54-136th.yml](.yidam/corpus/bill/hb54-136th.yml) | bill | House Bill 54 (136th General Assembly) | 2 | 31 |
+| [hb59-130th.yml](.yidam/corpus/bill/hb59-130th.yml) | bill | House Bill 59 (130th General Assembly) | 3 | 31 |
+| [hb64-131st.yml](.yidam/corpus/bill/hb64-131st.yml) | bill | House Bill 64 (131st General Assembly) | 3 | 26 |
 | [hb96-136th.yml](.yidam/corpus/bill/hb96-136th.yml) | bill | House Bill 96 (136th General Assembly) | 3 | 34 |
+| [hb110-as-enacted.yml](.yidam/corpus/bill-version/hb110-as-enacted.yml) | bill-version | HB 110 As Enacted | 3 | 27 |
+| [hb153-as-enacted.yml](.yidam/corpus/bill-version/hb153-as-enacted.yml) | bill-version | HB 153 As Enacted | 3 | 29 |
+| [hb166-as-enacted.yml](.yidam/corpus/bill-version/hb166-as-enacted.yml) | bill-version | HB 166 As Enacted | 3 | 35 |
 | [hb33-as-enacted.yml](.yidam/corpus/bill-version/hb33-as-enacted.yml) | bill-version | HB 33 As Enacted | 3 | 31 |
 | [hb54-as-enacted.yml](.yidam/corpus/bill-version/hb54-as-enacted.yml) | bill-version | HB 54 As Enacted | 3 | 28 |
 | [hb96-as-enacted.yml](.yidam/corpus/bill-version/hb96-as-enacted.yml) | bill-version | HB 96 As Enacted | 3 | 31 |
 | [hb96-as-introduced.yml](.yidam/corpus/bill-version/hb96-as-introduced.yml) | bill-version | HB 96 As Introduced | 2 | 29 |
 | [hb96-as-passed-house.yml](.yidam/corpus/bill-version/hb96-as-passed-house.yml) | bill-version | HB 96 As Passed by the House | 3 | 31 |
+| [hb96-as-passed-senate.yml](.yidam/corpus/bill-version/hb96-as-passed-senate.yml) | bill-version | HB 96 As Passed by the Senate | 4 | 31 |
+| [hb96-conference-report.yml](.yidam/corpus/bill-version/hb96-conference-report.yml) | bill-version | HB 96 Conference Report | 4 | 33 |
 | [controlling-board-medicaid-transfer.yml](.yidam/corpus/budget-action/controlling-board-medicaid-transfer.yml) | budget-action | Controlling Board Transfer — Medicaid | 5 | 45 |
+| [fy2020-executive-reduction.yml](.yidam/corpus/budget-action/fy2020-executive-reduction.yml) | budget-action | Executive Spending Reduction, FY2020 | 5 | 39 |
+| [hb110-fair-school-funding-enactment.yml](.yidam/corpus/budget-action/hb110-fair-school-funding-enactment.yml) | budget-action | Fair School Funding Plan Enactment, HB 110 | 4 | 37 |
+| [hb153-local-government-fund-reduction.yml](.yidam/corpus/budget-action/hb153-local-government-fund-reduction.yml) | budget-action | Local Government Fund Share Reduction, HB 153 | 4 | 38 |
+| [hb33-line-item-veto.yml](.yidam/corpus/budget-action/hb33-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 33 | 4 | 30 |
 | [hb96-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-house-amendment-foundation-funding.yml) | budget-action | House Amendment to Foundation Funding, HB 96 | 4 | 40 |
 | [hb96-line-item-veto.yml](.yidam/corpus/budget-action/hb96-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 96 | 3 | 37 |
+| [foundation-funding-fy2022-23-disbursed-cleveland.yml](.yidam/corpus/expenditure/foundation-funding-fy2022-23-disbursed-cleveland.yml) | expenditure | Foundation Funding Disbursement to Cleveland Metropolitan Schools — FY2022-23 | 5 | 33 |
 | [foundation-funding-fy2024-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-disbursed.yml) | expenditure | Foundation Funding Disbursement to Columbus City Schools — FY2024-25 | 5 | 45 |
+| [institutional-operations-fy2024-25-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2024-25-actual.yml) | expenditure | Institutional Operations — FY2024-25 Actual | 5 | 33 |
+| [local-government-fund-fy2012-13-disbursed-cuyahoga.yml](.yidam/corpus/expenditure/local-government-fund-fy2012-13-disbursed-cuyahoga.yml) | expenditure | Local Government Fund Disbursement to Cuyahoga County — FY2012-13 | 5 | 33 |
+| [medicaid-health-care-services-fy2024-25-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2024-25-actual.yml) | expenditure | Medicaid Health Care Services — FY2024-25 Actual | 4 | 27 |
+| [state-share-of-instruction-fy2024-25-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2024-25-actual.yml) | expenditure | State Share of Instruction — FY2024-25 Actual | 4 | 25 |
+| [fy2010-11.yml](.yidam/corpus/fiscal-period/fy2010-11.yml) | fiscal-period | FY2010-11 Biennium | 2 | 19 |
+| [fy2012-13.yml](.yidam/corpus/fiscal-period/fy2012-13.yml) | fiscal-period | FY2012-13 Biennium | 2 | 22 |
+| [fy2014-15.yml](.yidam/corpus/fiscal-period/fy2014-15.yml) | fiscal-period | FY2014-15 Biennium | 2 | 22 |
+| [fy2016-17.yml](.yidam/corpus/fiscal-period/fy2016-17.yml) | fiscal-period | FY2016-17 Biennium | 2 | 17 |
+| [fy2018-19.yml](.yidam/corpus/fiscal-period/fy2018-19.yml) | fiscal-period | FY2018-19 Biennium | 2 | 18 |
+| [fy2020-21.yml](.yidam/corpus/fiscal-period/fy2020-21.yml) | fiscal-period | FY2020-21 Biennium | 2 | 22 |
+| [fy2022-23.yml](.yidam/corpus/fiscal-period/fy2022-23.yml) | fiscal-period | FY2022-23 Biennium | 2 | 23 |
 | [fy2024-25.yml](.yidam/corpus/fiscal-period/fy2024-25.yml) | fiscal-period | FY2024-25 Biennium | 2 | 22 |
 | [fy2026-27.yml](.yidam/corpus/fiscal-period/fy2026-27.yml) | fiscal-period | FY2026-27 Biennium | 2 | 23 |
 | [fy2026.yml](.yidam/corpus/fiscal-period/fy2026.yml) | fiscal-period | Fiscal Year 2026 | 2 | 22 |
+| [medicaid-caseload-fy2024.yml](.yidam/corpus/forecast/medicaid-caseload-fy2024.yml) | forecast | Medicaid Caseload Projection — FY2024-25 | 4 | 32 |
 | [medicaid-caseload-fy2026.yml](.yidam/corpus/forecast/medicaid-caseload-fy2026.yml) | forecast | Medicaid Caseload Projection — FY2026 | 4 | 44 |
+| [obm-revenue-estimate-fy2020-income-tax.yml](.yidam/corpus/forecast/obm-revenue-estimate-fy2020-income-tax.yml) | forecast | Executive Revenue Estimate — FY2020-21, Personal Income Tax | 5 | 34 |
+| [obm-revenue-estimate-fy2026-sales-tax.yml](.yidam/corpus/forecast/obm-revenue-estimate-fy2026-sales-tax.yml) | forecast | Executive Revenue Estimate — FY2026, Sales and Use Tax | 5 | 32 |
 | [obm-revenue-estimate-fy2026.yml](.yidam/corpus/forecast/obm-revenue-estimate-fy2026.yml) | forecast | Executive Revenue Estimate — FY2026, Personal Income Tax | 5 | 45 |
 | [budget-stabilization-fund.yml](.yidam/corpus/fund/budget-stabilization-fund.yml) | fund | Budget Stabilization Fund | 3 | 35 |
+| [federal-medicaid-match-fund.yml](.yidam/corpus/fund/federal-medicaid-match-fund.yml) | fund | Federal Medicaid Match Fund | 1 | 27 |
 | [general-revenue-fund.yml](.yidam/corpus/fund/general-revenue-fund.yml) | fund | General Revenue Fund | 3 | 34 |
+| [higher-education-improvement-fund.yml](.yidam/corpus/fund/higher-education-improvement-fund.yml) | fund | Higher Education Improvement Fund | 1 | 26 |
 | [highway-operating-fund.yml](.yidam/corpus/fund/highway-operating-fund.yml) | fund | Highway Operating Fund | 1 | 28 |
 | [local-government-fund.yml](.yidam/corpus/fund/local-government-fund.yml) | fund | Local Government Fund | 2 | 31 |
+| [lottery-profits-education-fund.yml](.yidam/corpus/fund/lottery-profits-education-fund.yml) | fund | Lottery Profits Education Fund | 2 | 31 |
+| [public-library-fund.yml](.yidam/corpus/fund/public-library-fund.yml) | fund | Public Library Fund | 2 | 28 |
+| [cleveland-metropolitan-school-district.yml](.yidam/corpus/jurisdiction/cleveland-metropolitan-school-district.yml) | jurisdiction | Cleveland Metropolitan School District | 1 | 27 |
 | [columbus-city-school-district.yml](.yidam/corpus/jurisdiction/columbus-city-school-district.yml) | jurisdiction | Columbus City School District | 1 | 33 |
+| [columbus-metropolitan-library.yml](.yidam/corpus/jurisdiction/columbus-metropolitan-library.yml) | jurisdiction | Columbus Metropolitan Library | 1 | 26 |
+| [cuyahoga-county.yml](.yidam/corpus/jurisdiction/cuyahoga-county.yml) | jurisdiction | Cuyahoga County | 1 | 26 |
 | [franklin-county.yml](.yidam/corpus/jurisdiction/franklin-county.yml) | jurisdiction | Franklin County | 1 | 34 |
+| [developmental-disabilities-services.yml](.yidam/corpus/line-item/developmental-disabilities-services.yml) | line-item | Developmental Disabilities Medicaid Services | 3 | 31 |
+| [early-childhood-education.yml](.yidam/corpus/line-item/early-childhood-education.yml) | line-item | Early Childhood Education | 3 | 30 |
 | [foundation-funding.yml](.yidam/corpus/line-item/foundation-funding.yml) | line-item | Foundation Funding | 3 | 41 |
 | [highway-construction.yml](.yidam/corpus/line-item/highway-construction.yml) | line-item | Highway Construction | 3 | 37 |
+| [highway-maintenance.yml](.yidam/corpus/line-item/highway-maintenance.yml) | line-item | Highway Maintenance | 3 | 30 |
+| [institutional-operations.yml](.yidam/corpus/line-item/institutional-operations.yml) | line-item | Institutional Operations | 3 | 29 |
 | [local-government-fund-distribution.yml](.yidam/corpus/line-item/local-government-fund-distribution.yml) | line-item | Local Government Fund Distribution | 3 | 38 |
-| [medicaid-health-care-services.yml](.yidam/corpus/line-item/medicaid-health-care-services.yml) | line-item | Medicaid Health Care Services | 3 | 41 |
-| [fair-school-funding-plan.yml](.yidam/corpus/program/fair-school-funding-plan.yml) | program | Fair School Funding Plan | 3 | 41 |
+| [medicaid-health-care-services-federal.yml](.yidam/corpus/line-item/medicaid-health-care-services-federal.yml) | line-item | Medicaid Health Care Services (Federal Share) | 3 | 34 |
+| [medicaid-health-care-services.yml](.yidam/corpus/line-item/medicaid-health-care-services.yml) | line-item | Medicaid Health Care Services | 4 | 43 |
+| [medicaid-services-odjfs.yml](.yidam/corpus/line-item/medicaid-services-odjfs.yml) | line-item | Medicaid Services (Job and Family Services) | 4 | 37 |
+| [property-tax-rollback-reimbursement.yml](.yidam/corpus/line-item/property-tax-rollback-reimbursement.yml) | line-item | Property Tax Rollback Reimbursement | 3 | 34 |
+| [public-library-fund-distribution.yml](.yidam/corpus/line-item/public-library-fund-distribution.yml) | line-item | Public Library Fund Distribution | 3 | 29 |
+| [pupil-transportation.yml](.yidam/corpus/line-item/pupil-transportation.yml) | line-item | Pupil Transportation | 3 | 31 |
+| [state-share-of-instruction.yml](.yidam/corpus/line-item/state-share-of-instruction.yml) | line-item | State Share of Instruction | 3 | 30 |
+| [adult-corrections.yml](.yidam/corpus/program/adult-corrections.yml) | program | Adult Corrections | 2 | 30 |
+| [developmental-disabilities-services.yml](.yidam/corpus/program/developmental-disabilities-services.yml) | program | Developmental Disabilities Services | 2 | 31 |
+| [fair-school-funding-plan.yml](.yidam/corpus/program/fair-school-funding-plan.yml) | program | Fair School Funding Plan | 4 | 43 |
 | [highway-system-preservation.yml](.yidam/corpus/program/highway-system-preservation.yml) | program | Highway System Preservation | 3 | 37 |
 | [local-government-distribution.yml](.yidam/corpus/program/local-government-distribution.yml) | program | Local Government Fund Distribution | 6 | 51 |
-| [medicaid.yml](.yidam/corpus/program/medicaid.yml) | program | Ohio Medicaid | 2 | 36 |
+| [medicaid.yml](.yidam/corpus/program/medicaid.yml) | program | Ohio Medicaid | 3 | 38 |
+| [public-library-fund-distribution.yml](.yidam/corpus/program/public-library-fund-distribution.yml) | program | Public Library Fund Distribution | 5 | 38 |
+| [state-share-of-instruction.yml](.yidam/corpus/program/state-share-of-instruction.yml) | program | State Share of Instruction | 2 | 26 |
+| [casino-tax.yml](.yidam/corpus/revenue-source/casino-tax.yml) | revenue-source | Gross Casino Revenue Tax | 1 | 29 |
+| [cigarette-and-tobacco-tax.yml](.yidam/corpus/revenue-source/cigarette-and-tobacco-tax.yml) | revenue-source | Cigarette and Other Tobacco Products Tax | 2 | 28 |
+| [commercial-activity-tax.yml](.yidam/corpus/revenue-source/commercial-activity-tax.yml) | revenue-source | Commercial Activity Tax | 2 | 34 |
+| [federal-medicaid-match.yml](.yidam/corpus/revenue-source/federal-medicaid-match.yml) | revenue-source | Federal Medicaid Match | 2 | 34 |
 | [motor-fuel-tax.yml](.yidam/corpus/revenue-source/motor-fuel-tax.yml) | revenue-source | Ohio Motor Fuel Tax | 2 | 37 |
 | [personal-income-tax.yml](.yidam/corpus/revenue-source/personal-income-tax.yml) | revenue-source | Ohio Personal Income Tax | 3 | 36 |
 | [sales-and-use-tax.yml](.yidam/corpus/revenue-source/sales-and-use-tax.yml) | revenue-source | Ohio Sales and Use Tax | 3 | 35 |

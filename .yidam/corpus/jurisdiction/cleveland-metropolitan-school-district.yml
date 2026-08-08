@@ -1,0 +1,27 @@
+class: jurisdiction
+label: Cleveland Metropolitan School District
+description: |
+  A large urban district serving Cleveland, and one of the districts most dependent on state
+  foundation funding relative to local resources. [inference]
+
+  Seeded as the second school district, so the corpus can distinguish a formula change from a
+  district-specific one. A single seeded district makes every movement look particular; two make
+  it possible to ask whether districts with similar local capacity moved together.
+
+  It also operates under distinct governance arrangements that have at times carried their own
+  statutory provisions in operating budgets. [inference] That is worth noting because it means
+  a change affecting this district may appear in bill language rather than in any line item
+  figure — the same invisibility problem the
+  [local government distribution](../program/local-government-distribution.yml) has.
+
+  [open] Enrollment, district IRN, and state share are unpopulated.
+properties:
+  name: Cleveland Metropolitan School District
+  jurisdiction_type: school-district
+  identifier: "[open] district IRN pending verification"
+  county: Cuyahoga
+  population_basis: |
+    [open] Enrollment count and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

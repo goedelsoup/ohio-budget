@@ -1,0 +1,30 @@
+class: line-item
+label: Early Childhood Education
+description: |
+  State-funded preschool for eligible children, administered separately from the school
+  funding formula. [inference]
+
+  Seeded as a genuinely discretionary education appropriation — its size is a legislative choice
+  rather than a formula result, unlike [foundation funding](./foundation-funding.yml) or
+  [pupil transportation](./pupil-transportation.yml). That makes it the right control case when
+  reading a change in education spending: a formula line and a discretionary line moving
+  together mean something different from either moving alone.
+
+  [open] The code, eligibility thresholds, and served population are unreconstructed.
+properties:
+  name: Early Childhood Education
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    State-funded preschool slots for eligible children.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-education-and-workforce.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

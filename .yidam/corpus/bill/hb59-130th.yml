@@ -1,0 +1,31 @@
+class: bill
+label: House Bill 59 (130th General Assembly)
+description: |
+  The FY2014-15 main operating budget, which separated the
+  [Department of Medicaid](../agency/department-of-medicaid.yml) from Job and Family Services.
+  [inference]
+
+  Seeded as the reorganization case. Ohio operating budgets restructure government as well as
+  fund it, and this bill produced the corpus's largest organizational discontinuity — a whole
+  program and its line items moving to a new agency code mid-window, breaking any code-keyed
+  Medicaid series at FY2014.
+
+  [open] Which line items moved, and whether the bill also carried the eligibility extension
+  that changed caseload in the same biennium, are unreconstructed. The two are easily
+  conflated and have entirely different implications for reading the series.
+properties:
+  bill_number: HB 59
+  general_assembly: 130th
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2013-06-30
+  veto_summary: |
+    [open] Line-item vetoes were likely exercised, as on every operating budget in the window,
+    but the count and subject matter are unreconstructed. [inference]
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2014-15.yml
+    relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

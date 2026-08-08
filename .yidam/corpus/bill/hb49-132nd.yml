@@ -1,0 +1,27 @@
+class: bill
+label: House Bill 49 (132nd General Assembly)
+description: |
+  The FY2018-19 main operating budget, and the last one enacted under ordinary economic
+  conditions before the pandemic. [inference]
+
+  Its practical role in the corpus is as a reference point. Comparisons spanning FY2020 are
+  distorted by relief money and mid-year reductions on both sides, so a claim about how
+  something has changed "since before the pandemic" is a claim about this biennium.
+
+  [open] Not yet examined in detail.
+properties:
+  bill_number: HB 49
+  general_assembly: 132nd
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2017-06-30
+  veto_summary: |
+    [open] Line-item vetoes were likely exercised, as on every operating budget in the window,
+    but the count and subject matter are unreconstructed. [inference]
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2018-19.yml
+    relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

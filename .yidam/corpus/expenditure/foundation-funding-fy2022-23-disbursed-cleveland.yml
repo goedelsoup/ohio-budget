@@ -1,0 +1,33 @@
+class: expenditure
+label: Foundation Funding Disbursement to Cleveland Metropolitan Schools — FY2022-23
+description: |
+  Foundation funding paid to
+  [Cleveland Metropolitan School District](../jurisdiction/cleveland-metropolitan-school-district.yml)
+  during the first biennium of the Fair School Funding Plan phase-in. [inference]
+
+  The second district-level disbursement in the corpus. Paired with the
+  [Columbus figure](./foundation-funding-fy2024-disbursed.yml) it makes district comparison
+  possible for the first time — but the two cover different biennia, so they are not yet
+  directly comparable. Closing that requires either district seeded for both periods.
+
+  The same caveat applies as to any district figure: this is a slice of the line item, not the
+  line item, and differencing it against the full appropriation is wrong by orders of
+  magnitude.
+properties:
+  amount: "[open] pending the obm connector"
+  basis: actual-closed
+  period_label: FY2022-23
+  reporting_source: |
+    OBM financial reporting. [open] Not yet extracted.
+  reversion: "[open] not reported at this granularity"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2022-23.yml
+    relationship: occurs-in
+  - target: ../jurisdiction/cleveland-metropolitan-school-district.yml
+    relationship: paid-to
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

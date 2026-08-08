@@ -1,0 +1,28 @@
+class: agency
+label: Ohio Department of Developmental Disabilities
+description: |
+  The agency supporting Ohioans with developmental disabilities, largely through Medicaid
+  waiver services delivered in partnership with county boards. [inference]
+
+  Seeded because it complicates the tidy picture the corpus otherwise presents of Medicaid as
+  one program in one agency. A substantial share of Medicaid-funded services is appropriated to
+  and administered by *other* departments — this one, and behavioral health — so a Medicaid
+  total assembled from the [Department of Medicaid's](./department-of-medicaid.yml) line items
+  alone is incomplete. [inference]
+
+  This is the kind of error the program/line-item separation exists to prevent, and this agency
+  is the case that proves the separation was worth the extra class.
+
+  [open] The agency code and the share of Medicaid spending appropriated outside the Department
+  of Medicaid are unverified.
+properties:
+  name: Ohio Department of Developmental Disabilities
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    Renamed from a predecessor department around 2009. [inference]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/developmental-disabilities-services.yml
+    relationship: administers

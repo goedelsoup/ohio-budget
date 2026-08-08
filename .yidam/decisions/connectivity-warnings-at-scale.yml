@@ -1,0 +1,86 @@
+id: connectivity-warnings-at-scale
+summary: >-
+  At 120 nodes the corpus carries 38 connectivity warnings. The rule established in
+  [accepted-validator-warnings] is restated and generalized: close a warning caused by a
+  missing node, accept one caused by a missing fact.
+context: |
+  Supersedes nothing. Extends decision [accepted-validator-warnings], which was written when
+  the corpus held 46 instances and six warnings, and which established the governing
+  distinction. This record generalizes it now that the corpus holds 120 and the warning count
+  has risen to 38 — 30 orphan-in and 8 no-domain-link, with 0 errors.
+
+  The rise is expected and is not a regression. Both rules describe asymmetry: a node with
+  outgoing edges but no incoming ones, or a node whose only link is to its own class file.
+  Expansion adds leaf nodes faster than it adds the edges that would point back at them,
+  because a node arrives complete in what it asserts and incomplete in what asserts it.
+
+  Counts by class:
+
+    appropriation   10    bill            4    agency        2
+    fund             7    line-item       3    bill-version  1
+    revenue-source   5    forecast        3
+                          actor           3
+decision: |
+  Accepted, in five groups, with the closing condition for each:
+
+  1. APPROPRIATIONS WITH NO MODIFYING ACTION — 10
+     Nothing points at an appropriation except a budget-action that modifies it. Most
+     appropriations are never individually amended or vetoed. Closes only if extraction shows
+     a specific line was moved; asserting it now would fabricate a legislative event.
+
+  2. FUNDS AND REVENUE SOURCES AT THE EDGE OF THE MODELLED WORLD — 12
+     A fund warns when no other fund transfers to it and no line item draws on it; a revenue
+     source warns when no forecast projects it and no program is earmarked from it. Several
+     are terminal by design — the highway fund is a constitutionally restricted terminus, the
+     casino tax is distributed by formula rather than deposited to a single fund, and the
+     higher education improvement fund awaits a capital appropriation family that is in scope
+     but deliberately unseeded. Closes as extraction reaches each.
+
+  3. BILLS WITHOUT SEEDED VERSIONS — 4
+     HB 1, HB 59, HB 64, and HB 49 have no bill-version node, so nothing points at them. Each
+     closes when that biennium's figures are extracted and the enacted version is seeded with
+     them. Seeding empty versions now would be structure without content — five near-identical
+     stubs whose only function is to lower a number.
+
+     HB 166 was the exception and was seeded, because the FY2020 executive reduction had no
+     document to attach to and that left the window's most consequential execution-phase event
+     unanchored. That is a missing node, not a missing fact, and it was closed.
+
+  4. FORECASTS AND ACTORS WITH NO RECORDED CONSEQUENCE — 6
+     A forecast acquires an incoming edge when an action is triggered-by it; an actor when an
+     action is taken-by them. The Senate Finance Committee, the conference committee, and the
+     Legislative Service Commission have no action attributed to them because no stage-level
+     amendment has been extracted. The LSC may never acquire one — it observes and documents
+     rather than acts, which is why it was seeded at all.
+
+  5. PREDECESSOR AND EDGE-OF-SERIES NODES — 6
+     Line items with no appropriation yet, agencies at the end of a succession chain, the
+     earliest bill-version in a chain. Structural leaves of a series that only extends
+     backward through extraction.
+
+  No suppression mechanism was added, and none should be. The count is expected to rise again
+  before it falls.
+rationale: |
+  The temptation this record exists to resist is treating the warning count as a score. It is
+  not one. A corpus of 120 nodes with 38 asymmetries and 0 errors is in better condition than a
+  corpus of 120 nodes with 0 asymmetries achieved by asserting 38 edges nobody checked, and the
+  second is roughly ten minutes of work away at any time.
+
+  The governing distinction has held under a threefold expansion, which is the useful finding
+  here. A warning caused by a missing node is a prompt to write the node — and in this pass
+  that prompt was productive: it produced the Job and Family Services and Department of
+  Education predecessor agencies, the pre-2013 Medicaid line item, and HB 166's enacted
+  version, each of which closed a declared-but-empty edge that had been open since genesis.
+  Agency succession, line-item lineage, expenditure reversion, and forecast-triggered action
+  are all now populated with real instances rather than declared in the abstract.
+
+  A warning caused by a missing fact is a prompt to extract, and extraction has not run. Those
+  warnings should persist, visibly, until it does. They are the most honest inventory the
+  repository currently has of what it does not know.
+
+  One asymmetry in the rules themselves is worth recording. orphan-in exempts pure-source
+  classes and no-domain-link exempts sinks, both computed from the class definition rather than
+  from a hand-maintained list. That is why budget-action never warns despite nothing ever
+  pointing at an action, and why jurisdiction and actor never warn for lacking outward edges.
+  The exemptions are structural, so they cannot drift out of step with the ontology the way a
+  suppression list would.

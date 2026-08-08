@@ -1,0 +1,18 @@
+class: fiscal-period
+label: FY2018-19 Biennium
+description: |
+  Appropriated by House Bill 49. [inference] The last full biennium before the pandemic,
+  and therefore the last one whose figures reflect ordinary conditions. Comparisons that
+  span FY2020 should generally use this period rather than the one after it as their
+  reference point.
+properties:
+  label: FY2018-19
+  period_type: biennium
+  start_date: 2017-07-01
+  end_date: 2019-06-30
+  general_assembly: 132nd
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2020-21.yml
+    relationship: precedes

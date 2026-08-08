@@ -1,0 +1,29 @@
+class: actor
+label: Legislative Service Commission
+description: |
+  The nonpartisan legislative agency that analyzes appropriation bills, produces the
+  stage-comparison documents this corpus depends on, and prepares fiscal notes. [inference]
+
+  It takes no budget action and appropriates nothing, which makes its inclusion as an actor a
+  deliberate choice rather than an obvious one. It is here because it is the observer whose
+  records constitute most of what this repository can ever know about the legislative phase —
+  the [comparison document](../../catalog/lsc-hb96-comparison.md) is the authority for what a
+  line stood at when a body acted.
+
+  Modeling the observer explicitly keeps a distinction the corpus needs: what happened, and what
+  was recorded about what happened. Where the two differ, the corpus can only ever see the
+  second.
+properties:
+  name: Legislative Service Commission
+  role_type: analytic-office
+  authority_basis: |
+    Statutory duty to provide nonpartisan analysis and fiscal research to the General
+    Assembly. [inference]
+  held_by: |
+    A permanent nonpartisan staff agency serving both chambers. [inference]
+  phase_active: legislative — analysis and documentation
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of
+  - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites

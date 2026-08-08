@@ -1,0 +1,31 @@
+class: bill
+label: House Bill 153 (129th General Assembly)
+description: |
+  The FY2012-13 main operating budget, and the most consequential bill in this corpus's
+  window for local government finance. [inference]
+
+  It reduced the [local government fund](../fund/local-government-fund.yml) and
+  [public library fund](../fund/public-library-fund.yml) shares and accelerated the phase-out of
+  reimbursements for the eliminated tangible personal property tax, together shifting durable
+  fiscal pressure from the state to counties, municipalities, school districts, and library
+  systems. [inference]
+
+  The changes were made in bill language — statutory percentages — rather than in appropriation
+  figures, which is why they are nearly invisible to an analysis that reads line item amounts
+  alone. The amounts fell, and nothing in the numbers says why.
+properties:
+  bill_number: HB 153
+  general_assembly: 129th
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2011-06-30
+  veto_summary: |
+    [open] Line-item vetoes were likely exercised, as on every operating budget in the window,
+    but the count and subject matter are unreconstructed. [inference]
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2012-13.yml
+    relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

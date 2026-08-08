@@ -1,0 +1,31 @@
+class: line-item
+label: Pupil Transportation
+description: |
+  State support for school district transportation costs, distributed by a formula
+  separate from the main school funding formula. [inference]
+
+  Seeded because it demonstrates that a program is not a line item. The
+  [Fair School Funding Plan](../program/fair-school-funding-plan.yml) is commonly described as
+  *the* school funding formula, but districts receive state education money through several
+  line items with different formulas, and transportation is the largest of the others.
+  [inference] A claim about what a district receives from the state is incomplete if it cites
+  only foundation funding.
+
+  [open] The code and the transportation formula's basis are unreconstructed.
+properties:
+  name: Pupil Transportation
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    State share of school district pupil transportation costs.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-education-and-workforce.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

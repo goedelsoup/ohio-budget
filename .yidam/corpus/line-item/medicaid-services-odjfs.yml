@@ -1,0 +1,37 @@
+class: line-item
+label: Medicaid Services (Job and Family Services)
+description: |
+  The line item carrying Medicaid benefit payments before the
+  [Department of Medicaid](../agency/department-of-medicaid.yml) was separated out in the
+  FY2014-15 biennium. [inference]
+
+  This node exists to be a lineage target. It is the predecessor of
+  [Medicaid Health Care Services](./medicaid-health-care-services.yml), and the pair is the
+  corpus's worked example of the problem the durable-identity design was chosen to solve: the
+  same money, funding the same benefits, under two codes and two agencies, with a discontinuity
+  in FY2014 that is organizational rather than fiscal.
+
+  A code-keyed series breaks here and reports a collapse. The `succeeds` edge asserted on the
+  successor is what repairs it — and it is an assertion, made by a person, not a computed
+  result.
+
+  [open] Both codes, and the precise set of line items that moved, are unverified.
+properties:
+  name: Medicaid Services (Job and Family Services)
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Payment for Medicaid-covered services under Job and Family Services administration.
+  first_period: "[open] predates the corpus window"
+  last_period: "approximately FY2013"
+  status: superseded
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/job-and-family-services.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ./medicaid-health-care-services.yml
+    relationship: superseded-by

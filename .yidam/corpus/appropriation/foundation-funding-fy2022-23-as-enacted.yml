@@ -1,0 +1,33 @@
+class: appropriation
+label: Foundation Funding — FY2022-23, As Enacted
+description: |
+  The FY2022-23 biennial figure, appropriated by [HB 110](../bill/hb110-134th.yml) — the
+  budget that enacted the [Fair School Funding Plan](../program/fair-school-funding-plan.yml).
+
+  This is the first point in the formula's phase-in and therefore the origin of the education
+  series. Every later foundation funding figure is on-schedule or behind relative to what this
+  bill set out, and that comparison cannot be made from amounts alone: it needs the schedule,
+  which lives in [bill language](../bill-version/hb110-as-enacted.yml) rather than in a
+  comparison table.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2022-23
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2022-23.yml
+    relationship: covers
+  - target: ../bill-version/hb110-as-enacted.yml
+    relationship: stated-in
+  - target: ../expenditure/foundation-funding-fy2022-23-disbursed-cleveland.yml
+    relationship: realized-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

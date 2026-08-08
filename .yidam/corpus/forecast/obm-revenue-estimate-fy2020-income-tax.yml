@@ -1,0 +1,34 @@
+class: forecast
+label: Executive Revenue Estimate — FY2020-21, Personal Income Tax
+description: |
+  The revenue estimate underlying [HB 166](../bill/hb166-133rd.yml), issued before the
+  pandemic and overtaken by it within months. [inference]
+
+  This is the corpus's most consequential forecast node, because its failure is what the
+  [executive reduction](../budget-action/fy2020-executive-reduction.yml) responded to. It is the
+  target of the corpus's only `triggered-by` edge on a revenue estimate, and it turns the claim
+  that spending was cut because revenue fell into something the graph can be asked about.
+
+  It is also the corpus's best future test of forecast quality: the period has closed, so the
+  variance is computable as soon as extraction supplies both numbers.
+properties:
+  forecast_type: revenue-estimate
+  issued_date: "[open] pending the obm connector"
+  projected_amount: "[open] pending the obm connector"
+  horizon: |
+    [open] Not reconstructed.
+  variance_from_actual: |
+    [open] Computable once extraction supplies both the projection and the outturn.
+  assumptions: |
+    [open] Not reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2020-21.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by
+  - target: ../revenue-source/personal-income-tax.yml
+    relationship: projects
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

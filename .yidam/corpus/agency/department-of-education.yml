@@ -1,0 +1,29 @@
+class: agency
+label: Ohio Department of Education
+description: |
+  The agency administering primary and secondary education funding before its restructuring
+  into the [Department of Education and Workforce](./department-of-education-and-workforce.yml)
+  in the FY2024-25 biennium. [inference] It was governed by the elected State Board of
+  Education rather than by a director reporting to the governor. [inference]
+
+  Seeded as the second predecessor node, and the more subtle of the two. The Medicaid
+  separation moved money between agencies; this restructuring moved *authority* — from an
+  elected board to the executive — while the line items, the codes, and the dollar amounts
+  appear to have carried across largely unchanged. [inference]
+
+  That is precisely the case a financial model renders invisible. A series keyed on
+  [foundation funding](../line-item/foundation-funding.yml) shows no discontinuity here at all,
+  and a reader would conclude nothing happened. Something did.
+
+  [open] Whether any line item codes changed at the restructuring is unverified, and it is the
+  first question the [lineage](../../skills/lineage.md) calculator should be pointed at for
+  this agency.
+properties:
+  name: Ohio Department of Education
+  agency_code: "200 [inference]"
+  cabinet_status: board-or-commission
+  predecessor: |
+    Predates the corpus window under State Board of Education governance. [inference]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of

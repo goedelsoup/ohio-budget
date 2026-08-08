@@ -1,0 +1,28 @@
+class: agency
+label: Ohio Department of Rehabilitation and Correction
+description: |
+  The agency operating Ohio's prisons and parole supervision. [inference]
+
+  Seeded because it is the corpus's clearest case of a cost driven by a population the budget
+  does not control on a budget timescale. Prison population follows sentencing law and criminal
+  justice practice, so institutional operating costs behave more like an entitlement than like a
+  discretionary appropriation — much as Medicaid does, but with a driver that responds to policy
+  over years rather than to economic conditions over months. [inference]
+
+  It is therefore the right contrast case for reading [`gap`](../../skills/gap.md) results.
+  Medicaid, foundation funding, and corrections would each produce a divergence between
+  appropriated and actual for entirely different reasons, and the calculator returns the same
+  shape of number for all three.
+
+  [open] The agency code is unverified.
+properties:
+  name: Ohio Department of Rehabilitation and Correction
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    No reorganization within the corpus window. [inference]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/adult-corrections.yml
+    relationship: administers

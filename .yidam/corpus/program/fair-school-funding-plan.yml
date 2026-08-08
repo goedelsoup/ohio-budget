@@ -39,3 +39,5 @@ links:
     relationship: funded-by
   - target: ../jurisdiction/columbus-city-school-district.yml
     relationship: serves
+  - target: ../line-item/pupil-transportation.yml
+    relationship: funded-by

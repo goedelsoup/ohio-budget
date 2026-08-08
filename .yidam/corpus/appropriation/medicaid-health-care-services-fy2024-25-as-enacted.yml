@@ -1,0 +1,35 @@
+class: appropriation
+label: Medicaid Health Care Services — FY2024-25, As Enacted
+description: |
+  The general revenue share of Medicaid benefit authority for the FY2024-25 biennium.
+
+  Seeded against a closed period so it can be differenced against
+  [what was actually spent](../expenditure/medicaid-health-care-services-fy2024-25-actual.yml)
+  using final rather than provisional figures. On this line item that difference is evidence
+  about caseload forecasting rather than about spending discipline.
+
+  Note this is the general revenue figure only. The
+  [federal share](../line-item/medicaid-health-care-services-federal.yml) is a separate line
+  item, and the all-funds total is roughly double this. [inference]
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2024-25
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024-25.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../expenditure/medicaid-health-care-services-fy2024-25-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

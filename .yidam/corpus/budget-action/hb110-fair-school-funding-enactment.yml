@@ -1,0 +1,37 @@
+class: budget-action
+label: Fair School Funding Plan Enactment, HB 110
+description: |
+  The replacement of Ohio's prior school funding arrangement with the
+  [Fair School Funding Plan](../program/fair-school-funding-plan.yml) in
+  [HB 110](../bill/hb110-134th.yml), together with the phase-in schedule that governs every
+  subsequent budget's treatment of it. [inference]
+
+  Modeled as a budget action rather than left implicit in the program node because it has a
+  date, a document, and a specific effect on a specific appropriation — and because everything
+  that has happened to school funding since is a decision about the schedule this action
+  created.
+
+  The action's significance is not its dollar delta. A formula replacement changes how every
+  district's share is computed; the appropriation total may move modestly while individual
+  districts move a great deal in both directions.
+
+  [open] The phase-in schedule is unextracted, and without it no later budget can be assessed as
+  on-schedule or behind — currently the largest unanswerable question in the education thread.
+properties:
+  action_type: amendment
+  action_date: 2021-06-30
+  direction: increase
+  amount_delta: "[open] pending the lsc connector"
+  stated_justification: |
+    [open] Not reconstructed. The plan followed several years of work on a formula intended to
+    base the state share on a computed cost of educating a pupil. [inference]
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb110-as-enacted.yml
+    relationship: applies-to
+  - target: ../appropriation/foundation-funding-fy2022-23-as-enacted.yml
+    relationship: modifies
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

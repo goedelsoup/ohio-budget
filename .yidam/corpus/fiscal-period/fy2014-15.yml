@@ -1,0 +1,22 @@
+class: fiscal-period
+label: FY2014-15 Biennium
+description: |
+  The biennium in which the [Department of Medicaid](../agency/department-of-medicaid.yml)
+  was separated from Job and Family Services, and in which Medicaid eligibility was extended
+  to the expansion population. [inference]
+
+  Both events land in the same two years, which is analytically awkward: the agency
+  reorganization renumbers the line items at the same moment the caseload changes
+  substantially. Any Medicaid series crossing this boundary is measuring two things at once,
+  and separating them requires the [lineage](../../skills/lineage.md) resolution to be right.
+properties:
+  label: FY2014-15
+  period_type: biennium
+  start_date: 2013-07-01
+  end_date: 2015-06-30
+  general_assembly: 130th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2016-17.yml
+    relationship: precedes

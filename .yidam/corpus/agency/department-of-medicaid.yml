@@ -32,3 +32,5 @@ links:
     relationship: instance-of
   - target: ../program/medicaid.yml
     relationship: administers
+  - target: ./job-and-family-services.yml
+    relationship: succeeds

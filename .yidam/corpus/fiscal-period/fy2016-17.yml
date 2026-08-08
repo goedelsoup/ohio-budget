@@ -1,0 +1,17 @@
+class: fiscal-period
+label: FY2016-17 Biennium
+description: |
+  A comparatively quiet biennium, appropriated by House Bill 64. [inference] It is seeded
+  because a series needs its unremarkable periods as much as its pivotal ones — without them
+  there is no baseline against which a step change reads as a step change.
+properties:
+  label: FY2016-17
+  period_type: biennium
+  start_date: 2015-07-01
+  end_date: 2017-06-30
+  general_assembly: 131st
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2018-19.yml
+    relationship: precedes

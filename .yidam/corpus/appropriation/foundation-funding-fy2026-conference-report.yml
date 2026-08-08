@@ -1,0 +1,29 @@
+class: appropriation
+label: Foundation Funding — FY2026, Conference Report
+description: |
+  The reconciled FY2026 figure both chambers voted on, before the governor acted.
+
+  This is the legislature's final position on school funding for the year. Differenced against
+  the [enacted figure](./foundation-funding-fy2026-as-enacted.yml), the remainder is by
+  definition the executive's edit and nothing else — which is the only clean way the corpus can
+  isolate a veto's effect on a specific line.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2026
+  stage: conference-report
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers
+  - target: ../bill-version/hb96-conference-report.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites

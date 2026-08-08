@@ -1,0 +1,34 @@
+class: line-item
+label: Property Tax Rollback Reimbursement
+description: |
+  State reimbursement to local governments and school districts for property tax relief
+  granted to homeowners under statutory rollback and homestead provisions. [inference]
+
+  This is state money that never appears as a state program and never reaches a state agency's
+  operations. It exists because the state reduced a *local* tax and undertook to make the local
+  recipients whole, which makes it one of the largest general revenue line items that funds no
+  state activity at all. [inference]
+
+  It matters to the incidence framing more than its visibility suggests: changes to eligibility
+  narrow who benefits without changing any appropriation, and the appropriation then falls as a
+  consequence rather than as a decision.
+
+  [open] Eligibility changes during the window and their effect on the line item are
+  unreconstructed.
+properties:
+  name: Property Tax Rollback Reimbursement
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Reimbursement to local taxing authorities for statutory property tax relief.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-taxation.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

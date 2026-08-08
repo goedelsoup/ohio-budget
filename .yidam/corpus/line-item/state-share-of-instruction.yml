@@ -1,0 +1,30 @@
+class: line-item
+label: State Share of Instruction
+description: |
+  The principal subsidy to public universities and community colleges, distributed by a
+  formula weighted toward course and degree completion rather than enrollment alone. [inference]
+
+  Seeded because it is the corpus's second formula program and behaves oppositely to
+  [foundation funding](./foundation-funding.yml). School funding formulas direct more money
+  where local capacity is weaker; this one directs more where institutions produce more
+  completions. Both are formulas, and knowing that tells you nothing about direction — which is
+  why `formula_basis` is a property rather than a flag.
+
+  [open] The formula's components and their weights across the window are unreconstructed.
+properties:
+  name: State Share of Instruction
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Operating subsidy to state-supported institutions of higher education.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-higher-education.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

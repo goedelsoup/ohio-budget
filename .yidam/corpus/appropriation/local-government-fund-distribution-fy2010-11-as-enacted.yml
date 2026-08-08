@@ -1,0 +1,29 @@
+class: appropriation
+label: Local Government Fund Distribution — FY2010-11, As Enacted
+description: |
+  The last biennial local government fund figure before the reduction.
+
+  Its only job is to be the *before* half of a pair. Differenced against the
+  [FY2012-13 figure](./local-government-fund-distribution-fy2012-13-as-enacted.yml) it measures
+  the largest single shift of fiscal weight from the state to local government inside the corpus
+  window — and the comparison is only valid in constant dollars, which makes this the pair that
+  most clearly justifies [`real-dollars`](../../skills/real-dollars.md) as a prerequisite rather
+  than an enhancement.
+
+  No bill version is seeded for HB 1, so this figure has nothing to be stated in yet.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2010-11
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2010-11.yml
+    relationship: covers

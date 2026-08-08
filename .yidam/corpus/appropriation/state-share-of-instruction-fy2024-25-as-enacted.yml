@@ -1,0 +1,31 @@
+class: appropriation
+label: State Share of Instruction — FY2024-25, As Enacted
+description: |
+  Higher education operating subsidy authority for the FY2024-25 biennium.
+
+  Seeded as a formula line whose formula points the opposite way from school funding's — toward
+  institutions that produce more completions rather than toward those with weaker local
+  capacity. Its [gap](../../skills/gap.md) against actual should behave differently again from
+  Medicaid's and from corrections', which is the point of holding all three.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2024-25
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/state-share-of-instruction.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024-25.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../expenditure/state-share-of-instruction-fy2024-25-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

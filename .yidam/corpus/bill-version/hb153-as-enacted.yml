@@ -1,0 +1,29 @@
+class: bill-version
+label: HB 153 As Enacted
+description: |
+  [HB 153](../bill/hb153-129th.yml) as it became law in June 2011, carrying the reductions to
+  the [local government fund](../fund/local-government-fund.yml) and
+  [public library fund](../fund/public-library-fund.yml) shares. [inference]
+
+  This is the most important single document in the corpus for the local finance thread, and it
+  is important for its *language* rather than its figures. The reduction was a change to
+  statutory percentages; the appropriation amounts fell as a consequence. Extraction that
+  captures only the tabular figures from this bill will record the effect and miss the cause.
+
+  [open] The percentages before and after are unextracted. They are the pair of numbers that
+  would let the entire local government fund series be interpreted, and they live in bill
+  language rather than in a comparison table.
+properties:
+  stage: as-enacted
+  stage_date: 2011-06-30
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb153-129th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

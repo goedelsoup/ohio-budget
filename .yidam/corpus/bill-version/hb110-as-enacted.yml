@@ -1,0 +1,27 @@
+class: bill-version
+label: HB 110 As Enacted
+description: |
+  [HB 110](../bill/hb110-134th.yml) as it became law in mid-2021, enacting the
+  [Fair School Funding Plan](../program/fair-school-funding-plan.yml). [inference]
+
+  Seeded because this is the version that fixed the phase-in schedule every subsequent budget
+  makes a decision about. The schedule is the reference against which later budgets are
+  on-track or behind, and it exists only in this text.
+
+  [open] The schedule itself is unextracted. Until it is, no claim that a later budget slowed
+  the phase-in can be evaluated — which is currently the largest unanswerable question in the
+  corpus's education thread.
+properties:
+  stage: as-enacted
+  stage_date: 2021-06-30
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb110-134th.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

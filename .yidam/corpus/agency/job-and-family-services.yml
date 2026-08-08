@@ -1,0 +1,29 @@
+class: agency
+label: Ohio Department of Job and Family Services
+description: |
+  The agency administering unemployment compensation, cash and food assistance, child support,
+  and — until the separation in the FY2014-15 biennium — Medicaid. [inference]
+
+  It is seeded to give the [Department of Medicaid](./department-of-medicaid.yml) a predecessor
+  to point at. Until now the `succeeds` edge between agencies was declared and empty, and the
+  most consequential organizational discontinuity in the corpus window was recorded only as
+  free text in a property. It is now an edge that can be traversed.
+
+  The distinction the edge makes is worth stating: this agency did not cease to exist. It
+  continues to administer everything else it administered before. What moved was a program and
+  its line items, which is why the successor relation belongs on the Medicaid side and why a
+  naive agency-total series will show this department shrinking dramatically in FY2014 for
+  reasons that have nothing to do with a funding decision.
+
+  [open] The agency code, the effective date of the Medicaid transfer, and which line items
+  moved are unverified.
+properties:
+  name: Ohio Department of Job and Family Services
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    Formed from the merger of predecessor human services and employment agencies around 2000.
+    [inference] Predates the corpus window.
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of

@@ -34,3 +34,5 @@ links:
     relationship: instance-of
   - target: ../line-item/medicaid-health-care-services.yml
     relationship: funded-by
+  - target: ../line-item/medicaid-health-care-services-federal.yml
+    relationship: funded-by

@@ -1,0 +1,32 @@
+class: forecast
+label: Executive Revenue Estimate — FY2026, Sales and Use Tax
+description: |
+  The sales and use tax component of the executive revenue estimate underlying
+  [HB 96](../bill/hb96-136th.yml). [inference]
+
+  Seeded alongside the [income tax estimate](./obm-revenue-estimate-fy2026.yml) for the same
+  period because forecast error is not uniform across instruments. Income tax is the more
+  cyclically sensitive of the two, so a single-instrument view of forecast quality would
+  systematically misstate it. Holding both is what lets the corpus eventually say which
+  instrument the estimate got wrong, rather than only that the total missed.
+properties:
+  forecast_type: revenue-estimate
+  issued_date: "[open] pending the obm connector"
+  projected_amount: "[open] pending the obm connector"
+  horizon: |
+    [open] Not reconstructed.
+  variance_from_actual: |
+    [open] Computable once extraction supplies both the projection and the outturn.
+  assumptions: |
+    [open] Not reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by
+  - target: ../revenue-source/sales-and-use-tax.yml
+    relationship: projects
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

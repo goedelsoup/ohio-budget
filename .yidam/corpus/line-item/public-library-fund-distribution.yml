@@ -1,0 +1,29 @@
+class: line-item
+label: Public Library Fund Distribution
+description: |
+  The statutory distribution of a share of state tax receipts to public library systems.
+  [inference]
+
+  The sibling of [local government fund distribution](./local-government-fund-distribution.yml),
+  and seeded for the same reason its fund was: two formula distributions reduced in the same
+  period read as a shift of fiscal weight onto local entities, where one reads as a targeted
+  cut. Which of those is true is an empirical question, and it needs both nodes to be asked.
+
+  [open] The percentage by biennium is unreconstructed.
+properties:
+  name: Public Library Fund Distribution
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Distribution to public library systems under the statutory formula.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-taxation.yml
+    relationship: belongs-to
+  - target: ../fund/public-library-fund.yml
+    relationship: draws-from

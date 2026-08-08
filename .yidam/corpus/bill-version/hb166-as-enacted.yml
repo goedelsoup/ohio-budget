@@ -1,0 +1,35 @@
+class: bill-version
+label: HB 166 As Enacted
+description: |
+  [HB 166](../bill/hb166-133rd.yml) as it became law in July 2019 — the FY2020-21 operating
+  budget as the legislature and governor settled it, eight months before the pandemic.
+  [inference]
+
+  Seeded so the [executive reduction](../budget-action/fy2020-executive-reduction.yml) has
+  something to apply to. Without it, the corpus recorded a mid-year cut with no document
+  attached, which left the most important execution-phase event in the window unanchored.
+
+  Its value is as a record of a budget that was not carried out. The figures here describe
+  FY2020 as it was authorized; what happened bears little resemblance to them. That divergence
+  is not a defect in the bill and not evidence about anyone's spending discipline — it is what
+  it looks like when the assumptions underneath an appropriation stop holding partway through
+  the year.
+
+  Any [`gap`](../../skills/gap.md) result for this biennium has to be read against that, which
+  is why the [FY2020-21 period node](../fiscal-period/fy2020-21.yml) carries the same warning.
+
+  [open] Figures are unextracted, as are the reduction's size and which agencies were exempted.
+properties:
+  stage: as-enacted
+  stage_date: 2019-07-18
+  chamber: none
+  document_reference: |
+    Enacted bill text. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb166-133rd.yml
+    relationship: version-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

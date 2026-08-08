@@ -1,0 +1,26 @@
+class: jurisdiction
+label: Columbus Metropolitan Library
+description: |
+  A public library system serving Columbus and parts of Franklin County. [inference]
+
+  Seeded as the recipient class for the [public library fund](../fund/public-library-fund.yml),
+  and to make one point the county and school district cases cannot: library systems have very
+  few revenue alternatives. A school district can seek a local levy against property; a county
+  has sales tax authority. A library system's options are narrower, so the same proportional
+  reduction in a state distribution lands harder here. [inference]
+
+  This is the substance behind the incidence framing that was ranked fourth and deferred. The
+  question is not only who receives less, but who can replace it — and the corpus can hold the
+  first while flagging that it cannot yet answer the second.
+
+  [open] Receipts, service population, and local levy capacity are unpopulated.
+properties:
+  name: Columbus Metropolitan Library
+  jurisdiction_type: special-district
+  identifier: "[open] pending verification"
+  county: Franklin
+  population_basis: |
+    [open] Service population and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

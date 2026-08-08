@@ -20,11 +20,11 @@ Sorted by: type, then slug.
 -->
 | Entry | Description | Citations |
 |---|---|---|
-| [controlling-board-minutes.md](controlling-board-minutes.md) | — | 1 |
-| [ga-bill-record.md](ga-bill-record.md) | — | 3 |
-| [lsc-hb96-comparison.md](lsc-hb96-comparison.md) | — | 3 |
-| [obm-annual-report.md](obm-annual-report.md) | — | 3 |
-| [orc-chapter-131.md](orc-chapter-131.md) | — | 3 |
+| [controlling-board-minutes.md](controlling-board-minutes.md) | — | 2 |
+| [ga-bill-record.md](ga-bill-record.md) | — | 23 |
+| [lsc-hb96-comparison.md](lsc-hb96-comparison.md) | — | 8 |
+| [obm-annual-report.md](obm-annual-report.md) | — | 12 |
+| [orc-chapter-131.md](orc-chapter-131.md) | — | 5 |
 <!-- /REGEN -->
 
 ## Adding a source

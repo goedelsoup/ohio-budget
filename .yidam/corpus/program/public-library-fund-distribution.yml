@@ -1,0 +1,38 @@
+class: program
+label: Public Library Fund Distribution
+description: |
+  The statutory distribution of a share of state tax receipts to public library systems.
+  [inference]
+
+  The third instance of the approved `program →[draws-from]→ revenue-source` edge, and the one
+  that completes a pattern worth naming. Highway money is earmarked by the constitution; local
+  government money by statute the legislature changed; library money by statute on the same
+  pattern in the same period. Three earmarks, three different degrees of durability, and only
+  the first is beyond legislative reach.
+
+  Its recipients have the narrowest revenue alternatives of the three, which is what makes
+  [Columbus Metropolitan Library](../jurisdiction/columbus-metropolitan-library.yml) the
+  sharpest incidence case the corpus currently holds.
+
+  [open] The percentage by biennium, and whether it moved in step with the local government
+  fund, are unreconstructed.
+properties:
+  name: Public Library Fund Distribution
+  policy_area: other
+  authorizing_statute: ORC Chapter 131 [inference]
+  formula_basis: |
+    A statutory percentage of general revenue fund tax receipts, allocated among library
+    systems. [inference]
+  federal_participation: |
+    None.
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/public-library-fund-distribution.yml
+    relationship: funded-by
+  - target: ../jurisdiction/columbus-metropolitan-library.yml
+    relationship: serves
+  - target: ../revenue-source/sales-and-use-tax.yml
+    relationship: draws-from
+  - target: ../../catalog/orc-chapter-131.md
+    relationship: cites

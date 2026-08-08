@@ -1,0 +1,28 @@
+class: revenue-source
+label: Cigarette and Other Tobacco Products Tax
+description: |
+  Excise taxes on cigarettes and other tobacco products, authorized by Chapter 5743 of the
+  Revised Code. [inference]
+
+  Seeded as the corpus's example of a declining base. Consumption has fallen over the window
+  while rates have risen, so receipts can be flat or rising while the underlying base shrinks.
+  [inference] A structural balance analysis that treats this as recurring capacity without
+  noting the trend direction will overstate future revenue.
+
+  [open] Rate history and the split between cigarettes and other products are not yet
+  reconstructed.
+properties:
+  name: Cigarette and Other Tobacco Products Tax
+  instrument_type: tax
+  statutory_basis: ORC Chapter 5743 [inference]
+  rate_basis: |
+    Per-pack excise on cigarettes; a percentage of wholesale price on other tobacco products.
+    [inference]
+  first_effective: 1931-01-01
+  disposition: |
+    Credited principally to the general revenue fund. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/general-revenue-fund.yml
+    relationship: deposits-into

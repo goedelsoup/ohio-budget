@@ -1,0 +1,26 @@
+class: bill
+label: House Bill 64 (131st General Assembly)
+description: |
+  The FY2016-17 main operating budget. [inference]
+
+  Seeded without a distinguishing claim attached, deliberately. A sixteen-year series needs its
+  unremarkable periods, and asserting significance for every bill would be a form of narrative
+  overfitting — the corpus should be able to say that a budget was ordinary.
+
+  [open] Nothing about this bill has been examined beyond its identification.
+properties:
+  bill_number: HB 64
+  general_assembly: 131st
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2015-06-30
+  veto_summary: |
+    [open] Line-item vetoes were likely exercised, as on every operating budget in the window,
+    but the count and subject matter are unreconstructed. [inference]
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2016-17.yml
+    relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

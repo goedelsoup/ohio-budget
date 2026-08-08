@@ -1,0 +1,22 @@
+class: fiscal-period
+label: FY2020-21 Biennium
+description: |
+  The pandemic biennium, appropriated by House Bill 166 and then substantially altered in
+  execution. [inference] Mid-year executive reductions were ordered as revenue collapsed in
+  spring 2020, and large federal relief flows arrived outside the ordinary appropriation
+  process. [inference]
+
+  This is the period where appropriated and actual diverge most, and for reasons that have
+  nothing to do with the spending discipline such a gap usually implies. [`gap`](../../skills/gap.md)
+  results for this biennium must not be read the way results for FY2018-19 are read.
+properties:
+  label: FY2020-21
+  period_type: biennium
+  start_date: 2019-07-01
+  end_date: 2021-06-30
+  general_assembly: 133rd
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2022-23.yml
+    relationship: precedes

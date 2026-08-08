@@ -1,0 +1,32 @@
+class: appropriation
+label: Institutional Operations — FY2024-25, As Enacted
+description: |
+  Prison operating authority for the FY2024-25 biennium.
+
+  The third gap case, and the one where a divergence between appropriated and actual is most
+  likely to reflect genuine execution rather than forecasting or formula. Its paired
+  [expenditure](../expenditure/institutional-operations-fy2024-25-actual.yml) carries a
+  reversion, which makes this the corpus's first complete demonstration that authority granted
+  can lapse unspent.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2024-25
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/institutional-operations.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024-25.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../expenditure/institutional-operations-fy2024-25-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

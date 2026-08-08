@@ -31,3 +31,5 @@ links:
     relationship: instance-of
   - target: ../program/fair-school-funding-plan.yml
     relationship: administers
+  - target: ./department-of-education.yml
+    relationship: succeeds

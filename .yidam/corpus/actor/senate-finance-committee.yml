@@ -1,0 +1,25 @@
+class: actor
+label: Senate Finance Committee
+description: |
+  The standing committee of the Ohio Senate that takes an appropriation bill after the House
+  has passed it and produces the Senate's version.
+
+  Seeded to make the middle of the legislative chain visible. The corpus previously held the
+  [House committee](./house-finance-committee.yml) and the
+  [governor](./governor.yml) but nothing between them, so every change between House passage
+  and enactment was attributable only in aggregate. The Senate's revisions are frequently
+  substantial and pull in different directions from the House's on the same items. [inference]
+
+  [open] Whether Senate-stage changes are systematically smaller than House-stage ones across
+  the window is an empirical question the corpus is now shaped to answer.
+properties:
+  name: Senate Finance Committee
+  role_type: committee
+  authority_basis: |
+    Senate rules; the chamber's role in amending appropriation bills. [inference]
+  held_by: |
+    Membership and chairmanship turn over by General Assembly. [open] Not reconstructed.
+  phase_active: legislative — second chamber
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of

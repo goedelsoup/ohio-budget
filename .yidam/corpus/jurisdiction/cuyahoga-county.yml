@@ -1,0 +1,26 @@
+class: jurisdiction
+label: Cuyahoga County
+description: |
+  Ohio's second most populous county, containing Cleveland. [inference]
+
+  Seeded as the receiving end of the [local government fund](../fund/local-government-fund.yml)
+  reduction. A county's undivided local government fund receipt is computed from a statutory
+  percentage of state tax collections, so when that percentage fell in the FY2012-13 biennium
+  every county's receipt fell with it — without any county having done anything, and without
+  any appropriation document recording a decision about that county. [inference]
+
+  Paired with [Franklin County](./franklin-county.yml), it gives the corpus two counties whose
+  receipts should move together under a formula change and diverge under an economic one. That
+  contrast is what makes a distribution claim testable rather than illustrative.
+
+  [open] Population, FIPS code, and receipts are unpopulated.
+properties:
+  name: Cuyahoga County
+  jurisdiction_type: county
+  identifier: "[open] FIPS code pending verification"
+  county: Cuyahoga
+  population_basis: |
+    [open] Population figure and vintage not yet populated.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

@@ -1,0 +1,28 @@
+class: fund
+label: Public Library Fund
+description: |
+  The statutory account distributing a share of state tax receipts to public library systems,
+  set as a percentage of general revenue fund tax receipts. [inference]
+
+  It is the sibling of the [local government fund](./local-government-fund.yml) and was reduced
+  on the same pattern in the same period. [inference] Seeded because a single instance of a
+  formula-driven distribution being cut invites the reading that it was targeted; two instances
+  cut together show it as a general shift of fiscal weight onto local entities, which is a
+  different claim with different evidence.
+
+  [open] The percentage by biennium is unreconstructed, as is whether the two funds' shares
+  moved by the same proportion.
+properties:
+  name: Public Library Fund
+  fund_number: "[open] pending verification"
+  fund_group: dedicated-purpose
+  statutory_basis: ORC Chapter 131 [inference]
+  purpose: |
+    Distribution to public library systems by statutory formula rather than by discretionary
+    appropriation.
+  is_reserve: "no"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+  - target: ../../catalog/orc-chapter-131.md
+    relationship: cites

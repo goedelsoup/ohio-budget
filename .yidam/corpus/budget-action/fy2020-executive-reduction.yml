@@ -1,0 +1,39 @@
+class: budget-action
+label: Executive Spending Reduction, FY2020
+description: |
+  The mid-year reduction ordered in spring 2020 as revenue collapsed, cutting general revenue
+  spending across most agencies partway through a fiscal year already appropriated by
+  [HB 166](../bill/hb166-133rd.yml). [inference]
+
+  This is the corpus's clearest single demonstration of why the execution phase is modeled at
+  all. The appropriation for FY2020 was fixed in July 2019 and describes a year that did not
+  happen. No legislative act intervened; the change was executive, mid-year, and large enough to
+  make the enacted figures for that year misleading on their own. [inference]
+
+  It is also the corpus's first instance of an action traced to its cause. The
+  `triggered-by` edge points at the [revenue estimate](../forecast/obm-revenue-estimate-fy2020-income-tax.yml)
+  it responded to, which turns "spending was cut because revenue fell" from a narrative into a
+  traversal that either resolves or does not.
+
+  [open] The size of the reduction, which agencies were exempted, and whether federal relief
+  later offset it are all unreconstructed.
+properties:
+  action_type: executive-reduction
+  action_date: "[open] spring 2020, pending verification"
+  direction: decrease
+  amount_delta: "[open] pending the obm connector"
+  stated_justification: |
+    [open] Not reconstructed. The stated basis was the collapse in revenue collections following
+    the onset of the pandemic. [inference]
+  phase: execution
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb166-as-enacted.yml
+    relationship: applies-to
+  - target: ../actor/governor.yml
+    relationship: taken-by
+  - target: ../forecast/obm-revenue-estimate-fy2020-income-tax.yml
+    relationship: triggered-by
+  - target: ../../catalog/obm-annual-report.md
+    relationship: cites

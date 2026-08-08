@@ -1,0 +1,30 @@
+class: bill
+label: House Bill 110 (134th General Assembly)
+description: |
+  The FY2022-23 main operating budget, which enacted the
+  [Fair School Funding Plan](../program/fair-school-funding-plan.yml) and began its
+  multi-biennium phase-in. [inference]
+
+  It is the origin point for the corpus's central education thread. Because the plan phases in
+  across subsequent biennia, every later budget makes a decision about it — which phase-in step
+  to fund and which base year to compute against — and those decisions are the substance of
+  school funding policy since. None of them appear as a cut.
+
+  [open] The original phase-in schedule is unreconstructed, and without it no later budget's
+  treatment can be assessed as on-schedule or not.
+properties:
+  bill_number: HB 110
+  general_assembly: 134th
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2021-06-30
+  veto_summary: |
+    [open] Line-item vetoes were likely exercised, as on every operating budget in the window,
+    but the count and subject matter are unreconstructed. [inference]
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2022-23.yml
+    relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

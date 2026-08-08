@@ -1,0 +1,26 @@
+class: agency
+label: Ohio Department of Higher Education
+description: |
+  The agency distributing state support to public universities and community colleges, renamed
+  from the Board of Regents during the corpus window. [inference]
+
+  A third reorganization case, and the mildest: a renaming with a change in governance form but
+  no evident movement of programs between agencies. [inference] Seeded alongside the Medicaid
+  separation and the education restructuring so the corpus holds all three degrees of the same
+  phenomenon — money moved, authority moved, and only the name moved — rather than treating
+  agency succession as one undifferentiated event type.
+
+  [open] The agency code and the effective date of the renaming are unverified.
+properties:
+  name: Ohio Department of Higher Education
+  agency_code: "[open] pending verification"
+  cabinet_status: cabinet
+  predecessor: |
+    Ohio Board of Regents, renamed during the corpus window. [inference] Not seeded as a
+    separate node; the change appears to have been a renaming rather than a transfer of
+    programs, so no successor edge is asserted.
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/state-share-of-instruction.yml
+    relationship: administers

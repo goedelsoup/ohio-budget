@@ -1,0 +1,29 @@
+class: revenue-source
+label: Gross Casino Revenue Tax
+description: |
+  A tax on casino gross revenue, authorized following the 2009 constitutional amendment that
+  permitted casinos in four Ohio cities. [inference] Collections began when the casinos opened
+  in 2012, inside the corpus window. [inference]
+
+  It is seeded because its distribution formula is unusually explicit: proceeds are divided by
+  constitutional and statutory formula among counties, the host cities, school districts, and
+  several state funds, rather than flowing to the general revenue fund for appropriation.
+  [inference] That makes it a clean second example of money that reaches
+  [jurisdictions](../jurisdiction/) without passing through a discretionary appropriation, and
+  a useful contrast to the [local government fund](../fund/local-government-fund.yml), whose
+  formula the General Assembly changed.
+
+  [open] The split among recipients and whether it has changed since 2012 is unreconstructed.
+properties:
+  name: Gross Casino Revenue Tax
+  instrument_type: tax
+  statutory_basis: ORC Chapter 5753; Ohio Constitution Article XV [inference]
+  rate_basis: |
+    A percentage of gross casino revenue. [inference]
+  first_effective: 2012-05-01
+  disposition: |
+    Distributed by formula among counties, host cities, school districts, and state funds
+    rather than credited to the general revenue fund. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of

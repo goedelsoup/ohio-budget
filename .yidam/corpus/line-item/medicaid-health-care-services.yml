@@ -39,3 +39,5 @@ links:
     relationship: belongs-to
   - target: ../fund/general-revenue-fund.yml
     relationship: draws-from
+  - target: ./medicaid-services-odjfs.yml
+    relationship: succeeds

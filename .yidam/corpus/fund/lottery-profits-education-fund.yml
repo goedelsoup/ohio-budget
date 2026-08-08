@@ -1,0 +1,31 @@
+class: fund
+label: Lottery Profits Education Fund
+description: |
+  The account receiving net lottery proceeds, constitutionally dedicated to education.
+  [inference]
+
+  Seeded because it is the corpus's clearest example of a dedication that constrains less than
+  it appears to. Lottery money is restricted to education, but education is also funded from
+  the [general revenue fund](./general-revenue-fund.yml), so lottery proceeds can substitute
+  for general revenue rather than adding to it. Total education funding can stay flat while
+  lottery contributions rise.
+
+  This is worth stating precisely because the public understanding runs the other way. It is
+  also a structural point the corpus can eventually test: if lottery transfers rise and general
+  revenue education appropriations fall by a similar amount in the same period, substitution is
+  visible in the graph.
+
+  [open] Whether substitution actually occurred in any biennium in the window is unexamined.
+properties:
+  name: Lottery Profits Education Fund
+  fund_number: "[open] pending verification"
+  fund_group: dedicated-purpose
+  statutory_basis: Ohio Constitution Article XV Section 6 [inference]
+  purpose: |
+    Support of elementary, secondary, vocational, and special education programs.
+  is_reserve: "no"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+  - target: ./general-revenue-fund.yml
+    relationship: transfers-to

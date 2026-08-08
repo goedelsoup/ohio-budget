@@ -1,0 +1,31 @@
+class: bill-version
+label: HB 96 As Passed by the Senate
+description: |
+  [HB 96](../bill/hb96-136th.yml) after Senate committee and floor action. [inference]
+
+  Seeded to close part of the attribution gap the genesis corpus left. With only the introduced,
+  House, and enacted versions present, every change after House passage was one undifferentiated
+  hop covering Senate action, conference reconciliation, and the governor's vetoes — three
+  actors, one number. This version and the
+  [conference report](./hb96-conference-report.yml) split that hop into steps that can be
+  attributed separately.
+
+  [open] No figures are extracted. What this node currently provides is the structure for
+  [`stage-delta`](../../skills/stage-delta.md) to attribute against, not the attribution itself.
+properties:
+  stage: as-passed-senate
+  stage_date: "[open] spring 2025, pending verification"
+  chamber: senate
+  document_reference: |
+    Senate-passed bill text and the LSC comparison document for this stage. [open] Not yet
+    catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-as-passed-house.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites

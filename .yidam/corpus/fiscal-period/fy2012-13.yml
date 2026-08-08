@@ -1,0 +1,22 @@
+class: fiscal-period
+label: FY2012-13 Biennium
+description: |
+  The pivotal biennium of the corpus window. House Bill 153 reduced the
+  [local government fund](../fund/local-government-fund.yml) share sharply and accelerated
+  the elimination of the tangible personal property tax reimbursements, shifting durable
+  fiscal pressure onto counties, municipalities, and school districts. [inference]
+
+  It is the single strongest argument for a sixteen-year window. A series beginning after
+  FY2013 shows local governments receiving a stable low share and reveals nothing; a series
+  spanning this boundary shows the step change and the decision behind it.
+properties:
+  label: FY2012-13
+  period_type: biennium
+  start_date: 2011-07-01
+  end_date: 2013-06-30
+  general_assembly: 129th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2014-15.yml
+    relationship: precedes

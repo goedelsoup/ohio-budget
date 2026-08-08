@@ -1,0 +1,30 @@
+class: program
+label: Adult Corrections
+description: |
+  Operation of Ohio's prison system and supervision of released offenders, administered by the
+  [Department of Rehabilitation and Correction](../agency/rehabilitation-and-correction.yml).
+  [inference]
+
+  Its cost is driven by the incarcerated population, which is set by sentencing law rather than
+  by appropriation. Seeded as the corpus's third distinct kind of cost driver: Medicaid follows
+  economic conditions and eligibility, school funding follows a formula and enrollment, and this
+  follows criminal justice policy over a much longer lag.
+
+  The practical consequence is that a sentencing change is a budget decision that appears in no
+  budget document, with effects arriving years after the law does. [inference]
+
+  [open] The relationship between population and cost, and whether any sentencing change in the
+  window moved it, are unexamined.
+properties:
+  name: Adult Corrections
+  policy_area: corrections
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    Not formula-distributed. Cost follows incarcerated population and institutional capacity.
+  federal_participation: |
+    Limited. Largely state-source money. [inference]
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/institutional-operations.yml
+    relationship: funded-by

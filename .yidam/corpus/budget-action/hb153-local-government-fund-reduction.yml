@@ -1,0 +1,38 @@
+class: budget-action
+label: Local Government Fund Share Reduction, HB 153
+description: |
+  The reduction of the [local government fund](../fund/local-government-fund.yml) share enacted
+  in [HB 153](../bill/hb153-129th.yml), which cut the statutory percentage of general revenue
+  tax receipts distributed to counties, municipalities, and townships. [inference]
+
+  This node is the corpus's answer to a question its own data raises and cannot otherwise settle.
+  The [FY2010-11](../appropriation/local-government-fund-distribution-fy2010-11-as-enacted.yml)
+  and [FY2012-13](../appropriation/local-government-fund-distribution-fy2012-13-as-enacted.yml)
+  appropriations differ sharply, and nothing in either figure says why. This is why.
+
+  **No actor is attributed.** The reduction appeared in the executive proposal and was enacted
+  by the General Assembly, and the corpus cannot yet say at which stage the percentage took its
+  final value — the intermediate versions of HB 153 are not seeded. Attributing it to a
+  committee or to the governor would be a guess dressed as a record, so `taken-by` is left
+  unwired rather than filled. That absence is itself informative.
+
+  [open] The percentages before and after, and the stage at which the final value was set, are
+  unextracted. Both live in bill language rather than in appropriation tables.
+properties:
+  action_type: amendment
+  action_date: 2011-06-30
+  direction: decrease
+  amount_delta: "[open] the change was to a percentage, not to an amount"
+  stated_justification: |
+    [open] Not reconstructed. The rationale offered at the time concerned rebalancing state and
+    local responsibilities. [inference]
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb153-as-enacted.yml
+    relationship: applies-to
+  - target: ../appropriation/local-government-fund-distribution-fy2012-13-as-enacted.yml
+    relationship: modifies
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

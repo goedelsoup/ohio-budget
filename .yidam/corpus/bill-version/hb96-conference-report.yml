@@ -1,0 +1,33 @@
+class: bill-version
+label: HB 96 Conference Report
+description: |
+  The reconciled text of [HB 96](../bill/hb96-136th.yml) produced by the conference committee
+  and voted on by both chambers. [inference]
+
+  This is the version the legislature actually enacted, before the governor's
+  [line-item vetoes](../budget-action/hb96-line-item-veto.yml) removed items from it. Holding it
+  separately from [as enacted](./hb96-as-enacted.yml) is what lets the corpus separate the
+  legislature's final position from the executive's edit — the difference between the two is,
+  by definition, exactly the vetoes and nothing else.
+
+  Without this node, "what the legislature passed" is not recoverable from the corpus at all.
+
+  [open] Figures are unextracted, and conference-stage changes typically carry no stated
+  justification comparable to a committee record. That absence is a property of the process
+  rather than a gap in extraction — see [conference committee](../actor/conference-committee.yml).
+properties:
+  stage: conference-report
+  stage_date: "[open] June 2025, pending verification"
+  chamber: conference
+  document_reference: |
+    Conference committee report. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-as-passed-senate.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites

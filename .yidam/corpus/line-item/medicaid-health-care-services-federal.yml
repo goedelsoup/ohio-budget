@@ -1,0 +1,34 @@
+class: line-item
+label: Medicaid Health Care Services (Federal Share)
+description: |
+  The federal-fund-group counterpart to
+  [Medicaid Health Care Services](./medicaid-health-care-services.yml), carrying the share of
+  benefit payments reimbursed by the [federal match](../revenue-source/federal-medicaid-match.yml).
+  [inference]
+
+  This node makes the all-funds versus state-share distinction structural. The two line items
+  fund the same benefits to the same people; one draws on the general revenue fund and one on
+  federal money, and quoting either alone as "the Medicaid appropriation" is defensible only if
+  you say which. Most public discussion does not.
+
+  It also localizes a risk. A change in the federal match rate moves the split between these two
+  line items without changing the total cost of the program or requiring any Ohio decision.
+
+  [open] The code and the state/federal split by period are unverified.
+properties:
+  name: Medicaid Health Care Services (Federal Share)
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Federal share of Medicaid-covered health care services.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-medicaid.yml
+    relationship: belongs-to
+  - target: ../fund/federal-medicaid-match-fund.yml
+    relationship: draws-from

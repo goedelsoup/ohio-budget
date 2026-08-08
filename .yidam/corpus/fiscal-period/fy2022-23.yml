@@ -1,0 +1,23 @@
+class: fiscal-period
+label: FY2022-23 Biennium
+description: |
+  Appropriated by House Bill 110, which enacted the
+  [Fair School Funding Plan](../program/fair-school-funding-plan.yml) and began its multi-
+  biennium phase-in. [inference] It also carried unusually large federal pandemic relief
+  balances, which inflate all-funds totals in ways that are not recurring capacity.
+  [inference]
+
+  Any structural balance claim about this period has to separate the relief money out;
+  treating it as recurring would make the subsequent biennia look like a decline that was
+  really an expiry.
+properties:
+  label: FY2022-23
+  period_type: biennium
+  start_date: 2021-07-01
+  end_date: 2023-06-30
+  general_assembly: 134th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2024-25.yml
+    relationship: precedes

@@ -1,0 +1,30 @@
+class: bill
+label: House Bill 166 (133rd General Assembly)
+description: |
+  The FY2020-21 main operating budget, enacted in July 2019 and substantially overtaken by
+  events within a year. [inference] Revenue collapsed in spring 2020, mid-year executive
+  reductions were ordered, and large federal relief flows arrived outside the ordinary
+  appropriation process. [inference]
+
+  This is the corpus's strongest case for modeling the execution phase at all. The enacted
+  figures in this bill describe a budget that was never carried out as written, and an analysis
+  stopping at enactment would describe a fiscal year that did not happen.
+
+  [open] The reductions and relief flows are unreconstructed, and they are the highest-value
+  target for the [controlling board](../../catalog/controlling-board-minutes.md) connector.
+properties:
+  bill_number: HB 166
+  general_assembly: 133rd
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2019-07-18
+  veto_summary: |
+    [open] Line-item vetoes were likely exercised, as on every operating budget in the window,
+    but the count and subject matter are unreconstructed. [inference]
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2020-21.yml
+    relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

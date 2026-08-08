@@ -1,0 +1,30 @@
+class: budget-action
+label: Line-Item Vetoes, HB 33
+description: |
+  The governor's line-item vetoes against [HB 33](../bill/hb33-135th.yml) before it became law
+  in July 2023. [inference]
+
+  Seeded as the second veto event, which is what makes the first one interpretable. A single
+  veto node invites reading the executive edit as an unusual intervention; two, on consecutive
+  budgets, establish it as a routine stage of every Ohio operating budget — and therefore as
+  something an analysis must account for by default rather than notice when it happens.
+
+  [open] Count, items struck, and aggregate effect are unreconstructed. The veto message is the
+  primary source and is not catalogued.
+properties:
+  action_type: line-item-veto
+  action_date: 2023-07-04
+  direction: decrease
+  amount_delta: "[open] aggregate effect not reconstructed"
+  stated_justification: |
+    [open] The veto message states a rationale per item. Not catalogued.
+  phase: executive
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: applies-to
+  - target: ../actor/governor.yml
+    relationship: taken-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

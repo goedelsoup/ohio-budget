@@ -1,0 +1,29 @@
+class: bill
+label: House Bill 1 (128th General Assembly)
+description: |
+  The FY2010-11 main operating budget, enacted in July 2009 amid the sharpest revenue
+  collapse of the corpus window. [inference] It relied substantially on one-time federal
+  recovery money to close a gap that recurring revenue could not. [inference]
+
+  It is the corpus's baseline period and its first structural-balance case. A budget balanced
+  with non-recurring money is balanced in the constitutional sense and unbalanced in the
+  structural one, and this bill is where that distinction first becomes concrete in the series.
+
+  [open] The scale of the one-time money and how much of the gap it covered are
+  unreconstructed.
+properties:
+  bill_number: HB 1
+  general_assembly: 128th
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2009-07-17
+  veto_summary: |
+    [open] Line-item vetoes were likely exercised, as on every operating budget in the window,
+    but the count and subject matter are unreconstructed. [inference]
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2010-11.yml
+    relationship: enacted-for
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

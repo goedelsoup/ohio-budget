@@ -1,0 +1,19 @@
+class: fiscal-period
+label: FY2010-11 Biennium
+description: |
+  The first biennium in the corpus window, appropriated by House Bill 1. [inference] It is
+  the pre-shock baseline: federal recovery money was still supporting state budgets, the
+  local government fund was still at its historical share, and the commercial activity tax
+  was still completing its phase-in. [inference] Every claim about what Ohio's fiscal
+  structure looked like *before* the changes this corpus tracks is a claim about this period.
+properties:
+  label: FY2010-11
+  period_type: biennium
+  start_date: 2009-07-01
+  end_date: 2011-06-30
+  general_assembly: 128th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2012-13.yml
+    relationship: precedes

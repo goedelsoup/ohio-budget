@@ -1,0 +1,29 @@
+class: appropriation
+label: Foundation Funding — FY2026, As Passed by the Senate
+description: |
+  The Senate's FY2026 figure for [foundation funding](../line-item/foundation-funding.yml).
+
+  Together with the [conference](./foundation-funding-fy2026-conference-report.yml) figure it
+  breaks the corpus's largest attribution gap into steps. Previously the distance between the
+  House-passed and enacted amounts covered Senate action, conference reconciliation, and the
+  governor's vetoes as one undifferentiated movement.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2026
+  stage: as-passed-senate
+  measure: appropriated
+  source_document: |
+    [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers
+  - target: ../bill-version/hb96-as-passed-senate.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb96-comparison.md
+    relationship: cites

@@ -27,5 +27,5 @@ links:
     relationship: instance-of
   - target: ../bill/hb96-136th.yml
     relationship: version-of
-  - target: ./hb96-as-passed-house.yml
+  - target: ./hb96-conference-report.yml
     relationship: supersedes

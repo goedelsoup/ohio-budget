@@ -1,0 +1,34 @@
+class: revenue-source
+label: Commercial Activity Tax
+description: |
+  A tax on gross receipts of businesses operating in Ohio, authorized by Chapter 5751 of the
+  Revised Code. [inference] It was enacted in 2005 and phased in over several years, replacing
+  the corporate franchise tax and the tangible personal property tax on business equipment.
+  [inference]
+
+  It matters to this corpus for a reason that is not about its size. The taxes it replaced
+  were substantially local revenue, and the replacement scheme included reimbursement payments
+  to local governments and school districts that were phased out during the corpus window.
+  [inference] The commercial activity tax is therefore one half of a swap whose other half —
+  the reimbursements — expired, and reading it in isolation understates what changed for local
+  finance.
+
+  [open] The reimbursement phase-out schedule and its interaction with the
+  [local government fund](../fund/local-government-fund.yml) reduction are not yet
+  reconstructed. Both fall inside the FY2012-13 biennium and are easily conflated.
+properties:
+  name: Commercial Activity Tax
+  instrument_type: tax
+  statutory_basis: ORC Chapter 5751 [inference]
+  rate_basis: |
+    A low rate applied to gross receipts above a threshold, rather than to net income.
+    [inference]
+  first_effective: 2005-07-01
+  disposition: |
+    Credited principally to the general revenue fund following the phase-out of dedicated
+    reimbursement distributions. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/general-revenue-fund.yml
+    relationship: deposits-into

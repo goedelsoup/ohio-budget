@@ -1,0 +1,29 @@
+class: line-item
+label: Institutional Operations
+description: |
+  The line item funding operation of state correctional institutions. [inference]
+
+  Its cost follows the incarcerated population, which follows sentencing law rather than
+  budgetary choice, so this appropriation behaves closer to an entitlement than to a
+  discretionary one on a biennial timescale. [inference] Unlike Medicaid, its driver responds to
+  policy over years rather than to economic conditions over months, which makes it the corpus's
+  third distinct reason for an appropriated-versus-actual divergence.
+
+  [open] The code and the relationship between population and cost are unreconstructed.
+properties:
+  name: Institutional Operations
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Operation of state correctional institutions, including staffing and inmate services.
+  first_period: "[open] predates the corpus window"
+  last_period: "current"
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/rehabilitation-and-correction.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

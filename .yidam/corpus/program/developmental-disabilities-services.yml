@@ -1,0 +1,31 @@
+class: program
+label: Developmental Disabilities Services
+description: |
+  Medicaid waiver services for Ohioans with developmental disabilities, delivered through county
+  boards in partnership with the state. [inference]
+
+  Seeded because it is Medicaid money that is not in the Medicaid department, and therefore the
+  case that justifies keeping [program](../program.ont.yml) and
+  [line-item](../line-item.ont.yml) as separate classes. A reader who assumes the two correspond
+  will assemble a Medicaid total from one agency's line items and be wrong by whatever this
+  program and its behavioral health counterpart amount to.
+
+  It also has a two-level structure the corpus does not yet model: county boards levy locally and
+  the state matches, so the state share is one input to a service level rather than the whole of
+  it.
+
+  [open] The state/county/federal split is unreconstructed.
+properties:
+  name: Developmental Disabilities Services
+  policy_area: human-services
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    Waiver service costs by enrolled individual, matched between state, county boards, and
+    federal Medicaid. [inference]
+  federal_participation: |
+    Federal Medicaid match at waiver rates. [inference]
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/developmental-disabilities-services.yml
+    relationship: funded-by

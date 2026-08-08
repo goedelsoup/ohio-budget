@@ -1,0 +1,26 @@
+class: actor
+label: Conference Committee
+description: |
+  The joint committee that reconciles House and Senate versions of an appropriation bill and
+  produces the text both chambers vote on.
+
+  It is the least documented actor in the process and the one that most often decides the final
+  number. [inference] Conference changes appear in the report rather than in a committee record
+  comparable to the chambers', so attributing a change to this role is frequently possible while
+  attributing a *reason* is not.
+
+  That asymmetry is worth recording as a property of the domain rather than a gap in the corpus.
+  The [`stated_justification`](../budget-action.ont.yml) field will often be legitimately empty
+  for conference-stage actions, and an empty justification here means something different from
+  an unextracted one.
+properties:
+  name: Conference Committee
+  role_type: committee
+  authority_basis: |
+    Joint rules governing reconciliation of differing chamber versions. [inference]
+  held_by: |
+    Appointed per bill from both chambers. [open] Not reconstructed.
+  phase_active: legislative — reconciliation
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of

@@ -1,0 +1,26 @@
+class: fund
+label: Higher Education Improvement Fund
+description: |
+  A capital account supporting construction and renovation at state universities and community
+  colleges, financed by bond proceeds rather than by tax receipts. [inference]
+
+  Seeded as the corpus's single representative of the capital instrument family, which is in
+  the confirmed scope but otherwise unseeded. It demonstrates a property no operating fund has:
+  the money is borrowed, so an appropriation from it creates a future debt service obligation
+  in the general revenue fund. Capital and operating budgets are usually discussed separately,
+  and that separation hides the connection.
+
+  [open] No capital appropriation bill is seeded, so this fund currently has no line items
+  drawing on it. The capital family remains the largest gap in the confirmed instrument scope.
+properties:
+  name: Higher Education Improvement Fund
+  fund_number: "[open] pending verification"
+  fund_group: dedicated-purpose
+  statutory_basis: "[open] pending verification"
+  purpose: |
+    Capital facilities for state-supported institutions of higher education, financed by
+    bond proceeds.
+  is_reserve: "no"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of

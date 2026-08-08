@@ -1,0 +1,27 @@
+class: fund
+label: Federal Medicaid Match Fund
+description: |
+  The federal fund group account through which federal Medicaid reimbursement flows before
+  being appropriated. [inference]
+
+  Seeded to make the all-funds versus state-share distinction structural rather than a caveat
+  in prose. Medicaid appropriations draw on both this fund and the
+  [general revenue fund](./general-revenue-fund.yml); a figure citing one is not comparable to
+  a figure citing both, and the graph now records which.
+
+  Federal fund group money differs from dedicated-purpose money in a way that matters for the
+  structural framing: its availability depends on a rate Ohio does not set and on continued
+  federal authorization, so it is neither discretionary state capacity nor a reliable base.
+
+  [open] The exact fund name and number are unverified and are not guessed here.
+properties:
+  name: "[open] federal Medicaid reimbursement account, exact name pending verification"
+  fund_number: "[open] pending verification"
+  fund_group: federal
+  statutory_basis: "[open] pending verification"
+  purpose: |
+    Receipt of federal Medicaid reimbursement pending appropriation.
+  is_reserve: "no"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
