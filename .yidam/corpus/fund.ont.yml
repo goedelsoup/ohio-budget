@@ -1,0 +1,49 @@
+class: fund
+label: Fund
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  A statutory account that money is held in and appropriated from, irreducible because a
+  fund's balance and its spending authority are governed by different rules — money can sit
+  in a fund without being appropriated, and can be appropriated without being available.
+properties:
+  - name: name
+    type: string
+    description: Statutory name of the fund
+  - name: fund_number
+    type: string
+    description: State fund number as carried in accounting records
+  - name: fund_group
+    type: string
+    description: general | dedicated-purpose | federal | fiduciary | holding | debt-service
+  - name: statutory_basis
+    type: string
+    description: Ohio Revised Code section creating the fund
+  - name: purpose
+    type: text
+    description: What the fund may lawfully be spent on, including any restriction on use
+  - name: is_reserve
+    type: string
+    description: Whether the fund functions as a reserve rather than an operating account
+edges:
+  - relationship: deposits-into
+    target: revenue-source
+    direction: in
+    description: A revenue instrument credits its proceeds to this fund
+  - relationship: draws-from
+    target: appropriation
+    direction: in
+    description: An appropriation grants authority to spend from this fund
+  - relationship: transfers-to
+    target: fund
+    direction: out
+    description: Money moved between funds without an appropriation, the mechanism reserves operate by
+  - relationship: reverts-to
+    target: expenditure
+    direction: in
+    description: Unspent authority lapsing back into this fund at period end
+  - relationship: draws-from
+    target: line-item
+    direction: in
+    description: A line item is chargeable against this fund

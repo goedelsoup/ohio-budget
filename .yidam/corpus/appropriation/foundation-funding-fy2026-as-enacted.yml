@@ -1,0 +1,37 @@
+class: appropriation
+label: Foundation Funding — FY2026, As Enacted
+description: |
+  The enacted FY2026 figure for [foundation funding](../line-item/foundation-funding.yml), as
+  stated in [HB 96 as enacted](../bill-version/hb96-as-enacted.yml).
+
+  Paired with the [as-introduced figure](./foundation-funding-fy2026-as-introduced.yml), this
+  node makes the corpus's priority-2 question answerable for one line item: what did the
+  legislature and the governor do to the executive's proposal. The difference between the two
+  is the whole legislative and executive contribution, aggregated — and because the Senate and
+  conference versions are not yet seeded, it cannot yet be decomposed further.
+
+  For a formula program, the interesting question is not only whether this figure is larger or
+  smaller than the proposal but whether the phase-in step and base year changed. [inference] A
+  budget can increase the dollar amount while slowing the phase-in, and both statements would
+  be true at once. That is not a paradox; it is why this corpus models programs separately from
+  the line items that fund them.
+
+  [open] The amount is unfilled, pending the LSC comparison document for the enacted bill.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2026
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC comparison document for HB 96 as enacted. [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../bill-version/hb96-as-enacted.yml
+    relationship: stated-in
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers

@@ -1,0 +1,37 @@
+class: budget-action
+label: Line-Item Vetoes, HB 96
+description: |
+  The governor's line-item vetoes exercised against HB 96 before it became law at the end of
+  June 2025. [inference]
+
+  This is the corpus's executive-phase exemplar, and the node that resolves what would otherwise
+  be an unexplained discontinuity. The enacted text is the legislature's bill *minus* these
+  strikes, which means [HB 96 as enacted](../bill-version/hb96-as-enacted.yml) is not any single
+  body's product. Without this node, a comparison between the House-passed and enacted versions
+  would silently attribute the governor's decisions to the legislature.
+
+  The veto power's asymmetry matters for interpretation and is worth stating explicitly: under
+  Article II, Section 16 the governor may strike items but not add or increase them.
+  [inference] Any apparent increase between as-passed and as-enacted is therefore never
+  attributable to a veto, and must have another explanation.
+
+  [open] The number of vetoes, the items struck, and their aggregate dollar effect are
+  unreconstructed. The governor's veto message is the primary source and is not yet catalogued.
+  This node is modeled as a single action covering the veto event; if the extracted record
+  warrants per-item granularity, it should be split into one node per struck item rather than
+  edited.
+properties:
+  action_type: line-item-veto
+  action_date: 2025-06-30
+  direction: decrease
+  amount_delta: "[open] aggregate effect not yet reconstructed"
+  stated_justification: |
+    [open] The governor's veto message states a rationale per item. Not yet catalogued.
+  phase: executive
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb96-as-enacted.yml
+    relationship: applies-to
+  - target: ../actor/governor.yml
+    relationship: taken-by

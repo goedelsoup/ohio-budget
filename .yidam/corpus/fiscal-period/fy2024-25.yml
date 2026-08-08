@@ -1,0 +1,22 @@
+class: fiscal-period
+label: FY2024-25 Biennium
+description: |
+  The biennium running July 1, 2023 through June 30, 2025, appropriated by the 135th General
+  Assembly through House Bill 33. [inference] Both of its years have closed, which makes it
+  the most recent period where appropriated and actual can be compared against final rather
+  than provisional figures.
+
+  It is seeded as the immediate comparator to [FY2026-27](./fy2026-27.yml). Any claim that
+  funding for something rose or fell in the current budget is a claim about the difference
+  between these two periods, and cannot be evaluated without both.
+properties:
+  label: FY2024-25
+  period_type: biennium
+  start_date: 2023-07-01
+  end_date: 2025-06-30
+  general_assembly: 135th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2026-27.yml
+    relationship: precedes

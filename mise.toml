@@ -1,0 +1,13 @@
+# mise.toml — task and toolchain entry point for this yidam-derived repository.
+#
+# The yidam CLI tasks (yidam-build, regen, graph-check, bundle, …) live in
+# mise.yidam.toml, placed at the repo root by `yidam overlay` and re-synced
+# whenever overlay runs again. Do not edit that file — edit this one.
+#
+# mise has no config-level `extends`/`include`, so mise.yidam.toml is wired in
+# as a config fragment: .config/mise/conf.d/yidam.toml symlinks to it. mise
+# auto-loads conf.d fragments, so `mise tasks` and `mise run <task>` see the
+# yidam tasks with no MISE_ENV needed. Keep repo-specific tools and tasks here.
+
+[tools]
+rust = { version = "1.88.0", components = "rustfmt,clippy" }

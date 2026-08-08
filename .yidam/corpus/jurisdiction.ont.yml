@@ -1,0 +1,34 @@
+class: jurisdiction
+label: Jurisdiction
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  A local entity that receives state money — county, municipality, school district, library
+  system, or special district — irreducible because state appropriations frequently pass
+  through state accounts to entities the state does not control.
+properties:
+  - name: name
+    type: string
+    description: Name of the jurisdiction
+  - name: jurisdiction_type
+    type: string
+    description: county | municipality | township | school-district | library-system | transit-authority | special-district
+  - name: identifier
+    type: string
+    description: Stable external identifier, such as a district IRN or a county FIPS code
+  - name: county
+    type: string
+    description: County containing the jurisdiction, where it is a sub-county entity
+  - name: population_basis
+    type: text
+    description: Population or enrollment figure used in any distribution formula, with its vintage
+edges:
+  - relationship: paid-to
+    target: expenditure
+    direction: in
+    description: An expenditure that landed with this jurisdiction
+  - relationship: serves
+    target: program
+    direction: in
+    description: A program that distributes to or operates in this jurisdiction

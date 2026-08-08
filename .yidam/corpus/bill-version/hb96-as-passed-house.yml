@@ -1,0 +1,31 @@
+class: bill-version
+label: HB 96 As Passed by the House
+description: |
+  HB 96 after House committee and floor action, as passed to the Senate. [inference]
+
+  In Ohio operating budgets the House substitute is typically the largest single rewrite of
+  the executive proposal, [inference] which makes the difference between this version and
+  [as introduced](./hb96-as-introduced.yml) the highest-yield comparison in the bill's
+  history. Whether that generalization holds across the full corpus window is an open
+  empirical question rather than an established fact. [open]
+
+  This version is seeded without its Senate and conference successors, so the chain from here
+  to [as enacted](./hb96-as-enacted.yml) covers three distinct sets of changes at once —
+  Senate action, conference resolution, and executive veto. Any `stage-delta` result across
+  that hop reports aggregate movement and cannot attribute it. Closing that gap is the
+  clearest next expansion of this class.
+properties:
+  stage: as-passed-house
+  stage_date: "[open] spring 2025, exact date pending verification"
+  chamber: house
+  document_reference: |
+    The House-passed bill text and the LSC comparison document for this stage. [open] Not yet
+    catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-as-introduced.yml
+    relationship: supersedes

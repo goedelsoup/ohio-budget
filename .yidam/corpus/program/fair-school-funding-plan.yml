@@ -1,0 +1,41 @@
+class: program
+label: Fair School Funding Plan
+description: |
+  The formula governing the state's share of school district operating costs, enacted in the
+  FY2022-23 operating budget and designed to phase in across multiple biennia. [inference] It
+  replaced a prior arrangement that had been operating largely on guarantees and caps rather
+  than on a working formula. [inference]
+
+  It is the corpus's central worked example of why a sixteen-year window was chosen. A formula
+  that phases in over six years cannot be evaluated within one biennium, and its most
+  consequential decisions are not funding cuts but changes to the phase-in schedule and to the
+  base year the formula computes against — both of which change what districts receive without
+  appearing as a reduction in any year-over-year comparison. [inference] The
+  [`program` cautions](./ACTIONS.md) exist because of this program.
+
+  It distributes through [foundation funding](../line-item/foundation-funding.yml) to roughly
+  six hundred school districts, [inference] each with its own computed state share depending
+  on local property valuation and income. That is the point at which state budget policy
+  becomes a specific dollar figure for a specific district, and the reason
+  [`jurisdiction`](../jurisdiction/) was seeded at genesis rather than deferred.
+
+  [open] Whether the phase-in has proceeded on its original schedule across each subsequent
+  budget, and what base year each has used, is the first substantive question this corpus
+  should answer.
+properties:
+  name: Fair School Funding Plan
+  policy_area: primary-secondary-education
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    A computed base cost per pupil, split between state and local shares according to
+    district capacity measured by property valuation and resident income. Phased in across
+    multiple biennia. [inference]
+  federal_participation: |
+    None directly. Federal education money flows through separate line items.
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: funded-by
+  - target: ../jurisdiction/columbus-city-school-district.yml
+    relationship: serves

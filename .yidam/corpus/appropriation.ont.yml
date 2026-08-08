@@ -1,0 +1,51 @@
+class: appropriation
+label: Appropriation
+foundational_type:
+  ontology: ufo
+  type: relator
+description: |
+  Legal authority to spend a stated amount from a stated fund for a stated line item in a
+  stated period, as fixed by one version of one bill — a relator rather than an edge,
+  because the amount, its stage, and every action that moved it are properties of the
+  connection itself.
+properties:
+  - name: amount
+    type: string
+    description: Authority granted, in dollars; state magnitude honestly where the exact figure is unsourced
+  - name: period_label
+    type: string
+    description: The fiscal year or biennium this authority covers
+  - name: stage
+    type: string
+    description: Stage of the bill at which this amount stood, mirroring the bill-version stage
+  - name: measure
+    type: string
+    description: Always "appropriated" — the other four measures are modeled elsewhere or not at all
+  - name: source_document
+    type: text
+    description: The document reporting this figure, pending a catalog entry to cite
+edges:
+  - relationship: draws-from
+    target: fund
+    direction: out
+    description: The fund this authority is chargeable against
+  - relationship: grants-authority-for
+    target: line-item
+    direction: out
+    description: The line item this authority is granted for
+  - relationship: stated-in
+    target: bill-version
+    direction: out
+    description: The bill version in which this amount appears
+  - relationship: covers
+    target: fiscal-period
+    direction: out
+    description: The period this authority applies to
+  - relationship: realized-by
+    target: expenditure
+    direction: out
+    description: The money actually disbursed against this authority; the gap between them is the central question
+  - relationship: modifies
+    target: budget-action
+    direction: in
+    description: An action changed this amount, or created or eliminated it

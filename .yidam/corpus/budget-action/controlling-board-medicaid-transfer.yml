@@ -1,0 +1,41 @@
+class: budget-action
+label: Controlling Board Transfer — Medicaid
+description: |
+  A post-enactment adjustment to
+  [Medicaid appropriation authority](../appropriation/medicaid-health-care-services-fy2026-as-enacted.yml)
+  approved by the [Controlling Board](../actor/controlling-board.yml).
+
+  This is the execution-phase exemplar, and the one that most directly serves this repository's
+  central question. The common model of a budget — the legislature decides, the governor signs,
+  the number is set — accounts for the legislative and executive phases and stops. This node
+  represents the third phase, where money moves after the budget is supposedly settled, and it
+  is a substantial part of why appropriated and actual differ.
+
+  [Medicaid](../program/medicaid.yml) is the most frequent subject of such adjustments because
+  its cost follows enrollment rather than legislative choice, [inference] which is also what
+  makes this node the natural instance of the approved `budget-action →[triggered-by]→ forecast`
+  edge: an adjustment of this kind typically follows a caseload projection revision rather than
+  a policy decision. That edge has no target here because no caseload forecast is seeded — the
+  one seeded [forecast](../forecast/obm-revenue-estimate-fy2026.yml) is a revenue estimate.
+  Seeding a caseload projection would close the loop and is a strong candidate for first
+  expansion.
+
+  [open] This node asserts the *pattern* rather than a specific verified transaction. Whether a
+  transfer of this kind occurred for FY2026, on what date, and in what amount, all await the
+  `controlling-board` connector. It is seeded as structure to be filled, and is tagged
+  accordingly rather than presented as an established event.
+properties:
+  action_type: controlling-board-transfer
+  action_date: "[open] pending the controlling-board connector"
+  direction: "[open] typically increase, not yet verified for this period"
+  amount_delta: "[open] pending the controlling-board connector"
+  stated_justification: |
+    [open] Controlling board requests carry an agency justification. Not yet catalogued.
+  phase: execution
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../appropriation/medicaid-health-care-services-fy2026-as-enacted.yml
+    relationship: modifies
+  - target: ../actor/controlling-board.yml
+    relationship: taken-by

@@ -1,0 +1,54 @@
+class: fiscal-period
+label: Fiscal Period
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  A fiscal year or biennium — the temporal frame every amount in this corpus is stated
+  against, irreducible because Ohio appropriates by biennium while it reports and closes
+  its books by year, so a figure without a period is not a figure.
+properties:
+  - name: label
+    type: string
+    description: Period name, e.g. FY2026 or FY2026-27
+  - name: period_type
+    type: string
+    description: fiscal-year | biennium
+  - name: start_date
+    type: date
+    description: First day of the period
+  - name: end_date
+    type: date
+    description: Last day of the period
+  - name: general_assembly
+    type: string
+    description: General Assembly that enacted the operating budget for this period
+edges:
+  - relationship: contains
+    target: fiscal-period
+    direction: out
+    description: A biennium contains the fiscal years within it
+  - relationship: contained-by
+    target: fiscal-period
+    direction: out
+    description: A fiscal year is contained by its biennium
+  - relationship: precedes
+    target: fiscal-period
+    direction: out
+    description: A period immediately precedes another of the same type, giving the series its order
+  - relationship: covers
+    target: appropriation
+    direction: in
+    description: An appropriation stated for this period
+  - relationship: occurs-in
+    target: expenditure
+    direction: in
+    description: An expenditure that occurred in this period
+  - relationship: enacted-for
+    target: bill
+    direction: in
+    description: A bill making appropriations for this period
+  - relationship: covers
+    target: forecast
+    direction: in
+    description: A forecast issued for this period

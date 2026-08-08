@@ -1,0 +1,31 @@
+class: bill-version
+label: HB 96 As Enacted
+description: |
+  HB 96 as it became law at the end of June 2025, after Senate passage, conference committee
+  resolution, and the governor's line-item vetoes. [inference] This is the operative version.
+
+  It is worth being precise about what "enacted" means here, because the corpus depends on
+  the distinction. This version is the bill the legislature passed *minus* the items the
+  governor struck. It is therefore not any single body's product, and comparing it directly
+  to [as passed by the House](./hb96-as-passed-house.yml) conflates three different actors'
+  changes. The [veto action](../budget-action/hb96-line-item-veto.yml) is modeled separately
+  so that the executive's contribution can be isolated.
+
+  Enacted is also not final in the sense a reader might assume. Supplementals, controlling
+  board transfers, and executive reductions all operate on these figures afterward, which is
+  why [`appropriation`](../appropriation/) nodes carry a stage and why the corpus tracks the
+  execution phase at all.
+properties:
+  stage: as-enacted
+  stage_date: 2025-06-30
+  chamber: none
+  document_reference: |
+    The enacted bill text and the governor's veto message. [open] Not yet catalogued.
+  is_operative: "yes"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of
+  - target: ./hb96-as-passed-house.yml
+    relationship: supersedes

@@ -1,0 +1,22 @@
+class: fiscal-period
+label: Fiscal Year 2026
+description: |
+  The state fiscal year running July 1, 2025 through June 30, 2026 — the first year of the
+  FY2026-27 biennium. Named for the calendar year it ends in, which is the convention that
+  most often trips up readers coming from federal budget data, where the federal fiscal year
+  ends September 30.
+
+  This node exists separately from its biennium because appropriation acts state annual
+  figures within a biennial authorization, and because financial reporting closes annually.
+  A claim about FY2026 spending and a claim about FY2026-27 spending are different claims.
+properties:
+  label: FY2026
+  period_type: fiscal-year
+  start_date: 2025-07-01
+  end_date: 2026-06-30
+  general_assembly: 136th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2026-27.yml
+    relationship: contained-by

@@ -1,0 +1,34 @@
+class: fund
+label: General Revenue Fund
+description: |
+  The state's principal unrestricted operating account, and the fund most people mean when
+  they refer to the size of the Ohio budget. Its receipts come chiefly from the personal
+  income tax and the sales and use tax, and it carries the appropriations for the largest
+  programs including Medicaid and primary and secondary education. [inference]
+
+  Its unrestricted character is what makes it the site of nearly all budget conflict. Because
+  general revenue money is fungible in a way that restricted money is not, every program
+  funded from it is in competition with every other, and a decision to fund one thing is a
+  decision not to fund another. That is not true of the
+  [highway operating fund](./highway-operating-fund.yml), which is why claims of the form
+  "the state chose roads over schools" usually do not survive contact with the fund structure.
+
+  [inference] General revenue appropriations run to roughly sixty billion dollars per year in
+  recent biennia. This is stated as a magnitude, not a figure — the exact amount by period
+  awaits the `lsc` connector.
+properties:
+  name: General Revenue Fund
+  fund_number: "[open] pending verification"
+  fund_group: general
+  statutory_basis: "[open] pending verification"
+  purpose: |
+    Unrestricted operating purposes. Available for any appropriation the General Assembly
+    chooses to make, subject only to the constitutional requirement of a balanced budget.
+  is_reserve: "no"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+  - target: ./budget-stabilization-fund.yml
+    relationship: transfers-to
+  - target: ./local-government-fund.yml
+    relationship: transfers-to

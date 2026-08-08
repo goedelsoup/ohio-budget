@@ -1,0 +1,42 @@
+class: program
+label: Program
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  A policy program with its own purpose and beneficiaries, irreducible because programs
+  and line items do not correspond one to one — a single program is commonly funded across
+  several line items, and a single line item commonly funds several programs.
+properties:
+  - name: name
+    type: string
+    description: Program name as used in policy discussion, which may differ from any line item title
+  - name: policy_area
+    type: string
+    description: medicaid | primary-secondary-education | higher-education | corrections | human-services | transportation | other
+  - name: authorizing_statute
+    type: string
+    description: Ohio Revised Code basis for the program, where one exists
+  - name: formula_basis
+    type: text
+    description: How amounts flowing to recipients are determined, where distribution is by formula
+  - name: federal_participation
+    type: text
+    description: Federal match or grant structure, where the program is jointly funded
+edges:
+  - relationship: funded-by
+    target: line-item
+    direction: out
+    description: A line item that carries part or all of this program's funding
+  - relationship: serves
+    target: jurisdiction
+    direction: out
+    description: A local entity this program distributes to or operates in
+  - relationship: draws-from
+    target: revenue-source
+    direction: out
+    description: Earmarked revenue reaching this program directly, bypassing general appropriation competition
+  - relationship: administers
+    target: agency
+    direction: in
+    description: The agency that runs this program

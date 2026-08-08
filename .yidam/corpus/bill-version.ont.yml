@@ -1,0 +1,42 @@
+class: bill-version
+label: Bill Version
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  One stage of an appropriation bill as a distinct artifact carrying its own set of
+  figures — the checkpoint against which any question of the form "what did this line stand
+  at when the Senate acted" is answered without replaying a chain of amendments.
+properties:
+  - name: stage
+    type: string
+    description: as-introduced | as-passed-house | as-passed-senate | conference-report | as-enacted | post-veto
+  - name: stage_date
+    type: date
+    description: Date this version was produced or acted on
+  - name: chamber
+    type: string
+    description: house | senate | conference | executive | none
+  - name: document_reference
+    type: text
+    description: The published document that fixes this version's figures, pending a catalog entry
+  - name: is_operative
+    type: string
+    description: Whether this version is the currently operative text
+edges:
+  - relationship: version-of
+    target: bill
+    direction: out
+    description: The bill this is a version of
+  - relationship: supersedes
+    target: bill-version
+    direction: out
+    description: The version immediately preceding this one in the bill's progression
+  - relationship: stated-in
+    target: appropriation
+    direction: in
+    description: An appropriation amount fixed by this version
+  - relationship: applies-to
+    target: budget-action
+    direction: in
+    description: An action taken on or against this version

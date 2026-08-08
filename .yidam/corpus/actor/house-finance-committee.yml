@@ -1,0 +1,29 @@
+class: actor
+label: House Finance Committee
+description: |
+  The standing committee of the Ohio House of Representatives that takes the executive budget
+  proposal first and rewrites it. It is seeded because the largest single set of changes to
+  any Ohio operating budget typically occurs between the as-introduced and as-passed-by-House
+  versions, [inference] which makes this role the highest-yield target for the
+  [`stage-delta`](../../skills/) calculator.
+
+  Modeling the committee as a role rather than as a body has a specific payoff here: committee
+  membership and chairmanship turn over across the sixteen-year window, but the role's
+  position in the sequence does not. Actions attributed to it remain comparable across
+  General Assemblies.
+
+  [open] Whether House-stage changes are systematically larger than Senate-stage changes
+  across the window is an empirical question this corpus is structured to answer and has not
+  yet answered.
+properties:
+  name: House Finance Committee
+  role_type: committee
+  authority_basis: |
+    House rules; the chamber's constitutional role in originating and amending appropriation
+    bills. [inference]
+  held_by: |
+    Membership and chairmanship turn over by General Assembly. [open] Not yet reconstructed.
+  phase_active: legislative — first chamber
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of

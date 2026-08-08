@@ -1,0 +1,46 @@
+class: expenditure
+label: Expenditure
+foundational_type:
+  ontology: ufo
+  type: event
+description: |
+  Money that actually left the treasury against a line item in a period — an occurrence
+  rather than a state, and irreducibly distinct from the appropriation that authorized it,
+  because authority granted and money spent routinely differ.
+properties:
+  - name: amount
+    type: string
+    description: Dollars disbursed; state magnitude honestly where the exact figure is unsourced
+  - name: basis
+    type: string
+    description: disbursed | actual-closed — whether from in-year reporting or the closed books
+  - name: period_label
+    type: string
+    description: The fiscal year or biennium in which the disbursement occurred
+  - name: reporting_source
+    type: text
+    description: The report this figure comes from, pending a catalog entry to cite
+  - name: reversion
+    type: string
+    description: Authority that lapsed unspent at period end, where known
+edges:
+  - relationship: disburses-against
+    target: line-item
+    direction: out
+    description: The line item this money was charged to
+  - relationship: occurs-in
+    target: fiscal-period
+    direction: out
+    description: The period in which the disbursement happened
+  - relationship: reverts-to
+    target: fund
+    direction: out
+    description: Authority that lapsed unspent at period end, restoring fund balance without an expenditure
+  - relationship: realized-by
+    target: appropriation
+    direction: in
+    description: The authority this disbursement was made under
+  - relationship: paid-to
+    target: jurisdiction
+    direction: out
+    description: The local entity that received the money, where it left state government

@@ -1,0 +1,37 @@
+class: program
+label: Highway System Preservation
+description: |
+  The maintenance and reconstruction of the existing state highway system, administered by the
+  [Department of Transportation](../agency/department-of-transportation.yml) and funded from
+  constitutionally restricted revenue. [inference]
+
+  It is seeded to make one structural point that the rest of the corpus cannot make without
+  it: this program does not compete with Medicaid or with school funding. Its money arrives
+  through the [motor fuel tax](../revenue-source/motor-fuel-tax.yml), whose proceeds Article
+  XII, Section 5a restricts to highway purposes, [inference] and it is appropriated in a
+  separate bill on a separate schedule.
+
+  This is the instance that populates the approved `program →[draws-from]→ revenue-source`
+  edge. That edge exists precisely so the graph does not imply a tradeoff that the
+  constitution forecloses — a distinction that is routinely lost in public discussion of state
+  budget priorities.
+
+  [open] The split between preservation and new capacity within transportation appropriations
+  is not yet reconstructed, and the two are frequently conflated in summary reporting.
+properties:
+  name: Highway System Preservation
+  policy_area: transportation
+  authorizing_statute: Ohio Constitution Article XII Section 5a; ORC Chapter 5735 [inference]
+  formula_basis: |
+    Not formula-distributed. Allocated by the department against asset condition and program
+    need. [inference]
+  federal_participation: |
+    Federal highway aid participates at a matching rate, flowing through state accounts.
+    [inference]
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/highway-construction.yml
+    relationship: funded-by
+  - target: ../revenue-source/motor-fuel-tax.yml
+    relationship: draws-from

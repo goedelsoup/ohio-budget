@@ -1,0 +1,26 @@
+class: agency
+label: Ohio Department of Transportation
+description: |
+  The agency responsible for the state highway system. It is seeded as the stable
+  counterexample to the two reorganized agencies: its identity, code, and mission held
+  constant across the corpus window, so any discontinuity in its line item series is a real
+  change in funding rather than an artifact of restructuring. [inference]
+
+  It is also the agency that demonstrates why the corpus models bills rather than budgets.
+  Transportation appropriations are made in a separate biennial act on an earlier schedule
+  than the main operating budget, [inference] and are drawn chiefly from constitutionally
+  restricted funds. An analysis that treats "the Ohio budget" as one bill will simply miss
+  this agency's money.
+properties:
+  name: Ohio Department of Transportation
+  agency_code: "775 [inference]"
+  cabinet_status: cabinet
+  established: 1972-01-01
+  predecessor: |
+    Ohio Department of Highways, reorganized into the current department. [inference]
+    Predates the corpus window and is not seeded.
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/highway-system-preservation.yml
+    relationship: administers

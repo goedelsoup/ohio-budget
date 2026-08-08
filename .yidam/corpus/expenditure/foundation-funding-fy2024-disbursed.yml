@@ -1,0 +1,43 @@
+class: expenditure
+label: Foundation Funding Disbursement to Columbus City Schools — FY2024-25
+description: |
+  State foundation funding actually paid to
+  [Columbus City School District](../jurisdiction/columbus-city-school-district.yml) during the
+  FY2024-25 biennium, charged against
+  [foundation funding](../line-item/foundation-funding.yml). [inference]
+
+  This node exists to complete one chain end to end. Set against
+  [what HB 33 appropriated](../appropriation/foundation-funding-fy2024-25-as-enacted.yml) for
+  the same line item and period, it is the corpus's single fully-formed instance of the
+  priority-1 question: authority granted on one side, money disbursed on the other.
+
+  FY2024-25 was chosen rather than the current biennium precisely because it has closed. A gap
+  computed against an open period is provisional in a way that is easy to forget once the
+  number is in a chart.
+
+  One caution belongs on the node rather than only in the class documentation. Foundation
+  funding is distributed across roughly six hundred districts, [inference] so a
+  district-level disbursement is a slice of the line item, not the line item. Comparing this
+  figure to the full appropriation would be an error of several orders of magnitude — the gap
+  calculator must aggregate district disbursements before differencing, or compare like to
+  like at the district level using the district's computed formula share.
+
+  [open] The amount is unfilled, pending the `obm` and `district-finance` connectors. Whether
+  the district's receipts should be measured on a cash or accrual basis is also unresolved,
+  and the two differ at period boundaries.
+properties:
+  amount: "[open] pending the obm and district-finance connectors"
+  basis: actual-closed
+  period_label: FY2024-25
+  reporting_source: |
+    OBM financial reporting and district finance reporting. [open] Not yet catalogued.
+  reversion: "[open] not applicable at district level; measured at line item level"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2024-25.yml
+    relationship: occurs-in
+  - target: ../jurisdiction/columbus-city-school-district.yml
+    relationship: paid-to

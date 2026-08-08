@@ -1,0 +1,46 @@
+class: forecast
+label: Forecast
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  A revenue estimate or caseload projection issued for a future period — irreducible
+  because a budget is built on projections rather than on receipts, and the gap between a
+  forecast and what actually arrived is the evidence base for any claim about structural
+  balance.
+properties:
+  - name: forecast_type
+    type: string
+    description: revenue-estimate | caseload-projection | expenditure-projection
+  - name: issued_date
+    type: date
+    description: Date the forecast was published
+  - name: projected_amount
+    type: string
+    description: The projected figure, at the magnitude the source states it
+  - name: horizon
+    type: string
+    description: How far forward the projection runs
+  - name: variance_from_actual
+    type: text
+    description: Difference from what actually materialized, where the period has closed
+  - name: assumptions
+    type: text
+    description: Stated economic or caseload assumptions the projection rests on
+edges:
+  - relationship: projects
+    target: revenue-source
+    direction: out
+    description: The revenue instrument this forecast estimates receipts for
+  - relationship: covers
+    target: fiscal-period
+    direction: out
+    description: The period this forecast applies to
+  - relationship: issued-by
+    target: actor
+    direction: out
+    description: The role that issued this forecast
+  - relationship: triggered-by
+    target: budget-action
+    direction: in
+    description: The role that issued this forecast

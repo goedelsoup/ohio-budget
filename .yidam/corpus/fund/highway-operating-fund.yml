@@ -1,0 +1,28 @@
+class: fund
+label: Highway Operating Fund
+description: |
+  The principal operating account for state highway work, filled chiefly by motor fuel tax
+  receipts and federal highway money. [inference] It is appropriated through the separate
+  biennial transportation budget rather than through the main operating budget.
+
+  It is seeded to make the constitutional restriction visible in the graph. Because Article
+  XII, Section 5a restricts motor fuel tax proceeds to highway purposes, [inference] money in
+  this fund is not available to the General Assembly for other uses, no matter how acute the
+  need elsewhere. This is the structural fact that defeats the common framing of state budget
+  choices as a single pot allocated among competing claims.
+
+  It also demonstrates why the corpus models bills as a class rather than assuming one budget
+  per biennium. Transportation appropriations are enacted on a different schedule from the
+  main operating budget, typically by the end of March in odd-numbered years. [inference]
+properties:
+  name: Highway Operating Fund
+  fund_number: "[open] pending verification"
+  fund_group: dedicated-purpose
+  statutory_basis: Ohio Constitution Article XII Section 5a; ORC Chapter 5735 [inference]
+  purpose: |
+    Highway purposes only, as constitutionally restricted. Construction, maintenance, and
+    administration of the state highway system.
+  is_reserve: "no"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of

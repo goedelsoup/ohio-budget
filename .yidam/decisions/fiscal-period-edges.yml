@@ -1,0 +1,51 @@
+id: fiscal-period-edges
+summary: >-
+  Three fiscal-period self-edges added during seeding that the step 5 proposals report
+  missed; declared in the schema, pending ratification.
+context: |
+  During step 6 seeding, the first two fiscal-period instances — the FY2026-27 biennium and
+  the FY2026 fiscal year within it — could not be connected to each other. The class as
+  written in step 4 declared only inbound edges: appropriations cover a period, expenditures
+  occur in one, bills are enacted for one, forecasts cover one. Nothing related one period to
+  another.
+
+  This left the two nodes mutually unreachable despite one containing the other, and left the
+  long-series framing without any way to express sequence — which is a gap in a corpus whose
+  temporal scope is sixteen years and whose central comparisons are period against period.
+
+  The step 5 proposals report did not surface these. It examined relationships between
+  distinct classes and did not check whether each class could express relationships among its
+  own instances. Line-item self-edges were caught because the identity problem was probed
+  explicitly during ontology discovery; fiscal-period self-edges were not, because nothing in
+  the dialogue drew attention to them.
+decision: |
+  Three self-edges added to fiscal-period.ont.yml during step 6:
+
+    fiscal-period →[contains]→      fiscal-period   a biennium contains its fiscal years
+    fiscal-period →[contained-by]→  fiscal-period   a fiscal year is contained by its biennium
+    fiscal-period →[precedes]→      fiscal-period   ordering across the series
+
+  All three are wired in the seeded instances: FY2026-27 contains FY2026, FY2026 is contained
+  by FY2026-27, and FY2024-25 precedes FY2026-27.
+
+  These were declared in the schema at the moment of use rather than left as undeclared
+  relationships asserted only in instance files, so that the corpus is internally consistent.
+
+  Status: PENDING RATIFICATION. Unlike the edges in [proposals], these were not presented for
+  approval before being written, because leaving the nodes disconnected during seeding was the
+  worse alternative. They should be confirmed, modified, or removed.
+rationale: |
+  Containment and sequence are both genuinely needed rather than convenient. Ohio appropriates
+  by biennium and reports by fiscal year, so a corpus that cannot say which year belongs to
+  which biennium cannot reconcile an appropriation to an expenditure at all. Ordering is what
+  makes a series a series — the real-dollars and structural-balance calculators both need to
+  know which period follows which.
+
+  Containment is modeled as two directed edges rather than one, consistent with the prelude's
+  statement in GRAPH.md that edges are directional and that bidirectional relationships
+  require a reference in both files.
+
+  The procedural lesson is worth recording separately from the edges themselves: step 5's
+  implied-edge analysis should examine intra-class relationships as deliberately as
+  inter-class ones. A class whose declared edges are all inbound cannot connect its own
+  instances, and that is invisible until seeding begins.

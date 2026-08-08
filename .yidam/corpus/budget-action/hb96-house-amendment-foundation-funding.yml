@@ -1,0 +1,40 @@
+class: budget-action
+label: House Amendment to Foundation Funding, HB 96
+description: |
+  The House Finance Committee's change to the executive proposal's
+  [foundation funding](../line-item/foundation-funding.yml) figure, incorporated into
+  [HB 96 as passed by the House](../bill-version/hb96-as-passed-house.yml). [inference]
+
+  This node is seeded as the legislative-phase exemplar. In Ohio operating budgets the House
+  substitute is typically the largest single rewrite of the executive proposal, [inference] and
+  school funding is typically among the most contested items within it.
+
+  For a formula program the amendment's substance is often not the dollar figure at all but the
+  phase-in step and base year the formula computes against. [inference] An amendment can raise
+  the appropriation while slowing the phase-in, producing a larger number and less money
+  reaching districts than the schedule would have delivered. Recording only `amount_delta` for
+  such an action would capture the arithmetic and miss the decision, which is why
+  `stated_justification` is a first-class property.
+
+  [open] The direction, magnitude, and stated justification are all unreconstructed. This node
+  asserts that an amendment occurred at this stage — itself an `[inference]` from the general
+  pattern rather than a verified fact about HB 96 specifically — and provides the structure for
+  the `legislature` and `lsc` connectors to fill.
+properties:
+  action_type: amendment
+  action_date: "[open] spring 2025, pending verification"
+  direction: "[open] not yet reconstructed"
+  amount_delta: "[open] pending the lsc connector"
+  stated_justification: |
+    [open] Not yet reconstructed. Committee statements and the LSC comparison document are the
+    sources.
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb96-as-passed-house.yml
+    relationship: applies-to
+  - target: ../appropriation/foundation-funding-fy2026-as-introduced.yml
+    relationship: modifies
+  - target: ../actor/house-finance-committee.yml
+    relationship: taken-by

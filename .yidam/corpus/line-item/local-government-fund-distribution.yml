@@ -1,0 +1,36 @@
+class: line-item
+label: Local Government Fund Distribution
+description: |
+  The line item through which money in the
+  [local government fund](../fund/local-government-fund.yml) is distributed to counties,
+  municipalities, and townships. [inference]
+
+  It is seeded because it is the clearest case in the corpus of an appropriation that is not
+  really a decision. The amount follows from a statutory percentage of general revenue tax
+  receipts, so the line item's size is a consequence of tax collections and of the percentage
+  set in law — not of a discretionary judgment made during budget deliberation. Changing what
+  local governments receive means changing the percentage, which is a policy act that appears
+  in bill language rather than in an appropriation figure.
+
+  That is why the sharp reduction to the percentage in the FY2012-13 operating budget
+  [inference] is the single most consequential event in this corpus's window for local
+  finance, and why it is nearly invisible to an analysis that reads appropriation figures
+  alone. It shows up as a smaller number with no apparent decision attached.
+
+  [open] The code, and the percentage by biennium across the window, are unverified.
+properties:
+  name: Local Government Fund Distribution
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "[open] pending verification"
+  purpose: |
+    Statutory distribution to county undivided local government funds and to municipalities
+    and townships.
+  first_period: "[open] predates the corpus window"
+  last_period: current
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from

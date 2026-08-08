@@ -1,0 +1,37 @@
+class: line-item
+label: Highway Construction
+description: |
+  The line item funding construction and reconstruction of the state highway system, held by
+  the [Department of Transportation](../agency/department-of-transportation.yml) and drawn from
+  the [highway operating fund](../fund/highway-operating-fund.yml). [inference]
+
+  It is seeded as the corpus's restricted-fund case. Because its money originates in
+  constitutionally restricted [motor fuel tax](../revenue-source/motor-fuel-tax.yml) receipts,
+  this line item does not compete with any general revenue line item. That makes it the
+  counterexample to the intuition the rest of the corpus might otherwise encourage — that every
+  appropriation is a choice against every other.
+
+  It also sits in a different bill on a different schedule, appropriated through
+  [HB 54](../bill/hb54-136th.yml) rather than the main operating budget. A query for "the
+  largest line items in the Ohio budget" that reads only the operating budget will not see it.
+
+  [open] The code is unverified and not guessed. The split between preservation and new
+  capacity within this line item, which matters for any claim about whether Ohio is
+  maintaining or expanding its system, is also unreconstructed.
+properties:
+  name: Highway Construction
+  current_code: "[open] pending verification"
+  historical_codes: "[open] not yet reconstructed"
+  agency_code: "775 [inference]"
+  purpose: |
+    Construction, reconstruction, and major rehabilitation of the state highway system.
+  first_period: "[open] predates the corpus window"
+  last_period: current
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-transportation.yml
+    relationship: belongs-to
+  - target: ../fund/highway-operating-fund.yml
+    relationship: draws-from

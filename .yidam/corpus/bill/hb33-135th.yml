@@ -1,0 +1,31 @@
+class: bill
+label: House Bill 33 (135th General Assembly)
+description: |
+  The main operating budget for the FY2024-25 biennium, enacted in July 2023 with line-item
+  vetoes. [inference] It is seeded as the immediate comparator to
+  [HB 96](./hb96-136th.yml): any claim that funding for something rose or fell in the current
+  budget is a claim about the difference between these two acts.
+
+  It also carries structural significance beyond its appropriations. It restructured the
+  Ohio Department of Education into the
+  [Department of Education and Workforce](../agency/department-of-education-and-workforce.yml),
+  [inference] which makes it a demonstration that operating budgets in Ohio reorganize
+  government as well as fund it — and therefore a demonstration of why agency succession has
+  to be modeled at all.
+
+  [open] Whether the education restructuring changed line item codes, and how its phase-in of
+  the school funding formula compared to the original schedule, are both unresolved.
+properties:
+  bill_number: HB 33
+  general_assembly: 135th
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2023-07-04
+  veto_summary: |
+    Line-item vetoes were exercised. [inference] Count and subject matter not yet
+    reconstructed.
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2024-25.yml
+    relationship: enacted-for

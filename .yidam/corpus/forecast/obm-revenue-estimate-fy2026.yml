@@ -1,0 +1,43 @@
+class: forecast
+label: Executive Revenue Estimate — FY2026, Personal Income Tax
+description: |
+  The executive branch's estimate of FY2026
+  [personal income tax](../revenue-source/personal-income-tax.yml) receipts, prepared by the
+  [Office of Budget and Management](../actor/office-of-budget-and-management.yml) and
+  underpinning the figures in
+  [HB 96 as introduced](../bill-version/hb96-as-introduced.yml). [inference]
+
+  Every appropriation in the executive proposal was sized against this number. If it was wrong,
+  the legislative changes that followed may be responses to the estimate rather than to policy
+  preference — a distinction that is invisible without this node and that materially changes how
+  the priority-2 question should be read.
+
+  The income tax is the right instrument to seed first because it is the most cyclically
+  sensitive of the major sources, [inference] so it contributes disproportionately to forecast
+  error. It is also the instrument that changed most across the corpus window as rates
+  consolidated toward a flat structure, which means each estimate rests on assumptions about a
+  base that was itself being altered.
+
+  [open] The projected amount, issue date, and stated assumptions are unfilled pending the
+  `obm` connector. Variance from actual cannot be computed until FY2026 closes on June 30, 2026,
+  which makes this node prospective rather than evaluative for now.
+properties:
+  forecast_type: revenue-estimate
+  issued_date: "[open] early 2025, with the executive budget"
+  projected_amount: "[open] pending the obm connector"
+  horizon: |
+    The FY2026-27 biennium, stated by fiscal year.
+  variance_from_actual: |
+    [open] Not computable until FY2026 closes on June 30, 2026.
+  assumptions: |
+    [open] Employment, wage growth, and the phase of the rate consolidation in effect for the
+    tax year. Not yet reconstructed.
+links:
+  - target: ../forecast.ont.yml
+    relationship: instance-of
+  - target: ../revenue-source/personal-income-tax.yml
+    relationship: projects
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers
+  - target: ../actor/office-of-budget-and-management.yml
+    relationship: issued-by

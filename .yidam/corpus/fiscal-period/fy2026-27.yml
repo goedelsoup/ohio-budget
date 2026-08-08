@@ -1,0 +1,23 @@
+class: fiscal-period
+label: FY2026-27 Biennium
+description: |
+  The biennium running July 1, 2025 through June 30, 2027, appropriated by the 136th General
+  Assembly. [inference] Its main operating budget is House Bill 96, and its transportation
+  appropriations were enacted separately and earlier, in keeping with Ohio's practice of
+  enacting the transportation budget by the end of March in odd-numbered years. [inference]
+
+  This is the current period and therefore the one where the distinction between appropriated
+  and actual matters most: authority is fixed but the books are open, so every expenditure
+  figure for it is provisional. [open] The FY2026 half has not closed as of this corpus's
+  genesis.
+properties:
+  label: FY2026-27
+  period_type: biennium
+  start_date: 2025-07-01
+  end_date: 2027-06-30
+  general_assembly: 136th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2026.yml
+    relationship: contains

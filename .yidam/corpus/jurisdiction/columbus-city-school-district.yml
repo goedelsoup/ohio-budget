@@ -1,0 +1,33 @@
+class: jurisdiction
+label: Columbus City School District
+description: |
+  Ohio's largest school district by enrollment, [inference] serving the state capital. It is
+  seeded as the single genesis jurisdiction because it is the endpoint of the corpus's most
+  complete chain: the [Fair School Funding Plan](../program/fair-school-funding-plan.yml)
+  distributes through [foundation funding](../line-item/foundation-funding.yml), held by the
+  [Department of Education and Workforce](../agency/department-of-education-and-workforce.yml),
+  drawn from the [general revenue fund](../fund/general-revenue-fund.yml), and lands here as a
+  [specific disbursement](../expenditure/foundation-funding-fy2024-disbursed.yml).
+
+  That chain is the point. It runs from a tax instrument to a named recipient in a named year,
+  and every hop in it is a node that can be independently checked. Demonstrating one such
+  chain end to end was worth more at genesis than seeding many districts with no chain
+  attached.
+
+  As a large urban district with a relatively weak per-pupil property tax base compared to
+  suburban peers, [inference] it also receives a comparatively high state share, which makes
+  it a sensitive case for any change to the funding formula's local capacity measure.
+
+  [open] Enrollment and valuation figures are not yet populated, and the vintage question
+  matters here — formulas frequently compute against a lagged count.
+properties:
+  name: Columbus City School District
+  jurisdiction_type: school-district
+  identifier: "[open] district IRN pending verification"
+  county: Franklin
+  population_basis: |
+    Enrollment count used in the funding formula. [open] Figure and vintage not yet
+    populated; the formula may use a lagged or frozen count rather than current enrollment.
+links:
+  - target: ../jurisdiction.ont.yml
+    relationship: instance-of

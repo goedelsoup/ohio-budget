@@ -1,0 +1,36 @@
+class: revenue-source
+label: Ohio Personal Income Tax
+description: |
+  The state tax on individual income, authorized by Chapter 5747 of the Revised Code.
+  [inference] It is the instrument that changed most across this corpus's window: over the
+  period from FY2010 to the present it moved from a graduated structure with many brackets
+  toward a flat rate, with reductions enacted incrementally across successive operating
+  budgets rather than in one act. [inference] The FY2026-27 budget continued that
+  consolidation. [inference]
+
+  This matters structurally, not just as tax policy. Income tax is a large share of general
+  revenue receipts, and it is the most cyclically sensitive of the major instruments — it
+  falls faster than sales tax in a downturn. A budget that has shifted weight from income tax
+  toward less elastic sources has changed its own risk profile, which is the kind of claim
+  [`structural-balance`](../../skills/) exists to test.
+
+  [open] The exact bracket and rate history across the sixteen-year window is not yet
+  reconstructed. This node states the direction of travel, not the schedule.
+properties:
+  name: Ohio Personal Income Tax
+  instrument_type: tax
+  statutory_basis: ORC Chapter 5747 [inference]
+  rate_basis: |
+    Graduated brackets historically; consolidated toward a flat rate in recent biennia.
+    [inference] Exact schedule per year pending verification.
+  first_effective: 1972-01-01
+  disposition: |
+    Credited principally to the general revenue fund, with a statutory share directed to
+    local distribution funds. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/general-revenue-fund.yml
+    relationship: deposits-into
+  - target: ../fund/local-government-fund.yml
+    relationship: deposits-into

@@ -1,0 +1,42 @@
+class: agency
+label: State Agency
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  An organizational unit of Ohio state government that holds appropriation authority and
+  spends it — a kind rather than a role, because an entity that ceases to be an agency
+  ceases to exist as that thing, while the roles it plays in the budget process vary.
+properties:
+  - name: name
+    type: string
+    description: Official name of the agency
+  - name: agency_code
+    type: string
+    description: Numeric agency code used to prefix its line items
+  - name: cabinet_status
+    type: string
+    description: cabinet | non-cabinet | board-or-commission | elected-office | judicial | legislative
+  - name: established
+    type: date
+    description: When the agency was created in its current form
+  - name: predecessor
+    type: text
+    description: Prior organizational arrangement, where the agency was split from or merged into another
+edges:
+  - relationship: administers
+    target: program
+    direction: out
+    description: A policy program this agency runs
+  - relationship: participates-as
+    target: actor
+    direction: out
+    description: The role this agency plays in the budget process, distinct from its identity
+  - relationship: succeeds
+    target: agency
+    direction: out
+    description: This agency continues the functions of an earlier one, on a split, merger, or renaming
+  - relationship: belongs-to
+    target: line-item
+    direction: in
+    description: A line item whose authority this agency holds

@@ -1,0 +1,34 @@
+class: agency
+label: Ohio Department of Medicaid
+description: |
+  The cabinet-level agency administering Ohio's Medicaid program, established as a separate
+  department around 2013 and carved out of the Department of Job and Family Services, which
+  had administered Medicaid previously. [inference]
+
+  It is the largest single spender in the state budget by a wide margin, and the agency whose
+  appropriations are least discretionary in practice: Medicaid spending is driven by
+  enrollment and by federally negotiated match rates rather than by legislative choice, which
+  is why [`forecast`](../forecast/) nodes for caseload matter as much as appropriation figures.
+
+  The separation from Job and Family Services is the corpus's primary worked example of the
+  approved `agency →[succeeds]→ agency` edge. Medicaid line items carried different codes
+  before and after, and any series spanning the change without resolving that succession will
+  show a spurious collapse in one agency and a spurious appearance of another.
+
+  [open] The exact effective date of the separation and the mapping of pre-separation line
+  items to post-separation ones are not yet reconstructed. The predecessor agency is not yet
+  seeded as a node, so the `succeeds` edge has no target — it is recorded in the predecessor
+  property and becomes an edge when Job and Family Services is added.
+properties:
+  name: Ohio Department of Medicaid
+  agency_code: "651 [inference]"
+  cabinet_status: cabinet
+  established: 2013-07-01
+  predecessor: |
+    Ohio Department of Job and Family Services administered Medicaid before the separation.
+    [inference] Not yet seeded as a node.
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/medicaid.yml
+    relationship: administers

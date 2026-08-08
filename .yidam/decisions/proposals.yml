@@ -1,0 +1,137 @@
+id: proposals
+summary: >-
+  Seven implied edges, seven connectors, and six calculators approved; the levies edge
+  discarded and deferred with the population class.
+context: |
+  After the fourteen class definitions were written, the full set of .ont.yml files was read
+  and examined for relationships, external sources, and computations warranted by the domain
+  but not yet declared. The following were presented as proposals.
+
+  Implied edges presented (eight):
+    appropriation →[realized-by]→ expenditure
+      The priority-1 question currently traverses two hops, through line-item and
+      fiscal-period. A direct edge makes the authority-to-spend comparison one traversal.
+    expenditure →[reverts-to]→ fund
+      Unspent authority lapses back at period end. The expenditure class carries a reversion
+      property with no target to point at.
+    fund →[transfers-to]→ fund
+      Inter-fund transfers — general revenue to the budget stabilization fund, or to local
+      distribution funds — are a major mechanism and are invisible in the current graph.
+    agency →[succeeds]→ agency
+      Agency reorganizations mirror line item lineage across the sixteen-year window. The
+      agency.predecessor property is free text with no edge, leaving the separation of
+      Medicaid from Job and Family Services unqueryable.
+    bill →[amends]→ bill
+      Supplementals and mid-biennium bills amend a prior operating budget. Both are in the
+      confirmed instrument scope, but nothing connects them to what they amend.
+    program →[draws-from]→ revenue-source
+      Earmarked revenue bypasses general appropriation logic — motor fuel tax is
+      constitutionally restricted to highway purposes, and casino tax is distributed by
+      formula.
+    budget-action →[triggered-by]→ forecast
+      Controlling board transfers and executive reductions typically follow a revenue
+      shortfall. This edge is what makes the structural framing testable rather than narrated.
+    jurisdiction →[levies]→ revenue-source
+      Local taxing capacity determines the state share under school funding formulas.
+      Presented as the weakest of the eight.
+
+  Connectors presented (seven): lsc, obm, legislature, controlling-board, checkbook, orc,
+  district-finance. Sources, target classes, and notes as recorded in the decision below.
+
+  Calculators presented (six): gap, lineage, stage-delta, real-dollars, structural-balance,
+  per-capita.
+decision: |
+  Approved — implied edges (seven of eight):
+    appropriation  →[realized-by]→   expenditure
+    expenditure    →[reverts-to]→    fund
+    fund           →[transfers-to]→  fund
+    agency         →[succeeds]→      agency
+    bill           →[amends]→        bill
+    program        →[draws-from]→    revenue-source
+    budget-action  →[triggered-by]→  forecast
+
+  Discarded — one:
+    jurisdiction   →[levies]→        revenue-source
+      Serves only the priority-4 incidence framing, which was already deferred when the
+      population class was deferred. Revisit together, not separately.
+
+  Approved — connectors (seven), with build order:
+    legislature       Ohio General Assembly bill status and text.
+                      Feeds bill, bill-version, budget-action. Build first: structured,
+                      stable, and the cheapest to stand up.
+    lsc               Legislative Service Commission analyses and stage-comparison documents.
+                      Feeds bill-version, appropriation, line-item. Build second. The
+                      load-bearing connector; published as PDF, so extraction is the hard part.
+    obm               Office of Budget and Management monthly and annual financial reports.
+                      Feeds expenditure, fund, forecast. The only authoritative source for
+                      actual disbursement, and therefore a prerequisite for the gap calculator.
+    controlling-board Controlling Board agendas and minutes.
+                      Feeds budget-action. The only source for execution-level changes.
+    orc               Ohio Revised Code.
+                      Feeds fund, revenue-source, program. Slow-changing — a one-time seed
+                      plus occasional refresh rather than a live connector.
+    checkbook         State transaction-level transparency reporting.
+                      Feeds expenditure and jurisdiction as aggregates, not as nodes;
+                      transaction granularity was ruled out of the corpus during step 2.
+    district-finance  School district finance and enrollment reporting.
+                      Feeds jurisdiction, program. Deferred until the local pass-through
+                      framing becomes active work.
+
+  Approved — calculators (six):
+    gap                 Appropriated authority against actual disbursement.
+                        Reads appropriation, expenditure, line-item, fiscal-period.
+                        Returns variance in dollars and percent, plus reversion rate.
+    lineage             Whether a line item continues an earlier differently-coded one.
+                        Reads line-item, appropriation, agency.
+                        Returns candidate successor pairs with confidence and evidence.
+    stage-delta         How an amount moved across bill versions.
+                        Reads appropriation, bill-version, budget-action.
+                        Returns per-stage deltas attributed to an action and actor.
+    real-dollars        Nominal amounts restated in constant dollars.
+                        Reads appropriation, expenditure, fiscal-period.
+                        Returns a deflated series.
+    structural-balance  Recurring revenue against recurring obligation.
+                        Reads revenue-source, appropriation, forecast, fiscal-period.
+                        Returns structural surplus or deficit per biennium, one-time money isolated.
+    per-capita          Expenditure normalized by population or enrollment.
+                        Reads expenditure, jurisdiction.
+                        Returns per-recipient figures comparable across jurisdictions.
+
+  Two qualifications were attached to the approval and stand as part of it:
+    - real-dollars is a prerequisite for structural-balance and for any long-series use of
+      gap. A sixteen-year comparison in nominal dollars is not a comparison.
+    - lineage produces candidates for human review, not conclusions. Its output must never
+      be written to succeeds / superseded-by edges without a contributor confirming the pair.
+rationale: |
+  The seven approved edges divide into two groups. Four of them — realized-by, reverts-to,
+  succeeds between agencies, and amends between bills — close gaps where a class already
+  carries a property describing a relationship it has no way to express. Those are defects
+  in the step-4 schema rather than genuine extensions, and approving them costs nothing.
+
+  The other three are genuine extensions serving framings beyond priority 1. transfers-to
+  exposes a mechanism that moves large sums without any appropriation being involved.
+  draws-from between program and revenue-source captures earmarking, which breaks the
+  assumption that all money is fungible at the fund level. triggered-by is the most
+  consequential: without it, the claim that a mid-year reduction followed a revenue
+  shortfall is a narrative assertion, and with it the claim is a traversal that either
+  resolves or does not.
+
+  The discarded edge was not rejected on merit. It is coherent and will likely be needed.
+  It was discarded because it serves only the framing whose other class was already
+  deferred, and adding half of a deferred framing produces exactly the speculative,
+  under-populated node the prelude warns against. It should return when population returns.
+
+  Connector build order follows difficulty against dependency, not priority. legislature is
+  first because it is structured and stable and produces the skeleton the others hang on.
+  lsc is the load-bearing source but its content is locked in PDF tables, so it should not
+  be the first thing attempted. obm is ordered third despite being essential, because the
+  gap calculator it unblocks has nothing to compare against until lsc has run.
+
+  All six calculators were approved because each computes something no upstream source
+  publishes. The two qualifications matter more than the approvals. real-dollars is listed
+  as a peer of the others but is really a precondition for them, and treating it as
+  optional would silently corrupt every long-series result. lineage is the one calculator
+  whose output is a hypothesis rather than a value — it guesses at identity across
+  renumberings, and a wrong guess silently fuses two unrelated funding histories into one
+  series. Holding its output to human confirmation is the difference between a useful tool
+  and a machine for generating plausible false continuity.

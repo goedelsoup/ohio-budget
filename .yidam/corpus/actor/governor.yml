@@ -1,0 +1,30 @@
+class: actor
+label: Governor of Ohio
+description: |
+  The executive role that opens and closes the budget cycle. The governor submits the
+  executive budget proposal to the General Assembly early in the first year of each biennium,
+  and holds the line-item veto over appropriation bills under Article II, Section 16 of the
+  Ohio Constitution. [inference]
+
+  The line-item veto is why this role matters structurally rather than only politically. In
+  most states and at the federal level, the executive's choice on a budget bill is binary.
+  In Ohio the governor can strike individual items while allowing the rest to become law,
+  which means the enacted budget is not any single body's product — it is the legislature's
+  bill minus the executive's strikes. A corpus that modeled only "as passed" and "as enacted"
+  without the veto between them would show an unexplained discontinuity.
+
+  This is a role, not a person or an office. Its `held_by` property records occupancy, so
+  that a change of governor does not sever the history of actions taken in the role.
+properties:
+  name: Governor of Ohio
+  role_type: executive
+  authority_basis: |
+    Ohio Constitution Article II Section 16 (line-item veto over appropriations); statutory
+    duty to submit an executive budget. [inference]
+  held_by: |
+    Occupancy across the corpus window spans more than one administration. [open] Not yet
+    reconstructed as a dated succession.
+  phase_active: executive-preparation and post-passage
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of

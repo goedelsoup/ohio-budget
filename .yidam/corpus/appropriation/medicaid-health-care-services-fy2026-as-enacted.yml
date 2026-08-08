@@ -1,0 +1,39 @@
+class: appropriation
+label: Medicaid Health Care Services — FY2026, As Enacted
+description: |
+  The enacted FY2026 general revenue figure for
+  [Medicaid health care services](../line-item/medicaid-health-care-services.yml), as stated in
+  [HB 96 as enacted](../bill-version/hb96-as-enacted.yml).
+
+  This node exists to make a point the foundation funding chain cannot make: for
+  [Medicaid](../program/medicaid.yml), the appropriation is closer to an estimate than to a
+  limit. [inference] Cost follows enrollment and federal match, neither of which the General
+  Assembly controls within a biennium, so a divergence between this figure and actual spending
+  is evidence about forecasting rather than about spending discipline. The same divergence on
+  foundation funding would mean something entirely different.
+
+  This is why [`gap`](../../skills/) results must be read against the line item's character
+  rather than uniformly. A single calculator produces the number; interpreting it requires
+  knowing whether the line item is discretionary, formula-driven, or entitlement-driven.
+
+  [open] The amount is unfilled. Note also that a general revenue figure for this line item is
+  roughly half the all-funds figure, since federal match flows through separate accounts —
+  quoting one for the other is the most common Medicaid reporting error. [inference]
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2026
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC comparison document for HB 96 as enacted. [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../bill-version/hb96-as-enacted.yml
+    relationship: stated-in
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers

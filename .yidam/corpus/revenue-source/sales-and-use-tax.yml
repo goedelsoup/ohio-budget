@@ -1,0 +1,35 @@
+class: revenue-source
+label: Ohio Sales and Use Tax
+description: |
+  The state tax on retail sales and on the use of goods purchased untaxed elsewhere,
+  authorized by Chapters 5739 and 5741 of the Revised Code. [inference] The state rate has
+  stood at 5.75 percent through most of this corpus's window. [inference]
+
+  Two features make it structurally distinct from the income tax. It is less cyclically
+  sensitive, so as the state has leaned on it more heavily the revenue base has become
+  steadier but also less responsive to recovery. And counties and transit authorities levy
+  piggyback rates on the same base, which means the rate a resident actually pays is a state
+  and local composite — a fact that has to be respected by any incidence analysis, and the
+  reason the deferred `levies` edge will eventually be needed.
+
+  [open] Whether base broadening across the window offset rate stability is not yet
+  established. Receipts can grow without a rate change if the taxable base expands, and
+  those are different claims about who is paying more.
+properties:
+  name: Ohio Sales and Use Tax
+  instrument_type: tax
+  statutory_basis: ORC Chapters 5739 and 5741 [inference]
+  rate_basis: |
+    State rate of 5.75 percent on the taxable base, with county and transit authority
+    piggyback rates levied on top. [inference]
+  first_effective: 1934-01-01
+  disposition: |
+    Credited principally to the general revenue fund, with a statutory share directed to
+    local distribution funds. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/general-revenue-fund.yml
+    relationship: deposits-into
+  - target: ../fund/local-government-fund.yml
+    relationship: deposits-into

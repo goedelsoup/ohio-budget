@@ -1,0 +1,41 @@
+class: line-item
+label: Foundation Funding
+description: |
+  The general revenue line item through which the state's share of school district operating
+  costs is distributed. It is the largest single education appropriation and among the largest
+  line items in the budget. [inference]
+
+  It is the corpus's most fully developed line item, chosen because it demonstrates every
+  property the class was designed for. It distributes by formula rather than by discretion, so
+  its amount is a consequence of the
+  [Fair School Funding Plan](../program/fair-school-funding-plan.yml) rather than an
+  independent decision. It passes state money to entities the state does not control, landing
+  as [specific disbursements](../expenditure/foundation-funding-fy2024-disbursed.yml) to
+  roughly six hundred districts. [inference] And its ownership changed mid-window when the
+  Department of Education was restructured into the
+  [Department of Education and Workforce](../agency/department-of-education-and-workforce.yml).
+
+  Its code is stated as 200550 with an `[inference]` tag — this is the one line item code in
+  the seed corpus asserted with any confidence, and it is still unverified. [open] Whether the
+  code held constant across the education restructuring is exactly the kind of question the
+  `lineage` calculator exists to raise.
+properties:
+  name: Foundation Funding
+  current_code: "200550 [inference]"
+  historical_codes: |
+    [open] Not yet reconstructed. Whether the code survived the FY2024-25 education
+    restructuring unchanged is unverified.
+  agency_code: "200 [inference]"
+  purpose: |
+    Distribution of the state share of school district operating costs, computed under the
+    school funding formula.
+  first_period: "[open] predates the corpus window"
+  last_period: current
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-education-and-workforce.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

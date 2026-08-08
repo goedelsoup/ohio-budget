@@ -1,0 +1,31 @@
+class: actor
+label: Controlling Board
+description: |
+  The body that approves transfers and adjustments to appropriations after enactment,
+  operating under Chapter 127 of the Revised Code. [inference] It is composed of legislative
+  appointees and the director of Budget and Management or a designee. [inference]
+
+  It is seeded because it is the answer to the question the rest of the corpus keeps raising:
+  if the enacted budget is final, why do appropriated and actual differ? A substantial part
+  of the answer is that money moves after enactment, and this is the body that moves it. An
+  analysis that stops at the enacted bill treats the budget as a decision, when it is closer
+  to a decision plus two years of adjustments.
+
+  Its existence is the reason execution-level changes were included in the confirmed
+  instrument scope, and the reason [`budget-action`](../budget-action/) carries a `phase`
+  property distinguishing legislative from execution-phase changes.
+
+  [open] The aggregate dollar volume passing through controlling board action in a typical
+  biennium is not established. It is the first number that would test whether this mechanism
+  is marginal or material.
+properties:
+  name: Controlling Board
+  role_type: board
+  authority_basis: ORC Chapter 127 [inference]
+  held_by: |
+    Legislative appointees plus the director of Budget and Management or a designee.
+    [inference]
+  phase_active: execution — after enactment
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of

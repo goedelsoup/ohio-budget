@@ -1,0 +1,36 @@
+class: program
+label: Ohio Medicaid
+description: |
+  The joint federal-state health coverage program, administered by the
+  [Department of Medicaid](../agency/department-of-medicaid.yml) and the largest single
+  component of the state budget on an all-funds basis. [inference]
+
+  Its defining budgetary property is that it is not really appropriated in the ordinary
+  sense. Cost is driven by enrollment and by the federal match rate, both of which are outside
+  legislative control within a biennium, so the appropriation is closer to an estimate than to
+  a limit. [inference] This is why Medicaid appropriations are among the most frequent
+  subjects of controlling board adjustment and supplemental action, and why a
+  [caseload forecast](../forecast/) is as load-bearing as the appropriation itself.
+
+  Its scale also distorts naive comparison. Because federal match flows through state
+  accounts, all-funds Medicaid figures are roughly double the state-share figures, and the two
+  are quoted interchangeably in public discussion. [inference] Any claim about Medicaid's
+  share of the budget has to state which basis it uses.
+
+  [open] The federal match rate history across the window, including the enhanced match for
+  the expansion population, is not yet reconstructed.
+properties:
+  name: Ohio Medicaid
+  policy_area: medicaid
+  authorizing_statute: "[open] pending verification"
+  formula_basis: |
+    Per-enrollee cost by eligibility category, times enrollment. Not a distribution formula
+    in the school funding sense — cost emerges from utilization rather than being allocated.
+  federal_participation: |
+    Federal match at a rate varying by eligibility category, with an enhanced rate for the
+    expansion population. [inference]
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: funded-by

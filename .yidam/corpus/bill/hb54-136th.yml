@@ -1,0 +1,31 @@
+class: bill
+label: House Bill 54 (136th General Assembly)
+description: |
+  The transportation budget for the FY2026-27 biennium, enacted in the spring of 2025 ahead of
+  the main operating budget. [inference] Ohio enacts transportation appropriations separately
+  and earlier, by the end of March in odd-numbered years, because the construction season
+  begins before the operating budget is settled. [inference]
+
+  It is seeded to establish a fact that is easy to state and easy to forget: there is no such
+  thing as "the Ohio budget" as a single object. This bill appropriates billions that appear
+  in no operating budget document, drawn chiefly from
+  [constitutionally restricted funds](../fund/highway-operating-fund.yml) that the main
+  operating budget cannot touch.
+
+  Any corpus-wide total that sums appropriations without stating which bills it covers is
+  therefore ambiguous, and any comparison of Ohio's budget to another state's needs to say
+  whether transportation is inside or outside the figure.
+
+  [open] Totals and the split between preservation and new capacity are not yet populated.
+properties:
+  bill_number: HB 54
+  general_assembly: 136th
+  instrument_type: transportation
+  introduced_date: "[open] pending verification"
+  enacted_date: "[open] spring 2025, exact date pending verification"
+  veto_summary: "[open] not yet reconstructed"
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2026-27.yml
+    relationship: enacted-for

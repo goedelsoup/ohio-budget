@@ -1,0 +1,39 @@
+class: actor
+label: Actor
+foundational_type:
+  ontology: ufo
+  type: role
+description: |
+  A role with authority to propose, amend, enact, veto, or transfer appropriations — held
+  contingently rather than essentially, since the same agency is a requester in one phase
+  and a spender in another, and the same office is a proposer in one month and a vetoer in
+  the next.
+properties:
+  - name: name
+    type: string
+    description: Name of the role, or of the office or body playing it
+  - name: role_type
+    type: string
+    description: executive | chamber | committee | board | analytic-office | agency-as-requester
+  - name: authority_basis
+    type: string
+    description: Constitutional or statutory source of this role's budget authority
+  - name: held_by
+    type: text
+    description: The entity playing the role, and the period over which it did
+  - name: phase_active
+    type: string
+    description: Which phase of the budget cycle this role acts in
+edges:
+  - relationship: taken-by
+    target: budget-action
+    direction: in
+    description: An action taken while playing this role
+  - relationship: participates-as
+    target: agency
+    direction: in
+    description: The agency that plays this role, where the role is played by one
+  - relationship: issued-by
+    target: forecast
+    direction: in
+    description: A forecast issued while playing this role

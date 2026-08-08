@@ -1,0 +1,41 @@
+class: revenue-source
+label: Revenue Source
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  A tax or non-tax instrument that produces revenue for the state, irreducible because the
+  legal authority to collect is distinct from the fund the proceeds land in and from the
+  appropriation that later spends them.
+properties:
+  - name: name
+    type: string
+    description: Common name of the instrument, e.g. personal income tax, commercial activity tax
+  - name: instrument_type
+    type: string
+    description: tax | fee | federal-grant | transfer | earnings | other
+  - name: statutory_basis
+    type: string
+    description: Ohio Revised Code chapter or section authorizing collection
+  - name: rate_basis
+    type: text
+    description: How the amount owed is computed — rate, base, brackets, exclusions
+  - name: first_effective
+    type: date
+    description: When the instrument in its current form took effect
+  - name: disposition
+    type: text
+    description: How proceeds are split across funds, including any statutory percentages
+edges:
+  - relationship: deposits-into
+    target: fund
+    direction: out
+    description: Proceeds of this instrument are credited to the named fund
+  - relationship: draws-from
+    target: program
+    direction: in
+    description: A program drawing directly on this instrument through an earmark
+  - relationship: projects
+    target: forecast
+    direction: in
+    description: A forecast estimates future receipts from this instrument

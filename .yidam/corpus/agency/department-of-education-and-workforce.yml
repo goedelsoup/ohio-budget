@@ -1,0 +1,33 @@
+class: agency
+label: Ohio Department of Education and Workforce
+description: |
+  The agency administering primary and secondary education funding, created in the FY2024-25
+  operating budget as a restructuring of the former Ohio Department of Education, with its
+  director appointed by the governor rather than reporting to the State Board of Education.
+  [inference]
+
+  It holds [foundation funding](../line-item/foundation-funding.yml), the line item through
+  which the state's share of school district operating costs flows, and therefore the line
+  item that connects the state budget to the roughly six hundred school districts that
+  actually educate children.
+
+  The restructuring is a second worked example of agency succession, and a more subtle one
+  than the Medicaid case: the agency's numeric code and its principal line item code appear
+  to have carried across, so a naive series would not visibly break. What changed was
+  governance — who the director answers to — which is exactly the kind of change that a
+  purely financial model renders invisible and that this corpus should be able to state.
+
+  [open] Whether and how the restructuring affected line item codes is not yet verified.
+properties:
+  name: Ohio Department of Education and Workforce
+  agency_code: "200 [inference]"
+  cabinet_status: cabinet
+  established: 2023-10-03
+  predecessor: |
+    Ohio Department of Education, governed by the State Board of Education. [inference]
+    Not yet seeded as a node.
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../program/fair-school-funding-plan.yml
+    relationship: administers

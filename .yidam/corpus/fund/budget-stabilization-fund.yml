@@ -1,0 +1,33 @@
+class: fund
+label: Budget Stabilization Fund
+description: |
+  The state's reserve account, commonly called the rainy day fund, authorized under Chapter
+  131 of the Revised Code. [inference] Its balance grew substantially over the decade
+  following FY2010, from a nominal amount after the financial crisis to several billion
+  dollars in recent years. [inference]
+
+  It is seeded because it is the clearest demonstration of why the approved
+  `fund →[transfers-to]→ fund` edge was necessary. Money enters and leaves this fund by
+  transfer, not by appropriation. A corpus that models only appropriations would show this
+  fund as inert while billions moved through it, and would miss one of the two main
+  mechanisms by which a budget is actually balanced — the other being timing.
+
+  This fund is also where the structural balance question becomes concrete. Using reserve
+  draws to cover recurring obligations is the textbook signature of a structural deficit, and
+  it is only visible if transfers are modeled.
+
+  [open] The transfer history across the window is not yet reconstructed.
+properties:
+  name: Budget Stabilization Fund
+  fund_number: "[open] pending verification"
+  fund_group: dedicated-purpose
+  statutory_basis: ORC Chapter 131 [inference]
+  purpose: |
+    Reserve against revenue shortfall. Draws are authorized by specific legislative action
+    rather than by ordinary appropriation.
+  is_reserve: "yes"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of
+  - target: ./general-revenue-fund.yml
+    relationship: transfers-to

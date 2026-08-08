@@ -1,0 +1,29 @@
+class: bill-version
+label: HB 96 As Introduced
+description: |
+  The executive budget proposal for FY2026-27 as introduced in the House, before any
+  legislative amendment. [inference]
+
+  This version is the baseline against which everything the legislature did is measured. It
+  is also the version where the executive's own priorities are legible without negotiation
+  having obscured them — which makes it the right starting point for any question about who
+  wanted what, as distinct from who got what.
+
+  Because it is the executive's document, its figures rest on the executive's revenue
+  estimate. If that [forecast](../forecast/obm-revenue-estimate-fy2026.yml) was wrong, every
+  figure in this version was sized against a number that did not materialize, and the
+  legislative changes that followed may be responses to the estimate rather than to policy
+  preference. That is a distinction the corpus is structured to test and has not yet tested.
+  [open]
+properties:
+  stage: as-introduced
+  stage_date: "[open] early 2025, exact date pending verification"
+  chamber: executive
+  document_reference: |
+    The as-introduced bill text and the accompanying LSC analysis. [open] Not yet catalogued.
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb96-136th.yml
+    relationship: version-of

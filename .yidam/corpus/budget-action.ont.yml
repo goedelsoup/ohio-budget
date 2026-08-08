@@ -1,0 +1,45 @@
+class: budget-action
+label: Budget Action
+foundational_type:
+  ontology: ufo
+  type: event
+description: |
+  A discrete event that changes an appropriation — an amendment, a line-item veto, a
+  controlling board transfer, a supplemental, or an executive reduction — modeled as its own
+  node so that the reason a number moved, and who moved it, survives in the graph.
+properties:
+  - name: action_type
+    type: string
+    description: amendment | line-item-veto | controlling-board-transfer | supplemental | executive-reduction | technical-correction
+  - name: action_date
+    type: date
+    description: Date the action took effect
+  - name: direction
+    type: string
+    description: increase | decrease | reallocate | eliminate | create | language-only
+  - name: amount_delta
+    type: string
+    description: Change in dollars, signed; empty where the action changed language rather than an amount
+  - name: stated_justification
+    type: text
+    description: The reason given by the actor, quoted or summarized, distinct from any inferred motive
+  - name: phase
+    type: string
+    description: legislative | executive | execution — whether the action occurred before or after enactment
+edges:
+  - relationship: applies-to
+    target: bill-version
+    direction: out
+    description: The bill version this action was taken on
+  - relationship: modifies
+    target: appropriation
+    direction: out
+    description: The appropriation this action changed, created, or eliminated
+  - relationship: triggered-by
+    target: forecast
+    direction: out
+    description: The projection revision this action responded to, where one prompted it
+  - relationship: taken-by
+    target: actor
+    direction: out
+    description: The participant that took this action

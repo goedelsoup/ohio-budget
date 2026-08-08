@@ -1,0 +1,41 @@
+class: bill
+label: Appropriation Bill
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  An act of the General Assembly that makes appropriations — irreducible from its versions,
+  because the bill is the persisting legislative vehicle while each version is a distinct
+  artifact carrying its own figures.
+properties:
+  - name: bill_number
+    type: string
+    description: Chamber and number, e.g. HB 96
+  - name: general_assembly
+    type: string
+    description: Numbered General Assembly that considered the bill
+  - name: instrument_type
+    type: string
+    description: operating | transportation | capital | workers-compensation | industrial-commission | supplemental | mid-biennium
+  - name: introduced_date
+    type: date
+    description: Date of introduction
+  - name: enacted_date
+    type: date
+    description: Date signed, or date of enactment without signature
+  - name: veto_summary
+    type: text
+    description: Whether line-item vetoes were exercised and their general character
+edges:
+  - relationship: enacted-for
+    target: fiscal-period
+    direction: out
+    description: The period this bill makes appropriations for
+  - relationship: amends
+    target: bill
+    direction: out
+    description: A supplemental or mid-biennium act changing appropriations made by an earlier bill
+  - relationship: version-of
+    target: bill-version
+    direction: in
+    description: A version representing this bill at one stage

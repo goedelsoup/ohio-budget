@@ -1,0 +1,33 @@
+class: appropriation
+label: Foundation Funding — FY2026, As Introduced
+description: |
+  The executive proposal's FY2026 figure for
+  [foundation funding](../line-item/foundation-funding.yml), as stated in
+  [HB 96 as introduced](../bill-version/hb96-as-introduced.yml).
+
+  This node is the baseline for every subsequent claim about what happened to school funding in
+  the FY2026-27 budget. It represents what the executive proposed before any legislative
+  rewriting — which, for a formula program mid-phase-in, is chiefly a statement about which
+  phase-in step and which base year the executive chose to fund. [inference] Those choices are
+  more consequential than the dollar figure itself, and they are not visible in the figure.
+
+  [open] The amount is unfilled. It appears in the LSC comparison document for this stage,
+  which is not yet catalogued.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2026
+  stage: as-introduced
+  measure: appropriated
+  source_document: |
+    LSC comparison document for HB 96 as introduced. [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../bill-version/hb96-as-introduced.yml
+    relationship: stated-in
+  - target: ../fiscal-period/fy2026.yml
+    relationship: covers

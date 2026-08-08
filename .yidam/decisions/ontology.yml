@@ -1,0 +1,177 @@
+id: ontology
+summary: >-
+  Ohio state budget — 14 domain classes spanning money flow, legislative process,
+  fiscal structure, and local incidence; aligned to UFO.
+corpus_depth: 40        # target instance count for initial seeding; user-configurable
+context: |
+  The ontology discovery dialogue established the domain as the Ohio state budget and
+  settled four scoping questions before any class was named.
+
+  Central question — the repository carries all four candidate framings, in declared
+  priority order:
+    1. Follow the money — revenue source through fund and appropriation line item to
+       recipient, with the appropriated-versus-actual gap as the central tension.
+    2. How the numbers got that way — line item changes across executive proposal,
+       chamber passage, conference committee, and line-item veto.
+    3. Structural balance — recurring revenue against recurring obligation across biennia.
+    4. Who pays, who receives — distributional incidence across jurisdictions and
+       populations.
+
+  Instrument scope — all four families: the main biennial operating budget; execution-level
+  changes (controlling board actions, supplementals, mid-biennium adjustments); other
+  appropriation bills (transportation, capital, workers' compensation, industrial
+  commission); and local pass-through (local government fund, public library fund, school
+  district foundation payments).
+
+  Temporal scope — long series, FY2010 to present. This is what forces the line item
+  identity problem below: appropriation line item codes are not stable across sixteen
+  years.
+
+  Granularity — the appropriation line item (ALI) is the atomic unit of money. Coarser
+  units (fund, program) lose the resolution where policy argument happens; finer units
+  (individual payment) belong behind a connector, not in the corpus as nodes.
+
+  Four modeling decisions were probed explicitly because each changes the class list:
+
+  a. The five numbers problem. Appropriated, allocated, encumbered, disbursed, and actual
+     are five different figures for one line, and the gap between them is where the
+     priority-1 question lives. Options considered: two classes (appropriation vs
+     expenditure); one uniform measurement class with a measure discriminator; or
+     per-period properties on the line item node.
+  b. Legislative journey. Options considered: bill version nodes as checkpoints; change
+     events only, replayed to reconstruct a stage; or both.
+  c. Line item identity across sixteen years. Codes are renumbered and retired at exactly
+     the restructurings that matter most — the Fair School Funding Plan restructured school
+     funding lines, and Medicaid lines moved when the Department of Medicaid was separated
+     from Job and Family Services. Options considered: durable identity with lineage edges;
+     one node per biennium joined by lineage; or code-as-identity.
+  d. Incidence classes. Jurisdiction and population serve only the priority-4 framing.
+     Options considered: jurisdiction now and population later; both now; or defer both.
+
+  Foundational alignment was presented with three classes from the confirmed sketch as
+  worked examples. Under BFO, fund and line-item are continuants and expenditure and
+  budget-action are occurrents, but appropriation strains the axis — granted spending
+  authority is neither cleanly a thing nor cleanly an event. Under UFO, the same three
+  classes fall out naturally: agency is a Kind, actor is a Role, and appropriation is a
+  Relator mediating line-item, fund, bill-version, and fiscal-period while carrying its
+  own amount and amendment history.
+
+  The default corpus depth of 13 was flagged as infeasible: the sketch has 14 classes and
+  the seeding rule requires a minimum of one instance per class, making 14 the arithmetic
+  floor and leaving every class a lone stub.
+decision: |
+  Fourteen classes, confirmed:
+
+    revenue-source   a tax or non-tax instrument that produces state revenue
+    fund             a statutory account money is held in and appropriated from
+    line-item        a durable appropriation line item identity, persisting across code changes
+    appropriation    legal spending authority for a line item in a period, per one bill version
+    expenditure      money actually disbursed against a line item in a period
+    agency           an organizational unit of state government that holds and spends authority
+    program          a policy program funded across one or more line items
+    jurisdiction     a local entity receiving state money
+    bill             an appropriation act
+    bill-version     one stage of a bill: introduced, passed, conference, enacted, post-veto
+    budget-action    a discrete event that changes a number
+    actor            a participant with authority to propose, amend, enact, veto, or transfer
+    fiscal-period    a fiscal year or biennium
+    forecast         a revenue estimate or caseload projection issued for a period
+
+  Confirmed edges:
+
+    revenue-source →[deposits-into]→ fund
+    appropriation  →[draws-from]→ fund
+    appropriation  →[grants-authority-for]→ line-item
+    appropriation  →[stated-in]→ bill-version
+    appropriation  →[covers]→ fiscal-period
+    expenditure    →[disburses-against]→ line-item
+    expenditure    →[occurs-in]→ fiscal-period
+    expenditure    →[paid-to]→ jurisdiction
+    line-item      →[belongs-to]→ agency
+    line-item      →[draws-from]→ fund
+    line-item      →[succeeds]→ line-item
+    line-item      →[superseded-by]→ line-item
+    program        →[funded-by]→ line-item
+    program        →[serves]→ jurisdiction
+    agency         →[administers]→ program
+    agency         →[participates-as]→ actor
+    bill-version   →[version-of]→ bill
+    bill-version   →[supersedes]→ bill-version
+    bill           →[enacted-for]→ fiscal-period
+    budget-action  →[applies-to]→ bill-version
+    budget-action  →[modifies]→ appropriation
+    budget-action  →[taken-by]→ actor
+    forecast       →[projects]→ revenue-source
+    forecast       →[covers]→ fiscal-period
+    forecast       →[issued-by]→ actor
+
+  Modeling decisions:
+
+  a. Appropriation and expenditure are separate classes. The gap between authority granted
+     and money spent becomes a calculator output over two node sets rather than a hidden
+     field on one.
+  b. Both bill-version and budget-action. Versions are checkpoints carrying figures;
+     actions are the transitions between them. A line-item veto is a first-class object.
+  c. Line-item is a durable identity. Codes are properties that change over time, with
+     explicit succeeds and superseded-by edges across restructurings.
+  d. Jurisdiction is included at genesis; population is deferred to a later phase.
+
+  Foundational alignment: UFO. Every class carries a ufo_type field.
+
+  Corpus depth: 40 instances, weighted toward hub classes.
+rationale: |
+  Why these classes. Each of the four framings contributes classes that no other framing
+  requires, and the user declined to drop any framing. Money flow contributes
+  revenue-source, fund, line-item, appropriation, expenditure, agency, program.
+  Process contributes bill, bill-version, budget-action, actor. Structure contributes
+  fiscal-period and forecast. Incidence contributes jurisdiction. Fourteen is larger than
+  a typical genesis sketch, and that is a direct consequence of the maximal scope chosen —
+  it is honest rather than exhaustive.
+
+  Considered and discarded. A separate tax-instrument class for the incidence framing was
+  folded into revenue-source with an instrument-type property; the distinction did not
+  survive probing, since every tax instrument is a revenue source and the incidence
+  question attaches through edges to jurisdiction rather than through a distinct class.
+  A reserve class was folded into fund, since the budget stabilization fund is literally
+  a fund and needs no separate treatment. Population was deferred rather than seeded,
+  per the prelude's instruction not to add nodes ahead of need — it earns a node when a
+  connector can populate it with real demographic joins.
+
+  Why appropriation and expenditure are separate rather than one measurement class. The
+  uniform-measure option was genuinely attractive: fewer classes, easier to extend to a
+  sixth measure. It was rejected because it makes the repository's highest-priority
+  question a query rather than a structure. With two classes, "where did authority granted
+  diverge from money spent" is a traversal between two node sets and is visible in the
+  graph itself; with one class it is a filter predicate that a reader has to know to apply.
+
+  Why both bill-version and budget-action. Checkpoints alone cannot say who moved a number
+  or why. Deltas alone require replaying an entire chain to answer what a line stood at
+  when the Senate passed it — a question asked constantly in this domain. The extra class
+  is the cost of making the line-item veto, which Ohio's governor exercises on appropriation
+  bills, a node with its own properties rather than an unexplained discontinuity between
+  two versions.
+
+  Why durable line-item identity. Code-as-identity is correct for most lines most of the
+  time and fails silently at precisely the restructurings that carry the most analytical
+  weight. One-node-per-biennium is maximally faithful to the enacted documents but produces
+  many near-duplicate nodes over sixteen years and pushes the continuity question onto the
+  reader. Durable identity with explicit lineage edges keeps the series intact and makes
+  each discontinuity an assertion that can be inspected and disputed.
+
+  Why UFO over BFO. The domain is institutional and legal, not empirical or physical.
+  The decisive case is appropriation: under UFO it is a relator, a node that mediates a
+  relationship while carrying its own identity, amount, and amendment history — which is
+  exactly what the priority-2 framing needs to interrogate. Under BFO it becomes a
+  generically dependent continuant, a classification that is defensible but does no
+  analytical work here. The agency/actor pair independently confirms the fit: the same
+  agency is a requester during executive preparation and a spender during execution, and
+  the governor is a proposer in February and a vetoer in June. That is UFO's Kind/Role
+  distinction, and the confirmed sketch had already drawn the edge before the alignment
+  question was asked.
+
+  Why 40 rather than the default. The default of 13 is below the floor of 14 imposed by
+  one-instance-per-class. At 28 every class has a partner but the hubs stay thin and line
+  item lineage is illustrated exactly once. At 40 the hub classes carry several instances
+  each, lineage can show a real restructuring, and the veto and controlling board mechanics
+  are demonstrated rather than asserted. 60 was offered and declined as carrying more risk
+  of thin nodes toward the tail than the additional coverage was worth.

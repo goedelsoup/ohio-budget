@@ -1,0 +1,32 @@
+class: bill
+label: House Bill 96 (136th General Assembly)
+description: |
+  The main operating budget for the FY2026-27 biennium, enacted at the end of June 2025 with
+  line-item vetoes. [inference] It is the current operative appropriation act for most of
+  state government.
+
+  It is the corpus's primary worked example of the full legislative journey, and the reason
+  [`bill-version`](../bill-version/) exists as a class: the figures in the executive proposal,
+  in the House-passed version, and in the enacted text differ materially, and the difference
+  between the last two is partly the legislature's work and partly the governor's strikes.
+
+  Like every Ohio operating budget it carries substantial policy language alongside its
+  appropriations, so its significance is not bounded by its dollar figures. [inference]
+
+  [open] The all-funds and general-revenue totals are not yet populated. They are stated in
+  the LSC comparison documents that the `lsc` connector will read, and asserting them from
+  memory would be exactly the false precision this corpus is structured to avoid.
+properties:
+  bill_number: HB 96
+  general_assembly: 136th
+  instrument_type: operating
+  introduced_date: "[open] pending verification"
+  enacted_date: 2025-06-30
+  veto_summary: |
+    Line-item vetoes were exercised. [inference] Count and subject matter not yet
+    reconstructed.
+links:
+  - target: ../bill.ont.yml
+    relationship: instance-of
+  - target: ../fiscal-period/fy2026-27.yml
+    relationship: enacted-for

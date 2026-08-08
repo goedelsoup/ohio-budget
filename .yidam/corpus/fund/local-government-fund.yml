@@ -1,0 +1,29 @@
+class: fund
+label: Local Government Fund
+description: |
+  The statutory account through which the state distributes a share of its tax receipts to
+  counties, municipalities, townships, and other local entities. [inference] Its share is set
+  as a percentage of general revenue fund tax receipts.
+
+  This fund carries the single most consequential event in the corpus's window for local
+  finance. The share was reduced sharply in the FY2012-13 operating budget, from roughly 3.68
+  percent of general revenue tax receipts to a substantially lower level, and has remained
+  near the reduced level since. [inference] The effect was a durable transfer of fiscal
+  pressure from the state to local governments, and it is the reason a sixteen-year window
+  was chosen rather than a shorter one — the change is invisible in any series beginning
+  after FY2013.
+
+  [open] The exact percentage by biennium across the window is not yet reconstructed, and the
+  figures above are stated at magnitude pending the `orc` and `lsc` connectors.
+properties:
+  name: Local Government Fund
+  fund_number: "[open] pending verification"
+  fund_group: dedicated-purpose
+  statutory_basis: ORC Chapter 131 [inference]
+  purpose: |
+    Distribution to county undivided local government funds and to municipalities and
+    townships, by statutory formula rather than by discretionary appropriation.
+  is_reserve: "no"
+links:
+  - target: ../fund.ont.yml
+    relationship: instance-of

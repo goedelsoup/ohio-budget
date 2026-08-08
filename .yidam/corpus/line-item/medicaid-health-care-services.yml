@@ -1,0 +1,41 @@
+class: line-item
+label: Medicaid Health Care Services
+description: |
+  The principal line item funding Medicaid benefits, held by the
+  [Department of Medicaid](../agency/department-of-medicaid.yml). [inference] It is the
+  largest line item in the state budget on an all-funds basis. [inference]
+
+  It demonstrates the property that makes appropriation and expenditure worth separating.
+  Because [Medicaid](../program/medicaid.yml) cost is driven by enrollment and federal match
+  rather than by legislative choice, this line item's appropriation functions closer to an
+  estimate than to a limit, [inference] and it is among the most frequent subjects of
+  controlling board adjustment and supplemental action. The gap between what is appropriated
+  here and what is spent is therefore not evidence of underspending — it is evidence about how
+  well caseload was forecast.
+
+  It is also the line item whose lineage is most disrupted. When the Department of Medicaid was
+  separated from Job and Family Services partway through the corpus window, [inference] the
+  Medicaid appropriations moved to a new agency code, breaking any code-keyed series at that
+  point. The predecessor line item is not yet seeded, so the `succeeds` edge has no target.
+
+  [open] The code, the predecessor code, and the effective date of the transition are all
+  unverified. No code is guessed here.
+properties:
+  name: Medicaid Health Care Services
+  current_code: "[open] pending verification"
+  historical_codes: |
+    [open] Pre-separation codes under Job and Family Services not yet reconstructed.
+  agency_code: "651 [inference]"
+  purpose: |
+    Payment for Medicaid-covered health care services, including managed care capitation and
+    fee-for-service claims.
+  first_period: "[open] under this agency, approximately FY2014"
+  last_period: current
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-medicaid.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from

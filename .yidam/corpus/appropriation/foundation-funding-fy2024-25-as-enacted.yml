@@ -1,0 +1,43 @@
+class: appropriation
+label: Foundation Funding — FY2024-25, As Enacted
+description: |
+  The enacted FY2024-25 biennial figure for
+  [foundation funding](../line-item/foundation-funding.yml), appropriated by
+  [HB 33](../bill/hb33-135th.yml).
+
+  This is the cross-biennium comparator, and it is the node that makes the corpus's
+  long-series framing operational rather than aspirational. Any claim that school funding rose
+  or fell in the current budget is a claim about the relationship between this figure and the
+  [FY2026 enacted figure](./foundation-funding-fy2026-as-enacted.yml) — and that comparison is
+  not valid in nominal dollars, which is why [`real-dollars`](../../skills/) was approved as a
+  prerequisite rather than an enhancement.
+
+  It is also the appropriation against which the corpus's one seeded
+  [expenditure](../expenditure/foundation-funding-fy2024-disbursed.yml) is compared. That pair
+  is the complete demonstration of the priority-1 question: authority granted on one side,
+  money actually disbursed on the other, with the gap as a traversal between them.
+
+  Note the period is stated as a biennium rather than a fiscal year, unlike the FY2026 nodes.
+  This is deliberate — it reflects how the figure is stated in the source and demonstrates that
+  the two period types coexist in the corpus rather than one being normalized away.
+
+  [open] The amount is unfilled, and this node is linked to a bill version that is not yet
+  seeded, so it carries no `stated-in` edge. Seeding HB 33 as enacted would close that gap.
+properties:
+  amount: "[open] pending the lsc connector"
+  period_label: FY2024-25
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC comparison document for HB 33 as enacted. [open] Not yet catalogued.
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024-25.yml
+    relationship: covers
+  - target: ../expenditure/foundation-funding-fy2024-disbursed.yml
+    relationship: realized-by

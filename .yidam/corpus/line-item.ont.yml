@@ -1,0 +1,63 @@
+class: line-item
+label: Appropriation Line Item
+foundational_type:
+  ontology: ufo
+  type: kind
+description: |
+  The durable identity of an appropriation line item — the atomic unit of legislative
+  spending authority — held distinct from the code that names it, because codes are
+  renumbered and retired across biennia while the thing being funded persists.
+properties:
+  - name: name
+    type: string
+    description: Line item title as it appears in the appropriation act
+  - name: current_code
+    type: string
+    description: Appropriation line item code in the most recent period covered
+  - name: historical_codes
+    type: text
+    description: Prior codes with the periods in which each was in force
+  - name: agency_code
+    type: string
+    description: Numeric agency code prefixing the line item
+  - name: purpose
+    type: text
+    description: What the line item funds, in the terms used by the enacting bill
+  - name: first_period
+    type: string
+    description: Earliest fiscal period in which this identity carried an appropriation
+  - name: last_period
+    type: string
+    description: Latest fiscal period, or "current" if still active
+  - name: status
+    type: string
+    description: active | retired | restructured | consolidated | split
+edges:
+  - relationship: belongs-to
+    target: agency
+    direction: out
+    description: The agency that holds and spends this line item's authority
+  - relationship: draws-from
+    target: fund
+    direction: out
+    description: The fund this line item is chargeable against
+  - relationship: succeeds
+    target: line-item
+    direction: out
+    description: This identity continues an earlier, differently-coded line item
+  - relationship: superseded-by
+    target: line-item
+    direction: out
+    description: This identity was replaced by a later line item, on restructuring or split
+  - relationship: grants-authority-for
+    target: appropriation
+    direction: in
+    description: An appropriation sets an amount for this line item in one period
+  - relationship: disburses-against
+    target: expenditure
+    direction: in
+    description: An expenditure charges money against this line item
+  - relationship: funded-by
+    target: program
+    direction: in
+    description: A policy program draws part or all of its funding from this line item

@@ -1,0 +1,37 @@
+class: revenue-source
+label: Ohio Motor Fuel Tax
+description: |
+  The per-gallon excise on motor fuel, authorized by Chapter 5735 of the Revised Code.
+  [inference] Its rate was increased in the FY2020-21 transportation budget after holding
+  flat for many years. [inference]
+
+  It is seeded because it is the clearest case in the domain where money is not fungible.
+  Article XII, Section 5a of the Ohio Constitution restricts proceeds of motor vehicle fuel
+  taxes and registration fees to highway purposes. [inference] That restriction binds harder
+  than any statutory earmark: an appropriation act can redirect statutorily dedicated money,
+  but it cannot redirect this. A shortfall in a constitutionally restricted fund therefore
+  cannot be papered over from general revenue the way an ordinary dedicated-purpose shortfall
+  can.
+
+  This is the instrument that justifies the approved `program →[draws-from]→ revenue-source`
+  edge. Without it, the graph would imply that highway spending competes with Medicaid for
+  the same dollars, which is false.
+
+  [open] Per-gallon rate history across the window, and the diesel differential, are not yet
+  reconstructed.
+properties:
+  name: Ohio Motor Fuel Tax
+  instrument_type: tax
+  statutory_basis: ORC Chapter 5735; Ohio Constitution Article XII Section 5a [inference]
+  rate_basis: |
+    Cents per gallon, with a differential between gasoline and diesel. Increased in the
+    FY2020-21 transportation budget. [inference]
+  first_effective: 1925-01-01
+  disposition: |
+    Restricted to highway purposes by constitutional provision; distributed among state
+    highway funds and local government road accounts. [inference]
+links:
+  - target: ../revenue-source.ont.yml
+    relationship: instance-of
+  - target: ../fund/highway-operating-fund.yml
+    relationship: deposits-into

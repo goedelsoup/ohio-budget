@@ -1,0 +1,33 @@
+class: actor
+label: Office of Budget and Management
+description: |
+  The executive office that prepares the governor's budget proposal, issues the revenue
+  estimates it is built on, and reports the state's actual financial results. [inference]
+
+  It occupies both ends of the corpus at once, which is why it is seeded despite being the
+  least visible of the four roles. At the front end it produces the [`forecast`](../forecast/)
+  nodes that every appropriation is sized against. At the back end it produces the reports
+  that [`expenditure`](../expenditure/) nodes are drawn from. The gap between appropriated and
+  actual — this repository's central question — is bounded on one side by a number this office
+  projected and on the other by a number this office reported.
+
+  That dual position is worth stating plainly rather than leaving implicit, because it means
+  forecast error and reporting basis are not independent sources of uncertainty. [inference]
+
+  Note that this role is played by an agency that is not itself seeded as an
+  [`agency`](../agency/) node, which is why the `participates-as` edge is unpopulated at
+  genesis. Seeding Budget and Management as an agency would close that gap and is a natural
+  first corpus expansion.
+properties:
+  name: Office of Budget and Management
+  role_type: analytic-office
+  authority_basis: |
+    Statutory duty to prepare the executive budget and to report state financial results.
+    [inference]
+  held_by: |
+    The Office of Budget and Management, a state agency, under a director appointed by the
+    governor. [inference]
+  phase_active: executive-preparation and reporting
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of
