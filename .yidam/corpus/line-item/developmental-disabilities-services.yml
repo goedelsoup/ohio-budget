@@ -13,20 +13,47 @@ description: |
   [open] The code, and the full set of agencies holding Medicaid-funded line items, are
   unverified.
 
-  ## Candidates, and why none is committed
+  ## Nine line items, $5.40 billion, and a renumbering
 
-  The Department of Developmental Disabilities carries at least six Medicaid-related lines in
-  the committed workbooks — **322407** `Medicaid State Match`, **322416** and **322604**
-  `Medicaid Waiver - State Match` under two different fund groups, **322624** `County Board
-  Waiver Match`, **322619** `Medicaid Repayment`, and others. [verified] Several appear only in
-  the older biennia.
+  The candidates are resolved and there are more of them than a line item can hold. In FY2026 the
+  Department of Developmental Disabilities carries nine Medicaid line items totalling $5.40B:
+  [verified]
 
-  This node describes "Medicaid waiver services delivered through county boards", which is
-  plausibly **322624** or **322604** and plausibly the sum of several. Assigning one would be a
-  guess presented as a code.
+  | ALI | name | FY2026 enacted |
+  |---|---|---|
+  | 653654 | Medicaid Services | $3.386B |
+  | 653407 | Medicaid Services | $1.127B |
+  | 653624 | County Board Waiver Match | $0.688B |
+  | 653655 | Medicaid Support | $0.092B |
+  | 653606 | ICF/IID and Waiver Match | $0.060B |
+  | 653622 | Medicaid Administration and Oversight | $0.036B |
+  | 653321 | Medicaid Program Support - State | $0.008B |
+  | 653627 | Medicaid Program Support | $0.003B |
+  | 322619 | Medicaid Repayment | $0.001B |
 
-  [open] Whether this node should be one line item or a programme spanning several — the same
-  question [foundation funding](./foundation-funding.yml) turned out to have.
+  **Two of them share a name**, differing only in fund, which is the
+  [foundation funding](./foundation-funding.yml) shape again. Four are marked support or
+  administration rather than benefits — a reading of the names, so `[inference]`. Benefits come
+  to roughly **$5.26B**.
+
+  ## Why this matters beyond this node
+
+  That $5.26B is Medicaid. Same recipients, same federal match, appropriated to a different
+  department — and
+  [the Medicaid reconciliation](./medicaid-health-care-services.yml) did not include it, which is
+  how a figure recorded as "the programme" came to understate benefit appropriations by about
+  17%. This node is the missing piece of that correction rather than a separate subject.
+
+  [open] Still not modelled, and now for a stated reason rather than for want of investigation.
+  Nine line items is a programme, and the corpus's pattern for that is one node per ALI with the
+  programme named on each — as foundation funding and Medicaid now do. Seeding nine would be
+  mechanical; deciding which are benefits and which are administration is not, and the corpus
+  has no verified basis for that split beyond the names.
+
+  [open] DDD's Medicaid lines were numbered **322xxx** through the 132nd General Assembly and
+  **653xxx** from the 133rd — 322619 survives under the old number into FY2026, which suggests
+  the renumbering was partial rather than wholesale. Any series spanning the boundary needs that
+  lineage resolved first.
 
 properties:
   name: Developmental Disabilities Medicaid Services

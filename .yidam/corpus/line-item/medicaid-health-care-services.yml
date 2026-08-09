@@ -22,7 +22,37 @@ description: |
   [ALI 600525 under Job and Family Services](./medicaid-services-odjfs.yml), confirmed from
   HB 59's workbook, which carries both codes at once.
 
-  ## This line item is a third of the programme
+  ## This line item is a third of the programme — and the programme is larger than recorded here
+
+  **Correction, and it lands on this node's own headline.** What follows called five ALIs "the
+  programme" and put it at $37.22B in FY2026. Those are the five *largest* Medicaid line items
+  held by the Department of Medicaid. They are not the programme.
+
+  In FY2026 the Department of Medicaid carries **fourteen** Medicaid line items totalling
+  **$39.02B**, and the Department of Developmental Disabilities carries **nine** more totalling
+  **$5.40B**. [verified] Excluding the ones whose names mark them as programme support or
+  administration rather than benefits — a reading of the names and therefore `[inference]` —
+  benefit appropriations come to about **$38.27B at MCD and $5.26B at DDD, $43.5B together**,
+  against the $37.22B recorded below. **The figure understates the programme by about 17%.**
+
+  This is the sixth arrival of
+  [appropriation is not distribution](../../decisions/appropriation-is-not-distribution.yml) and
+  the second one self-inflicted. The first four were about a line item being a slice — of a
+  recipient class, of a distribution estimate, of a fund. The reconciliation below was written to
+  fix exactly that error and repeated it one level up: it sliced by **agency**, taking every
+  Medicaid line item held by the Department of Medicaid and calling the sum Medicaid. The
+  developmental disabilities waiver programme is Medicaid, paid to Medicaid recipients under the
+  same federal match, and it is appropriated to a different department.
+
+  What survives unchanged: the five ALIs below are correctly extracted, the arithmetic among them
+  is right, and the point the reconciliation was making — that ALI 651525 alone is a third of
+  what it appears to summarise — is understated rather than overturned.
+
+  [open] The corrected series is not computed. DDD's Medicaid lines were numbered 322xxx before
+  the 133rd and 653xxx after, so a FY2014-FY2026 comparison needs that lineage resolved first,
+  and the growth rates below are the five ALIs' rather than the programme's.
+
+  ## The five largest, and what they are a third of
 
   Medicaid benefits are appropriated across five line items in four fund groups. Enacted, in
   billions: [verified]

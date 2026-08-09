@@ -143,6 +143,23 @@ decision: |
 
   See [Medicaid Health Care Services](../corpus/line-item/medicaid-health-care-services.yml).
 
+  ## The sixth instance: the fix for the fifth, one level up
+
+  The reconciliation above was written to correct a line item being read as a programme, and it
+  drew the programme's boundary at the **agency**: every Medicaid line item held by the Department
+  of Medicaid, summed. That is not the programme either. Developmental disabilities waiver
+  services are Medicaid — same recipients, same federal match — and are appropriated to the
+  Department of Developmental Disabilities, $5.26B of benefits in FY2026 against MCD's $38.27B.
+  [verified] The five ALIs recorded as "the programme" understate benefit appropriations by
+  about 17%.
+
+  Six arrivals, and the boundary has been drawn wrong at every level available: by recipient
+  class, by distribution estimate, by fund, by line item, and now by agency. The rule that
+  survives all six is not about any of those categories. It is: **before summing, state what the
+  total is a total of, and check that the categories in the source are the categories in the
+  claim.** An agency is an accounting convenience and a programme is a policy; they coincide
+  often enough to be dangerous.
+
 rationale: |
   The failure mode this closes is specific and quiet. Both figures are correct, both are
   citable to a committed primary source, and both are about foundation funding in FY2026. A
