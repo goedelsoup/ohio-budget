@@ -176,6 +176,17 @@ fn keyed(dir: &Path, file: &str, stage: BillStage, fy: &str) -> Result<BTreeMap<
     let mut out: BTreeMap<Key, i64> = BTreeMap::new();
     let mut duplicated: BTreeSet<Key> = BTreeSet::new();
     for r in &table.rows {
+        // A row with no ALI code is a **grand total**, not a line item. Every workbook carries
+        // between one and six of them — `Grand Total`, `Total All Funds`, `Total GRF`,
+        // `GRF State Total` — and each one's movement is the sum of every line item's.
+        //
+        // Their effect on counts is negligible and on dollars is not: a single total row shifted
+        // the share of contested money conference splits by sixteen percentage points. It looked
+        // like a line item, it had a fund group and an agency, and nothing about the figure was
+        // implausible.
+        if r[l].trim().is_empty() {
+            continue;
+        }
         let Ok(cents) = lsc::parse_money_to_cents(&r[c]) else {
             continue;
         };
@@ -480,7 +491,13 @@ mod tests {
         assert_eq!(t.raised_share(), Some(50.0));
     }
 
-    /// The figures quoted in `.yidam/decisions/the-unit-of-observation.yml`.
+    /// The figures quoted in `.yidam/decisions/the-unit-of-observation.yml` and on
+    /// `conference-committee`.
+    ///
+    /// This test passed on figures that were wrong. It pins what the computation produces, which
+    /// catches a record drifting from the code and does not catch the code being wrong — the
+    /// grand-total rows were inside both. What found that was measuring a different question
+    /// (whether vetoes move appropriation figures) and noticing a `Grand Total` in the output.
     ///
     /// Transcribed numbers in prose are the failure this whole exercise exists to close: a record
     /// asserting `27.4%` has nothing checking it, and the corpus has already been caught three
@@ -508,27 +525,27 @@ mod tests {
 
         // "the House raises 27.4% of what the executive proposed to raise and 81.1% of what it
         // proposed to cut" — the-unit-of-observation.yml
-        assert_eq!(pooled("House"), (89, 325, 90, 111));
+        assert_eq!(pooled("House"), (89, 324, 90, 111));
         // "Senate, answering the House | 25.0% | 51.8%"
-        assert_eq!(pooled("Senate"), (56, 224, 59, 114));
+        assert_eq!(pooled("Senate"), (56, 223, 59, 113));
         // "conference, answering the Senate | 54.4% | 93.9%"
-        assert_eq!(pooled("conference"), (31, 57, 108, 115));
+        assert_eq!(pooled("conference"), (31, 57, 107, 113));
 
         // "581 | 77.2% | 33.0%" and the rest of the conference table —
         // conference-committee.yml
         let c = &f.conference;
         let sum = |g: fn(&ConferencePosition) -> usize| c.iter().map(g).sum::<usize>();
-        assert_eq!(sum(|x| x.contested), 753);
+        assert_eq!(sum(|x| x.contested), 751);
         assert_eq!(sum(|x| x.at_senate), 581);
         assert_eq!(sum(|x| x.at_house), 73);
-        assert_eq!(sum(|x| x.between), 47);
-        assert_eq!(sum(|x| x.outside_both), 52);
+        assert_eq!(sum(|x| x.between), 46);
+        assert_eq!(sum(|x| x.outside_both), 51);
 
         let cents = |g: fn(&ConferencePosition) -> i128| c.iter().map(g).sum::<i128>();
         let total = cents(|x| x.contested_cents) as f64;
         let share = |v: i128| (v as f64 / total * 1000.0).round() / 10.0;
-        assert_eq!(share(cents(|x| x.cents_between)), 51.2);
-        assert_eq!(share(cents(|x| x.cents_at_senate)), 33.0);
+        assert_eq!(share(cents(|x| x.cents_between)), 38.1);
+        assert_eq!(share(cents(|x| x.cents_at_senate)), 45.6);
     }
 
     #[test]
@@ -549,6 +566,34 @@ mod tests {
                 c.bill,
                 c.when_prior_raised.raised_share(),
                 c.when_prior_cut.raised_share()
+            );
+        }
+    }
+
+    #[test]
+    fn grand_total_rows_are_never_read_as_line_items() {
+        // Every workbook carries between one and six rows with no ALI code whose movement is the
+        // sum of every line item's. Including them changed the share of contested money
+        // conference splits from 38.1% to 51.2% and left the line counts almost untouched, so a
+        // check of the counts would not have found it — and did not.
+        use lsc::columns::{ColumnPlan, Identity};
+        let dir = root().join(".yidam/sources/lsc");
+        for b in &BIENNIA {
+            let t = lsc::xlsx::sheet_to_table(&dir.join(b.file), "EN").unwrap();
+            let plan = ColumnPlan::of(&t.headers);
+            let l = plan.identity_column(Identity::LineItemCode).unwrap();
+            let blank = t.rows.iter().filter(|r| r[l].trim().is_empty()).count();
+            assert!(
+                blank > 0,
+                "{} has no total rows to exclude — has the format changed?",
+                b.bill
+            );
+
+            let keyed_rows = keyed(&dir, b.file, BillStage::AsEnacted, b.years[0]).unwrap();
+            assert!(
+                !keyed_rows.keys().any(|(_, code, _)| code.is_empty()),
+                "{}: a row with no ALI code reached the analysis",
+                b.bill
             );
         }
     }

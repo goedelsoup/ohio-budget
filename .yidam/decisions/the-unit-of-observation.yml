@@ -51,9 +51,9 @@ decision: |
 
   | the actor | on what the previous actor raised | on what it cut | gap | p |
   |---|---|---|---|---|
-  | House, answering the executive | 27.4% | 81.1% | +53.7pp | 1.6e-23 |
-  | Senate, answering the House | 25.0% | 51.8% | +26.8pp | 1.7e-06 |
-  | conference, answering the Senate | 54.4% | 93.9% | +39.5pp | 2.3e-09 |
+  | House, answering the executive | 27.5% | 81.1% | +53.6pp | 1.6e-23 |
+  | Senate, answering the House | 25.1% | 52.2% | +27.1pp | 1.7e-06 |
+  | conference, answering the Senate | 54.4% | 94.7% | +40.3pp | 2.3e-09 |
 
   **All twelve biennium-by-stage cells point the same way** — every actor is more likely to raise
   a line item its predecessor cut than one its predecessor raised. On direction alone that is a
@@ -94,9 +94,10 @@ rationale: |
 
   The conference column looked like a body splitting differences, and it is not. On the 753 line
   items where the chambers disagreed, the report lands exactly at the **Senate's** figure 77.2%
-  of the time, at the House's 9.7%, and strictly between them on 6.2%. **By contested dollars
-  those shares are 33.0%, 6.9% and 51.2%** — a majority of the disputed money is split, on 6% of
-  the lines. [verified] Conference moves only 172 of those 753 — which is precisely the 57 + 115 the conditioning table above was
+  of the time, at the House's 9.7%, and strictly between them on 6.1%. **By contested dollars
+  those shares are 45.6%, 9.6% and 38.1%** — the Senate's figure leads on both measures, and the
+  split lines carry six times their share of the money. [verified] Conference moves only 170 of
+  those 751 — which is precisely the 57 + 115 the conditioning table above was
   computed over. It acts rarely, and when it acts it restores what the Senate cut. See
   [conference-committee](../corpus/actor/conference-committee.yml).
 
