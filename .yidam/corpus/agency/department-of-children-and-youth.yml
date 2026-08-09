@@ -1,0 +1,29 @@
+class: agency
+label: Department of Children and Youth
+description: |
+  The agency created in the FY2024-25 budget to consolidate children's programmes that had been
+  spread across education, job and family services, health and mental health. [inference]
+  Its appropriation code is `KID`. [verified]
+
+  It is the corpus's second worked example of an agency created mid-window, after the
+  [Department of Medicaid](./department-of-medicaid.yml), and the two behave differently in a way
+  worth holding onto. Medicaid's predecessor line item was **retained at zero** beside its
+  successor in the same workbook, which made the succession legible in one document. This one was
+  not: ALI 200408 under `EDU` is zeroed from FY2024 and ALI 830407 under `KID` simply appears,
+  with no row tying them together. [verified]
+
+  The tie had to be established from the figures instead, and it is
+  [recorded on the line item](../line-item/early-childhood-education.yml).
+properties:
+  name: Department of Children and Youth
+  agency_code: "KID"
+  established: "FY2024 [inference]"
+  predecessor: |
+    Consolidated from programmes previously appropriated to education, job and family services
+    and mental health. [inference] Only one line item of the transfer is traced:
+    ALI 200408 (EDU) to ALI 830407 (KID). [verified]
+links:
+  - target: ../agency.ont.yml
+    relationship: instance-of
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,0 +1,30 @@
+class: appropriation
+label: Early Childhood Education (Children and Youth) — FY2025, As Enacted
+description: |
+  $130,316,000.00 for line item 830407 in FY2025, appropriated by
+  [HB 33](../bill-version/hb33-as-enacted.yml). [verified]
+
+  Roughly double what
+  [the predecessor line item](../line-item/early-childhood-education.yml) carried, which held
+  $68,116,789 unchanged from FY2018 through FY2023.
+properties:
+  amount: "$130,316,000.00"
+  period_label: FY2025
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 33, sheet EN, ALI 830407 "Early Childhood Education",
+    enacted column for FY2025. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/early-childhood-education-kid.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2025.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

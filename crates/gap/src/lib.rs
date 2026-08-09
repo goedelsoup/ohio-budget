@@ -128,9 +128,14 @@ pub struct GapResult {
     pub variance_pct: Option<f64>,
     /// Set when the pair is arithmetically computable and still means something unusual.
     ///
-    /// Money leaving against no authority is not a rounding artefact. In this corpus it marks
-    /// a line item zeroed mid-transition while its disbursements continued under the old code,
-    /// which is a lineage question rather than an overspend.
+    /// Two shapes, and they are the two halves of one event. Money leaving against no authority
+    /// is not a rounding artefact; neither is a full appropriation against which nothing at all
+    /// was spent. In this corpus both mark a line item mid-succession — the predecessor keeps
+    /// disbursing while the successor holds the appropriation — and a reader who meets either
+    /// alone will read it as a scandal.
+    ///
+    /// Where the corpus declares the succession, the message names the counterpart, because the
+    /// whole point is that the other half exists.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub anomaly: Option<String>,
     pub reversion_cents: Option<i64>,
@@ -197,6 +202,51 @@ fn character_of(corpus: &Corpus, line_item: &LoadedInstance) -> Character {
                 .is_some_and(|f| !f.trim_start().starts_with("None") && !f.contains("[open]"))
         }),
     }
+}
+
+/// The line item this one hands over to, or takes over from, if the corpus declares one.
+///
+/// Read from the node's own edges rather than guessed. `lineage` proposes candidates; this
+/// reports only what a person has asserted.
+fn counterpart(corpus: &Corpus, li: &LoadedInstance) -> Option<(&'static str, String)> {
+    let dir = li.abs_path.parent().unwrap_or(&li.abs_path);
+    li.inst.links.iter().find_map(|l| {
+        let verb = match l.relationship.as_str() {
+            "superseded-by" => "is superseded by",
+            "succeeds" => "succeeds",
+            _ => return None,
+        };
+        let target = normalize_join(dir, &l.target);
+        let inst = corpus.instances.iter().find(|i| i.abs_path == target)?;
+        Some((verb, slug_of(&inst.rel_path).to_string()))
+    })
+}
+
+/// Names the two halves of a succession, where a period's figures show one.
+fn succession_anomaly(
+    corpus: &Corpus,
+    li: &LoadedInstance,
+    appropriated: i64,
+    spent: i64,
+) -> Option<String> {
+    let shape = match (appropriated, spent) {
+        (0, s) if s != 0 => "money was disbursed against no appropriation at all",
+        (a, 0) if a != 0 => "an appropriation was made and nothing at all was spent against it",
+        _ => return None,
+    };
+    Some(match counterpart(corpus, li) {
+        Some((verb, other)) => format!(
+            "{shape}. This line item {verb} {other}, and a succession normally shows exactly \
+             this: one code holds the authority while the other keeps disbursing. Read the two \
+             together — neither half means what it appears to mean alone."
+        ),
+        None => format!(
+            "{shape}, which is not something a line item does. The usual cause is a succession \
+             partway through the year, with a predecessor or successor holding the other half; \
+             the corpus declares none for this line item, so that is a guess rather than a \
+             reading."
+        ),
+    })
 }
 
 /// Computes the gap for one line item in one period.
@@ -324,12 +374,7 @@ pub fn gap_for(corpus: &Corpus, line_item_slug: &str, period: &str) -> Outcome {
         spent_cents: spent,
         variance_cents: variance,
         variance_pct: (appropriated != 0).then(|| variance as f64 / appropriated as f64 * 100.0),
-        anomaly: (appropriated == 0 && spent != 0).then(|| {
-            "money was disbursed against no appropriation at all; the line item was most likely \
-             zeroed while its successor took over, so this is evidence about lineage rather \
-             than about overspending"
-                .to_string()
-        }),
+        anomaly: succession_anomaly(corpus, li, appropriated, spent),
         reversion_cents: reversion,
         provisional: basis == "disbursed",
         basis,
@@ -726,7 +771,57 @@ links:
             r.variance_pct.is_none(),
             "a share of nothing is undefined, not nought"
         );
-        assert!(r.anomaly.as_deref().is_some_and(|a| a.contains("lineage")));
+        assert!(r
+            .anomaly
+            .as_deref()
+            .is_some_and(|a| a.contains("no appropriation at all")));
+        assert!(
+            r.anomaly
+                .as_deref()
+                .is_some_and(|a| a.contains("declares none")),
+            "with no succession edge the message must not assert one"
+        );
+    }
+
+    #[test]
+    fn an_appropriation_nothing_was_spent_against_is_the_other_half() {
+        // KID 830407 in FY2024: $130.3M appropriated, nothing spent, because the predecessor
+        // kept disbursing. Alone it reads as a programme that did nothing.
+        let c = corpus_with(
+            "$130,316,000.00",
+            &[("e1", "$0.00", "actual-closed", false)],
+        );
+        let Outcome::Computed(r) = gap_for(&c, "foundation-funding", "FY2024-25") else {
+            panic!()
+        };
+        assert!(r
+            .anomaly
+            .as_deref()
+            .is_some_and(|a| a.contains("nothing at all was spent")));
+    }
+
+    #[test]
+    fn a_declared_succession_is_named_in_the_anomaly() {
+        let mut c = corpus_with("$0.00", &[("e1", "$100.00", "actual-closed", false)]);
+        c.instances.push(inst(
+            "c/line-item/successor.yml",
+            "class: line-item\nlabel: S\ndescription: d\n",
+        ));
+        // The line item under test declares where its programme went.
+        for i in c.instances.iter_mut() {
+            if i.rel_path.ends_with("line-item/foundation-funding.yml") {
+                i.inst.links.push(
+                    serde_yaml::from_str("target: ./successor.yml\nrelationship: superseded-by\n")
+                        .unwrap(),
+                );
+            }
+        }
+        let Outcome::Computed(r) = gap_for(&c, "foundation-funding", "FY2024-25") else {
+            panic!()
+        };
+        let a = r.anomaly.as_deref().unwrap_or_default();
+        assert!(a.contains("is superseded by successor"), "{a}");
+        assert!(a.contains("Read the two together"), "{a}");
     }
 
     #[test]

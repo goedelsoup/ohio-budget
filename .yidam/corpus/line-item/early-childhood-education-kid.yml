@@ -1,0 +1,59 @@
+class: line-item
+label: Early Childhood Education (Children and Youth)
+description: |
+  State-funded preschool, appropriated to the
+  [Department of Children and Youth](../agency/department-of-children-and-youth.yml) from FY2024,
+  where it had previously been
+  [a line item of the education department](./early-childhood-education.yml). [verified]
+
+  **ALI 830407, agency `KID`, general revenue fund.** Enacted $130,316,000 in FY2024 and FY2025
+  and $130,319,450 in FY2026 — roughly double the $68,116,789 the predecessor carried unchanged
+  from FY2018 through FY2023. [verified]
+
+  ## It reports no spending at all, and that is the interesting part
+
+  | | FY2022 | FY2023 | FY2024 |
+  |---|---|---|---|
+  | this line item, actual | $0 | $0 | **$0** |
+  | [ALI 200408](./early-childhood-education.yml), actual | $59,336,017 | $64,038,422 | **$112,723,609** |
+  | this line item, enacted | — | — | $130,316,000 |
+  | ALI 200408, enacted | $68,116,789 | $68,116,789 | **$0** |
+
+  Every figure is [verified] from a committed workbook.
+
+  In FY2024 the authority sits here and the disbursement is booked against the predecessor. The
+  $112.7M is 86% of *this* line item's appropriation and 165% of anything ALI 200408 ever carried,
+  so it is not the education department spending an old budget — it is this appropriation being
+  executed under the old code during the transition year.
+
+  Taken alone each half is alarming: a programme that appropriated $130 million and spent nothing,
+  beside a line item that spent $112 million it was never given. Taken together they are one
+  ordinary event. The [gap](../../../crates/gap/) calculator now names the counterpart on both.
+
+  [open] Whether FY2025 repeats the pattern is unknown; no committed source carries FY2025
+  actuals for either code.
+properties:
+  name: Early Childhood Education [verified]
+  current_code: "830407"
+  historical_codes: |
+    Preceded by ALI 200408 under agency EDU, which carried the programme through FY2023.
+    [verified]
+  agency_code: "KID"
+  purpose: |
+    State-funded preschool slots for eligible children.
+  first_period: "FY2024 [verified]"
+  last_period: current
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ./early-childhood-education.yml
+    relationship: succeeds
+  - target: ../agency/department-of-children-and-youth.yml
+    relationship: belongs-to
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

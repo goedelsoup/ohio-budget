@@ -8,6 +8,13 @@ description: |
   **estimate**, and no later workbook reaches back that far. An estimate is somebody's
   projection and is never an actual, so the year stays absent rather than being filled with the
   nearest available number.
+
+  **FY2010 carries actuals and no appropriations, and never will.** An LSC workbook appropriates
+  one biennium and reports two completed years beside it, so the earliest committed document
+  reaches two years further back in outturn than in authority. Supplying FY2010 appropriations
+  would need the 128th General Assembly's workbook, and the 128th published none — only
+  greenbooks and per-agency comparison PDFs. Twelve appropriated-against-actual pairs are blocked
+  on this and are permanently blocked. [verified]
 properties:
   label: FY2010
   period_type: fiscal-year
@@ -15,6 +22,8 @@ properties:
   end_date: 2010-06-30
   general_assembly: 128th
 links:
+  - target: ../../catalog/lsc-hb153-budget-in-detail.md
+    relationship: cites
   - target: ../fiscal-period.ont.yml
     relationship: instance-of
   - target: ./fy2010-11.yml

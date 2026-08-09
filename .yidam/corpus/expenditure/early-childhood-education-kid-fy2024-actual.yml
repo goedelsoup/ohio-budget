@@ -1,0 +1,27 @@
+class: expenditure
+label: Early Childhood Education (Children and Youth) — FY2024, Actual
+description: |
+  **$0.00** disbursed against line item 830407 in FY2024, on a closed-book basis. [verified]
+
+  FY2024 is the one that matters. This line item holds $130,316,000 of authority that year and
+  reports nothing spent, while
+  [ALI 200408](./../line-item/early-childhood-education.yml) — appropriated nothing — reports
+  $112,723,608.72. The authority moved to the new agency and the disbursement kept running
+  through the old code. [verified]
+properties:
+  amount: "$0.00"
+  basis: actual-closed
+  period_label: FY2024
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation spreadsheet, HB 96, sheet EN, ALI 830407, actual column for FY2024.
+    [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/early-childhood-education-kid.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2024.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

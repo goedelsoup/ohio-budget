@@ -26,14 +26,20 @@ description: |
   [the Medicaid agency transfer](./medicaid-services-odjfs.yml): a line item zeroed while a
   successor under a new agency takes the programme.
 
-  **[open] The FY2024 actual is $112,723,608.72 against an appropriation of $0.00.** Both figures
-  are read from committed workbooks and neither is a parse failure. Money left the treasury
-  under a line item with no authority, which cannot be literally what happened — the likely
-  explanations are that disbursement continued under the old code through the transition year,
-  or that the workbook reports the successor's spending against the predecessor's row. The
-  corpus does not know which, and the [gap](../../../crates/gap/) calculator now marks the pair
-  rather than dividing by zero and reporting it as a nought-percent variance, which is what it
-  did when this figure first arrived.
+  **The FY2024 actual is $112,723,608.72 against an appropriation of $0.00, and the other half
+  has been found.** [verified] ALI 830407 under the new agency is appropriated $130,316,000 that
+  year and reports **$0.00** spent. So the authority moved and the disbursement did not: $112.7M
+  is 86% of the successor's appropriation and 165% of anything this line item ever carried, which
+  rules out the education department simply spending an old budget.
+
+  The two halves are now linked by a `superseded-by` edge, and
+  [the gap calculator](../../../crates/gap/) names the counterpart on both rather than reporting
+  one as an overspend and the other as a programme that did nothing. When this figure first
+  arrived it was reported as a nought-percent variance, because the percentage defaulted to zero
+  when authority was zero.
+
+  [open] Which of the two rows the state's own accounting treats as authoritative, and whether
+  FY2025 repeats it. No committed source carries FY2025 actuals for either code.
 
 properties:
   name: Early Childhood Education
@@ -46,6 +52,8 @@ properties:
   last_period: "current"
   status: active
 links:
+  - target: ./early-childhood-education-kid.yml
+    relationship: superseded-by
   - target: ../../catalog/lsc-hb59-budget-in-detail.md
     relationship: cites
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md

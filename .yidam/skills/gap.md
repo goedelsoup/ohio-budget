@@ -72,3 +72,28 @@ those is wrong by orders of magnitude while looking entirely reasonable.
 
 That report is the repository's own inventory of what extraction has to deliver before its
 central question can be answered at all.
+
+## Why the blocked pairs cluster at the start of the window
+
+Twenty-seven of 197 pairs are not computed, and most of them fail the same way: the corpus holds
+an expenditure and no appropriation to measure it against. That is not a backlog. It follows from
+the shape of the source.
+
+An LSC workbook appropriates one biennium and reports **two completed years** beside it. So each
+document reaches two years further back in actuals than in appropriations, and the earliest one
+committed — HB 153, for the 129th General Assembly — supplies an FY2010 actual with no FY2010
+appropriation anywhere. The 128th published no workbook at all, so nothing can supply one.
+**Twelve of the blocked pairs are FY2010 and are permanently blocked.** [verified]
+
+The same asymmetry accounts for most of the rest, one line item at a time: `foundation-funding-dpf`
+has actuals from FY2018 and appropriations from FY2020; `medicaid-health-care-services` has
+FY2012-13 actuals of $0 against a code that did not carry money until FY2014, its predecessor
+[ALI 600525](../corpus/line-item/medicaid-services-odjfs.yml) having held it.
+
+Three more are recipient slices — a Cleveland or Cuyahoga disbursement against a whole line item —
+which `gap` refuses by design rather than for want of data.
+
+**None of these is a defect and none is a todo.** What would be a defect is a reader taking a
+list of twenty-seven blocked pairs as twenty-seven pieces of missing work, so the distinction is
+recorded here: a pair blocked because the corpus has not reached the figure is different from one
+blocked because the figure was never published, and the second kind does not shrink.
