@@ -1,0 +1,70 @@
+id: deflator-choice
+summary: >-
+  Constant-dollar figures use the BEA state and local government purchases deflator, base
+  FY2025. Measured against CPI-U the choice moves a five-year growth rate by 0.4 points, while
+  the decision to deflate at all moves it by 22.7 — from +19.1% to -3.6%.
+context: |
+  `real_dollars` shipped no index and refused every cross-period comparison, on the stated
+  grounds that which index to use is a modelling decision rather than a technical detail. That
+  was the right default while the corpus held figures for two fiscal years. It now holds a
+  continuous FY2020-FY2026 series for five line items, and the refusal was blocking the
+  question the sixteen-year window was chosen to answer.
+
+  Two candidates were committed and both were computed rather than argued about:
+
+  - **CPI-U**, all items, not seasonally adjusted. What households pay.
+  - **BEA state and local government consumption expenditures and gross investment, implicit
+    price deflator.** What state and local governments pay — weighted toward compensation,
+    construction, and services rather than toward rent, groceries and petrol.
+decision: |
+  The **state and local government purchases deflator**, base **FY2025**, built from
+  `.yidam/sources/price-index/fred-a829rd3q086sbea.csv` by averaging its quarterly observations
+  onto Ohio's July-June fiscal year.
+
+  Three reasons, in the order they should be weighed:
+
+  1. **It measures what the buyer buys.** A state budget is spent overwhelmingly on salaries,
+     medical services, and construction. Deflating it by a consumer basket asks what the money
+     would have bought a household, which is a different question from what it bought the
+     state.
+  2. **It covers the corpus window.** FY2010 through FY2026, every year the corpus holds.
+     CPI-U cannot cover FY2026 at all: BLS never published an October 2025 figure, and one
+     missing month makes that fiscal year permanently unaverageable.
+  3. **Quarterly observations land cleanly on a July-June year.** Four quarters in, four
+     quarters averaged, no interpolation.
+
+  Every restated figure carries the series name. `Real::label` renders
+  `FY2025 dollars (state and local government … A829RD3Q086SBEA)` and not a bare number,
+  because the choice is contestable and a constant-dollar figure without its index is not
+  interpretable.
+
+  Swapping it is a one-line change to `DEFLATOR_SOURCE` and `DEFLATOR_NAME` in `corpus-export`.
+  Both series are committed so the alternative can be computed, not just imagined.
+rationale: |
+  The measurement is what settled it, and it settled it in an unexpected direction.
+
+  Foundation funding, FY2020 to FY2025:
+
+      nominal                  +19.1%
+      real, CPI-U               -3.6%
+      real, state and local     -3.2%
+
+  **Deflation reverses the sign.** A line item that grew nineteen percent in dollars shrank
+  about three and a half percent in purchasing power. Any account of Ohio school funding over
+  this period that quotes the nominal figure is not describing the same thing as one that
+  deflates, and the difference is not a nuance — it is the whole finding.
+
+  Against that, the gap between the two candidate indices is 0.4 percentage points over five
+  years, and never more than $28 million on a roughly $8 billion line in any single year.
+
+  So the modelling worry that kept `real_dollars` empty — that the choice of index would
+  materially change the answer — turns out to be much smaller than the thing it was protecting
+  against. The refusal was still correct: it prevented nominal figures being charted as a trend,
+  which is the error the skill names. But it was guarding the smaller of the two risks, and
+  measuring both is what showed which was which.
+
+  [open] One index is applied to every line item. A Medicaid series arguably wants a medical
+  care price index and a construction line a construction cost index, since neither moves with
+  the average of government purchases. Nothing here prevents a per-line-item deflator; the
+  corpus simply does not yet hold one, and starting with a single defensible index beats
+  starting with five undefended ones.

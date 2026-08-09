@@ -81,21 +81,99 @@ pub struct Manifest {
 #[derive(Debug, Clone, Serialize)]
 pub struct RealDollars {
     pub deflator_available: bool,
-    pub reason: &'static str,
+    pub reason: String,
+    /// Which index, named on every figure it produces. A constant-dollar number without this
+    /// is not interpretable, and the point of naming it is that the choice stays arguable.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub series_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub base_period: Option<String>,
+    /// Fiscal years the index covers, in order.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub periods: Vec<String>,
+    /// Fiscal years it does not, and why. A period absent here cannot be deflated at all.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub periods_uncovered: Vec<String>,
+}
+
+/// The index this repository uses, built from a committed source.
+///
+/// The choice is recorded in `deflator-choice.yml`. In short: it deflates by what state and
+/// local governments actually buy rather than by what households buy, it is quarterly and so
+/// averages cleanly onto Ohio's July-June fiscal year, and it covers FY2026 where CPI-U cannot
+/// — BLS never published an October 2025 figure, which leaves that fiscal year permanently
+/// unaverageable from consumer prices.
+pub const DEFLATOR_SOURCE: &str = ".yidam/sources/price-index/fred-a829rd3q086sbea.csv";
+pub const DEFLATOR_NAME: &str =
+    "state and local government consumption expenditures and gross investment, implicit price deflator (BEA, via FRED A829RD3Q086SBEA)";
+pub const DEFLATOR_BASE: &str = "FY2025";
+
+/// Builds the deflator, or explains why there is none.
+pub fn load_deflator(repo_root: &std::path::Path) -> RealDollars {
+    let path = repo_root.join(DEFLATOR_SOURCE);
+    let Ok(text) = std::fs::read_to_string(&path) else {
+        return RealDollars {
+            deflator_available: false,
+            reason: format!(
+                "The price index source is missing at {DEFLATOR_SOURCE}. Figures from \
+                 different fiscal periods are nominal and must not be drawn as a trend."
+            ),
+            ..RealDollars::none()
+        };
+    };
+    match real_dollars::parse_fred_csv(&text, DEFLATOR_NAME)
+        .and_then(|o| o.ohio_fiscal_years(2010, 2027))
+    {
+        Ok(real_dollars::FiscalYearIndex {
+            index,
+            incomplete: uncovered,
+        }) => {
+            let pairs: Vec<(&str, f64)> = index.iter().map(|(k, v)| (k.as_str(), *v)).collect();
+            match real_dollars::Deflator::new(DEFLATOR_BASE, DEFLATOR_NAME, &pairs) {
+                Ok(d) => RealDollars {
+                    deflator_available: true,
+                    reason: format!(
+                        "Figures may be restated in {DEFLATOR_BASE} dollars using \
+                         {DEFLATOR_NAME}. Every restated figure carries the index name, because \
+                         the choice of index is contestable and a constant-dollar number \
+                         without it is not interpretable."
+                    ),
+                    series_name: Some(d.series_name.clone()),
+                    base_period: Some(d.base_period.clone()),
+                    periods: index.into_iter().map(|(k, _)| k).collect(),
+                    periods_uncovered: uncovered,
+                },
+                Err(e) => RealDollars {
+                    deflator_available: false,
+                    reason: format!("The price index could not be built: {e}"),
+                    ..RealDollars::none()
+                },
+            }
+        }
+        Err(e) => RealDollars {
+            deflator_available: false,
+            reason: format!("The price index source could not be read: {e}"),
+            ..RealDollars::none()
+        },
+    }
+}
+
+impl RealDollars {
+    fn none() -> Self {
+        Self {
+            deflator_available: false,
+            reason: String::new(),
+            series_name: None,
+            base_period: None,
+            periods: Vec::new(),
+            periods_uncovered: Vec::new(),
+        }
+    }
 }
 
 impl Default for RealDollars {
     fn default() -> Self {
-        Self {
-            deflator_available: false,
-            // Plain prose, no markdown: this string is read by a CLI, a JSON consumer, and
-            // a web page that renders it verbatim, and only one of those would style it.
-            reason: "No deflator is supplied. The real-dollars calculator ships none by \
-                     design — which price index to use is a modeling decision, not a \
-                     technical detail — and the corpus seeds no index either. Figures from \
-                     different fiscal periods are therefore nominal, and must not be drawn \
-                     as a trend.",
-        }
+        Self::none()
     }
 }
 
@@ -506,7 +584,7 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
             contract_version: CONTRACT_VERSION,
             commit: head_commit(repo_root),
             counts,
-            real_dollars: RealDollars::default(),
+            real_dollars: load_deflator(repo_root),
         },
         classes,
         nodes,

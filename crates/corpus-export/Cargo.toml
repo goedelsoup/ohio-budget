@@ -13,6 +13,7 @@ serde_json.workspace = true
 serde_yaml.workspace = true
 walkdir.workspace = true
 corpus-schema = { path = "../corpus-schema" }
+real-dollars = { path = "../real-dollars" }
 corpus-validate = { path = "../corpus-validate" }
 gap = { path = "../gap" }
 lsc = { path = "../lsc", default-features = false }
