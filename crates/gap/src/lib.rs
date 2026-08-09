@@ -23,6 +23,8 @@
 //! execution. The calculator returns the figure together with what the corpus knows about the
 //! line item's character, and refuses to collapse that into a verdict.
 
+pub mod adjustment;
+
 use anyhow::Result;
 use corpus_validate::{normalize_join, Corpus, LoadedInstance};
 use real_dollars::Deflator;

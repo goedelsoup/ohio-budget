@@ -13,7 +13,7 @@ serde_json.workspace = true
 serde_yaml.workspace = true
 corpus-schema = { path = "../corpus-schema" }
 corpus-validate = { path = "../corpus-validate" }
-lsc = { path = "../lsc", default-features = false }
+lsc = { path = "../lsc", features = ["xlsx"] }
 real-dollars = { path = "../real-dollars" }
 
 [[bin]]

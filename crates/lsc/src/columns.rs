@@ -128,10 +128,14 @@ fn label_without_year(h: &str) -> String {
 pub fn classify_header(h: &str) -> ColumnKind {
     let n = norm(h);
     match n.as_str() {
-        // `CAS` is HB 166's heading for the agency column — a code-and-agency-sort field.
-        "agency" | "agency code" | "agy" | "cas" => return ColumnKind::Identity(Identity::Agency),
+        // `CAS` is HB 166's heading for the agency column — a code-and-agency-sort field. The
+        // adjusted-appropriations workbooks spell the same things differently again; there is no
+        // house style across these documents and every variant costs a silently missing column.
+        "agency" | "agency code" | "agy" | "cas" | "cas code" | "agency name" => {
+            return ColumnKind::Identity(Identity::Agency)
+        }
         "fund group" | "group" => return ColumnKind::Identity(Identity::FundGroup),
-        "fund" | "fund code" => return ColumnKind::Identity(Identity::Fund),
+        "fund" | "fund code" | "fund number" => return ColumnKind::Identity(Identity::Fund),
         "ali" | "ali code" | "line item code" | "code" => {
             return ColumnKind::Identity(Identity::LineItemCode)
         }
@@ -166,7 +170,11 @@ pub fn classify_header(h: &str) -> ColumnKind {
     // Authority after execution-phase adjustment — controlling board transfers and the like.
     // Neither the enacted figure nor a figure that was spent, and it has been mistaken for
     // both. See the `adjusted-appropriation-is-a-stage` note in the class docs.
-    if label.starts_with("adjusted appropriation") {
+    // `Adjusted Appropriations FY 2021`, and also `FY 2019 Adjusted Approp. OAKS as of
+    // 9/11/2018`, which is the same column abbreviated and dated. Matching the full word missed
+    // it silently: the column fell through to `UnknownStage` and the workbook contributed
+    // nothing, which reads exactly like a workbook that has no adjusted figures.
+    if label.starts_with("adjusted approp") {
         return ColumnKind::AdjustedAppropriation { fiscal_year };
     }
     if label.contains("estimate") || label.contains("projected") {
@@ -406,6 +414,23 @@ mod tests {
     }
 
     #[test]
+    fn the_adjusted_appropriation_workbooks_spell_identity_columns_their_own_way() {
+        // `CAS Code`, `Agency Name`, `Fund Number`. An unmatched identity column is not an error
+        // anywhere — the caller simply finds no agency and joins on less than it meant to.
+        for h in ["CAS Code", "Agency Name"] {
+            assert_eq!(
+                classify_header(h),
+                ColumnKind::Identity(Identity::Agency),
+                "{h}"
+            );
+        }
+        assert_eq!(
+            classify_header("Fund Number"),
+            ColumnKind::Identity(Identity::Fund)
+        );
+    }
+
+    #[test]
     fn an_unqualified_appropriation_column_is_the_enacted_figure() {
         // The 129th-132nd "budget in detail" workbooks carry no stage columns at all: two
         // appropriation columns, one prior-year actual, one estimate. Every later workbook names
@@ -424,6 +449,19 @@ mod tests {
                 stage: BillStage::AsEnacted,
                 fiscal_year: "FY2012".into()
             }
+        );
+    }
+
+    #[test]
+    fn an_abbreviated_adjusted_appropriation_is_still_one() {
+        // HB 49's adjusted workbook heads the column with the abbreviation, the accounting
+        // system it came from, and the date it was taken.
+        assert_eq!(
+            classify_header("FY 2019 \r\nAdjusted Approp. \r\nOAKS as of 9/11/2018"),
+            ColumnKind::AdjustedAppropriation {
+                fiscal_year: "FY2019".into()
+            },
+            "the trailing date must not be read as the fiscal year either"
         );
     }
 
