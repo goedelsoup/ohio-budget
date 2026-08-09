@@ -1,0 +1,87 @@
+id: the-unit-of-observation
+summary: >-
+  Every question this corpus asked about chamber behaviour was posed per biennium, where n=4 and
+  will still be 4 in 2028. Asked per line item, where n is about 1,400, the same question answers
+  immediately: the House raises 27% of what the executive proposed to raise and 81% of what it
+  proposed to cut, p = 1.6e-23. The finding is real; the mechanism is not what it looks like.
+context: |
+  [The leadership record](./leadership-and-the-anomalies.yml) ended by naming one surviving
+  hypothesis: that a chamber which receives a lean introduced budget raises line items and one
+  which receives a generous budget trims them.
+
+  Tested the way every previous question here was tested — four biennium-level numbers against
+  four others — it gives `r = -0.61` in exactly the hypothesised direction. [verified]
+
+  That number is worthless, and it is worth being precise about why. With four observations the
+  threshold for significance is about |r| = 0.95. A correlation of 0.61 on n=4 is what the
+  Speaker alignment already was: a pattern of the right shape, arrived at honestly, carrying no
+  information. Recording it would have repeated the error diagnosed one commit earlier.
+decision: |
+  **Stop asking questions about legislative behaviour at biennium granularity.** Ohio holds one
+  biennium every two years. The corpus has four and will have five in 2028; no amount of
+  extraction changes that, and a hypothesis that needs biennium-level variance is unanswerable
+  for the lifetime of anyone reading this.
+
+  Ask the same question per line item. Each biennium carries roughly 1,400 of them, and the
+  chamber acts on each one separately.
+
+  Restated that way — *given what the executive did to this line item, what did the chamber do
+  to it?* — the answer arrives at once: [verified]
+
+  | | executive raised it | executive cut it | gap | p |
+  |---|---|---|---|---|
+  | HB 166, Householder | 29/49 = 59.2% | 11/14 = 78.6% | +19.4pp | 0.22 |
+  | HB 110, Cupp | 12/17 = 70.6% | 36/37 = 97.3% | +26.7pp | 0.0093 |
+  | HB 33, Stephens | 35/206 = 17.0% | 18/28 = 64.3% | +47.3pp | <0.0001 |
+  | HB 96, Huffman | 13/53 = 24.5% | 25/32 = 78.1% | +53.6pp | <0.0001 |
+  | **pooled** | **89/325 = 27.4%** | **90/111 = 81.1%** | **+53.7pp** | **1.6e-23** |
+
+  Cells are: of the line items the chamber moved, the share it moved **up**. Three of four
+  biennia are individually significant and the fourth has n=63.
+
+  **The House moves against the executive, line by line, under all four Speakers.** That is what
+  the aggregate direction was tracking all along — a chamber handed a budget in which the
+  executive raised 71.5% of line items will appear to be a cutting chamber, and one handed 50.1%
+  will appear generous, without anybody's disposition entering into it.
+rationale: |
+  ## The mechanism is not the obvious one
+
+  "Raises what the executive cut" is also exactly what regression toward a line item's usual
+  level looks like, and that would be an artefact rather than a behaviour. The discriminating
+  test: if the chamber is pulling figures back toward what the last biennium actually enacted,
+  its substitute should land **closer** to that level than the introduced figure did.
+
+  | | line items moved | toward the previous level |
+  |---|---|---|
+  | HB 166 | 72 | 30.6% |
+  | HB 110 | 66 | 53.0% |
+  | HB 33 | 260 | 68.8% |
+  | HB 96 | 100 | 51.0% |
+
+  **It does not.** [verified] Three of four sit near a coin flip and the fourth moves *away*. The
+  chamber reverses the executive's direction without returning to the status quo ante — it
+  overshoots, undershoots, and lands past the old level about as often as short of it.
+
+  So the anti-correlation is robust and its cause is open. Two candidates the corpus cannot yet
+  separate: the chamber negotiates against a **total**, so a budget already raised throughout
+  leaves room only in cuts; or the introduced figure is an opening position in a negotiation and
+  is expected by both parties to be moved. Both predict the sign and neither predicts the
+  distance, which is why the toward/away test does not distinguish them.
+
+  [open] Whether the Senate substitute shows the same conditioning against the House-passed
+  figure. The same measurement runs on a column already committed and has not been made.
+
+  ## Why this is a decision rather than a finding
+
+  The finding is that the chamber answers the executive. The decision is about what to do with
+  every future question of this kind, and it generalises past this one:
+
+  **Count the observations before choosing the unit.** This corpus holds 4 biennia, 22 line
+  items it models, roughly 1,400 line items per workbook, 630 nodes, and 15 fiscal years. A
+  question framed against the smallest of those is unanswerable and will still produce a
+  suggestive number, because four points can be fitted by anything. The
+  [Speaker alignment](./leadership-and-the-anomalies.yml) survived three commits on exactly that
+  basis.
+
+  Nothing about the data changed between `r = -0.61` and `p = 1.6e-23`. The same four workbooks
+  answered both. What changed was asking the question at a granularity the evidence actually has.

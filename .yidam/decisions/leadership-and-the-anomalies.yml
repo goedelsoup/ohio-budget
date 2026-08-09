@@ -159,10 +159,16 @@ rationale: |
   Senate President and plan-phase all change on that same boundary, which is why any of them
   looked explanatory on four observations.
 
-  [open] The leading alternative is the shape of what the executive introduced — a chamber that
-  receives a lean budget raises line items and one that receives a generous budget trims them,
-  and the introduced column is in every workbook already. That is testable with what is
-  committed and has not been tested.
+  **That alternative has now been tested and it holds** — but only when asked per line item
+  rather than per biennium. The House raises 27.4% of the line items the executive proposed to
+  raise and 81.1% of those it proposed to cut, under all four Speakers, pooled p = 1.6e-23.
+  [verified] A chamber handed a budget the executive already raised throughout will look like a
+  cutting chamber whoever is presiding.
+
+  Asked the way this record asked all its earlier questions — four biennium-level numbers against
+  four others — the same hypothesis gives `r = -0.61`, which on n=4 means nothing at all. See
+  [the unit of observation](./the-unit-of-observation.yml), which is the general lesson and the
+  one this record kept failing to learn.
 
   ## The claim that was wrong, and why it was attractive
 
