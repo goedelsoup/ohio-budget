@@ -10,15 +10,20 @@ description: |
   [conference report](./hb96-conference-report.yml) split that hop into steps that can be
   attributed separately.
 
-  [open] No figures are extracted. What this node currently provides is the structure for
-  [`stage-delta`](../../skills/stage-delta.md) to attribute against, not the attribution itself.
+  Figures for this stage are extracted: the appropriation spreadsheet carries a
+  `Senate Passed FY 2026` column for all 1,528 line items, and `stage-delta` measured the
+  Senate floor's movement across it at zero. [verified] This node said no figures were
+  extracted long after they were, which is the same staleness the validator now catches when
+  it appears next to a filled money property — and does not catch here, because a bill version
+  holds no amount of its own.
 properties:
   stage: as-passed-senate
-  stage_date: "[open] spring 2025, pending verification"
+  stage_date: 2025-06-11
   chamber: senate
   document_reference: |
-    Senate-passed bill text and the LSC comparison document for this stage. [open] Not yet
-    catalogued.
+    LSC appropriation spreadsheet, column "Senate Passed", and the
+    [comparison document](../../catalog/lsc-hb96-comparison.md), both committed. [verified]
+    [open] The Senate-passed bill text itself is not catalogued.
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

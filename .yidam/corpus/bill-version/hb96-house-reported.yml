@@ -11,7 +11,7 @@ description: |
   is visible as distinct from floor action.
 properties:
   stage: house-reported
-  stage_date: "[open] 2025, pending verification"
+  stage_date: 2025-04-08
   chamber: house
   document_reference: |
     LSC appropriation spreadsheet, HB 96 as enacted, column "House Reported FY 2026". [verified]

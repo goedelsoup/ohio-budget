@@ -16,7 +16,7 @@ description: |
   attributes every step rather than reporting an aggregate.
 properties:
   stage: as-passed-house
-  stage_date: "[open] spring 2025, exact date pending verification"
+  stage_date: 2025-04-09
   chamber: house
   document_reference: |
     LSC appropriation spreadsheet, HB 96 as enacted, column "House Passed FY 2026".

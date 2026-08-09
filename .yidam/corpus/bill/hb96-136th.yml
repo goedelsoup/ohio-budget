@@ -20,7 +20,7 @@ properties:
   bill_number: HB 96
   general_assembly: 136th
   instrument_type: operating
-  introduced_date: "[open] pending verification"
+  introduced_date: 2025-02-11
   enacted_date: 2025-06-30
   veto_summary: |
     Line-item vetoes were exercised. [inference] Count and subject matter not yet

@@ -42,6 +42,13 @@ description: |
   language inside an appropriation is the power to redirect the appropriation, and in this bill
   that is almost entirely how it was used.
 
+  **The power is not the last word, and this corpus assumed it was.** Item 66 was overridden by
+  both chambers, restoring text this role had struck. [verified] The enacted budget is therefore
+  the legislature's bill minus the executive's strikes *plus whatever the legislature puts back*,
+  and the third term was missing from the model until
+  [the override](../budget-action/hb96-veto-override-item-66.yml) was seeded. See
+  [the General Assembly](./general-assembly.yml), the role that can act after enactment.
+
   [open] 64 of the 67 rationales are not yet transcribed into the corpus. They belong in one
   node per item.
 properties:

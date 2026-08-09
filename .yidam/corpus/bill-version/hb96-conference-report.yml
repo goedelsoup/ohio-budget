@@ -12,15 +12,18 @@ description: |
 
   Without this node, "what the legislature passed" is not recoverable from the corpus at all.
 
-  [open] Figures are unextracted, and conference-stage changes typically carry no stated
-  justification comparable to a committee record. That absence is a property of the process
-  rather than a gap in extraction — see [conference committee](../actor/conference-committee.yml).
+  Figures for this stage are extracted — the spreadsheet carries a `Conference Report` column
+  for all 1,528 line items, and this stage moved 15.3% of the bill's total. [verified] What
+  remains absent is the *reason*: conference-stage changes carry no stated justification
+  comparable to a committee record, and that absence is a property of the process rather than a
+  gap in extraction. See [conference committee](../actor/conference-committee.yml).
 properties:
   stage: conference-report
-  stage_date: "[open] June 2025, pending verification"
+  stage_date: 2025-06-25
   chamber: conference
   document_reference: |
-    Conference committee report. [open] Not yet catalogued.
+    LSC appropriation spreadsheet, column "Conference Report", committed. [verified]
+    [open] The conference committee report itself is not catalogued.
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

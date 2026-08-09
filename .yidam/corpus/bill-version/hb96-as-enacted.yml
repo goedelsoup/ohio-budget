@@ -20,7 +20,9 @@ properties:
   stage_date: 2025-06-30
   chamber: none
   document_reference: |
-    The enacted bill text and the governor's veto message. [open] Not yet catalogued.
+    The governor's veto message, committed and catalogued as
+    [governor-hb96-veto-messages](../../catalog/governor-hb96-veto-messages.md). [verified]
+    [open] The enacted bill text itself is not catalogued.
   is_operative: "yes"
 links:
   - target: ../bill-version.ont.yml

@@ -1,0 +1,45 @@
+class: actor
+label: Ohio General Assembly
+description: |
+  The legislature acting as a whole, both chambers together, rather than through either
+  chamber's finance committee or a conference committee. Seeded because one act in this corpus
+  cannot be attributed to any narrower role: the override of a line-item veto, which requires a
+  three-fifths vote of each chamber and is therefore an act of the body rather than of any
+  committee within it. [inference]
+
+  The distinction earns its place. Most legislative work in a budget cycle is committee work,
+  and the corpus models the roles that do it — [House Finance](./house-finance-committee.yml),
+  [Senate Finance](./senate-finance-committee.yml), the
+  [conference committee](./conference-committee.yml). Those roles amend. This one is the only
+  legislative role that can act *after* enactment, and the only one that can reverse the
+  executive.
+
+  **It is also the role that makes the enacted budget provisional.** The corpus described
+  enactment as the point at which the legislature's bill minus the governor's strikes becomes
+  law. For HB 96 that held for three weeks:
+  [item 66 was overridden](../budget-action/hb96-veto-override-item-66.yml) by the House on 21
+  July 2025 and the Senate on 1 October 2025, restoring text the governor had removed.
+  [verified]
+
+  So the operative budget is not fixed at enactment, and a source published at enactment cannot
+  be read as final however it is titled.
+
+  [open] Override votes on veto items 55 and 65 were placed on the House's July agenda and have
+  not been taken. They remain available until the session ends on 31 December 2026, so the count
+  of surviving vetoes is provisional. [verified]
+properties:
+  name: Ohio General Assembly
+  role_type: chamber
+  authority_basis: |
+    Ohio Constitution Article II, Section 16 — a bill or item disapproved by the governor
+    becomes law on reconsideration by three-fifths of the members elected to each house.
+    [inference]
+  held_by: |
+    The 136th General Assembly for HB 96. [open] Occupancy across the corpus window is not
+    reconstructed as a dated succession.
+  phase_active: legislative — including after enactment
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

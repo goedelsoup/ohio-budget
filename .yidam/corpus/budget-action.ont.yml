@@ -10,7 +10,7 @@ description: |
 properties:
   - name: action_type
     type: string
-    description: amendment | line-item-veto | controlling-board-transfer | supplemental | executive-reduction | technical-correction
+    description: amendment | line-item-veto | veto-override | controlling-board-transfer | supplemental | executive-reduction | technical-correction
   - name: action_date
     type: date
     description: Date the action took effect

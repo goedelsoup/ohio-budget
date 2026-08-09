@@ -119,6 +119,13 @@ with the raw annotation sitting inside the stored text.
 strikes are listed separately in `vetoed_spans`. The position is what a chamber did, the spans
 are what the executive then removed.
 
+**Its veto markers are dated, not final.** The document is published at enactment, 30 June
+2025. Veto item 66 was overridden by the House on 21 July and the Senate on 1 October, so the
+ten passages this document marks struck under provision TAXCD91 became law on or about 30
+December 2025. An extraction run over this document produces records that were true when it was
+published; nothing in the document says so. See
+[the override](../corpus/budget-action/hb96-veto-override-item-66.yml).
+
 **This does not establish the vetoes' dollar effect**, and a claim resting on it was withdrawn
 from three nodes. This document says what language was struck; it does not say whether the
 appropriation spreadsheet's as-enacted column is taken before or after the governor acts. See

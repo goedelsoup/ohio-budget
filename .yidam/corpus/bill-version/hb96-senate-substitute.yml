@@ -11,7 +11,12 @@ description: |
   is visible as distinct from floor action.
 properties:
   stage: senate-substitute
-  stage_date: "[open] 2025, pending verification"
+  stage_date: |
+    [open] Not recoverable from the General Assembly's action table, which records the
+    committee's single "Reported - Substitute" action on 2025-06-10 and not the earlier
+    moment the substitute was introduced in committee. LSC publishes the two as separate
+    columns with different figures, so they are distinct documents; the legislature's
+    record treats them as one event. [verified]
   chamber: senate
   document_reference: |
     LSC appropriation spreadsheet, HB 96 as enacted, column "Senate Substitute FY 2026". [verified]

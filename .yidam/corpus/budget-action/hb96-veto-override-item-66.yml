@@ -1,0 +1,65 @@
+class: budget-action
+label: Veto Override, Item 66, HB 96
+description: |
+  The General Assembly's override of one of the governor's line-item vetoes on HB 96 — item 66,
+  School District Property Tax Levy Restrictions. The House voted 61-28 on 21 July 2025 and the
+  Senate 21-11 on 1 October 2025, three months apart. [verified] The restored provisions took
+  effect on or about 30 December 2025. [inference]
+
+  **This node exists because the corpus had a shape of event it could not represent.** Every
+  other action here moves in one direction: a chamber amends, the executive strikes, and the
+  enacted text is the residue. An override runs backwards — the legislature reinstating text the
+  executive removed — and until this node there was nowhere to put it. The consequence was not
+  a gap but an error: the corpus asserted that the enacted budget is "the legislature's bill
+  minus the executive's strikes", which is exactly right for 66 of the 67 items and wrong for
+  this one.
+
+  **It also dates the corpus's two best sources.** The
+  [veto message](../../catalog/governor-hb96-veto-messages.md) and the
+  [comparison document](../../catalog/lsc-hb96-comparison.md) are both published at enactment,
+  30 June 2025. Neither can know about an override voted three weeks and three months later.
+  The comparison document still marks provision TAXCD91 as `**PARTIALLY VETOED**` across ten
+  passages, [verified] and those passages are now law.
+
+  So an extraction run over either document produces records that were true when published and
+  are false now. That is not a defect in the extraction — it is what "as enacted" means, and the
+  corpus was reading it as "final".
+
+  Items 55 and 65, both property-tax vetoes, were placed on the House's July agenda alongside
+  this one and have not been overridden. [verified] The General Assembly's action table as
+  retrieved on 2026-08-08 records exactly two override votes. An override remains available to
+  the chamber until the session ends on 31 December 2026, so this is a live count rather than a
+  final one. [inference]
+
+  [open] Whether the override changed any appropriation figure is unexamined. Item 66 struck
+  statutory language about levy authority rather than an appropriation, so the direct effect is
+  probably none — but property tax levy rules feed the school funding formula's local share, and
+  a change there moves state aid without any appropriation being amended. That is the same
+  distinction as
+  [appropriation-is-not-distribution](../../decisions/appropriation-is-not-distribution.yml),
+  reached from a third direction.
+properties:
+  action_type: veto-override
+  action_date: 2025-10-01
+  direction: language-only
+  amount_delta: ""
+  stated_justification: |
+    [open] The chambers' stated reasons are not catalogued. The override restored provisions
+    limiting the types of levies a subdivision may seek, including replacement and substitute
+    emergency levies. [verified]
+
+    The governor's reason for the veto being overridden is recorded, and is the other half of
+    the disagreement: item 66 in the
+    [veto message](../../catalog/governor-hb96-veto-messages.md).
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb96-as-enacted.yml
+    relationship: applies-to
+  - target: ../actor/general-assembly.yml
+    relationship: taken-by
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites
+  - target: ../../catalog/governor-hb96-veto-messages.md
+    relationship: cites
