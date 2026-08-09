@@ -5,7 +5,8 @@ description: Normalize expenditure to a jurisdiction by population or enrollment
 
 # Skill: per-capita
 
-**Status:** stub. Not runnable — one jurisdiction is seeded and its population basis is `[open]`.
+**Status:** stub. Not runnable — ten jurisdictions are seeded and every `population_basis`
+among them is `[open]`, so no denominator exists to normalize by.
 
 Normalizes state money received so that jurisdictions of different sizes can be compared.
 
