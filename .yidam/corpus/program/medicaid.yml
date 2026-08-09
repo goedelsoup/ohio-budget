@@ -19,6 +19,10 @@ description: |
 
   [open] The federal match rate history across the window, including the enhanced match for
   the expansion population, is not yet reconstructed.
+  The federal share, which is the larger half of Medicaid's funding and appears in the budget
+  as [its own line item](../line-item/medicaid-health-care-services-federal.yml) rather than as
+  a netting against state spending. [verified]
+
 properties:
   name: Ohio Medicaid
   policy_area: medicaid
@@ -30,6 +34,10 @@ properties:
     Federal match at a rate varying by eligibility category, with an enhanced rate for the
     expansion population. [inference]
 links:
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../revenue-source/federal-medicaid-match.yml
+    relationship: draws-from
   - target: ../program.ont.yml
     relationship: instance-of
   - target: ../line-item/medicaid-health-care-services.yml

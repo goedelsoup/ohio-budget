@@ -16,6 +16,9 @@ description: |
 
   [open] The percentage by biennium, and whether it moved in step with the local government
   fund, are unreconstructed.
+  The same statutory-percentage mechanism as the local government fund, drawing on total general
+  revenue tax receipts rather than on one source. [inference]
+
 properties:
   name: Public Library Fund Distribution
   policy_area: other
@@ -26,6 +29,8 @@ properties:
   federal_participation: |
     None.
 links:
+  - target: ../revenue-source/personal-income-tax.yml
+    relationship: draws-from
   - target: ../program.ont.yml
     relationship: instance-of
   - target: ../line-item/public-library-fund-distribution.yml

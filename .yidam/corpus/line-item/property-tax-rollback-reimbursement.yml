@@ -14,6 +14,12 @@ description: |
 
   Enacted $610,900,000.00 in FY2012 and $698,816,877.00 in FY2027. [verified]
 
+  The appropriation carries agency code `RDF`, revenue distribution funds, which is an accounting
+  construct rather than a department — the same problem
+  [the local government fund](./local-government-fund-distribution.yml) records. The predecessor
+  ALI 110901 sat under `TAX` through FY2015, so the `belongs-to` edge names the Department of
+  Taxation on that evidence. [inference]
+
   ## It is the quiet half of state support to local government
 
   Where [the local government fund](./local-government-fund-distribution.yml) was cut 41% in a
@@ -51,6 +57,8 @@ properties:
   last_period: current
   status: active
 links:
+  - target: ../agency/department-of-taxation.yml
+    relationship: belongs-to
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../../catalog/lsc-hb153-budget-in-detail.md

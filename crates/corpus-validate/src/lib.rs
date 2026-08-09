@@ -710,8 +710,18 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
 
         // A class with no declared outgoing edges is a sink by design; its instances
         // cannot carry domain links and are not faulted for it.
+        //
+        // Neither is a node that carries none but is pointed at. `local-government-fund` has one
+        // declared outgoing edge — `transfers-to` another fund — and transfers to nothing, while
+        // appropriations draw from it and the general revenue fund transfers into it. It is
+        // among the best-connected nodes in the corpus and was being reported as unwired.
+        //
+        // The symmetric mistake to the one `orphan-in` was making before `EdgeDef::expected`:
+        // measuring one direction and calling it connectivity. A node connected either way is in
+        // the graph, and the case worth reporting is a node connected neither way.
         let is_sink = class.outgoing().count() == 0;
-        if domain_link_count == 0 && !is_sink {
+        let pointed_at = incoming.get(&inst.abs_path).copied().unwrap_or(0) > 0;
+        if domain_link_count == 0 && !is_sink && !pointed_at {
             findings.push(Finding {
                 path: p.clone(),
                 rule: "no-domain-link",
@@ -1887,6 +1897,86 @@ links:
 "#,
             )],
         )
+    }
+
+    #[test]
+    fn a_node_that_is_pointed_at_is_wired_even_with_no_outgoing_edges() {
+        // The regression. `fund` declares one outgoing edge, `transfers-to` another fund, and
+        // most funds transfer to nothing while appropriations draw from them constantly. Five
+        // of the corpus's eight funds were reported as making no domain links at all.
+        let mut classes = BTreeMap::new();
+        classes.insert(
+            "fund".to_string(),
+            class(
+                r#"
+class: fund
+label: Fund
+description: d
+edges:
+  - relationship: transfers-to
+    target: fund
+    direction: out
+  - relationship: draws-from
+    target: appropriation
+    direction: in
+"#,
+            ),
+        );
+        classes.insert(
+            "appropriation".to_string(),
+            class(
+                r#"
+class: appropriation
+label: Appropriation
+description: d
+edges:
+  - relationship: draws-from
+    target: fund
+    direction: out
+"#,
+            ),
+        );
+        let mut paths = BTreeSet::new();
+        paths.insert(PathBuf::from("corpus/fund.ont.yml"));
+        paths.insert(PathBuf::from("corpus/appropriation.ont.yml"));
+        let findings = run(
+            classes,
+            paths,
+            vec![
+                instance(
+                    "corpus/fund/grf.yml",
+                    "class: fund\nlabel: G\ndescription: d\nlinks:\n  \
+                     - target: ../fund.ont.yml\n    relationship: instance-of\n",
+                ),
+                instance(
+                    "corpus/appropriation/a.yml",
+                    "class: appropriation\nlabel: A\ndescription: d\nlinks:\n  \
+                     - target: ../appropriation.ont.yml\n    relationship: instance-of\n  \
+                     - target: ../fund/grf.yml\n    relationship: draws-from\n",
+                ),
+            ],
+        );
+        assert!(
+            !findings
+                .iter()
+                .any(|f| f.rule == "no-domain-link" && f.path.contains("grf")),
+            "a fund drawn from is wired: {findings:?}"
+        );
+    }
+
+    #[test]
+    fn a_node_connected_in_neither_direction_is_still_reported() {
+        let (classes, paths) = fixture();
+        let findings = run(
+            classes,
+            paths,
+            vec![instance(
+                "corpus/fund/lonely.yml",
+                "class: fund\nlabel: L\ndescription: d\nlinks:\n  \
+                 - target: ../fund.ont.yml\n    relationship: instance-of\n",
+            )],
+        );
+        assert!(findings.iter().any(|f| f.rule == "no-domain-link"));
     }
 
     #[test]
