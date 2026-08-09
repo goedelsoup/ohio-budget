@@ -23,6 +23,24 @@ description: |
   as [its own line item](../line-item/medicaid-health-care-services-federal.yml) rather than as
   a netting against state spending. [verified]
 
+  ## What it funds
+
+  Five line items in four fund groups, [reconciled on the general revenue
+  one](../line-item/medicaid-health-care-services.yml): benefits from the GRF and from a federal
+  fund, and three dedicated-purpose lines backed by recoveries, the hospital franchise fee and
+  the health insuring corporation fee. [verified] All five are named here because the
+  [gap](../../../crates/gap/) calculator reads a line item's character from the programmes that
+  fund it — and a Medicaid variance is evidence about caseload forecasting rather than about
+  spending discipline, which is the whole reason that field exists.
+
+  Two of the five carried no `funded-by` edge until the reconciliation found them, so eighty-one
+  computed gaps were reported with no reading attached.
+
+  [open] The programme also reaches the Department of Developmental Disabilities, which
+  appropriates about $5.26B of Medicaid benefits under
+  [nine line items of its own](../line-item/developmental-disabilities-services.yml). Those are
+  unmodelled and this edge set understates the programme by that much.
+
 properties:
   name: Ohio Medicaid
   policy_area: medicaid
@@ -34,6 +52,14 @@ properties:
     Federal match at a rate varying by eligibility category, with an enhanced rate for the
     expansion population. [inference]
 links:
+  - target: ../line-item/medicaid-services-recoveries.yml
+    relationship: funded-by
+  - target: ../line-item/medicaid-services-hospital-franchise-fee.yml
+    relationship: funded-by
+  - target: ../line-item/medicaid-services-hic-fee.yml
+    relationship: funded-by
+  - target: ../line-item/medicaid-services-odjfs.yml
+    relationship: funded-by
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites
   - target: ../revenue-source/federal-medicaid-match.yml

@@ -1,0 +1,40 @@
+class: program
+label: Property Tax Relief and Reimbursement
+description: |
+  The statutory rollbacks and the homestead exemption reduce what an Ohio homeowner owes in
+  property tax, and the state pays the difference to the taxing authority. [inference] The
+  taxpayer's bill falls; the school district's and the county's receipts do not.
+
+  Seeded because it is the mechanism behind the corpus's quietest local-finance result. This is
+  the largest single flow of state money to local government after school foundation aid — larger
+  than the [local government fund](../line-item/local-government-fund-distribution.yml), whose
+  41% cut the corpus calls the window's most consequential event for local finance — and nothing
+  was ever decided about it.
+
+  **It falls anyway.** The reimbursement rises in nominal dollars in every biennium and lost
+  roughly a fifth to a quarter of its purchasing power between FY2012 and FY2026, because the
+  amount follows a formula fixed in statute and the formula is not indexed. [verified] A
+  programme can shrink by a quarter with no vote, no line in a bill, and no figure to point at.
+
+  See [three kinds of money to local
+  government](../../decisions/three-kinds-of-money-to-local-government.yml), where it is the
+  clearest case of the reimbursement category.
+properties:
+  name: Property Tax Relief and Reimbursement
+  policy_area: local-government-finance
+  authorizing_statute: "[open] not catalogued (orc-323-and-4503)"
+  formula_basis: |
+    Statutory rollback percentages against qualifying levies, plus the homestead exemption for
+    eligible owners. The state reimburses what the formula forgoes rather than appropriating a
+    chosen amount. [inference]
+  federal_participation: |
+    None. This is entirely state money reimbursing local taxing authorities.
+links:
+  - target: ../program.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement.yml
+    relationship: funded-by
+  - target: ../line-item/property-tax-rollback-reimbursement-education.yml
+    relationship: funded-by
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

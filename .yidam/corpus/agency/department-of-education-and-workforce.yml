@@ -27,6 +27,10 @@ properties:
     Ohio Department of Education, governed by the State Board of Education. [inference]
     Not yet seeded as a node.
 links:
+  - target: ../program/community-schools.yml
+    relationship: administers
+  - target: ../program/special-education.yml
+    relationship: administers
   - target: ../agency.ont.yml
     relationship: instance-of
   - target: ../program/fair-school-funding-plan.yml

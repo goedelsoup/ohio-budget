@@ -26,6 +26,8 @@ properties:
   predecessor: |
     No reorganization within the corpus window. [inference]
 links:
+  - target: ../program/property-tax-relief.yml
+    relationship: administers
   - target: ../agency.ont.yml
     relationship: instance-of
   - target: ../program/local-government-distribution.yml
