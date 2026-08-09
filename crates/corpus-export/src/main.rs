@@ -99,6 +99,21 @@ fn main() -> Result<()> {
         restated,
         feed.findings.real_terms.len(),
     );
+    if let Some(p) = &feed.findings.process {
+        let reversing = p
+            .conditioning
+            .iter()
+            .filter(|c| c.reversal_gap().is_some_and(|g| g > 0.0))
+            .count();
+        println!(
+            "  process: {} of {} hand-offs raise more of what their predecessor cut; \
+             {} conference position(s)",
+            reversing,
+            p.conditioning.len(),
+            p.conference.len()
+        );
+    }
+
     for path in written {
         println!("  → {}", path.display());
     }

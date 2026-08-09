@@ -15,6 +15,8 @@
 //! contradiction. Rather than report it, this flags a missing version — because that is the
 //! likelier explanation and the one a reader should check.
 
+pub mod process;
+
 use anyhow::Result;
 use corpus_schema::BillStage;
 use corpus_validate::{normalize_join, Corpus, LoadedInstance};

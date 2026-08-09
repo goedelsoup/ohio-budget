@@ -114,3 +114,21 @@ rationale: |
 
   Nothing about the data changed between `r = -0.61` and `p = 1.6e-23`. The same four workbooks
   answered both. What changed was asking the question at a granularity the evidence actually has.
+
+  ## Two things the write-up nearly got wrong
+
+  **Which fiscal year counts.** A substitute sets both years of a biennium at once, so a line
+  item's treatment is one decision and not two. Measured across every hand-off, a line item moved
+  in year one moves the same direction in year two 83.6% of the time and the opposite direction
+  2.4%. [verified] Pooling both years therefore roughly doubles n while adding about a sixth as
+  much information. Moving this analysis into a library briefly did pool them, and the House
+  counts went from 325 to 647 — the same data, twice as confident. The published figures were
+  computed on the first year throughout and are unchanged; what was missing was any record that
+  the choice had been made. It is now a named constant with the measurement behind it.
+
+  **Every figure here was hand-typed into this file.** A percentage in prose is a claim about a
+  computation with nothing checking it, which is the same shape as a `[verified]` claim about a
+  source nobody re-reads — and this repository has been caught three times by exactly that. The
+  analysis now lives in `stage_delta::process`, is emitted into `findings.json`, and a test
+  asserts the pooled counts this record quotes. If the workbooks change or the partition moves,
+  the test fails and names the record that needs editing.

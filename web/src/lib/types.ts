@@ -292,6 +292,59 @@ export interface SeriesCoverage {
   alternate?: SeriesOutcome;
 }
 
+/** Counts and dollars for one group of line items. Both, because they disagree. */
+export interface Tally {
+  raised: number;
+  cut: number;
+  net_cents: number;
+  gross_cents: number;
+}
+
+/**
+ * What one actor did in one bill, split by what its predecessor had done to the same line item.
+ *
+ * The measurement that dissolved the Speaker alignment. Computed over ~1,400 line items per
+ * bill rather than over the corpus's 22, because the biennium is a unit with four observations
+ * and always will be — see the `the-unit-of-observation` decision record.
+ */
+export interface Conditioning {
+  actor: string;
+  answering: string;
+  bill: string;
+  general_assembly: string;
+  /** Absent for conference, which has no single presiding officer. */
+  officer: string | null;
+  when_prior_raised: Tally;
+  when_prior_cut: Tally;
+  /** Separates reversing from restoring — see `revealed.ts`. */
+  moved_toward_baseline: number;
+  moved_away_from_baseline: number;
+}
+
+export interface ConferencePosition {
+  bill: string;
+  general_assembly: string;
+  contested: number;
+  at_house: number;
+  at_senate: number;
+  between: number;
+  outside_both: number;
+  contested_cents: number;
+  cents_at_house: number;
+  cents_at_senate: number;
+  cents_between: number;
+  cents_outside: number;
+  /** 0.0 at the Senate's figure, 1.0 at the House's. */
+  median_position: number | null;
+}
+
+export interface ProcessFindings {
+  conditioning: Conditioning[];
+  conference: ConferencePosition[];
+  /** Agencies treated as reachable by the school funding plan. */
+  plan_reaches: string[];
+}
+
 export interface Findings {
   gap: GapCoverage[];
   /** Adjacent-period comparisons of the gap, in constant dollars. */
@@ -299,6 +352,8 @@ export interface Findings {
   stage_delta: Decomposition[];
   /** Enacted appropriations restated, one series per line item. */
   real_terms: SeriesCoverage[];
+  /** Absent when the committed workbooks are not present. */
+  process?: ProcessFindings;
 }
 
 export interface Feed {

@@ -220,6 +220,97 @@ export function indexSensitivity(feed: Feed, lineItemSlug: string): IndexSensiti
   };
 }
 
+// ─── how each actor answers the one before it ────────────────────────────────
+
+/**
+ * One hand-off, with the shares already taken.
+ *
+ * Percentages are computed here rather than emitted because they are a ratio of two integers
+ * the feed already carries — unlike money, where a second implementation would be a second set
+ * of rules. A share of nothing stays `null`: `0%` would read as "everything was cut".
+ */
+export interface HandOff {
+  actor: string;
+  answering: string;
+  bill: string;
+  generalAssembly: string;
+  officer: string | null;
+  raisedWhenPriorRaised: number | null;
+  raisedWhenPriorCut: number | null;
+  /** Percentage points by which this actor favoured what its predecessor cut. */
+  gap: number | null;
+  movedN: number;
+  /** Share of moved lines landing closer to where the predecessor started. */
+  towardBaseline: number | null;
+}
+
+const shareOf = (t: { raised: number; cut: number }): number | null => {
+  const n = t.raised + t.cut;
+  return n > 0 ? (t.raised / n) * 100 : null;
+};
+
+export function handOffs(feed: Feed): HandOff[] {
+  const p = feed.findings.process;
+  if (!p) return [];
+  return p.conditioning.map((c) => {
+    const a = shareOf(c.when_prior_raised);
+    const b = shareOf(c.when_prior_cut);
+    const toward = c.moved_toward_baseline + c.moved_away_from_baseline;
+    return {
+      actor: c.actor,
+      answering: c.answering,
+      bill: c.bill,
+      generalAssembly: c.general_assembly,
+      officer: c.officer,
+      raisedWhenPriorRaised: a,
+      raisedWhenPriorCut: b,
+      gap: a !== null && b !== null ? b - a : null,
+      movedN: c.when_prior_raised.raised + c.when_prior_raised.cut +
+        c.when_prior_cut.raised + c.when_prior_cut.cut,
+      towardBaseline: toward > 0 ? (c.moved_toward_baseline / toward) * 100 : null,
+    };
+  });
+}
+
+/**
+ * Where conference landed, by line item and by contested dollar.
+ *
+ * Both, and never one alone. On this corpus the two answer differently: 6.2% of contested lines
+ * carry 51.2% of the contested money, so "conference rarely splits" and "conference splits most
+ * of the money" are both true and only one of them is usually quoted.
+ */
+export interface ConferenceShares {
+  bill: string;
+  generalAssembly: string;
+  contested: number;
+  byLine: { atHouse: number; atSenate: number; between: number; outside: number };
+  byDollar: { atHouse: number; atSenate: number; between: number; outside: number };
+  medianPosition: number | null;
+}
+
+export function conferenceShares(feed: Feed): ConferenceShares[] {
+  const p = feed.findings.process;
+  if (!p) return [];
+  return p.conference.map((c) => {
+    const l = (v: number) => (c.contested > 0 ? (v / c.contested) * 100 : 0);
+    const d = (v: number) => (c.contested_cents > 0 ? (v / c.contested_cents) * 100 : 0);
+    return {
+      bill: c.bill,
+      generalAssembly: c.general_assembly,
+      contested: c.contested,
+      byLine: {
+        atHouse: l(c.at_house), atSenate: l(c.at_senate),
+        between: l(c.between), outside: l(c.outside_both),
+      },
+      byDollar: {
+        atHouse: d(c.cents_at_house), atSenate: d(c.cents_at_senate),
+        between: d(c.cents_between), outside: d(c.cents_outside),
+      },
+      medianPosition: c.median_position,
+    };
+  });
+}
+
 /** Adjacent-period gap comparisons touching one line item, whatever their status. */
 export function trendsForLineItem(feed: Feed, lineItemSlug: string): TrendCoverage[] {
   return feed.findings.gap_trend.filter((t) => t.line_item === lineItemSlug);

@@ -554,6 +554,17 @@ pub struct Findings {
     pub stage_delta: Vec<stage_delta::Decomposition>,
     /// Enacted appropriations restated, one series per line item.
     pub real_terms: Vec<SeriesCoverage>,
+    /// How each actor in the process responds to the one before it.
+    ///
+    /// Computed over the committed workbooks rather than over the corpus: the answer needs all
+    /// ~1,400 line items in a bill and the corpus models 22. Absent when the workbooks are not
+    /// present, which is a smaller problem than an export that cannot run.
+    ///
+    /// It is emitted at all because the alternative was what the repository had been doing —
+    /// quoting the numbers as prose in decision records, hand-transcribed, with nothing checking
+    /// them. That is the same shape as a `[verified]` claim about a source nobody re-reads.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub process: Option<stage_delta::process::ProcessFindings>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -875,6 +886,7 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
                 deflator.as_ref(),
                 load_alternate(repo_root).as_ref(),
             ),
+            process: stage_delta::process::analyse(repo_root)?,
         },
     })
 }

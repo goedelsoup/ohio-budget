@@ -1,0 +1,242 @@
+---
+import Layout from '../../components/Layout.astro';
+import { loadFeed } from '../../lib/feed.ts';
+import { conferenceShares, handOffs } from '../../lib/derive.ts';
+import { percent } from '../../lib/money.ts';
+
+const feed = await loadFeed();
+const rows = handOffs(feed);
+const conference = conferenceShares(feed);
+const planReaches = feed.findings.process?.plan_reaches ?? [];
+
+// One block per hand-off, in the order the bill passes through them.
+const actors = [...new Set(rows.map((r) => r.actor))];
+
+const pct = (v: number | null, digits = 1) =>
+  v === null ? '—' : percent(v, digits).replace(/^[+−]/, '');
+
+/** Percentage *points*, which are not percent — `percent()` would append a stray `%`. */
+const points = (v: number | null) =>
+  v === null ? '—' : `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v).toFixed(1)}pp`;
+
+// Pooled across the four biennia, which is how the decision records quote it.
+function pooled(actor: string) {
+  const mine = rows.filter((r) => r.actor === actor);
+  const c = feed.findings.process!.conditioning.filter((x) => x.actor === actor);
+  const sum = (g: (t: { raised: number; cut: number }) => number, side: 'when_prior_raised' | 'when_prior_cut') =>
+    c.reduce((n, x) => n + g(x[side]), 0);
+  const rr = sum((t) => t.raised, 'when_prior_raised');
+  const rn = rr + sum((t) => t.cut, 'when_prior_raised');
+  const cr = sum((t) => t.raised, 'when_prior_cut');
+  const cn = cr + sum((t) => t.cut, 'when_prior_cut');
+  return {
+    answering: mine[0]?.answering ?? '',
+    raisedPct: rn > 0 ? (rr / rn) * 100 : null,
+    cutPct: cn > 0 ? (cr / cn) * 100 : null,
+    rn,
+    cn,
+    rr,
+    cr,
+  };
+}
+
+const totalContested = conference.reduce((n, c) => n + c.contested, 0);
+const confTotals = feed.findings.process?.conference ?? [];
+const sumC = (g: (c: (typeof confTotals)[number]) => number) => confTotals.reduce((n, c) => n + g(c), 0);
+const contestedCents = sumC((c) => c.contested_cents);
+const dShare = (v: number) => (contestedCents > 0 ? (v / contestedCents) * 100 : 0);
+---
+
+<Layout
+  title="How the budget moves"
+  section="findings"
+  wide
+  description="Every actor in Ohio's budget process reverses the one before it, measured across 1,400 line items per bill."
+>
+  <div class="column">
+    <p class="eyebrow">Findings</p>
+    <h1>How the budget moves</h1>
+
+    {
+      rows.length === 0 ? (
+        <div class="refusal">
+          <div class="refusal__label">Not computed</div>
+          <p style="margin:0">
+            This measurement reads the committed LSC workbooks directly rather than the corpus,
+            and they are not present in this build.
+          </p>
+        </div>
+      ) : (
+        <>
+          <p class="lede">
+            Every actor in the process is more likely to raise a line item its predecessor cut
+            than one its predecessor raised. It holds at all three hand-offs, in all four
+            biennia, under every presiding officer — twelve cells of twelve.
+          </p>
+
+          <p>
+            This is the measurement that dissolved an earlier reading of the same data. The
+            House substitute's direction on foundation funding splits exactly with the Speaker
+            across four biennia, and the Fair School Funding Plan phases in over the same window
+            — a confound of identical shape. Four observations cannot separate them. Asked per
+            line item, where each bill carries about 1,400 rather than one, the question answers
+            immediately and the answer is about the process rather than about anyone presiding.
+          </p>
+        </>
+      )
+    }
+
+    {
+      actors.map((actor) => {
+        const p = pooled(actor);
+        return (
+          <>
+            <h2>The {actor} answering {p.answering}</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Bill</th>
+                    <th>Officer</th>
+                    <th class="num">…it raised</th>
+                    <th class="num">…it cut</th>
+                    <th class="num">Gap</th>
+                    <th class="num">Toward baseline</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows
+                    .filter((r) => r.actor === actor)
+                    .map((r) => (
+                      <tr>
+                        <td>{r.bill}</td>
+                        <td>{r.officer ?? <span class="rel">joint committee</span>}</td>
+                        <td class="num">{pct(r.raisedWhenPriorRaised)}</td>
+                        <td class="num">{pct(r.raisedWhenPriorCut)}</td>
+                        <td class="num">{points(r.gap)}</td>
+                        <td class="num">{pct(r.towardBaseline)}</td>
+                      </tr>
+                    ))}
+                  <tr>
+                    <th colspan="2">Pooled</th>
+                    <th class="num">
+                      {pct(p.raisedPct)} <small>({p.rr}/{p.rn})</small>
+                    </th>
+                    <th class="num">
+                      {pct(p.cutPct)} <small>({p.cr}/{p.cn})</small>
+                    </th>
+                    <th class="num">
+                      {points(p.raisedPct !== null && p.cutPct !== null ? p.cutPct - p.raisedPct : null)}
+                    </th>
+                    <th class="num" />
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="rel">
+              Cells are the share of line items this actor moved <em>up</em>, given what its
+              predecessor had done to the same line item.
+            </p>
+          </>
+        );
+      })
+    }
+
+    {
+      rows.length > 0 && (
+        <>
+          <h2>Reversing is not restoring</h2>
+          <p>
+            “Raises what its predecessor cut” is also what regression toward a line item's usual
+            level looks like, which would be an artefact rather than a behaviour. The
+            discriminator is the last column above: an actor pulling figures back toward where
+            its predecessor started should land <em>closer</em> to that level. Mostly it does not
+            — the shares sit near a coin flip and one is well below it. Every actor reverses the
+            one before it without returning to the level it started from.
+          </p>
+
+          <h2>Where conference lands when the chambers disagree</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Bill</th>
+                  <th class="num">Contested</th>
+                  <th class="num">At House</th>
+                  <th class="num">At Senate</th>
+                  <th class="num">Between</th>
+                  <th class="num">Outside both</th>
+                  <th class="num">Median</th>
+                </tr>
+              </thead>
+              <tbody>
+                {conference.map((c) => (
+                  <tr>
+                    <td>{c.bill}</td>
+                    <td class="num">{c.contested}</td>
+                    <td class="num">{pct(c.byLine.atHouse)}</td>
+                    <td class="num">{pct(c.byLine.atSenate)}</td>
+                    <td class="num">{pct(c.byLine.between)}</td>
+                    <td class="num">{pct(c.byLine.outside)}</td>
+                    <td class="num">{c.medianPosition?.toFixed(2) ?? '—'}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <th>Pooled, by line</th>
+                  <th class="num">{totalContested}</th>
+                  <th class="num">{pct((sumC((c) => c.at_house) / totalContested) * 100)}</th>
+                  <th class="num">{pct((sumC((c) => c.at_senate) / totalContested) * 100)}</th>
+                  <th class="num">{pct((sumC((c) => c.between) / totalContested) * 100)}</th>
+                  <th class="num">{pct((sumC((c) => c.outside_both) / totalContested) * 100)}</th>
+                  <th class="num" />
+                </tr>
+                <tr>
+                  <th>Pooled, by contested dollar</th>
+                  <th class="num" />
+                  <th class="num">{pct(dShare(sumC((c) => c.cents_at_house)))}</th>
+                  <th class="num">{pct(dShare(sumC((c) => c.cents_at_senate)))}</th>
+                  <th class="num">{pct(dShare(sumC((c) => c.cents_between)))}</th>
+                  <th class="num">{pct(dShare(sumC((c) => c.cents_outside)))}</th>
+                  <th class="num" />
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            <strong>The two pooled rows tell opposite stories and both are true.</strong> By line
+            item conference barely acts: three-quarters of contested figures are left exactly
+            where the Senate put them, and the median position is the Senate's number in every
+            General Assembly separately. By money it splits — a majority of every dollar the
+            chambers disagreed about lands strictly between their two positions, on about six
+            percent of the lines.
+          </p>
+          <p class="rel">
+            Position runs 0.00 at the Senate's figure to 1.00 at the House's. “Contested” counts
+            line items where the House-passed and Senate-passed figures differ; “contested
+            dollars” weights each by the size of that disagreement, which is the quantity
+            conference actually has to resolve.
+          </p>
+
+          <h2>What this does not say</h2>
+          <p>
+            The mechanism is open. Two candidates the data cannot separate: the chamber
+            negotiates against a total, so a budget already raised throughout leaves room only in
+            cuts; or the introduced figure is an opening position both parties expect to be
+            moved. Both predict the direction and neither predicts the distance.
+          </p>
+          <p>
+            The school-funding partition used to eliminate the plan hypothesis is agencies{' '}
+            {planReaches.map((a, i) => (
+              <>
+                {i > 0 && ', '}
+                <span class="mono">{a}</span>
+              </>
+            ))}. Every figure on this page is within one fiscal year, so no deflator is involved
+            and no sign depends on the price level.
+          </p>
+        </>
+      )
+    }
+  </div>
+</Layout>
