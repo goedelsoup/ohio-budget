@@ -23,7 +23,7 @@ properties:
   chamber: conference
   document_reference: |
     LSC appropriation spreadsheet, column "Conference Report", committed. [verified]
-    [open] The conference committee report itself is not catalogued.
+    [open] The conference committee report itself is not catalogued (ga-hb96-conference-report-text). See [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

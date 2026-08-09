@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   enactedByPeriod,
+  indexSensitivity,
   landingSubjects,
   periodKind,
   periodStart,
@@ -437,5 +438,54 @@ describe('landingSubjects', () => {
   it('leaves a line item with nothing around it off the list', () => {
     const f = feed({ classes: [], nodes: [shallow] });
     expect(landingSubjects(f)).toEqual([]);
+  });
+});
+
+describe('indexSensitivity', () => {
+  const empty: Corpus = { classes: [], nodes: [] };
+
+  /** A series plus the same series restated under a second index. */
+  function withAlternate(primary: [string, number, number][], alt: [string, number, number][]) {
+    const a = restated('m', primary);
+    const b = restated('m', alt);
+    if (b.outcome.status !== 'restated') throw new Error('fixture');
+    b.outcome.series_name = 'health care prices';
+    return feed(empty, { realTerms: [{ ...a, alternate: b.outcome }] });
+  }
+
+  it('reports both answers and the spread between them', () => {
+    // Medicaid's real figures: +4.3% under government purchases, +15.6% under health prices.
+    const out = indexSensitivity(
+      withAlternate(
+        [['FY2014', 100, 1000], ['FY2026', 147, 1043]],
+        [['FY2014', 100, 1000], ['FY2026', 147, 1156]],
+      ),
+      'm',
+    );
+    expect(out?.primaryPct).toBeCloseTo(4.3, 1);
+    expect(out?.alternatePct).toBeCloseTo(15.6, 1);
+    expect(out?.spreadPoints).toBeCloseTo(11.3, 1);
+    expect(out?.alternateName).toBe('health care prices');
+  });
+
+  it('flags when the two indices disagree about direction', () => {
+    // Does not occur anywhere in this corpus today, which is the finding — so the case that
+    // would overturn it has to be detectable rather than assumed away.
+    const out = indexSensitivity(
+      withAlternate(
+        [['FY2014', 100, 1000], ['FY2026', 147, 900]],
+        [['FY2014', 100, 1000], ['FY2026', 147, 1100]],
+      ),
+      'm',
+    );
+    expect(out?.sameDirection).toBe(false);
+  });
+
+  it('is absent when no alternate was emitted', () => {
+    const out = indexSensitivity(
+      feed(empty, { realTerms: [restated('m', [['FY2014', 100, 1000], ['FY2026', 147, 1043]])] }),
+      'm',
+    );
+    expect(out).toBeUndefined();
   });
 });

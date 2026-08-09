@@ -22,7 +22,7 @@ properties:
   document_reference: |
     The governor's veto message, committed and catalogued as
     [governor-hb96-veto-messages](../../catalog/governor-hb96-veto-messages.md). [verified]
-    [open] The enacted bill text itself is not catalogued.
+    [open] The enacted bill text itself is not catalogued (ga-hb96-enacted-text). See [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "yes"
 links:
   - target: ../bill-version.ont.yml

@@ -10,6 +10,7 @@ import {
   decompositionFor,
   enactedByPeriod,
   gapsForLineItem,
+  indexSensitivity,
   landingSubjects,
   realSeriesFor,
   seriesChange,
@@ -40,6 +41,7 @@ const points = decomposition ? stagePoints(decomposition) : undefined;
 const enacted = enactedByPeriod(feed.corpus, subject.slug);
 const real = realSeriesFor(feed, subject.slug);
 const change = real.ok ? seriesChange(real.data) : undefined;
+const sensitivity = indexSensitivity(feed, subject.slug);
 const gaps = gapsForLineItem(feed, subject.slug);
 
 // Everything pointing at this line item, grouped by the class it comes from — the shape a
@@ -142,6 +144,17 @@ const computedGap = gaps.find((g) => g.outcome.status === 'computed');
                 {percent(change.realPct, 1)}.
                 {change.reversesSign &&
                   ' The two disagree about direction: the nominal increase is entirely price level.'}
+              </p>
+            )}
+
+            {sensitivity && (
+              <p class="rel" style="margin-bottom:var(--space-5)">
+                Under a different price index — {sensitivity.alternateName} — the same change is{' '}
+                {percent(sensitivity.alternatePct, 1)} rather than {percent(sensitivity.primaryPct, 1)},
+                a spread of {sensitivity.spreadPoints.toFixed(1)} points.
+                {sensitivity.sameDirection
+                  ? ' The two agree on direction and disagree on size, so what this line item did is not in question; how much it did is.'
+                  : ' The two disagree about direction, so nothing here should be read as a trend without naming the index.'}
               </p>
             )}
 

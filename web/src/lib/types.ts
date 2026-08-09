@@ -281,6 +281,12 @@ export type SeriesOutcome =
 export interface SeriesCoverage {
   line_item: string;
   outcome: SeriesOutcome;
+  /**
+   * The same series under a sectorally different price index. Present only where the primary
+   * restated. Exists so a reader can see how much of a real-terms figure is the appropriation
+   * and how much is the choice of index — which on this corpus is 8 to 14 percentage points.
+   */
+  alternate?: SeriesOutcome;
 }
 
 export interface Findings {

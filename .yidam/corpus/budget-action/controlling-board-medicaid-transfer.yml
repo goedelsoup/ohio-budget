@@ -30,7 +30,7 @@ properties:
   direction: "[open] typically increase, not yet verified for this period"
   amount_delta: "[open] pending the controlling-board connector"
   stated_justification: |
-    [open] Controlling board requests carry an agency justification. Not yet catalogued.
+    [open] Controlling board requests carry an agency justification. Not catalogued (controlling-board-requests), and the connector that would read them is a stub.
   phase: execution
 links:
   - target: ../budget-action.ont.yml

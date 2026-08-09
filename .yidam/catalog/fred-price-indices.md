@@ -11,13 +11,21 @@ feeds:
 
 # Price index series
 
-Two candidate deflators, both committed so the choice between them can be re-argued against the
-data rather than from memory.
+Two candidate deflators and one sensitivity probe, all committed so the choice between them can
+be re-argued against the data rather than from memory.
 
 | File | Series | Cadence | sha256 |
 |---|---|---|---|
 | [`fred-a829rd3q086sbea.csv`](../sources/price-index/fred-a829rd3q086sbea.csv) | State and local government consumption expenditures and gross investment, implicit price deflator (BEA) | quarterly | `b7adcaa1…` |
 | [`fred-cpiaucns.csv`](../sources/price-index/fred-cpiaucns.csv) | CPI-U, all items, not seasonally adjusted (BLS) | monthly | `4eb7e334…` |
+| [`fred-dhlcrg3q086sbea.csv`](../sources/price-index/fred-dhlcrg3q086sbea.csv) | Personal consumption expenditures, health care, chain-type price index (BEA) | quarterly | `2fa646c4…` |
+
+The third is not a candidate deflator. It is the direct sibling of the chosen one — same agency,
+same cadence, same construction — committed so that every restated series can be reported under a
+**sectorally** different index as well as a generally different one. That distinction turned out
+to matter: CPI-U against state and local purchases differs by 0.4 percentage points, health care
+prices against state and local purchases by 8 to 14. See
+[the deflator decision](../decisions/deflator-choice.yml).
 
 - **Retrieved:** 2026-08-09, covering 2008 to present.
 

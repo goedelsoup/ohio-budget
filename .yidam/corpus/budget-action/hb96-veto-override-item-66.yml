@@ -44,7 +44,7 @@ properties:
   direction: language-only
   amount_delta: ""
   stated_justification: |
-    [open] The chambers' stated reasons are not catalogued. The override restored provisions
+    [open] The chambers' stated reasons are not catalogued (ga-chamber-journals). The override restored provisions
     limiting the types of levies a subdivision may seek, including replacement and substitute
     emergency levies. [verified]
 

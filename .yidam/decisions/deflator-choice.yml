@@ -1,8 +1,9 @@
 id: deflator-choice
 summary: >-
   Constant-dollar figures use the BEA state and local government purchases deflator, base
-  FY2025. Measured against CPI-U the choice moves a five-year growth rate by 0.4 points, while
-  the decision to deflate at all moves it by 22.7 — from +19.1% to -3.6%.
+  FY2025. Against CPI-U the choice moves a five-year growth rate by 0.4 points; against a
+  sectorally different index it moves every series in the corpus by 8 to 14. Direction survives
+  the choice and magnitude does not, so a real-terms figure is never quoted without its index.
 context: |
   `real_dollars` shipped no index and refused every cross-period comparison, on the stated
   grounds that which index to use is a modelling decision rather than a technical detail. That
@@ -63,8 +64,45 @@ rationale: |
   which is the error the skill names. But it was guarding the smaller of the two risks, and
   measuring both is what showed which was which.
 
-  [open] One index is applied to every line item. A Medicaid series arguably wants a medical
-  care price index and a construction line a construction cost index, since neither moves with
-  the average of government purchases. Nothing here prevents a per-line-item deflator; the
-  corpus simply does not yet hold one, and starting with a single defensible index beats
-  starting with five undefended ones.
+  ## The 0.4 points do not generalise, and this record over-claimed
+
+  That comparison was between **two general price indices** — CPI-U and state and local
+  purchases — and the conclusion drawn from it, that the choice of index is the smaller risk,
+  was stated without that qualification. It does not hold against a sectorally different index.
+
+  A third series is now committed: the BEA health care chain-type price index, the direct
+  sibling of the chosen deflator — same agency, same cadence, same construction. Every restated
+  series in the corpus, under both: [verified]
+
+  | line item | window | nominal | gov purchases | health care | spread |
+  |---|---|---|---|---|---|
+  | Foundation Funding | FY2012-FY2026 | +52.8% | +2.1% | +16.5% | 14.4 pts |
+  | Medicaid Health Care Services | FY2014-FY2026 | +47.4% | +4.3% | +15.6% | 11.3 pts |
+  | Institutional Operations | FY2020-FY2025 | +23.9% | +0.7% | +8.9% | 8.2 pts |
+  | Local Government Fund | FY2012-FY2025 | -8.1% | -36.1% | -27.9% | 8.2 pts |
+  | State Share of Instruction | FY2020-FY2026 | +6.8% | -16.6% | -8.8% | 7.8 pts |
+
+  **Between eight and fourteen points, not four tenths of one.** The worry that kept
+  `real_dollars` empty was right after all; measuring two general indices simply could not
+  detect it.
+
+  **What survives, and it is the part that matters.** The sign is identical under both indices
+  on every series, and nominal exceeds real on every series under both. So the two conclusions
+  this corpus actually rests on —
+  [that nominal growth is mostly price level](./nominal-growth-is-mostly-price-level.yml), and
+  that the local government fund and State Share of Instruction fell in real terms — do not
+  depend on the choice. What depends on it is *how far*.
+
+  The rule that follows: **a direction stated in real terms is robust here; a magnitude is not,
+  and must not be quoted without its index.**
+
+  [open] A per-line-item deflator is still not built, and this measurement makes the case for
+  one weaker rather than stronger. Assigning an index per line item would need twenty-two
+  defences and would bury the sensitivity inside whichever index was chosen; reporting both on
+  every series costs one number and shows it. What a per-line-item index would genuinely help
+  is a construction or debt-service line, where the right index is not arguable — and the
+  corpus holds neither yet.
+
+  [open] Health care prices are not Medicaid prices. Medicaid pays administered rates set by
+  the state, not market rates, and the PCE index is weighted toward private spending. It is a
+  sensitivity probe, not a better answer, and the corpus does not pick between them.

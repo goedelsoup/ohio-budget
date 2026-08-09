@@ -23,15 +23,20 @@ description: |
   [the HB 96 override](../budget-action/hb96-veto-override-item-66.yml) for the shape of the
   event, and [general-assembly](../actor/general-assembly.yml) for the role.
 
-  [open] Which HB 33 items were overridden is not reconstructed; its veto message is not
-  catalogued.
+  [open] Which HB 33 items were overridden is not reconstructed. Its veto message *is*
+  catalogued and read — [governor-hb33-veto-messages](../../catalog/governor-hb33-veto-messages.md),
+  44 items — but a veto message records what the governor struck, not what the chambers later
+  restored, so the override set has to come from the journals.
 properties:
   stage: as-enacted
   stage_date: 2023-07-04
   chamber: none
   document_reference: |
-    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "Enacted". [verified]
-    [open] The enacted bill text and this bill's veto message are not catalogued.
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "Enacted", and the
+    governor's veto message, committed and catalogued as
+    [governor-hb33-veto-messages](../../catalog/governor-hb33-veto-messages.md). [verified]
+    [open] The enacted bill text itself is not catalogued (ga-hb33-enacted-text); see
+    [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

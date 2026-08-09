@@ -1,0 +1,76 @@
+id: bill-text-on-demand
+summary: >-
+  Bill text is catalogued when a specific question needs it, not as a matter of course. Fifteen
+  nodes asserted their own primary document was uncatalogued and named no slug, so the rule that
+  checks such claims could not check them — and two had gone stale, still saying HB 33's veto
+  message was uncatalogued a fortnight after it was committed and read.
+context: |
+  Every bill-version node carries a `document_reference` saying what states the figures it
+  holds. For most of them that reference reads, in substance, *the bill text — not yet
+  catalogued*.
+
+  Fifteen such claims existed, and the validator's `unnamed-not-catalogued-claim` rule warned
+  about all of them: an assertion that something is uncatalogued, with no slug naming what,
+  cannot be checked against the catalog and will not be noticed when it stops being true.
+
+  The count looked like noise. It was not. Two of the fifteen were already false:
+
+  - `hb33-as-enacted` said *the enacted bill text and this bill's veto message are not
+    catalogued*.
+  - `hb33-line-item-veto` said *the veto message is the primary source and is not catalogued*,
+    and that the count and items struck were unreconstructed.
+
+  [governor-hb33-veto-messages](../catalog/governor-hb33-veto-messages.md) has been committed
+  and read since the governor connector was built: 29 pages, 44 items, 340 instructions.
+  [verified] Both claims survived because neither named a slug, which is exactly the mechanism
+  the rule was written to describe.
+decision: |
+  **Bill text is fetched when a question needs it, and catalogued then.** It is not a gap in
+  coverage and the corpus should stop implying it is one.
+
+  The reason is what the documents are for. LSC's appropriation spreadsheets carry the figures,
+  its comparison documents carry the provisions and the stated justifications, and the governor's
+  veto messages carry what was struck. Between them they answer the questions this corpus asks.
+  Bill text answers a different kind of question — exact statutory language — and the corpus has
+  needed it exactly once so far, for the local government fund percentage, which lives in bill
+  language and nowhere in an appropriation table.
+
+  Committing fifteen bill texts against the possibility of needing them would be committing
+  megabytes to answer nothing.
+
+  **Every remaining claim names a prospective slug**, on the convention the catalog already
+  uses — `<publisher>-<bill>-<what>`, as in `governor-hb33-veto-messages` and
+  `lsc-hb49-budget-in-detail`. So `ga-hb96-enacted-text`, `obm-financial-reports`,
+  `ga-chamber-journals`. Naming a slug for a document nobody has fetched is not pretending to
+  hold it: it is stating what it would be called, so that
+  [`stale-not-catalogued-claim`](./claims-about-repository-state.yml) fires the day someone
+  commits it under that name.
+rationale: |
+  The argument against naming them was that a prospective slug is invention — twelve names for
+  documents nobody has, satisfying a rule without answering anything. That argument was made
+  in this repository, and the HB 33 pair is what refuted it.
+
+  An unnamed claim is not a smaller version of a named one. It is a claim the machine cannot
+  read at all, and its cost is not noise in a warning list — it is that the claim keeps being
+  displayed as true after it becomes false, on a page a reader trusts. The two HB 33 nodes told
+  every visitor that the veto message was uncatalogued while the site's own catalog page listed
+  it, and nothing in the repository could notice.
+
+  So the cost of naming is twelve strings, and the cost of not naming is measured: two false
+  statements, live, for as long as the nodes existed.
+
+  **The general form, since this is the third time it has come up.** A claim about the
+  repository's own state is the one kind of claim that goes false without anybody touching it.
+  A claim about Ohio's budget is wrong when written or right forever; a claim about what this
+  repository holds is invalidated by the ordinary work of adding to it. Those claims need to be
+  written so a machine can re-check them, and that means naming the thing.
+
+  [open] The rule matches the phrase `not catalogued` wherever it appears, so prose *about* a
+  claim trips it as readily as the claim itself — writing up the HB 33 correction fired the
+  warning a second time until the sentence was reworded to say `uncatalogued`. The simplicity is
+  worth keeping and the false positive is cheap, but it is a real limit and someone will hit it
+  again.
+
+  [open] Three of the fifteen are not about bill text and are genuine coverage gaps with
+  connectors that exist only as stubs: controlling board requests, the chambers' journals, and
+  OBM financial reporting. They now name slugs too, and naming them does not make them nearer.

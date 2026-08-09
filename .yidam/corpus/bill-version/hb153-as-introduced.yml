@@ -14,7 +14,7 @@ properties:
   stage_date: "[open] pending verification"
   chamber: executive
   document_reference: |
-    As-introduced bill text and the LSC analysis for this stage. [open] Not yet catalogued.
+    As-introduced bill text and the LSC analysis for this stage. [open] Not catalogued (ga-hb153-as-introduced-text). See [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

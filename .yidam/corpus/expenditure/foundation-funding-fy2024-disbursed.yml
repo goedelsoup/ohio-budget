@@ -35,7 +35,7 @@ properties:
   basis: actual-closed
   period_label: FY2024
   reporting_source: |
-    OBM financial reporting and district finance reporting. [open] Not yet catalogued.
+    OBM financial reporting and district finance reporting. [open] Not catalogued (obm-financial-reports).
   reversion: "[open] not applicable at district level; measured at line item level"
 links:
   - target: ../expenditure.ont.yml

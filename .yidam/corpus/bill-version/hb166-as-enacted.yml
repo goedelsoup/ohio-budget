@@ -24,7 +24,7 @@ properties:
   stage_date: 2019-07-18
   chamber: none
   document_reference: |
-    Enacted bill text. [open] Not yet catalogued.
+    Enacted bill text. [open] Not catalogued (ga-hb166-enacted-text). See [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

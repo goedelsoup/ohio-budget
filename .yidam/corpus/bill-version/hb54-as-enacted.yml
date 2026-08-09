@@ -17,7 +17,7 @@ properties:
   stage: as-enacted
   chamber: none
   document_reference: |
-    Enacted bill text. [open] Not yet catalogued.
+    Enacted bill text. [open] Not catalogued (ga-hb54-enacted-text). See [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "yes"
 links:
   - target: ../bill-version.ont.yml

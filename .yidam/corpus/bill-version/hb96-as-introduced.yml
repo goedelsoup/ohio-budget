@@ -20,7 +20,7 @@ properties:
   stage_date: 2025-02-11
   chamber: executive
   document_reference: |
-    The as-introduced bill text and the accompanying LSC analysis. [open] Not yet catalogued.
+    The as-introduced bill text and the accompanying LSC analysis. [open] Not catalogued (ga-hb96-as-introduced-text). See [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

@@ -23,7 +23,7 @@ properties:
   document_reference: |
     LSC appropriation spreadsheet, column "Senate Passed", and the
     [comparison document](../../catalog/lsc-hb96-comparison.md), both committed. [verified]
-    [open] The Senate-passed bill text itself is not catalogued.
+    [open] The Senate-passed bill text itself is not catalogued (ga-hb96-as-passed-senate-text). See [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml

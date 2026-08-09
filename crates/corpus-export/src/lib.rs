@@ -111,6 +111,22 @@ pub const DEFLATOR_NAME: &str =
     "state and local government consumption expenditures and gross investment, implicit price deflator (BEA, via FRED A829RD3Q086SBEA)";
 pub const DEFLATOR_BASE: &str = "FY2025";
 
+/// A second index, run beside the first so the answer's dependence on the choice is visible.
+///
+/// Not an alternative default and not a per-line-item deflator. It exists because the
+/// [deflator decision](../../../.yidam/decisions/deflator-choice.yml) measured CPI-U against
+/// state and local purchases, found 0.4 percentage points between them over five years, and
+/// concluded the choice of index was the smaller risk. That conclusion was drawn from two
+/// *general* price indices and does not survive a sectorally different one: Medicaid over
+/// FY2014-FY2026 is +4.3% under government purchases and +15.6% under health care prices.
+///
+/// Reporting both on every series is cheaper and more honest than assigning an index per line
+/// item, which would need twenty-two defences and would hide the sensitivity inside whichever
+/// one was chosen.
+pub const ALTERNATE_SOURCE: &str = ".yidam/sources/price-index/fred-dhlcrg3q086sbea.csv";
+pub const ALTERNATE_NAME: &str =
+    "personal consumption expenditures, health care, chain-type price index (BEA, via FRED DHLCRG3Q086SBEA)";
+
 /// Builds the deflator, returning it alongside what the manifest should say about it.
 ///
 /// Both halves, because an earlier version returned only the description. The manifest then
@@ -163,6 +179,19 @@ pub fn load_deflator(repo_root: &std::path::Path) -> (Option<real_dollars::Defla
         }
         Err(e) => none(format!("The price index could not be built: {e}")),
     }
+}
+
+/// Builds the sensitivity index, or nothing.
+///
+/// Silent on failure by design: a missing alternate costs a comparison, not a figure, and
+/// failing the export over it would make a reporting nicety load-bearing for the whole feed.
+pub fn load_alternate(repo_root: &std::path::Path) -> Option<real_dollars::Deflator> {
+    let text = std::fs::read_to_string(repo_root.join(ALTERNATE_SOURCE)).ok()?;
+    let index = real_dollars::parse_fred_csv(&text, ALTERNATE_NAME)
+        .and_then(|o| o.ohio_fiscal_years(2010, 2027))
+        .ok()?;
+    let pairs: Vec<(&str, f64)> = index.index.iter().map(|(k, v)| (k.as_str(), *v)).collect();
+    real_dollars::Deflator::new(DEFLATOR_BASE, ALTERNATE_NAME, &pairs).ok()
 }
 
 impl RealDollars {
@@ -452,12 +481,17 @@ pub fn real_series(
 pub struct SeriesCoverage {
     pub line_item: String,
     pub outcome: SeriesOutcome,
+    /// The same series under [`ALTERNATE_NAME`], so a reader can see how much of the answer is
+    /// the index rather than the appropriation. Absent when the alternate could not be built.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub alternate: Option<SeriesOutcome>,
 }
 
 /// Restates the enacted series of every line item the corpus holds one for.
 pub fn real_terms(
     corpus: &Corpus,
     deflator: Option<&real_dollars::Deflator>,
+    alternate: Option<&real_dollars::Deflator>,
 ) -> Vec<SeriesCoverage> {
     let mut slugs: Vec<String> = corpus
         .instances
@@ -470,6 +504,11 @@ pub fn real_terms(
         .into_iter()
         .map(|line_item| SeriesCoverage {
             outcome: real_series(corpus, &line_item, deflator),
+            // Only where the primary restated: an alternate beside a refusal is noise, and the
+            // two would not be answering the same question.
+            alternate: alternate
+                .map(|a| real_series(corpus, &line_item, Some(a)))
+                .filter(|o| o.is_restated()),
             line_item,
         })
         .collect()
@@ -800,7 +839,11 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
             gap: gap::all(repo_root)?,
             gap_trend: gap::all_trends(repo_root, deflator.as_ref())?,
             stage_delta: stage_delta::all(repo_root)?,
-            real_terms: real_terms(&corpus, deflator.as_ref()),
+            real_terms: real_terms(
+                &corpus,
+                deflator.as_ref(),
+                load_alternate(repo_root).as_ref(),
+            ),
         },
     })
 }

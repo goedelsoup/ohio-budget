@@ -175,6 +175,51 @@ export function realSeriesFor(feed: Feed, lineItemSlug: string): Chartable<RealS
   return { ok: true, data: found.outcome };
 }
 
+/**
+ * How far the real-terms answer moves under a different price index.
+ *
+ * Reported rather than resolved. The corpus deflates by what state and local government buys,
+ * which is defensible for a budget and is not the only defensible choice; a health-care index
+ * puts Medicaid's fourteen-year change at +15.6% where the default puts it at +4.3%. Neither is
+ * wrong, and a reader shown one figure alone cannot tell that the other exists.
+ *
+ * `sameDirection` is the part that travels: across every series in this corpus the two indices
+ * agree on sign and disagree on size, so a claim about direction survives the choice and a
+ * claim about magnitude does not.
+ */
+export interface IndexSensitivity {
+  primaryPct: number;
+  alternatePct: number;
+  alternateName: string;
+  spreadPoints: number;
+  sameDirection: boolean;
+}
+
+export function indexSensitivity(feed: Feed, lineItemSlug: string): IndexSensitivity | undefined {
+  const found = feed.findings.real_terms.find((s) => s.line_item === lineItemSlug);
+  if (!found || found.outcome.status !== 'restated') return undefined;
+  const alt = found.alternate;
+  if (!alt || alt.status !== 'restated') return undefined;
+
+  const pct = (pts: { real_cents: number }[]) => {
+    const a = pts[0];
+    const b = pts[pts.length - 1];
+    if (!a || !b || a === b || a.real_cents === 0) return undefined;
+    return (b.real_cents / a.real_cents - 1) * 100;
+  };
+  const primaryPct = pct(found.outcome.points);
+  const alternatePct = pct(alt.points);
+  if (primaryPct === undefined || alternatePct === undefined) return undefined;
+
+  return {
+    primaryPct,
+    alternatePct,
+    alternateName: alt.series_name,
+    spreadPoints: Math.abs(alternatePct - primaryPct),
+    sameDirection: Math.sign(primaryPct) === Math.sign(alternatePct),
+  };
+}
+
 /** Adjacent-period gap comparisons touching one line item, whatever their status. */
 export function trendsForLineItem(feed: Feed, lineItemSlug: string): TrendCoverage[] {
   return feed.findings.gap_trend.filter((t) => t.line_item === lineItemSlug);

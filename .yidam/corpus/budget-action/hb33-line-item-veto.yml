@@ -9,8 +9,18 @@ description: |
   budgets, establish it as a routine stage of every Ohio operating budget — and therefore as
   something an analysis must account for by default rather than notice when it happens.
 
-  [open] Count, items struck, and aggregate effect are unreconstructed. The veto message is the
-  primary source and is not catalogued.
+  **The count and the items struck are now read.** The veto message is committed and catalogued
+  as [governor-hb33-veto-messages](../../catalog/governor-hb33-veto-messages.md): **44 items**,
+  dated 3 July 2023, parsed into 340 instructions by the `governor` connector. [verified] This
+  node asserted the message was uncatalogued for as long as it existed, and went on asserting it
+  after the message was committed — the stale claim
+  [the validator exists to catch](../../decisions/claims-about-repository-state.yml), surviving
+  because it named no slug for the rule to check.
+
+  [open] The aggregate fiscal effect is still unreconstructed, and on the evidence of HB 96 and
+  HB 166 it is not a sum of struck amounts: across HB 33's 44 items, none strikes an
+  appropriation figure. What they change is distribution and condition, per
+  [appropriation is not distribution](../../decisions/appropriation-is-not-distribution.yml).
 properties:
   action_type: line-item-veto
   action_date: 2023-07-04
