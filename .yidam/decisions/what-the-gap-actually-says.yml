@@ -109,6 +109,33 @@ rationale: |
   $475.1B total is nominal across fifteen years — it is a count of what passed through, not a
   quantity anyone should compare to anything.
 
+  ## A fourth explanation the corpus cannot express
+
+  A variance means one of several things and `gap` names three: forecasting on an entitlement
+  line, formula inputs on a formula line, execution on a discretionary one. OBM's vocabulary has
+  a fourth that this corpus has no word for.
+
+  Authority resolves three ways — **disbursed, encumbered, lapsed** — and an encumbrance is "an
+  OAKS spending document that legally reserves appropriation", a purchase order or contract
+  already signed. [verified] The corpus models disbursement as `expenditure` and lapse as
+  `reversion`, and models encumbrance nowhere.
+
+  So an unknown share of the +1.01% is money **committed and not yet paid** rather than money not
+  used. That does not change the arithmetic and it changes what the arithmetic means, on a line
+  item whose spending runs through contracts more than one whose spending is a formula
+  distribution — which is to say, unevenly across exactly the split this record reports.
+
+  [open] It is recoverable in principle: for a closed fiscal year the adjusted appropriation
+  equals disbursements plus outstanding encumbrances, so the encumbrance is the difference. No
+  committed source carries a closed-year adjusted figure. The subtraction is defined and not
+  computable.
+
+  [open] OBM defines an appropriation line item code as **seven characters**. Every code in HB
+  96's workbook is six, and one older workbook writes `110644.00`. The corpus matches on these
+  codes constantly, and a systematic difference between the published code and the accounting
+  code would matter for any join against an OAKS-derived source — the
+  [checkbook connector](../../crates/checkbook/) being the obvious one.
+
   [open] Twenty-one pairs are unclassified because four line items have no programme node. Three
   of them — disability financial assistance, early childhood education, highway patrol operations
   — would need a programme seeded with a formula basis the corpus cannot yet verify, and seeding

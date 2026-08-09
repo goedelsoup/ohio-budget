@@ -7,6 +7,26 @@ description: |
   Money that actually left the treasury against a line item in a period — an occurrence
   rather than a state, and irreducibly distinct from the appropriation that authorized it,
   because authority granted and money spent routinely differ.
+
+  **This is a disbursement, and the state's accounting has one more step than this class does.**
+  OBM's own definitions: a *disbursement* is "a payment made for any purpose"; an *encumbrance*
+  is "an OAKS spending document that legally reserves appropriation from an agency's available
+  appropriation balance", representing purchase orders and contracts already entered into.
+  [verified] So authority resolves three ways, not two:
+
+      appropriation  =  disbursed  +  encumbered  +  lapsed
+
+  This class models the first and `reversion` models the third. **Nothing here models the
+  second**, and its absence has a direction: a line item that committed its authority to a
+  contract and had not yet paid it appears in this corpus as an underspend. The same figure means
+  "the money is spoken for" and "the money was not used", and the corpus cannot currently tell
+  them apart. See [what the gap actually says](../decisions/what-the-gap-actually-says.yml).
+
+  The definition that fixes it is published: for a closed fiscal year, adjusted appropriation
+  equals disbursements plus outstanding encumbrances, so encumbrances are recoverable as the
+  difference wherever both figures exist for the same closed year. [open] No committed source
+  carries a closed-year adjusted figure — all three available are current-year — so the
+  subtraction is defined and not yet computable.
 properties:
   - name: amount
     type: string
