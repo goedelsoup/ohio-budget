@@ -125,6 +125,15 @@ pub struct GapResult {
     pub provisional: bool,
     #[serde(serialize_with = "character_with_reading")]
     pub character: Character,
+    /// Recipient-scoped expenditures excluded from this computation.
+    ///
+    /// A district-level disbursement is a slice of the line item and cannot be differenced
+    /// against the whole appropriation. Where a whole-line figure also exists, the slice is set
+    /// aside rather than allowed to block the comparison — but it is named here, because a
+    /// reader who sees the corpus holds a Columbus figure and a total is entitled to know which
+    /// one this result rests on.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub recipient_slices_excluded: Vec<String>,
 }
 
 /// The three answers the calculator can give.
@@ -211,21 +220,33 @@ pub fn gap_for(corpus: &Corpus, line_item_slug: &str, period: &str) -> Outcome {
     }
 
     // A district-level disbursement is a slice of the line item, not the line item.
-    // Differencing it against the whole appropriation is wrong by orders of magnitude and
-    // the result looks entirely reasonable, which is what makes it worth refusing.
-    if let Some(sliced) = expenditures
+    // Differencing it against the whole appropriation is wrong by orders of magnitude and the
+    // result looks entirely reasonable, which is what makes it worth refusing.
+    //
+    // But a slice is only a reason to refuse when it is *all* the corpus has for the period.
+    // Where a whole-line figure exists too, the slice is set aside and named on the result.
+    // Treating it as a poison pill cost this calculator a computed answer it already had: the
+    // Columbus disbursement and the whole-line FY2024 actual both landed in FY2024, and the
+    // pair went from computed to refused without any figure changing.
+    let (sliced, whole): (Vec<&&LoadedInstance>, Vec<&&LoadedInstance>) = expenditures
         .iter()
-        .find(|e| e.inst.links.iter().any(|l| l.relationship == "paid-to"))
-    {
+        .partition(|e| e.inst.links.iter().any(|l| l.relationship == "paid-to"));
+    let recipient_slices_excluded: Vec<String> = sliced
+        .iter()
+        .map(|e| slug_of(&e.rel_path).to_string())
+        .collect();
+
+    if whole.is_empty() {
         return Outcome::Refused {
             reason: format!(
                 "{} is scoped to one recipient; comparing a recipient's share against the whole \
                  line item's authority is wrong by orders of magnitude. Aggregate recipients \
                  first, or compare like to like at recipient level.",
-                slug_of(&sliced.rel_path)
+                recipient_slices_excluded.join(", ")
             ),
         };
     }
+    let expenditures: Vec<&LoadedInstance> = whole.into_iter().copied().collect();
 
     let mut bases: Vec<&str> = expenditures
         .iter()
@@ -297,6 +318,7 @@ pub fn gap_for(corpus: &Corpus, line_item_slug: &str, period: &str) -> Outcome {
         provisional: basis == "disbursed",
         basis,
         character: character_of(corpus, li),
+        recipient_slices_excluded,
     }))
 }
 
@@ -501,8 +523,30 @@ links:
     }
 
     #[test]
+    fn a_slice_alongside_a_whole_line_figure_is_set_aside_not_refused() {
+        // The regression this guards. When the corpus gained a whole-line FY2024 actual, the
+        // Columbus disbursement already sitting in FY2024 turned a computed answer into a
+        // refusal — no figure changed, only the company the slice was keeping.
+        let c = corpus_with(
+            "$1,000,000.00",
+            &[
+                ("whole", "$999,000.00", "actual-closed", false),
+                ("columbus", "$900.00", "actual-closed", true),
+            ],
+        );
+        match gap_for(&c, "foundation-funding", "FY2024-25") {
+            Outcome::Computed(r) => {
+                assert_eq!(r.spent_cents, 99_900_000, "the slice must not be summed in");
+                assert_eq!(r.recipient_slices_excluded, vec!["columbus".to_string()]);
+            }
+            other => panic!("expected Computed, got {other:?}"),
+        }
+    }
+
+    #[test]
     fn a_recipient_slice_is_refused() {
-        // Wrong by orders of magnitude, and the result would look entirely reasonable.
+        // Refused only when a slice is all the corpus has: then it is the only thing a reader
+        // could reach for, and reaching for it is the error.
         let c = corpus_with("$1,000,000.00", &[("e1", "$900.00", "actual-closed", true)]);
         match gap_for(&c, "foundation-funding", "FY2024-25") {
             Outcome::Refused { reason } => {

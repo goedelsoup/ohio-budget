@@ -1,5 +1,5 @@
 class: expenditure
-label: Foundation Funding Disbursement to Columbus City Schools — FY2024-25
+label: Foundation Funding Disbursement to Columbus City Schools — FY2024
 description: |
   State foundation funding actually paid to
   [Columbus City School District](../jurisdiction/columbus-city-school-district.yml) during the
@@ -25,14 +25,15 @@ description: |
   [open] The amount is unfilled, pending the `obm` and `district-finance` connectors. Whether
   the district's receipts should be measured on a cash or accrual basis is also unresolved,
   and the two differ at period boundaries.
-  This node is still labelled by biennium, which the corpus no longer does for figures. It is
-  staged rather than overlooked: no source is committed for this period, and splitting an empty
-  node yields two empty nodes. It is converted when a source arrives. See
+  Relabelled from FY2024-25 to FY2024 when figures moved to fiscal years. Its filename always
+  said FY2024; only the period property disagreed, and while it did this node paired with no
+  appropriation at all, so `gap` reported the pair unavailable rather than reaching the refusal
+  the node exists to demonstrate. See
   [period-granularity](../../decisions/period-granularity.yml).
 properties:
   amount: "[open] pending the obm and district-finance connectors"
   basis: actual-closed
-  period_label: FY2024-25
+  period_label: FY2024
   reporting_source: |
     OBM financial reporting and district finance reporting. [open] Not yet catalogued.
   reversion: "[open] not applicable at district level; measured at line item level"
