@@ -2,8 +2,29 @@ class: line-item
 label: Foundation Funding
 description: |
   The general revenue line item through which the state's share of school district operating
-  costs is distributed. It is the largest single education appropriation and among the largest
-  line items in the budget. [inference]
+  costs is distributed. The largest single education appropriation and among the largest line
+  items in the budget. [inference]
+
+  **It is not the whole of foundation funding, and this node read as though it were.** Three
+  line items carry the identical name *Foundation Funding - All Students*, differing only in the
+  fund they draw on: [verified]
+
+  | ALI | fund | FY2024 enacted | FY2026 enacted |
+  |---|---|---|---|
+  | 200550 (this node) | GRF | $7,967,250,000 | $8,457,598,772 |
+  | [200612](./foundation-funding-lottery.yml) | 7017, lottery | $1,274,945,000 | $1,436,583,202 |
+  | [200604](./foundation-funding-dpf.yml) | 5VS0 | $600,000,000 | $600,000,000 |
+  | **programme total** | | **$9,842,195,000** | **$10,494,181,974** |
+
+  This line item is **80.6%** of the programme in FY2026. Every figure below it in the corpus —
+  the nine-stage series, the computed gap — is a general revenue figure and correct as such, but
+  a reader taking "foundation funding" to mean school funding understates it by $2.04 billion.
+
+  The confusion is not the reader's fault. Matching on the name returns three line items,
+  matching on the code returns one, and neither source announces which you have. It surfaced
+  only when the [HB 33 comparison document](../../catalog/lsc-hb33-comparison.md) reported a
+  distribution to traditional districts *larger* than this line item's authority — an
+  impossibility that had to mean the programme drew on something else.
 
   It is the corpus's most fully developed line item, chosen because it demonstrates every
   property the class was designed for. It distributes by formula rather than by discretion, so

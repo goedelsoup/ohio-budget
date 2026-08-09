@@ -1,0 +1,36 @@
+class: line-item
+label: Foundation Funding — All Students (Lottery)
+description: |
+  One of three line items carrying the identical name **Foundation Funding - All Students**,
+  distinguished only by the fund it draws on — here state lottery fund, 7017. [verified]
+
+  Lottery profits are constitutionally dedicated to education, and this is the line item that
+  delivers them into the school funding formula. It is the second-largest of the three, at
+  $1.44 billion in FY2026.
+
+  Seeded because its absence was making the corpus wrong rather than merely incomplete. The
+  [general revenue line item](./foundation-funding.yml) was the corpus's stand-in for school
+  funding, and it holds 80.6% of the programme; a reader taking it for the whole understates
+  FY2026 by $2.04 billion.
+
+  Three line items, one name. Matching on the name returns all three, matching on the code
+  returns one, and nothing in either source announces which you have.
+properties:
+  name: Foundation Funding - All Students [verified]
+  current_code: "200612"
+  historical_codes: |
+    [open] Not reconstructed.
+  agency_code: "EDU"
+  purpose: |
+    The state's share of school district operating costs, distributed by the Fair School
+    Funding Plan formula and charged against fund 7017. [verified]
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../fund/lottery-profits-education-fund.yml
+    relationship: draws-from
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

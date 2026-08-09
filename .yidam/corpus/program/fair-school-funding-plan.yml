@@ -37,6 +37,10 @@ links:
     relationship: instance-of
   - target: ../line-item/foundation-funding.yml
     relationship: funded-by
+  - target: ../line-item/foundation-funding-lottery.yml
+    relationship: funded-by
+  - target: ../line-item/foundation-funding-dpf.yml
+    relationship: funded-by
   - target: ../jurisdiction/columbus-city-school-district.yml
     relationship: serves
   - target: ../line-item/pupil-transportation.yml

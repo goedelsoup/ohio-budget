@@ -9,16 +9,32 @@ description: |
   Nearly seven times the equivalent move two years later, where the House added $92,250,000 to
   the FY2026 figure. The direction and the stage are identical; the magnitude is not, which is
   the argument for measuring both rather than generalising from one.
+
+  **What the House changed was the formula's inputs, not its shape.** It moved the base cost
+  calculation onto more recent and higher cost data — FY2022 in place of FY2018, and the FY2024
+  statewide average per-pupil cost in place of the FY2022 average, a 12.1% increase. [verified]
+
+  Two years later the same chamber did the reverse: HB 96's House substitute *froze* the base
+  cost at the FY2024 average and redirected the formula's output into temporary foundation
+  funding. Same committee, same stage, opposite direction — which is an argument against reading
+  a chamber's behaviour off one biennium.
 properties:
   action_type: amendment
   action_date: "[open] 2023, pending verification"
   direction: increase
   amount_delta: "$626,999,599.00"
   stated_justification: |
-    [open] Not reconstructed. LSC publishes a comparison document for HB 33 as it does for
-    HB 96, and that is the source that would close this — it is not catalogued. Until it is,
-    this action has a verified amount and no stated reason, which is exactly the state the
-    HB 96 amendments were in before their comparison document was read.
+    From the LSC comparison document, provision EDUCD38 (Traditional school district funding
+    formula), As Passed By House column: the House "updates the data used to calculate the base
+    cost in the formula from FY 2018 data to FY 2022 data", and requires "the use of the FY 2024
+    statewide average base cost per pupil" where the executive had required the FY 2022 average.
+    [verified]
+
+    Stated fiscal effect: "Increases the estimated FY 2024 allocation by $497.1 million, to
+    $8.05 billion... The statewide average base cost per pupil increases to an estimated $8,241
+    in each of FY 2024 and FY 2025, an increase of 12.1% from the FY 2022 and FY 2023 amount of
+    $7,352." [verified] A distribution estimate across all three foundation funding line items,
+    not this one's authority.
   phase: legislative
 links:
   - target: ../budget-action.ont.yml
@@ -30,4 +46,6 @@ links:
   - target: ../actor/house-finance-committee.yml
     relationship: taken-by
   - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb33-comparison.md
     relationship: cites

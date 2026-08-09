@@ -9,15 +9,25 @@ description: |
   It takes back 28% of what the House added. In HB 96 the same step took back 79%. Both
   chambers behave the same way in both biennia — the House raises, the Senate cuts, conference
   settles above both — but how far the Senate goes is not a constant.
+
+  The comparison document states the Senate's effect and not its mechanism: it concurs with the
+  House on every numbered change to the formula while reducing the allocation by $245.6 million.
+  [verified] The reduction is therefore somewhere other than the base cost changes the House
+  made, and this provision does not say where.
 properties:
   action_type: amendment
   action_date: "[open] 2023, pending verification"
   direction: decrease
   amount_delta: "-$173,800,000.00"
   stated_justification: |
-    [open] Not reconstructed, and not reconstructible from any source committed here. The
-    HB 96 counterpart turned out to rest on a change to the disadvantaged pupil impact aid
-    calculation rather than on the size of the pot; whether the same holds here is unknown.
+    From the LSC comparison document, provision EDUCD38, As Passed By Senate column, stated
+    fiscal effect: "Same as the House, but decreases the estimated FY 2024 allocations by $245.6
+    million in FY 2024, to $7.81 billion, and the estimated FY 2025 allocation by $295.8
+    million, to $7.97 billion." [verified]
+
+    [open] The document records the Senate's *effect* here but concurs with the House on every
+    numbered change to the formula, so which input the Senate altered to produce the reduction
+    is not recoverable from this provision alone.
   phase: legislative
 links:
   - target: ../budget-action.ont.yml
@@ -29,4 +39,6 @@ links:
   - target: ../actor/senate-finance-committee.yml
     relationship: taken-by
   - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb33-comparison.md
     relationship: cites

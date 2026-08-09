@@ -69,6 +69,27 @@ confirmed_by: |
   shows the same gap opening inside the statute itself: the amount and its distribution are
   separately amendable, by different actors, at different stages, and a corpus that tracks only
   amounts is blind to one of them.
+third_failure_mode: |
+  A third way the same error arrives, found when HB 33's comparison document reported a
+  distribution to traditional school districts *larger* than the line item's authority — which
+  is impossible, and therefore evidence that the programme draws on something the corpus was
+  not modelling.
+
+  **Foundation funding is three line items, not one.** ALI 200550 (GRF), 200612 (lottery, fund
+  7017), and 200604 (fund 5VS0) all carry the identical name `Foundation Funding - All
+  Students`. The corpus modelled only the first, which is 80.6% of the programme in FY2026.
+  [verified]
+
+  So the earlier two cases were about comparing a **recipient slice** or a **distribution
+  estimate** against a whole line item. This one is about the line item itself being a slice —
+  of a programme, by fund. The rule generalises accordingly: before differencing two figures,
+  establish that they cover the same recipients, the same basis, **and the same funds**.
+
+  What makes this one harder to see than the others is that nothing is mislabelled. Each of the
+  three line items is correctly named and correctly coded. Matching on the name returns three;
+  matching on the code returns one; and a corpus that models one of them under the programme's
+  ordinary English name has quietly answered a question nobody asked.
+
 rationale: |
   The failure mode this closes is specific and quiet. Both figures are correct, both are
   citable to a committed primary source, and both are about foundation funding in FY2026. A

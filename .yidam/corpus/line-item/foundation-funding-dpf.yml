@@ -1,0 +1,37 @@
+class: line-item
+label: Foundation Funding — All Students (Fund 5VS0)
+description: |
+  One of three line items carrying the identical name **Foundation Funding - All Students**,
+  distinguished only by the fund it draws on — here a dedicated purpose fund, 5VS0. [verified]
+
+  Flat at $600,000,000 across both biennia the corpus has measured — the only one of the
+  three that neither chamber moved in either bill. [verified]
+
+  Seeded because its absence was making the corpus wrong rather than merely incomplete. The
+  [general revenue line item](./foundation-funding.yml) was the corpus's stand-in for school
+  funding, and it holds 80.6% of the programme; a reader taking it for the whole understates
+  FY2026 by $2.04 billion.
+
+  [open] No `fund` node exists for 5VS0, so this line item carries no `draws-from` edge. The
+  corpus models eight funds and the budget has hundreds; seeding one to satisfy an edge would
+  be seeding it for the wrong reason.
+
+  Three line items, one name. Matching on the name returns all three, matching on the code
+  returns one, and nothing in either source announces which you have.
+properties:
+  name: Foundation Funding - All Students [verified]
+  current_code: "200604"
+  historical_codes: |
+    [open] Not reconstructed.
+  agency_code: "EDU"
+  purpose: |
+    The state's share of school district operating costs, distributed by the Fair School
+    Funding Plan formula and charged against fund 5VS0. [verified]
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
