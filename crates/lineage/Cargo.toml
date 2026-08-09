@@ -12,6 +12,7 @@ serde.workspace = true
 serde_yaml.workspace = true
 corpus-schema = { path = "../corpus-schema" }
 corpus-validate = { path = "../corpus-validate" }
+lsc = { path = "../lsc", features = ["xlsx"] }
 
 [[bin]]
 name = "lineage"

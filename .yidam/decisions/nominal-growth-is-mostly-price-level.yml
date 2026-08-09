@@ -104,9 +104,35 @@ decision: |
   Every figure in the table above is a single ALI, and the two that have now been checked
   against their programmes — foundation funding and Medicaid — were both understating it.
 
-  [open] The other three series in the table are unchecked against their programmes. State Share
-  of Instruction and Institutional Operations may each be one ALI of several, and nothing here
-  establishes that they are not.
+  ## The other series were checked, and they hold
+
+  That `[open]` said State Share of Instruction and Institutional Operations might each be one ALI
+  of several. They are not. Every line item in their agencies was read against them in FY2026:
+  [verified]
+
+  | line item | agency total | this ALI | namesakes |
+  |---|---|---|---|
+  | State Share of Instruction | $3.16B across 85 items | $2.156B | one, `State Share of Instruction Reconciliation`, at **$0.000B** |
+  | Institutional Operations | $2.55B across 27 items | $1.488B | none |
+  | Local Government Fund | — | $0.531B | none |
+  | Foundation Funding | $14.88B across 86 items | $8.458B | **two**, already recorded |
+
+  So the real-terms conclusions rest on genuine single line items, and the one exception was
+  already known. The check is now mechanised in [`lineage::slices`](../../crates/lineage/), which
+  reports any modelled line item sharing a name with another in the same agency — the signature
+  the foundation funding error left. Run against the corpus it rediscovers that error unprompted
+  and puts the share at 80.6%, which is the figure the node records.
+
+  [open] Adjacent is not the same as namesake. `Institution Medical Services` at $0.375B is a
+  separate line item from `Institutional Operations` and would not be reported by a name check,
+  yet a reader taking the latter for the cost of running prisons wants both. The mechanised check
+  catches shared names and cannot catch shared meaning.
+
+  [open] The largest flow through the revenue distribution funds is `Permissive Sales Tax
+  Distribution` at $3.707B, seven times the local government fund. It is county sales tax
+  collected by the state and returned, so it is local money in transit rather than state support
+  — but nothing in the corpus says so, and a total of RDF appropriations would silently mix the
+  two.
 
   This is also what splitting biennial periods bought. The old FY2012-13 local government fund
   node recorded $925,000,000 for two years. Split, it is $577.0M and $348.0M — **a 41.3% real

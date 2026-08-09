@@ -13,6 +13,8 @@
 //!
 //! So this crate ranks candidates, states the evidence for each, and stops.
 
+pub mod slices;
+
 use corpus_validate::{normalize_join, Corpus, LoadedInstance};
 
 fn slug_of(rel: &str) -> &str {
