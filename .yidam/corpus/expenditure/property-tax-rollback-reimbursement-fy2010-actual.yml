@@ -1,0 +1,20 @@
+class: expenditure
+label: Property Tax Reimbursement (Local Government) — FY2010, Actual
+description: |
+  $633,376,601.33 disbursed in FY2010 under ALI 110901, on a closed-book basis. [verified]
+properties:
+  amount: "$633,376,601.33"
+  basis: actual-closed
+  period_label: FY2010
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 153, sheet EN, ALI 110901, actual column for FY2010. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2010.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb153-budget-in-detail.md
+    relationship: cites

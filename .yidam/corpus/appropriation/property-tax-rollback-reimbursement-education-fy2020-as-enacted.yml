@@ -1,0 +1,23 @@
+class: appropriation
+label: Property Tax Reimbursement (Education) — FY2020, As Enacted
+description: |
+  $1,197,715,000.00 in FY2020, appropriated by [HB 166](../bill-version/hb166-as-enacted.yml) under
+  ALI 200903. [verified]
+properties:
+  amount: "$1,197,715,000.00"
+  period_label: FY2020
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 166, sheet EN, ALI 200903, enacted column for FY2020. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement-education.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2020.yml
+    relationship: covers
+  - target: ../bill-version/hb166-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

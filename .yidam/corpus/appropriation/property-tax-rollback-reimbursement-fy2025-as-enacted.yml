@@ -1,0 +1,23 @@
+class: appropriation
+label: Property Tax Reimbursement (Local Government) — FY2025, As Enacted
+description: |
+  $647,960,000.00 in FY2025, appropriated by [HB 33](../bill-version/hb33-as-enacted.yml) under
+  ALI 110908. [verified]
+properties:
+  amount: "$647,960,000.00"
+  period_label: FY2025
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 33, sheet EN, ALI 110908, enacted column for FY2025. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2025.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

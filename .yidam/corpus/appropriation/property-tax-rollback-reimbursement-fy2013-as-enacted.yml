@@ -1,0 +1,23 @@
+class: appropriation
+label: Property Tax Reimbursement (Local Government) — FY2013, As Enacted
+description: |
+  $616,000,000.00 in FY2013, appropriated by [HB 153](../bill-version/hb153-as-enacted.yml) under
+  ALI 110901. [verified]
+properties:
+  amount: "$616,000,000.00"
+  period_label: FY2013
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 153, sheet EN, ALI 110901, enacted column for FY2013. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2013.yml
+    relationship: covers
+  - target: ../bill-version/hb153-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb153-budget-in-detail.md
+    relationship: cites

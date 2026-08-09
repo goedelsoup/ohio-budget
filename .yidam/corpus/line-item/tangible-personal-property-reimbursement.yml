@@ -13,19 +13,32 @@ description: |
   without this line item in view understates what happened to local finance in the same period,
   because two separate withdrawals overlapped.
 
-  ## Candidates, and a phase-out visible in the names
+  ## Eight codes, two merges and a renumbering — all of it one wind-down
 
-  Two candidates, both under agency RDF: **110907** `Property Tax Replacement Phase Out - Local
-  Government` and **110403** `Personal Property Tax Replacement Phase Out - Local Government`,
-  the second appearing only in HB 96. [verified] A school-district counterpart is likely and was
-  not located.
+  Traced through the committed workbooks, the reimbursement for the abolished tangible personal
+  property tax is appropriated under eight ALIs across the window, in three phases: [verified]
 
-  The names carry the finding: these are *phase-out* lines, which is what a reimbursement for an
-  abolished tax looks like as it is withdrawn.
+  | period | local government | schools |
+  |---|---|---|
+  | FY2012-FY2015 | **110981** business, **110954** utility | **200909** business, **200900** utility |
+  | FY2016-FY2025 | **110907** | **200902** |
+  | FY2026-FY2027 | **110403** | **200417** |
 
-  [open] The codes, the school-district counterpart, and the schedule of the phase-out — which
-  lives in bill language rather than in an appropriation table, per
-  [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
+  Two ALIs merge into one on each side at FY2016, and both are renumbered again at FY2026. The
+  figures fall throughout: the education side runs $0.36B in FY2016 to $0.05B in FY2025, and the
+  local side $0.07B to $0.01B, which is what a reimbursement being wound down looks like.
+
+  **The corpus does not model this yet, and the reason is specific.** Its
+  [durable-identity design](../line-item.ont.yml) handles a line item renumbered — that is
+  `succeeds`, and [the rollback reimbursement](./property-tax-rollback-reimbursement.yml) uses it
+  for exactly this. It has no pattern for **two line items merging into one**. A `succeeds` edge
+  from 110907 to both 110981 and 110954 would assert two identities became one, which is true of
+  the money and false of the identity, and nothing downstream would know which reading to take.
+
+  [open] Whether the class needs a `consolidates` edge distinct from `succeeds`, or whether a
+  merge should be modelled as one line item ending and another beginning with the relationship
+  recorded only in prose. This is the first merge the corpus has met; a second would say more
+  about which answer is right than arguing about this one will.
 
 properties:
   name: Tangible Personal Property Tax Reimbursement

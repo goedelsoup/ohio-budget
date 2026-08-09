@@ -1,0 +1,23 @@
+class: appropriation
+label: Property Tax Reimbursement (Education) — FY2027, As Enacted
+description: |
+  $1,312,678,846.00 in FY2027, appropriated by [HB 96](../bill-version/hb96-as-enacted.yml) under
+  ALI 200903. [verified]
+properties:
+  amount: "$1,312,678,846.00"
+  period_label: FY2027
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 96, sheet EN, ALI 200903, enacted column for FY2027. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement-education.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2027.yml
+    relationship: covers
+  - target: ../bill-version/hb96-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

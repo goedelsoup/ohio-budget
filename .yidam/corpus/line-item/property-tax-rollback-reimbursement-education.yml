@@ -1,18 +1,18 @@
 class: line-item
-label: Property Tax Reimbursement — Local Government
+label: Property Tax Reimbursement — Education
 description: |
-  State reimbursement to local governments for property tax relief granted to homeowners under the
+  State reimbursement to school districts for property tax relief granted to homeowners under the
   statutory rollbacks and the homestead exemption. The state forgoes nothing itself: it
   reduces what the taxpayer owes and pays the difference to the taxing authority. [inference]
 
-  **ALI 110908, agency RDF, revenue distribution fund** — and **ALI 110901 before FY2016**.
+  **ALI 200903, agency RDF, revenue distribution fund** — and **ALI 200901 before FY2016**.
   [verified] The corpus treats these as one line item because they are one identity: the same
   reimbursement to the same recipients, renumbered. The predecessor is retained at $0.00 in
   FY2016 and FY2017 beside its successor, which is the pattern that makes a succession legible
   in a single document rather than inferred from a row's absence — the same evidence that
   settled [the Medicaid transfer](./medicaid-services-odjfs.yml).
 
-  Enacted $610,900,000.00 in FY2012 and $698,816,877.00 in FY2027. [verified]
+  Enacted $1,086,500,000.00 in FY2012 and $1,312,678,846.00 in FY2027. [verified]
 
   ## It is the quiet half of state support to local government
 
@@ -21,32 +21,31 @@ description: |
   this line is larger and nothing was ever decided about it. It rises in nominal dollars every
   biennium.
 
-  **FY2012 to FY2026: +12.6% nominal, -24.7% real.** [verified] A reimbursement held roughly
+  **FY2012 to FY2026: +18.9% nominal, -20.5% real.** [verified] A reimbursement held roughly
   level in dollars while prices rose a third is a reimbursement being reduced, and no vote was
   taken to reduce it. That is the same shape as
   [every other series in this corpus](../../decisions/nominal-growth-is-mostly-price-level.yml),
   arriving on the one line item where the mechanism is purely arithmetic — the state reimburses
   what the rollback formula computes, and the formula is not indexed.
 
-  So the corpus now holds two ways for state support to local governments to fall without a decision: a
+  So the corpus now holds two ways for state support to school districts to fall without a decision: a
   statutory percentage changed in bill language, and a fixed reimbursement meeting inflation.
   Only the first is visible as an event.
 
   [open] This is one of at least two reimbursement programmes and the other is being wound down:
-  the [tangible personal property replacement](./tangible-personal-property-reimbursement.yml)
-  falls from $0.43B to near zero over the same window, under eight ALIs that merge and are
-  renumbered twice. Its structure is traced on that node and it is not modelled, because the
-  corpus has no pattern for two line items merging into one. A statement about total state
-  support to local government needs both.
+  the tangible personal property replacement, recorded on
+  [its own node](./tangible-personal-property-reimbursement.yml), falls toward zero over the same
+  window. A statement about total state support to local government needs both and the corpus
+  models one.
 properties:
-  name: "Property Tax Reimbursement - Local Government [verified]"
-  current_code: "110908"
+  name: "Property Tax Reimbursement - Education [verified]"
+  current_code: "200903"
   historical_codes: |
-    ALI 110901 `Property Tax Allocation - Taxation` through FY2015, retained at $0.00 in FY2016-17 beside its
+    ALI 200901 `Property Tax Allocation - Education` through FY2015, retained at $0.00 in FY2016-17 beside its
     successor. [verified]
   agency_code: "RDF"
   purpose: |
-    Reimbursement to local governments for the statutory property tax rollbacks and homestead exemption.
+    Reimbursement to school districts for the statutory property tax rollbacks and homestead exemption.
   first_period: "[open] predates the corpus window"
   last_period: current
   status: active

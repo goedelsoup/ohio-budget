@@ -1,0 +1,23 @@
+class: appropriation
+label: Property Tax Reimbursement (Local Government) — FY2015, As Enacted
+description: |
+  $678,255,600.00 in FY2015, appropriated by [HB 59](../bill-version/hb59-as-enacted.yml) under
+  ALI 110901. [verified]
+properties:
+  amount: "$678,255,600.00"
+  period_label: FY2015
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 59, sheet EN, ALI 110901, enacted column for FY2015. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2015.yml
+    relationship: covers
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites

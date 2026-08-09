@@ -1,0 +1,23 @@
+class: appropriation
+label: Property Tax Reimbursement (Local Government) — FY2018, As Enacted
+description: |
+  $641,015,200.00 in FY2018, appropriated by [HB 49](../bill-version/hb49-as-enacted.yml) under
+  ALI 110908. [verified]
+properties:
+  amount: "$641,015,200.00"
+  period_label: FY2018
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 49, sheet EN, ALI 110908, enacted column for FY2018. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2018.yml
+    relationship: covers
+  - target: ../bill-version/hb49-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb49-budget-in-detail.md
+    relationship: cites

@@ -1,0 +1,20 @@
+class: expenditure
+label: Property Tax Reimbursement (Education) — FY2024, Actual
+description: |
+  $1,223,040,646.42 disbursed in FY2024 under ALI 200903, on a closed-book basis. [verified]
+properties:
+  amount: "$1,223,040,646.42"
+  basis: actual-closed
+  period_label: FY2024
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 96, sheet EN, ALI 200903, actual column for FY2024. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement-education.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2024.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

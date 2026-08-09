@@ -1,0 +1,23 @@
+class: appropriation
+label: Property Tax Reimbursement (Education) — FY2014, As Enacted
+description: |
+  $1,138,800,000.00 in FY2014, appropriated by [HB 59](../bill-version/hb59-as-enacted.yml) under
+  ALI 200901. [verified]
+properties:
+  amount: "$1,138,800,000.00"
+  period_label: FY2014
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 59, sheet EN, ALI 200901, enacted column for FY2014. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement-education.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2014.yml
+    relationship: covers
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites

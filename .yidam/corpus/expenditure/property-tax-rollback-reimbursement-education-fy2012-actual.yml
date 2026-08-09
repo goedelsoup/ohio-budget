@@ -1,0 +1,20 @@
+class: expenditure
+label: Property Tax Reimbursement (Education) — FY2012, Actual
+description: |
+  $1,074,778,419.36 disbursed in FY2012 under ALI 200901, on a closed-book basis. [verified]
+properties:
+  amount: "$1,074,778,419.36"
+  basis: actual-closed
+  period_label: FY2012
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 59, sheet EN, ALI 200901, actual column for FY2012. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/property-tax-rollback-reimbursement-education.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2012.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
