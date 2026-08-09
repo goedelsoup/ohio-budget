@@ -1,0 +1,73 @@
+id: leadership-and-the-anomalies
+summary: >-
+  Presiding officers are now modelled and lined up against the two behavioural anomalies the
+  corpus has found. The House substitute's direction splits exactly with the Speaker — and so
+  does the Fair School Funding Plan's adoption, which is a confound of the same shape. Four
+  biennia cannot separate them, and this record exists to stop the coincidence being read as a
+  result.
+context: |
+  Two things the corpus measured turned out not to generalise, and both were recorded as
+  patterns before a third biennium contradicted them:
+
+  - **Chamber floors move no money** — true in HB 110, HB 33 and HB 96; false in HB 166, where
+    the Senate floor moved two line items and the General Assembly's own record labels that vote
+    `Passed - Amended`.
+  - **The House raises school funding and the Senate takes part of it back** — true in HB 33 and
+    HB 96, and reversed in HB 166 and HB 110.
+
+  The obvious covariate is who was presiding. It is not derivable from appropriation data —
+  presiding officers change on their own schedule, twice mid-General-Assembly in this window —
+  so `speaker-of-the-house` and `president-of-the-senate` were seeded with dated occupancy.
+the_alignment: |
+  | GA | Budget | Speaker | Senate President | House sub | Senate sub | floor moves |
+  |---|---|---|---|---|---|---|
+  | 133rd | HB 166, FY2020 | Householder → Cupp | Obhof | **-$250.0M** | -$2.5M | **Senate, 2 items** |
+  | 134th | HB 110, FY2022 | Cupp | Huffman | **-$154.5M** | **+$267.9M** | none |
+  | 135th | HB 33, FY2024 | Stephens | Huffman | +$627.0M | -$173.8M | none |
+  | 136th | HB 96, FY2026 | Huffman | McColley | +$92.3M | -$72.9M | none |
+
+  All figures [verified]; leadership [verified] against a committed source.
+
+  HB 166 was signed 18 July 2019 and Householder was removed 30 July 2020, so the whole of that
+  bill's passage falls under him. Cupp's speakership covers HB 110 entire.
+
+  **The House substitute's sign splits exactly with the Speaker.** Householder and Cupp cut
+  foundation funding; Stephens and Huffman raised it. Two and two, no exceptions.
+decision: |
+  Record the alignment. Do not treat it as a finding, and do not let a node assert that
+  leadership explains any of it.
+
+  Three reasons, and the third is the one that matters:
+
+  1. **Four points.** Two per side. A coin lands this way half the time.
+  2. **The Senate anomaly does not fit.** The one floor exception is under Obhof, who also
+     presided over the 132nd — for which the corpus holds no stage series. There is one Obhof
+     budget here and it is the one with the anomaly, so "this officer" and "this biennium"
+     are the same hypothesis at present.
+  3. **A confound of exactly the same shape.** The Fair School Funding Plan was enacted in
+     HB 110 and phased in across the two budgets after it. The biennia where the House cut
+     foundation funding are the biennia before the plan took hold; the ones where it raised are
+     after. Speaker and plan-phase change together across this window, and nothing in four
+     observations can tell them apart.
+
+  What would separate them: the 128th through 132nd General Assemblies, which span two speakers
+  and three Senate presidents entirely before the plan existed. Their spreadsheets follow the
+  same LSC format the connector already reads. That is the test, and it is reachable.
+rationale: |
+  The alignment is the most striking thing the corpus has produced and the least supported. That
+  combination is exactly when a repository like this earns its keep or fails.
+
+  Every other pattern recorded here was contradicted by extending the series: the floor result
+  survived two biennia, the House-raises shape survived two, and both broke on the third and
+  fourth. The base rate for "pattern found in a handful of Ohio budgets" is poor, and this one is
+  drawn from fewer observations than either of the ones that already failed.
+
+  The confound is what makes it worth a record rather than a footnote. If the Speaker hypothesis
+  were merely underpowered, more data would settle it. But plan-phase moves with speakership over
+  precisely these four biennia, so more data *of this kind* would not — every additional
+  post-2021 budget adds a point to both explanations equally. The informative observations are
+  the older ones, where the two come apart, and naming that is more useful than either asserting
+  the correlation or dismissing it.
+
+  [open] The 128th-132nd stage series are unextracted. Four more biennia, from a source family
+  the connector handles, deciding a question the corpus can already state precisely.

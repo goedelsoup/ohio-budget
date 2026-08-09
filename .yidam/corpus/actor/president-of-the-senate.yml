@@ -1,0 +1,32 @@
+class: actor
+label: President of the Ohio Senate
+description: |
+  The Senate's presiding officer, elected by its members at the start of each General Assembly.
+  Seeded alongside [the Speaker](./speaker-of-the-house.yml), and the more directly relevant of
+  the two: the one chamber-floor exception the corpus has found is a **Senate** floor.
+  [verified]
+
+  That exception sits in the 133rd General Assembly, under Larry Obhof — who also presided over
+  the 132nd, for which the corpus holds no stage series. So the data cannot yet distinguish
+  "this presiding officer" from "this biennium": there is one Obhof budget in the corpus and it
+  is the one with the anomaly.
+
+  A role, not a person; occupancy is a dated succession for the same reason as the Speaker's.
+properties:
+  name: President of the Ohio Senate
+  role_type: chamber
+  authority_basis: |
+    Ohio Constitution Article II, Section 8 — each house chooses its own officers. [inference]
+  held_by: |
+    133rd General Assembly (FY2020-21 budget): Larry Obhof. [verified]
+    134th (FY2022-23): Matt Huffman. [verified]
+    135th (FY2024-25): Matt Huffman. [verified]
+    136th (FY2026-27): Rob McColley. [verified]
+
+    [open] The 128th through 132nd are not reconstructed.
+  phase_active: legislative
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of
+  - target: ../../catalog/ohio-general-assembly-leadership.md
+    relationship: cites

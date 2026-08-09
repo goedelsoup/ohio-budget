@@ -1,0 +1,43 @@
+class: actor
+label: Speaker of the Ohio House of Representatives
+description: |
+  The House's presiding officer, elected by its members at the start of each General Assembly.
+  Seeded to make a question askable that the corpus had recorded and could not answer: whether
+  the legislative behaviour it measures tracks who is presiding. [inference]
+
+  It is a role, not a person. Occupancy is recorded in `held_by` as a dated succession, because
+  presiding officers change on a schedule that has nothing to do with fiscal years — twice
+  mid-General-Assembly in the window the corpus covers — and a budget bill has to be placed
+  against who held the chair while it moved, not against who held it when the biennium began.
+
+  **What it does not do.** The class declares no edge from an `actor` to another `actor`, so
+  this role is not linked to [House Finance](./house-finance-committee.yml) even though the
+  Speaker appoints its membership. That relation is real and unmodelled, and inventing an edge
+  for it was the first thing tried and rejected here — the corpus has already had one rule
+  removed for resting on a relationship the schema did not declare.
+
+  [open] Occupancy before the 133rd General Assembly is not reconstructed. The corpus holds
+  stage series for four biennia and leadership for exactly those four; extending one without
+  the other would not help.
+properties:
+  name: Speaker of the Ohio House of Representatives
+  role_type: chamber
+  authority_basis: |
+    Ohio Constitution Article II, Section 8 — each house chooses its own officers. [inference]
+  held_by: |
+    133rd General Assembly (FY2020-21 budget): Larry Householder, until 30 July 2020; Robert R.
+    Cupp thereafter. [verified] HB 166 was signed 18 July 2019, so the whole of its passage
+    falls under Householder.
+
+    134th (FY2022-23): Robert Cupp. [verified]
+    135th (FY2024-25): Jason Stephens. [verified]
+    136th (FY2026-27): Matt Huffman, who had been President of the Senate for the 134th and
+    135th. [verified] He is the only person in the window to have presided over both chambers.
+
+    [open] The 128th through 132nd are not reconstructed.
+  phase_active: legislative
+links:
+  - target: ../actor.ont.yml
+    relationship: instance-of
+  - target: ../../catalog/ohio-general-assembly-leadership.md
+    relationship: cites
