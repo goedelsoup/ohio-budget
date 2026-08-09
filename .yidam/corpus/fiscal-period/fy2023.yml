@@ -1,0 +1,20 @@
+class: fiscal-period
+label: Fiscal Year 2023
+description: |
+  The state fiscal year running 2022-07-01 through 2023-06-30.
+
+  Seeded with the FY2020-FY2026 series, when four biennia of LSC workbooks made a continuous
+  run of years extractable. See
+  [period-granularity](../../decisions/period-granularity.yml) for why figures hang on years
+  rather than on biennia.
+properties:
+  label: FY2023
+  period_type: fiscal-year
+  start_date: 2022-07-01
+  end_date: 2023-06-30
+  general_assembly: 134th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2022-23.yml
+    relationship: contained-by

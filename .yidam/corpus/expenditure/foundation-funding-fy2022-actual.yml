@@ -1,0 +1,26 @@
+class: expenditure
+label: Foundation Funding — FY2022, Actual
+description: |
+  $6,957,669,288.32 charged against line item 200550 in FY2022, on closed books. [verified]
+
+  Read against the $6,937,998,712.00 appropriated, a variance of $-19,670,577.68. [verified]
+properties:
+  amount: "$6,957,669,288.32"
+  basis: actual-closed
+  period_label: FY2022
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 110, ALI 200550, actual column
+    for FY 2022. Committed at .yidam/sources/lsc/ with sha256 ba6ab512. [verified]
+
+    The memorandum sub-rows beneath the schedule — `- State`, `- Federal`, `- Total` under the
+    same ALI — are excluded. Reading one of those as the line item is what produced a $3.5
+    billion phantom variance here once. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2022.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

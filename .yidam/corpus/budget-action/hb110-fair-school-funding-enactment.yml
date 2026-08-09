@@ -31,7 +31,7 @@ links:
     relationship: instance-of
   - target: ../bill-version/hb110-as-enacted.yml
     relationship: applies-to
-  - target: ../appropriation/foundation-funding-fy2022-23-as-enacted.yml
+  - target: ../appropriation/foundation-funding-fy2022-as-enacted.yml
     relationship: modifies
   - target: ../../catalog/ga-bill-record.md
     relationship: cites

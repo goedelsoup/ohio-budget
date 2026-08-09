@@ -1,0 +1,31 @@
+class: appropriation
+label: Foundation Funding — FY2023, As Enacted
+description: |
+  $7,079,848,712.00 for line item 200550 in FY2023, appropriated by [HB 110](../bill/hb110-134th.yml).
+  [verified]
+
+  Against the $7,118,107,448.85 actually spent, a variance of $-38,258,737.15 — 0.54%. [verified]
+
+  One year of a seven-year series for this line item, FY2020 through FY2026. The series exists
+  because four biennia of LSC workbooks are committed here and they overlap: each carries
+  appropriations for its own years and actuals for earlier ones, so a year is usually stated
+  twice by different publications.
+properties:
+  amount: "$7,079,848,712.00"
+  period_label: FY2023
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 110, ALI 200550, enacted column for FY 2023. Committed at
+    .yidam/sources/lsc/ with sha256 ba6ab512. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2023.yml
+    relationship: covers
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

@@ -90,6 +90,38 @@ third_failure_mode: |
   matching on the code returns one; and a corpus that models one of them under the programme's
   ordinary English name has quietly answered a question nobody asked.
 
+fourth_instance_and_the_first_self_inflicted: |
+  The fourth arrival of this error, and the only one where the corpus's own author committed it
+  as `[verified]`.
+
+  `medicaid-health-care-services-fy2020-actual` was seeded at $10,586,261,761.86 against an
+  authority of $14,112,337,514, and the node reported a 25% underspend — the largest variance in
+  the corpus — with a plausible explanation attached about federal match rates rising during the
+  public health emergency. The explanation was invented to fit a number that was wrong.
+
+  ALI 651525 appears on four rows of that workbook. One is the line item; three are a memorandum
+  breakdown beneath the schedule — `- State`, `- Federal`, `- Total` — and the extraction took
+  the Federal row:
+
+      10,586,261,761.86  Federal
+    +  3,525,731,926.06  State
+    = 14,111,993,687.92  Total, and the line item
+
+  The true FY2020 variance is $343,826.08, or 0.002%.
+
+  **What found it was not review.** The claim reads well, the arithmetic is right, the source is
+  committed and citable, and the explanation is the sort a reader nods at. It was caught because
+  HB 166's and HB 110's actuals overlap on FY2020: they agreed to the cent on four line items and
+  disagreed on the fifth by exactly the state share. Two sources covering one year is worth more
+  than any amount of re-reading one.
+
+  **Two guards, since the diagnosis has two halves.** `ExtractionReport` now reports
+  `ambiguous_line_item_codes` — any code appearing under more than one name, which is the shape
+  that makes selecting by code alone unsafe. And `ALITitle`, the unspaced header every
+  with-actuals workbook uses for the name column, was never matched as an identity column, so
+  every extracted row from those files carried an empty name. That is why the ambiguity was
+  invisible: the thing that distinguishes the four rows was the one field not being read.
+
 rationale: |
   The failure mode this closes is specific and quiet. Both figures are correct, both are
   citable to a committed primary source, and both are about foundation funding in FY2026. A

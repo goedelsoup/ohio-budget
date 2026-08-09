@@ -1,0 +1,26 @@
+class: expenditure
+label: Institutional Operations — FY2023, Actual
+description: |
+  $1,267,687,394.61 charged against line item 501321 in FY2023, on closed books. [verified]
+
+  Read against the $1,234,125,637.00 appropriated, a variance of $-33,561,758.39. [verified]
+properties:
+  amount: "$1,267,687,394.61"
+  basis: actual-closed
+  period_label: FY2023
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 33, ALI 501321, actual column
+    for FY 2023. Committed at .yidam/sources/lsc/ with sha256 c979accc. [verified]
+
+    The memorandum sub-rows beneath the schedule — `- State`, `- Federal`, `- Total` under the
+    same ALI — are excluded. Reading one of those as the line item is what produced a $3.5
+    billion phantom variance here once. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/institutional-operations.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2023.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

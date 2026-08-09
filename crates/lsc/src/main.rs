@@ -99,6 +99,12 @@ fn main() -> Result<()> {
         for e in &rep.estimate_columns_skipped {
             println!("  SKIPPED estimate column {e:?}");
         }
+        for (code, names) in &rep.ambiguous_line_item_codes {
+            println!(
+                "  AMBIGUOUS code {code} appears under {} names: {names:?}",
+                names.len()
+            );
+        }
         for f in rep.failures.iter().take(5) {
             println!(
                 "  FAILED {} {} {:?}: {}",

@@ -52,6 +52,18 @@ pub struct ExtractionReport {
     /// Estimate columns, skipped by design. An estimate is neither an appropriation nor an
     /// actual, and silently treating one as either is the error this field exists to prevent.
     pub estimate_columns_skipped: Vec<String>,
+    /// Line item codes that appear under more than one name, with those names.
+    ///
+    /// A workbook may carry a memorandum breakdown of a line item beneath the schedule proper.
+    /// HB 110's does: ALI 651525 appears as `Medicaid Health Care Services` and then again as
+    /// `- State`, `- Federal`, and `- Total`, the middle two summing to the first.
+    ///
+    /// Nothing distinguishes them but the name. Anything that selects a row by code alone —
+    /// a promotion tool, a join, an analyst — can silently take a component for the whole, and
+    /// the resulting figure looks entirely reasonable. It produced a $3.5 billion phantom
+    /// underspend in this repository, committed as `[verified]`, and was caught only because a
+    /// second workbook overlapped the same fiscal year.
+    pub ambiguous_line_item_codes: Vec<(String, Vec<String>)>,
 }
 
 impl ExtractionReport {
@@ -88,6 +100,28 @@ pub fn extract(table: &RawTable, plan: &ColumnPlan, ctx: &ExtractionContext) -> 
             .collect(),
         ..Default::default()
     };
+
+    // A code carrying more than one name means the sheet distinguishes rows by something the
+    // code does not capture. Collected before extraction so the report can say so even when
+    // every row parses cleanly, which is exactly when it goes unnoticed.
+    {
+        let i_code = plan.index_of(Identity::LineItemCode);
+        let i_name = plan.index_of(Identity::LineItemName);
+        let mut names: std::collections::BTreeMap<String, std::collections::BTreeSet<String>> =
+            Default::default();
+        for row in &table.rows {
+            let code = cell(row, i_code).trim().to_string();
+            let name = cell(row, i_name).trim().to_string();
+            if !code.is_empty() && !name.is_empty() {
+                names.entry(code).or_default().insert(name);
+            }
+        }
+        r.ambiguous_line_item_codes = names
+            .into_iter()
+            .filter(|(_, n)| n.len() > 1)
+            .map(|(c, n)| (c, n.into_iter().collect()))
+            .collect();
+    }
 
     let i_agency = plan.index_of(Identity::Agency);
     let i_code = plan.index_of(Identity::LineItemCode);
@@ -324,5 +358,78 @@ mod tests {
         );
         let r = extract(&t, &ColumnPlan::of(&t.headers), &ctx());
         assert!(r.actuals.iter().all(|a| a.amount_cents != 99900));
+    }
+}
+
+#[cfg(test)]
+mod ambiguity {
+    use super::*;
+    use crate::columns::ColumnPlan;
+    use crate::parse_delimited;
+
+    fn ctx() -> ExtractionContext {
+        ExtractionContext {
+            bill_number: "HB 110".into(),
+            general_assembly: "134th".into(),
+            provenance: corpus_schema::Provenance {
+                catalog_slug: "t".into(),
+                document_ref: "t".into(),
+                locator: None,
+                retrieved: "2026-08-09".into(),
+            },
+        }
+    }
+
+    #[test]
+    fn one_code_under_several_names_is_reported() {
+        // The real shape: a memorandum breakdown beneath the schedule, where the components
+        // sum to the line above and nothing but the name distinguishes them. Selecting by code
+        // alone takes a component for the whole, and the figure looks entirely reasonable.
+        let text = "Agency\tFund Group\tFund\tALI\tALITitle\tFY 2020\n\
+                    MCD\tGRF\tGRF\t651525\tMedicaid Health Care Services\t14111993687.92\n\
+                    MCD\tGRF\tGRF\t651525\tMedicaid/Health Care Services - State\t3525731926.06\n\
+                    MCD\tGRF\tGRF\t651525\tMedicaid/Health Care Services - Federal\t10586261761.86\n\
+                    EDU\tGRF\tGRF\t200550\tFoundation Funding\t6687924225.44\n";
+        let t = parse_delimited(text, '\t').unwrap();
+        let plan = ColumnPlan::of(&t.headers);
+        let r = extract(&t, &plan, &ctx());
+        assert_eq!(
+            r.ambiguous_line_item_codes.len(),
+            1,
+            "{:?}",
+            r.ambiguous_line_item_codes
+        );
+        let (code, names) = &r.ambiguous_line_item_codes[0];
+        assert_eq!(code, "651525");
+        assert_eq!(names.len(), 3);
+        // Every row still extracts; the point is that the report says the code is not a key.
+        assert_eq!(r.actuals.len(), 4);
+    }
+
+    #[test]
+    fn a_clean_sheet_reports_no_ambiguity() {
+        let text = "Agency\tFund Group\tFund\tALI\tALITitle\tFY 2020\n\
+                    EDU\tGRF\tGRF\t200550\tFoundation Funding\t1.00\n\
+                    DRC\tGRF\tGRF\t501321\tInstitutional Operations\t2.00\n";
+        let t = parse_delimited(text, '\t').unwrap();
+        let plan = ColumnPlan::of(&t.headers);
+        assert!(extract(&t, &plan, &ctx())
+            .ambiguous_line_item_codes
+            .is_empty());
+    }
+
+    #[test]
+    fn the_unspaced_name_header_is_recognised() {
+        // `ALITitle` appears in every workbook with actuals. Unmatched, it left the name empty
+        // on every row — which is what hid the ambiguity above.
+        use crate::columns::{classify_header, ColumnKind, Identity};
+        assert_eq!(
+            classify_header("ALITitle"),
+            ColumnKind::Identity(Identity::LineItemName)
+        );
+        assert_eq!(
+            classify_header("CAS"),
+            ColumnKind::Identity(Identity::Agency)
+        );
     }
 }

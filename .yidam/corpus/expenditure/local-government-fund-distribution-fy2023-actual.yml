@@ -1,0 +1,26 @@
+class: expenditure
+label: Local Government Fund Distribution — FY2023, Actual
+description: |
+  $495,065,723.41 charged against line item 110969 in FY2023, on closed books. [verified]
+
+  Read against the $443,000,000.00 appropriated, a variance of $-52,065,724.59. [verified]
+properties:
+  amount: "$495,065,723.41"
+  basis: actual-closed
+  period_label: FY2023
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 33, ALI 110969, actual column
+    for FY 2023. Committed at .yidam/sources/lsc/ with sha256 c979accc. [verified]
+
+    The memorandum sub-rows beneath the schedule — `- State`, `- Federal`, `- Total` under the
+    same ALI — are excluded. Reading one of those as the line item is what produced a $3.5
+    billion phantom variance here once. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2023.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

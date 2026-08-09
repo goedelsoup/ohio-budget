@@ -1,0 +1,26 @@
+class: expenditure
+label: Medicaid Health Care Services — FY2023, Actual
+description: |
+  $17,141,079,073.00 charged against line item 651525 in FY2023, on closed books. [verified]
+
+  Read against the $18,540,178,346.00 appropriated, a variance of $1,399,099,273.00. [verified]
+properties:
+  amount: "$17,141,079,073.00"
+  basis: actual-closed
+  period_label: FY2023
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 33, ALI 651525, actual column
+    for FY 2023. Committed at .yidam/sources/lsc/ with sha256 c979accc. [verified]
+
+    The memorandum sub-rows beneath the schedule — `- State`, `- Federal`, `- Total` under the
+    same ALI — are excluded. Reading one of those as the line item is what produced a $3.5
+    billion phantom variance here once. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2023.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,0 +1,26 @@
+class: expenditure
+label: Foundation Funding — FY2021, Actual
+description: |
+  $6,703,103,300.93 charged against line item 200550 in FY2021, on closed books. [verified]
+
+  Read against the $6,774,618,845.00 appropriated, a variance of $71,515,544.07. [verified]
+properties:
+  amount: "$6,703,103,300.93"
+  basis: actual-closed
+  period_label: FY2021
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 110, ALI 200550, actual column
+    for FY 2021. Committed at .yidam/sources/lsc/ with sha256 ba6ab512. [verified]
+
+    The memorandum sub-rows beneath the schedule — `- State`, `- Federal`, `- Total` under the
+    same ALI — are excluded. Reading one of those as the line item is what produced a $3.5
+    billion phantom variance here once. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2021.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

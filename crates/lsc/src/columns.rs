@@ -128,15 +128,18 @@ fn label_without_year(h: &str) -> String {
 pub fn classify_header(h: &str) -> ColumnKind {
     let n = norm(h);
     match n.as_str() {
-        "agency" | "agency code" | "agy" => return ColumnKind::Identity(Identity::Agency),
+        // `CAS` is HB 166's heading for the agency column — a code-and-agency-sort field.
+        "agency" | "agency code" | "agy" | "cas" => return ColumnKind::Identity(Identity::Agency),
         "fund group" | "group" => return ColumnKind::Identity(Identity::FundGroup),
         "fund" | "fund code" => return ColumnKind::Identity(Identity::Fund),
         "ali" | "ali code" | "line item code" | "code" => {
             return ColumnKind::Identity(Identity::LineItemCode)
         }
-        "ali name" | "line item name" | "line item" | "title" | "name" => {
-            return ColumnKind::Identity(Identity::LineItemName)
-        }
+        // `ALITitle`, unspaced, in every workbook with actuals. Unmatched, it left the name
+        // empty on every extracted row — which is also what hid a line item appearing under
+        // four different names in the same sheet.
+        "ali name" | "alititle" | "ali title" | "line item name" | "line item" | "title"
+        | "name" => return ColumnKind::Identity(Identity::LineItemName),
         _ => {}
     }
 

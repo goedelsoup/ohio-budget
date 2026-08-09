@@ -1,0 +1,26 @@
+class: expenditure
+label: Local Government Fund Distribution — FY2021, Actual
+description: |
+  $451,474,951.44 charged against line item 110969 in FY2021, on closed books. [verified]
+
+  Read against the $424,900,000.00 appropriated, a variance of $-26,574,952.56. [verified]
+properties:
+  amount: "$451,474,951.44"
+  basis: actual-closed
+  period_label: FY2021
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 110, ALI 110969, actual column
+    for FY 2021. Committed at .yidam/sources/lsc/ with sha256 ba6ab512. [verified]
+
+    The memorandum sub-rows beneath the schedule — `- State`, `- Federal`, `- Total` under the
+    same ALI — are excluded. Reading one of those as the line item is what produced a $3.5
+    billion phantom variance here once. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2021.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

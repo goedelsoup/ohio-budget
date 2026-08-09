@@ -1,0 +1,31 @@
+class: appropriation
+label: State Share of Instruction — FY2022, As Enacted
+description: |
+  $2,056,678,116.00 for line item 235501 in FY2022, appropriated by [HB 110](../bill/hb110-134th.yml).
+  [verified]
+
+  Against the $2,054,632,520.00 actually spent, a variance of $2,045,596.00 — 0.10%. [verified]
+
+  One year of a seven-year series for this line item, FY2020 through FY2026. The series exists
+  because four biennia of LSC workbooks are committed here and they overlap: each carries
+  appropriations for its own years and actuals for earlier ones, so a year is usually stated
+  twice by different publications.
+properties:
+  amount: "$2,056,678,116.00"
+  period_label: FY2022
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 110, ALI 235501, enacted column for FY 2022. Committed at
+    .yidam/sources/lsc/ with sha256 77d0cbc3. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/state-share-of-instruction.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2022.yml
+    relationship: covers
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

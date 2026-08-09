@@ -1,11 +1,23 @@
 class: expenditure
 label: Medicaid Health Care Services — FY2020, Actual
 description: |
-  $10,586,261,761.86 charged against line item 651525 in FY2020, on closed books. [verified]
+  $14,111,993,687.92 charged against line item 651525 in FY2020, on closed books. [verified]
 
-  FY2020 spending came in **$3,526,075,752.14 under** authority — 25.0%, by far the largest variance the corpus has measured. The federal match rate rose during the public health emergency, which moves cost off the general revenue share without reducing what the programme spent. [inference] Read as a general revenue underspend it looks like a collapse in Medicaid; it is not.
+  FY2020 spending came in $343,826.08 under authority — **0.002%**, the closest match between
+  authority and outturn anywhere in this corpus.
+
+  **This node first said $10,586,261,761.86 and a 25% underspend. That was wrong, and the error
+  was mine.** The workbook carries a memorandum breakdown of this line item at the bottom of the
+  sheet — `Medicaid/Health Care Services - State`, `- Federal`, and `- Total`, all under ALI
+  651525 — and the extraction took the **Federal** row, then differenced a component against the
+  whole line's authority. $10,586,261,761.86 + $3,525,731,926.06 = $14,111,993,687.92 exactly.
+
+  It was caught by cross-checking the same fiscal year against a second committed workbook.
+  HB 166's and HB 110's actuals overlap on FY2020, agreed to the cent on the other four line
+  items, and disagreed on this one by precisely the state share. Nothing internal to either
+  source would have shown it.
 properties:
-  amount: "$10,586,261,761.86"
+  amount: "$14,111,993,687.92"
   basis: actual-closed
   period_label: FY2020
   reporting_source: |

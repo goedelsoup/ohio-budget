@@ -64,6 +64,22 @@ description: |
   observations agreeing is a weaker thing than it feels like, and the corpus recorded it as a
   pattern one biennium before it had a counterexample.
 
+  **[open] Whether the floor result tracks chamber leadership is unmeasured, and is the next
+  thing to ask of it.** The one counterexample so far sits in the 133rd General Assembly; the
+  two bills where both floors moved nothing are the 135th and 136th. Three points is not
+  enough to see a pattern, but it is enough to know which covariate to record — and presiding
+  officers change on a schedule that has nothing to do with fiscal years, so the question
+  cannot be answered from the appropriation data alone.
+
+  The `held_by` property on this node is where that belongs. It currently says only that
+  membership and chairmanship turn over by General Assembly, which is exactly the kind of
+  placeholder that stops a question being asked. What it needs is a dated succession: who
+  presided, over which General Assembly, and which budget bill fell in their term.
+
+  Note the counterexample is on the **Senate** floor, so the presiding officer that matters
+  for it is the Senate President rather than the Speaker. Both are unmodelled — neither is an
+  `actor` in this corpus yet — and seeding them is a prerequisite rather than an aside.
+
 properties:
   name: House Finance Committee
   role_type: committee
