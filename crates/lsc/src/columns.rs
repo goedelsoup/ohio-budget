@@ -214,6 +214,17 @@ impl ColumnPlan {
             .position(|k| matches!(k, ColumnKind::Identity(x) if *x == id))
     }
 
+    /// Index of the column carrying one identity field, if the sheet has one.
+    ///
+    /// Every caller that wants the agency or the ALI code was scanning `kinds` by hand for
+    /// `ColumnKind::Identity(_)`, which is a three-line match repeated per call site and one
+    /// place for a typo to make a column silently absent rather than wrong.
+    pub fn identity_column(&self, want: Identity) -> Option<usize> {
+        self.kinds
+            .iter()
+            .position(|k| matches!(k, ColumnKind::Identity(i) if *i == want))
+    }
+
     /// Every (index, stage, fiscal year) appropriation column.
     pub fn appropriation_columns(&self) -> Vec<(usize, BillStage, &str)> {
         self.kinds

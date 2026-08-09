@@ -73,3 +73,37 @@ mean a bill version was missing rather than that a veto added anything.
 
 The `post-veto` stage carries no figure anywhere in the corpus, so nothing after enactment is
 decomposable yet.
+
+## Aggregate movement, and the leadership test
+
+`aggregate` runs the same decomposition across every line item in an extraction rather than one,
+and reports each transition as counts and dollars together: `line_items_moved`, `raised`, `cut`,
+`gross_cents`, `net_cents`.
+
+Both because they disagree. A chamber that raises nine hundred small lines and cuts Medicaid has
+raised most things and reduced the budget, and only one of those usually gets quoted. Where a
+claim about a chamber's *disposition* is being tested, the counts are the less misleading of the
+two — a dollar total is one observation wearing a thousand costumes.
+
+`cargo run --bin leadership -- .` is the worked case. It asks whether the House substitute's
+direction tracks the Speaker, which
+[a decision record](../decisions/leadership-and-the-anomalies.yml) had recorded as an unresolved
+coincidence on four observations of a single line item.
+
+Two things it does that the single-line-item version could not:
+
+1. **Partitions by whether the Fair School Funding Plan can reach the line item** (agencies `EDU`
+   and `KID`). The plan is a school funding formula, so a plan effect must be confined to that
+   side and a leadership effect must not be. The pattern appears equally on both, which
+   eliminates the plan.
+2. **Follows the one officer who presides more than once.** Matt Huffman is Senate President for
+   the 134th and 135th and Speaker for the 136th, and the share of line items his chamber raised
+   goes 68-72%, then 35-38%, then 44-46%. A personal disposition does not reverse between two
+   adjacent budgets under the same officer.
+
+Both halves come out negative, which is the point: the calculator's job was to make a recorded
+coincidence testable, and the test dissolved it.
+
+**All figures are within one fiscal year**, so no deflator is involved and no sign depends on the
+price level — see [real-dollars](./real-dollars.md) for why that matters, and for what would need
+saying if the comparison ever crossed periods.

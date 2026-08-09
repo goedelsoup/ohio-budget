@@ -1,10 +1,10 @@
 id: leadership-and-the-anomalies
 summary: >-
-  Presiding officers are now modelled and lined up against the two behavioural anomalies the
-  corpus has found. The House substitute's direction splits exactly with the Speaker — and so
-  does the Fair School Funding Plan's adoption, which is a confound of the same shape. Four
-  biennia cannot separate them, and this record exists to stop the coincidence being read as a
-  result.
+  The House substitute's direction on foundation funding splits exactly with the Speaker, and so
+  does the Fair School Funding Plan's phase-in. Extending the test to all 1,400 line items kills
+  both: the pattern appears just as strongly outside anything the plan touches, and the one
+  officer who presides three times behaves three different ways. It is an era effect, not a
+  person and not a policy.
 context: |
   Two things the corpus measured turned out not to generalise, and both were recorded as
   patterns before a third biennium contradicted them:
@@ -63,15 +63,31 @@ decision: |
      after. Speaker and plan-phase change together across this window, and nothing in four
      observations can tell them apart.
 
-  What would separate them: the 128th through 132nd General Assemblies, which span two speakers
-  and three Senate presidents entirely before the plan existed.
+  **The test has now been run, and neither hypothesis survives it.**
 
-  **That test was checked and it is not reachable. LSC did not publish stage-by-stage
-  appropriation figures before the FY2020-21 budget.** [verified] This record previously
-  asserted the opposite — "their spreadsheets follow the same LSC format the connector already
-  reads … that is the test, and it is reachable" — on no evidence beyond the assumption that a
-  publisher's format is stable. It is not, and the break falls exactly at the edge of the
-  corpus's window.
+  This record twice said the separating evidence was the 128th through 132nd General Assemblies
+  — biennia before the plan existed — and was twice wrong. LSC published no stage columns before
+  FY2020-21. [verified] It was looking along the wrong axis. The plan reaches school funding and
+  nothing else, so the separating evidence is **more line items in the same biennia**, and every
+  committed workbook from the 133rd on carries all nine stages for roughly 1,400 of them. The
+  evidence was in hand the entire time.
+
+  `crates/stage-delta/src/bin/leadership.rs` runs it. House substitute, share of moved line
+  items **raised**, school funding against everything else, both fiscal years: [verified]
+
+  | Speaker | school funding | everything else |
+  |---|---|---|
+  | Householder | 77.8% / 77.8% | 73.7% / 80.6% |
+  | Cupp | 80.0% / 78.6% | 89.2% / 90.1% |
+  | Stephens | 38.1% / 31.7% | 27.7% / 22.7% |
+  | Huffman | 36.4% / 35.0% | 46.1% / 43.9% |
+
+  **The two columns move together.** Householder and Cupp raised most of what they touched
+  everywhere; Stephens and Huffman cut most of it everywhere. The Fair School Funding Plan
+  cannot explain a pattern that appears just as strongly outside anything it can reach, so the
+  confound this record was built around is **eliminated**.
+
+  That leaves leadership — and the same run eliminates it too.
 rationale: |
   The alignment is the most striking thing the corpus has produced and the least supported. That
   combination is exactly when a repository like this earns its keep or fails.
@@ -120,6 +136,33 @@ rationale: |
   The older documents also draw no column rules, so `lsc::comparison` refuses them outright —
   a second obstacle, and the smaller one, since a reader could be written and would still find
   no figures.
+
+  ## Huffman presides three times and behaves three ways
+
+  Matt Huffman is Senate President for the 134th and 135th General Assemblies and Speaker of the
+  House for the 136th. He is the only officer this corpus observes more than once, and he is
+  therefore the whole experiment. Share of moved line items raised: [verified]
+
+  | | role | stage | share raised |
+  |---|---|---|---|
+  | HB 110 (134th) | Senate President | Senate substitute | 68.4% / 71.6% |
+  | HB 33 (135th) | Senate President | Senate substitute | 37.5% / 35.3% |
+  | HB 96 (136th) | Speaker | House substitute | 46.1% / 43.9% |
+
+  Same person, same chamber, consecutive biennia — **68-72% raised, then 35-38%**. A personal
+  disposition toward raising or cutting appropriations does not reverse between two adjacent
+  budgets under the same officer. Whatever the four-point alignment is tracking, it is not who
+  was presiding.
+
+  What both halves point at is an **era effect**: the 133rd and 134th raise, the 135th and 136th
+  cut, across both chambers, both parties' officers, and every part of the budget. Speaker,
+  Senate President and plan-phase all change on that same boundary, which is why any of them
+  looked explanatory on four observations.
+
+  [open] The leading alternative is the shape of what the executive introduced — a chamber that
+  receives a lean budget raises line items and one that receives a generous budget trims them,
+  and the introduced column is in every workbook already. That is testable with what is
+  committed and has not been tested.
 
   ## The claim that was wrong, and why it was attractive
 

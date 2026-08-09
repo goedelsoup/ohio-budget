@@ -335,6 +335,16 @@ pub struct StageMovement {
     pub to: BillStage,
     /// Line items whose figure changed at this transition.
     pub line_items_moved: usize,
+    /// Of those, how many went up and how many went down.
+    ///
+    /// Separate from `net_cents` because they answer different questions and routinely
+    /// disagree. A chamber can raise nine line items out of ten and still net negative by
+    /// cutting Medicaid, and "what did they do to most line items" and "which way did the money
+    /// go" are then opposite statements, both true. Where a claim about a chamber's disposition
+    /// is being tested, the counts are the less misleading of the two — a dollar total is one
+    /// observation wearing a thousand costumes.
+    pub raised: usize,
+    pub cut: usize,
     /// Sum of absolute movement. This is the measure of *activity* — a chamber that adds a
     /// billion to one line and removes a billion from another has done a great deal, and a
     /// net figure would report zero.
@@ -373,6 +383,8 @@ pub fn aggregate(
             from,
             to,
             line_items_moved: 0,
+            raised: 0,
+            cut: 0,
             gross_cents: 0,
             net_cents: 0,
             largest_increase: None,
@@ -387,6 +399,11 @@ pub fn aggregate(
                 continue;
             }
             m.line_items_moved += 1;
+            if d > 0 {
+                m.raised += 1
+            } else {
+                m.cut += 1
+            }
             m.gross_cents += d.abs();
             m.net_cents += d;
             if d > 0 && m.largest_increase.as_ref().is_none_or(|(_, v)| d > *v) {
@@ -414,10 +431,12 @@ pub fn render_aggregate(m: &[StageMovement], fiscal_year: &str) -> String {
             0.0
         };
         s.push_str(&format!(
-            "  {:>18} -> {:<18} {:>5} item(s)  gross {:>16}  net {:>+16}  {:>5.1}%\n",
+            "  {:>18} -> {:<18} {:>5} item(s) ({:>4} up, {:>4} down)  gross {:>16}  net {:>+16}  {:>5.1}%\n",
             x.from.as_str(),
             x.to.as_str(),
             x.line_items_moved,
+            x.raised,
+            x.cut,
             x.gross_cents,
             x.net_cents,
             share
@@ -549,6 +568,8 @@ links:
             .find(|x| x.to == BillStage::HouseSubstitute)
             .unwrap();
         assert_eq!(step.line_items_moved, 2);
+        assert_eq!(step.raised, 1);
+        assert_eq!(step.cut, 1);
         assert_eq!(step.gross_cents, 200);
         assert_eq!(step.net_cents, 0);
         assert_eq!(step.largest_increase.as_ref().unwrap().0, "a");
@@ -583,6 +604,8 @@ links:
             .find(|x| x.to == BillStage::HouseSubstitute)
             .unwrap();
         assert_eq!(step.line_items_moved, 0);
+        assert_eq!(step.raised, 0);
+        assert_eq!(step.cut, 0);
         assert_eq!(step.gross_cents, 0);
     }
 
