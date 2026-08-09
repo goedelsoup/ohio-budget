@@ -73,6 +73,34 @@ decision: |
   — before the Fair School Funding Plan existed — falls for six years to a FY2023 trough, and
   recovers from there rather than from the peak.
 
+  ## Medicaid was the exception, and the corpus was measuring a third of it
+
+  This record listed Medicaid Health Care Services at +4.3% real and called it the one series
+  that survives — "the one whose cost the legislature least controls." Both halves were drawn
+  from ALI 651525, the general revenue line, which is **a third of the programme**.
+
+  Medicaid benefits are appropriated across five ALIs in four fund groups. Reconciled: [verified]
+
+  | | FY2014 | FY2026 | nominal | real |
+  |---|---|---|---|---|
+  | ALI 651525 alone (what this record measured) | $13.70B | $20.19B | +47.4% | **+4.3%** |
+  | the five-ALI programme | $17.66B | $37.22B | +110.7% | **+49.2%** |
+
+  So the conclusion stands and its one exception is far larger than recorded. Four of the five
+  series in the table above are flat or falling in real terms; the fifth grew by half, not by a
+  twentieth. See
+  [Medicaid Health Care Services](../corpus/line-item/medicaid-health-care-services.yml) for the
+  reconciliation and for the FY2018 step, 85% of which turns out to be money moving between
+  funds rather than any change in spending.
+
+  The general lesson is the one this repository keeps relearning: **a line item is a slice.**
+  Every figure in the table above is a single ALI, and the two that have now been checked
+  against their programmes — foundation funding and Medicaid — were both understating it.
+
+  [open] The other three series in the table are unchecked against their programmes. State Share
+  of Instruction and Institutional Operations may each be one ALI of several, and nothing here
+  establishes that they are not.
+
   This is also what splitting biennial periods bought. The old FY2012-13 local government fund
   node recorded $925,000,000 for two years. Split, it is $577.0M and $348.0M — **a 41.3% real
   fall inside one biennium**, the single largest annual move anywhere in the corpus, and it did

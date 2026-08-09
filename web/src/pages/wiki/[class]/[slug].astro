@@ -13,7 +13,7 @@ import {
   realSeriesFor,
   stagePoints,
 } from '../../../lib/derive.ts';
-import { dollars, exact, percent } from '../../../lib/money.ts';
+import { dollars, exact, percent, percentOrNone } from '../../../lib/money.ts';
 import { renderInlineText } from '../../../lib/prose.ts';
 import type { Feed, NodeView } from '../../../lib/types.ts';
 
@@ -227,7 +227,7 @@ const parentSeries =
                       </td>
                       <td>
                         {g.outcome.status === 'computed'
-                          ? `${dollars(g.outcome.appropriated_cents)} appropriated, ${exact(g.outcome.spent_cents)} spent (${g.outcome.basis}) — ${percent(g.outcome.variance_pct)}`
+                          ? `${dollars(g.outcome.appropriated_cents)} appropriated, ${exact(g.outcome.spent_cents)} spent (${g.outcome.basis}) — ${percentOrNone(g.outcome.variance_pct)}`
                           : g.outcome.reason}
                       </td>
                     </tr>

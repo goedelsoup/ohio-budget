@@ -45,11 +45,16 @@ fn main() -> Result<()> {
             Outcome::Computed(r) => {
                 computed += 1;
                 println!(
-                    "  COMPUTED {li} {period}: variance {} cents ({:.1}%) — {}",
+                    "  COMPUTED {li} {period}: variance {} cents ({}) — {}",
                     r.variance_cents,
-                    r.variance_pct,
+                    r.variance_pct
+                        .map(|p| format!("{p:.1}%"))
+                        .unwrap_or_else(|| "no authority to take a share of".into()),
                     r.character.how_to_read()
                 );
+                if let Some(a) = &r.anomaly {
+                    println!("    ANOMALY: {a}");
+                }
             }
             Outcome::Unavailable { reason } => {
                 println!("  BLOCKED   {li} {period}: {reason}");

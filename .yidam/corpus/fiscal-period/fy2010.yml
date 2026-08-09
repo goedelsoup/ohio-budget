@@ -1,0 +1,21 @@
+class: fiscal-period
+label: Fiscal Year 2010
+description: |
+  The state fiscal year running 2009-07-01 through 2010-06-30.
+
+  The corpus's earliest annual figure. FY2011 has no annual node and will not get one from
+  this source family: HB 153's workbook reports FY2010 as an actual and FY2011 only as an
+  **estimate**, and no later workbook reaches back that far. An estimate is somebody's
+  projection and is never an actual, so the year stays absent rather than being filled with the
+  nearest available number.
+properties:
+  label: FY2010
+  period_type: fiscal-year
+  start_date: 2009-07-01
+  end_date: 2010-06-30
+  general_assembly: 128th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2010-11.yml
+    relationship: contained-by

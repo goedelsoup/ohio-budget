@@ -1,0 +1,25 @@
+class: expenditure
+label: Medicaid Services — Federal — FY2019, Actual
+description: |
+  $5,999,439,163.71 disbursed against line item 651623 in FY2019, on a closed-book basis.
+  [verified]
+
+  Read from HB 166's appropriation detail, which reports completed years
+  alongside the biennium it appropriates.
+properties:
+  amount: "$5,999,439,163.71"
+  basis: actual-closed
+  period_label: FY2019
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 166, sheet FY21Update, ALI 651623, actual column for FY2019.
+    Committed at .yidam/sources/lsc/ with sha256 b5533209. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services-federal.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2019.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

@@ -18,6 +18,22 @@ description: |
   [open] The code is unverified and not guessed. The split between preservation and new
   capacity within this line item, which matters for any claim about whether Ohio is
   maintaining or expanding its system, is also unreconstructed.
+
+  ## Not in this source family
+
+  **The main operating budget does not appropriate it.** Highway construction is funded through
+  Ohio's separate biennial *transportation* budget — HB 54 in the 136th General Assembly, whose
+  [as-enacted version](../bill-version/hb54-as-enacted.yml) the corpus already seeds — and no
+  ALI matching this node appears in any of the fourteen main-operating workbooks committed here.
+  [verified]
+
+  That is a fact about Ohio's budget structure rather than a gap in extraction, and it is worth
+  the node saying so: a reader who finds every other line item carrying fifteen years of figures
+  is entitled to know why this one carries none.
+
+  [open] The transportation budget is a distinct source family with its own workbooks, and no
+  connector reads it (lsc-transportation-budget).
+
 properties:
   name: Highway Construction
   current_code: "[open] pending verification"
@@ -29,6 +45,10 @@ properties:
   last_period: current
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/department-of-transportation.yml

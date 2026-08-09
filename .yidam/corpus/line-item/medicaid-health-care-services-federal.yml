@@ -6,6 +6,18 @@ description: |
   benefit payments reimbursed by the [federal match](../revenue-source/federal-medicaid-match.yml).
   [inference]
 
+  **ALI 651623, `Medicaid Services - Federal`, agency MCD, federal fund group.** [verified]
+  Enacted $2.97B in FY2014 and $12.57B in FY2026 — **+324% nominal, +200% real** — which is by a
+  wide margin the largest real growth of any line item the corpus holds.
+
+  Most of that is not new spending. Between FY2017 and FY2018 this line rose $2.90B while
+  [the general revenue line](./medicaid-health-care-services.yml) fell $4.36B, and the two must
+  be read together or neither means anything. See the reconciliation on that node.
+
+  [open] Whether the FY2022 step to $11.00B is the enhanced federal match rate of the public
+  health emergency is untested, and it is the obvious hypothesis, which is a reason for caution
+  rather than confidence.
+
   This node makes the all-funds versus state-share distinction structural. The two line items
   fund the same benefits to the same people; one draws on the general revenue fund and one on
   federal money, and quoting either alone as "the Medicaid appropriation" is defensible only if
@@ -17,15 +29,19 @@ description: |
   [open] The code and the state/federal split by period are unverified.
 properties:
   name: Medicaid Health Care Services (Federal Share)
-  current_code: "[open] pending verification"
+  current_code: "651623"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "MCD"
   purpose: |
     Federal share of Medicaid-covered health care services.
   first_period: "[open] predates the corpus window"
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/department-of-medicaid.yml

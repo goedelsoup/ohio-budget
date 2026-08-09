@@ -1,0 +1,30 @@
+class: appropriation
+label: State Share of Instruction — FY2027, As Enacted
+description: |
+  $2,177,772,240.00 for line item 235501 in FY2027, appropriated by
+  [HB 96](../bill-version/hb96-as-enacted.yml). [verified]
+
+  Selected by ALI code and by the row carrying the line item rather than
+  a `- State`, `- Federal` or `- Total` memorandum row beneath it — the distinction that
+  [cost the corpus a $3.5 billion figure](../../decisions/appropriation-is-not-distribution.yml).
+properties:
+  amount: "$2,177,772,240.00"
+  period_label: FY2027
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 96, sheet EN, ALI 235501, enacted column for FY2027.
+    Committed at .yidam/sources/lsc/ with sha256 as catalogued. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/state-share-of-instruction.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2027.yml
+    relationship: covers
+  - target: ../bill-version/hb96-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

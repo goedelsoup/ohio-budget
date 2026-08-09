@@ -1,0 +1,25 @@
+class: expenditure
+label: Disability Financial Assistance — FY2010, Actual
+description: |
+  $10,915,533.06 disbursed against line item 600511 in FY2010, on a closed-book basis.
+  [verified]
+
+  Read from HB 153's appropriation detail, which reports completed years
+  alongside the biennium it appropriates.
+properties:
+  amount: "$10,915,533.06"
+  basis: actual-closed
+  period_label: FY2010
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 153, sheet All Funds without Summary, ALI 600511, actual column for FY2010.
+    Committed at .yidam/sources/lsc/ with sha256 0916adca. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/disability-financial-assistance.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2010.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb153-budget-in-detail.md
+    relationship: cites

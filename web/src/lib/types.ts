@@ -161,7 +161,10 @@ export interface GapResult {
   spent_cents: number;
   /** Positive when authority exceeded spending. */
   variance_cents: number;
-  variance_pct: number;
+  /** Absent when authority is zero — a share of nothing is undefined, not nought. */
+  variance_pct: number | null;
+  /** Set where the pair computes and still means something unusual. */
+  anomaly?: string | null;
   reversion_cents: number | null;
   basis: string;
   provisional: boolean;

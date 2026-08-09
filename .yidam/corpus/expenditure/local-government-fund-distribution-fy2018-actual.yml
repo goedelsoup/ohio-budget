@@ -1,0 +1,25 @@
+class: expenditure
+label: Local Government Fund Distribution — FY2018, Actual
+description: |
+  $366,167,735.99 disbursed against line item 110969 in FY2018, on a closed-book basis.
+  [verified]
+
+  Reported identically by 2 independent workbooks (HB166, HB166a), which is the check that the row selected is the line item and not a component of it. Read from HB 166's appropriation detail, which reports completed years
+  alongside the biennium it appropriates.
+properties:
+  amount: "$366,167,735.99"
+  basis: actual-closed
+  period_label: FY2018
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 166, sheet EN, ALI 110969, actual column for FY2018.
+    Committed at .yidam/sources/lsc/ with sha256 b5533209. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2018.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

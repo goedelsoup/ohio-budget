@@ -1,0 +1,24 @@
+class: fiscal-period
+label: Fiscal Year 2027
+description: |
+  The state fiscal year running 2026-07-01 through 2027-06-30.
+
+  The second year of the current biennium. Its appropriations are enacted and committed; its
+  actuals do not exist yet, and neither does its price level — the deflator averages four
+  observed quarters onto a July-June year and the publisher has observed none of FY2027's.
+
+  So FY2027 appears in nominal series and is named as omitted from restated ones. That is what
+  `periods_omitted` is for: leaving it out of a constant-dollar series is not the same as
+  hiding it, and putting it in would mean a nominal point standing unlabelled beside real
+  ones.
+properties:
+  label: FY2027
+  period_type: fiscal-year
+  start_date: 2026-07-01
+  end_date: 2027-06-30
+  general_assembly: 136th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2026-27.yml
+    relationship: contained-by

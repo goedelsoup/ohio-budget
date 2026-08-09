@@ -12,7 +12,7 @@ import {
   stageLevels,
 } from '../lib/charts.ts';
 import { computedGaps, decompositionFor, landingSubjects, stagePoints } from '../lib/derive.ts';
-import { dollars, exact, percent } from '../lib/money.ts';
+import { dollars, exact, percent, percentOrNone } from '../lib/money.ts';
 
 const feed = await loadFeed();
 const { manifest, findings } = feed;
@@ -76,7 +76,7 @@ const attributedSteps = hb96?.steps.filter((s) => s.is_attributed).length ?? 0;
             <dt>{headlineGap.variance_cents < 0 ? 'Overspent by' : 'Left unspent'}</dt>
             <dd>
               {exact(Math.abs(headlineGap.variance_cents))}
-              <small>{percent(headlineGap.variance_pct)} of authority</small>
+              <small>{percentOrNone(headlineGap.variance_pct)} of authority</small>
             </dd>
           </div>
         </dl>
@@ -86,7 +86,7 @@ const attributedSteps = hb96?.steps.filter((s) => s.is_attributed).length ?? 0;
           district operating costs — spent {exact(Math.abs(headlineGap.variance_cents))} more
           in {headlineGap.period} than it was appropriated, on an authority of{' '}
           {dollars(headlineGap.appropriated_cents)}. That is{' '}
-          {percent(headlineGap.variance_pct)}, and the figure rests on closed books rather
+          {percentOrNone(headlineGap.variance_pct)}, and the figure rests on closed books rather
           than in-year reporting, so it will not move.
         </p>
 

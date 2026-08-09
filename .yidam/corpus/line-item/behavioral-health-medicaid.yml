@@ -9,6 +9,21 @@ description: |
   [developmental disabilities](./developmental-disabilities-services.yml). Together they make
   the point structural: a Medicaid total assembled from one agency understates the program, and
   the size of the understatement is not knowable without enumerating the other agencies.
+
+  ## Candidates, and why none is committed
+
+  Searching the committed workbooks for this node's definition returns several ALIs and no
+  obvious answer: **333607** `Behavioral Health Medicaid Services` (DMH, then MHA after the
+  agency renaming, dedicated fund) appears only through HB 59; **335507** `Community Behavioral
+  Health` (MHA, GRF) runs HB 59 through HB 49; **333635** `Community Medicaid Expansion` is a
+  third shape again. [verified]
+
+  No code is guessed. Matching on a name returned five different line items for
+  [early childhood education](./early-childhood-education.yml), and the discipline that avoided
+  an error there applies here.
+
+  [open] The right code, and whether this node describes one line item or a group of them.
+
 properties:
   name: Behavioral Health Medicaid Services
   current_code: "[open] pending verification"
@@ -20,6 +35,10 @@ properties:
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/mental-health-and-addiction-services.yml

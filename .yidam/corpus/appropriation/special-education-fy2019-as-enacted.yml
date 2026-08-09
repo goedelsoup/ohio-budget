@@ -1,0 +1,30 @@
+class: appropriation
+label: Special Education Enhancements — FY2019, As Enacted
+description: |
+  $152,350,000.00 for line item 200540 in FY2019, appropriated by
+  [HB 49](../bill-version/hb49-as-enacted.yml). [verified]
+
+  Confirmed identical in 2 workbooks (HB49, HB49a). Selected by ALI code and by the row carrying the line item rather than
+  a `- State`, `- Federal` or `- Total` memorandum row beneath it — the distinction that
+  [cost the corpus a $3.5 billion figure](../../decisions/appropriation-is-not-distribution.yml).
+properties:
+  amount: "$152,350,000.00"
+  period_label: FY2019
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 49, sheet EN, ALI 200540, enacted column for FY2019.
+    Committed at .yidam/sources/lsc/ with sha256 964f0734. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/special-education.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2019.yml
+    relationship: covers
+  - target: ../bill-version/hb49-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb49-budget-in-detail.md
+    relationship: cites

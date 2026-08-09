@@ -8,17 +8,43 @@ description: |
   matched programs. Where a Medicaid dollar draws a federal dollar, a dollar cut here saves the
   state a dollar and costs a recipient a dollar — the leverage is absent, which changes the
   arithmetic of cutting it.
+
+  ## ALI 600511, wound down to nothing by FY2019
+
+  **ALI 600511, `Disability Financial Assistance`, agency JFS, general revenue fund.**
+  [verified] Unambiguous — one code, one agency, one fund, in every workbook that carries it.
+
+  | | FY2012 | FY2014 | FY2016 | FY2018 | FY2019 | FY2021 |
+  |---|---|---|---|---|---|---|
+  | enacted | $26.6M | $22.0M | $17.0M | $3.9M | $0 | $0 |
+  | actual | $14.6M | $16.5M | $9.9M | $1.6M | $0 | $0 |
+
+  A programme reduced across four biennia and then ended, still carried at zero for two more
+  years before disappearing from the workbooks entirely after HB 166. [verified]
+
+  It also spent well under its authority every single year it operated — between 25% and 59%.
+  On an entitlement-style programme that is evidence about take-up rather than about execution,
+  and it is the clearest case in the corpus of a persistent one-directional variance.
+
+  [open] Whether the programme was repealed or folded into another line item is unestablished.
+  Unlike the Medicaid and early-childhood transitions, no successor with a matching purpose was
+  found in the workbooks, so this may genuinely be a termination rather than a lineage break.
+
 properties:
   name: Disability Financial Assistance
-  current_code: "[open] pending verification"
+  current_code: "600511"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "JFS"
   purpose: |
     Cash assistance for disabled adults ineligible for federal benefits.
   first_period: "[open] not yet reconstructed"
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/job-and-family-services.yml

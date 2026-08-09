@@ -15,6 +15,20 @@ description: |
 
   [open] Eligibility changes during the window and their effect on the line item are
   unreconstructed.
+
+  ## Two line items, not one
+
+  The reimbursement is split by recipient across **110901** `Property Tax Allocation - Taxation`
+  (agency TAX, GRF) and **200901** `Property Tax Allocation - Education` (agency EDU, GRF), and
+  both stop appearing after HB 64. [verified] This node's own description says the reimbursement
+  goes to "local governments **and** school districts", which is exactly the split.
+
+  So it is a programme of at least two line items, and modelling it as one would repeat the
+  error [foundation funding](./foundation-funding.yml) records.
+
+  [open] Both codes, the reason they leave the workbooks after the 131st General Assembly, and
+  whether a third line carries the homestead exemption separately.
+
 properties:
   name: Property Tax Rollback Reimbursement
   current_code: "[open] pending verification"
@@ -26,6 +40,10 @@ properties:
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/department-of-taxation.yml

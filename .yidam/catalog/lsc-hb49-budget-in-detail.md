@@ -7,6 +7,7 @@ publisher: Ohio Legislative Service Commission
 content_committed: true
 feeds:
   - appropriation
+  - expenditure
   - line-item
 ---
 
@@ -68,3 +69,18 @@ So the `Appropriation` columns are read as `as-enacted`.
 [open] This establishes the pattern is inconsistent with the column being systematically
 pre-veto. It does not prove no veto touched any amount in these four biennia. The stronger
 evidence would be the veto messages themselves, which are catalogued for HB 96 and HB 33 only.
+
+## The with-actuals sibling
+
+| File | sha256 | Contents |
+|---|---|---|
+| [`hb49-budget-in-detail-with-actuals-132nd.xlsx`](../sources/lsc/hb49-budget-in-detail-with-actuals-132nd.xlsx) | `698e5d1e…` | closed-book actuals for **FY2016 and FY2017**, beside the same two appropriation columns |
+
+Same thirteen columns, with the prior-year estimate replaced by a second completed year. It is
+what carries appropriated-against-actual back before FY2020 — the calculation this repository
+exists for, which until these were committed could be computed for five fiscal years.
+
+Overlaps are the check. Each workbook reports two completed years and the next reports the later
+of them again, so every actual except the first and last is stated twice by independent
+documents. Across every line item the corpus extracts, all overlapping figures agree to the
+cent. [verified]

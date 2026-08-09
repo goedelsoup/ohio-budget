@@ -128,6 +128,21 @@ decision: |
   every extracted row from those files carried an empty name. That is why the ambiguity was
   invisible: the thing that distinguishes the four rows was the one field not being read.
 
+
+  ## The fifth instance: Medicaid, by fund
+
+  The same shape as the third, on a larger scale. Medicaid benefits are appropriated across five
+  ALIs in four fund groups, and the corpus modelled the general revenue one. It is a third of the
+  programme: **+47.4% nominal against the programme's +110.7%**, and in real terms +4.3% against
+  +49.2%. [verified]
+
+  What makes it worth recording separately is the FY2017-FY2018 step. ALI 651525 falls $4.36B,
+  which read as a policy event. Across the programme the net movement is **-$0.65B**, because
+  $2.90B moved to the federal-fund line and a new dedicated-purpose line took $0.59B. Eighty-five
+  percent of an apparent collapse was an accounting boundary.
+
+  See [Medicaid Health Care Services](../corpus/line-item/medicaid-health-care-services.yml).
+
 rationale: |
   The failure mode this closes is specific and quiet. Both figures are correct, both are
   citable to a committed primary source, and both are about foundation funding in FY2026. A

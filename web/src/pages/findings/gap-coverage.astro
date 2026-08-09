@@ -3,7 +3,7 @@ import Layout from '../../components/Layout.astro';
 import Figure from '../../components/Figure.astro';
 import { loadFeed } from '../../lib/feed.ts';
 import { COVERAGE_FILL, COVERAGE_ORDER, coverageBar } from '../../lib/charts.ts';
-import { dollars, exact, percent } from '../../lib/money.ts';
+import { dollars, exact, percent, percentOrNone } from '../../lib/money.ts';
 import { humanize } from '../../lib/derive.ts';
 
 const feed = await loadFeed();
@@ -120,7 +120,7 @@ for (const c of coverage) {
                   <>
                     {dollars(c.outcome.appropriated_cents)} appropriated,{' '}
                     {exact(c.outcome.spent_cents)} spent on a {c.outcome.basis} basis —{' '}
-                    {percent(c.outcome.variance_pct)}.
+                    {percentOrNone(c.outcome.variance_pct)}.
                     {c.outcome.provisional && ' In-year figures; the books will still move.'}
                     <div class="rel">{c.outcome.character.how_to_read}</div>
                   </>

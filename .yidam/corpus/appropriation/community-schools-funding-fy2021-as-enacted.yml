@@ -1,0 +1,30 @@
+class: appropriation
+label: Community Schools and Choice Programs — FY2021, As Enacted
+description: |
+  $4,912,546.00 for line item 200455 in FY2021, appropriated by
+  [HB 166](../bill-version/hb166-as-enacted.yml). [verified]
+
+  Selected by ALI code and by the row carrying the line item rather than
+  a `- State`, `- Federal` or `- Total` memorandum row beneath it — the distinction that
+  [cost the corpus a $3.5 billion figure](../../decisions/appropriation-is-not-distribution.yml).
+properties:
+  amount: "$4,912,546.00"
+  period_label: FY2021
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 166, sheet EN, ALI 200455, enacted column for FY2021.
+    Committed at .yidam/sources/lsc/ with sha256 b5533209. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/community-schools-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2021.yml
+    relationship: covers
+  - target: ../bill-version/hb166-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

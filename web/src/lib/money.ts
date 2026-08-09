@@ -47,6 +47,17 @@ export function compact(cents: number): string {
   return `${sign}$${d.toFixed(0)}`;
 }
 
+/**
+ * A percentage that may not exist.
+ *
+ * `variance_pct` is absent when authority is zero, and the placeholder must not be `0%` — that
+ * is the reading the Rust side stopped emitting precisely because it made the corpus's largest
+ * divergence look like its smallest.
+ */
+export function percentOrNone(pct: number | null | undefined, digits = 2): string {
+  return pct === null || pct === undefined ? 'no authority to take a share of' : percent(pct, digits);
+}
+
 /** `0.10%`, signed. Percentages here are small and the sign carries the meaning. */
 export function percent(pct: number, digits = 2): string {
   const sign = pct > 0 ? '+' : pct < 0 ? '−' : '';

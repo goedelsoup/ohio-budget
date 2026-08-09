@@ -1,0 +1,30 @@
+class: appropriation
+label: Medicaid Services — Federal — FY2024, As Enacted
+description: |
+  $11,106,604,990.00 for line item 651623 in FY2024, appropriated by
+  [HB 33](../bill-version/hb33-as-enacted.yml). [verified]
+
+  Selected by ALI code and by the row carrying the line item rather than
+  a `- State`, `- Federal` or `- Total` memorandum row beneath it — the distinction that
+  [cost the corpus a $3.5 billion figure](../../decisions/appropriation-is-not-distribution.yml).
+properties:
+  amount: "$11,106,604,990.00"
+  period_label: FY2024
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 33, sheet EN, ALI 651623, enacted column for FY2024.
+    Committed at .yidam/sources/lsc/ with sha256 as catalogued. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services-federal.yml
+    relationship: grants-authority-for
+  - target: ../fund/federal-medicaid-match-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

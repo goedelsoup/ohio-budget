@@ -11,17 +11,45 @@ description: |
   together mean something different from either moving alone.
 
   [open] The code, eligibility thresholds, and served population are unreconstructed.
+
+  ## ALI 200408, zeroed in FY2024 — and an actual that should not exist
+
+  **ALI 200408, `Early Childhood Education`, agency EDU, general revenue fund.** [verified]
+  The name matches five different line items across five agencies — EDU/GRF 200408, EDU/FED
+  200661, OSB/DPF 226402, JFS/DPF 600696 and KID/GRF 830407 — so the code was chosen on the
+  node's own definition (state-funded preschool, general revenue) rather than on the name, which
+  identifies nothing.
+
+  The series runs $23.3M in FY2012 to $68.1M from FY2018, and then **$0.00 from FY2024 onward**.
+  ALI 830407, `Early Childhood Education` under the new Department of Children and Youth, is
+  enacted at $130.3M in FY2024. [verified] The shape is the same as
+  [the Medicaid agency transfer](./medicaid-services-odjfs.yml): a line item zeroed while a
+  successor under a new agency takes the programme.
+
+  **[open] The FY2024 actual is $112,723,608.72 against an appropriation of $0.00.** Both figures
+  are read from committed workbooks and neither is a parse failure. Money left the treasury
+  under a line item with no authority, which cannot be literally what happened — the likely
+  explanations are that disbursement continued under the old code through the transition year,
+  or that the workbook reports the successor's spending against the predecessor's row. The
+  corpus does not know which, and the [gap](../../../crates/gap/) calculator now marks the pair
+  rather than dividing by zero and reporting it as a nought-percent variance, which is what it
+  did when this figure first arrived.
+
 properties:
   name: Early Childhood Education
-  current_code: "[open] pending verification"
+  current_code: "200408"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "EDU"
   purpose: |
     State-funded preschool slots for eligible children.
   first_period: "[open] predates the corpus window"
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/department-of-education-and-workforce.yml

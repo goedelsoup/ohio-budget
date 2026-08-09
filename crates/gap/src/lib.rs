@@ -118,7 +118,21 @@ pub struct GapResult {
     pub spent_cents: i64,
     /// Positive when authority exceeded spending.
     pub variance_cents: i64,
-    pub variance_pct: f64,
+    /// Variance as a share of authority. **Absent when authority is zero**, because a share of
+    /// nothing is undefined rather than nought.
+    ///
+    /// This field was an `f64` defaulting to `0.0`, and the default was not harmless. Early
+    /// Childhood Education FY2024 carries no appropriation and $112,723,608.72 of closed-book
+    /// spending — the largest possible divergence — and it was reported as `0.0`, which reads
+    /// as perfectly on budget and sorts as perfectly on budget.
+    pub variance_pct: Option<f64>,
+    /// Set when the pair is arithmetically computable and still means something unusual.
+    ///
+    /// Money leaving against no authority is not a rounding artefact. In this corpus it marks
+    /// a line item zeroed mid-transition while its disbursements continued under the old code,
+    /// which is a lineage question rather than an overspend.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub anomaly: Option<String>,
     pub reversion_cents: Option<i64>,
     pub basis: String,
     /// True when the figures rest on in-year reporting and the books will still move.
@@ -309,11 +323,13 @@ pub fn gap_for(corpus: &Corpus, line_item_slug: &str, period: &str) -> Outcome {
         appropriated_cents: appropriated,
         spent_cents: spent,
         variance_cents: variance,
-        variance_pct: if appropriated != 0 {
-            variance as f64 / appropriated as f64 * 100.0
-        } else {
-            0.0
-        },
+        variance_pct: (appropriated != 0).then(|| variance as f64 / appropriated as f64 * 100.0),
+        anomaly: (appropriated == 0 && spent != 0).then(|| {
+            "money was disbursed against no appropriation at all; the line item was most likely \
+             zeroed while its successor took over, so this is evidence about lineage rather \
+             than about overspending"
+                .to_string()
+        }),
         reversion_cents: reversion,
         provisional: basis == "disbursed",
         basis,
@@ -654,7 +670,7 @@ links:
         assert_eq!(r.appropriated_cents, 100_000);
         assert_eq!(r.spent_cents, 90_000);
         assert_eq!(r.variance_cents, 10_000);
-        assert!((r.variance_pct - 10.0).abs() < 1e-9);
+        assert!((r.variance_pct.unwrap() - 10.0).abs() < 1e-9);
         assert!(!r.provisional);
     }
 
@@ -690,6 +706,38 @@ links:
             }
             other => panic!("expected Refused, got {other:?}"),
         }
+    }
+
+    #[test]
+    fn spending_against_zero_authority_has_no_percentage_and_says_so() {
+        // The regression. Early Childhood Education FY2024 holds a zeroed appropriation and
+        // $112.7M of closed-book spending, and a percentage that defaulted to 0.0 reported the
+        // largest divergence in the corpus as no divergence at all.
+        let c = corpus_with(
+            "$0.00",
+            &[("e1", "$112,723,608.72", "actual-closed", false)],
+        );
+        let Outcome::Computed(r) = gap_for(&c, "foundation-funding", "FY2024-25") else {
+            panic!("a zero appropriation is a figure, not an absence — this must still compute")
+        };
+        assert_eq!(r.appropriated_cents, 0);
+        assert_eq!(r.variance_cents, -11_272_360_872);
+        assert!(
+            r.variance_pct.is_none(),
+            "a share of nothing is undefined, not nought"
+        );
+        assert!(r.anomaly.as_deref().is_some_and(|a| a.contains("lineage")));
+    }
+
+    #[test]
+    fn a_zero_against_zero_is_not_anomalous() {
+        // A wound-down programme appropriated nothing and spent nothing is unremarkable.
+        let c = corpus_with("$0.00", &[("e1", "$0.00", "actual-closed", false)]);
+        let Outcome::Computed(r) = gap_for(&c, "foundation-funding", "FY2024-25") else {
+            panic!()
+        };
+        assert!(r.anomaly.is_none());
+        assert!(r.variance_pct.is_none());
     }
 
     #[test]

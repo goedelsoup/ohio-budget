@@ -1,0 +1,25 @@
+class: expenditure
+label: Public Library Fund Distribution — FY2021, Actual
+description: |
+  $452,090,123.76 disbursed against line item 110965 in FY2021, on a closed-book basis.
+  [verified]
+
+  Read from HB 110's appropriation detail, which reports completed years
+  alongside the biennium it appropriates.
+properties:
+  amount: "$452,090,123.76"
+  basis: actual-closed
+  period_label: FY2021
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 110, sheet Update 9.30.22, ALI 110965, actual column for FY2021.
+    Committed at .yidam/sources/lsc/ with sha256 ba6ab512. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/public-library-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2021.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

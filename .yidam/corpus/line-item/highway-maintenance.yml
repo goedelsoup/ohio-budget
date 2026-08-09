@@ -11,6 +11,15 @@ description: |
   now and a larger cost later, and nothing in an appropriation document records the second.
 
   [open] The code and the maintenance-versus-construction split are unreconstructed.
+
+  ## Not in this source family
+
+  As with [highway construction](./highway-construction.yml), this is appropriated in the
+  separate transportation budget rather than in the main operating budget, and no matching ALI
+  appears in any committed workbook. [verified]
+
+  [open] Not catalogued (lsc-transportation-budget).
+
 properties:
   name: Highway Maintenance
   current_code: "[open] pending verification"
@@ -22,6 +31,10 @@ properties:
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/department-of-transportation.yml

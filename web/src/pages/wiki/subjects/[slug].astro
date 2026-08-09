@@ -17,7 +17,7 @@ import {
   stagePoints,
 } from '../../../lib/derive.ts';
 import type { Subject } from '../../../lib/derive.ts';
-import { dollars, exact, percent } from '../../../lib/money.ts';
+import { dollars, exact, percent, percentOrNone } from '../../../lib/money.ts';
 import type { Feed, NodeView } from '../../../lib/types.ts';
 
 export async function getStaticPaths() {
@@ -91,7 +91,7 @@ const computedGap = gaps.find((g) => g.outcome.status === 'computed');
               <dt>Variance, {computedGap.period}</dt>
               <dd>
                 {exact(computedGap.outcome.variance_cents)}
-                <small>{percent(computedGap.outcome.variance_pct)} of authority</small>
+                <small>{percentOrNone(computedGap.outcome.variance_pct)} of authority</small>
               </dd>
             </div>
           )
@@ -238,6 +238,12 @@ const computedGap = gaps.find((g) => g.outcome.status === 'computed');
                           <>
                             {dollars(g.outcome.appropriated_cents)} appropriated,{' '}
                             {exact(g.outcome.spent_cents)} spent ({g.outcome.basis})
+                            {g.outcome.anomaly && (
+                              <div class="refusal" style="margin-top:var(--space-3)">
+                                <div class="refusal__label">Anomaly</div>
+                                <p style="margin:0">{g.outcome.anomaly}</p>
+                              </div>
+                            )}
                             <div class="rel">{g.outcome.character.how_to_read}</div>
                           </>
                         ) : (

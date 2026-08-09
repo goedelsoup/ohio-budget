@@ -12,6 +12,21 @@ description: |
   Reading the [local government fund](./local-government-fund-distribution.yml) reduction
   without this line item in view understates what happened to local finance in the same period,
   because two separate withdrawals overlapped.
+
+  ## Candidates, and a phase-out visible in the names
+
+  Two candidates, both under agency RDF: **110907** `Property Tax Replacement Phase Out - Local
+  Government` and **110403** `Personal Property Tax Replacement Phase Out - Local Government`,
+  the second appearing only in HB 96. [verified] A school-district counterpart is likely and was
+  not located.
+
+  The names carry the finding: these are *phase-out* lines, which is what a reimbursement for an
+  abolished tax looks like as it is withdrawn.
+
+  [open] The codes, the school-district counterpart, and the schedule of the phase-out — which
+  lives in bill language rather than in an appropriation table, per
+  [bill-text-on-demand](../../decisions/bill-text-on-demand.yml).
+
 properties:
   name: Tangible Personal Property Tax Reimbursement
   current_code: "[open] pending verification"
@@ -23,6 +38,10 @@ properties:
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/department-of-taxation.yml

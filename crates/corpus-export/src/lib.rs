@@ -335,6 +335,21 @@ pub struct RealSeries {
     pub series_name: String,
     pub base_period: String,
     pub points: Vec<RealPoint>,
+    /// Periods the corpus holds a figure for and the index cannot reach, named rather than
+    /// dropped.
+    ///
+    /// [`real_dollars::deflate_series`] fails a series whole if any period is uncovered, and
+    /// that is right for its caller: a chart mixing nominal and real points looks fine, which
+    /// is the failure the crate exists to prevent. It is the wrong answer here. FY2027 is
+    /// enacted and committed, and the price index cannot reach a fiscal year whose quarters the
+    /// publisher has not observed yet — so refusing wholesale would mean a fifteen-year real
+    /// series disappearing the day a sixteenth year's appropriation was extracted.
+    ///
+    /// Omitting is not mixing. Every point in `points` is real; the years left out are listed
+    /// here and stated on the page. What must never happen is a nominal figure standing
+    /// unlabelled beside a restated one.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub periods_omitted: Vec<String>,
 }
 
 /// A restated series, or the reason there is none.
@@ -454,13 +469,28 @@ pub fn real_series(
         };
     }
 
-    let points: Vec<(String, i64)> = raw.iter().map(|(p, _, c)| (p.clone(), *c)).collect();
+    let (covered, uncovered): (Vec<_>, Vec<_>) = raw
+        .into_iter()
+        .partition(|(p, _, _)| d.index.contains_key(p));
+    let periods_omitted: Vec<String> = uncovered.into_iter().map(|(p, _, _)| p).collect();
+
+    if covered.len() < 2 {
+        return SeriesOutcome::Refused {
+            reason: format!(
+                "the index reaches {} of this line item's periods; {periods_omitted:?} are \
+                 outside it, and one point is a figure rather than a series",
+                covered.len()
+            ),
+        };
+    }
+
+    let points: Vec<(String, i64)> = covered.iter().map(|(p, _, c)| (p.clone(), *c)).collect();
     match real_dollars::deflate_series(&points, d) {
         Ok(real) => SeriesOutcome::Restated(Box::new(RealSeries {
             line_item: line_item_slug.to_string(),
             series_name: d.series_name.clone(),
             base_period: d.base_period.clone(),
-            points: raw
+            points: covered
                 .into_iter()
                 .zip(real)
                 .map(|((period, slug, _), r)| RealPoint {
@@ -470,6 +500,7 @@ pub fn real_series(
                     real_cents: r.real_cents,
                 })
                 .collect(),
+            periods_omitted,
         })),
         Err(e) => SeriesOutcome::Refused {
             reason: e.to_string(),

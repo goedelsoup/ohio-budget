@@ -9,15 +9,19 @@ description: |
   "education spending" as competing priorities is not describing a real tradeoff.
 properties:
   name: Highway Patrol Operations
-  current_code: "[open] pending verification"
+  current_code: "764321"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "DPS"
   purpose: |
     Operation of the state highway patrol.
   first_period: "[open] not yet reconstructed"
   last_period: "current"
   status: active
 links:
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/department-of-public-safety.yml

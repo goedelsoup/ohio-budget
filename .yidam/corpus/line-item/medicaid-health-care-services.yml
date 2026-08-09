@@ -18,9 +18,53 @@ description: |
   Medicaid appropriations moved to a new agency code, breaking any code-keyed series at that
   point. The predecessor line item is not yet seeded, so the `succeeds` edge has no target.
 
-  [open] The code, the predecessor code, and the effective date of the transition are all
-  unverified. No code is guessed here.
-  ALI 651525, agency MCD, general revenue fund. [verified]
+  ALI 651525, agency MCD, general revenue fund. [verified] Its predecessor is
+  [ALI 600525 under Job and Family Services](./medicaid-services-odjfs.yml), confirmed from
+  HB 59's workbook, which carries both codes at once.
+
+  ## This line item is a third of the programme
+
+  Medicaid benefits are appropriated across five line items in four fund groups. Enacted, in
+  billions: [verified]
+
+  | ALI | fund | what it carries | FY2014 | FY2026 |
+  |---|---|---|---|---|
+  | 651525 (this node) | GRF | state-share benefits | 13.70 | 20.19 |
+  | [651623](./medicaid-health-care-services-federal.yml) | FED | federally reimbursed benefits | 2.97 | 12.57 |
+  | 651639 | DPF | recoveries | 0.46 | 0.94 |
+  | 651656 | DPF | hospital upper-payment / franchise fee | 0.53 | 2.63 |
+  | 651684 | DPF | health insuring corporation fee | — | 0.88 |
+  | **programme** | | | **17.66** | **37.22** |
+
+  **The programme grew +110.7% nominal and +49.2% real; this line item grew +47.4% and +4.3%.**
+  [verified] Reading the general revenue series as Medicaid spending understates the programme's
+  real growth by an order of magnitude, and it is the difference between "Medicaid barely moved"
+  and "Medicaid is the one thing in this corpus that genuinely grew."
+
+  ### The FY2018 fall was reclassification, not restraint
+
+  This node previously recorded a $4.36 billion drop between FY2017 and FY2018 and declined to
+  explain it. Across the whole programme that step is: [verified]
+
+      651525  GRF   -4.36B
+      651623  FED   +2.90B
+      651684  DPF   +0.59B   (line item created)
+      651639  DPF   +0.21B
+      651656  DPF   +0.01B
+      -------------------
+      net           -0.65B
+
+  Eighty-five percent of the apparent collapse is money moving between funds. The net movement
+  is a fifteenth of what the general revenue line alone reports.
+
+  This is the fifth arrival of
+  [appropriation is not distribution](../../decisions/appropriation-is-not-distribution.yml),
+  and the same variety as the third: a line item that is a slice of a programme *by fund*,
+  exactly as foundation funding is three ALIs.
+
+  [open] The five ALIs are read but not modelled — only 651525 and 651623 have nodes. The three
+  dedicated-purpose lines carry $4.45B in FY2026 between them and nothing in the corpus
+  represents them.
 properties:
   name: "Medicaid Health Care Services [verified]"
   current_code: "651525"

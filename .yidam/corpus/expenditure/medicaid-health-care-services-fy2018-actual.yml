@@ -1,0 +1,25 @@
+class: expenditure
+label: Medicaid Health Care Services — FY2018, Actual
+description: |
+  $13,204,693,889.33 disbursed against line item 651525 in FY2018, on a closed-book basis.
+  [verified]
+
+  Reported identically by 2 independent workbooks (HB166, HB166a), which is the check that the row selected is the line item and not a component of it. Read from HB 166's appropriation detail, which reports completed years
+  alongside the biennium it appropriates.
+properties:
+  amount: "$13,204,693,889.33"
+  basis: actual-closed
+  period_label: FY2018
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 166, sheet EN, ALI 651525, actual column for FY2018.
+    Committed at .yidam/sources/lsc/ with sha256 b5533209. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2018.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

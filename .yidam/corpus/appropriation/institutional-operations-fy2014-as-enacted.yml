@@ -1,0 +1,30 @@
+class: appropriation
+label: Institutional Operations — FY2014, As Enacted
+description: |
+  $883,768,015.00 for line item 501321 in FY2014, appropriated by
+  [HB 59](../bill-version/hb59-as-enacted.yml). [verified]
+
+  Confirmed identical in 2 workbooks (HB59, HB59a). Selected by ALI code and by the row carrying the line item rather than
+  a `- State`, `- Federal` or `- Total` memorandum row beneath it — the distinction that
+  [cost the corpus a $3.5 billion figure](../../decisions/appropriation-is-not-distribution.yml).
+properties:
+  amount: "$883,768,015.00"
+  period_label: FY2014
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 59, sheet EN, ALI 501321, enacted column for FY2014.
+    Committed at .yidam/sources/lsc/ with sha256 e68ff534. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/institutional-operations.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2014.yml
+    relationship: covers
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites

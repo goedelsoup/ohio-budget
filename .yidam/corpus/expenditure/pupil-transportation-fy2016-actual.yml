@@ -1,0 +1,25 @@
+class: expenditure
+label: Pupil Transportation — FY2016, Actual
+description: |
+  $570,751,647.41 disbursed against line item 200502 in FY2016, on a closed-book basis.
+  [verified]
+
+  Reported identically by 2 independent workbooks (HB49, HB49a), which is the check that the row selected is the line item and not a component of it. Read from HB 49's appropriation detail, which reports completed years
+  alongside the biennium it appropriates.
+properties:
+  amount: "$570,751,647.41"
+  basis: actual-closed
+  period_label: FY2016
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 49, sheet EN, ALI 200502, actual column for FY2016.
+    Committed at .yidam/sources/lsc/ with sha256 964f0734. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/pupil-transportation.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2016.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb49-budget-in-detail.md
+    relationship: cites

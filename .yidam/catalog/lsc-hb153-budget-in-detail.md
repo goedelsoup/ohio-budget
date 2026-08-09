@@ -39,3 +39,14 @@ zip reader's failure on this file — `Could not find EOCD` — says nothing abo
 
 Its three sheets include two carrying summary rows; `All Funds without Summary` is the one read,
 since summing a summary row with the detail beneath it double-counts.
+
+## There is no with-actuals sibling
+
+LSC's page for the 129th General Assembly links a `-with-actual-expenditures-` file, and it is
+**byte-identical** to the as-enrolled workbook — the same sha256, the same three sheets. One
+document served at two URLs. [verified]
+
+That matters for what the corpus can reach. This workbook's only completed year is FY2010; FY2011
+appears solely as an `Estimate` column, and no later workbook reaches back that far. **FY2011 has
+no actual anywhere in this source family**, and an estimate is somebody's projection rather than
+an outturn, so the year is left absent rather than filled with the nearest available number.
