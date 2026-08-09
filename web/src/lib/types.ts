@@ -348,18 +348,21 @@ export interface ProcessFindings {
 export type LocalFinanceCategory =
   | 'own-source-in-transit'
   | 'shared-state-revenue'
-  | 'reimbursement';
+  | 'reimbursement'
+  | 'school-foundation-aid';
 
 export interface LocalFinanceYear {
   fiscal_year: string;
   own_source_cents: number;
   shared_cents: number;
   reimbursement_cents: number;
+  school_foundation_cents: number;
   /** Closed-book disbursements, where the source reports them. Nominal. */
   actual?: {
     own_source_cents: number;
     shared_cents: number;
     reimbursement_cents: number;
+    school_foundation_cents: number;
     categories_missing?: string[];
   };
   /** Absent where the price index does not reach the year. */
@@ -367,6 +370,7 @@ export interface LocalFinanceYear {
     own_source_cents: number;
     shared_cents: number;
     reimbursement_cents: number;
+  school_foundation_cents: number;
     base_period: string;
     series_name: string;
   };

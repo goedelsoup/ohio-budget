@@ -90,6 +90,55 @@ const groups = [
             appropriations are enacted.
           </p>
 
+          <h2>Where the boundary is drawn</h2>
+          <p>
+            The table above counts shared taxes and reimbursements. School foundation aid is also
+            state money going to a political subdivision — school districts are local governments
+            — and is excluded because it is a programme with a formula rather than a shared tax
+            or a compensation. That is a choice, so both are computed:
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Boundary</th>
+                  <th class="num">{first!.period}</th>
+                  <th class="num">{last!.period}</th>
+                  <th class="num">Real change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Shared taxes and reimbursements</td>
+                  <td class="num">{dollars(first!.stateMoney)}</td>
+                  <td class="num">{dollars(last!.stateMoney)}</td>
+                  <td class="num">{percent(change(first!.stateMoney, last!.stateMoney), 1)}</td>
+                </tr>
+                <tr>
+                  <td>School foundation aid</td>
+                  <td class="num">{dollars(first!.schoolFoundation)}</td>
+                  <td class="num">{dollars(last!.schoolFoundation)}</td>
+                  <td class="num">{percent(change(first!.schoolFoundation, last!.schoolFoundation), 1)}</td>
+                </tr>
+                <tr>
+                  <th>Both together</th>
+                  <th class="num">{dollars(first!.stateMoneyWide)}</th>
+                  <th class="num">{dollars(last!.stateMoneyWide)}</th>
+                  <th class="num">{percent(change(first!.stateMoneyWide, last!.stateMoneyWide), 1)}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Twenty-seven percentage points sit between the two headlines and neither is wrong.
+            What is wrong is quoting one without the boundary. The composition point survives
+            either way and sharpens: school aid held roughly level while everything else halved,
+            so by {last!.period} school districts receive{' '}
+            {Math.round((last!.schoolFoundation / last!.stateMoneyWide) * 100)}% of all state money
+            reaching local government, against{' '}
+            {Math.round((first!.schoolFoundation / first!.stateMoneyWide) * 100)}% in {first!.period}.
+          </p>
+
           <h2>It holds on money actually paid</h2>
           <p>
             The table counts appropriations, which is the figure the state chooses. Disbursement

@@ -124,8 +124,30 @@ rationale: |
   Assembly published none. It is named in `actual_only_years` rather than carried at zero, which
   would put a $0.00 point at the head of every chart and read as a collapse.
 
-  [open] It also counts only what flows through `RDF`, `EDU` and `TAX`. State money reaches local
-  government through other channels — school foundation funding most obviously, which is an order
-  of magnitude larger than all of this and is not a local-government transfer in the same sense.
-  The boundary drawn here is "shared taxes and reimbursements", and it is a boundary, which is
-  the thing this corpus has now got wrong six times.
+  ## The boundary, stated rather than assumed
+
+  The headline counts shared taxes and reimbursements. School foundation aid is also state money
+  going to a political subdivision — school districts are local governments — and it is excluded
+  because it is a programme with a formula rather than a shared tax or a compensation. That is a
+  choice, and this corpus has got a boundary wrong six times by not saying so. Both are computed:
+  [verified]
+
+  | | FY2012 | FY2026 | real |
+  |---|---|---|---|
+  | shared taxes and reimbursements | 6.20 | 3.70 | **-40.2%** |
+  | school foundation aid | 8.99 | 9.51 | **+5.8%** |
+  | **both together** | **15.19** | **13.21** | **-13.0%** |
+
+  Twenty-seven percentage points sit between the two headlines and neither is wrong. What is
+  wrong is quoting one without the boundary, which is what "state money to local government fell
+  by two fifths" does on its own.
+
+  The composition point survives either way and sharpens under the wide boundary: school aid held
+  roughly level while everything else halved, so by FY2026 school districts receive 72% of all
+  state money reaching local government against 59% in FY2012.
+
+  **ALI 200604 is excluded from school foundation aid.** It carries the same name from a dedicated
+  purpose fund and exists only from FY2020, so counting it compares a programme of two line items
+  against one of three — the growth reads +12.2% with it and +5.8% without. A category that gains
+  a member mid-window measures its own composition, which is the seventh version of the same
+  error and the first caught before it reached a record.

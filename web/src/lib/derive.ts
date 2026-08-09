@@ -325,6 +325,10 @@ export interface LocalFinancePoint {
   stateMoney: number;
   /** What was actually disbursed against that state money, where the source reports it. */
   stateMoneyPaid: number | null;
+  /** Outside the narrow boundary, reported beside it. */
+  schoolFoundation: number;
+  /** The narrow boundary plus school foundation aid. */
+  stateMoneyWide: number;
 }
 
 export function localFinance(feed: Feed): LocalFinancePoint[] {
@@ -336,6 +340,9 @@ export function localFinance(feed: Feed): LocalFinancePoint[] {
           shared: y.real.shared_cents,
           reimbursement: y.real.reimbursement_cents,
           stateMoney: y.real.shared_cents + y.real.reimbursement_cents,
+          schoolFoundation: y.real.school_foundation_cents,
+          stateMoneyWide:
+            y.real.shared_cents + y.real.reimbursement_cents + y.real.school_foundation_cents,
           // Nominal actuals rescaled by the same factor the restated appropriation used, so the
           // two sit in one set of dollars. Absent where the source reports no actual.
           stateMoneyPaid:

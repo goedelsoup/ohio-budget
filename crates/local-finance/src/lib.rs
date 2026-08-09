@@ -43,6 +43,13 @@ pub enum Category {
     SharedStateRevenue,
     /// The state compensates local government for revenue it removed.
     Reimbursement,
+    /// Programme aid the state appropriates to school districts, which are local governments.
+    ///
+    /// Outside the other three by construction and reported separately, because including it
+    /// changes the headline by 27 percentage points and the choice is not obvious. School
+    /// foundation aid is a state programme with a formula, not a shared tax or a compensation;
+    /// it is also, plainly, state money going to a political subdivision.
+    SchoolFoundationAid,
 }
 
 impl Category {
@@ -51,6 +58,7 @@ impl Category {
             Category::OwnSourceInTransit => "own-source revenue in transit",
             Category::SharedStateRevenue => "shared state revenue",
             Category::Reimbursement => "reimbursement",
+            Category::SchoolFoundationAid => "school foundation aid",
         }
     }
     /// The test applied, so the classification can be argued with rather than only accepted.
@@ -68,11 +76,20 @@ impl Category {
                 "the state removed or relieved a local revenue source and pays compensation; the \
                  obligation is fixed by past policy rather than by current receipts"
             }
+            Category::SchoolFoundationAid => {
+                "the state appropriates it to school districts under a funding formula; it is \
+                 state money to a political subdivision but is neither a shared tax nor a \
+                 compensation, and it is reported separately for that reason"
+            }
         }
     }
     /// True where the money is the state's own.
     pub fn is_state_money(&self) -> bool {
         !matches!(self, Category::OwnSourceInTransit)
+    }
+    /// True for the two categories the narrow headline counts.
+    pub fn in_narrow_boundary(&self) -> bool {
+        matches!(self, Category::SharedStateRevenue | Category::Reimbursement)
     }
 }
 
@@ -80,7 +97,7 @@ impl Category {
 ///
 /// Listed rather than inferred at runtime. A rule over names would be shorter and would be a
 /// second, invisible set of judgments; these are the judgments, and they are reviewable.
-pub const CLASSIFIED: [(&str, Category); 28] = [
+pub const CLASSIFIED: [(&str, Category); 30] = [
     // Levied locally, collected by the state, returned.
     ("110963", Category::OwnSourceInTransit), // permissive sales tax
     ("110967", Category::OwnSourceInTransit), // school district income tax
@@ -112,6 +129,14 @@ pub const CLASSIFIED: [(&str, Category); 28] = [
     ("110954", Category::Reimbursement), // TPP replacement, utility
     ("200909", Category::Reimbursement), // school district TPP replacement, business
     ("200900", Category::Reimbursement), // school district TPP replacement, utility
+    // Programme aid, reported outside the narrow boundary.
+    //
+    // ALI 200604 is deliberately absent. It carries `Foundation Funding - All Students` from a
+    // dedicated purpose fund and exists only from FY2020, so including it compares a programme
+    // of two line items against one of three: the growth reads +12.2% with it and +5.8% without.
+    // A category that gains a member mid-window measures its own composition.
+    ("200550", Category::SchoolFoundationAid),
+    ("200612", Category::SchoolFoundationAid),
 ];
 
 /// Agencies these line items are appropriated through.
@@ -148,7 +173,9 @@ pub struct Year {
     pub own_source_cents: i64,
     pub shared_cents: i64,
     pub reimbursement_cents: i64,
-    /// The same three from the workbooks' closed-book actual columns, where they exist.
+    /// School foundation aid, outside the narrow boundary and reported beside it.
+    pub school_foundation_cents: i64,
+    /// The same from the workbooks' closed-book actual columns, where they exist.
     ///
     /// A reimbursement appropriated is not a reimbursement paid, and the distinction is not
     /// decorative here: the appropriation is an authority the state sets and the disbursement is
@@ -165,6 +192,7 @@ pub struct Actuals {
     pub own_source_cents: i64,
     pub shared_cents: i64,
     pub reimbursement_cents: i64,
+    pub school_foundation_cents: i64,
     /// Categories with no actual reported at all this year; their totals are absent, not zero.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub categories_missing: Vec<Category>,
@@ -175,14 +203,19 @@ pub struct Real {
     pub own_source_cents: i64,
     pub shared_cents: i64,
     pub reimbursement_cents: i64,
+    pub school_foundation_cents: i64,
     pub base_period: String,
     pub series_name: String,
 }
 
 impl Year {
-    /// Shared revenue plus reimbursement: the money that is actually the state's.
+    /// Shared revenue plus reimbursement — the narrow boundary, and the headline.
     pub fn state_money_cents(&self) -> i64 {
         self.shared_cents + self.reimbursement_cents
+    }
+    /// The narrow boundary plus school foundation aid.
+    pub fn state_money_wide_cents(&self) -> i64 {
+        self.state_money_cents() + self.school_foundation_cents
     }
 }
 
@@ -353,6 +386,7 @@ pub fn analyse(
                 own_source_cents: sum(codes, Category::OwnSourceInTransit).unwrap_or(0),
                 shared_cents: sum(codes, Category::SharedStateRevenue).unwrap_or(0),
                 reimbursement_cents: sum(codes, Category::Reimbursement).unwrap_or(0),
+                school_foundation_cents: sum(codes, Category::SchoolFoundationAid).unwrap_or(0),
                 ..Default::default()
             };
             y.actual = by_year
@@ -388,6 +422,7 @@ pub fn analyse(
                     own_source_cents: one(y.own_source_cents)?,
                     shared_cents: one(y.shared_cents)?,
                     reimbursement_cents: one(y.reimbursement_cents)?,
+                    school_foundation_cents: one(y.school_foundation_cents)?,
                     base_period: d.base_period.clone(),
                     series_name: d.series_name.clone(),
                 })
@@ -526,6 +561,45 @@ mod tests {
             (at("FY2026") as f64) < at("FY2012") as f64 * 0.60,
             "the window ends below three fifths of where it opened"
         );
+    }
+
+    #[test]
+    fn both_boundaries_are_computed_and_differ_by_27_points() {
+        // The figures `three-kinds-of-money-to-local-government.yml` quotes for the wide
+        // boundary. Twenty-seven points sit between the two headlines and neither is wrong;
+        // quoting one without the boundary is what is wrong.
+        let f = run();
+        let at = |fy: &str| {
+            f.years
+                .iter()
+                .find(|y| y.fiscal_year == fy)
+                .and_then(|y| y.real.clone())
+                .unwrap_or_else(|| panic!("no restated {fy}"))
+        };
+        let (a, z) = (at("FY2012"), at("FY2026"));
+        let pct = |x: i64, y: i64| ((y as f64 / x as f64 - 1.0) * 1000.0).round() / 10.0;
+
+        let narrow = |r: &Real| r.shared_cents + r.reimbursement_cents;
+        assert_eq!(pct(narrow(&a), narrow(&z)), -40.2);
+        assert_eq!(
+            pct(a.school_foundation_cents, z.school_foundation_cents),
+            5.8
+        );
+        assert_eq!(
+            pct(
+                narrow(&a) + a.school_foundation_cents,
+                narrow(&z) + z.school_foundation_cents
+            ),
+            -13.0
+        );
+
+        // School districts' share of all state money reaching local government.
+        let share = |r: &Real| {
+            r.school_foundation_cents as f64 / (narrow(r) + r.school_foundation_cents) as f64
+                * 100.0
+        };
+        assert_eq!(share(&a).round(), 59.0);
+        assert_eq!(share(&z).round(), 72.0);
     }
 
     #[test]
