@@ -1,0 +1,31 @@
+class: bill-version
+label: HB 110 Senate Substitute
+description: |
+  [HB 110](../bill/hb110-134th.yml) at the senate substitute stage. [verified]
+
+  The stage at which the Fair School Funding Plan enters this bill. Foundation funding rises $267,879,867 here, after the House had cut it — see [the enactment](../budget-action/hb110-fair-school-funding-enactment.yml).
+
+  Seeded so `stage-delta` can decompose a third and fourth biennium. The first two agreed on a
+  pattern that these two do not share — see
+  [house-finance-committee](../actor/house-finance-committee.yml).
+properties:
+  stage: senate-substitute
+  stage_date: |
+    [open] Not recoverable from the General Assembly's action table, which records one
+    "Reported - Substitute" action on 2021-06-09 and not the earlier moment the substitute
+    was introduced in committee. [verified]
+  chamber: senate
+  document_reference: |
+    LSC appropriation spreadsheet, HB 110, sheet EN, column "Senate Substitute". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb110-134th.yml
+    relationship: version-of
+  - target: ./hb110-as-passed-house.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

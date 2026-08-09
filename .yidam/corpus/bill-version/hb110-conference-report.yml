@@ -1,0 +1,28 @@
+class: bill-version
+label: HB 110 Conference Report
+description: |
+  [HB 110](../bill/hb110-134th.yml) at the conference report stage. [verified]
+
+  One checkpoint in the HB 110 stage series, the corpus's fourth complete run of all nine.
+
+  Seeded so `stage-delta` can decompose a third and fourth biennium. The first two agreed on a
+  pattern that these two do not share — see
+  [house-finance-committee](../actor/house-finance-committee.yml).
+properties:
+  stage: conference-report
+  stage_date: 2021-06-28
+  chamber: conference
+  document_reference: |
+    LSC appropriation spreadsheet, HB 110, sheet EN, column "Conference Report". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb110-134th.yml
+    relationship: version-of
+  - target: ./hb110-as-passed-senate.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

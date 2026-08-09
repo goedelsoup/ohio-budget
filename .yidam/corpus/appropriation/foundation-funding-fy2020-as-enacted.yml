@@ -25,6 +25,8 @@ links:
     relationship: grants-authority-for
   - target: ../fund/general-revenue-fund.yml
     relationship: draws-from
+  - target: ../bill-version/hb166-as-enacted.yml
+    relationship: stated-in
   - target: ../fiscal-period/fy2020.yml
     relationship: covers
   - target: ../expenditure/foundation-funding-fy2020-actual.yml

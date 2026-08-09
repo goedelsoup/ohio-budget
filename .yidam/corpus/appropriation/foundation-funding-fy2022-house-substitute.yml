@@ -1,0 +1,29 @@
+class: appropriation
+label: Foundation Funding — FY2022, House Substitute
+description: |
+  $6,681,118,845.00 at the house substitute stage. A change of $-154,500,000.00 from the stage before. [verified] [verified]
+
+  One checkpoint in the corpus's fourth complete nine-stage
+  series. Its value is the difference from its neighbours, which is what
+  [`stage-delta`](../../skills/stage-delta.md) reads.
+properties:
+  amount: "$6,681,118,845.00"
+  period_label: FY2022
+  stage: house-substitute
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 110, sheet EN, ALI 200550, column "House Substitute FY 2022".
+    Committed at .yidam/sources/lsc/ with sha256 77d0cbc3. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2022.yml
+    relationship: covers
+  - target: ../bill-version/hb110-house-substitute.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

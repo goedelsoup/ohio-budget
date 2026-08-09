@@ -42,6 +42,28 @@ description: |
 
   [open] Whether the code survived the education restructuring unchanged is still open, and is
   exactly the kind of question the `lineage` calculator exists to raise.
+
+  ## Four biennia of legislative movement, and no stable pattern
+
+  The corpus now holds a complete nine-stage series for this line item in each of four bills.
+  Comparing the substitute stages, where nearly all movement happens: [verified]
+
+  | | House substitute | Senate substitute | conference | net |
+  |---|---|---|---|---|
+  | FY2020 (HB 166) | **-$250.0M** | -$2.5M | -$1.5M | **-$253.4M** |
+  | FY2022 (HB 110) | **-$154.5M** | **+$267.9M** | -$24.0M | +$102.4M |
+  | FY2024 (HB 33) | +$627.0M | -$173.8M | +$261.0M | +$716.7M |
+  | FY2026 (HB 96) | +$92.3M | -$72.9M | +$10.5M | +$32.6M |
+
+  **The shape recorded from the two most recent bills — House raises, Senate takes part of it
+  back, conference settles above both — holds only in those two.** In FY2020 the House cut this
+  line item and every later stage cut it further. In FY2022 the House cut it and the *Senate*
+  restored it, which is the reverse of the later pattern and is where the Fair School Funding
+  Plan enters the bill.
+
+  So neither chamber has a stable disposition toward school funding across the window. What
+  looked like a role behaving characteristically was two adjacent biennia.
+
 properties:
   name: Foundation Funding - All Students [verified]
   current_code: "200550"

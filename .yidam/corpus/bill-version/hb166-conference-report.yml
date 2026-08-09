@@ -1,0 +1,28 @@
+class: bill-version
+label: HB 166 Conference Report
+description: |
+  [HB 166](../bill/hb166-133rd.yml) at the conference report stage. [verified]
+
+  One checkpoint in the HB 166 stage series, the corpus's third complete run of all nine.
+
+  Seeded so `stage-delta` can decompose a third and fourth biennium. The first two agreed on a
+  pattern that these two do not share — see
+  [house-finance-committee](../actor/house-finance-committee.yml).
+properties:
+  stage: conference-report
+  stage_date: 2019-07-17
+  chamber: conference
+  document_reference: |
+    LSC appropriation spreadsheet, HB 166, sheet EN, column "Conference Report". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb166-133rd.yml
+    relationship: version-of
+  - target: ./hb166-as-passed-senate.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

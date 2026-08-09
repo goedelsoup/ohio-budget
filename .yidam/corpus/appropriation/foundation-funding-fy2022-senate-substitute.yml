@@ -1,0 +1,29 @@
+class: appropriation
+label: Foundation Funding — FY2022, Senate Substitute
+description: |
+  $6,948,998,712.00 at the senate substitute stage. A change of $267,879,867.00 from the stage before. [verified] [verified]
+
+  One checkpoint in the corpus's fourth complete nine-stage
+  series. Its value is the difference from its neighbours, which is what
+  [`stage-delta`](../../skills/stage-delta.md) reads.
+properties:
+  amount: "$6,948,998,712.00"
+  period_label: FY2022
+  stage: senate-substitute
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 110, sheet EN, ALI 200550, column "Senate Substitute FY 2022".
+    Committed at .yidam/sources/lsc/ with sha256 77d0cbc3. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2022.yml
+    relationship: covers
+  - target: ../bill-version/hb110-senate-substitute.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites
