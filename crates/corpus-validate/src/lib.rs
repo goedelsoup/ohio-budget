@@ -76,7 +76,32 @@ pub struct Corpus {
     pub catalog_paths: BTreeSet<PathBuf>,
     pub catalog: Vec<LoadedCatalog>,
     pub instances: Vec<LoadedInstance>,
+    /// Decision records, as top-level keys only. The rules care which keys are present, not
+    /// what is in them.
+    pub decisions: Vec<LoadedDecision>,
 }
+
+/// A decision record's top-level keys, for the schema-coverage rule.
+#[derive(Debug, Clone)]
+pub struct LoadedDecision {
+    pub rel_path: String,
+    pub keys: Vec<String>,
+}
+
+/// The fields `corpus_schema::DecisionRecord` deserializes.
+///
+/// Duplicated as a list rather than derived from the type because serde offers no way to
+/// enumerate a struct's fields at runtime, and the alternative — `deny_unknown_fields` — would
+/// make `corpus-export` skip the whole record instead of dropping one key, which is worse.
+/// [`a_decision_key_outside_the_schema_is_reported`] fails if the two drift.
+const DECISION_FIELDS: [&str; 6] = [
+    "id",
+    "summary",
+    "corpus_depth",
+    "context",
+    "decision",
+    "rationale",
+];
 
 /// Resolves `base_dir/rel`, collapsing `.` and `..` lexically.
 ///
@@ -325,6 +350,7 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
         catalog_paths,
         catalog,
         instances,
+        decisions,
     } = corpus;
     let mut findings = Vec::new();
     let known_instances: BTreeSet<&PathBuf> = instances.iter().map(|i| &i.abs_path).collect();
@@ -332,6 +358,41 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
         .iter()
         .filter_map(|c| c.parsed.as_ref().ok().map(|e| (e.slug.as_str(), e)))
         .collect();
+
+    // A decision record's top-level key that the schema does not deserialize is dropped in
+    // silence: it stays on disk, reads correctly to anyone opening the file, and never reaches
+    // the feed or the site. `leadership-and-the-anomalies.yml` carried its central evidence —
+    // the four-biennium alignment table the whole record argues about — under `the_alignment:`
+    // for as long as the record existed, and no reader of the published version ever saw it.
+    //
+    // An error rather than a warning. The failure mode is not untidiness: it is a record that
+    // is complete in the repository and materially incomplete everywhere it is read, with
+    // nothing on either side to indicate a difference.
+    for d in decisions {
+        // A file that is not a mapping — `proposals.yml` holds a list — has no keys to check,
+        // and was never claiming to be a decision record.
+        if d.keys.is_empty() {
+            continue;
+        }
+        let stray: Vec<&str> = d
+            .keys
+            .iter()
+            .map(String::as_str)
+            .filter(|k| !DECISION_FIELDS.contains(k))
+            .collect();
+        if !stray.is_empty() {
+            findings.push(Finding {
+                path: d.rel_path.clone(),
+                rule: "decision-key-outside-schema",
+                severity: Severity::Error,
+                message: format!(
+                    "top-level key(s) {stray:?} are not fields of DecisionRecord, so they are \
+                     dropped from the exported feed and never reach a reader — fold the content \
+                     into {DECISION_FIELDS:?}, or add the field to the schema"
+                ),
+            });
+        }
+    }
 
     // A catalog entry whose frontmatter does not parse is not a provenance anchor — it is a
     // document that looks like one, which is worse than an absent entry.
@@ -741,6 +802,39 @@ pub fn load(repo_root: &Path) -> Result<Corpus> {
     let mut catalog_paths = BTreeSet::new();
     let mut instances = Vec::new();
 
+    let mut decisions = Vec::new();
+    let decisions_root = repo_root.join(".yidam").join("decisions");
+    if decisions_root.is_dir() {
+        let mut paths: Vec<PathBuf> = std::fs::read_dir(&decisions_root)?
+            .filter_map(|e| e.ok().map(|e| e.path()))
+            .filter(|p| p.extension().and_then(|e| e.to_str()) == Some("yml"))
+            .collect();
+        paths.sort();
+        for path in paths {
+            let text = std::fs::read_to_string(&path)
+                .with_context(|| format!("reading {}", path.display()))?;
+            // Top-level keys only. A record that is not a mapping at all — `proposals.yml` is a
+            // list — has none, and the rule then has nothing to say about it.
+            let keys = serde_yaml::from_str::<serde_yaml::Value>(&text)
+                .ok()
+                .and_then(|v| v.as_mapping().cloned())
+                .map(|m| {
+                    m.keys()
+                        .filter_map(|k| k.as_str().map(str::to_string))
+                        .collect()
+                })
+                .unwrap_or_default();
+            decisions.push(LoadedDecision {
+                rel_path: path
+                    .strip_prefix(repo_root)
+                    .unwrap_or(&path)
+                    .to_string_lossy()
+                    .to_string(),
+                keys,
+            });
+        }
+    }
+
     let mut catalog = Vec::new();
     if catalog_root.is_dir() {
         for entry in walkdir::WalkDir::new(&catalog_root)
@@ -820,6 +914,7 @@ pub fn load(repo_root: &Path) -> Result<Corpus> {
         catalog_paths,
         catalog,
         instances,
+        decisions,
     })
 }
 
@@ -883,6 +978,7 @@ mod tests {
             catalog_paths: BTreeSet::new(),
             catalog,
             instances,
+            decisions: Vec::new(),
         })
     }
 
@@ -1409,6 +1505,7 @@ links:
             catalog_paths,
             catalog: Vec::new(),
             instances,
+            decisions: Vec::new(),
         })
     }
 
@@ -1635,5 +1732,99 @@ links:
             .collect();
         assert_eq!(tags.len(), 1, "got {tags:?}");
         assert!(tags[0].message.contains("[probable]"));
+    }
+
+    fn decisions_only(records: &[(&str, &[&str])]) -> Vec<Finding> {
+        check(&Corpus {
+            decisions: records
+                .iter()
+                .map(|(path, keys)| LoadedDecision {
+                    rel_path: (*path).to_string(),
+                    keys: keys.iter().map(|k| (*k).to_string()).collect(),
+                })
+                .collect(),
+            ..Default::default()
+        })
+    }
+
+    #[test]
+    fn a_decision_key_outside_the_schema_is_reported() {
+        // The real case: `leadership-and-the-anomalies.yml` carried the four-biennium alignment
+        // table — the evidence the entire record argues about — under `the_alignment:`. It was
+        // on disk and correct, and `DecisionRecord` does not deserialize that field, so the
+        // exported feed and every page built from it silently omitted the table.
+        let f = decisions_only(&[(
+            ".yidam/decisions/x.yml",
+            &[
+                "id",
+                "summary",
+                "the_alignment",
+                "context",
+                "decision",
+                "rationale",
+            ],
+        )]);
+        let stray: Vec<&Finding> = f
+            .iter()
+            .filter(|x| x.rule == "decision-key-outside-schema")
+            .collect();
+        assert_eq!(stray.len(), 1, "got {f:?}");
+        assert_eq!(stray[0].severity, Severity::Error);
+        assert!(
+            stray[0].message.contains("the_alignment"),
+            "{}",
+            stray[0].message
+        );
+    }
+
+    #[test]
+    fn a_decision_using_only_schema_fields_is_clean() {
+        assert!(decisions_only(&[(
+            ".yidam/decisions/x.yml",
+            &["id", "summary", "context", "decision", "rationale"],
+        )])
+        .is_empty());
+    }
+
+    #[test]
+    fn corpus_depth_is_a_schema_field_and_not_reported() {
+        // `ontology.yml` carries it. A rule that flagged it would fire on a record that is
+        // correct, which is how a guard gets switched off.
+        assert!(decisions_only(&[(
+            ".yidam/decisions/ontology.yml",
+            &[
+                "id",
+                "summary",
+                "corpus_depth",
+                "context",
+                "decision",
+                "rationale"
+            ],
+        )])
+        .is_empty());
+    }
+
+    #[test]
+    fn a_file_that_is_not_a_mapping_is_not_a_decision_record() {
+        // `proposals.yml` holds a list. It never claimed to be a decision record, and loading
+        // it yields no top-level keys, so the rule must have nothing to say about it.
+        assert!(decisions_only(&[(".yidam/decisions/proposals.yml", &[])]).is_empty());
+    }
+
+    #[test]
+    fn the_field_list_matches_what_the_schema_deserializes() {
+        // DECISION_FIELDS is written by hand beside a struct it cannot see. If a field is added
+        // to `DecisionRecord` and not here, the rule starts reporting a correct record as
+        // broken — so round-trip a record naming every field and require it to parse.
+        let yaml = DECISION_FIELDS
+            .iter()
+            .map(|f| match *f {
+                "corpus_depth" => format!("{f}: 40"),
+                _ => format!("{f}: x"),
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        let parsed = serde_yaml::from_str::<corpus_schema::DecisionRecord>(&yaml);
+        assert!(parsed.is_ok(), "DECISION_FIELDS has drifted: {parsed:?}");
     }
 }

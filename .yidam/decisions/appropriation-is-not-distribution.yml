@@ -49,7 +49,9 @@ decision: |
   directly. Nothing was stopping a *node author* from doing the same subtraction by hand and
   committing the result as a verified figure, which is how this would actually have entered
   the corpus.
-confirmed_by: |
+
+  ## Confirmed independently
+
   Recorded from the House and Senate amendments. The governor's veto message, committed
   afterwards, is a third independent instance and the first from the executive branch.
 
@@ -69,7 +71,9 @@ confirmed_by: |
   shows the same gap opening inside the statute itself: the amount and its distribution are
   separately amendable, by different actors, at different stages, and a corpus that tracks only
   amounts is blind to one of them.
-third_failure_mode: |
+
+  ## The third failure mode
+
   A third way the same error arrives, found when HB 33's comparison document reported a
   distribution to traditional school districts *larger* than the line item's authority — which
   is impossible, and therefore evidence that the programme draws on something the corpus was
@@ -90,7 +94,9 @@ third_failure_mode: |
   matching on the code returns one; and a corpus that models one of them under the programme's
   ordinary English name has quietly answered a question nobody asked.
 
-fourth_instance_and_the_first_self_inflicted: |
+
+  ## The fourth instance, and the first self-inflicted
+
   The fourth arrival of this error, and the only one where the corpus's own author committed it
   as `[verified]`.
 

@@ -18,7 +18,9 @@ context: |
   The obvious covariate is who was presiding. It is not derivable from appropriation data —
   presiding officers change on their own schedule, twice mid-General-Assembly in this window —
   so `speaker-of-the-house` and `president-of-the-senate` were seeded with dated occupancy.
-the_alignment: |
+
+  ## The alignment
+
   | GA | Budget | Speaker | Senate President | House sub | Senate sub | floor moves |
   |---|---|---|---|---|---|---|
   | 133rd | HB 166, FY2020 | Householder → Cupp | Obhof | **-$250.0M** | -$2.5M | **Senate, 2 items** |
@@ -62,8 +64,14 @@ decision: |
      observations can tell them apart.
 
   What would separate them: the 128th through 132nd General Assemblies, which span two speakers
-  and three Senate presidents entirely before the plan existed. Their spreadsheets follow the
-  same LSC format the connector already reads. That is the test, and it is reachable.
+  and three Senate presidents entirely before the plan existed.
+
+  **That test was checked and it is not reachable. LSC did not publish stage-by-stage
+  appropriation figures before the FY2020-21 budget.** [verified] This record previously
+  asserted the opposite — "their spreadsheets follow the same LSC format the connector already
+  reads … that is the test, and it is reachable" — on no evidence beyond the assumption that a
+  publisher's format is stable. It is not, and the break falls exactly at the edge of the
+  corpus's window.
 rationale: |
   The alignment is the most striking thing the corpus has produced and the least supported. That
   combination is exactly when a repository like this earns its keep or fails.
@@ -80,5 +88,64 @@ rationale: |
   the older ones, where the two come apart, and naming that is more useful than either asserting
   the correlation or dismissing it.
 
-  [open] The 128th-132nd stage series are unextracted. Four more biennia, from a source family
-  the connector handles, deciding a question the corpus can already state precisely.
+  ## Why the older biennia cannot settle it
+
+  What LSC published, checked against the live site rather than assumed: [verified]
+
+  | GA | bill | workbook | columns |
+  |---|---|---|---|
+  | 128th | HB 1, FY2010-11 | **none** | greenbooks and comparison documents, PDF only |
+  | 129th | HB 153, FY2012-13 | budget in detail | 13 |
+  | 130th | HB 59, FY2014-15 | budget in detail | 13 |
+  | 131st | HB 64, FY2016-17 | budget in detail | 13 |
+  | 132nd | HB 49, FY2018-19 | budget in detail | 13 |
+  | 133rd | HB 166, FY2020-21 | **appropriation spreadsheet** | **25** |
+
+  The thirteen are `Agency, Fund Group, Fund, ALI, ALI Title`, one prior-year actual, one
+  estimate, **two appropriation columns**, and four sort keys. The twenty-five carry the nine
+  stages in both fiscal years. There is no substitute column, no reported-by-committee column
+  and no conference column anywhere before the 133rd — the figures do not exist in machine
+  form because LSC did not publish them.
+
+  Even the filename changes at the same boundary, from `budget-in-detail` to
+  `appropriation-spreadsheet`. The rename tracks the format change exactly, which is as close
+  to the publisher saying so as this is going to get.
+
+  The comparison documents are not a way around it. They exist for all five General Assemblies
+  and they do carry stage columns — but what stands in those columns is prose and per-pupil
+  formula parameters, not line-item totals. HB 49's education document sets out
+  `increases the formula amount to $6,020 in both years` under the House and `$6,010 in FY 2018`
+  under the Senate; it never states what ALI 200550 stood at in either version. The corpus's
+  existing stage series all came from the spreadsheets, and nothing else published carries them.
+  The older documents also draw no column rules, so `lsc::comparison` refuses them outright —
+  a second obstacle, and the smaller one, since a reader could be written and would still find
+  no figures.
+
+  ## The claim that was wrong, and why it was attractive
+
+  The claim that the test was reachable was wrong in a way worth naming, because it was
+  attractive rather than careless. It made the record better: a confound honestly identified
+  *and* a stated route to resolving it reads as more complete than a confound with no way out.
+  Nothing was checked. One HTTP request to the LSC budget archive would have settled it, and
+  the record shipped without one.
+
+  The rule this suggests, and the corpus should hold itself to: **a claim that data is
+  obtainable is a claim about the world, and takes the same evidence as a claim about a figure.**
+  "The connector already handles this format" is checkable in about a minute and was treated as
+  self-evident. Compare the neighbouring claims in this same record, every one of which was
+  computed before it was written down.
+
+  [open] What the 129th-132nd *can* supply is annual enacted appropriations for FY2012 through
+  FY2019 — two per workbook, in a shape the classifier nearly reads already (it wants a bare
+  `Appropriation FY20XX` label mapped to the enacted stage). That is not the leadership test.
+  It is worth more than the leadership test: it would carry every real-dollar series back eight
+  years, and it would convert the corpus's four biennial period labels — the ones the deflator
+  cannot restate, per
+  [nominal growth is mostly price level](./nominal-growth-is-mostly-price-level.yml) — into
+  annual figures that it can. HB 153's workbook is served with an `.xlsx` extension and is a
+  legacy OLE2 `.xls`; `calamine` refuses it, so that one needs a converter or another route.
+
+  [open] The Speaker question therefore has no reachable test in the published record, and this
+  record should stop implying one exists. Separating speakership from Fair School Funding Plan
+  phase-in would need the stage figures reconstructed from bill text — the substitute bills
+  themselves are published — which is a different and much larger connector than any here.
