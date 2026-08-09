@@ -52,6 +52,27 @@ use anyhow::{anyhow, bail, Context, Result};
 use corpus_schema::{BillStage, Cents, LscComparisonRow, Provenance};
 
 // ─── money ───────────────────────────────────────────────────────────────────
+/// Is this row's ALI code a line item's, or something else in the same column?
+///
+/// **Not every row in an LSC workbook is a line item**, and the ones that are not carry figures
+/// large enough to swamp anything computed over them. Two shapes, and this catches the first:
+///
+/// 1. **Grand totals.** Every workbook carries between one and six rows with no ALI code —
+///    `Grand Total`, `Total All Funds`, `Total GRF`, `GRF State Total`. Each one's movement is
+///    the sum of every line item's. Reading them as line items shifted the share of contested
+///    money conference splits by thirteen percentage points, changed the line counts by two out
+///    of 753, and so survived a check of the counts. They have an agency, a fund group, and a
+///    plausible figure; only the empty code marks them.
+///
+/// 2. **Memorandum breakdowns**, which share their parent's code and are suffixed `- State`,
+///    `- Federal`, `- Total`. Those are *not* caught here, because they are only components in
+///    the company of a sibling: ALI 651623 is genuinely named `Medicaid Services - Federal` and
+///    is a line item in its own right. Callers that select by code must disambiguate within the
+///    code — see `ExtractionReport::ambiguous_line_item_codes`, which exists because taking the
+///    `- Federal` row of ALI 651525 produced a $3.5 billion error.
+pub fn is_line_item_code(code: &str) -> bool {
+    !code.trim().is_empty()
+}
 
 /// Parses a published dollar figure into exact integer cents.
 ///
@@ -402,6 +423,20 @@ impl Source for FixtureSource {
 
 #[cfg(test)]
 mod tests {
+
+    #[test]
+    fn a_row_with_no_ali_code_is_not_a_line_item() {
+        // The grand-total rows. They carry an agency, a fund group and a figure that is the sum
+        // of everything above them; the empty code is the only thing marking them.
+        assert!(!is_line_item_code(""));
+        assert!(!is_line_item_code("   "));
+        assert!(is_line_item_code("200550"));
+        // Ohio numbers one line item `110644.00`, so a code is not always digits.
+        assert!(is_line_item_code("110644.00"));
+        // A memorandum breakdown carries its parent's code and is not caught here, by design:
+        // ALI 651623 is genuinely named `Medicaid Services - Federal`.
+        assert!(is_line_item_code("651525"));
+    }
     use super::*;
 
     fn prov() -> Provenance {

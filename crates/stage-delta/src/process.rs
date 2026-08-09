@@ -184,7 +184,7 @@ fn keyed(dir: &Path, file: &str, stage: BillStage, fy: &str) -> Result<BTreeMap<
         // the share of contested money conference splits by sixteen percentage points. It looked
         // like a line item, it had a fund group and an agency, and nothing about the figure was
         // implausible.
-        if r[l].trim().is_empty() {
+        if !lsc::is_line_item_code(&r[l]) {
             continue;
         }
         let Ok(cents) = lsc::parse_money_to_cents(&r[c]) else {

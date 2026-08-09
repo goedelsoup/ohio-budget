@@ -134,7 +134,7 @@ pub fn extract(table: &RawTable, plan: &ColumnPlan, ctx: &ExtractionContext) -> 
 
     for row in &table.rows {
         let code = cell(row, i_code).to_string();
-        if code.is_empty() {
+        if !crate::is_line_item_code(&code) {
             continue;
         }
         let name = cell(row, i_name).to_string();

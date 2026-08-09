@@ -312,7 +312,13 @@ fn read(path: &Path) -> Result<Figures> {
         };
         for r in &table.rows {
             let (agency, code) = (r[a].trim(), r[l].trim());
-            if !AGENCIES.contains(&agency) || category_of(code).is_none() {
+            // The code filter already excludes grand totals, since none of them carries a code.
+            // Stated rather than relied on: the guard here is a side effect of the
+            // classification being a fixed list, and a future rule over names would lose it.
+            if !lsc::is_line_item_code(code)
+                || !AGENCIES.contains(&agency)
+                || category_of(code).is_none()
+            {
                 continue;
             }
             let Ok(cents) = lsc::parse_money_to_cents(&r[i]) else {

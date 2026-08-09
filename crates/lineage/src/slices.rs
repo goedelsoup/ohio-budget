@@ -119,6 +119,11 @@ pub fn check(corpus: &Corpus, workbook: &Path, fiscal_year: &str) -> Result<Vec<
     // register as siblings of it.
     let mut rows: BTreeMap<(String, String), (String, i64)> = BTreeMap::new();
     for r in &table.rows {
+        // A grand-total row has an agency, a fund group and a very large figure, and would be
+        // reported as a namesake of anything sharing a word with `Total All Funds`.
+        if !lsc::is_line_item_code(&r[l]) {
+            continue;
+        }
         let Ok(cents) = lsc::parse_money_to_cents(&r[c]) else {
             continue;
         };
