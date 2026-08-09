@@ -5,7 +5,7 @@ description: |
   [inference]
 
   Seeded to give the FY2024-25 appropriations something to be stated in. Without it, the
-  [foundation funding figure for that biennium](../appropriation/foundation-funding-fy2024-25-as-enacted.yml)
+  [foundation funding figure for that biennium](../appropriation/foundation-funding-fy2024-as-enacted.yml)
   was an amount attributed to a bill with no version attached — which is exactly the
   ambiguity the bill-version class exists to remove, since "HB 33 appropriated X" is
   underdetermined between the proposal, each chamber's version, and the enacted text.

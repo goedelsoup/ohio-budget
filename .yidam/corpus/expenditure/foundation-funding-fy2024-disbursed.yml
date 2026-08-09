@@ -7,7 +7,7 @@ description: |
   [foundation funding](../line-item/foundation-funding.yml). [inference]
 
   This node exists to complete one chain end to end. Set against
-  [what HB 33 appropriated](../appropriation/foundation-funding-fy2024-25-as-enacted.yml) for
+  [what HB 33 appropriated](../appropriation/foundation-funding-fy2024-as-enacted.yml) for
   the same line item and period, it is the corpus's single fully-formed instance of the
   priority-1 question: authority granted on one side, money disbursed on the other.
 
@@ -25,6 +25,10 @@ description: |
   [open] The amount is unfilled, pending the `obm` and `district-finance` connectors. Whether
   the district's receipts should be measured on a cash or accrual basis is also unresolved,
   and the two differ at period boundaries.
+  This node is still labelled by biennium, which the corpus no longer does for figures. It is
+  staged rather than overlooked: no source is committed for this period, and splitting an empty
+  node yields two empty nodes. It is converted when a source arrives. See
+  [period-granularity](../../decisions/period-granularity.yml).
 properties:
   amount: "[open] pending the obm and district-finance connectors"
   basis: actual-closed

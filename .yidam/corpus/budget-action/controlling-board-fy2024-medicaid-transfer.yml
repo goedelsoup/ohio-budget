@@ -21,7 +21,7 @@ properties:
 links:
   - target: ../budget-action.ont.yml
     relationship: instance-of
-  - target: ../appropriation/medicaid-health-care-services-fy2024-25-as-enacted.yml
+  - target: ../appropriation/medicaid-health-care-services-fy2024-as-enacted.yml
     relationship: modifies
   - target: ../actor/controlling-board.yml
     relationship: taken-by

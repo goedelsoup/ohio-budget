@@ -1,0 +1,65 @@
+id: period-granularity
+summary: >-
+  Appropriations and expenditures are recorded per fiscal year, not per biennium. No Ohio
+  source states a biennium figure; the genesis claim that a biennium node "reflects how the
+  figure is stated in the source" was false, and it kept 24 nodes empty for want of a number
+  that does not exist.
+context: |
+  The corpus carried appropriation and expenditure nodes at two period granularities. The
+  FY2026 series is per fiscal year; twenty-four older nodes were labelled by biennium —
+  `FY2024-25`, `FY2022-23`, and so on — and every one of them had an `[open]` amount.
+
+  The genesis rationale, on `foundation-funding-fy2024-25-as-enacted`, read:
+
+    Note the period is stated as a biennium rather than a fiscal year, unlike the FY2026 nodes.
+    This is deliberate — it reflects how the figure is stated in the source and demonstrates
+    that the two period types coexist in the corpus rather than one being normalized away.
+
+  **The first half of that is wrong.** No source states a biennium figure. HB 33's workbook
+  gives `Enacted FY 2024` and `Enacted FY 2025` in separate columns; the actuals workbook
+  reports FY2022, FY2023 and FY2024 separately; Ohio appropriates by fiscal year within a
+  biennial act. A biennium figure exists only as a sum somebody performs.
+
+  So the biennium nodes were not reflecting the source. They were a shape nothing supported,
+  and their amounts stayed `[open]` because the number they were waiting for is never published.
+  Four of them were blocking `gap` pairs whose underlying figures had been committed to this
+  repository for weeks.
+decision: |
+  Appropriation and expenditure nodes are labelled by **fiscal year**. A biennium remains a
+  `fiscal-period` node, and fiscal years are `contained-by` it, so anyone wanting a biennium
+  total can sum the years — but the corpus does not store the sum, because storing a derivation
+  next to its inputs invites the two to disagree.
+
+  Converted, with figures from sources already committed: foundation funding, institutional
+  operations, local government fund distribution, Medicaid health care services, and state
+  share of instruction. Each gained an FY2024 and an FY2025 appropriation and, where the year
+  has closed and been reported, an FY2024 actual. `FY2025` was seeded as a `fiscal-period`.
+
+  `gap` coverage went from 3 computable pairs to 7.
+
+  **The remaining biennium nodes are staged, not overlooked.** Nineteen older ones — FY2010-11
+  through FY2022-23 — have no committed source and no figure. Splitting an empty node yields
+  two empty nodes and no new knowledge, so they are converted as sources arrive rather than
+  ahead of them. This is a deliberate limit and is written here so that finding one later is
+  not read as an inconsistency nobody noticed.
+rationale: |
+  The rule that decides this is one the corpus already applies elsewhere: record what a source
+  states, and let calculators derive. A biennium total is a derivation. Storing it as a node
+  property would put a derived figure in the same field as transcribed ones, where nothing
+  distinguishes them and nothing keeps the sum in step with its parts.
+
+  It also unblocks the corpus's central question rather than merely tidying it. Four gap pairs
+  were unavailable for a reason that had nothing to do with missing data — the figures were in
+  `.yidam/sources/`, in a workbook this repository had committed, waiting on a node shape that
+  could not hold them. That is the expensive kind of modelling error: it does not look like an
+  error, it looks like an absence of data.
+
+  What the genesis note got right is worth keeping. It wanted both granularities visible rather
+  than one silently normalised away, and that survives — the `fiscal-period` class still models
+  biennia, still relates them to their years by containment, and `hb33-as-enacted` is still a
+  biennial act. What changed is only where a *figure* may hang.
+
+  One measured consequence, since it is the sort of thing this decision will be judged on:
+  Medicaid health care services spent $1,169,724,543.64 under its FY2024 authority, 6.3%. That
+  number was unavailable while the node was biennial, and it is the largest single variance the
+  corpus has measured.

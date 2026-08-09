@@ -6,7 +6,7 @@ description: |
   Seeded against a closed period, unlike the
   [FY2026 projection](./medicaid-caseload-fy2026.yml). That difference is the whole point: this
   one's variance from actual is computable, so it is the node that could establish whether the
-  gap on the [FY2024-25 Medicaid appropriation](../appropriation/medicaid-health-care-services-fy2024-25-as-enacted.yml)
+  gap on the [FY2024-25 Medicaid appropriation](../appropriation/medicaid-health-care-services-fy2024-as-enacted.yml)
   is explained by caseload forecasting or by something else.
 
   It carries no `projects` edge. A caseload projection projects people, not money, and the edge

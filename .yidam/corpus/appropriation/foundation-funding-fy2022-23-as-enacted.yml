@@ -9,6 +9,10 @@ description: |
   bill set out, and that comparison cannot be made from amounts alone: it needs the schedule,
   which lives in [bill language](../bill-version/hb110-as-enacted.yml) rather than in a
   comparison table.
+  This node is still labelled by biennium, which the corpus no longer does for figures. It is
+  staged rather than overlooked: no source is committed for this period, and splitting an empty
+  node yields two empty nodes. It is converted when a source arrives. See
+  [period-granularity](../../decisions/period-granularity.yml).
 properties:
   amount: "[open] pending the lsc connector"
   period_label: FY2022-23

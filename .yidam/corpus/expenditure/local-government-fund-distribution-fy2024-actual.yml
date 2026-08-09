@@ -1,0 +1,27 @@
+class: expenditure
+label: Local Government Fund Distribution — FY2024, Actual
+description: |
+  $485,371,379.72 charged against line item 110969 in FY2024, on closed books. [verified]
+
+  FY2024 spending came in $19,628,620.28 under authority — 3.9%, the widest proportional margin of the five line items the corpus can now measure.
+
+  Replaces the FY2024-25 biennium node. Actuals are reported annually and never for a
+  biennium, so a biennium expenditure node could not be filled from any source — see
+  [period-granularity](../../decisions/period-granularity.yml).
+properties:
+  amount: "$485,371,379.72"
+  basis: actual-closed
+  period_label: FY2024
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 33, ALI 110969, column
+    "FY 2024". Stated as of September 30, 2024. Committed at .yidam/sources/lsc/ with
+    sha256 c979accc. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2024.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-actuals.md
+    relationship: cites

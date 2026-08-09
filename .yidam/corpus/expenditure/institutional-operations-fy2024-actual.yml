@@ -1,0 +1,27 @@
+class: expenditure
+label: Institutional Operations — FY2024, Actual
+description: |
+  $1,315,393,767.56 charged against line item 501321 in FY2024, on closed books. [verified]
+
+  Rehabilitation and Correction's largest operating line. FY2024 spending came in $1,671,232.44 under authority, a 0.13% margin.
+
+  Replaces the FY2024-25 biennium node. Actuals are reported annually and never for a
+  biennium, so a biennium expenditure node could not be filled from any source — see
+  [period-granularity](../../decisions/period-granularity.yml).
+properties:
+  amount: "$1,315,393,767.56"
+  basis: actual-closed
+  period_label: FY2024
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 33, ALI 501321, column
+    "FY 2024". Stated as of September 30, 2024. Committed at .yidam/sources/lsc/ with
+    sha256 c979accc. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/institutional-operations.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2024.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-actuals.md
+    relationship: cites

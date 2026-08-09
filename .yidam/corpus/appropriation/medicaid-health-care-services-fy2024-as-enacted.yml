@@ -1,0 +1,36 @@
+class: appropriation
+label: Medicaid Health Care Services — FY2024, As Enacted
+description: |
+  $18,675,614,000.00 for line item 651525 in FY2024, appropriated by
+  [HB 33](../bill/hb33-135th.yml). [verified]
+
+  FY2024 spending came in **$1,169,724,543.64 under** authority, 6.3%. On a caseload-driven line that is evidence about forecasting rather than about spending discipline, which is what this line item was seeded to demonstrate.
+
+  Replaces the FY2024-25 biennium node this line item used to carry. No source states a
+  biennium figure — HB 33's workbook gives FY2024 and FY2025 in separate columns, and every
+  actual is annual — so the biennium node was a shape nothing supported and its amount stayed
+  `[open]` for want of a figure that does not exist. See
+  [period-granularity](../../decisions/period-granularity.yml).
+properties:
+  amount: "$18,675,614,000.00"
+  period_label: FY2024
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, ALI 651525, column
+    "Enacted FY 2024". Committed at .yidam/sources/lsc/ with sha256 140d62e9. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../expenditure/medicaid-health-care-services-fy2024-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

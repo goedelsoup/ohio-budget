@@ -9,6 +9,10 @@ description: |
   way; a gradual recovery answers it another, and the two imply very different things about what
   the [FY2012-13 decision](../budget-action/hb153-local-government-fund-reduction.yml) actually
   was.
+  This node is still labelled by biennium, which the corpus no longer does for figures. It is
+  staged rather than overlooked: no source is committed for this period, and splitting an empty
+  node yields two empty nodes. It is converted when a source arrives. See
+  [period-granularity](../../decisions/period-granularity.yml).
 properties:
   amount: "[open] pending the lsc connector"
   period_label: FY2020-21

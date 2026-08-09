@@ -10,6 +10,10 @@ description: |
 
   It is seeded precisely because it is the case where a naive reading of `gap` output would be
   most confidently wrong.
+  This node is still labelled by biennium, which the corpus no longer does for figures. It is
+  staged rather than overlooked: no source is committed for this period, and splitting an empty
+  node yields two empty nodes. It is converted when a source arrives. See
+  [period-granularity](../../decisions/period-granularity.yml).
 properties:
   amount: "[open] pending the obm connector"
   basis: actual-closed

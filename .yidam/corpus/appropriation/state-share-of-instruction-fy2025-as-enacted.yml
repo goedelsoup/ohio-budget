@@ -1,0 +1,34 @@
+class: appropriation
+label: State Share of Instruction — FY2025, As Enacted
+description: |
+  $2,121,751,939.00 for line item 235501 in FY2025, appropriated by
+  [HB 33](../bill/hb33-135th.yml). [verified]
+
+  FY2025 closed on 2025-06-30, but no committed source carries its actuals: the HB 33 workbook was published as of 2024-09-30 and reports FY2025 as an adjusted appropriation. [open]
+
+  Replaces the FY2024-25 biennium node this line item used to carry. No source states a
+  biennium figure — HB 33's workbook gives FY2024 and FY2025 in separate columns, and every
+  actual is annual — so the biennium node was a shape nothing supported and its amount stayed
+  `[open]` for want of a figure that does not exist. See
+  [period-granularity](../../decisions/period-granularity.yml).
+properties:
+  amount: "$2,121,751,939.00"
+  period_label: FY2025
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, ALI 235501, column
+    "Enacted FY 2025". Committed at .yidam/sources/lsc/ with sha256 140d62e9. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/state-share-of-instruction.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2025.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
