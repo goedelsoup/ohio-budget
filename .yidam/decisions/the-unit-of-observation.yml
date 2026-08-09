@@ -1,9 +1,10 @@
 id: the-unit-of-observation
 summary: >-
   Every question this corpus asked about chamber behaviour was posed per biennium, where n=4 and
-  will still be 4 in 2028. Asked per line item, where n is about 1,400, the same question answers
-  immediately: the House raises 27% of what the executive proposed to raise and 81% of what it
-  proposed to cut, p = 1.6e-23. The finding is real; the mechanism is not what it looks like.
+  will still be 4 in 2028. Asked per line item, where n is about 1,400, it answers at once — and
+  the answer is about the process, not the chamber: at all three hand-offs, every actor is more
+  likely to raise what its predecessor cut than what its predecessor raised. Twelve cells of
+  twelve, sign test p = 0.0005. The mechanism is not what it looks like.
 context: |
   [The leadership record](./leadership-and-the-anomalies.yml) ended by naming one surviving
   hypothesis: that a chamber which receives a lean introduced budget raises line items and one
@@ -43,6 +44,24 @@ decision: |
   the aggregate direction was tracking all along — a chamber handed a budget in which the
   executive raised 71.5% of line items will appear to be a cutting chamber, and one handed 50.1%
   will appear generous, without anybody's disposition entering into it.
+
+  ## It is not the House. It is every hand-off.
+
+  The same measurement at each remaining transition, pooled across the four biennia: [verified]
+
+  | the actor | on what the previous actor raised | on what it cut | gap | p |
+  |---|---|---|---|---|
+  | House, answering the executive | 27.4% | 81.1% | +53.7pp | 1.6e-23 |
+  | Senate, answering the House | 25.0% | 51.8% | +26.8pp | 1.7e-06 |
+  | conference, answering the Senate | 54.4% | 93.9% | +39.5pp | 2.3e-09 |
+
+  **All twelve biennium-by-stage cells point the same way** — every actor is more likely to raise
+  a line item its predecessor cut than one its predecessor raised. On direction alone that is a
+  sign test at p = 0.0005, before any of the individual gaps are counted.
+
+  So this is a property of the process rather than of a chamber, a party or an officer. Each
+  actor in the sequence reverses the one before it, and the reversal is measured on line items,
+  not on totals — nothing here depends on which line items are large.
 rationale: |
   ## The mechanism is not the obvious one
 
@@ -68,8 +87,15 @@ rationale: |
   is expected by both parties to be moved. Both predict the sign and neither predicts the
   distance, which is why the toward/away test does not distinguish them.
 
-  [open] Whether the Senate substitute shows the same conditioning against the House-passed
-  figure. The same measurement runs on a column already committed and has not been made.
+  The refutation above was run on the House. The Senate and conference behave the same way and
+  the toward/away question has not been re-run for them — [open] whether either returns figures
+  to the level its predecessor started from, or whether all three actors reverse without
+  restoring.
+
+  [open] The conference column is the most lopsided of the three: 115 line items reach it having
+  been cut by the Senate against 57 having been raised, and conference restores 93.9% of the
+  cuts. That looks like conference splitting differences rather than deciding anything, and it is
+  the transition the corpus has least language for.
 
   ## Why this is a decision rather than a finding
 

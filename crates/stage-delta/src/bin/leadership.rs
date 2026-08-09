@@ -370,7 +370,40 @@ fn executive_baseline(dir: &std::path::Path) -> Result<()> {
     println!("\n  Joined on (agency, ALI, fund group) across two workbooks; keys appearing twice");
     println!("  in either are dropped rather than paired with a component of themselves.");
 
-    per_line_item(dir, &pairs)?;
+    for c in [
+        Conditioning {
+            prior: (Stage::PreviousEnacted, Stage::Here(BillStage::AsIntroduced)),
+            theirs: (
+                Stage::Here(BillStage::AsIntroduced),
+                Stage::Here(BillStage::HouseSubstitute),
+            ),
+            label: "The House answering the executive",
+        },
+        Conditioning {
+            prior: (
+                Stage::Here(BillStage::AsIntroduced),
+                Stage::Here(BillStage::AsPassedHouse),
+            ),
+            theirs: (
+                Stage::Here(BillStage::AsPassedHouse),
+                Stage::Here(BillStage::SenateSubstitute),
+            ),
+            label: "The Senate answering the House",
+        },
+        Conditioning {
+            prior: (
+                Stage::Here(BillStage::AsPassedHouse),
+                Stage::Here(BillStage::AsPassedSenate),
+            ),
+            theirs: (
+                Stage::Here(BillStage::AsPassedSenate),
+                Stage::Here(BillStage::ConferenceReport),
+            ),
+            label: "Conference answering the Senate",
+        },
+    ] {
+        conditional(dir, &pairs, &c)?;
+    }
     Ok(())
 }
 
@@ -385,47 +418,98 @@ fn executive_baseline(dir: &std::path::Path) -> Result<()> {
 ///
 /// **The biennium is the wrong unit.** Ohio holds one every two years and the corpus has four;
 /// it will still have four in 2028. The line item is a unit with roughly 1,400 per biennium, and
-/// the question restated at that granularity is answerable now: *on the line items the executive
-/// raised, what did the chamber do — and did it do something different on the ones the executive
-/// cut?*
-fn per_line_item(
+/// the question restated at that granularity is answerable now: *on the line items the previous
+/// actor raised, what did this one do — and did it do something different on the ones the
+/// previous actor cut?*
+///
+/// Run over each consecutive pair of actors in the sequence, because a conditioning found only
+/// at one hand-off is a fact about that chamber and one found at all of them is a fact about how
+/// the process works.
+struct Conditioning {
+    /// What the previous actor did, as (baseline, their figure).
+    prior: (Stage, Stage),
+    /// What this actor did, as (their input, their figure).
+    theirs: (Stage, Stage),
+    label: &'static str,
+}
+
+/// Where a figure comes from: a stage in this bill, or the previous bill's enacted column.
+#[derive(Clone, Copy)]
+enum Stage {
+    Here(BillStage),
+    PreviousEnacted,
+}
+
+fn figures(
+    dir: &std::path::Path,
+    b: &(&str, &str, &str, &str, &str, &str),
+    stage: Stage,
+) -> Result<BTreeMap<Key, i64>> {
+    let (_, file, fy, prev_file, prev_fy, _) = *b;
+    match stage {
+        Stage::Here(s) => keyed(dir, file, s, fy),
+        Stage::PreviousEnacted => keyed(dir, prev_file, BillStage::AsEnacted, prev_fy),
+    }
+}
+
+/// The General Assembly a bill belongs to, for labelling rows.
+///
+/// Not the presiding officer: this table runs over the House, the Senate and conference, and
+/// printing the Speaker beside the Senate's behaviour would attribute it to the wrong person.
+fn ga_of(bill: &str) -> &'static str {
+    BIENNIA
+        .iter()
+        .find(|b| b.bill == bill)
+        .map(|b| b.ga)
+        .unwrap_or("?")
+}
+
+fn conditional(
     dir: &std::path::Path,
     pairs: &[(&str, &str, &str, &str, &str, &str)],
+    c: &Conditioning,
 ) -> Result<()> {
-    println!("\n═══ Per line item: what the chamber did, given what the executive did\n");
+    println!("\n═══ {}\n", c.label);
     println!(
-        "  {:<7} {:<12} │ {:>28} │ {:>28}",
-        "bill", "speaker", "executive RAISED this line", "executive CUT this line"
+        "  {:<7} {:<12} │ {:>26} │ {:>26}",
+        "bill", "GA", "previous actor RAISED it", "previous actor CUT it"
     );
     println!(
-        "  {:<7} {:<12} │ {:>8} {:>8} {:>10} │ {:>8} {:>8} {:>10}",
-        "", "", "n", "House up", "up%", "n", "House up", "up%"
+        "  {:<7} {:<12} │ {:>8} {:>7} {:>9} │ {:>8} {:>7} {:>9}",
+        "", "", "n", "up", "up%", "n", "up", "up%"
     );
-    println!("  {}", "─".repeat(84));
+    println!("  {}", "─".repeat(80));
 
-    for (bill, file, fy, prev_file, prev_fy, speaker) in pairs {
-        let before = keyed(dir, prev_file, BillStage::AsEnacted, prev_fy)?;
-        let intro = keyed(dir, file, BillStage::AsIntroduced, fy)?;
-        let sub = keyed(dir, file, BillStage::HouseSubstitute, fy)?;
+    let (mut pa, mut pb, mut ca, mut cb) = (0usize, 0usize, 0usize, 0usize);
+    for b in pairs {
+        let base = figures(dir, b, c.prior.0)?;
+        let prior = figures(dir, b, c.prior.1)?;
+        let input = figures(dir, b, c.theirs.0)?;
+        let out = figures(dir, b, c.theirs.1)?;
 
         let (mut when_raised, mut when_cut) = (Tally::default(), Tally::default());
-        for (k, i) in &intro {
-            let (Some(p), Some(h)) = (before.get(k), sub.get(k)) else {
+        for (k, p) in &prior {
+            let (Some(z), Some(i), Some(o)) = (base.get(k), input.get(k), out.get(k)) else {
                 continue;
             };
-            let exec = i - p;
-            let house = h - i;
-            if house == 0 {
+            let moved = o - i;
+            if moved == 0 {
                 continue;
             }
-            if exec > 0 {
-                when_raised.add(house)
-            } else if exec < 0 {
-                when_cut.add(house)
+            match (p - z).cmp(&0) {
+                std::cmp::Ordering::Greater => when_raised.add(moved),
+                std::cmp::Ordering::Less => when_cut.add(moved),
+                std::cmp::Ordering::Equal => {}
             }
         }
+        pa += when_raised.raised;
+        pb += when_raised.moved();
+        ca += when_cut.raised;
+        cb += when_cut.moved();
         println!(
-            "  {bill:<7} {speaker:<12} │ {:>8} {:>8} {:>10} │ {:>8} {:>8} {:>10}",
+            "  {:<7} {:<12} │ {:>8} {:>7} {:>9} │ {:>8} {:>7} {:>9}",
+            b.0,
+            ga_of(b.0),
             when_raised.moved(),
             when_raised.raised,
             pct(when_raised.raised_share()),
@@ -434,48 +518,17 @@ fn per_line_item(
             pct(when_cut.raised_share()),
         );
     }
-    println!("\n  Line items the chamber left alone are excluded from both sides: the question is");
-    println!("  which way it moved when it moved, not whether it moved.");
-
-    println!("\n═══ Toward or away from the previous enacted level\n");
-    println!("  The discriminating test. `Raises what the executive cut` is also what regression");
-    println!("  to the mean looks like: condition on an unusually large proposed increase and the");
+    println!("  {}", "─".repeat(80));
     println!(
-        "  next measurement tends lower whether or not anybody intended it. If the chamber is"
+        "  {:<7} {:<12} │ {:>8} {:>7} {:>9} │ {:>8} {:>7} {:>9}",
+        "POOLED",
+        "",
+        pb,
+        pa,
+        pct((pb > 0).then(|| pa as f64 / pb as f64 * 100.0)),
+        cb,
+        ca,
+        pct((cb > 0).then(|| ca as f64 / cb as f64 * 100.0)),
     );
-    println!("  actually pulling figures back toward last biennium's level, its substitute should");
-    println!("  land *closer* to that level than the introduced figure did.\n");
-    println!(
-        "  {:<7} {:<12} │ {:>8} {:>8} {:>8} {:>9}",
-        "bill", "speaker", "moved", "toward", "away", "toward%"
-    );
-    println!("  {}", "─".repeat(60));
-    for (bill, file, fy, prev_file, prev_fy, speaker) in pairs {
-        let before = keyed(dir, prev_file, BillStage::AsEnacted, prev_fy)?;
-        let intro = keyed(dir, file, BillStage::AsIntroduced, fy)?;
-        let sub = keyed(dir, file, BillStage::HouseSubstitute, fy)?;
-        let (mut toward, mut away) = (0usize, 0usize);
-        for (k, i) in &intro {
-            let (Some(p), Some(h)) = (before.get(k), sub.get(k)) else {
-                continue;
-            };
-            if h == i {
-                continue;
-            }
-            // Distance to the level the previous biennium actually enacted.
-            let was = (i - p).abs();
-            let now = (h - p).abs();
-            if now < was {
-                toward += 1
-            } else if now > was {
-                away += 1
-            }
-        }
-        let n = toward + away;
-        println!(
-            "  {bill:<7} {speaker:<12} │ {n:>8} {toward:>8} {away:>8} {:>9}",
-            pct((n > 0).then(|| toward as f64 / n as f64 * 100.0))
-        );
-    }
     Ok(())
 }

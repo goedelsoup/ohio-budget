@@ -104,6 +104,16 @@ Two things it does that the single-line-item version could not:
 Both halves come out negative, which is the point: the calculator's job was to make a recorded
 coincidence testable, and the test dissolved it.
 
+3. **Runs the same conditional at every hand-off.** For each consecutive pair of actors —
+   executive→House, House→Senate, Senate→conference — it asks what this actor did to the line
+   items the previous one raised, against those it cut. All three show the same reversal, twelve
+   cells of twelve in the same direction, so it is a property of the process rather than of a
+   chamber. See [the unit of observation](../decisions/the-unit-of-observation.yml).
+
+The cross-workbook join is on `(agency, ALI, fund group)`, not on the ALI alone. A code appears
+more than once in these sheets, and joining on it by itself would pair a line item in one
+workbook with a memorandum component of itself in another.
+
 **All figures are within one fiscal year**, so no deflator is involved and no sign depends on the
 price level — see [real-dollars](./real-dollars.md) for why that matters, and for what would need
 saying if the comparison ever crossed periods.
