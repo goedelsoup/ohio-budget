@@ -18,9 +18,19 @@ description: |
   The Senate floor, like the House floor, changed nothing: zero line items between the reported
   and passed versions. [verified] Both chambers finish their work in committee.
 
-  [open] Whether this holds across earlier biennia is unmeasured and currently blocked — see
-  [house-finance-committee](./house-finance-committee.yml) for why the FY2024 series is not
-  reachable from published sources.
+  **It holds in the previous biennium, and this role was larger there than here.** In HB 33 the
+  Senate substitute carries 35.9% of FY2024's movement and 35.8% of FY2025's, against the House
+  substitute's 43.3% and 51.1%. [verified] In HB 96 the same comparison was 17.0% against
+  51.3%. So the Senate's share of the rewriting is not a stable property of the role — it
+  roughly doubled between the two biennia while the House's stayed near half.
+
+  The floor result is stable where the magnitudes are not: across both bills and all four
+  fiscal years, zero line items and zero dollars moved between the reported and passed
+  versions in either chamber. [verified]
+
+  This node previously recorded the cross-biennium question as blocked. It was not; see
+  [house-finance-committee](./house-finance-committee.yml) for the mistake, which was mine and
+  was reading the wrong sheet of a workbook already committed here.
 properties:
   name: Senate Finance Committee
   role_type: committee

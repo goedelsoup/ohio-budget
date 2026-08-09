@@ -200,6 +200,25 @@ mod tests {
     use super::*;
 
     #[test]
+    fn the_two_spellings_of_the_conference_stage_both_classify() {
+        // HB 96 heads it `Conference Report`, HB 33 heads it `Conference`. Accepting only the
+        // first dropped both of HB 33's conference columns — 2 of its 18 money columns — and
+        // the loss showed up as an unclassified column rather than as a wrong figure.
+        for h in ["Conference Report\r\nFY 2026", "Conference\r\nFY 2024"] {
+            assert!(
+                matches!(
+                    classify_header(h),
+                    ColumnKind::Appropriation {
+                        stage: BillStage::ConferenceReport,
+                        ..
+                    }
+                ),
+                "{h:?} did not classify as the conference stage"
+            );
+        }
+    }
+
+    #[test]
     fn stage_and_year_are_separated_from_one_header() {
         // The exact header shape that defeated map_columns.
         assert_eq!(

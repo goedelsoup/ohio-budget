@@ -362,7 +362,11 @@ impl BillStage {
             "as passed by the senate" | "as passed senate" | "senate passed" => {
                 Some(BillStage::AsPassedSenate)
             }
-            "conference report" | "as reported by conference committee" => {
+            // HB 96's workbook heads this column `Conference Report`; HB 33's heads it
+            // `Conference`. Accepting only the longer spelling dropped the conference stage
+            // from every 135th General Assembly figure, and the drop was visible only because
+            // `ColumnPlan::unclassified` reports what it could not place.
+            "conference report" | "conference" | "as reported by conference committee" => {
                 Some(BillStage::ConferenceReport)
             }
             "as enacted" | "enacted" | "as signed by the governor" | "final" => {

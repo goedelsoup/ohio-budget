@@ -24,12 +24,29 @@ description: |
   proposal, and it is — but the rewriting is finished before the floor sees it, so a reader
   comparing the introduced and passed versions gets the right answer for the wrong reason.
 
-  [open] Whether the pattern holds across earlier biennia is unmeasured, and is currently
-  **blocked** rather than merely undone. LSC changed its publication format between the 135th
-  and 136th General Assemblies: HB 96's as-enacted spreadsheet accumulates all nine stages,
-  while HB 33's carries enacted columns only. The comparison documents are narrative and hold
-  no figures. Testing this across biennia needs the per-stage spreadsheets published during
-  the 2023 session, which the current budget pages do not serve. [verified]
+  **It holds in the previous biennium too, and the claim that this could not be tested was my
+  own error.** Measured across all 1,586 line items in HB 33: [verified]
+
+  | transition | FY2024 | FY2025 |
+  |---|---|---|
+  | introduced → House substitute | 43.3% | 51.1% |
+  | House substitute → House reported | 4.7% | 2.3% |
+  | House reported → **as passed by House** | **0.0%, 0 items** | **0.0%, 0 items** |
+  | as passed House → Senate substitute | 35.9% | 35.8% |
+  | Senate substitute → Senate reported | 1.7% | 1.7% |
+  | Senate reported → **as passed by Senate** | **0.0%, 0 items** | **0.0%, 0 items** |
+  | as passed Senate → conference report | 14.4% | 9.0% |
+  | conference report → as enacted | 0.0% | 0.0% |
+
+  Two biennia, four fiscal years, 3,114 line items: **not one dollar moved on either chamber's
+  floor.** Every figure both chambers changed, they changed in committee.
+
+  This node previously recorded the question as blocked, on the grounds that HB 33's
+  spreadsheet carried enacted columns only and LSC had changed format between General
+  Assemblies. That was wrong. The workbook has three sheets — `Final`, `EN`, `ENGRF` — and I
+  read `Final`, the nine-column summary, then generalised from it to the workbook. `EN` carries
+  all sixteen stage columns, and had done since it was committed. See
+  [the catalog entry](../../catalog/lsc-hb33-appropriation-spreadsheet.md).
 properties:
   name: House Finance Committee
   role_type: committee
