@@ -10,9 +10,20 @@ description: |
   in the same period.
 
   Note the [FY2024 actual](../expenditure/foundation-funding-fy2024-actual.yml) **exceeds**
-  this figure. That is not an error and not overspending in the ordinary sense: an enacted
-  appropriation is not the last word, and the difference is what the execution phase moved.
-  The corpus models that phase precisely so this result is legible rather than surprising.
+  this figure, by $7,753,596.89. This node used to attribute that to the execution phase, on the
+  reasoning that an enacted appropriation is not the last word. The real explanation is
+  narrower and checkable.
+
+  Foundation funding is [three line items](../line-item/foundation-funding.yml) across three
+  funds. In FY2024 the other two — [lottery](./foundation-funding-lottery-fy2024-as-enacted.yml)
+  and [5VS0](./foundation-funding-dpf-fy2024-as-enacted.yml) — spent their appropriations
+  **exactly**, to the cent. [verified] The whole of the programme's $7,753,596.89 variance lands
+  on this line.
+
+  That is a property of how the programme is funded rather than of how it was managed: the
+  non-general-revenue sources contribute fixed amounts into a formula-driven distribution, and
+  general revenue absorbs whatever the formula produces. [inference] Reading the variance as a
+  general revenue overspend attributes to one fund a movement that belongs to the programme.
 properties:
   amount: "$7,967,250,000.00"
   period_label: FY2024

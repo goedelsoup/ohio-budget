@@ -1,0 +1,31 @@
+class: appropriation
+label: Foundation Funding (7017) — FY2024, As Enacted
+description: |
+  $1,274,945,000.00 for line item 200612, fund 7017, appropriated by
+  [HB 33](../bill/hb33-135th.yml). [verified]
+
+  Seeded so that the foundation funding programme's authority is in the corpus in full. The
+  [general revenue line item](../line-item/foundation-funding.yml) is 80.6% of it, and until
+  this node and its sibling existed a reader summing the corpus got that 80.6% and no signal
+  that anything was missing.
+properties:
+  amount: "$1,274,945,000.00"
+  period_label: FY2024
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, ALI 200612, column
+    "Enacted FY 2024". Committed at .yidam/sources/lsc/ with sha256 140d62e9. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding-lottery.yml
+    relationship: grants-authority-for
+  - target: ../fund/lottery-profits-education-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

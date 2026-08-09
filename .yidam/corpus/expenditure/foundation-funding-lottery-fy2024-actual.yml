@@ -1,0 +1,32 @@
+class: expenditure
+label: Foundation Funding (7017) — FY2024, Actual
+description: |
+  $1,274,945,000.00 charged against line item 200612 in FY2024. [verified]
+
+  **Exactly the appropriation, to the cent.** Where the
+  [general revenue line](./foundation-funding-fy2024-actual.yml) overspent its authority by
+  $7,753,596.89, this one and its sibling matched theirs precisely.
+
+  That asymmetry is the explanation for the corpus's only computed gap, and it is a property of
+  how the programme is funded rather than of how it was managed. The non-general-revenue sources
+  contribute fixed amounts into a formula-driven distribution; the general revenue line absorbs
+  whatever the formula produces. [inference] So the entire $7,753,596.89 of programme-level
+  variance lands on GRF, and reading it as a general revenue overspend attributes to one fund a
+  movement that belongs to the programme.
+properties:
+  amount: "$1,274,945,000.00"
+  basis: actual-closed
+  period_label: FY2024
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 33, ALI 200612, column
+    "FY 2024". Stated as of September 30, 2024. Committed at .yidam/sources/lsc/ with
+    sha256 c979accc. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding-lottery.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2024.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-actuals.md
+    relationship: cites

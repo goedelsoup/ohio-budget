@@ -31,6 +31,8 @@ properties:
 links:
   - target: ../line-item.ont.yml
     relationship: instance-of
+  - target: ../agency/department-of-education-and-workforce.yml
+    relationship: belongs-to
   - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
     relationship: cites
   - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
