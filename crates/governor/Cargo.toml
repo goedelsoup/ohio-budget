@@ -1,0 +1,23 @@
+[package]
+name = "governor"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Connector for Ohio governor's veto messages"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_yaml.workspace = true
+corpus-schema = { path = "../corpus-schema" }
+pdf-extract = { version = "0.12", optional = true }
+
+[features]
+default = ["pdf"]
+pdf = ["dep:pdf-extract"]
+
+[[bin]]
+name = "governor-vetoes"
+path = "src/bin/governor-vetoes.rs"
+required-features = ["pdf"]

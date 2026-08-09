@@ -10,6 +10,7 @@ members = [
     "gap",
     "lineage",
     "stage-delta",
+    "governor",
 ]
 
 [workspace.package]

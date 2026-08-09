@@ -463,6 +463,66 @@ pub struct LscProvisionRow {
     pub provenance: Provenance,
 }
 
+/// How much of a page's boxed text one deletion instruction removes.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(tag = "kind", rename_all = "kebab-case")]
+pub enum DeletionExtent {
+    /// `delete the boxed text.` — the page's boxed text entire, with nothing quoted.
+    Whole,
+    /// One quoted passage.
+    Text { text: String },
+    /// A span given by its opening and closing words.
+    Range { begins: String, ends: String },
+    /// A form this connector does not recognise. Kept rather than guessed at, because a
+    /// misread extent understates or overstates what the governor struck.
+    Unrecognised,
+}
+
+/// One `On page N, delete …` instruction from a veto message.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+pub struct Deletion {
+    /// Page of the enrolled bill. `None` where the instruction named no page.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub bill_page: Option<u32>,
+    pub extent: DeletionExtent,
+    /// The source omitted a quotation mark and the extent was read from the surrounding
+    /// grammar instead. Three instructions in HB 96's message are like this.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub quotes_repaired: bool,
+    /// The instruction as printed, so the parse can always be checked against it.
+    pub instruction: String,
+}
+
+/// One numbered item of a governor's veto message.
+///
+/// The executive counterpart to [`LscProvisionRow`]. That record says what a chamber did to a
+/// provision; this says what the governor removed from the enrolled bill and why.
+///
+/// # These are not appropriation changes
+///
+/// Under Article II, Section 16 the governor may disapprove items in an appropriation bill, and
+/// in HB 96 not one of the 67 items deleted an amount — every one struck statutory or
+/// temporary-law language. That does not mean no money moved: striking a set-aside, an earmark,
+/// or a recipient restriction redirects an appropriation without altering its total. So a
+/// `VetoItemRow` never carries a figure, and the absence is the point rather than a gap.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+pub struct VetoItemRow {
+    pub bill_number: String,
+    pub general_assembly: String,
+    /// The message's own numbering, `ITEM NUMBER n`.
+    pub item_number: u32,
+    /// The heading the message gives the item.
+    pub title: String,
+    /// Set where the title ran to a second line and had to be rejoined, so a consumer knows
+    /// the heading was reconstructed rather than read off one line.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub title_rejoined: bool,
+    pub deletions: Vec<Deletion>,
+    /// The governor's stated reason, ending in the message's closing formula.
+    pub rationale: String,
+    pub provenance: Provenance,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "kebab-case")]
 pub enum ExpenditureBasis {

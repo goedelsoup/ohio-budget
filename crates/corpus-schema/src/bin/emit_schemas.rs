@@ -45,6 +45,7 @@ fn main() -> Result<()> {
     emit::<ObmExpenditureRow>(&extraction, "obm-expenditure-row")?;
     emit::<ControllingBoardRequest>(&extraction, "controlling-board-request")?;
     emit::<LegislatureBill>(&extraction, "legislature-bill")?;
+    emit::<VetoItemRow>(&extraction, "veto-item-row")?;
 
     Ok(())
 }

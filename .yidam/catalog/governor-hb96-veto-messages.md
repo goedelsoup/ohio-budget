@@ -77,6 +77,39 @@ should not be assumed.
 
 ## Extraction
 
-Not implemented. The structure is regular enough to parse — `ITEM NUMBER n`, deletions, title,
-rationale — and a `governor` connector reading it into `budget-action` nodes, one per item,
-is the obvious next connector. The reading above was done by hand.
+Implemented in [`crates/governor`](../../crates/governor/). Read with
+`governor-vetoes <pdf> [--item N] [--emit FILE]`.
+
+Coverage on this document: **67 items, 773 deletion instructions, none unrecognised.** Every
+item is numbered without a gap, deletes something, and closes with the standard formula. Extents
+break down as 420 quoted passages, 211 ranges, and 142 whole-page deletions.
+
+### What the document does to a parser
+
+Four defects in the source, all recorded rather than smoothed over:
+
+- **Three missing quotation marks.** `and ending with the effective date of this section.”`
+  opens nothing; `and ending with “at large.` closes nothing. The words are unambiguous from
+  the surrounding grammar, so they are recovered and each record is marked `quotes_repaired`.
+- **Typographical variants for the same act** — `begging with`, `stating with`, `boxed test`,
+  `or ending with`, and bare `delete “X”`. The connector classifies by structure (how many
+  quoted segments, and whether a range connector appears) rather than by phrasing, so a
+  typesetter's slip cannot drop a real deletion.
+- **Quoted text ending in an ellipsis.** `“…means a patient...”` reads as a finished sentence
+  to any "ends with a period" test, which then takes the instruction's own continuation to be
+  the item's heading. Two items lost their headings this way before the check was fixed.
+- **One heading wrapped across two lines** (item 45). Headings are set in bold and so wrap
+  earlier than the body around them; the rejoin is flagged on the record.
+
+### A note on line breaks
+
+`pdf-extract` and `pdftotext` do not agree on this document. Poppler silently rejoins words
+hyphenated by justification; `pdf-extract` preserves the visual break, leaving `end-` and `ing`
+on separate lines. The connector rejoins them under a rule derived from all 14 breaks in the
+document, which keeps `90-credit-hour`, `DeWine-Tressel`, `ADD-ON`, and `2026-2027` while
+mending `func-tions`, `end-ing`, and `other-wise`.
+
+That rule is the **opposite** of the one [`lsc`](./lsc-hb96-comparison.md) uses, which keeps
+every hyphen. Neither is wrong: LSC wraps at hyphens already in the word, the governor's office
+hyphenates by justification. It is worth stating because "how to rejoin a wrapped line" looks
+like a settled question and is actually a property of the publisher.

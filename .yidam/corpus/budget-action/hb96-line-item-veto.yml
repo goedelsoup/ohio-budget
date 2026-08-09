@@ -63,8 +63,11 @@ description: |
   **No item in the veto message concerns fire department grants.** [verified] It was sent, not
   struck — the secondary source described what was asked for, not what was done.
 
-  This node is modeled as a single action covering the veto event. With the message committed,
-  splitting it into 67 nodes is now possible; it should be a split rather than an edit.
+  This node is modeled as a single action covering the veto event. The
+  [`governor`](../../../crates/governor/) connector now reads the message into one record per
+  item — 67 items, 773 deletion instructions, none unrecognised — so splitting this into 67
+  nodes is a mechanical step whenever the corpus wants that granularity. It should be a split
+  rather than an edit, so this node's history stays attached to the event it describes.
 properties:
   action_type: line-item-veto
   action_date: 2025-06-30

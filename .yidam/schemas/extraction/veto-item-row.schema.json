@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VetoItemRow",
+  "description": "One numbered item of a governor's veto message.\n\nThe executive counterpart to [`LscProvisionRow`]. That record says what a chamber did to a provision; this says what the governor removed from the enrolled bill and why.\n\n# These are not appropriation changes\n\nUnder Article II, Section 16 the governor may disapprove items in an appropriation bill, and in HB 96 not one of the 67 items deleted an amount — every one struck statutory or temporary-law language. That does not mean no money moved: striking a set-aside, an earmark, or a recipient restriction redirects an appropriation without altering its total. So a `VetoItemRow` never carries a figure, and the absence is the point rather than a gap.",
+  "type": "object",
+  "required": [
+    "bill_number",
+    "deletions",
+    "general_assembly",
+    "item_number",
+    "provenance",
+    "rationale",
+    "title"
+  ],
+  "properties": {
+    "bill_number": {
+      "type": "string"
+    },
+    "deletions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Deletion"
+      }
+    },
+    "general_assembly": {
+      "type": "string"
+    },
+    "item_number": {
+      "description": "The message's own numbering, `ITEM NUMBER n`.",
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0.0
+    },
+    "provenance": {
+      "$ref": "#/definitions/Provenance"
+    },
+    "rationale": {
+      "description": "The governor's stated reason, ending in the message's closing formula.",
+      "type": "string"
+    },
+    "title": {
+      "description": "The heading the message gives the item.",
+      "type": "string"
+    },
+    "title_rejoined": {
+      "description": "Set where the title ran to a second line and had to be rejoined, so a consumer knows the heading was reconstructed rather than read off one line.",
+      "type": "boolean"
+    }
+  },
+  "definitions": {
+    "Deletion": {
+      "description": "One `On page N, delete …` instruction from a veto message.",
+      "type": "object",
+      "required": [
+        "extent",
+        "instruction"
+      ],
+      "properties": {
+        "bill_page": {
+          "description": "Page of the enrolled bill. `None` where the instruction named no page.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "extent": {
+          "$ref": "#/definitions/DeletionExtent"
+        },
+        "instruction": {
+          "description": "The instruction as printed, so the parse can always be checked against it.",
+          "type": "string"
+        },
+        "quotes_repaired": {
+          "description": "The source omitted a quotation mark and the extent was read from the surrounding grammar instead. Three instructions in HB 96's message are like this.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DeletionExtent": {
+      "description": "How much of a page's boxed text one deletion instruction removes.",
+      "oneOf": [
+        {
+          "description": "`delete the boxed text.` — the page's boxed text entire, with nothing quoted.",
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "whole"
+              ]
+            }
+          }
+        },
+        {
+          "description": "One quoted passage.",
+          "type": "object",
+          "required": [
+            "kind",
+            "text"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "text"
+              ]
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "description": "A span given by its opening and closing words.",
+          "type": "object",
+          "required": [
+            "begins",
+            "ends",
+            "kind"
+          ],
+          "properties": {
+            "begins": {
+              "type": "string"
+            },
+            "ends": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "range"
+              ]
+            }
+          }
+        },
+        {
+          "description": "A form this connector does not recognise. Kept rather than guessed at, because a misread extent understates or overstates what the governor struck.",
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "unrecognised"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Provenance": {
+      "description": "Where an extracted value came from, carried on every extraction record.\n\nWithout this a value cannot be promoted from `[inference]` to `[verified]`, since verification is defined as resting on a committed, citable source.",
+      "type": "object",
+      "required": [
+        "catalog_slug",
+        "document_ref",
+        "retrieved"
+      ],
+      "properties": {
+        "catalog_slug": {
+          "description": "Slug of the catalog entry describing the source, e.g. `lsc-hb96-comparison`.",
+          "type": "string"
+        },
+        "document_ref": {
+          "description": "Stable locator for the document itself.",
+          "type": "string"
+        },
+        "locator": {
+          "description": "Where inside the document — page, table, or row identifier.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved": {
+          "description": "ISO-8601 date the source was retrieved.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
