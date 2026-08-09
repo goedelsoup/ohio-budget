@@ -79,9 +79,15 @@ rationale: |
 
   [open] Every adjusted figure available is taken **early** in its fiscal year — 11 September 2018
   for FY2019, 30 September 2022 for FY2023. Adjustments made later appear in no committed source,
-  so this tests early adjustment and cannot speak for the rest of the year. The
-  [controlling board connector](../../crates/controlling-board/) is still a stub and is what would
-  settle it.
+  so this tests early adjustment and cannot speak for the rest of the year.
+
+  The [controlling board connector](../../crates/controlling-board/) would settle it and has now
+  been scouted rather than left as an unexplained stub. **It is blocked on enumeration, not on
+  effort.** The board's manual is reachable and is committed, so the corpus can now say what a
+  controlling board action is with a citation. The agendas and approved requests are not: the
+  portal pages return 404 to a plain fetch, the archive host serves individual files but refuses
+  directory listing, and the requests sit behind a search form. [verified] A connector could
+  parse a request perfectly and have nothing to point it at.
 
   **The aggregate is dominated by Medicaid.** Of $475.1B appropriated across these pairs, the
   Medicaid line items are more than half, so "Ohio spends 99% of what it appropriates" is close
