@@ -15,7 +15,14 @@ properties:
   stage: as-enacted
   measure: appropriated
   source_document: |
-    [open] Not yet catalogued.
+    LSC appropriation spreadsheet, HB 33 as enacted — catalogued and committed as
+    [lsc-hb33-appropriation-spreadsheet](../../catalog/lsc-hb33-appropriation-spreadsheet.md).
+    [verified]
+
+    [open] The figure is not extracted from it. The workbook reports FY2024 and FY2025 as
+    separate columns while this node is stated as a biennium, so extraction needs a decision
+    first: whether a biennium appropriation is the sum of its two years, or whether these nodes
+    should be split per year as the FY2026 ones are.
 links:
   - target: ../appropriation.ont.yml
     relationship: instance-of

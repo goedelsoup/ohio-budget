@@ -81,3 +81,15 @@ run = [
   "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- .",
   "yidam graph-check",
 ]
+
+[tasks.install-hooks]
+description = "Install the repository's git hooks into .git/hooks."
+run = """
+set -e
+root=$(git rev-parse --show-toplevel)
+for h in "$root"/hooks/*; do
+  name=$(basename "$h")
+  ln -sf ../../hooks/"$name" "$root/.git/hooks/$name"
+  echo "installed $name"
+done
+"""

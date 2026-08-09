@@ -14,7 +14,7 @@ properties:
   stage: as-enacted
   measure: appropriated
   source_document: |
-    [open] Not yet catalogued.
+    [open] Not catalogued (lsc-hb1-appropriation-spreadsheet).
 links:
   - target: ../appropriation.ont.yml
     relationship: instance-of

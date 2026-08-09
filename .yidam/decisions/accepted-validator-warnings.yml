@@ -72,3 +72,19 @@ rationale: |
   Two of the six carry a natural closing condition. The transportation bill version closes
   when transportation line items are seeded; the two appropriations close if extraction shows
   they were in fact amended. Neither should be forced.
+
+  ## unnamed-not-catalogued-claim (21, added 2026-08-08)
+
+  Nodes asserting that a source is not catalogued without naming which source. Each is real
+  debt rather than noise: naming the slug converts an unfalsifiable sentence into a dependency
+  that fires when the entry appears. See
+  [claims-about-repository-state](./claims-about-repository-state.yml).
+
+  Twenty-four were converted when the rule was written, and four of those immediately failed as
+  `stale-not-catalogued-claim` — nodes waiting on HB 33's appropriation spreadsheet, which had
+  been catalogued and committed several commits earlier. That is the rule paying for itself on
+  the first run.
+
+  The remainder are left named-less deliberately rather than guessed at. Most refer to bill text
+  and committee reports that have no slug yet, and inventing one commits the corpus to a naming
+  scheme for sources nobody has looked at. They should be named as those sources are catalogued.

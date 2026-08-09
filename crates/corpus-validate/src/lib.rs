@@ -242,6 +242,81 @@ fn scan_claim_tags(body: &str) -> Vec<String> {
     unknown
 }
 
+// ─── claims about the repository's own state ─────────────────────────────────
+
+/// A node's assertion that some source is not catalogued.
+///
+/// # Why this needs a convention rather than a cleverer parser
+///
+/// Node prose routinely asserts things about this repository — a source is not catalogued, a
+/// figure is not extracted, a connector is not written. Those claims go stale as the repository
+/// fills in, and they go stale **in the same commit that makes them false**, because the person
+/// adding the source is not the person re-reading every node that mentioned it. Three separate
+/// instances of this have been found and fixed by hand.
+///
+/// An attempt was made to catch them by matching the prose against catalog entry names. It was
+/// measured across seven commits before being abandoned: it missed the real cases when tuned to
+/// avoid false positives, and flagged `hb33-as-enacted`'s correct claim about HB 33's veto
+/// message against HB 96's entry when tuned to catch them. Free prose does not carry enough to
+/// decide.
+///
+/// So the claim names its own subject instead. `[open] Not catalogued (some-slug)` is exactly
+/// checkable: either that slug is in the catalog or it is not.
+///
+/// # Catalogued is not the same as committed
+///
+/// The distinction the corpus already draws and this vocabulary kept blurring. A catalog *entry*
+/// registers a source; `content_committed` says its bytes are in the repository, which is what
+/// a `[verified]` claim requires. `controlling-board-minutes` has been catalogued since genesis
+/// with its content uncommitted, and a node saying it is "not yet catalogued" is wrong about
+/// which of the two it means.
+const NOT_CATALOGUED: &str = "not catalogued";
+const NOT_YET_CATALOGUED: &str = "not yet catalogued";
+
+/// Extracts the slug from `Not catalogued (some-slug)`, if the claim names one.
+///
+/// `at` indexes into the **lowercased** text, which is also what this reads — slugs are
+/// lowercase by construction, so nothing is lost, and matching the phrase case-sensitively
+/// would silently miss every sentence-initial `Not catalogued`. It did.
+fn named_catalogue_slug(lower: &str, at: usize) -> Option<String> {
+    let rest = &lower[at..];
+    let rest = rest
+        .strip_prefix(NOT_YET_CATALOGUED)
+        .or_else(|| rest.strip_prefix(NOT_CATALOGUED))?
+        .trim_start();
+    let inner = rest.strip_prefix('(')?;
+    let end = inner.find(')')?;
+    let slug = inner[..end].trim();
+    if slug.is_empty() || !slug.chars().all(|c| c.is_ascii_alphanumeric() || c == '-') {
+        return None;
+    }
+    Some(slug.to_string())
+}
+
+/// Finds every `not catalogued` assertion in a node's text, with its byte offset.
+fn catalogue_claims(text: &str) -> Vec<usize> {
+    let lower = text.to_ascii_lowercase();
+    let mut out = Vec::new();
+    let mut from = 0;
+    while let Some(rel) = lower[from..].find(NOT_CATALOGUED) {
+        let at = from + rel;
+        // `not yet catalogued` also contains `not catalogued`? It does not — but it is the
+        // other spelling in use, so both are located and the earlier start wins.
+        out.push(at);
+        from = at + NOT_CATALOGUED.len();
+    }
+    let mut from = 0;
+    while let Some(rel) = lower[from..].find(NOT_YET_CATALOGUED) {
+        let at = from + rel;
+        if !out.contains(&at) {
+            out.push(at);
+        }
+        from = at + NOT_YET_CATALOGUED.len();
+    }
+    out.sort_unstable();
+    out
+}
+
 /// Runs every rule. Pure over loaded data.
 pub fn check(corpus: &Corpus) -> Vec<Finding> {
     let Corpus {
@@ -253,6 +328,10 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
     } = corpus;
     let mut findings = Vec::new();
     let known_instances: BTreeSet<&PathBuf> = instances.iter().map(|i| &i.abs_path).collect();
+    let catalog_by_slug: BTreeMap<&str, &CatalogEntry> = catalog
+        .iter()
+        .filter_map(|c| c.parsed.as_ref().ok().map(|e| (e.slug.as_str(), e)))
+        .collect();
 
     // A catalog entry whose frontmatter does not parse is not a provenance anchor — it is a
     // document that looks like one, which is worse than an absent entry.
@@ -400,6 +479,55 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
                         ),
                     });
                 }
+            }
+        }
+
+        // Claims about what this repository contains, checked against what it contains.
+        //
+        // The whole text is scanned, body and properties together, because these assertions sit
+        // in both — `description` prose and `source_document` alike.
+        let all_text = {
+            let mut t = inst.inst.description.clone();
+            for v in inst.inst.properties.values() {
+                if let Some(s) = v.as_text() {
+                    t.push('\n');
+                    t.push_str(s);
+                }
+            }
+            t
+        };
+        let lower_text = all_text.to_ascii_lowercase();
+        for at in catalogue_claims(&all_text) {
+            match named_catalogue_slug(&lower_text, at) {
+                Some(slug) => {
+                    if let Some(entry) = catalog_by_slug.get(slug.as_str()) {
+                        let committed = entry.content_committed;
+                        findings.push(Finding {
+                            path: p.clone(),
+                            rule: "stale-not-catalogued-claim",
+                            severity: Severity::Error,
+                            message: format!(
+                                "says '{slug}' is not catalogued, but it is{}; the claim went \
+                                 stale when the entry was added",
+                                if committed {
+                                    " and its content is committed"
+                                } else {
+                                    ", with content not yet committed — which is the distinction \
+                                     the claim probably meant"
+                                }
+                            ),
+                        });
+                    }
+                }
+                None => findings.push(Finding {
+                    path: p.clone(),
+                    rule: "unnamed-not-catalogued-claim",
+                    severity: Severity::Warn,
+                    message: "asserts something is not catalogued without naming it; write \
+                              'not catalogued (slug)' so the claim can be checked against the \
+                              catalog instead of going stale unnoticed"
+                        .into(),
+                }),
             }
         }
 
@@ -721,11 +849,39 @@ mod tests {
         class_paths: BTreeSet<PathBuf>,
         instances: Vec<LoadedInstance>,
     ) -> Vec<Finding> {
+        run_with_entries(classes, class_paths, instances, &[])
+    }
+
+    /// Same, with parsed catalog entries. `(slug, content_committed)` per entry.
+    fn run_with_entries(
+        classes: BTreeMap<String, ClassDefinition>,
+        class_paths: BTreeSet<PathBuf>,
+        instances: Vec<LoadedInstance>,
+        entries: &[(&str, bool)],
+    ) -> Vec<Finding> {
+        let catalog = entries
+            .iter()
+            .map(|(slug, committed)| LoadedCatalog {
+                rel_path: format!(".yidam/catalog/{slug}.md"),
+                abs_path: PathBuf::from(format!("/repo/.yidam/catalog/{slug}.md")),
+                file_slug: slug.to_string(),
+                parsed: Ok(CatalogEntry {
+                    slug: slug.to_string(),
+                    name: slug.to_string(),
+                    source_type: corpus_schema::SourceType::Other,
+                    location: String::new(),
+                    publisher: String::new(),
+                    content_committed: *committed,
+                    feeds: Vec::new(),
+                    access_constraints: None,
+                }),
+            })
+            .collect();
         check(&Corpus {
             classes,
             class_paths,
             catalog_paths: BTreeSet::new(),
-            catalog: Vec::new(),
+            catalog,
             instances,
         })
     }
@@ -1122,6 +1278,103 @@ links:
                 .iter()
                 .any(|f| f.rule == "body-contradicts-filled-property"),
             "{findings:?}"
+        );
+    }
+
+    #[test]
+    fn a_claim_that_a_catalogued_source_is_not_catalogued_is_rejected() {
+        // The exact defect, four instances of which were live when this rule was written:
+        // nodes waiting on HB 33's appropriation spreadsheet, which had been catalogued and
+        // committed several commits earlier.
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/expenditure/e.yml",
+            r#"
+class: expenditure
+label: E
+description: d
+properties:
+  reporting_source: |
+    [open] Not catalogued (obm-annual-report).
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run_with_entries(classes, paths, insts, &[("obm-annual-report", true)]);
+        assert!(
+            findings
+                .iter()
+                .any(|f| f.rule == "stale-not-catalogued-claim"),
+            "{findings:?}"
+        );
+    }
+
+    #[test]
+    fn naming_a_slug_that_does_not_exist_is_a_live_claim_not_an_error() {
+        // The point of naming it: the claim becomes a dependency that fires the day the
+        // entry appears, instead of prose nobody rereads.
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/expenditure/e.yml",
+            r#"
+class: expenditure
+label: E
+description: |
+  [open] Not catalogued (lsc-hb1-appropriation-spreadsheet).
+properties: {}
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run_with_entries(classes, paths, insts, &[("obm-annual-report", true)]);
+        assert!(
+            !findings.iter().any(|f| f.rule.contains("not-catalogued")),
+            "{findings:?}"
+        );
+    }
+
+    #[test]
+    fn an_unnamed_not_catalogued_claim_is_flagged_as_uncheckable() {
+        let (classes, paths) = fixture();
+        let insts = vec![instance(
+            "corpus/expenditure/e.yml",
+            r#"
+class: expenditure
+label: E
+description: |
+  The source for this figure is not yet catalogued.
+properties: {}
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+"#,
+        )];
+        let findings = run_with_entries(classes, paths, insts, &[]);
+        assert!(
+            findings
+                .iter()
+                .any(|f| f.rule == "unnamed-not-catalogued-claim"),
+            "{findings:?}"
+        );
+    }
+
+    #[test]
+    fn a_sentence_initial_claim_is_matched_despite_its_capital() {
+        // Matching case-sensitively silently missed every `Not catalogued (...)` that began a
+        // sentence, which is most of them. The rule reported them as unnamed instead.
+        assert_eq!(
+            named_catalogue_slug(&"Not catalogued (some-slug).".to_ascii_lowercase(), 0),
+            Some("some-slug".to_string())
+        );
+        assert_eq!(
+            named_catalogue_slug(&"not yet catalogued (other-slug)".to_ascii_lowercase(), 0),
+            Some("other-slug".to_string())
+        );
+        assert_eq!(
+            named_catalogue_slug(&"not catalogued.".to_ascii_lowercase(), 0),
+            None
         );
     }
 

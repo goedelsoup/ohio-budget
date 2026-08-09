@@ -54,3 +54,21 @@ Lists all corpus nodes whose title begins with `?` or whose content contains `[o
 -->
 _Run `yidam open-questions` to populate._
 <!-- /REGEN -->
+
+## Working in this repository
+
+```
+mise run install-hooks   # once, per clone
+mise run ci              # the full gate
+```
+
+`install-hooks` wires `hooks/pre-commit`, which validates the corpus whenever a commit touches
+`.yidam/corpus`, `.yidam/catalog`, `.yidam/decisions`, or the validator. It catches the failure
+this repository keeps having: a node asserting something about the repository that stopped being
+true — a source described as uncatalogued after it was catalogued, an amount described as
+unfilled after it was filled. Both halves of such a contradiction look correct in isolation, and
+the stale half is usually written in the same commit that falsifies it. See
+[claims-about-repository-state](.yidam/decisions/claims-about-repository-state.yml).
+
+The hook does not run tests or clippy. A gate slow enough to be bypassed protects nothing; those
+stay in `mise run ci`.

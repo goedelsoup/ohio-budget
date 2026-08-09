@@ -1,0 +1,75 @@
+id: claims-about-repository-state
+summary: >-
+  Node prose that asserts something about this repository — a source is not catalogued, an
+  amount is unfilled — must name its subject so the assertion can be checked. Prose that
+  cannot be checked goes stale in the same commit that falsifies it.
+context: |
+  Four separate instances of the same defect have been found and fixed by hand:
+
+  - `foundation-funding-fy2026-as-introduced` carried "[open] The amount is unfilled" directly
+    above the filled amount, citing a document that has no per-line-item figures;
+  - `medicaid-health-care-services-fy2026-as-enacted` carried the same contradiction;
+  - `hb96-as-passed-senate` and `hb96-conference-report` said no figures were extracted for
+    stages whose columns had been extracted for several commits;
+  - four FY2024-25 appropriation nodes said HB 33's spreadsheet was not catalogued while it sat
+    committed in `.yidam/sources/lsc/` with a catalog entry.
+
+  The pattern is consistent and it explains why review does not catch it. The stale sentence and
+  the fact that falsifies it are usually added in the **same commit**: whoever fills an amount
+  writes the new figure into the body and does not re-read the paragraph above it, and whoever
+  commits a source does not re-read every node that was waiting for it. Both halves are
+  well-formed on their own. Nothing about either looks wrong.
+
+  Git history does not help for the same reason — the node's modification time is current.
+decision: |
+  Two mechanisms, one convention.
+
+  **Convention.** A claim that a source is not catalogued names the slug it means:
+
+      [open] Not catalogued (lsc-hb1-appropriation-spreadsheet).
+
+  The claim then has a truth value the validator can evaluate, and it doubles as a dependency:
+  the day someone adds that entry, every node waiting on it fails.
+
+  **Rules** in `corpus-validate`:
+
+  - `stale-not-catalogued-claim` (Error) — the named slug is in the catalog. The claim is false.
+  - `unnamed-not-catalogued-claim` (Warn) — no slug named, so the claim cannot be checked.
+  - `body-contradicts-filled-property` (Error) — the body says an amount is unfilled while the
+    property holds one.
+
+  **Hook.** `hooks/pre-commit`, installed by `mise run install-hooks`, runs `mise run validate`
+  when a commit touches the corpus, catalog, decisions, or the validator itself.
+
+  The hook deliberately does not run the full `mise run ci`. Compiling and testing the workspace
+  on every commit trains people to pass `--no-verify`, and a gate that gets bypassed protects
+  nothing. Formatting, clippy, and tests stay in CI.
+rationale: |
+  Two earlier attempts inform this, and the difference between them is the whole argument.
+
+  A rule checking that a citing node's class appears in the cited entry's `feeds` was written and
+  removed. It fired 44 times and its premise was simply wrong: `feeds` names what a source
+  primarily populates, not who may cite it.
+
+  A rule matching prose against catalog entry *names* was prototyped and abandoned before it
+  shipped, having been measured across seven commits. Tuned to avoid false positives it missed
+  the real cases; tuned to catch them it flagged `hb33-as-enacted`'s correct statement about
+  HB 33's veto message against HB 96's entry. Free prose does not carry enough to decide, and no
+  amount of tuning adds information that is not in the text.
+
+  So the convention exists because the alternative was measured and does not work. Naming the
+  subject is a small cost at writing time that converts an unfalsifiable sentence into a checked
+  one. The rule that ships fires on a contradiction the repository can see, not on an assumption
+  about how it ought to be arranged — which is the same test the `feeds` rule failed.
+
+  **Catalogued is not committed.** The vocabulary confusion this exposed is worth keeping
+  separate. A catalog *entry* registers a source; `content_committed` says its bytes are in the
+  repository, which is what a `[verified]` claim requires. `controlling-board-minutes` has been
+  catalogued since genesis with its content uncommitted, and nodes saying it is "not yet
+  catalogued" mean the second thing. The error message distinguishes them.
+
+  **What none of this catches.** A claim about state that lives outside this repository, and a
+  claim whose subject is other nodes rather than a source — `hb96-as-passed-senate` saying no
+  figures were extracted was about the appropriation class, not about itself. That one is
+  reachable through the graph and is not implemented. Recorded as a limit rather than left for
+  someone to assume the guard is complete.
