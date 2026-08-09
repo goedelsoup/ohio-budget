@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import { loadFeed } from '../lib/feed.ts';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Top-level section, for the current-page marker in the masthead. */
+  section?: 'findings' | 'wiki' | 'sources' | 'methods';
+  wide?: boolean;
+}
+
+const { title, description, section, wide = false } = Astro.props;
+const { manifest } = await loadFeed();
+
+const NAV = [
+  { href: '/', label: 'Findings', key: 'findings' },
+  { href: '/wiki', label: 'Corpus', key: 'wiki' },
+  { href: '/sources', label: 'Sources', key: 'sources' },
+  { href: '/methods', label: 'Methods', key: 'methods' },
+] as const;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · ohio-budget</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="masthead__inner">
+        <a class="masthead__title" href="/">ohio-budget</a>
+        <nav>
+          {
+            NAV.map((item) => (
+              <a href={item.href} aria-current={section === item.key ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class={wide ? 'shell' : 'shell column'}>
+        <slot />
+      </div>
+    </main>
+
+    <footer class="colophon">
+      <p>
+        Built from the corpus at commit <code>{manifest.commit ?? 'unknown'}</code> —
+        {manifest.counts.nodes} nodes across {manifest.counts.classes} classes,
+        {manifest.counts.catalog} catalogued sources. Every figure on this site is
+        emitted by the calculators in <code>crates/</code>; nothing here recomputes them.
+      </p>
+      <p>
+        Claims carry their epistemic state. <span class="claim claim--verified">[verified]</span>
+        rests on a committed source, <span class="claim claim--inference">[inference]</span> is
+        drawn from verified facts, and <span class="claim claim--open">[open]</span> is a live
+        question. Absence of a figure means the corpus does not hold it — never zero.
+      </p>
+    </footer>
+  </body>
+</html>

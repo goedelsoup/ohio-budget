@@ -20,7 +20,7 @@ actually spends, and what the record shows about how that gap arises.
 | [`crates/`](crates/) | Rust domain computer — connectors to the sources that publish budget data |
 | [`docs/`](docs/) | Repository documentation |
 | [`packages/`](packages/) | Other-language domain computer packages |
-| [`web/`](web/) | Web interface layer (not applicable at genesis) |
+| [`web/`](web/) | Web interface layer — renders the corpus and the calculators' results |
 
 Foundational model: [`.yidam/.vendor/prelude/`](.yidam/.vendor/prelude/) — read before acting.
 

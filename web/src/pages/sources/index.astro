@@ -1,0 +1,75 @@
+---
+import Layout from '../../components/Layout.astro';
+import { loadFeed } from '../../lib/feed.ts';
+
+const feed = await loadFeed();
+const catalog = [...feed.catalog].sort((a, b) => a.slug.localeCompare(b.slug));
+const committed = catalog.filter((c) => c.state === 'parsed' && c.content_committed);
+
+// Which corpus nodes cite each source, so a reader can go the other way.
+const citedBy = new Map<string, number>();
+for (const n of feed.corpus.nodes) {
+  for (const l of n.links) {
+    if (l.kind !== 'catalog' || !l.slug) continue;
+    citedBy.set(l.slug, (citedBy.get(l.slug) ?? 0) + 1);
+  }
+}
+---
+
+<Layout
+  title="Sources"
+  section="sources"
+  wide
+  description="The registry of sources the corpus draws on, and which of them have been committed."
+>
+  <div class="column">
+    <p class="eyebrow">Provenance</p>
+    <h1>What the figures rest on</h1>
+
+    <p class="lede">
+      {catalog.length} sources are registered. {committed.length} have had their content
+      committed to the repository, which is the condition for any claim drawn from them to
+      be marked <span class="claim claim--verified">[verified]</span>.
+    </p>
+
+    <p>
+      Registering a source and reading it are different acts. A catalog entry says where a
+      document is and who published it; it does not itself verify anything. Until the
+      document is in the repository and its hash recorded, a figure taken from it is at best
+      an <span class="claim claim--inference">[inference]</span>.
+    </p>
+  </div>
+
+  <div class="grid" style="margin-top:var(--space-8)">
+    {
+      catalog.map((c) =>
+        c.state === 'malformed' ? (
+          <div class="card">
+            <div class="card__path">{c.path}</div>
+            <div class="card__title">{c.slug}</div>
+            <div class="refusal">
+              <div class="refusal__label">Entry does not parse</div>
+              <p style="margin:0">{c.error}</p>
+            </div>
+          </div>
+        ) : (
+          <a class="card" href={`/sources/${c.slug}`}>
+            <div class="card__path">{c.path}</div>
+            <div class="card__title">{c.name}</div>
+            <div class="card__excerpt">
+              {c.publisher} · {c.source_type.replace(/-/g, ' ')}
+            </div>
+            <div class="card__meta">
+              {c.content_committed ? (
+                <span class="claim claim--verified">committed</span>
+              ) : (
+                <span class="claim claim--open">registered only</span>
+              )}
+              <span>{citedBy.get(c.slug) ?? 0} citing node(s)</span>
+            </div>
+          </a>
+        ),
+      )
+    }
+  </div>
+</Layout>

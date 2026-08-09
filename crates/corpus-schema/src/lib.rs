@@ -74,6 +74,18 @@ impl ClaimTag {
             _ => None,
         }
     }
+
+    /// Which tags appear anywhere in `text`, in the fixed order of [`ClaimTag::ALL`].
+    ///
+    /// A node body routinely carries more than one — a verified figure beside an open
+    /// question about it — so this reports the set present, not a single verdict. Order is
+    /// fixed rather than by first appearance so that a rendering of it is stable.
+    pub fn scan(text: &str) -> Vec<ClaimTag> {
+        Self::ALL
+            .into_iter()
+            .filter(|t| text.contains(t.marker()))
+            .collect()
+    }
 }
 
 /// Where an extracted value came from, carried on every extraction record.
@@ -631,6 +643,29 @@ mod tests {
             assert_eq!(ClaimTag::parse_marker(tag.marker()), Some(tag));
         }
         assert_eq!(ClaimTag::parse_marker("[probably]"), None);
+    }
+
+    #[test]
+    fn scan_reports_every_tag_present_not_just_the_first() {
+        // The common shape: a figure that has been read, and a question about it that has not.
+        let body = "Its code is 200550. [verified]\n\n[open] Whether it survived is unresolved.";
+        assert_eq!(
+            ClaimTag::scan(body),
+            vec![ClaimTag::Verified, ClaimTag::Open]
+        );
+    }
+
+    #[test]
+    fn scan_order_is_fixed_not_order_of_appearance() {
+        assert_eq!(
+            ClaimTag::scan("[open] then [verified]"),
+            ClaimTag::scan("[verified] then [open]")
+        );
+    }
+
+    #[test]
+    fn scan_finds_nothing_in_untagged_prose() {
+        assert!(ClaimTag::scan("A plain sentence with no marker.").is_empty());
     }
 
     #[test]

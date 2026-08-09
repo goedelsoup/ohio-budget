@@ -4,6 +4,7 @@ members = [
     "corpus-schema",
     "corpus-validate",
     "corpus-promote",
+    "corpus-export",
     "legislature",
     "lsc",
     "real-dollars",

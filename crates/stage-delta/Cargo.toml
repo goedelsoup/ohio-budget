@@ -9,6 +9,7 @@ description = "Decomposes an appropriation's movement across bill stages and att
 [dependencies]
 anyhow.workspace = true
 serde.workspace = true
+serde_json.workspace = true
 serde_yaml.workspace = true
 corpus-schema = { path = "../corpus-schema" }
 corpus-validate = { path = "../corpus-validate" }

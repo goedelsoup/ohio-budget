@@ -1,21 +1,23 @@
 [package]
-name = "gap"
+name = "corpus-export"
 version = "0.1.0"
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-description = "Computes appropriated authority against actual disbursement"
+description = "Emits the corpus and the calculators' results as a versioned JSON feed for the web layer"
 
 [dependencies]
 anyhow.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 serde_yaml.workspace = true
+walkdir.workspace = true
 corpus-schema = { path = "../corpus-schema" }
 corpus-validate = { path = "../corpus-validate" }
+gap = { path = "../gap" }
 lsc = { path = "../lsc", default-features = false }
-real-dollars = { path = "../real-dollars" }
+stage-delta = { path = "../stage-delta" }
 
 [[bin]]
-name = "gap-report"
+name = "corpus-export"
 path = "src/main.rs"

@@ -1,0 +1,14 @@
+---
+import { renderBody } from '../lib/prose.ts';
+
+interface Props {
+  /** Node body text, as written in the corpus. */
+  text: string;
+  /** Repository-relative path of the file it came from — links resolve against it. */
+  from: string;
+}
+
+const { text, from } = Astro.props;
+---
+
+<div class="prose" set:html={renderBody(text, from)} />

@@ -43,7 +43,7 @@ fn class<'a>(c: &'a Corpus, k: &'a str) -> impl Iterator<Item = &'a LoadedInstan
 }
 
 /// An action that moved a figure, with what its taker said about it.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize)]
 pub struct Attribution {
     pub action: String,
     pub action_type: String,
@@ -73,6 +73,27 @@ impl Step {
     }
 }
 
+// Serialized by hand rather than derived so `is_attributed` travels with the step. It is
+// the distinction the whole calculator exists to draw — a delta that names the action
+// behind it against one that merely spans a gap in the record — and a consumer that
+// recomputed it from `skipped` and `attributions` would be a second definition of it.
+impl serde::Serialize for Step {
+    fn serialize<S: serde::Serializer>(&self, s: S) -> Result<S::Ok, S::Error> {
+        use serde::ser::SerializeStruct;
+        let mut st = s.serialize_struct("Step", 9)?;
+        st.serialize_field("from", &self.from)?;
+        st.serialize_field("to", &self.to)?;
+        st.serialize_field("from_cents", &self.from_cents)?;
+        st.serialize_field("to_cents", &self.to_cents)?;
+        st.serialize_field("delta_cents", &self.delta_cents)?;
+        st.serialize_field("skipped", &self.skipped)?;
+        st.serialize_field("attributions", &self.attributions)?;
+        st.serialize_field("anomaly", &self.anomaly)?;
+        st.serialize_field("is_attributed", &self.is_attributed())?;
+        st.end()
+    }
+}
+
 #[derive(Debug, Clone, Default)]
 pub struct Decomposition {
     pub line_item: String,
@@ -87,6 +108,23 @@ impl Decomposition {
     /// True when every stage in the sequence carries a figure, so no delta is aggregate.
     pub fn is_complete(&self) -> bool {
         self.steps.iter().all(|s| s.skipped.is_empty())
+    }
+}
+
+// Hand-written for the same reason as [`Step`]: `is_complete` decides whether the series may
+// be read as attribution or only as aggregate movement, and that judgment belongs to the
+// calculator.
+impl serde::Serialize for Decomposition {
+    fn serialize<S: serde::Serializer>(&self, s: S) -> Result<S::Ok, S::Error> {
+        use serde::ser::SerializeStruct;
+        let mut st = s.serialize_struct("Decomposition", 6)?;
+        st.serialize_field("line_item", &self.line_item)?;
+        st.serialize_field("period", &self.period)?;
+        st.serialize_field("steps", &self.steps)?;
+        st.serialize_field("missing_stages", &self.missing_stages)?;
+        st.serialize_field("net_cents", &self.net_cents)?;
+        st.serialize_field("is_complete", &self.is_complete())?;
+        st.end()
     }
 }
 
@@ -291,7 +329,7 @@ pub fn decomposable(corpus: &Corpus) -> Vec<(String, String)> {
 // ─── aggregate movement across a whole extraction ────────────────────────────
 
 /// How much money moved at one transition, across every line item in a document.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize)]
 pub struct StageMovement {
     pub from: BillStage,
     pub to: BillStage,
@@ -388,14 +426,24 @@ pub fn render_aggregate(m: &[StageMovement], fiscal_year: &str) -> String {
     s
 }
 
-pub fn run(repo_root: &std::path::Path) -> Result<String> {
+/// Every decomposable series in the corpus, as structured values.
+///
+/// The rendering entry points are built on this rather than the other way round, so the text
+/// report and the JSON export cannot disagree about what the corpus decomposes into.
+pub fn all(repo_root: &std::path::Path) -> Result<Vec<Decomposition>> {
     let corpus = corpus_validate::load(repo_root)?;
-    let mut out = String::new();
-    let pairs = decomposable(&corpus);
-    out.push_str(&format!("{} decomposable series\n", pairs.len()));
-    for (li, p) in pairs {
+    Ok(decomposable(&corpus)
+        .into_iter()
+        .map(|(li, p)| decompose(&corpus, &li, &p))
+        .collect())
+}
+
+pub fn run(repo_root: &std::path::Path) -> Result<String> {
+    let series = all(repo_root)?;
+    let mut out = format!("{} decomposable series\n", series.len());
+    for d in &series {
         out.push('\n');
-        out.push_str(&render(&decompose(&corpus, &li, &p)));
+        out.push_str(&render(d));
     }
     Ok(out)
 }

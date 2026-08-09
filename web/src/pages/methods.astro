@@ -1,0 +1,120 @@
+---
+import Layout from '../components/Layout.astro';
+import Prose from '../components/Prose.astro';
+import { loadFeed } from '../lib/feed.ts';
+import { computedGaps } from '../lib/derive.ts';
+
+const feed = await loadFeed();
+const { skills, decisions, manifest, findings } = feed;
+const computed = computedGaps(feed).length;
+---
+
+<Layout
+  title="Methods"
+  section="methods"
+  description="The calculators behind every figure on this site, and the decisions that shape the corpus."
+>
+  <p class="eyebrow">Methods</p>
+  <h1>How a figure gets onto this site</h1>
+
+  <p class="lede">
+    Nothing here is computed in the browser, and nothing is computed by this site's own code.
+    Every number on every page is emitted by a calculator in <code>crates/</code>, exported
+    as JSON, and rendered. The site formats figures; it does not produce them.
+  </p>
+
+  <h2>Why the arithmetic lives on the other side</h2>
+
+  <p>
+    Differencing two numbers is easy. Deciding <em>whether</em> to difference them is the
+    part that carries the domain, and it is written down in the skills below: that an
+    <span class="claim claim--open">[open]</span> amount is absence rather than zero, that a
+    recipient's share may not be measured against a whole line item's authority, that
+    expenditures reported on different bases may not be summed, that no comparison spanning
+    fiscal periods is valid without a deflator.
+  </p>
+
+  <p>
+    Reimplementing those rules in TypeScript would create a second set of them. The two would
+    drift, silently, in the direction of whichever was easier to write — and the web copy is
+    always the easier one, because it is the one under pressure to render something. So this
+    site consumes verdicts, including the refusals. Where a page says no figure was drawn,
+    that is a calculator's judgment reaching the reader intact.
+  </p>
+
+  <dl class="figures">
+    <div>
+      <dt>Feed contract</dt>
+      <dd>v{manifest.contract_version}<small>commit {manifest.commit}</small></dd>
+    </div>
+    <div>
+      <dt>Gap pairs</dt>
+      <dd>{computed}/{findings.gap.length}<small>computable</small></dd>
+    </div>
+    <div>
+      <dt>Stage series</dt>
+      <dd>{findings.stage_delta.length}<small>decomposable</small></dd>
+    </div>
+  </dl>
+
+  <div class="refusal">
+    <div class="refusal__label">Constant dollars</div>
+    <p style="margin:0">{manifest.real_dollars.reason}</p>
+  </div>
+
+  <h2>Calculators</h2>
+  <p>
+    Each is a procedure that emerged from inquiry rather than one written in advance. The
+    rules a calculator refuses under are as much a part of it as the arithmetic.
+  </p>
+
+  {
+    skills.map((s) => (
+      <div class="card" id={`skill-${s.slug}`} style="margin-bottom:var(--space-4)">
+        <div class="card__path">{s.path}</div>
+        <div class="card__title" style="font-size:var(--text-lg)">{s.name}</div>
+        <p style="margin:0;font-size:var(--text-sm);color:var(--text-secondary)">
+          {s.description}
+        </p>
+      </div>
+    ))
+  }
+
+  <h2>Decisions</h2>
+  <p>
+    Why the corpus is shaped the way it is. A decision record exists so that a choice made
+    once is not silently remade later by someone who did not know it had been settled.
+  </p>
+
+  {
+    decisions.map((d) => (
+      <div class="card" id={`decision-${d.id}`} style="margin-bottom:var(--space-5)">
+        <div class="card__path">.yidam/decisions/{d.id}.yml</div>
+        <div class="card__title" style="font-size:var(--text-lg)">{d.summary}</div>
+        <details>
+          <summary
+            style="cursor:pointer;font-family:var(--font-ui);font-size:var(--text-sm);color:var(--text-secondary)"
+          >
+            Context, decision, and rationale
+          </summary>
+          <div style="font-size:var(--text-sm);margin-top:var(--space-4)">
+            <h4>Context</h4>
+            <Prose text={d.context} from={`.yidam/decisions/${d.id}.yml`} />
+            <h4>Decision</h4>
+            <Prose text={d.decision} from={`.yidam/decisions/${d.id}.yml`} />
+            <h4>Rationale</h4>
+            <Prose text={d.rationale} from={`.yidam/decisions/${d.id}.yml`} />
+          </div>
+        </details>
+      </div>
+    ))
+  }
+
+  <h2>Rebuilding this site</h2>
+  <p>
+    The JSON feed is generated, not committed — a second copy of the corpus that could
+    disagree with it is exactly the failure the repository's pre-commit hook exists to catch.
+  </p>
+  <pre style="background:var(--surface-overlay);padding:var(--space-4);border-radius:var(--radius-lg);overflow-x:auto"><code>mise run export   # corpus + calculators → web/src/data/*.json
+mise run web-build</code></pre>
+</Layout>

@@ -1,0 +1,136 @@
+---
+import Layout from '../../components/Layout.astro';
+import NodeCard from '../../components/NodeCard.astro';
+import { loadFeed } from '../../lib/feed.ts';
+import type { CatalogView, NodeView } from '../../lib/types.ts';
+
+export async function getStaticPaths() {
+  const feed = await loadFeed();
+  return feed.catalog
+    .filter((c) => c.state === 'parsed')
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: {
+        entry,
+        citing: feed.corpus.nodes.filter((n) =>
+          n.links.some((l) => l.kind === 'catalog' && l.slug === entry.slug),
+        ),
+      },
+    }));
+}
+
+interface Props {
+  entry: CatalogView;
+  citing: NodeView[];
+}
+
+const { entry, citing } = Astro.props;
+if (entry.state !== 'parsed') throw new Error('unreachable: filtered in getStaticPaths');
+
+const external = /^https?:/.test(entry.location);
+
+// Grouped by class, so "what did this document tell us" reads as a shape rather than a list.
+const byClass = new Map<string, NodeView[]>();
+for (const n of citing) {
+  const bucket = byClass.get(n.class) ?? [];
+  bucket.push(n);
+  byClass.set(n.class, bucket);
+}
+---
+
+<Layout title={entry.name} section="sources" wide description={`${entry.publisher} — ${entry.name}`}>
+  <div class="column">
+    <div class="node__header">
+      <div class="node__path">{entry.path}</div>
+      <p class="eyebrow">Source</p>
+      <h1>{entry.name}</h1>
+      <p style="margin-top:var(--space-3)">
+        {
+          entry.content_committed ? (
+            <span class="claim claim--verified">content committed</span>
+          ) : (
+            <span class="claim claim--open">registered, not committed</span>
+          )
+        }
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><th style="width:12rem">Publisher</th><td>{entry.publisher}</td></tr>
+          <tr><th>Type</th><td>{entry.source_type.replace(/-/g, ' ')}</td></tr>
+          <tr>
+            <th>Location</th>
+            <td>
+              {
+                external ? (
+                  <a href={entry.location} rel="noopener noreferrer" target="_blank">
+                    {entry.location}
+                  </a>
+                ) : (
+                  <code class="path">{entry.location}</code>
+                )
+              }
+            </td>
+          </tr>
+          {entry.access_constraints && (
+            <tr><th>Access</th><td>{entry.access_constraints}</td></tr>
+          )}
+          {
+            entry.feeds.length > 0 && (
+              <tr>
+                <th>Feeds</th>
+                <td>
+                  {entry.feeds.map((f) => (
+                    <a href={`/wiki/${f}`} style="margin-right:var(--space-3)">
+                      {f}
+                    </a>
+                  ))}
+                </td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>
+    </div>
+
+    {
+      !entry.content_committed && (
+        <div class="refusal" style="margin-top:var(--space-6)">
+          <div class="refusal__label">What this means for claims</div>
+          <p style="margin:0">
+            This source is registered but its content is not in the repository. Nothing drawn
+            from it can be marked <span class="claim claim--verified">[verified]</span> until
+            it is, because there would be no committed text for a later reader to check the
+            claim against.
+          </p>
+        </div>
+      )
+    }
+  </div>
+
+  <h2>Cited by {citing.length} node{citing.length === 1 ? '' : 's'}</h2>
+  {
+    citing.length === 0 ? (
+      <p class="column" style="color:var(--text-tertiary)">
+        No node cites this source yet.
+      </p>
+    ) : (
+      [...byClass.entries()]
+        .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
+        .map(([cls, nodes]) => (
+          <>
+            <h3>
+              <a href={`/wiki/${cls}`}>{cls}</a> · {nodes.length}
+            </h3>
+            <div class="grid">
+              {nodes.map((n) => (
+                <NodeCard node={n} />
+              ))}
+            </div>
+          </>
+        ))
+    )
+  }
+</Layout>
