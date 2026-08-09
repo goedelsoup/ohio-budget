@@ -549,6 +549,9 @@ pub fn real_terms(
 #[derive(Debug, Clone, Serialize)]
 pub struct Findings {
     pub gap: Vec<gap::Coverage>,
+    /// What the whole set of computed gaps says — the corpus's central question, answered
+    /// rather than only computed.
+    pub gap_summary: gap::Summary,
     /// Adjacent-period comparisons of the gap, in constant dollars.
     pub gap_trend: Vec<gap::TrendCoverage>,
     pub stage_delta: Vec<stage_delta::Decomposition>,
@@ -870,6 +873,7 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
     };
 
     let (deflator, real_dollars) = load_deflator(repo_root);
+    let gap_summary;
 
     Ok(Feed {
         manifest: Manifest {
@@ -884,7 +888,12 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
         decisions,
         skills,
         findings: Findings {
-            gap: gap::all(repo_root)?,
+            gap: {
+                let all = gap::all(repo_root)?;
+                gap_summary = gap::summarise(&all);
+                all
+            },
+            gap_summary,
             gap_trend: gap::all_trends(repo_root, deflator.as_ref())?,
             stage_delta: stage_delta::all(repo_root)?,
             real_terms: real_terms(

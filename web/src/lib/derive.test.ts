@@ -84,6 +84,13 @@ function feed(
     skills: [],
     findings: {
       gap: [],
+      gap_summary: {
+        computed: 0,
+        appropriated_cents: 0,
+        spent_cents: 0,
+        overspent: 0,
+        by_character: [],
+      },
       gap_trend: [],
       stage_delta: opts.stageDelta ?? [],
       real_terms: opts.realTerms ?? [],

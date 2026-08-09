@@ -544,6 +544,109 @@ pub fn trends(corpus: &Corpus, deflator: Option<&Deflator>) -> Vec<TrendCoverage
     out
 }
 
+/// What the whole set of computed gaps says, grouped by the character of the line item.
+///
+/// # The question this repository was built to ask
+///
+/// `appropriation` and `expenditure` are separate classes rather than one class with a `measure`
+/// discriminator, on the argument that authority and outturn are different things that diverge
+/// for reasons worth naming. That was a design decision taken before any figure was extracted.
+/// This is the check on it: if the two rarely diverged, or diverged at random, the separation
+/// would be bookkeeping rather than modelling.
+///
+/// They diverge, and by kind. A line item whose cost follows enrollment and federal match rates
+/// misses its appropriation about twice as widely as one distributing by formula — which is what
+/// [`Character::how_to_read`] asserts qualitatively and what this measures.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct Summary {
+    pub computed: usize,
+    pub appropriated_cents: i128,
+    pub spent_cents: i128,
+    /// Pairs where more was spent than appropriated. Common rather than exceptional.
+    pub overspent: usize,
+    pub by_character: Vec<CharacterSummary>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct CharacterSummary {
+    /// `formula`, `entitlement`, or `unclassified` where no programme funds the line item.
+    pub character: String,
+    pub pairs: usize,
+    pub median_variance_pct: f64,
+    /// Mean of the absolute variance — the measure of how far figures land from authority,
+    /// which a mean of signed variances would cancel out.
+    pub mean_absolute_variance_pct: f64,
+    pub within_one_percent: usize,
+    pub beyond_five_percent: usize,
+}
+
+impl Summary {
+    pub fn variance_pct(&self) -> Option<f64> {
+        (self.appropriated_cents != 0).then(|| {
+            (self.appropriated_cents - self.spent_cents) as f64 / self.appropriated_cents as f64
+                * 100.0
+        })
+    }
+}
+
+/// Which of the three readings a result carries.
+fn character_key(c: &Character) -> &'static str {
+    if c.federally_matched {
+        "entitlement"
+    } else if c.formula_driven {
+        "formula"
+    } else {
+        "unclassified"
+    }
+}
+
+pub fn summarise(coverage: &[Coverage]) -> Summary {
+    let computed: Vec<&GapResult> = coverage
+        .iter()
+        .filter_map(|c| match &c.outcome {
+            Outcome::Computed(r) => Some(&**r),
+            _ => None,
+        })
+        .collect();
+
+    let mut groups: std::collections::BTreeMap<&str, Vec<f64>> = Default::default();
+    for r in &computed {
+        // A pair with no authority has no percentage; it is counted in the totals and cannot
+        // enter a distribution of percentages.
+        if let Some(p) = r.variance_pct {
+            groups
+                .entry(character_key(&r.character))
+                .or_default()
+                .push(p);
+        }
+    }
+
+    Summary {
+        computed: computed.len(),
+        appropriated_cents: computed.iter().map(|r| r.appropriated_cents as i128).sum(),
+        spent_cents: computed.iter().map(|r| r.spent_cents as i128).sum(),
+        overspent: computed
+            .iter()
+            .filter(|r| r.variance_pct.is_some_and(|p| p < 0.0))
+            .count(),
+        by_character: groups
+            .into_iter()
+            .map(|(character, mut v)| {
+                v.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+                CharacterSummary {
+                    character: character.to_string(),
+                    pairs: v.len(),
+                    median_variance_pct: v[v.len() / 2],
+                    mean_absolute_variance_pct: v.iter().map(|x| x.abs()).sum::<f64>()
+                        / v.len() as f64,
+                    within_one_percent: v.iter().filter(|x| x.abs() < 1.0).count(),
+                    beyond_five_percent: v.iter().filter(|x| x.abs() > 5.0).count(),
+                }
+            })
+            .collect(),
+    }
+}
+
 /// Every (line item, period) pair the corpus holds an expenditure for.
 ///
 /// The only pairs where a gap could exist at all — an appropriation with no expenditure
@@ -1037,5 +1140,44 @@ links:
             gap_for(&c, "no-such-line", "FY2024-25"),
             Outcome::Unavailable { .. }
         ));
+    }
+
+    #[test]
+    fn a_summary_separates_the_two_kinds_of_line_item() {
+        // The design decision, as an assertion. If a formula line and an entitlement line missed
+        // their appropriations by the same amount, separating `appropriation` from `expenditure`
+        // would be bookkeeping rather than modelling.
+        let formula = corpus_with("$1,000.00", &[("e1", "$999.00", "actual-closed", false)]);
+        let s = summarise(&[Coverage {
+            line_item: "foundation-funding".into(),
+            period: "FY2024-25".into(),
+            outcome: gap_for(&formula, "foundation-funding", "FY2024-25"),
+        }]);
+        assert_eq!(s.computed, 1);
+        assert_eq!(s.overspent, 0);
+        assert_eq!(s.by_character.len(), 1);
+        assert_eq!(s.by_character[0].character, "formula");
+        assert_eq!(s.by_character[0].within_one_percent, 1);
+        assert!((s.variance_pct().unwrap() - 0.1).abs() < 1e-9);
+    }
+
+    #[test]
+    fn a_pair_with_no_authority_counts_in_the_totals_and_not_in_the_distribution() {
+        // Early Childhood Education FY2024: $0 appropriated, $112.7M spent. It has no percentage
+        // and belongs in neither the median nor the within-1% count, and dropping it from the
+        // dollar totals would hide $112.7M that left the treasury.
+        let c = corpus_with("$0.00", &[("e1", "$100.00", "actual-closed", false)]);
+        let s = summarise(&[Coverage {
+            line_item: "foundation-funding".into(),
+            period: "FY2024-25".into(),
+            outcome: gap_for(&c, "foundation-funding", "FY2024-25"),
+        }]);
+        assert_eq!(s.computed, 1);
+        assert_eq!(s.spent_cents, 10_000);
+        assert!(
+            s.by_character.is_empty(),
+            "no percentage, so no distribution"
+        );
+        assert_eq!(s.overspent, 0, "an absent percentage is not a negative one");
     }
 }

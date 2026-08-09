@@ -8,6 +8,12 @@ import { humanize } from '../../lib/derive.ts';
 
 const feed = await loadFeed();
 const coverage = feed.findings.gap;
+const summary = feed.findings.gap_summary;
+const LABEL: Record<string, string> = {
+  formula: 'Distributes by formula',
+  entitlement: 'Federally matched entitlement',
+  unclassified: 'No funding programme linked',
+};
 
 const counts = Object.fromEntries(
   COVERAGE_ORDER.map((s) => [s, coverage.filter((c) => c.outcome.status === s).length]),
@@ -32,6 +38,57 @@ for (const c of coverage) {
   section="findings"
   description="Which appropriated-against-actual gaps are computable, and what blocks the rest."
 >
+
+  <div class="column">
+    <h2>What they say</h2>
+    <p class="lede">
+      Across {summary.computed} pairs, {dollars(summary.appropriated_cents)} was appropriated and{' '}
+      {dollars(summary.spent_cents)} spent — a variance of{' '}
+      {percent(
+        ((summary.appropriated_cents - summary.spent_cents) / summary.appropriated_cents) * 100,
+        2,
+      )}. On {summary.overspent} of them, more was spent than appropriated.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>How the calculator reads it</th>
+            <th class="num">Pairs</th>
+            <th class="num">Median</th>
+            <th class="num">Mean absolute</th>
+            <th class="num">Within 1%</th>
+            <th class="num">Beyond 5%</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            summary.by_character.map((c) => (
+              <tr>
+                <td>{LABEL[c.character] ?? c.character}</td>
+                <td class="num">{c.pairs}</td>
+                <td class="num">{percent(c.median_variance_pct, 2)}</td>
+                <td class="num">{c.mean_absolute_variance_pct.toFixed(2)}%</td>
+                <td class="num">{Math.round((c.within_one_percent / c.pairs) * 100)}%</td>
+                <td class="num">{Math.round((c.beyond_five_percent / c.pairs) * 100)}%</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>An entitlement line misses its appropriation about twice as widely as a formula
+      line</strong>, and is far less likely to land within a percent of it. That is why this
+      repository holds <code>appropriation</code> and <code>expenditure</code> as separate
+      classes: the two quantities differ, and they differ by kind.
+    </p>
+    <p class="rel">
+      The dollar total is nominal across fifteen years and is a count of what passed through
+      rather than a quantity to compare with anything. Every individual pair is a within-year
+      subtraction, so no figure crosses a period and no deflator is involved.
+    </p>
+  </div>
   <p class="eyebrow">Finding</p>
   <h1>What the central question can and cannot answer yet</h1>
 

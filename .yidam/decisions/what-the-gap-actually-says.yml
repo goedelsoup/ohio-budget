@@ -1,0 +1,79 @@
+id: what-the-gap-actually-says
+summary: >-
+  Two hundred and twenty-five appropriated-against-actual pairs across fifteen years and $475.1
+  billion, and nobody had looked at them together. Ohio spends 99% of what it appropriates — and
+  the divergence splits by exactly the distinction this repository separated its classes on: an
+  entitlement line misses its appropriation twice as widely as a formula line.
+context: |
+  `appropriation` and `expenditure` are separate classes rather than one class with a `measure`
+  discriminator. That was decided at genesis, before a single figure had been extracted, on the
+  argument that authority and outturn are different things which diverge for reasons worth
+  naming. [`gap`](../../crates/gap/) was built on the same argument: it returns a variance
+  together with what the corpus knows about the line item's character, because a divergence on an
+  entitlement line is evidence about forecasting and on a formula line evidence about the
+  formula's inputs.
+
+  Both claims were qualitative and neither had been checked. The corpus spent months getting to
+  225 computable pairs and then reported only how many were computable.
+decision: |
+  Report what they say. `gap::summarise` emits it into `findings.gap_summary`.
+
+  **Across all 225 pairs: $475.1B appropriated, $470.3B spent — a variance of +1.01%.** [verified]
+  Fifty-two of them, 23%, spent *more* than was appropriated, so overspending is ordinary rather
+  than exceptional.
+
+  Grouped by the reading `gap` attaches to each: [verified]
+
+  | | pairs | median | mean absolute | within 1% | beyond 5% |
+  |---|---|---|---|---|---|
+  | formula-driven | 122 | +0.11% | **2.95%** | 48% | 18% |
+  | federally matched | 79 | +0.49% | **6.21%** | 29% | 34% |
+  | no programme linked | 21 | +16.60% | 25.01% | 5% | 81% |
+
+  **An entitlement line misses its appropriation about twice as widely as a formula line**, and
+  is far less likely to land within a percent of it. That is the design decision, measured. The
+  separation of the two classes is not bookkeeping: the quantities differ, and they differ *by
+  kind* in the direction the ontology predicted.
+rationale: |
+  ## What each group is doing
+
+  **Formula lines land where they are put.** Foundation funding's median variance across thirteen
+  years is 0.10%, State Share of Instruction's 0.10%, the lottery line's 0.00%. These are
+  distributions computed from a formula and paid out; there is little room for the outturn to
+  differ from the authority, and it does not.
+
+  **Entitlement lines diverge in both directions.** Medicaid's general revenue line underspends by
+  a median 4.68% and its federal counterpart *overspends* by 3.12%, which is what a matched
+  entitlement looks like when the match rate moves: the state share is set and the federal share
+  follows utilisation. Institutional Operations, whose cost follows the incarcerated population,
+  runs slightly over.
+
+  **The third group is not a finding about Ohio.** Twenty-one pairs carry no funding programme, so
+  `gap` cannot characterise them, and they are dominated by small programmes being wound down —
+  Disability Financial Assistance underspends by a median 43% while shrinking toward zero, which
+  is take-up rather than execution. Their 25% mean absolute variance says more about the corpus's
+  modelling than about the state's.
+
+  ## What this does not say
+
+  **It is not evidence that Ohio budgets well.** A 1% aggregate variance across 225 pairs is
+  consistent with tight forecasting and equally consistent with appropriations being adjusted
+  mid-year to match what was going to be spent — the Controlling Board does exactly that, and
+  [the connector that would read its record](../../crates/controlling-board/) is a stub. The
+  `AdjustedAppropriation` column exists in the extractor for this reason and nothing in the corpus
+  reads it.
+
+  **The aggregate is dominated by Medicaid.** Of $475.1B appropriated across these pairs, the
+  Medicaid line items are more than half, so "Ohio spends 99% of what it appropriates" is close
+  to "Medicaid spends 99% of what it is appropriated" with a long tail attached.
+
+  [open] The comparison mixes fiscal years without deflating, which is correct here and worth
+  saying why: every pair is a within-year subtraction, so no figure crosses a period. Pooling the
+  *percentages* across years is safe for the same reason. Pooling the dollars is not, and the
+  $475.1B total is nominal across fifteen years — it is a count of what passed through, not a
+  quantity anyone should compare to anything.
+
+  [open] Twenty-one pairs are unclassified because four line items have no programme node. Three
+  of them — disability financial assistance, early childhood education, highway patrol operations
+  — would need a programme seeded with a formula basis the corpus cannot yet verify, and seeding
+  one with an `[open]` basis would move them into the formula group while adding nothing.

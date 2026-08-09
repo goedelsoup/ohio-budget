@@ -390,8 +390,27 @@ export interface LocalFinance {
   classification: { code: string; category: LocalFinanceCategory; why: string }[];
 }
 
+export interface CharacterSummary {
+  character: string;
+  pairs: number;
+  median_variance_pct: number;
+  mean_absolute_variance_pct: number;
+  within_one_percent: number;
+  beyond_five_percent: number;
+}
+
+/** What the whole set of computed gaps says — the corpus's central question, answered. */
+export interface GapSummary {
+  computed: number;
+  appropriated_cents: number;
+  spent_cents: number;
+  overspent: number;
+  by_character: CharacterSummary[];
+}
+
 export interface Findings {
   gap: GapCoverage[];
+  gap_summary: GapSummary;
   /** Adjacent-period comparisons of the gap, in constant dollars. */
   gap_trend: TrendCoverage[];
   stage_delta: Decomposition[];
