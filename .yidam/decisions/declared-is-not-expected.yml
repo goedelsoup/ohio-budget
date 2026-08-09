@@ -1,0 +1,81 @@
+id: declared-is-not-expected
+summary: >-
+  Declaring an inbound edge says the graph permits a reciprocal; it does not say every instance
+  should have one. Conflating the two made `orphan-in` fault 91 correct nodes, and 153 warnings
+  is a validator nobody reads. Inbound edges now opt in with `expected: true`, and the count
+  fell to 49.
+context: |
+  `orphan-in` warns when nothing points at a node. It exempted classes whose declared edges are
+  all outgoing — `budget-action` is the case, since actions point at versions and appropriations
+  and nothing points back — and faulted every instance of every other class with no inbound link.
+
+  On the real corpus that was 124 warnings, and 91 of them were `appropriation` and
+  `expenditure`. Their only inbound edges are:
+
+  - `appropriation <- modifies`, from a budget action. A veto or an amendment modifies an
+    appropriation. **Most appropriations are never modified by anything**, and are not defective
+    for it.
+  - `expenditure <- realized-by`, from an appropriation. The corpus connects the two through a
+    shared line item and period, so the direct edge is used almost nowhere.
+
+  Both edges are correct and both should stay. What was wrong was reading them as a requirement
+  on every instance of the target class.
+
+  The rest of the 124 were the opposite case and worth keeping. A `line-item` with no
+  appropriation pointing at it is a line item the corpus has not extracted yet. A
+  `revenue-source` no fund draws from is unwired. Those are a work queue.
+decision: |
+  `EdgeDef` gains `expected: bool`, default **false**, meaningful on inbound edges only.
+  `orphan-in` fires when a class declares at least one inbound edge with `expected: true` and an
+  instance has no inbound domain link at all — naming, in the message, which relationships would
+  satisfy it.
+
+  Twelve edges are marked expected, chosen on one question: **does an instance with no reciprocal
+  mean work not yet done, or is it an ordinary state?**
+
+  | class | expects | why |
+  |---|---|---|
+  | line-item | grants-authority-for | no appropriation extracted yet |
+  | revenue-source | draws-from | not wired to any fund |
+  | jurisdiction | paid-to | seeded to receive a disbursement |
+  | program | administers | no agency attached |
+  | agency | belongs-to | no line items attached |
+  | fund | draws-from | nothing charges against it |
+  | bill | version-of | a bill is its versions |
+  | fiscal-period | covers, occurs-in, enacted-for | an empty period is a stub |
+
+  Left unmarked, deliberately:
+
+  - **appropriation, expenditure, forecast** — their inbound edges describe the minority case.
+  - **actor** — `speaker-of-the-house` and `president-of-the-senate` were seeded as context for
+    the leadership analysis and may never have a budget action taken by them. An office exists
+    whether or not it acted inside this corpus's window.
+  - **bill-version** — a bill version is a fact about the legislative record. Whether this
+    repository extracted figures from it is tracked by the node's own `[open]` claims, which is
+    the right place for a coverage question.
+
+  Default false rather than true. An edge earns a per-instance warning by saying it expects one,
+  rather than generating warnings as a side effect of being declared.
+rationale: |
+  The count is the argument. 153 warnings, of which 91 described correct data, is not a strict
+  validator — it is an unread one, and an unread validator is worse than a silent one because it
+  looks like coverage. The failure it invites is specific: a real warning arrives and scrolls
+  past with the rest.
+
+  What makes this worth a record rather than a patch is that the distinction is not about
+  `orphan-in`. It is a gap in what a class definition could say. `direction: in` was carrying two
+  claims at once — *this shape of link is legal* and *every one of these should have one* — and
+  a schema that cannot separate them will keep producing rules that are right in intent and
+  wrong at scale. `expected` separates them, and a class author now has to decide which they
+  mean, once, in the ontology, instead of leaving a rule to guess.
+
+  The remaining 49 are 20 orphans, 19 `unnamed-not-catalogued-claim`, and 10 `no-domain-link`.
+  Every orphan names a specific missing piece of work.
+
+  [open] The 19 uncatalogued claims are mostly one claim repeated: twelve `bill-version` nodes
+  each say `[open] Not yet catalogued.` of their own bill text. The rule wants a slug so the
+  claim can be checked, and there is no slug because the source genuinely is not catalogued —
+  the corpus works from LSC's analyses and spreadsheets rather than from raw bill text. That is
+  a scope decision that would be better recorded once here than asserted twelve times as an open
+  question, and it has not been taken. Inventing twelve prospective slugs would satisfy the rule
+  without answering anything.

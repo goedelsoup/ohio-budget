@@ -724,16 +724,35 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
             });
         }
 
-        // Symmetric to the sink exemption: a class that declares no inbound edges is a
-        // pure source by design. budget-action is the case — actions point at versions,
-        // appropriations, and actors, and nothing ever points back at an action.
-        let is_pure_source = class.edges.iter().all(|e| e.direction == Direction::Out);
-        if !is_pure_source && incoming.get(&inst.abs_path).copied().unwrap_or(0) == 0 {
+        // Fires only where the ontology says every instance expects a reciprocal — see
+        // `EdgeDef::expected`. Keyed on that rather than on "declares any inbound edge",
+        // which is what it used to do and which faulted 91 correct nodes: an appropriation
+        // nothing vetoed and an expenditure no appropriation named were both reported as
+        // orphans, because those inbound edges exist for the minority of cases that have them.
+        //
+        // A rule that fires on the ordinary case is a rule nobody reads. At 153 warnings the
+        // validator's output was scrolled past, which is a worse failure than any single
+        // missing edge — it is how a real warning arrives unnoticed.
+        let mut expected_in: Vec<&str> = class
+            .edges
+            .iter()
+            .filter(|e| e.direction == Direction::In && e.expected)
+            .map(|e| e.relationship.as_str())
+            .collect();
+        // Deduped: `fund` declares `draws-from` twice, once from `appropriation` and once from
+        // `line-item`, and naming it twice reads as a mistake in the message rather than as
+        // two ways of satisfying one requirement.
+        expected_in.sort_unstable();
+        expected_in.dedup();
+        if !expected_in.is_empty() && incoming.get(&inst.abs_path).copied().unwrap_or(0) == 0 {
             findings.push(Finding {
                 path: p.clone(),
                 rule: "orphan-in",
                 severity: Severity::Warn,
-                message: "no incoming domain links — consider a reciprocal edge or a node that references this one".into(),
+                message: format!(
+                    "no incoming domain links; class '{}' expects at least one of {expected_in:?}",
+                    inst.inst.class
+                ),
             });
         }
 
@@ -1826,5 +1845,116 @@ links:
             .join("\n");
         let parsed = serde_yaml::from_str::<corpus_schema::DecisionRecord>(&yaml);
         assert!(parsed.is_ok(), "DECISION_FIELDS has drifted: {parsed:?}");
+    }
+
+    /// A class with one inbound edge, `expected` or not, plus one lonely instance of it.
+    fn orphan_case(expected: bool) -> Vec<Finding> {
+        let mut classes = BTreeMap::new();
+        classes.insert(
+            "appropriation".to_string(),
+            class(&format!(
+                r#"
+class: appropriation
+label: Appropriation
+description: d
+edges:
+  - relationship: grants-authority-for
+    target: line-item
+    direction: out
+  - relationship: modifies
+    target: budget-action
+    direction: in
+    expected: {expected}
+"#
+            )),
+        );
+        let mut paths = BTreeSet::new();
+        paths.insert(PathBuf::from("corpus/appropriation.ont.yml"));
+        run(
+            classes,
+            paths,
+            vec![instance(
+                "corpus/appropriation/a.yml",
+                r#"
+class: appropriation
+label: A
+description: d
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/ff.yml
+    relationship: grants-authority-for
+"#,
+            )],
+        )
+    }
+
+    #[test]
+    fn an_inbound_edge_that_is_merely_declared_does_not_make_an_orphan() {
+        // The regression. `appropriation <- modifies` exists because a veto can strike an
+        // appropriation. A veto struck a handful; the other several hundred appropriations
+        // were reported as orphans for not having been vetoed, which is 71 warnings about
+        // correct data and the reason nobody read the other 29.
+        let f = orphan_case(false);
+        assert!(
+            !f.iter().any(|x| x.rule == "orphan-in"),
+            "declaring an inbound edge is not expecting one on every instance: {f:?}"
+        );
+    }
+
+    #[test]
+    fn an_expected_inbound_edge_still_reports_an_orphan() {
+        // The case worth keeping: a line item with no appropriation is work not yet done.
+        let f = orphan_case(true);
+        let orphans: Vec<&Finding> = f.iter().filter(|x| x.rule == "orphan-in").collect();
+        assert_eq!(orphans.len(), 1, "got {f:?}");
+        assert!(
+            orphans[0].message.contains("modifies"),
+            "the message must name what would satisfy it: {}",
+            orphans[0].message
+        );
+    }
+
+    #[test]
+    fn the_same_relationship_declared_twice_is_named_once() {
+        // `fund` declares `draws-from` inbound from both `appropriation` and `line-item`.
+        // Listing it twice reads as a bug in the validator rather than as two ways to satisfy
+        // one requirement.
+        let mut classes = BTreeMap::new();
+        classes.insert(
+            "fund".to_string(),
+            class(
+                r#"
+class: fund
+label: Fund
+description: d
+edges:
+  - relationship: draws-from
+    target: appropriation
+    direction: in
+    expected: true
+  - relationship: draws-from
+    target: line-item
+    direction: in
+    expected: true
+"#,
+            ),
+        );
+        let mut paths = BTreeSet::new();
+        paths.insert(PathBuf::from("corpus/fund.ont.yml"));
+        let f = run(
+            classes,
+            paths,
+            vec![instance(
+                "corpus/fund/grf.yml",
+                "class: fund\nlabel: G\ndescription: d\nlinks:\n  - target: ../fund.ont.yml\n    relationship: instance-of\n",
+            )],
+        );
+        let msg = &f
+            .iter()
+            .find(|x| x.rule == "orphan-in")
+            .expect("orphan")
+            .message;
+        assert!(msg.contains(r#"["draws-from"]"#), "{msg}");
     }
 }

@@ -26,6 +26,11 @@ export interface EdgeDef {
   target: string;
   direction: 'in' | 'out';
   description?: string;
+  /**
+   * On an inbound edge: whether every instance of this class expects at least one.
+   * Absent means no — declaring an edge permits a reciprocal, it does not require one.
+   */
+  expected?: boolean;
 }
 
 export interface ClassView {

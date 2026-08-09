@@ -39,3 +39,4 @@ edges:
     target: bill-version
     direction: in
     description: A version representing this bill at one stage
+    expected: true

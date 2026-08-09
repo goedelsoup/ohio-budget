@@ -55,6 +55,7 @@ edges:
     target: appropriation
     direction: in
     description: An appropriation sets an amount for this line item in one period
+    expected: true
   - relationship: disburses-against
     target: expenditure
     direction: in

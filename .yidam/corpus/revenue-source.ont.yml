@@ -35,6 +35,7 @@ edges:
     target: program
     direction: in
     description: A program drawing directly on this instrument through an earmark
+    expected: true
   - relationship: projects
     target: forecast
     direction: in

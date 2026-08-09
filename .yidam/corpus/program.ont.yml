@@ -40,3 +40,4 @@ edges:
     target: agency
     direction: in
     description: The agency that runs this program
+    expected: true

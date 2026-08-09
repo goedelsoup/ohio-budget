@@ -35,6 +35,7 @@ edges:
     target: appropriation
     direction: in
     description: An appropriation grants authority to spend from this fund
+    expected: true
   - relationship: transfers-to
     target: fund
     direction: out
@@ -47,3 +48,4 @@ edges:
     target: line-item
     direction: in
     description: A line item is chargeable against this fund
+    expected: true

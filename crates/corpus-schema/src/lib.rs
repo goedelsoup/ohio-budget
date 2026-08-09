@@ -156,6 +156,22 @@ pub struct EdgeDef {
     pub direction: Direction,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
+    /// On an **inbound** edge: does every instance of this class expect at least one?
+    ///
+    /// The distinction the `orphan-in` rule turns on, and the corpus went a long time without
+    /// it. Declaring an inbound edge says the graph *permits* something to point here; it does
+    /// not say every instance *should* be pointed at. Those are different claims, and treating
+    /// the first as the second made the validator fault correct data at scale: 71 appropriations
+    /// and 20 expenditures were reported as orphans because `appropriation <- modifies` and
+    /// `expenditure <- realized-by` exist. A veto modifies a handful of appropriations. The
+    /// other several hundred are not defective for having gone unvetoed.
+    ///
+    /// So this is opt-in, and `false` is the honest default: an edge earns a per-instance
+    /// warning by saying it expects one, rather than generating warnings as a side effect of
+    /// being declared. Ignored on outbound edges, where `no-domain-link` already covers the
+    /// question.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub expected: bool,
 }
 
 /// A `<class>.ont.yml` file — the schema layer of the corpus.

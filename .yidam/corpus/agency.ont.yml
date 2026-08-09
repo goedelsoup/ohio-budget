@@ -43,3 +43,4 @@ edges:
     target: line-item
     direction: in
     description: A line item whose authority this agency holds
+    expected: true

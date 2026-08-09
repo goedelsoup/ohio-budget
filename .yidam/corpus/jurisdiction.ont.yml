@@ -28,6 +28,7 @@ edges:
     target: expenditure
     direction: in
     description: An expenditure that landed with this jurisdiction
+    expected: true
   - relationship: serves
     target: program
     direction: in
