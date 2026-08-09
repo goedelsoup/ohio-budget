@@ -345,6 +345,38 @@ export interface ProcessFindings {
   plan_reaches: string[];
 }
 
+export type LocalFinanceCategory =
+  | 'own-source-in-transit'
+  | 'shared-state-revenue'
+  | 'reimbursement';
+
+export interface LocalFinanceYear {
+  fiscal_year: string;
+  own_source_cents: number;
+  shared_cents: number;
+  reimbursement_cents: number;
+  /** Absent where the price index does not reach the year. */
+  real?: {
+    own_source_cents: number;
+    shared_cents: number;
+    reimbursement_cents: number;
+    base_period: string;
+    series_name: string;
+  };
+}
+
+/**
+ * State money to local government, separated from local money the state merely collects.
+ *
+ * The classification travels with the totals on purpose: no source marks these categories, each
+ * assignment is a reading of the line item's mechanism, and a reader who disagrees should be
+ * able to see which codes went where.
+ */
+export interface LocalFinance {
+  years: LocalFinanceYear[];
+  classification: { code: string; category: LocalFinanceCategory; why: string }[];
+}
+
 export interface Findings {
   gap: GapCoverage[];
   /** Adjacent-period comparisons of the gap, in constant dollars. */
@@ -354,6 +386,7 @@ export interface Findings {
   real_terms: SeriesCoverage[];
   /** Absent when the committed workbooks are not present. */
   process?: ProcessFindings;
+  local_finance?: LocalFinance;
 }
 
 export interface Feed {

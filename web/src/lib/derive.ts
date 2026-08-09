@@ -311,6 +311,34 @@ export function conferenceShares(feed: Feed): ConferenceShares[] {
   });
 }
 
+/**
+ * State money to local government, in constant dollars, with the pass-through separated out.
+ *
+ * Years the price index cannot reach are dropped rather than shown nominal beside real ones —
+ * the rule `real-dollars` exists to enforce, and the reason FY2027 does not appear.
+ */
+export interface LocalFinancePoint {
+  period: string;
+  ownSource: number;
+  shared: number;
+  reimbursement: number;
+  stateMoney: number;
+}
+
+export function localFinance(feed: Feed): LocalFinancePoint[] {
+  return (feed.findings.local_finance?.years ?? []).flatMap((y) =>
+    y.real
+      ? [{
+          period: y.fiscal_year,
+          ownSource: y.real.own_source_cents,
+          shared: y.real.shared_cents,
+          reimbursement: y.real.reimbursement_cents,
+          stateMoney: y.real.shared_cents + y.real.reimbursement_cents,
+        }]
+      : [],
+  );
+}
+
 /** Adjacent-period gap comparisons touching one line item, whatever their status. */
 export function trendsForLineItem(feed: Feed, lineItemSlug: string): TrendCoverage[] {
   return feed.findings.gap_trend.filter((t) => t.line_item === lineItemSlug);

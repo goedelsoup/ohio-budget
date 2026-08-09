@@ -565,6 +565,12 @@ pub struct Findings {
     /// them. That is the same shape as a `[verified]` claim about a source nobody re-reads.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub process: Option<stage_delta::process::ProcessFindings>,
+    /// State money to local government, separated from local money the state merely collects.
+    ///
+    /// Emitted for the same reason as `process`: the figures were quoted in a decision record,
+    /// hand-transcribed, with nothing checking them.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub local_finance: Option<local_finance::Findings>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -887,6 +893,14 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
                 load_alternate(repo_root).as_ref(),
             ),
             process: stage_delta::process::analyse(repo_root)?,
+            local_finance: {
+                let dir = repo_root.join(".yidam/sources/lsc");
+                dir.is_dir()
+                    .then(|| {
+                        local_finance::analyse(&dir, &local_finance::WORKBOOKS, deflator.as_ref())
+                    })
+                    .transpose()?
+            },
         },
     })
 }

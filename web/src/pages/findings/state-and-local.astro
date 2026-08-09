@@ -1,0 +1,126 @@
+---
+import Layout from '../../components/Layout.astro';
+import { loadFeed } from '../../lib/feed.ts';
+import { localFinance } from '../../lib/derive.ts';
+import { dollars, percent } from '../../lib/money.ts';
+
+const feed = await loadFeed();
+const points = localFinance(feed);
+const classification = feed.findings.local_finance?.classification ?? [];
+
+const first = points[0];
+const last = points[points.length - 1];
+const change = (a: number, b: number) => (a !== 0 ? (b / a - 1) * 100 : 0);
+
+const groups = [
+  { key: 'own-source-in-transit', label: 'Own-source revenue in transit' },
+  { key: 'shared-state-revenue', label: 'Shared state revenue' },
+  { key: 'reimbursement', label: 'Reimbursement' },
+] as const;
+---
+
+<Layout
+  title="State and local"
+  section="findings"
+  wide
+  description="State money to Ohio's local governments fell 40% in real terms while the local taxes the state merely collects rose 48%."
+>
+  <div class="column">
+    <p class="eyebrow">Findings</p>
+    <h1>What the state gives local government, and what it only handles</h1>
+
+    {
+      points.length === 0 ? (
+        <div class="refusal">
+          <div class="refusal__label">Not computed</div>
+          <p style="margin:0">
+            This reads the committed LSC workbooks directly and they are not present in this build.
+          </p>
+        </div>
+      ) : (
+        <>
+          <p class="lede">
+            Ohio appropriates $9.93 billion through its revenue distribution funds, and three
+            unrelated kinds of money sit in that total. Separated, state support to local
+            government fell {percent(change(first!.stateMoney, last!.stateMoney), 1)} in real terms
+            between {first!.period} and {last!.period}, while the taxes local governments levy
+            themselves — which the state collects and hands back, and which appear in the same
+            appropriations — rose {percent(change(first!.ownSource, last!.ownSource), 1)}.
+          </p>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fiscal year</th>
+                  <th class="num">Own-source, in transit</th>
+                  <th class="num">Shared state revenue</th>
+                  <th class="num">Reimbursement</th>
+                  <th class="num">State money</th>
+                </tr>
+              </thead>
+              <tbody>
+                {points.map((p) => (
+                  <tr>
+                    <td class="num">{p.period}</td>
+                    <td class="num">{dollars(p.ownSource)}</td>
+                    <td class="num">{dollars(p.shared)}</td>
+                    <td class="num">{dollars(p.reimbursement)}</td>
+                    <td class="num"><strong>{dollars(p.stateMoney)}</strong></td>
+                  </tr>
+                ))}
+                <tr>
+                  <th>Real change</th>
+                  <th class="num">{percent(change(first!.ownSource, last!.ownSource), 1)}</th>
+                  <th class="num">{percent(change(first!.shared, last!.shared), 1)}</th>
+                  <th class="num">{percent(change(first!.reimbursement, last!.reimbursement), 1)}</th>
+                  <th class="num">{percent(change(first!.stateMoney, last!.stateMoney), 1)}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="rel">
+            Constant dollars. Fiscal years the price index cannot reach are omitted rather than
+            shown nominal beside restated ones, which is why FY2027 is absent though its
+            appropriations are enacted.
+          </p>
+
+          <h2>Three mechanisms, one direction</h2>
+          <p>
+            The corpus found these one line item at a time and each looked like its own event: the
+            local government fund cut 41% in a single year by a changed statutory percentage; the
+            property tax reimbursement rising in nominal dollars every biennium and falling a
+            quarter in real terms because it is not indexed; the tangible personal property
+            replacement wound down deliberately across eight line items. Different mechanisms,
+            same direction — and the categories are what make that visible, because a share of
+            state revenue and a fixed reimbursement fail in unrelated ways.
+          </p>
+
+          <h2>The classification is a reading</h2>
+          <p>
+            No source marks these categories. Each assignment is an inference from the line item's
+            mechanism, and the codes are listed so the argument can be had against the same
+            figures. A reader who treats the fuel tax as a user fee returned to the roads that
+            raised it would draw a different line and get different totals.
+          </p>
+          {groups.map((g) => {
+            const items = classification.filter((c) => c.category === g.key);
+            return (
+              <>
+                <h3>{g.label}</h3>
+                <p class="rel">{items[0]?.why}</p>
+                <p class="mono" style="font-size:0.85em">
+                  {items.map((c) => c.code).join(' · ')}
+                </p>
+              </>
+            );
+          })}
+          <p class="rel">
+            <code>Investment Earnings</code> at $1.05 billion is excluded from all three, along
+            with the small miscellaneous funds. It is not money to local government.
+          </p>
+        </>
+      )
+    }
+  </div>
+</Layout>

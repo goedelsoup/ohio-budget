@@ -12,6 +12,7 @@ members = [
     "lineage",
     "stage-delta",
     "governor",
+    "local-finance",
 ]
 
 [workspace.package]

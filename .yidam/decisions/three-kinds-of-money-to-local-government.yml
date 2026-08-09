@@ -94,6 +94,16 @@ rationale: |
   **`Investment Earnings` at $1.050B is excluded from all three**, along with the small
   miscellaneous funds. It is not money to local government.
 
+  Every figure above is computed by [`local-finance`](../../crates/local-finance/) and emitted
+  into `findings.local_finance`, and a test asserts the percentages this record quotes. Numbers
+  typed into prose are a claim about a computation with nothing checking them — the shape this
+  repository has now been caught by four times — and writing this record created a fresh instance
+  of it before the crate existed.
+
+  Three drafts of that test claimed more than the data does: that state money fell in every step,
+  that it rose twice, that neither uptick reached the previous biennium. It rises three times and
+  FY2025 does exceed FY2022. What is asserted now is the fall itself.
+
   [open] The series counts **appropriations**, not disbursements. Actuals exist for most of these
   line items and are not summed here, and a reimbursement appropriated is not a reimbursement
   paid.

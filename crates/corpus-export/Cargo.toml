@@ -16,6 +16,7 @@ corpus-schema = { path = "../corpus-schema" }
 real-dollars = { path = "../real-dollars" }
 corpus-validate = { path = "../corpus-validate" }
 gap = { path = "../gap" }
+local-finance = { path = "../local-finance" }
 lsc = { path = "../lsc", default-features = false }
 stage-delta = { path = "../stage-delta" }
 

@@ -1,0 +1,18 @@
+[package]
+name = "local-finance"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Separates state support to local government from local revenue the state merely collects"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+corpus-schema = { path = "../corpus-schema" }
+real-dollars = { path = "../real-dollars" }
+lsc = { path = "../lsc", features = ["xlsx"] }
+
+[[bin]]
+name = "local-finance"
+path = "src/main.rs"
