@@ -1,0 +1,33 @@
+class: budget-action
+label: House Substitute Amendment to Foundation Funding, HB 33
+description: |
+  The House's change to the executive proposal's
+  [foundation funding](../line-item/foundation-funding.yml) figure for FY2024, incorporated
+  into [HB 33's House substitute](../bill-version/hb33-house-substitute.yml).
+  +$626,999,599. [verified]
+
+  Nearly seven times the equivalent move two years later, where the House added $92,250,000 to
+  the FY2026 figure. The direction and the stage are identical; the magnitude is not, which is
+  the argument for measuring both rather than generalising from one.
+properties:
+  action_type: amendment
+  action_date: "[open] 2023, pending verification"
+  direction: increase
+  amount_delta: "$626,999,599.00"
+  stated_justification: |
+    [open] Not reconstructed. LSC publishes a comparison document for HB 33 as it does for
+    HB 96, and that is the source that would close this — it is not catalogued. Until it is,
+    this action has a verified amount and no stated reason, which is exactly the state the
+    HB 96 amendments were in before their comparison document was read.
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb33-house-substitute.yml
+    relationship: applies-to
+  - target: ../appropriation/foundation-funding-fy2024-house-substitute.yml
+    relationship: modifies
+  - target: ../actor/house-finance-committee.yml
+    relationship: taken-by
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,0 +1,29 @@
+class: bill-version
+label: HB 33 Conference Report
+description: |
+  [HB 33](../bill/hb33-135th.yml) at the conference report stage. [verified]
+
+  Agreed to by both chambers on the same day. Carries 14.4% of FY2024's movement across 54 line items, and is the last stage at which any figure changes.
+
+  Seeded when the workbook's `EN` sheet turned out to carry all nine stages — the sheet an
+  earlier reading of this source missed, which is why
+  [HB 33 as enacted](./hb33-as-enacted.yml) said no stage-delta was computable for this
+  biennium. It is.
+properties:
+  stage: conference-report
+  stage_date: 2023-06-30
+  chamber: conference
+  document_reference: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "Conference Report". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb33-135th.yml
+    relationship: version-of
+  - target: ./hb33-as-passed-senate.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

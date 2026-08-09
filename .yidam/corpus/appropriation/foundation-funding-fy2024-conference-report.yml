@@ -1,0 +1,35 @@
+class: appropriation
+label: Foundation Funding — FY2024, Conference Report
+description: |
+  $7,967,250,000.00 at the conference report stage. [verified]
+
+  +$261,000,000 — more than the House and Senate committee steps combined, and the figure
+  that became law. Conference settled above both chambers' positions rather than between
+  them, which the [conference committee](../actor/conference-committee.yml) node records as
+  this stage's habit.
+
+  One checkpoint in the corpus's second complete nine-stage series. The first,
+  [FY2026 under HB 96](./foundation-funding-fy2026-conference-report.yml), could not be compared against
+  anything until this one existed — which is what made the chamber-floor result a pattern
+  rather than an observation about one bill.
+properties:
+  amount: "$7,967,250,000.00"
+  period_label: FY2024
+  stage: conference-report
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, ALI 200550, column
+    "Conference Report FY 2024". Committed at .yidam/sources/lsc/ with sha256 140d62e9. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024.yml
+    relationship: covers
+  - target: ../bill-version/hb33-conference-report.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

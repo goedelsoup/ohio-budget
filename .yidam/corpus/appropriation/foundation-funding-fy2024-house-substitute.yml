@@ -1,0 +1,34 @@
+class: appropriation
+label: Foundation Funding — FY2024, House Substitute
+description: |
+  $7,877,550,000.00 at the house substitute stage. [verified]
+
+  +$626,999,599 — an 8.6% increase, and the largest single move in the series. The House
+  substitute is where this chamber does its work; see
+  [house-finance-committee](../actor/house-finance-committee.yml).
+
+  One checkpoint in the corpus's second complete nine-stage series. The first,
+  [FY2026 under HB 96](./foundation-funding-fy2026-house-substitute.yml), could not be compared against
+  anything until this one existed — which is what made the chamber-floor result a pattern
+  rather than an observation about one bill.
+properties:
+  amount: "$7,877,550,000.00"
+  period_label: FY2024
+  stage: house-substitute
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, ALI 200550, column
+    "House Substitute FY 2024". Committed at .yidam/sources/lsc/ with sha256 140d62e9. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2024.yml
+    relationship: covers
+  - target: ../bill-version/hb33-house-substitute.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

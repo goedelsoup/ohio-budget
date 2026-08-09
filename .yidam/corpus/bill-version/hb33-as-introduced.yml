@@ -1,0 +1,27 @@
+class: bill-version
+label: HB 33 As Introduced
+description: |
+  [HB 33](../bill/hb33-135th.yml) at the as introduced stage. [verified]
+
+  The executive proposal as introduced, and the baseline every later figure is measured from.
+
+  Seeded when the workbook's `EN` sheet turned out to carry all nine stages — the sheet an
+  earlier reading of this source missed, which is why
+  [HB 33 as enacted](./hb33-as-enacted.yml) said no stage-delta was computable for this
+  biennium. It is.
+properties:
+  stage: as-introduced
+  stage_date: 2023-02-15
+  chamber: none
+  document_reference: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "As Introduced". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb33-135th.yml
+    relationship: version-of
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

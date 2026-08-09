@@ -1,0 +1,29 @@
+class: bill-version
+label: HB 33 As Passed By House
+description: |
+  [HB 33](../bill/hb33-135th.yml) at the as passed house stage. [verified]
+
+  Passed the same day it was reported, and identical to the reported version in every one of the 1,586 line items. [verified] The same-day vote and the zero delta are the same fact seen from two sources.
+
+  Seeded when the workbook's `EN` sheet turned out to carry all nine stages — the sheet an
+  earlier reading of this source missed, which is why
+  [HB 33 as enacted](./hb33-as-enacted.yml) said no stage-delta was computable for this
+  biennium. It is.
+properties:
+  stage: as-passed-house
+  stage_date: 2023-04-26
+  chamber: house
+  document_reference: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "As Passed By House". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb33-135th.yml
+    relationship: version-of
+  - target: ./hb33-house-reported.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

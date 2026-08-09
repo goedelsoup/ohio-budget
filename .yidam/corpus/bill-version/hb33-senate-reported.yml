@@ -1,0 +1,29 @@
+class: bill-version
+label: HB 33 Senate Reported
+description: |
+  [HB 33](../bill/hb33-135th.yml) at the senate reported stage. [verified]
+
+  Reported out of Senate Finance, moving 1.7% of the year's total across 41 line items.
+
+  Seeded when the workbook's `EN` sheet turned out to carry all nine stages — the sheet an
+  earlier reading of this source missed, which is why
+  [HB 33 as enacted](./hb33-as-enacted.yml) said no stage-delta was computable for this
+  biennium. It is.
+properties:
+  stage: senate-reported
+  stage_date: 2023-06-14
+  chamber: senate
+  document_reference: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "Senate Reported". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb33-135th.yml
+    relationship: version-of
+  - target: ./hb33-senate-substitute.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

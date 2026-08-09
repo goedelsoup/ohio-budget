@@ -1,0 +1,29 @@
+class: bill-version
+label: HB 33 As Passed By Senate
+description: |
+  [HB 33](../bill/hb33-135th.yml) at the as passed senate stage. [verified]
+
+  Identical to the reported version across all 1,586 line items. [verified] Neither chamber's floor changed a figure in either biennium the corpus has measured.
+
+  Seeded when the workbook's `EN` sheet turned out to carry all nine stages — the sheet an
+  earlier reading of this source missed, which is why
+  [HB 33 as enacted](./hb33-as-enacted.yml) said no stage-delta was computable for this
+  biennium. It is.
+properties:
+  stage: as-passed-senate
+  stage_date: 2023-06-15
+  chamber: senate
+  document_reference: |
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "As Passed By Senate". [verified]
+  is_operative: "no"
+links:
+  - target: ../bill-version.ont.yml
+    relationship: instance-of
+  - target: ../bill/hb33-135th.yml
+    relationship: version-of
+  - target: ./hb33-senate-reported.yml
+    relationship: supersedes
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/ga-bill-record.md
+    relationship: cites

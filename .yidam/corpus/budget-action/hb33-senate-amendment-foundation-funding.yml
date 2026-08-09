@@ -1,0 +1,32 @@
+class: budget-action
+label: Senate Substitute Amendment to Foundation Funding, HB 33
+description: |
+  The Senate's reduction of the House-passed
+  [foundation funding](../line-item/foundation-funding.yml) figure for FY2024, incorporated
+  into [HB 33's Senate substitute](../bill-version/hb33-senate-substitute.yml).
+  -$173,800,000. [verified]
+
+  It takes back 28% of what the House added. In HB 96 the same step took back 79%. Both
+  chambers behave the same way in both biennia — the House raises, the Senate cuts, conference
+  settles above both — but how far the Senate goes is not a constant.
+properties:
+  action_type: amendment
+  action_date: "[open] 2023, pending verification"
+  direction: decrease
+  amount_delta: "-$173,800,000.00"
+  stated_justification: |
+    [open] Not reconstructed, and not reconstructible from any source committed here. The
+    HB 96 counterpart turned out to rest on a change to the disadvantaged pupil impact aid
+    calculation rather than on the size of the pot; whether the same holds here is unknown.
+  phase: legislative
+links:
+  - target: ../budget-action.ont.yml
+    relationship: instance-of
+  - target: ../bill-version/hb33-senate-substitute.yml
+    relationship: applies-to
+  - target: ../appropriation/foundation-funding-fy2024-senate-substitute.yml
+    relationship: modifies
+  - target: ../actor/senate-finance-committee.yml
+    relationship: taken-by
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

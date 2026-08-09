@@ -10,17 +10,28 @@ description: |
   ambiguity the bill-version class exists to remove, since "HB 33 appropriated X" is
   underdetermined between the proposal, each chamber's version, and the enacted text.
 
-  This is a single-stage seed. The introduced, House, and Senate versions of HB 33 are not
-  present, so no stage-delta is computable for the FY2024-25 biennium — only the
-  cross-biennium comparison against [HB 96 as enacted](./hb96-as-enacted.yml), which is
-  what this node is for.
+  It was a single-stage seed, and recorded that no stage-delta was computable for this
+  biennium because the introduced, House, and Senate versions were absent. All eight are now
+  seeded, from the `EN` sheet of a workbook that had been committed here the whole time — see
+  [the catalog entry](../../catalog/lsc-hb33-appropriation-spreadsheet.md) for how that sheet
+  went unread.
+
+  **The vetoes on this bill were also overridden.** The General Assembly's action table records
+  the House passing an item notwithstanding the governor's objections on 13 December 2023 and
+  the Senate on 24 January 2024. [verified] So HB 96 is not a special case: in both biennia the
+  corpus has examined, the enacted text kept moving after enactment. See
+  [the HB 96 override](../budget-action/hb96-veto-override-item-66.yml) for the shape of the
+  event, and [general-assembly](../actor/general-assembly.yml) for the role.
+
+  [open] Which HB 33 items were overridden is not reconstructed; its veto message is not
+  catalogued.
 properties:
   stage: as-enacted
   stage_date: 2023-07-04
   chamber: none
   document_reference: |
-    Enacted bill text and the governor's veto message. [open] Not yet catalogued; the
-    catalog holds an entry for the HB 96 comparison document but not yet for HB 33.
+    LSC appropriation spreadsheet, HB 33 as enacted, sheet EN, column "Enacted". [verified]
+    [open] The enacted bill text and this bill's veto message are not catalogued.
   is_operative: "no"
 links:
   - target: ../bill-version.ont.yml
@@ -28,4 +39,6 @@ links:
   - target: ../bill/hb33-135th.yml
     relationship: version-of
   - target: ../../catalog/ga-bill-record.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
     relationship: cites
