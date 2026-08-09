@@ -323,6 +323,8 @@ export interface LocalFinancePoint {
   shared: number;
   reimbursement: number;
   stateMoney: number;
+  /** What was actually disbursed against that state money, where the source reports it. */
+  stateMoneyPaid: number | null;
 }
 
 export function localFinance(feed: Feed): LocalFinancePoint[] {
@@ -334,6 +336,16 @@ export function localFinance(feed: Feed): LocalFinancePoint[] {
           shared: y.real.shared_cents,
           reimbursement: y.real.reimbursement_cents,
           stateMoney: y.real.shared_cents + y.real.reimbursement_cents,
+          // Nominal actuals rescaled by the same factor the restated appropriation used, so the
+          // two sit in one set of dollars. Absent where the source reports no actual.
+          stateMoneyPaid:
+            y.actual && y.shared_cents + y.reimbursement_cents !== 0
+              ? Math.round(
+                  ((y.actual.shared_cents + y.actual.reimbursement_cents) *
+                    (y.real.shared_cents + y.real.reimbursement_cents)) /
+                    (y.shared_cents + y.reimbursement_cents),
+                )
+              : null,
         }]
       : [],
   );

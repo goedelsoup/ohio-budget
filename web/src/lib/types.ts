@@ -355,6 +355,13 @@ export interface LocalFinanceYear {
   own_source_cents: number;
   shared_cents: number;
   reimbursement_cents: number;
+  /** Closed-book disbursements, where the source reports them. Nominal. */
+  actual?: {
+    own_source_cents: number;
+    shared_cents: number;
+    reimbursement_cents: number;
+    categories_missing?: string[];
+  };
   /** Absent where the price index does not reach the year. */
   real?: {
     own_source_cents: number;
@@ -374,6 +381,8 @@ export interface LocalFinanceYear {
  */
 export interface LocalFinance {
   years: LocalFinanceYear[];
+  /** Years carrying a disbursement and no appropriation — named rather than shown as zero. */
+  actual_only_years?: string[];
   classification: { code: string; category: LocalFinanceCategory; why: string }[];
 }
 

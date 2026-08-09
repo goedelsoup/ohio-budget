@@ -104,9 +104,25 @@ rationale: |
   that it rose twice, that neither uptick reached the previous biennium. It rises three times and
   FY2025 does exceed FY2022. What is asserted now is the fall itself.
 
-  [open] The series counts **appropriations**, not disbursements. Actuals exist for most of these
-  line items and are not summed here, and a reimbursement appropriated is not a reimbursement
-  paid.
+  ## It holds on money actually paid
+
+  That the series counted **appropriations** was recorded as an open question, because a
+  reimbursement appropriated is not a reimbursement paid and the appropriation is the figure the
+  state chooses. The workbooks' closed-book actual columns answer it: [verified]
+
+  | | FY2012 to FY2024, real |
+  |---|---|
+  | state money **appropriated** | -39.1% |
+  | state money **disbursed** | -38.1% |
+
+  Year by year, disbursement runs between 96.1% and 104.5% of appropriation with no drift — it
+  is above 100% in FY2022 and FY2023 and below in every other year. So the appropriation series
+  is a fair proxy and the finding does not rest on the choice.
+
+  FY2010 carries a disbursement and no appropriation, and always will: the earliest committed
+  workbook reports two completed years and appropriates two later ones, and the 128th General
+  Assembly published none. It is named in `actual_only_years` rather than carried at zero, which
+  would put a $0.00 point at the head of every chart and read as a collapse.
 
   [open] It also counts only what flows through `RDF`, `EDU` and `TAX`. State money reaches local
   government through other channels — school foundation funding most obviously, which is an order

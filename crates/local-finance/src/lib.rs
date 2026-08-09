@@ -25,7 +25,7 @@
 //! and [`Category::why`] states the test applied. A reader who classifies the fuel tax as a user
 //! fee returned to the roads that raised it will get different totals, and should.
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 
 use anyhow::Result;
@@ -122,7 +122,7 @@ pub const CLASSIFIED: [(&str, Category); 28] = [
 pub const AGENCIES: [&str; 3] = ["RDF", "EDU", "TAX"];
 
 /// The committed workbooks carrying enacted appropriations, oldest first.
-pub const WORKBOOKS: [&str; 8] = [
+pub const WORKBOOKS: [&str; 14] = [
     "hb153-budget-in-detail-as-enrolled-129th.xls",
     "hb59-budget-in-detail-as-enrolled-130th.xlsx",
     "hb64-budget-in-detail-as-enrolled-131st.xlsx",
@@ -131,18 +131,43 @@ pub const WORKBOOKS: [&str; 8] = [
     "hb110-appropriation-spreadsheet-as-enrolled-134th.xlsx",
     "hb33-appropriation-spreadsheet-as-enacted-135th.xlsx",
     "hb96-appropriation-spreadsheet-as-enacted-136th.xlsx",
+    // The with-actuals siblings. Each reports two completed years where the as-enrolled workbook
+    // reports one, so without them only alternate years carry a disbursement figure.
+    "hb59-budget-in-detail-with-actuals-130th.xlsx",
+    "hb64-budget-in-detail-with-actuals-131st.xlsx",
+    "hb49-budget-in-detail-with-actuals-132nd.xlsx",
+    "hb166-appropriation-spreadsheet-with-actuals-133rd.xlsx",
+    "hb110-appropriation-spreadsheet-with-actuals-134th.xlsx",
+    "hb33-appropriation-spreadsheet-with-actuals-135th.xlsx",
 ];
 
-/// One fiscal year's appropriations, by category.
+/// One fiscal year, by category.
 #[derive(Debug, Clone, Default, PartialEq, Serialize)]
 pub struct Year {
     pub fiscal_year: String,
     pub own_source_cents: i64,
     pub shared_cents: i64,
     pub reimbursement_cents: i64,
+    /// The same three from the workbooks' closed-book actual columns, where they exist.
+    ///
+    /// A reimbursement appropriated is not a reimbursement paid, and the distinction is not
+    /// decorative here: the appropriation is an authority the state sets and the disbursement is
+    /// what a formula produced. Where they diverge, the appropriation is the weaker evidence.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub actual: Option<Actuals>,
     /// Present only where the price index reaches this year.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub real: Option<Real>,
+}
+
+#[derive(Debug, Clone, Default, PartialEq, Serialize)]
+pub struct Actuals {
+    pub own_source_cents: i64,
+    pub shared_cents: i64,
+    pub reimbursement_cents: i64,
+    /// Categories with no actual reported at all this year; their totals are absent, not zero.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub categories_missing: Vec<Category>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize)]
@@ -164,6 +189,16 @@ impl Year {
 #[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Findings {
     pub years: Vec<Year>,
+    /// Fiscal years carrying a disbursement and no appropriation, named rather than shown as
+    /// zero.
+    ///
+    /// FY2010 is the case and it is permanent. A workbook appropriates one biennium and reports
+    /// two completed years beside it, so the earliest committed document reaches two years
+    /// further back in outturn than in authority — and the 128th General Assembly published no
+    /// workbook at all. Carrying the year with `enacted = 0` would put a $0.00 point on every
+    /// chart at the start of the series and read as a collapse.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub actual_only_years: Vec<String>,
     /// Every classified line item, with the reasoning, so the categories travel with the totals.
     pub classification: Vec<ClassifiedItem>,
 }
@@ -190,13 +225,19 @@ fn sheet_of(path: &Path) -> Result<String> {
     if names.iter().any(|n| n == "EN") {
         return Ok("EN".into());
     }
+    // The with-actuals workbooks each carry one sheet under a name that changes per biennium —
+    // `FY21Update`, `Update 9.30.22`, `HB33`. Where there is nothing to choose between, there is
+    // no choice to get wrong.
+    if names.len() == 1 {
+        return Ok(names[0].clone());
+    }
     names
         .iter()
         .find(|n| n.to_lowercase().contains("without summary"))
         .cloned()
         .ok_or_else(|| {
             anyhow::anyhow!(
-                "{}: no EN sheet and none without summary rows: {names:?}",
+                "{}: no EN sheet, more than one sheet, and none without summary rows: {names:?}",
                 path.display()
             )
         })
@@ -206,7 +247,17 @@ fn sheet_of(path: &Path) -> Result<String> {
 ///
 /// Keyed by (agency, ALI): a code repeats within a sheet as a memorandum breakdown, and the
 /// largest row is the line item.
-fn read(path: &Path) -> Result<BTreeMap<(String, String), (String, i64)>> {
+/// One workbook's figures: (measure, fiscal year, ALI) to (agency, cents).
+type Figures = BTreeMap<(Measure, String, String), (String, i64)>;
+
+/// What a figure is: authority granted, or money out the door.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Measure {
+    Enacted,
+    Actual,
+}
+
+fn read(path: &Path) -> Result<Figures> {
     let table = lsc::xlsx::sheet_to_table(path, &sheet_of(path)?)?;
     let plan = ColumnPlan::of(&table.headers);
     let (Some(a), Some(l)) = (
@@ -215,14 +266,17 @@ fn read(path: &Path) -> Result<BTreeMap<(String, String), (String, i64)>> {
     ) else {
         return Ok(BTreeMap::new());
     };
-    let mut out: BTreeMap<(String, String), (String, i64)> = BTreeMap::new();
+    let mut out: Figures = BTreeMap::new();
     for (i, kind) in plan.kinds.iter().enumerate() {
-        let lsc::columns::ColumnKind::Appropriation { stage, fiscal_year } = kind else {
-            continue;
+        let (measure, fiscal_year) = match kind {
+            lsc::columns::ColumnKind::Appropriation { stage, fiscal_year }
+                if *stage == BillStage::AsEnacted =>
+            {
+                (Measure::Enacted, fiscal_year)
+            }
+            lsc::columns::ColumnKind::Actual { fiscal_year } => (Measure::Actual, fiscal_year),
+            _ => continue,
         };
-        if *stage != BillStage::AsEnacted {
-            continue;
-        }
         for r in &table.rows {
             let (agency, code) = (r[a].trim(), r[l].trim());
             if !AGENCIES.contains(&agency) || category_of(code).is_none() {
@@ -232,7 +286,7 @@ fn read(path: &Path) -> Result<BTreeMap<(String, String), (String, i64)>> {
                 continue;
             };
             let e = out
-                .entry((fiscal_year.clone(), code.to_string()))
+                .entry((measure, fiscal_year.clone(), code.to_string()))
                 .or_insert_with(|| (agency.to_string(), i64::MIN));
             if cents > e.1 {
                 *e = (agency.to_string(), cents);
@@ -248,36 +302,85 @@ pub fn analyse(
     workbooks: &[&str],
     deflator: Option<&Deflator>,
 ) -> Result<Findings> {
-    let mut by_year: BTreeMap<String, BTreeMap<String, i64>> = BTreeMap::new();
+    let mut by_year: BTreeMap<(Measure, String), BTreeMap<String, i64>> = BTreeMap::new();
     for w in workbooks {
         let path = sources.join(w);
         if !path.is_file() {
             continue;
         }
-        for ((fy, code), (_, cents)) in read(&path)? {
+        for ((measure, fy, code), (_, cents)) in read(&path)? {
             // A figure appearing in two workbooks is the same figure; take it once.
-            by_year.entry(fy).or_default().insert(code, cents);
+            by_year
+                .entry((measure, fy))
+                .or_default()
+                .insert(code, cents);
         }
     }
 
-    let years = by_year
+    let sum = |codes: &BTreeMap<String, i64>, want: Category| -> Option<i64> {
+        let mut total = 0i64;
+        let mut any = false;
+        for (code, cents) in codes {
+            if category_of(code) == Some(want) {
+                total += cents;
+                any = true;
+            }
+        }
+        any.then_some(total)
+    };
+
+    // Every fiscal year either measure reaches. Keying on the enacted years alone dropped any
+    // year carrying actuals and no appropriation — which is every year before the earliest
+    // committed workbook's biennium, since a workbook reports two completed years and
+    // appropriates two later ones.
+    let all_years: BTreeSet<&String> = by_year.keys().map(|(_, fy)| fy).collect();
+    let empty: BTreeMap<String, i64> = BTreeMap::new();
+    let actual_only_years: Vec<String> = all_years
+        .iter()
+        .filter(|fy| !by_year.contains_key(&(Measure::Enacted, (**fy).clone())))
+        .map(|fy| (*fy).clone())
+        .collect();
+
+    let years: Vec<Year> = all_years
         .into_iter()
-        .map(|(fiscal_year, codes)| {
+        .filter(|fy| by_year.contains_key(&(Measure::Enacted, (*fy).clone())))
+        .map(|fiscal_year| {
+            let codes = by_year
+                .get(&(Measure::Enacted, fiscal_year.clone()))
+                .unwrap_or(&empty);
             let mut y = Year {
                 fiscal_year: fiscal_year.clone(),
+                own_source_cents: sum(codes, Category::OwnSourceInTransit).unwrap_or(0),
+                shared_cents: sum(codes, Category::SharedStateRevenue).unwrap_or(0),
+                reimbursement_cents: sum(codes, Category::Reimbursement).unwrap_or(0),
                 ..Default::default()
             };
-            for (code, cents) in &codes {
-                match category_of(code) {
-                    Some(Category::OwnSourceInTransit) => y.own_source_cents += cents,
-                    Some(Category::SharedStateRevenue) => y.shared_cents += cents,
-                    Some(Category::Reimbursement) => y.reimbursement_cents += cents,
-                    None => {}
-                }
-            }
+            y.actual = by_year
+                .get(&(Measure::Actual, fiscal_year.clone()))
+                .map(|a| {
+                    let mut out = Actuals::default();
+                    for (cat, slot) in [
+                        (Category::OwnSourceInTransit, 0),
+                        (Category::SharedStateRevenue, 1),
+                        (Category::Reimbursement, 2),
+                    ] {
+                        match sum(a, cat) {
+                            Some(v) => match slot {
+                                0 => out.own_source_cents = v,
+                                1 => out.shared_cents = v,
+                                _ => out.reimbursement_cents = v,
+                            },
+                            // Absent, not zero. A category with no actual reported is a gap in the
+                            // source, and summing it as nought would report a programme that spent
+                            // nothing.
+                            None => out.categories_missing.push(cat),
+                        }
+                    }
+                    out
+                });
             y.real = deflator.and_then(|d| {
                 let one = |c: i64| {
-                    real_dollars::deflate(c, &fiscal_year, d)
+                    real_dollars::deflate(c, fiscal_year, d)
                         .ok()
                         .map(|r| r.real_cents)
                 };
@@ -295,6 +398,7 @@ pub fn analyse(
 
     Ok(Findings {
         years,
+        actual_only_years,
         classification: CLASSIFIED
             .iter()
             .map(|(code, category)| ClassifiedItem {
@@ -422,6 +526,41 @@ mod tests {
             (at("FY2026") as f64) < at("FY2012") as f64 * 0.60,
             "the window ends below three fifths of where it opened"
         );
+    }
+
+    #[test]
+    fn disbursement_tracks_appropriation() {
+        // The finding counts appropriations, which the state chooses. If what was actually paid
+        // diverged from what was authorised, the series would be measuring a decision rather
+        // than an outcome.
+        let f = run();
+        let mut ratios = Vec::new();
+        for y in &f.years {
+            let Some(a) = &y.actual else { continue };
+            let enacted = y.state_money_cents();
+            if enacted == 0 {
+                continue;
+            }
+            let paid = a.shared_cents + a.reimbursement_cents;
+            ratios.push((y.fiscal_year.clone(), paid as f64 / enacted as f64));
+        }
+        assert!(ratios.len() >= 12, "only {} years carry both", ratios.len());
+        for (fy, r) in &ratios {
+            assert!(
+                (0.95..=1.06).contains(r),
+                "{fy}: disbursement was {:.1}% of appropriation",
+                r * 100.0
+            );
+        }
+    }
+
+    #[test]
+    fn a_year_with_no_appropriation_is_named_not_zeroed() {
+        // FY2010 has a disbursement and no appropriation anywhere, permanently. Carried at zero
+        // it would open every chart with a collapse.
+        let f = run();
+        assert_eq!(f.actual_only_years, vec!["FY2010".to_string()]);
+        assert!(!f.years.iter().any(|y| y.fiscal_year == "FY2010"));
     }
 
     #[test]

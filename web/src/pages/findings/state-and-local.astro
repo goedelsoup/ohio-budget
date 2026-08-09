@@ -57,6 +57,7 @@ const groups = [
                   <th class="num">Shared state revenue</th>
                   <th class="num">Reimbursement</th>
                   <th class="num">State money</th>
+                  <th class="num">…as disbursed</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,6 +68,9 @@ const groups = [
                     <td class="num">{dollars(p.shared)}</td>
                     <td class="num">{dollars(p.reimbursement)}</td>
                     <td class="num"><strong>{dollars(p.stateMoney)}</strong></td>
+                    <td class="num">
+                      {p.stateMoneyPaid === null ? '—' : dollars(p.stateMoneyPaid)}
+                    </td>
                   </tr>
                 ))}
                 <tr>
@@ -75,6 +79,7 @@ const groups = [
                   <th class="num">{percent(change(first!.shared, last!.shared), 1)}</th>
                   <th class="num">{percent(change(first!.reimbursement, last!.reimbursement), 1)}</th>
                   <th class="num">{percent(change(first!.stateMoney, last!.stateMoney), 1)}</th>
+                  <th class="num" />
                 </tr>
               </tbody>
             </table>
@@ -83,6 +88,14 @@ const groups = [
             Constant dollars. Fiscal years the price index cannot reach are omitted rather than
             shown nominal beside restated ones, which is why FY2027 is absent though its
             appropriations are enacted.
+          </p>
+
+          <h2>It holds on money actually paid</h2>
+          <p>
+            The table counts appropriations, which is the figure the state chooses. Disbursement
+            runs between 96.1% and 104.5% of it every year with no drift, and over FY2012 to
+            FY2024 state money fell 39.1% as appropriated and 38.1% as paid. The finding does not
+            rest on the choice.
           </p>
 
           <h2>Three mechanisms, one direction</h2>
