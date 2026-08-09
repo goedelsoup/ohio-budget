@@ -167,9 +167,16 @@ pub fn classify_header(h: &str) -> ColumnKind {
     if label == "actual" || label == "actuals" {
         return ColumnKind::Actual { fiscal_year };
     }
-    // Authority after execution-phase adjustment — controlling board transfers and the like.
-    // Neither the enacted figure nor a figure that was spent, and it has been mistaken for
-    // both. See the `adjusted-appropriation-is-a-stage` note in the class docs.
+    // Authority after execution-phase adjustment. OBM defines it: "the original appropriation
+    // minus any executive order reductions plus net transfers" — two mechanisms, one the
+    // governor's and one the Controlling Board's, and the corpus had only recorded the second.
+    //
+    // Neither the enacted figure nor a figure that was spent, and it has been mistaken for both.
+    // The same definition adds a warning worth carrying here: "for prior budget fiscal years,
+    // the adjusted appropriation always equals the sum of disbursements and outstanding
+    // encumbrances". A closed-year adjusted figure is therefore not independent evidence about
+    // what was spent — it is a restatement of it, and comparing the two answers nothing.
+    // See `obm-controlling-board-manual` and the `adjusted-appropriation-is-a-stage` class note.
     // `Adjusted Appropriations FY 2021`, and also `FY 2019 Adjusted Approp. OAKS as of
     // 9/11/2018`, which is the same column abbreviated and dated. Matching the full word missed
     // it silently: the column fell through to `UnknownStage` and the workbook contributed

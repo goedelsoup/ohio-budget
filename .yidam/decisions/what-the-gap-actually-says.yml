@@ -81,6 +81,16 @@ rationale: |
   for FY2019, 30 September 2022 for FY2023. Adjustments made later appear in no committed source,
   so this tests early adjustment and cannot speak for the rest of the year.
 
+  **And the test is narrower than it looks, for a reason found afterwards.** OBM's glossary
+  defines an adjusted appropriation as the original appropriation less executive order reductions
+  plus net transfers — and adds that *for prior budget fiscal years it always equals the sum of
+  disbursements and outstanding encumbrances*. [verified] So a closed-year adjusted figure is a
+  restatement of what was spent, and asking whether the outturn tracks it would return "almost
+  exactly" by construction. The test above is valid only because all three adjusted figures that
+  exist happen to be **current-year**, taken two to three months into the year they describe.
+  That was luck rather than design, and a fourth workbook carrying a closed-year adjusted column
+  would have produced a confident, circular answer.
+
   The [controlling board connector](../../crates/controlling-board/) would settle it and has now
   been scouted rather than left as an unexplained stub. **It is blocked on enumeration, not on
   effort.** The board's manual is reachable and is committed, so the corpus can now say what a

@@ -14,8 +14,28 @@ feeds:
 | File | sha256 | Contents |
 |---|---|---|
 | [`controlling-board-manual-2023-05-04.pdf`](../sources/obm/controlling-board-manual-2023-05-04.pdf) | `7fbad1e0…` | 42 pages: request types, thresholds, exemptions, and the statutory authority for each |
+| [`controlling-board-glossary.pdf`](../sources/obm/controlling-board-glossary.pdf) | `7bb239b5…` | 6 pages defining the board's terms, including **adjusted appropriation** |
 
-- **Retrieved:** 2026-08-09, dated 4 May 2023
+- **Retrieved:** 2026-08-09; the manual is dated 4 May 2023
+
+## The glossary settles what an adjusted appropriation is
+
+> **Adjusted Appropriation.** The amount of the original appropriation minus any executive order
+> reductions plus net transfers. **For prior budget fiscal years, the adjusted appropriation
+> always equals the sum of disbursements and outstanding encumbrances.**
+
+[verified] Two things follow, and the second is a trap the corpus walked past rather than around.
+
+**Two mechanisms, not one.** The corpus's extractor describes the adjusted figure as authority
+after "controlling board transfers and the like". The glossary names the other component:
+executive order reductions, which are the governor's and not the board's.
+
+**A closed-year adjusted appropriation cannot test whether adjustment explains the gap.** For a
+prior year it is *defined* as disbursements plus encumbrances, so asking whether the outturn
+tracks it would return "almost exactly" by construction and mean nothing at all. See
+[what the gap actually says](../decisions/what-the-gap-actually-says.yml), whose test survives
+only because all three adjusted figures available happen to be current-year — taken two to three
+months into the fiscal year they describe. That was luck.
 
 ## It is the specification, not the data
 

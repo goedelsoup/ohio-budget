@@ -48,16 +48,22 @@ controlling board action *is*.
 
     obm.ohio.gov/.../controlling-board/agendas-and-minutes        HTTP 404
     obm.ohio.gov/.../controlling-board/search-for-prior-records   HTTP 404
-    archives.obm.ohio.gov/Files/Controlling_Board/                HTTP 403 (no listing)
-    archives.obm.ohio.gov/Files/.../<known file>.pdf              HTTP 200
+    archives.obm.ohio.gov/Files/.../<known file>.pdf              a PDF
+    archives.obm.ohio.gov/Files/.../<anything else>               18.6 kB of HTML, **HTTP 200**
+
+**Probe the archive by content, not by status.** It answers 200 to everything, including
+`this-cannot-possibly-exist-9137.pdf`, and returns a soft-404 page rather than an error. Six
+guessed agenda paths all "succeeded" and all returned the same HTML; the manual returned 1.3 MB
+of PDF. A scout that trusted the status code would have reported the agendas as reachable and
+written a parser against an error page.
 
 Individual files serve fine once their URL is known. Nothing offers a way to learn the URLs:
-agendas sit behind a search form, the archive host refuses directory listing, and the portal
-pages return 404 to a plain fetch. A connector could parse a request perfectly and have nothing
-to point it at.
+agendas sit behind a search form, and the obvious path conventions — `Agendas/2025/`,
+`Meeting_Agendas/2025/`, date-stamped filenames in three formats — are not it. A connector could
+parse a request perfectly and have nothing to point it at.
 
 **What would unblock it**, in order of likelihood: a naming convention for agenda PDFs inferred
-from a handful of known ones; a public records request for the approved-requests dataset, which
+from a handful of known ones — attempted and unsuccessful, six paths tried; a public records request for the approved-requests dataset, which
 OBM maintains as a searchable database and therefore holds in structured form; or driving the
 search form, which this repository does not do.
 
