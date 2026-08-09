@@ -1,0 +1,105 @@
+id: three-kinds-of-money-to-local-government
+summary: >-
+  The revenue distribution funds carry three different things under one agency code, and summing
+  them answers nothing. Separated, state money to Ohio's local governments fell 40.2% in real
+  terms between FY2012 and FY2026 while the locally levied taxes the state merely collects and
+  returns rose 48.1%. Every local-finance result this corpus has recorded is an instance.
+context: |
+  Agency `RDF`, revenue distribution funds, appropriates $9.93B in FY2026 across 31 line items.
+  It is an accounting container rather than a programme, and three unrelated kinds of money sit
+  in it:
+
+  - **Own-source revenue in transit.** A county levies a permissive sales tax; the state collects
+    it and hands it back. `Permissive Sales Tax Distribution` is $3.707B in FY2026, seven times
+    the local government fund, and not one cent of it is state support. The state is a collection
+    agent.
+  - **Shared state revenue.** The state levies a tax and distributes a statutory share. The
+    [local government fund](../corpus/line-item/local-government-fund-distribution.yml) and the
+    [public library fund](../corpus/line-item/public-library-fund-distribution.yml) are this, and
+    so is the casino tax.
+  - **Reimbursement.** The state compensates local governments for revenue it eliminated or
+    relieved — the
+    [property tax rollbacks and homestead exemption](../corpus/line-item/property-tax-rollback-reimbursement.yml),
+    and the tangible personal property replacement being wound down.
+
+  A total of `RDF` mixes all three. So does any statement about "state money to local government"
+  that starts from the agency, which is how
+  [the sixth slice error](./appropriation-is-not-distribution.yml) was made — by taking an
+  accounting boundary for a policy one.
+decision: |
+  Classify these line items by **where the money comes from and why it moves**, not by the agency
+  that appropriates them. Three categories, and the assignment is `[inference]` from each line
+  item's name and mechanism because no source states it:
+
+  | | codes |
+  |---|---|
+  | own-source, in transit | 110963, 110967, 110902, 110995, 762902, 110962 |
+  | shared state revenue | 110969, 110965, 110633, 110634, 110636, 762901, 110617, 762900, 110982, 110996 |
+  | reimbursement | 110908, 200903, 110907, 200902, 110403, 200417, 110981, 110954, 110901, 200901, 200909, 200900 |
+
+  Enacted appropriations restated in FY2025 dollars, billions: [verified]
+
+  | fiscal year | own-source | shared | reimbursement | **state money** |
+  |---|---|---|---|---|
+  | FY2012 | 3.22 | 2.23 | 3.97 | **6.20** |
+  | FY2014 | 3.56 | 1.94 | 3.35 | **5.29** |
+  | FY2016 | 4.03 | 1.89 | 3.07 | **4.96** |
+  | FY2018 | 4.13 | 1.78 | 2.65 | **4.43** |
+  | FY2020 | 4.26 | 1.85 | 2.45 | **4.29** |
+  | FY2022 | 4.15 | 1.67 | 2.09 | **3.76** |
+  | FY2024 | 4.90 | 1.81 | 1.96 | **3.77** |
+  | FY2026 | 4.78 | 1.75 | 1.95 | **3.70** |
+
+  **FY2012 to FY2026, in real terms: own-source +48.1%, shared -21.3%, reimbursement -50.8%,
+  state money combined -40.2%.** [verified]
+
+  State support to Ohio's local governments fell by two fifths in fifteen years. Over the same
+  period the taxes those governments levy themselves — which the state collects and returns,
+  and which appear in the same agency's appropriations — rose by nearly half.
+rationale: |
+  ## Every local-finance result in this corpus is an instance of this
+
+  The corpus found them one line item at a time and each looked like its own event:
+
+  - The local government fund [was cut 41% in one year](../corpus/line-item/local-government-fund-distribution.yml)
+    by a changed statutory percentage, and never recovered — shared revenue, cut by decision.
+  - The [rollback reimbursement](../corpus/line-item/property-tax-rollback-reimbursement.yml) rose
+    in nominal dollars every biennium and fell about a quarter in real terms — reimbursement,
+    eroded by not being indexed.
+  - The tangible personal property replacement falls toward zero across eight ALIs — reimbursement,
+    wound down deliberately.
+
+  Three mechanisms, one direction. The categories are what make that visible: a share of state
+  revenue and a fixed reimbursement fail in different ways, and both fail.
+
+  ## Why the composition matters more than the total
+
+  A local government reading only the total sees its state money halve. Reading the composition
+  it sees something more specific: **the part the state controls shrank, and the part it merely
+  handles grew.** By FY2026 the state collects $4.78B of local taxes and passes them through, and
+  appropriates $3.70B of its own money — the first exceeded the second in FY2013 and the gap has
+  widened every biennium since.
+
+  That is a structural change in what "state and local finance" means in Ohio, and no single
+  appropriation figure contains it.
+
+  ## What this is not
+
+  **The classification is a reading, not a record.** No source marks these categories. Casino
+  revenue is treated as shared state revenue because the state levies the tax, and the
+  auto-registration and fuel-tax distributions likewise; a reader who classified the fuel tax as
+  a user fee returned to the roads that collected it would draw a different line and get different
+  totals. The codes are listed above so that argument can be had against the same figures.
+
+  **`Investment Earnings` at $1.050B is excluded from all three**, along with the small
+  miscellaneous funds. It is not money to local government.
+
+  [open] The series counts **appropriations**, not disbursements. Actuals exist for most of these
+  line items and are not summed here, and a reimbursement appropriated is not a reimbursement
+  paid.
+
+  [open] It also counts only what flows through `RDF`, `EDU` and `TAX`. State money reaches local
+  government through other channels — school foundation funding most obviously, which is an order
+  of magnitude larger than all of this and is not a local-government transfer in the same sense.
+  The boundary drawn here is "shared taxes and reimbursements", and it is a boundary, which is
+  the thing this corpus has now got wrong six times.

@@ -55,6 +55,14 @@ description: |
   argue with it — the amount follows a statutory percentage, so there is no discretionary
   decision anywhere in the series to explain the shape away.
 
+  **And it is not an isolated event.** Separating the revenue distribution funds into money the
+  state shares, money it reimburses, and money it merely collects and returns,
+  [state support to Ohio's local governments fell 40.2% in real terms between FY2012 and
+  FY2026](../../decisions/three-kinds-of-money-to-local-government.yml), while the locally levied
+  taxes passing through the same agency rose 48.1%. [verified] This line item's 41% cut is the
+  loudest instance of a decline that also reached the property tax reimbursements, by an entirely
+  different mechanism and with no vote attached.
+
   [open] The code, and the percentage by biennium across the window, are unverified.
   ALI 110969. The source assigns it to agency `RDF`, revenue distribution funds, not to
   the Department of Taxation as this node asserted. [verified] RDF is an accounting
