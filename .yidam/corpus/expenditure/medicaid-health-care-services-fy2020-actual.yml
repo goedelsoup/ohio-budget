@@ -1,0 +1,22 @@
+class: expenditure
+label: Medicaid Health Care Services — FY2020, Actual
+description: |
+  $10,586,261,761.86 charged against line item 651525 in FY2020, on closed books. [verified]
+
+  FY2020 spending came in **$3,526,075,752.14 under** authority — 25.0%, by far the largest variance the corpus has measured. The federal match rate rose during the public health emergency, which moves cost off the general revenue share without reducing what the programme spent. [inference] Read as a general revenue underspend it looks like a collapse in Medicaid; it is not.
+properties:
+  amount: "$10,586,261,761.86"
+  basis: actual-closed
+  period_label: FY2020
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 166, ALI 651525, column
+    "Actual FY 2020". Committed at .yidam/sources/lsc/ with sha256 ffeb622d. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2020.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

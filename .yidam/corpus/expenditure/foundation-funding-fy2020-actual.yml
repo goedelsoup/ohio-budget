@@ -1,0 +1,22 @@
+class: expenditure
+label: Foundation Funding — FY2020, Actual
+description: |
+  $6,687,924,225.44 charged against line item 200550 in FY2020, on closed books. [verified]
+
+  FY2020 spending came in $255,088,619.56 under authority, 3.7%. The year ran to 2020-06-30 and schools closed statewide that March, so a formula-driven distribution measured against a pre-pandemic appropriation is not measuring ordinary execution. [inference]
+properties:
+  amount: "$6,687,924,225.44"
+  basis: actual-closed
+  period_label: FY2020
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 166, ALI 200550, column
+    "Actual FY 2020". Committed at .yidam/sources/lsc/ with sha256 ffeb622d. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2020.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

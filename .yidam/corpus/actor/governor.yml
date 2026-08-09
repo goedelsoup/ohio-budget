@@ -51,6 +51,24 @@ description: |
 
   [open] 64 of the 67 rationales are not yet transcribed into the corpus. They belong in one
   node per item.
+  **A veto eliminated a line item outright in HB 166, and that changes the shape of this claim.**
+  Between the conference report and the enacted text, ALI 651691 — Rural Healthcare Workforce
+  Training and Retention Program, Medicaid, fund 5VW0 — went from $15,000,000 to **$0** in
+  FY2020 and from $30,000,000 to **$0** in FY2021. [verified] A $45 million programme struck
+  entirely.
+
+  So the item veto does reach appropriation amounts. It did not in HB 33 or HB 96, where every
+  one of the 44 and 67 items struck language — but those are facts about two bills, not about
+  the power. The corpus was one biennium away from generalising them into a claim about the
+  instrument.
+
+  **This also settles how LSC's enacted column is read.** HB 166 heads it
+  `As Enacted after Governor's Vetoes`, where HB 96 and HB 33 head the same column in the same
+  series simply `As Enacted`, and its conference-to-enacted delta is non-zero. The columns
+  straddle the veto. That was recorded here as an open question, and the earlier inference —
+  identical columns meaning the vetoes moved no money — turns out to have been sound reasoning
+  on a premise that had not yet been checked.
+
 properties:
   name: Governor of Ohio
   role_type: executive

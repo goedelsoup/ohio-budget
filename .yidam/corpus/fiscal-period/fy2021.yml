@@ -1,0 +1,22 @@
+class: fiscal-period
+label: Fiscal Year 2021
+description: |
+  The state fiscal year running 2020-07-01 through 2021-06-30.
+
+  Seeded with FY2020 when HB 166's workbooks were committed and the FY2020-21 nodes were split
+  per year, per [period-granularity](../../decisions/period-granularity.yml).
+
+  [open] No committed source carries FY2021 actuals. HB 166's update workbook was published
+  during FY2021 and reports that year as an *adjusted appropriation*; HB 110's with-actuals
+  workbook would close it.
+properties:
+  label: FY2021
+  period_type: fiscal-year
+  start_date: 2020-07-01
+  end_date: 2021-06-30
+  general_assembly: 133rd
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2020-21.yml
+    relationship: contained-by

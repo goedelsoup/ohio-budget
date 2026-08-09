@@ -369,9 +369,17 @@ impl BillStage {
             "conference report" | "conference" | "as reported by conference committee" => {
                 Some(BillStage::ConferenceReport)
             }
-            "as enacted" | "enacted" | "as signed by the governor" | "final" => {
-                Some(BillStage::AsEnacted)
-            }
+            // HB 166 heads this column `As Enacted after Governor's Vetoes`, spelling out what
+            // HB 96 and HB 33 leave implicit in `As Enacted`. Same publisher, same position in
+            // the same series of workbooks, so it is the same stage — and the explicit spelling
+            // is the best evidence available that LSC's enacted column is taken *after* the
+            // governor acts, a question this repository had recorded as open. [inference]
+            "as enacted"
+            | "enacted"
+            | "as signed by the governor"
+            | "final"
+            | "as enacted after governor s vetoes"
+            | "as enacted after governors vetoes" => Some(BillStage::AsEnacted),
             "post veto" | "as vetoed" | "after line item veto" => Some(BillStage::PostVeto),
             _ => None,
         }

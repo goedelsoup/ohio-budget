@@ -1,0 +1,33 @@
+class: appropriation
+label: Local Government Fund Distribution — FY2020, As Enacted
+description: |
+  $417,300,000.00 for line item 110969 in FY2020, appropriated by
+  [HB 166](../bill/hb166-133rd.yml). [verified]
+
+  FY2020 spending came in $23,653,468.80 under authority, 5.7%. This line distributes a share of state tax receipts, so a shortfall against appropriation is largely a shortfall in the receipts themselves. [inference]
+
+  From the column HB 166 heads `As Enacted after Governor's Vetoes` — the workbook that
+  settled whether LSC's enacted figure is taken before or after the executive acts. It is
+  after. See [the catalog entry](../../catalog/lsc-hb166-appropriation-spreadsheet.md).
+properties:
+  amount: "$417,300,000.00"
+  period_label: FY2020
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 166 as enrolled, sheet EN, ALI 110969, column
+    "As Enacted after Governor's Vetoes FY 2020". Committed at .yidam/sources/lsc/ with
+    sha256 b5533209. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2020.yml
+    relationship: covers
+  - target: ../expenditure/local-government-fund-distribution-fy2020-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

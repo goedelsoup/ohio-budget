@@ -1,0 +1,22 @@
+class: expenditure
+label: Institutional Operations — FY2020, Actual
+description: |
+  $1,121,092,596.66 charged against line item 501321 in FY2020, on closed books. [verified]
+
+  FY2020 spending came in $5,496,669.34 under authority, 0.49%.
+properties:
+  amount: "$1,121,092,596.66"
+  basis: actual-closed
+  period_label: FY2020
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 166, ALI 501321, column
+    "Actual FY 2020". Committed at .yidam/sources/lsc/ with sha256 ffeb622d. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/institutional-operations.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2020.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

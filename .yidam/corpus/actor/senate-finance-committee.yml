@@ -24,13 +24,28 @@ description: |
   51.3%. So the Senate's share of the rewriting is not a stable property of the role — it
   roughly doubled between the two biennia while the House's stayed near half.
 
-  The floor result is stable where the magnitudes are not: across both bills and all four
-  fiscal years, zero line items and zero dollars moved between the reported and passed
-  versions in either chamber. [verified]
+  Across HB 96 and HB 33 — both bills, all four fiscal years — zero line items and zero dollars
+  moved between the reported and passed versions in either chamber. [verified]
 
   This node previously recorded the cross-biennium question as blocked. It was not; see
-  [house-finance-committee](./house-finance-committee.yml) for the mistake, which was mine and
-  was reading the wrong sheet of a workbook already committed here.
+  [house-finance-committee](./house-finance-committee.yml) for that mistake.
+
+  **A third biennium breaks the floor result, and it breaks on this chamber.** HB 166, FY2020-21, measured across all 1,371 line items: the
+  House floor still moved nothing, but the **Senate floor did**. [verified]
+
+  | | HB 166 FY2020 | HB 166 FY2021 |
+  |---|---|---|
+  | House reported → as passed by House | 0 items | 0 items |
+  | Senate reported → **as passed by Senate** | **2 items, +$11.1M** | **1 item, +$0.1M** |
+
+  Lupus Awareness (ALI 440481, Health) gained $100,000 on the Senate floor in each year, and
+  Local Disaster Assistance (ALI 763511, Public Safety) gained $11,000,000 in FY2020.
+
+  So the finding is narrower than two biennia suggested: chamber floors *rarely* move money and
+  the House floor has moved none in three bills, but "the floors change nothing" is false. Two
+  observations agreeing is a weaker thing than it feels like, and the corpus recorded it as a
+  pattern one biennium before it had a counterexample.
+
 properties:
   name: Senate Finance Committee
   role_type: committee

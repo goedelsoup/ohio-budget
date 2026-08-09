@@ -1,0 +1,33 @@
+class: appropriation
+label: Foundation Funding — FY2020, As Enacted
+description: |
+  $6,942,880,845.00 for line item 200550 in FY2020, appropriated by
+  [HB 166](../bill/hb166-133rd.yml). [verified]
+
+  FY2020 spending came in $255,088,619.56 under authority, 3.7%. The year ran to 2020-06-30 and schools closed statewide that March, so a formula-driven distribution measured against a pre-pandemic appropriation is not measuring ordinary execution. [inference]
+
+  From the column HB 166 heads `As Enacted after Governor's Vetoes` — the workbook that
+  settled whether LSC's enacted figure is taken before or after the executive acts. It is
+  after. See [the catalog entry](../../catalog/lsc-hb166-appropriation-spreadsheet.md).
+properties:
+  amount: "$6,942,880,845.00"
+  period_label: FY2020
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 166 as enrolled, sheet EN, ALI 200550, column
+    "As Enacted after Governor's Vetoes FY 2020". Committed at .yidam/sources/lsc/ with
+    sha256 b5533209. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2020.yml
+    relationship: covers
+  - target: ../expenditure/foundation-funding-fy2020-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,0 +1,22 @@
+class: expenditure
+label: Local Government Fund Distribution — FY2020, Actual
+description: |
+  $393,646,531.20 charged against line item 110969 in FY2020, on closed books. [verified]
+
+  FY2020 spending came in $23,653,468.80 under authority, 5.7%. This line distributes a share of state tax receipts, so a shortfall against appropriation is largely a shortfall in the receipts themselves. [inference]
+properties:
+  amount: "$393,646,531.20"
+  basis: actual-closed
+  period_label: FY2020
+  reporting_source: |
+    LSC appropriation spreadsheet with actual expenditures, HB 166, ALI 110969, column
+    "Actual FY 2020". Committed at .yidam/sources/lsc/ with sha256 ffeb622d. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2020.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,0 +1,31 @@
+class: appropriation
+label: Local Government Fund Distribution — FY2021, As Enacted
+description: |
+  $424,900,000.00 for line item 110969 in FY2021, appropriated by
+  [HB 166](../bill/hb166-133rd.yml). [verified]
+
+  [open] FY2021 actuals are not carried by any committed source; HB 110's with-actuals workbook would close it.
+
+  From the column HB 166 heads `As Enacted after Governor's Vetoes` — the workbook that
+  settled whether LSC's enacted figure is taken before or after the executive acts. It is
+  after. See [the catalog entry](../../catalog/lsc-hb166-appropriation-spreadsheet.md).
+properties:
+  amount: "$424,900,000.00"
+  period_label: FY2021
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 166 as enrolled, sheet EN, ALI 110969, column
+    "As Enacted after Governor's Vetoes FY 2021". Committed at .yidam/sources/lsc/ with
+    sha256 b5533209. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2021.yml
+    relationship: covers
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

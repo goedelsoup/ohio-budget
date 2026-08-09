@@ -17,14 +17,20 @@ description: |
   **And it matters more than expected.** This role carries 15.3% of HB 96's total movement
   across 79 line items — comparable to the Senate substitute's 17.0%. [verified]
 
-  It is also the last stage at which any appropriation figure changes. That was asserted here
-  from the spreadsheet's columns, withdrawn when the columns turned out unable to support it,
-  and now holds on the [veto message](../../catalog/governor-hb96-veto-messages.md): none of the
-  governor's 67 items struck an amount. [verified]
+  It is the last stage at which any appropriation figure changes **in HB 96 and HB 33** — which
+  holds on those bills' [veto messages](../../catalog/governor-hb96-veto-messages.md), where none
+  of the governor's 67 and 44 items struck an amount. [verified] The claim was asserted here from
+  the spreadsheet's columns first, withdrawn when the columns turned out unable to support it,
+  and restored on the messages.
 
-  The qualification is real, though. Vetoes moved money *within* line items — a 5% set-aside on
-  State Share of Instruction, three dredging earmarks, a recipient restriction — so this role is
-  the last to move a **figure**, not the last to move money. [verified]
+  **It does not hold in HB 166**, where the governor struck a $45 million line item after
+  conference reported it — see [governor](./governor.yml). So this role is the last to move a
+  figure in two of the three biennia the corpus has measured, and the exception is the executive
+  rather than anything legislative.
+
+  Even where it holds, it holds only for figures. Vetoes moved money *within* line items — a 5%
+  set-aside on State Share of Instruction, three dredging earmarks, a recipient restriction —
+  so "last to move a figure" and "last to move money" are different claims. [verified]
 
   What was true regardless: among the legislative stages this is the last one that moves money,
   and it is the least documented of them. Where the chambers leave a record of committee

@@ -18,5 +18,9 @@ properties:
 links:
   - target: ../fiscal-period.ont.yml
     relationship: instance-of
+  - target: ./fy2021.yml
+    relationship: contains
+  - target: ./fy2020.yml
+    relationship: contains
   - target: ./fy2022-23.yml
     relationship: precedes

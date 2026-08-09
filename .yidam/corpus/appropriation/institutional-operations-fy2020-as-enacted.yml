@@ -1,0 +1,33 @@
+class: appropriation
+label: Institutional Operations — FY2020, As Enacted
+description: |
+  $1,126,589,266.00 for line item 501321 in FY2020, appropriated by
+  [HB 166](../bill/hb166-133rd.yml). [verified]
+
+  FY2020 spending came in $5,496,669.34 under authority, 0.49%.
+
+  From the column HB 166 heads `As Enacted after Governor's Vetoes` — the workbook that
+  settled whether LSC's enacted figure is taken before or after the executive acts. It is
+  after. See [the catalog entry](../../catalog/lsc-hb166-appropriation-spreadsheet.md).
+properties:
+  amount: "$1,126,589,266.00"
+  period_label: FY2020
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation spreadsheet, HB 166 as enrolled, sheet EN, ALI 501321, column
+    "As Enacted after Governor's Vetoes FY 2020". Committed at .yidam/sources/lsc/ with
+    sha256 b5533209. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/institutional-operations.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2020.yml
+    relationship: covers
+  - target: ../expenditure/institutional-operations-fy2020-actual.yml
+    relationship: realized-by
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

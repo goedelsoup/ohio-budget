@@ -40,6 +40,11 @@ pub enum ColumnKind {
     Actual {
         fiscal_year: String,
     },
+    /// Authority as it stood partway through execution, after transfers and other
+    /// post-enactment changes. Distinct from the enacted figure and from what was spent.
+    AdjustedAppropriation {
+        fiscal_year: String,
+    },
     /// Somebody's projection. Never an appropriation, and never an actual.
     Estimate {
         fiscal_year: String,
@@ -69,8 +74,29 @@ fn norm(h: &str) -> String {
         .join(" ")
 }
 
+/// Drops parenthesised asides from a header.
+///
+/// HB 166 heads its substitute columns `House Substitute (LSC 133 0001-4) FY 2020`. The
+/// parenthetical names the drafting document, which identifies the amendment and says nothing
+/// about the stage — but it survives normalisation as `lsc 133 0001 4` and turns a label the
+/// classifier knows into one it does not.
+fn without_parentheticals(h: &str) -> String {
+    let mut out = String::with_capacity(h.len());
+    let mut depth = 0usize;
+    for c in h.chars() {
+        match c {
+            '(' => depth += 1,
+            ')' => depth = depth.saturating_sub(1),
+            _ if depth == 0 => out.push(c),
+            _ => {}
+        }
+    }
+    out
+}
+
 /// Removes the fiscal-year tokens, leaving whatever labels the column.
 fn label_without_year(h: &str) -> String {
+    let h = &without_parentheticals(h);
     let n = norm(h);
     let mut out: Vec<&str> = Vec::new();
     let toks: Vec<&str> = n.split_whitespace().collect();
@@ -122,6 +148,23 @@ pub fn classify_header(h: &str) -> ColumnKind {
     if label.is_empty() {
         // A bare fiscal year in an as-enacted document is the completed year's outturn.
         return ColumnKind::Actual { fiscal_year };
+    }
+    // Columns the publisher derived from two others. Skipped deliberately rather than
+    // reported as unclassified: a `$ Change` column is arithmetic, and ingesting it would put
+    // a derived figure beside its own inputs.
+    if label.contains("change") {
+        return ColumnKind::Other;
+    }
+    // `Actual FY 2020`. HB 96 and HB 33 head a completed year with a bare fiscal year; HB 166
+    // and HB 110 say so.
+    if label == "actual" || label == "actuals" {
+        return ColumnKind::Actual { fiscal_year };
+    }
+    // Authority after execution-phase adjustment — controlling board transfers and the like.
+    // Neither the enacted figure nor a figure that was spent, and it has been mistaken for
+    // both. See the `adjusted-appropriation-is-a-stage` note in the class docs.
+    if label.starts_with("adjusted appropriation") {
+        return ColumnKind::AdjustedAppropriation { fiscal_year };
     }
     if label.contains("estimate") || label.contains("projected") {
         return ColumnKind::Estimate {
@@ -198,6 +241,82 @@ impl ColumnPlan {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_drafting_reference_in_a_header_does_not_hide_the_stage() {
+        // HB 166: `House Substitute (LSC 133 0001-4) FY 2020`. The parenthetical names the
+        // amendment document and survives normalisation as `lsc 133 0001 4`, turning a label
+        // the classifier knows into one it does not — four columns lost that way.
+        assert_eq!(
+            classify_header("House Substitute\r\n(LSC 133 0001-4)\r\nFY 2020"),
+            ColumnKind::Appropriation {
+                stage: BillStage::HouseSubstitute,
+                fiscal_year: "FY2020".into()
+            }
+        );
+    }
+
+    #[test]
+    fn lsc_spells_out_that_its_enacted_column_is_post_veto() {
+        // HB 166 heads it `As Enacted after Governor's Vetoes`; HB 96 and HB 33 head the same
+        // column `As Enacted`. Reading them as the same stage is what lets the explicit
+        // spelling speak for the implicit ones.
+        for h in [
+            "As Enacted after Governor's Vetoes\r\nFY 2020",
+            "As Enacted\r\nFY 2026",
+            "Enacted\r\nFY 2024",
+        ] {
+            assert!(
+                matches!(
+                    classify_header(h),
+                    ColumnKind::Appropriation {
+                        stage: BillStage::AsEnacted,
+                        ..
+                    }
+                ),
+                "{h:?}"
+            );
+        }
+    }
+
+    #[test]
+    fn an_adjusted_appropriation_is_neither_enacted_nor_spent() {
+        // Authority partway through execution. Classifying it as an appropriation would put a
+        // post-transfer figure in the enacted series; as an actual, it would count authority
+        // as spending.
+        assert_eq!(
+            classify_header("Adjusted Appropriations\r\nFY 2021"),
+            ColumnKind::AdjustedAppropriation {
+                fiscal_year: "FY2021".into()
+            }
+        );
+    }
+
+    #[test]
+    fn a_spelled_out_actual_and_a_bare_year_are_the_same_thing() {
+        assert_eq!(
+            classify_header("Actual\r\nFY 2020"),
+            ColumnKind::Actual {
+                fiscal_year: "FY2020".into()
+            }
+        );
+        assert_eq!(
+            classify_header("FY 2024"),
+            ColumnKind::Actual {
+                fiscal_year: "FY2024".into()
+            }
+        );
+    }
+
+    #[test]
+    fn a_derived_change_column_is_skipped_rather_than_reported_unclassified() {
+        // `$ Change FY 2020` is arithmetic on two other columns. Ingesting it would store a
+        // derivation beside its own inputs; reporting it as unclassified would imply a figure
+        // was lost.
+        for h in ["$ Change\r\nFY 2020", "% Change\r\nFY 2021"] {
+            assert_eq!(classify_header(h), ColumnKind::Other, "{h:?}");
+        }
+    }
 
     #[test]
     fn the_two_spellings_of_the_conference_stage_both_classify() {

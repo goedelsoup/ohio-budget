@@ -50,7 +50,9 @@ fn header_score(row: &[String]) -> usize {
     row.iter()
         .map(|h| match classify_header(h) {
             ColumnKind::Identity(_) => 3,
-            ColumnKind::Appropriation { .. } | ColumnKind::Actual { .. } => 2,
+            ColumnKind::Appropriation { .. }
+            | ColumnKind::Actual { .. }
+            | ColumnKind::AdjustedAppropriation { .. } => 2,
             ColumnKind::Estimate { .. } | ColumnKind::UnknownStage { .. } => 1,
             ColumnKind::Other => 0,
         })

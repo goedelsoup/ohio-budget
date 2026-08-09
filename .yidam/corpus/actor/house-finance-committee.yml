@@ -47,6 +47,23 @@ description: |
   read `Final`, the nine-column summary, then generalised from it to the workbook. `EN` carries
   all sixteen stage columns, and had done since it was committed. See
   [the catalog entry](../../catalog/lsc-hb33-appropriation-spreadsheet.md).
+
+  **A third biennium breaks the result — though not for this chamber.** HB 166, FY2020-21, measured across all 1,371 line items: the
+  House floor still moved nothing, but the **Senate floor did**. [verified]
+
+  | | HB 166 FY2020 | HB 166 FY2021 |
+  |---|---|---|
+  | House reported → as passed by House | 0 items | 0 items |
+  | Senate reported → **as passed by Senate** | **2 items, +$11.1M** | **1 item, +$0.1M** |
+
+  Lupus Awareness (ALI 440481, Health) gained $100,000 on the Senate floor in each year, and
+  Local Disaster Assistance (ALI 763511, Public Safety) gained $11,000,000 in FY2020.
+
+  So the finding is narrower than two biennia suggested: chamber floors *rarely* move money and
+  the House floor has moved none in three bills, but "the floors change nothing" is false. Two
+  observations agreeing is a weaker thing than it feels like, and the corpus recorded it as a
+  pattern one biennium before it had a counterexample.
+
 properties:
   name: House Finance Committee
   role_type: committee
