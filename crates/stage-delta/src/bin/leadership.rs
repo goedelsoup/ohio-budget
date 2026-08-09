@@ -370,6 +370,8 @@ fn executive_baseline(dir: &std::path::Path) -> Result<()> {
     println!("\n  Joined on (agency, ALI, fund group) across two workbooks; keys appearing twice");
     println!("  in either are dropped rather than paired with a component of themselves.");
 
+    conference(dir, &pairs)?;
+
     for c in [
         Conditioning {
             prior: (Stage::PreviousEnacted, Stage::Here(BillStage::AsIntroduced)),
@@ -530,5 +532,126 @@ fn conditional(
         ca,
         pct((cb > 0).then(|| ca as f64 / cb as f64 * 100.0)),
     );
+    Ok(())
+}
+
+/// Where conference lands when the two chambers disagree.
+///
+/// # Why this needs its own measurement
+///
+/// The conditioning table says conference restores 93.9% of what the Senate cut, and that a
+/// line item is twice as likely to arrive there cut as raised. Both are consistent with
+/// conference deciding something and with conference doing nothing but average two positions,
+/// and those are very different claims about how Ohio's budget is settled.
+///
+/// The test is positional rather than directional. Where the House-passed and Senate-passed
+/// figures differ, the conference report can only land in one of four places, and they mean
+/// different things:
+///
+/// - **at one chamber's figure** — that chamber prevailed on this line;
+/// - **strictly between them** — a split, which is what "splitting the difference" would mean;
+/// - **outside both** — conference did something neither chamber had proposed, which is the only
+///   one of the four that is conference exercising judgment of its own.
+fn conference(dir: &std::path::Path, pairs: &[(&str, &str, &str, &str, &str, &str)]) -> Result<()> {
+    println!("\n═══ Where conference lands when the chambers disagree\n");
+    println!(
+        "  {:<7} {:<6} │ {:>7} {:>8} {:>8} {:>8} {:>8} │ {:>9}",
+        "bill", "GA", "differ", "House", "Senate", "between", "outside", "median"
+    );
+    println!("  {}", "─".repeat(74));
+
+    let (mut th, mut ts, mut tb, mut to) = (0usize, 0usize, 0usize, 0usize);
+    let (mut gh, mut gs, mut gb, mut go) = (0i128, 0i128, 0i128, 0i128);
+    let mut all_positions: Vec<f64> = Vec::new();
+
+    for b in pairs {
+        let house = figures(dir, b, Stage::Here(BillStage::AsPassedHouse))?;
+        let senate = figures(dir, b, Stage::Here(BillStage::AsPassedSenate))?;
+        let conf = figures(dir, b, Stage::Here(BillStage::ConferenceReport))?;
+
+        let (mut at_h, mut at_s, mut between, mut outside) = (0usize, 0usize, 0usize, 0usize);
+        // Dollars beside counts, because on this corpus they have disagreed every time they
+        // have been asked separately. 77% of *line items* is not 77% of the money.
+        let (mut dh, mut ds, mut db, mut d_out) = (0i128, 0i128, 0i128, 0i128);
+        let mut positions: Vec<f64> = Vec::new();
+        for (k, h) in &house {
+            let (Some(s), Some(c)) = (senate.get(k), conf.get(k)) else {
+                continue;
+            };
+            if h == s {
+                continue;
+            }
+            let spread = (h - s).unsigned_abs() as i128;
+            if c == h {
+                at_h += 1;
+                dh += spread
+            } else if c == s {
+                at_s += 1;
+                ds += spread
+            } else if (c > h.min(s)) && (c < h.max(s)) {
+                between += 1;
+                db += spread
+            } else {
+                outside += 1;
+                d_out += spread
+            }
+            // 0.0 at the Senate's figure, 1.0 at the House's. Meaningful for every case,
+            // including the ones that land outside — those simply fall beyond [0, 1].
+            positions.push((c - s) as f64 / (h - s) as f64);
+        }
+        let n = at_h + at_s + between + outside;
+        positions.sort_by(|x, y| x.partial_cmp(y).unwrap_or(std::cmp::Ordering::Equal));
+        let median = positions.get(positions.len() / 2).copied();
+        all_positions.extend(positions);
+        th += at_h;
+        ts += at_s;
+        tb += between;
+        to += outside;
+        gh += dh;
+        gs += ds;
+        gb += db;
+        go += d_out;
+        println!(
+            "  {:<7} {:<6} │ {n:>7} {at_h:>8} {at_s:>8} {between:>8} {outside:>8} │ {:>9}",
+            b.0,
+            ga_of(b.0),
+            median
+                .map(|m| format!("{m:.2}"))
+                .unwrap_or_else(|| "—".into())
+        );
+    }
+    let n = th + ts + tb + to;
+    all_positions.sort_by(|x, y| x.partial_cmp(y).unwrap_or(std::cmp::Ordering::Equal));
+    println!("  {}", "─".repeat(74));
+    println!(
+        "  {:<7} {:<6} │ {n:>7} {th:>8} {ts:>8} {tb:>8} {to:>8} │ {:>9}",
+        "POOLED",
+        "",
+        all_positions
+            .get(all_positions.len() / 2)
+            .map(|m| format!("{m:.2}"))
+            .unwrap_or_else(|| "—".into())
+    );
+    let total = gh + gs + gb + go;
+    let share = |v: i128| {
+        if total > 0 {
+            format!("{:.1}%", v as f64 / total as f64 * 100.0)
+        } else {
+            "—".into()
+        }
+    };
+    println!(
+        "\n  by contested dollars │ {:>7} {:>8} {:>8} {:>8} {:>8}",
+        "",
+        share(gh),
+        share(gs),
+        share(gb),
+        share(go)
+    );
+    println!(
+        "\n  Position is 0.00 at the Senate's figure and 1.00 at the House's. `outside` counts"
+    );
+    println!("  reports that fell beyond both chambers — the only column in which conference is");
+    println!("  doing something neither chamber proposed.");
     Ok(())
 }

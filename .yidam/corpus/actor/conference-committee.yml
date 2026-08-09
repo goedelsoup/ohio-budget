@@ -35,6 +35,57 @@ description: |
   What was true regardless: among the legislative stages this is the last one that moves money,
   and it is the least documented of them. Where the chambers leave a record of committee
   deliberation, this stage produces a report and a vote.
+
+  ## Where it lands depends entirely on whether you count lines or dollars
+
+  Across all four biennia, on every line item where the House-passed and Senate-passed figures
+  disagree — 753 of them — the conference report lands: [verified]
+
+  | | line items | share of lines | share of contested dollars |
+  |---|---|---|---|
+  | exactly at the **Senate's** figure | 581 | **77.2%** | 33.0% |
+  | exactly at the House's figure | 73 | 9.7% | 6.9% |
+  | **strictly between the two** | 47 | 6.2% | **51.2%** |
+  | outside both | 52 | 6.9% | 8.9% |
+
+  "Contested dollars" is the size of the House-Senate gap on each line, which is the quantity
+  conference actually has to resolve.
+
+  **The two columns tell opposite stories and both are true.** By line item, conference barely
+  acts: three-quarters of contested figures are left exactly where the Senate put them, and the
+  median position is 0.00 — the Senate's number — in all four General Assemblies separately.
+  By money, conference splits: **a majority of every dollar the chambers disagreed about lands
+  strictly between their two positions**, on forty-seven line items.
+
+  So conference is selective rather than either passive or averaging. Small disagreements are
+  left at the Senate's figure; the large ones — the 6% of lines carrying half the contested
+  money — are negotiated to a number neither chamber proposed.
+
+  This is the third time in this corpus that counts and dollars have answered a question
+  differently, and the third time only one of them would have been quoted. The others are
+  [the chamber-direction result](../../decisions/the-unit-of-observation.yml) and
+  [foundation funding's sign](../line-item/foundation-funding.yml), which moved opposite to the
+  education aggregate it was taken to summarise.
+
+  ### Reconciling that with the conditioning result
+
+  [The unit of observation](../../decisions/the-unit-of-observation.yml) records that conference
+  raises 93.9% of the line items the Senate cut, which sounds like a body that overturns the
+  Senate constantly. Both are true and they are the same 172 line items: conference **moves**
+  only 22.8% of contested lines, and 753 − 581 = 172 is exactly the count that measurement was
+  taken over.
+
+  So the three together say something none says alone. **Conference acts on few lines, acts on
+  the big ones, and acts in one direction**: it leaves three-quarters of contested figures where
+  the Senate put them, the ones it moves carry most of the disputed money, and where it moves
+  them it is almost always to restore something the Senate cut.
+
+  [open] The Senate-passed text is the operative version entering conference, so a report landing
+  at the Senate's figure is conference declining to disturb the bill rather than choosing between
+  two candidates. That is a weaker claim than "the Senate wins" and the data cannot separate them
+  — but it is not vacuous either, because reverting to the House figure is available and is taken
+  on 9.7%. What the corpus can say is that the House's position is the one that has to be argued
+  back in, and usually is not.
 properties:
   name: Conference Committee
   role_type: committee

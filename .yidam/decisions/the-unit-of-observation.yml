@@ -92,10 +92,13 @@ rationale: |
   to the level its predecessor started from, or whether all three actors reverse without
   restoring.
 
-  [open] The conference column is the most lopsided of the three: 115 line items reach it having
-  been cut by the Senate against 57 having been raised, and conference restores 93.9% of the
-  cuts. That looks like conference splitting differences rather than deciding anything, and it is
-  the transition the corpus has least language for.
+  The conference column looked like a body splitting differences, and it is not. On the 753 line
+  items where the chambers disagreed, the report lands exactly at the **Senate's** figure 77.2%
+  of the time, at the House's 9.7%, and strictly between them on 6.2%. **By contested dollars
+  those shares are 33.0%, 6.9% and 51.2%** — a majority of the disputed money is split, on 6% of
+  the lines. [verified] Conference moves only 172 of those 753 — which is precisely the 57 + 115 the conditioning table above was
+  computed over. It acts rarely, and when it acts it restores what the Senate cut. See
+  [conference-committee](../corpus/actor/conference-committee.yml).
 
   ## Why this is a decision rather than a finding
 
