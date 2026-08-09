@@ -322,6 +322,60 @@ pub fn gap_for(corpus: &Corpus, line_item_slug: &str, period: &str) -> Outcome {
     }))
 }
 
+// ─── comparing periods ───────────────────────────────────────────────────────
+
+/// One period's variance, in its own dollars and in the base period's.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct TrendPoint {
+    pub period: String,
+    pub nominal_cents: i64,
+    pub real_cents: i64,
+}
+
+/// One line item's variance compared across two periods, in constant dollars.
+///
+/// # Every field says which dollars it is in
+///
+/// An earlier version of this returned a [`GapResult`] with the real-terms difference written
+/// into `variance_cents` and the later period's nominal figures left in the other fields. That
+/// is three units in one record with nothing to tell them apart, which is the failure
+/// [`real_dollars`] exists to prevent, committed inside the type meant to prevent it.
+///
+/// So the two endpoints carry both figures, and the change is reported twice: `real_change_cents`
+/// is the answer, and `nominal_change_cents` is what subtracting without a deflator would have
+/// said. Emitting the wrong one alongside the right one is deliberate — the correction is the
+/// finding, and a silent correction teaches the reader nothing.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct Trend {
+    pub line_item: String,
+    /// Named on the record, because a constant-dollar figure without its index is not
+    /// interpretable and this one will be quoted.
+    pub series_name: String,
+    pub base_period: String,
+    pub earlier: TrendPoint,
+    pub later: TrendPoint,
+    /// The comparable difference: later minus earlier, both in base-period dollars.
+    pub real_change_cents: i64,
+    /// What a nominal subtraction would have said. Kept beside the real figure so the size of
+    /// the correction is visible rather than absorbed.
+    pub nominal_change_cents: i64,
+}
+
+/// A trend, or the reason there is none.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[serde(tag = "status", rename_all = "lowercase")]
+pub enum TrendOutcome {
+    Computed(Box<Trend>),
+    Unavailable { reason: String },
+    Refused { reason: String },
+}
+
+impl TrendOutcome {
+    pub fn is_computed(&self) -> bool {
+        matches!(self, TrendOutcome::Computed(_))
+    }
+}
+
 /// Compares one line item's gap across two periods.
 ///
 /// Requires a deflator. A sixteen-year corpus makes nominal cross-period comparison the
@@ -332,30 +386,101 @@ pub fn gap_trend(
     earlier: &str,
     later: &str,
     deflator: Option<&Deflator>,
-) -> Result<Outcome> {
+) -> TrendOutcome {
     let Some(d) = deflator else {
-        return Ok(Outcome::Refused {
+        return TrendOutcome::Refused {
             reason: "cross-period comparison requires a deflator; nominal dollars across periods \
                      are not comparable"
                 .into(),
-        });
+        };
     };
-    let (a, b) = (
-        gap_for(corpus, line_item_slug, earlier),
-        gap_for(corpus, line_item_slug, later),
-    );
-    match (a, b) {
-        (Outcome::Computed(x), Outcome::Computed(y)) => {
-            let rx = real_dollars::deflate(x.variance_cents, earlier, d)?;
-            let ry = real_dollars::deflate(y.variance_cents, later, d)?;
-            Ok(Outcome::Computed(Box::new(GapResult {
-                variance_cents: ry.real_cents - rx.real_cents,
-                ..*y
-            })))
+
+    let point = |o: Outcome, period: &str| -> Result<TrendPoint, TrendOutcome> {
+        match o {
+            Outcome::Computed(r) => match real_dollars::deflate(r.variance_cents, period, d) {
+                Ok(real) => Ok(TrendPoint {
+                    period: period.to_string(),
+                    nominal_cents: real.nominal_cents,
+                    real_cents: real.real_cents,
+                }),
+                // An uncovered period is a refusal, not a missing figure: the corpus holds the
+                // variance, and the index declines to restate it rather than extrapolating.
+                Err(e) => Err(TrendOutcome::Refused {
+                    reason: format!("{period}: {e}"),
+                }),
+            },
+            Outcome::Unavailable { reason } => Err(TrendOutcome::Unavailable { reason }),
+            Outcome::Refused { reason } => Err(TrendOutcome::Refused { reason }),
         }
-        (other, Outcome::Computed(_)) | (Outcome::Computed(_), other) => Ok(other),
-        (other, _) => Ok(other),
+    };
+
+    let a = match point(gap_for(corpus, line_item_slug, earlier), earlier) {
+        Ok(p) => p,
+        Err(o) => return o,
+    };
+    let b = match point(gap_for(corpus, line_item_slug, later), later) {
+        Ok(p) => p,
+        Err(o) => return o,
+    };
+
+    TrendOutcome::Computed(Box::new(Trend {
+        line_item: line_item_slug.to_string(),
+        series_name: d.series_name.clone(),
+        base_period: d.base_period.clone(),
+        real_change_cents: b.real_cents - a.real_cents,
+        nominal_change_cents: b.nominal_cents - a.nominal_cents,
+        earlier: a,
+        later: b,
+    }))
+}
+
+/// One comparison per adjacent pair of periods the corpus can compute a gap for.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct TrendCoverage {
+    pub line_item: String,
+    pub earlier: String,
+    pub later: String,
+    pub outcome: TrendOutcome,
+}
+
+/// Compares every adjacent pair of periods, for every line item with two or more.
+///
+/// Adjacent rather than first-to-last: a single sixteen-year difference hides everything that
+/// happened in between, and the endpoints are recoverable from the steps while the steps are
+/// not recoverable from the endpoints.
+pub fn trends(corpus: &Corpus, deflator: Option<&Deflator>) -> Vec<TrendCoverage> {
+    use std::collections::BTreeMap;
+
+    let mut by_item: BTreeMap<String, Vec<String>> = BTreeMap::new();
+    for (line_item, period) in coverage(corpus) {
+        by_item.entry(line_item).or_default().push(period);
     }
+
+    let mut out = Vec::new();
+    for (line_item, mut periods) in by_item {
+        // Periods are compared in the order they happened. `FY2024-25` sorts by its first year,
+        // which is also the year it starts.
+        periods.sort_by_key(|p| {
+            (
+                p.trim_start_matches("FY")
+                    .split(['-', ' '])
+                    .next()
+                    .and_then(|y| y.parse::<i32>().ok())
+                    .unwrap_or(i32::MAX),
+                p.clone(),
+            )
+        });
+        for w in periods.windows(2) {
+            let (earlier, later) = (&w[0], &w[1]);
+            out.push(TrendCoverage {
+                line_item: line_item.clone(),
+                earlier: earlier.clone(),
+                later: later.clone(),
+                outcome: gap_trend(corpus, &line_item, earlier, later, deflator),
+            });
+        }
+    }
+    out
 }
 
 /// Every (line item, period) pair the corpus holds an expenditure for.
@@ -408,6 +533,17 @@ pub fn all(repo_root: &std::path::Path) -> Result<Vec<Coverage>> {
             }
         })
         .collect())
+}
+
+/// Every adjacent-period comparison the corpus could support, restated by `deflator`.
+///
+/// Passing `None` yields one refusal per pair rather than an empty list, so a feed built
+/// without an index still says what it declined and why.
+pub fn all_trends(
+    repo_root: &std::path::Path,
+    deflator: Option<&Deflator>,
+) -> Result<Vec<TrendCoverage>> {
+    Ok(trends(&corpus_validate::load(repo_root)?, deflator))
 }
 
 #[cfg(test)]
@@ -603,10 +739,140 @@ links:
     #[test]
     fn a_cross_period_comparison_without_a_deflator_is_refused() {
         let c = corpus_with("$1,000.00", &[("e1", "$900.00", "actual-closed", false)]);
-        match gap_trend(&c, "foundation-funding", "FY2010-11", "FY2024-25", None).unwrap() {
-            Outcome::Refused { reason } => assert!(reason.contains("deflator"), "{reason}"),
+        match gap_trend(&c, "foundation-funding", "FY2010-11", "FY2024-25", None) {
+            TrendOutcome::Refused { reason } => assert!(reason.contains("deflator"), "{reason}"),
             other => panic!("expected Refused, got {other:?}"),
         }
+    }
+
+    /// Two periods of the same line item, so a trend has something to join.
+    fn two_period_corpus() -> Corpus {
+        let mut c = corpus_with("$1,000.00", &[("e1", "$900.00", "actual-closed", false)]);
+        for (slug, period, appr, spent) in [
+            ("a2", "FY2020", "$1,000.00", "$900.00"),
+            ("a3", "FY2025", "$1,000.00", "$900.00"),
+        ] {
+            c.instances.push(inst(
+                &format!("c/appropriation/{slug}.yml"),
+                &format!(
+                    "class: appropriation\nlabel: A\ndescription: d\nproperties:\n  \
+                     amount: \"{appr}\"\n  period_label: {period}\n  stage: as-enacted\nlinks:\n  \
+                     - target: ../line-item/foundation-funding.yml\n    \
+                     relationship: grants-authority-for\n"
+                ),
+            ));
+            c.instances.push(inst(
+                &format!("c/expenditure/{slug}.yml"),
+                &format!(
+                    "class: expenditure\nlabel: E\ndescription: d\nproperties:\n  \
+                     amount: \"{spent}\"\n  basis: actual-closed\n  period_label: {period}\n  \
+                     reversion: \"[open]\"\nlinks:\n  \
+                     - target: ../line-item/foundation-funding.yml\n    \
+                     relationship: disburses-against\n"
+                ),
+            ));
+        }
+        c
+    }
+
+    fn test_deflator() -> Deflator {
+        // FY2025 prices are 25% above FY2020's, so an identical nominal variance is a smaller
+        // real one — the sign of the change flips relative to a nominal subtraction.
+        Deflator::new(
+            "FY2025",
+            "test index",
+            &[("FY2020", 100.0), ("FY2025", 125.0)],
+        )
+        .unwrap()
+    }
+
+    #[test]
+    fn a_trend_reports_both_dollars_for_each_endpoint() {
+        // The regression this guards: an earlier version wrote the real-terms difference into
+        // a GapResult and left the later period's nominal figures in the neighbouring fields,
+        // so one record carried three units with nothing to distinguish them.
+        let d = test_deflator();
+        let TrendOutcome::Computed(t) = gap_trend(
+            &two_period_corpus(),
+            "foundation-funding",
+            "FY2020",
+            "FY2025",
+            Some(&d),
+        ) else {
+            panic!("expected a trend");
+        };
+        assert_eq!(t.earlier.nominal_cents, 10_000);
+        assert_eq!(t.earlier.real_cents, 12_500, "FY2020 dollars buy more");
+        assert_eq!(t.later.nominal_cents, 10_000);
+        assert_eq!(t.later.real_cents, 10_000, "the base period is unchanged");
+        assert_eq!(t.base_period, "FY2025");
+        assert_eq!(t.series_name, "test index");
+    }
+
+    #[test]
+    fn the_nominal_answer_travels_beside_the_real_one() {
+        // Identical nominal variances: subtracting them says nothing changed. In constant
+        // dollars the variance fell by a quarter. Both are emitted, because the gap between
+        // them is the finding.
+        let d = test_deflator();
+        let TrendOutcome::Computed(t) = gap_trend(
+            &two_period_corpus(),
+            "foundation-funding",
+            "FY2020",
+            "FY2025",
+            Some(&d),
+        ) else {
+            panic!()
+        };
+        assert_eq!(t.nominal_change_cents, 0);
+        assert_eq!(t.real_change_cents, -2_500);
+    }
+
+    #[test]
+    fn a_period_the_index_does_not_reach_is_refused_not_extrapolated() {
+        let d = test_deflator();
+        // FY2024-25 is a biennial label; the index is keyed by single fiscal year and has no
+        // entry for it. Averaging two years to cover it would be a modeling decision.
+        match gap_trend(
+            &two_period_corpus(),
+            "foundation-funding",
+            "FY2020",
+            "FY2024-25",
+            Some(&d),
+        ) {
+            TrendOutcome::Refused { reason } => {
+                assert!(reason.contains("extrapolating"), "{reason}")
+            }
+            other => panic!("expected Refused, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn trends_pair_adjacent_periods_in_chronological_order() {
+        let d = test_deflator();
+        let out = trends(&two_period_corpus(), Some(&d));
+        let pairs: Vec<(&str, &str)> = out
+            .iter()
+            .map(|t| (t.earlier.as_str(), t.later.as_str()))
+            .collect();
+        // FY2020, FY2024-25 and FY2025 are all held; adjacency gives two steps, not three
+        // pairwise combinations, and FY2020 comes first despite sorting after "FY2024-25"
+        // lexically only by luck.
+        assert_eq!(
+            pairs,
+            vec![("FY2020", "FY2024-25"), ("FY2024-25", "FY2025")]
+        );
+    }
+
+    #[test]
+    fn trends_without_a_deflator_are_refusals_rather_than_an_empty_list() {
+        // A feed built with no index must still say what it declined. An empty list would read
+        // as "no periods to compare", which is a different and false statement.
+        let out = trends(&two_period_corpus(), None);
+        assert!(!out.is_empty());
+        assert!(out
+            .iter()
+            .all(|t| matches!(t.outcome, TrendOutcome::Refused { .. })));
     }
 
     #[test]

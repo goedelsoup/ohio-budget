@@ -18,7 +18,7 @@ import type { StagePoint } from './derive.ts';
 import { stageLabel } from './derive.ts';
 import { compact, delta as fmtDelta, dollars } from './money.ts';
 import { PALETTE, renderPlot } from './plot.ts';
-import type { GapCoverage, GapResult, ManifestCounts } from './types.ts';
+import type { GapCoverage, GapResult, ManifestCounts, RealSeries } from './types.ts';
 
 const AXIS = { stroke: PALETTE.grid, strokeOpacity: 1 } as const;
 
@@ -184,6 +184,93 @@ export function stageDeltas(points: StagePoint[]): string {
         dx: -8,
         fill: PALETTE.text,
         fontSize: 11,
+      }),
+    ],
+  });
+}
+
+/**
+ * An enacted series in nominal and constant dollars, on one axis.
+ *
+ * Two lines rather than one, and the nominal line is the point. Drawing only the real series
+ * would silently correct a figure the reader may have seen quoted nominally somewhere else;
+ * drawing only the nominal one is the error this whole apparatus exists to prevent. Together
+ * the gap between them *is* the finding — for four of this corpus's five multi-year series it
+ * is the difference between growth and decline.
+ *
+ * Both lines end at the same point by construction: the base period is its own deflator, so
+ * they converge on FY2025 and separate going backwards. That convergence is a property of the
+ * method rather than of the data, so the caption says so.
+ */
+export function realTerms(series: RealSeries): string {
+  const data = series.points.flatMap((p) => [
+    {
+      period: p.period,
+      cents: p.nominal_cents,
+      kind: 'As enacted (nominal)',
+      title: `${p.period} — ${dollars(p.nominal_cents)} as enacted`,
+    },
+    {
+      period: p.period,
+      cents: p.real_cents,
+      kind: `In ${series.base_period} dollars`,
+      title: `${p.period} — ${dollars(p.real_cents)} in ${series.base_period} dollars`,
+    },
+  ]);
+
+  const kinds = ['As enacted (nominal)', `In ${series.base_period} dollars`];
+  const ends = kinds.map((k) => data.filter((d) => d.kind === k).at(-1)).filter((d) => d !== undefined);
+
+  return renderPlot({
+    width: 760,
+    height: 320,
+    marginLeft: 72,
+    marginBottom: 52,
+    marginRight: 132,
+    marginTop: 16,
+    x: {
+      type: 'point',
+      domain: series.points.map((p) => p.period),
+      label: null,
+      line: false,
+      ...AXIS,
+    },
+    y: {
+      label: null,
+      grid: true,
+      ticks: 5,
+      tickFormat: (d: number) => compact(d),
+      ...AXIS,
+    },
+    color: { domain: kinds, range: [PALETTE.neutral, PALETTE.single] },
+    marks: [
+      Plot.line(data, {
+        x: 'period',
+        y: 'cents',
+        stroke: 'kind',
+        strokeWidth: 2,
+        curve: 'linear',
+      }),
+      Plot.dot(data, {
+        x: 'period',
+        y: 'cents',
+        fill: 'kind',
+        stroke: PALETTE.surface,
+        strokeWidth: 1.5,
+        r: 3.5,
+        title: 'title',
+      }),
+      // Named at the line's end rather than in a legend, so the reader never has to carry a
+      // colour across the figure to find out which series they are looking at.
+      Plot.text(ends, {
+        x: 'period',
+        y: 'cents',
+        text: 'kind',
+        textAnchor: 'start',
+        dx: 10,
+        fill: PALETTE.text,
+        fontSize: 11,
+        lineWidth: 12,
       }),
     ],
   });

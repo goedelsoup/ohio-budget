@@ -20,6 +20,8 @@ import type {
   Feed,
   GapCoverage,
   NodeView,
+  RealSeries,
+  TrendCoverage,
 } from './types.ts';
 
 /** A refusal carries its reason, because the reason is what the reader needs. */
@@ -146,28 +148,67 @@ export function enactedByPeriod(corpus: Corpus, lineItemSlug: string): PeriodPoi
 }
 
 /**
- * Whether an enacted series may be drawn as a trend.
+ * The enacted series restated in constant dollars, or the reason there is none.
  *
- * Two independent reasons it may not, and both are live in this corpus today.
+ * # Why this reads the feed rather than deciding anything
+ *
+ * An earlier version of this function decided for itself: it counted the points, checked that
+ * the periods did not mix annual with biennial, checked `deflator_available`, and — if all
+ * three passed — returned the **nominal** points for plotting. Every guard was real and the
+ * conclusion was still wrong, because passing a deflator check is not the same as having
+ * deflated anything. The day a deflator was committed, that function went from refusing to
+ * returning a nominal series with the caveat removed, which is the exact failure
+ * `.yidam/skills/real-dollars.md` names.
+ *
+ * So the restatement now happens in `crates/real-dollars` and arrives here already done. This
+ * reads the answer; it does not reconstruct it.
  */
-export function trendable(feed: Feed, points: PeriodPoint[]): Chartable<PeriodPoint[]> {
-  if (points.length < 2) {
+export function realSeriesFor(feed: Feed, lineItemSlug: string): Chartable<RealSeries> {
+  const found = feed.findings.real_terms.find((s) => s.line_item === lineItemSlug);
+  if (!found) {
+    return refuse('The corpus holds no enacted appropriation carrying an amount for this line item.');
+  }
+  if (found.outcome.status === 'refused') return refuse(found.outcome.reason);
+  if (found.outcome.points.length < 2) {
     return refuse('Fewer than two enacted figures are known for this line item.');
   }
+  return { ok: true, data: found.outcome };
+}
 
-  const kinds = new Set(points.map((p) => periodKind(p.period)));
-  if (kinds.size > 1) {
-    return refuse(
-      'The known figures mix annual and biennial periods. A year against a biennium is not ' +
-        'a comparison, and the difference would read as growth.',
-    );
-  }
+/** Adjacent-period gap comparisons touching one line item, whatever their status. */
+export function trendsForLineItem(feed: Feed, lineItemSlug: string): TrendCoverage[] {
+  return feed.findings.gap_trend.filter((t) => t.line_item === lineItemSlug);
+}
 
-  if (!feed.manifest.real_dollars.deflator_available) {
-    return refuse(feed.manifest.real_dollars.reason);
-  }
+/**
+ * How much of a nominal change was price level rather than money.
+ *
+ * Returned as a pair rather than a verdict: a series can grow in both, grow in one, or — as
+ * four of this corpus's five multi-year series do — grow nominally while falling in real
+ * terms. Naming which of those happened is the page's job, not this function's.
+ */
+export interface SeriesChange {
+  from: string;
+  to: string;
+  nominalPct: number;
+  realPct: number;
+  /** True when the two disagree about direction. */
+  reversesSign: boolean;
+}
 
-  return { ok: true, data: points };
+export function seriesChange(series: RealSeries): SeriesChange | undefined {
+  const a = series.points[0];
+  const b = series.points[series.points.length - 1];
+  if (!a || !b || a === b || a.nominal_cents === 0 || a.real_cents === 0) return undefined;
+  const nominalPct = (b.nominal_cents / a.nominal_cents - 1) * 100;
+  const realPct = (b.real_cents / a.real_cents - 1) * 100;
+  return {
+    from: a.period,
+    to: b.period,
+    nominalPct,
+    realPct,
+    reversesSign: Math.sign(nominalPct) !== Math.sign(realPct),
+  };
 }
 
 // ─── gap coverage ────────────────────────────────────────────────────────────

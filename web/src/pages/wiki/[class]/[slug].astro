@@ -10,8 +10,8 @@ import {
   enactedByPeriod,
   gapsForLineItem,
   humanize,
+  realSeriesFor,
   stagePoints,
-  trendable,
 } from '../../../lib/derive.ts';
 import { dollars, exact, percent } from '../../../lib/money.ts';
 import { renderInlineText } from '../../../lib/prose.ts';
@@ -53,7 +53,7 @@ const decomposition = isLineItem ? decompositionFor(feed, node.slug) : undefined
 const points = decomposition ? stagePoints(decomposition) : undefined;
 
 const enacted = isLineItem ? enactedByPeriod(feed.corpus, node.slug) : [];
-const trend = isLineItem ? trendable(feed, enacted) : undefined;
+const real = isLineItem ? realSeriesFor(feed, node.slug) : undefined;
 const gaps = isLineItem ? gapsForLineItem(feed, node.slug) : [];
 
 // An appropriation belongs to a stage series; point at it rather than redrawing it.
@@ -153,10 +153,14 @@ const parentSeries =
         isLineItem && enacted.length > 0 && (
           <>
             <h2>Enacted figures by period</h2>
-            {trend && !trend.ok ? (
+            {real && !real.ok ? (
               <div class="refusal" style="margin-bottom:var(--space-6)">
-                <div class="refusal__label">Not drawn as a trend</div>
-                <p style="margin:0">{trend.reason}</p>
+                <div class="refusal__label">Not restated in constant dollars</div>
+                <p style="margin:0">{real.reason}</p>
+                <p style="margin:var(--space-3) 0 0">
+                  These figures stand in the dollars of their own year. Comparing two of them
+                  measures the price level as much as the appropriation.
+                </p>
               </div>
             ) : null}
             <div class="table-wrap">
@@ -164,23 +168,37 @@ const parentSeries =
                 <thead>
                   <tr>
                     <th>Period</th>
-                    <th class="num">Enacted</th>
+                    <th class="num">As enacted</th>
+                    {real?.ok && <th class="num">In {real.data.base_period} dollars</th>}
                     <th>Node</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {enacted.map((p) => (
-                    <tr>
-                      <td class="num">{p.period}</td>
-                      <td class="num">{dollars(p.cents)}</td>
-                      <td>
-                        <a href={`/wiki/appropriation/${p.slug}`}>{p.slug}</a>
-                      </td>
-                    </tr>
-                  ))}
+                  {enacted.map((p) => {
+                    const restated = real?.ok
+                      ? real.data.points.find((r) => r.period === p.period)
+                      : undefined;
+                    return (
+                      <tr>
+                        <td class="num">{p.period}</td>
+                        <td class="num">{dollars(p.cents)}</td>
+                        {real?.ok && (
+                          <td class="num">{restated ? dollars(restated.real_cents) : '—'}</td>
+                        )}
+                        <td>
+                          <a href={`/wiki/appropriation/${p.slug}`}>{p.slug}</a>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
+            {real?.ok && (
+              <p class="rel">
+                Restated in {real.data.base_period} dollars using {real.data.series_name}.
+              </p>
+            )}
           </>
         )
       }

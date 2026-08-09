@@ -4,11 +4,19 @@ import {
   landingSubjects,
   periodKind,
   periodStart,
+  realSeriesFor,
+  seriesChange,
   stagePoints,
-  trendable,
 } from './derive.ts';
-import type { PeriodPoint } from './derive.ts';
-import type { Corpus, Decomposition, Feed, Manifest, NodeView, Step } from './types.ts';
+import type {
+  Corpus,
+  Decomposition,
+  Feed,
+  Manifest,
+  NodeView,
+  SeriesCoverage,
+  Step,
+} from './types.ts';
 
 // ─── fixtures ────────────────────────────────────────────────────────────────
 
@@ -59,14 +67,45 @@ function manifest(deflator: boolean): Manifest {
   };
 }
 
-function feed(corpus: Corpus, opts: { deflator?: boolean; stageDelta?: Decomposition[] } = {}): Feed {
+function feed(
+  corpus: Corpus,
+  opts: {
+    deflator?: boolean;
+    stageDelta?: Decomposition[];
+    realTerms?: SeriesCoverage[];
+  } = {},
+): Feed {
   return {
     manifest: manifest(opts.deflator ?? false),
     corpus,
     catalog: [],
     decisions: [],
     skills: [],
-    findings: { gap: [], stage_delta: opts.stageDelta ?? [] },
+    findings: {
+      gap: [],
+      gap_trend: [],
+      stage_delta: opts.stageDelta ?? [],
+      real_terms: opts.realTerms ?? [],
+    },
+  };
+}
+
+/** A restated series as `crates/corpus-export` emits one. */
+function restated(line_item: string, points: [string, number, number][]): SeriesCoverage {
+  return {
+    line_item,
+    outcome: {
+      status: 'restated',
+      line_item,
+      series_name: 'test index',
+      base_period: 'FY2025',
+      points: points.map(([period, nominal_cents, real_cents], i) => ({
+        period,
+        slug: `n${i}`,
+        nominal_cents,
+        real_cents,
+      })),
+    },
   };
 }
 
@@ -251,42 +290,99 @@ describe('enactedByPeriod', () => {
   });
 });
 
-describe('trendable', () => {
-  const annual: PeriodPoint[] = [
-    { period: 'FY2024', cents: 796_725_000_000, slug: 'a' },
-    { period: 'FY2026', cents: 845_759_877_200, slug: 'b' },
-  ];
+describe('realSeriesFor', () => {
+  const empty: Corpus = { classes: [], nodes: [] };
 
-  it('refuses a single point', () => {
-    const out = trendable(feed({ classes: [], nodes: [] }), [annual[0]!]);
+  it('refuses when the feed carries no series for the line item', () => {
+    const out = realSeriesFor(feed(empty), 'foundation-funding');
+    expect(out.ok).toBe(false);
+    if (out.ok) return;
+    expect(out.reason).toContain('no enacted appropriation');
+  });
+
+  it('passes through the calculator refusal rather than restating it', () => {
+    // The reason is written where the decision was taken. Rewording it here would be a second
+    // account of why the corpus declined, and the two would drift.
+    const out = realSeriesFor(
+      feed(empty, {
+        realTerms: [
+          {
+            line_item: 'local-government-fund-distribution',
+            outcome: { status: 'refused', reason: 'index does not cover ["FY2010-11"]' },
+          },
+        ],
+      }),
+      'local-government-fund-distribution',
+    );
+    expect(out.ok).toBe(false);
+    if (out.ok) return;
+    expect(out.reason).toContain('FY2010-11');
+  });
+
+  it('refuses a single point, which is a figure rather than a series', () => {
+    const out = realSeriesFor(
+      feed(empty, { realTerms: [restated('ff', [['FY2024', 100, 102]])] }),
+      'ff',
+    );
     expect(out.ok).toBe(false);
     if (out.ok) return;
     expect(out.reason).toContain('Fewer than two');
   });
 
-  it('refuses a nominal series when no deflator is available', () => {
-    const out = trendable(feed({ classes: [], nodes: [] }, { deflator: false }), annual);
-    expect(out.ok).toBe(false);
-    if (out.ok) return;
-    expect(out.reason).toContain('No deflator');
-  });
-
-  it('refuses a series mixing annual and biennial periods before it reaches the deflator check', () => {
-    // Two independent reasons; the mixed-period one is the more specific and must win,
-    // because supplying a deflator would not make the comparison valid.
-    const mixed: PeriodPoint[] = [
-      { period: 'FY2024', cents: 1, slug: 'a' },
-      { period: 'FY2024-25', cents: 2, slug: 'b' },
-    ];
-    const out = trendable(feed({ classes: [], nodes: [] }, { deflator: true }), mixed);
-    expect(out.ok).toBe(false);
-    if (out.ok) return;
-    expect(out.reason).toContain('annual and biennial');
-  });
-
-  it('permits a consistent series once a deflator exists', () => {
-    const out = trendable(feed({ classes: [], nodes: [] }, { deflator: true }), annual);
+  it('returns the restated series with both dollars on every point', () => {
+    const out = realSeriesFor(
+      feed(empty, {
+        realTerms: [
+          restated('ff', [
+            ['FY2020', 694_288_084_500, 853_906_238_300],
+            ['FY2026', 845_759_877_200, 812_792_001_700],
+          ]),
+        ],
+      }),
+      'ff',
+    );
     expect(out.ok).toBe(true);
+    if (!out.ok) return;
+    expect(out.data.base_period).toBe('FY2025');
+    expect(out.data.points[0]?.real_cents).toBe(853_906_238_300);
+  });
+});
+
+describe('seriesChange', () => {
+  it('reports a nominal rise that is a real fall as a sign reversal', () => {
+    // Foundation funding's actual FY2020-FY2026 figures: +21.8% as written into law,
+    // -4.8% against what state and local government pays for what it buys.
+    const out = realSeriesFor(
+      feed(
+        { classes: [], nodes: [] },
+        {
+          realTerms: [
+            restated('ff', [
+              ['FY2020', 694_288_084_500, 853_906_238_300],
+              ['FY2026', 845_759_877_200, 812_792_001_700],
+            ]),
+          ],
+        },
+      ),
+      'ff',
+    );
+    if (!out.ok) throw new Error('expected a series');
+    const change = seriesChange(out.data);
+    expect(change?.nominalPct).toBeGreaterThan(0);
+    expect(change?.realPct).toBeLessThan(0);
+    expect(change?.reversesSign).toBe(true);
+  });
+
+  it('does not call it a reversal when both agree', () => {
+    const out = realSeriesFor(
+      feed(
+        { classes: [], nodes: [] },
+        { realTerms: [restated('m', [['FY2020', 100, 120], ['FY2026', 200, 190]])] },
+      ),
+      'm',
+    );
+    if (!out.ok) throw new Error('expected a series');
+    expect(seriesChange(out.data)?.reversesSign).toBe(false);
   });
 });
 

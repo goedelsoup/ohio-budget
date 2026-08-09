@@ -69,6 +69,36 @@ fn main() -> Result<()> {
         feed.findings.gap.len(),
         feed.findings.stage_delta.len(),
     );
+
+    let rd = &feed.manifest.real_dollars;
+    let trended = feed
+        .findings
+        .gap_trend
+        .iter()
+        .filter(|t| t.outcome.is_computed())
+        .count();
+    let restated = feed
+        .findings
+        .real_terms
+        .iter()
+        .filter(|s| s.outcome.is_restated())
+        .count();
+    println!(
+        "  real dollars: {} — {} of {} adjacent pair(s) compared, {} of {} enacted series restated",
+        if rd.deflator_available {
+            format!(
+                "{} dollars, {} period(s) covered",
+                rd.base_period.as_deref().unwrap_or("?"),
+                rd.periods.len()
+            )
+        } else {
+            "no index".to_string()
+        },
+        trended,
+        feed.findings.gap_trend.len(),
+        restated,
+        feed.findings.real_terms.len(),
+    );
     for path in written {
         println!("  → {}", path.display());
     }

@@ -94,6 +94,16 @@ export interface Manifest {
   real_dollars: {
     deflator_available: boolean;
     reason: string;
+    /**
+     * Which index. Carried on every restated figure, because the choice is contestable and a
+     * constant-dollar number without it is not interpretable.
+     */
+    series_name?: string;
+    base_period?: string;
+    /** Fiscal years the index covers. */
+    periods?: string[];
+    /** Fiscal years it does not. A period absent from `periods` cannot be restated at all. */
+    periods_uncovered?: string[];
   };
 }
 
@@ -205,9 +215,76 @@ export interface Decomposition {
   is_complete: boolean;
 }
 
+// ─── constant dollars ────────────────────────────────────────────────────────
+
+/**
+ * One period's figure in its own dollars and in the base period's.
+ *
+ * Both travel together deliberately. Nothing here multiplies a nominal figure by an index —
+ * that would be a second deflator beside `crates/real-dollars`, and the two would drift in
+ * the direction of whichever was easier to write.
+ */
+export interface TrendPoint {
+  period: string;
+  nominal_cents: number;
+  real_cents: number;
+}
+
+export interface Trend {
+  line_item: string;
+  series_name: string;
+  base_period: string;
+  earlier: TrendPoint;
+  later: TrendPoint;
+  /** The comparable difference: later minus earlier, both in base-period dollars. */
+  real_change_cents: number;
+  /** What a nominal subtraction would have said, kept so the correction stays visible. */
+  nominal_change_cents: number;
+}
+
+export type TrendOutcome =
+  | ({ status: 'computed' } & Trend)
+  | { status: 'unavailable'; reason: string }
+  | { status: 'refused'; reason: string };
+
+export interface TrendCoverage {
+  line_item: string;
+  earlier: string;
+  later: string;
+  outcome: TrendOutcome;
+}
+
+export interface RealPoint {
+  period: string;
+  /** The appropriation node this came from. */
+  slug: string;
+  nominal_cents: number;
+  real_cents: number;
+}
+
+export interface RealSeries {
+  line_item: string;
+  series_name: string;
+  base_period: string;
+  points: RealPoint[];
+}
+
+export type SeriesOutcome =
+  | ({ status: 'restated' } & RealSeries)
+  | { status: 'refused'; reason: string };
+
+export interface SeriesCoverage {
+  line_item: string;
+  outcome: SeriesOutcome;
+}
+
 export interface Findings {
   gap: GapCoverage[];
+  /** Adjacent-period comparisons of the gap, in constant dollars. */
+  gap_trend: TrendCoverage[];
   stage_delta: Decomposition[];
+  /** Enacted appropriations restated, one series per line item. */
+  real_terms: SeriesCoverage[];
 }
 
 export interface Feed {

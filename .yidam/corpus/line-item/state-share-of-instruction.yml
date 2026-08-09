@@ -14,6 +14,39 @@ description: |
   ALI 235501, agency BOR — the Board of Regents code persists as the agency identifier
   despite the department's renaming, which is itself evidence for the mildness of that
   reorganization. [verified]
+
+  ## The corpus's sharpest divergence between nominal and real
+
+  This line item rose every single year from FY2020 to FY2026 and lost a sixth of its
+  purchasing power doing it: [verified]
+
+  | fiscal year | as enacted | in FY2025 dollars |
+  |---|---|---|
+  | FY2020 | $2,019,202,822 | $2,483,421,399 |
+  | FY2021 | $2,039,394,850 | $2,404,455,568 |
+  | FY2022 | $2,056,678,116 | $2,234,165,175 |
+  | FY2023 | $2,075,761,402 | $2,152,255,232 |
+  | FY2024 | $2,098,704,372 | $2,138,039,788 |
+  | FY2025 | $2,121,751,939 | $2,121,751,939 |
+  | FY2026 | $2,156,383,406 | $2,072,327,184 |
+
+  **Nominal +6.8%; real -16.6%** — the widest gap in the corpus, and the only series that is
+  monotonic in both directions at once. Nominally it never falls; in constant dollars it never
+  rises. [verified]
+
+  That shape is what makes it worth holding beside
+  [foundation funding](./foundation-funding.yml). Both are formula-driven, both are education,
+  and the corpus seeded this one on the argument that a formula's *direction* tells you nothing
+  by itself. The real series makes a sharper version of the same point: an appropriation can be
+  raised in every budget of a decade and still be cut, and nothing in the appropriation figure
+  says which happened.
+
+  [open] Whether the FY2022 step — the largest single-year real fall, -$170.3M — corresponds to
+  anything in the bill or is entirely the FY2022 price jump is unexamined. The corpus holds no
+  stage series for this line item, so there is nothing yet to attribute it to.
+
+  See [nominal growth is mostly price level](../../decisions/nominal-growth-is-mostly-price-level.yml)
+  for the same computation across every series the corpus holds.
 properties:
   name: "State Share of Instruction [verified]"
   current_code: "235501"

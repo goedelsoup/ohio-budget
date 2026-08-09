@@ -64,6 +64,42 @@ description: |
   So neither chamber has a stable disposition toward school funding across the window. What
   looked like a role behaving characteristically was two adjacent biennia.
 
+  The deltas above are each stated in the dollars of their own biennium, so their *magnitudes*
+  are not comparable across rows even though their signs are. In FY2025 dollars the House
+  substitute figures are -$307.5M, -$167.8M, +$638.8M and +$88.7M — the FY2020 cut is a fifth
+  larger than it looks and the FY2026 rise is smaller. [verified] Restating cannot change any
+  sign, because deflation multiplies a period's figures by one positive number; it changes only
+  how the four rows rank against each other.
+
+  ## What the whole series does in constant dollars
+
+  The seven enacted figures below, restated in FY2025 dollars using the state and local
+  government purchases deflator: [verified]
+
+  | fiscal year | as enacted | in FY2025 dollars |
+  |---|---|---|
+  | FY2020 | $6,942,880,845 | $8,539,062,383 |
+  | FY2021 | $6,774,618,845 | $7,987,305,649 |
+  | FY2022 | $6,937,998,712 | $7,536,733,622 |
+  | FY2023 | $7,079,848,712 | $7,340,748,033 |
+  | FY2024 | $7,967,250,000 | $8,116,577,890 |
+  | FY2025 | $8,269,497,000 | $8,269,497,000 |
+  | FY2026 | $8,457,598,772 | $8,127,920,017 |
+
+  **Nominal +21.8%; real -4.8%.** The two disagree about direction, and the disagreement is not
+  marginal — this line item bought less in FY2026 than in FY2020 while its appropriation rose by
+  a billion and a half dollars. The real series also has a shape the nominal one hides: it falls
+  for four consecutive years to a FY2023 trough, recovers through FY2025, and turns down again.
+
+  The [Fair School Funding Plan](../program/fair-school-funding-plan.yml) was enacted in HB 110
+  and phased in across the two budgets after it. [open] Whether the FY2023-25 real recovery is
+  the phase-in and the FY2026 turn is the phase-in ending is not answerable from this line item
+  alone, and the corpus should not assert it.
+
+  The programme total behaves the same way: the three foundation-funding line items together
+  come to $9.84B in FY2024 and $10.49B in FY2026, **+6.6% nominal and +0.6% real**. [verified]
+  The 80.6% share above is a within-year ratio and deflation cannot move it.
+
 properties:
   name: Foundation Funding - All Students [verified]
   current_code: "200550"

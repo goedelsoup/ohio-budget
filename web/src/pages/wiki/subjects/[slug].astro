@@ -5,14 +5,15 @@ import Prose from '../../../components/Prose.astro';
 import Figure from '../../../components/Figure.astro';
 import NodeCard from '../../../components/NodeCard.astro';
 import { loadFeed } from '../../../lib/feed.ts';
-import { stageDeltas, stageLevels } from '../../../lib/charts.ts';
+import { realTerms, stageDeltas, stageLevels } from '../../../lib/charts.ts';
 import {
   decompositionFor,
   enactedByPeriod,
   gapsForLineItem,
   landingSubjects,
+  realSeriesFor,
+  seriesChange,
   stagePoints,
-  trendable,
 } from '../../../lib/derive.ts';
 import type { Subject } from '../../../lib/derive.ts';
 import { dollars, exact, percent } from '../../../lib/money.ts';
@@ -37,7 +38,8 @@ const node = subject.node;
 const decomposition = decompositionFor(feed, subject.slug);
 const points = decomposition ? stagePoints(decomposition) : undefined;
 const enacted = enactedByPeriod(feed.corpus, subject.slug);
-const trend = trendable(feed, enacted);
+const real = realSeriesFor(feed, subject.slug);
+const change = real.ok ? seriesChange(real.data) : undefined;
 const gaps = gapsForLineItem(feed, subject.slug);
 
 // Everything pointing at this line item, grouped by the class it comes from — the shape a
@@ -131,31 +133,64 @@ const computedGap = gaps.find((g) => g.outcome.status === 'computed');
           </div>
         ) : (
           <>
-            {!trend.ok && (
+            {change && (
+              <p class="lede">
+                Between {change.from} and {change.to} this line item{' '}
+                {change.nominalPct >= 0 ? 'rose' : 'fell'} by {percent(change.nominalPct, 1)} as
+                written into law. Measured against what state and local government actually pays
+                for what it buys, it {change.realPct >= 0 ? 'rose' : 'fell'} by{' '}
+                {percent(change.realPct, 1)}.
+                {change.reversesSign &&
+                  ' The two disagree about direction: the nominal increase is entirely price level.'}
+              </p>
+            )}
+
+            {real.ok ? (
+              <Figure
+                title={`${node.label} — as enacted, and in ${real.data.base_period} dollars`}
+                refusal={real}
+                svg={realTerms(real.data)}
+                caption={`Restated using ${real.data.series_name}. The two lines meet at ${real.data.base_period} because the base period is its own deflator — that convergence is a property of the method, not of the data. The vertical axis does not start at zero.`}
+              />
+            ) : (
               <div class="refusal" style="margin-bottom:var(--space-6)">
-                <div class="refusal__label">Not drawn as a trend</div>
-                <p style="margin:0">{trend.reason}</p>
+                <div class="refusal__label">Not restated in constant dollars</div>
+                <p style="margin:0">{real.reason}</p>
+                <p style="margin:var(--space-3) 0 0">
+                  The figures below stand in the dollars of their own year. Comparing two of them
+                  measures the price level as much as the appropriation.
+                </p>
               </div>
             )}
+
             <div class="table-wrap">
               <table>
                 <thead>
                   <tr>
                     <th>Period</th>
-                    <th class="num">Enacted</th>
+                    <th class="num">As enacted</th>
+                    {real.ok && <th class="num">In {real.data.base_period} dollars</th>}
                     <th>Node</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {enacted.map((p) => (
-                    <tr>
-                      <td class="num">{p.period}</td>
-                      <td class="num">{dollars(p.cents)}</td>
-                      <td>
-                        <a href={`/wiki/appropriation/${p.slug}`}>{p.slug}</a>
-                      </td>
-                    </tr>
-                  ))}
+                  {enacted.map((p) => {
+                    const restated = real.ok
+                      ? real.data.points.find((r) => r.period === p.period)
+                      : undefined;
+                    return (
+                      <tr>
+                        <td class="num">{p.period}</td>
+                        <td class="num">{dollars(p.cents)}</td>
+                        {real.ok && (
+                          <td class="num">{restated ? dollars(restated.real_cents) : '—'}</td>
+                        )}
+                        <td>
+                          <a href={`/wiki/appropriation/${p.slug}`}>{p.slug}</a>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

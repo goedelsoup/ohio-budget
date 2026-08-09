@@ -69,15 +69,18 @@ pub struct Manifest {
     pub real_dollars: RealDollars,
 }
 
-/// Whether anything in this feed may be compared across fiscal periods.
+/// Which index this feed's constant-dollar figures are stated in.
 ///
 /// [`real_dollars`] ships no deflator on purpose — which index to use is a modeling decision,
 /// and a general price index and a state-and-local-purchases index give materially different
-/// answers for a budget series. Nothing in the corpus supplies one either, so this export
-/// constructs none, and every cross-period comparison downstream is nominal.
+/// answers for a budget series. This export supplies one, from a committed source and under a
+/// recorded decision, and names it here so the choice stays arguable.
 ///
 /// This travels in the manifest because the consumer most likely to get it wrong is a chart.
 /// The skill names the failure directly: a chart mixing nominal and real points looks fine.
+/// Note what that means for `deflator_available`: it says an index exists, not that any
+/// particular figure was restated by it. The restatements live in
+/// [`Findings::real_terms`] and [`Findings::gap_trend`], each carrying its own refusals.
 #[derive(Debug, Clone, Serialize)]
 pub struct RealDollars {
     pub deflator_available: bool,
@@ -108,53 +111,57 @@ pub const DEFLATOR_NAME: &str =
     "state and local government consumption expenditures and gross investment, implicit price deflator (BEA, via FRED A829RD3Q086SBEA)";
 pub const DEFLATOR_BASE: &str = "FY2025";
 
-/// Builds the deflator, or explains why there is none.
-pub fn load_deflator(repo_root: &std::path::Path) -> RealDollars {
+/// Builds the deflator, returning it alongside what the manifest should say about it.
+///
+/// Both halves, because an earlier version returned only the description. The manifest then
+/// advertised `deflator_available: true` while the index itself was dropped on the floor, so
+/// nothing downstream could restate anything and every figure the site showed stayed nominal
+/// under a gate that reported itself satisfied. A capability announced but not handed over is
+/// worse than one that is absent, because the absence is at least visible.
+pub fn load_deflator(repo_root: &std::path::Path) -> (Option<real_dollars::Deflator>, RealDollars) {
+    let none = |reason: String| {
+        (
+            None,
+            RealDollars {
+                deflator_available: false,
+                reason,
+                ..RealDollars::none()
+            },
+        )
+    };
+
     let path = repo_root.join(DEFLATOR_SOURCE);
     let Ok(text) = std::fs::read_to_string(&path) else {
-        return RealDollars {
-            deflator_available: false,
-            reason: format!(
-                "The price index source is missing at {DEFLATOR_SOURCE}. Figures from \
-                 different fiscal periods are nominal and must not be drawn as a trend."
-            ),
-            ..RealDollars::none()
-        };
+        return none(format!(
+            "The price index source is missing at {DEFLATOR_SOURCE}. Figures from different \
+             fiscal periods are nominal and must not be drawn as a trend."
+        ));
     };
-    match real_dollars::parse_fred_csv(&text, DEFLATOR_NAME)
+    let index = match real_dollars::parse_fred_csv(&text, DEFLATOR_NAME)
         .and_then(|o| o.ohio_fiscal_years(2010, 2027))
     {
-        Ok(real_dollars::FiscalYearIndex {
-            index,
-            incomplete: uncovered,
-        }) => {
-            let pairs: Vec<(&str, f64)> = index.iter().map(|(k, v)| (k.as_str(), *v)).collect();
-            match real_dollars::Deflator::new(DEFLATOR_BASE, DEFLATOR_NAME, &pairs) {
-                Ok(d) => RealDollars {
-                    deflator_available: true,
-                    reason: format!(
-                        "Figures may be restated in {DEFLATOR_BASE} dollars using \
-                         {DEFLATOR_NAME}. Every restated figure carries the index name, because \
-                         the choice of index is contestable and a constant-dollar number \
-                         without it is not interpretable."
-                    ),
-                    series_name: Some(d.series_name.clone()),
-                    base_period: Some(d.base_period.clone()),
-                    periods: index.into_iter().map(|(k, _)| k).collect(),
-                    periods_uncovered: uncovered,
-                },
-                Err(e) => RealDollars {
-                    deflator_available: false,
-                    reason: format!("The price index could not be built: {e}"),
-                    ..RealDollars::none()
-                },
-            }
+        Ok(i) => i,
+        Err(e) => return none(format!("The price index source could not be read: {e}")),
+    };
+
+    let pairs: Vec<(&str, f64)> = index.index.iter().map(|(k, v)| (k.as_str(), *v)).collect();
+    match real_dollars::Deflator::new(DEFLATOR_BASE, DEFLATOR_NAME, &pairs) {
+        Ok(d) => {
+            let described = RealDollars {
+                deflator_available: true,
+                reason: format!(
+                    "Figures may be restated in {DEFLATOR_BASE} dollars using {DEFLATOR_NAME}. \
+                     Every restated figure carries the index name, because the choice of index \
+                     is contestable and a constant-dollar number without it is not interpretable."
+                ),
+                series_name: Some(d.series_name.clone()),
+                base_period: Some(d.base_period.clone()),
+                periods: index.index.into_iter().map(|(k, _)| k).collect(),
+                periods_uncovered: index.incomplete,
+            };
+            (Some(d), described)
         }
-        Err(e) => RealDollars {
-            deflator_available: false,
-            reason: format!("The price index source could not be read: {e}"),
-            ..RealDollars::none()
-        },
+        Err(e) => none(format!("The price index could not be built: {e}")),
     }
 }
 
@@ -276,11 +283,207 @@ pub struct SkillView {
     pub path: String,
 }
 
+// ─── enacted figures, restated ───────────────────────────────────────────────
+
+/// One enacted figure in its own dollars and in the base period's.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct RealPoint {
+    pub period: String,
+    /// The appropriation node this came from, so a reader can go and check it.
+    pub slug: String,
+    pub nominal_cents: i64,
+    pub real_cents: i64,
+}
+
+/// One line item's enacted appropriations across every period, restated.
+///
+/// This is what a reader is actually looking at when they scan a table of figures by year, and
+/// until now it was the one place the deflator never reached: the web layer read the nominal
+/// amounts straight off the appropriation nodes and drew them in a column.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct RealSeries {
+    pub line_item: String,
+    pub series_name: String,
+    pub base_period: String,
+    pub points: Vec<RealPoint>,
+}
+
+/// A restated series, or the reason there is none.
+///
+/// Refusal is the common case and it is content. Half this corpus's periods are biennial
+/// labels the index has no entry for, and restating them would mean averaging two years —
+/// a modeling decision nobody has taken.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[serde(tag = "status", rename_all = "lowercase")]
+pub enum SeriesOutcome {
+    Restated(Box<RealSeries>),
+    Refused { reason: String },
+}
+
+impl SeriesOutcome {
+    pub fn is_restated(&self) -> bool {
+        matches!(self, SeriesOutcome::Restated(_))
+    }
+}
+
+/// `FY2024-25` covers two years; `FY2024` covers one.
+fn is_biennial(label: &str) -> bool {
+    label
+        .trim()
+        .split_once('-')
+        .is_some_and(|(_, b)| b.chars().all(|c| c.is_ascii_digit()) && !b.is_empty())
+}
+
+fn period_start(label: &str) -> i32 {
+    label
+        .trim()
+        .trim_start_matches("FY")
+        .split(['-', ' '])
+        .next()
+        .and_then(|y| y.parse().ok())
+        .unwrap_or(i32::MAX)
+}
+
+/// Restates one line item's enacted series.
+pub fn real_series(
+    corpus: &Corpus,
+    line_item_slug: &str,
+    deflator: Option<&real_dollars::Deflator>,
+) -> SeriesOutcome {
+    let Some(d) = deflator else {
+        return SeriesOutcome::Refused {
+            reason: "No price index is available, so these figures stand in the dollars of their \
+                     own year and must not be read as a series."
+                .into(),
+        };
+    };
+
+    let Some(li) = corpus
+        .instances
+        .iter()
+        .find(|i| i.inst.class == "line-item" && slug_of(&i.rel_path) == line_item_slug)
+    else {
+        return SeriesOutcome::Refused {
+            reason: format!("no line item named {line_item_slug}"),
+        };
+    };
+
+    let mut raw: Vec<(String, String, i64)> = Vec::new();
+    for a in corpus
+        .instances
+        .iter()
+        .filter(|i| i.inst.class == "appropriation")
+    {
+        if corpus_validate::property_text(&a.inst, "stage").map(str::trim) != Some("as-enacted") {
+            continue;
+        }
+        let dir = a.abs_path.parent().unwrap_or(&a.abs_path);
+        let grants = a.inst.links.iter().any(|l| {
+            l.relationship == "grants-authority-for"
+                && normalize_join(dir, &l.target) == li.abs_path
+        });
+        if !grants {
+            continue;
+        }
+        let (Some(period), Some(amount)) = (
+            corpus_validate::property_text(&a.inst, "period_label"),
+            corpus_validate::property_text(&a.inst, "amount"),
+        ) else {
+            continue;
+        };
+        if amount.contains("[open]") {
+            continue;
+        }
+        let Ok(cents) = lsc::parse_money_to_cents(amount) else {
+            continue;
+        };
+        raw.push((period.trim().to_string(), slug_of(&a.rel_path), cents));
+    }
+
+    if raw.is_empty() {
+        return SeriesOutcome::Refused {
+            reason: "The corpus holds no enacted appropriation carrying an amount for this line \
+                     item."
+                .into(),
+        };
+    }
+    raw.sort_by(|x, y| {
+        period_start(&x.0)
+            .cmp(&period_start(&y.0))
+            .then(x.0.cmp(&y.0))
+    });
+
+    // Checked before deflating so the reason names the real problem. Without it, a mixed series
+    // would still be refused — the index has no biennial keys — but the message would talk
+    // about extrapolation and leave the reader to work out why.
+    let biennial = raw.iter().filter(|(p, ..)| is_biennial(p)).count();
+    if biennial > 0 && biennial < raw.len() {
+        return SeriesOutcome::Refused {
+            reason: "The known figures mix annual and biennial periods. A year against a \
+                     biennium is not a comparison, and the difference would read as growth."
+                .into(),
+        };
+    }
+
+    let points: Vec<(String, i64)> = raw.iter().map(|(p, _, c)| (p.clone(), *c)).collect();
+    match real_dollars::deflate_series(&points, d) {
+        Ok(real) => SeriesOutcome::Restated(Box::new(RealSeries {
+            line_item: line_item_slug.to_string(),
+            series_name: d.series_name.clone(),
+            base_period: d.base_period.clone(),
+            points: raw
+                .into_iter()
+                .zip(real)
+                .map(|((period, slug, _), r)| RealPoint {
+                    period,
+                    slug,
+                    nominal_cents: r.nominal_cents,
+                    real_cents: r.real_cents,
+                })
+                .collect(),
+        })),
+        Err(e) => SeriesOutcome::Refused {
+            reason: e.to_string(),
+        },
+    }
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct SeriesCoverage {
+    pub line_item: String,
+    pub outcome: SeriesOutcome,
+}
+
+/// Restates the enacted series of every line item the corpus holds one for.
+pub fn real_terms(
+    corpus: &Corpus,
+    deflator: Option<&real_dollars::Deflator>,
+) -> Vec<SeriesCoverage> {
+    let mut slugs: Vec<String> = corpus
+        .instances
+        .iter()
+        .filter(|i| i.inst.class == "line-item")
+        .map(|i| slug_of(&i.rel_path))
+        .collect();
+    slugs.sort();
+    slugs
+        .into_iter()
+        .map(|line_item| SeriesCoverage {
+            outcome: real_series(corpus, &line_item, deflator),
+            line_item,
+        })
+        .collect()
+}
+
 /// What the calculators say, and where they decline to say anything.
 #[derive(Debug, Clone, Serialize)]
 pub struct Findings {
     pub gap: Vec<gap::Coverage>,
+    /// Adjacent-period comparisons of the gap, in constant dollars.
+    pub gap_trend: Vec<gap::TrendCoverage>,
     pub stage_delta: Vec<stage_delta::Decomposition>,
+    /// Enacted appropriations restated, one series per line item.
+    pub real_terms: Vec<SeriesCoverage>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -579,12 +782,14 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
             .count(),
     };
 
+    let (deflator, real_dollars) = load_deflator(repo_root);
+
     Ok(Feed {
         manifest: Manifest {
             contract_version: CONTRACT_VERSION,
             commit: head_commit(repo_root),
             counts,
-            real_dollars: load_deflator(repo_root),
+            real_dollars,
         },
         classes,
         nodes,
@@ -593,7 +798,9 @@ pub fn build(repo_root: &Path) -> Result<Feed> {
         skills,
         findings: Findings {
             gap: gap::all(repo_root)?,
+            gap_trend: gap::all_trends(repo_root, deflator.as_ref())?,
             stage_delta: stage_delta::all(repo_root)?,
+            real_terms: real_terms(&corpus, deflator.as_ref()),
         },
     })
 }
