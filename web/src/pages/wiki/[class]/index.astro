@@ -1,0 +1,125 @@
+---
+import Layout from '../../../components/Layout.astro';
+import WikiSidebar from '../../../components/WikiSidebar.astro';
+import NodeCard from '../../../components/NodeCard.astro';
+import Prose from '../../../components/Prose.astro';
+import { loadFeed, nodesOfClass } from '../../../lib/feed.ts';
+import type { ClassView, NodeView } from '../../../lib/types.ts';
+
+export async function getStaticPaths() {
+  const feed = await loadFeed();
+  return feed.corpus.classes.map((c) => ({
+    params: { class: c.class },
+    props: { def: c, nodes: nodesOfClass(feed.corpus, c.class) },
+  }));
+}
+
+interface Props {
+  def: ClassView;
+  nodes: NodeView[];
+}
+
+const { def, nodes } = Astro.props;
+const outgoing = def.edges.filter((e) => e.direction === 'out');
+const incoming = def.edges.filter((e) => e.direction === 'in');
+---
+
+<Layout title={def.label} section="wiki" wide description={def.description.slice(0, 180)}>
+  <div class="wiki">
+    <WikiSidebar current={def.class} />
+
+    <div>
+      <div class="node__header">
+        <div class="node__path">.yidam/corpus/{def.class}.ont.yml</div>
+        <p class="eyebrow">Class</p>
+        <h1>{def.label}</h1>
+        {
+          def.foundational_type && (
+            <p style="margin-top:var(--space-3)">
+              <span class="badge">ufo · {def.foundational_type}</span>
+            </p>
+          )
+        }
+      </div>
+
+      <div class="column">
+        <Prose text={def.description} from={`.yidam/corpus/${def.class}.ont.yml`} />
+      </div>
+
+      {
+        def.properties.length > 0 && (
+          <>
+            <h2>Properties</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {def.properties.map((p) => (
+                    <tr>
+                      <td><code>{p.name}</code></td>
+                      <td>{p.type}</td>
+                      <td>{p.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
+      }
+
+      {
+        def.edges.length > 0 && (
+          <>
+            <h2>Declared edges</h2>
+            <p class="column">
+              An instance may assert only the relationships its class declares. Anything else
+              is a validation error, not a new kind of connection.
+            </p>
+            <div class="edges">
+              <div>
+                <h3>Outgoing</h3>
+                <ul>
+                  {outgoing.map((e) => (
+                    <li>
+                      <span class="rel">{e.relationship} →</span>
+                      <a href={`/wiki/${e.target}`}>{e.target}</a>
+                      {e.description && <div style="color:var(--text-tertiary)">{e.description}</div>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {incoming.length > 0 && (
+                <div>
+                  <h3>Incoming</h3>
+                  <ul>
+                    {incoming.map((e) => (
+                      <li>
+                        <span class="rel">← {e.relationship}</span>
+                        <a href={`/wiki/${e.target}`}>{e.target}</a>
+                        {e.description && (
+                          <div style="color:var(--text-tertiary)">{e.description}</div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </>
+        )
+      }
+
+      <h2>{nodes.length} instance{nodes.length === 1 ? '' : 's'}</h2>
+      <div class="grid">
+        {nodes.map((n) => <NodeCard node={n} />)}
+      </div>
+    </div>
+  </div>
+</Layout>

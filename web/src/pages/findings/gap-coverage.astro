@@ -1,0 +1,146 @@
+---
+import Layout from '../../components/Layout.astro';
+import Figure from '../../components/Figure.astro';
+import { loadFeed } from '../../lib/feed.ts';
+import { COVERAGE_FILL, COVERAGE_ORDER, coverageBar } from '../../lib/charts.ts';
+import { dollars, exact, percent } from '../../lib/money.ts';
+import { humanize } from '../../lib/derive.ts';
+
+const feed = await loadFeed();
+const coverage = feed.findings.gap;
+
+const counts = Object.fromEntries(
+  COVERAGE_ORDER.map((s) => [s, coverage.filter((c) => c.outcome.status === s).length]),
+) as Record<(typeof COVERAGE_ORDER)[number], number>;
+
+// Group refusals by their reason: several pairs commonly fail the same way, and the
+// repeated reason is the more useful unit than the individual pair.
+const refusalKinds = new Map<string, number>();
+for (const c of coverage) {
+  if (c.outcome.status !== 'refused') continue;
+  const kind = c.outcome.reason.includes('orders of magnitude')
+    ? 'A recipient-level disbursement measured against the whole line item'
+    : c.outcome.reason.includes('mix bases')
+      ? 'Expenditures reported on more than one basis'
+      : 'Other';
+  refusalKinds.set(kind, (refusalKinds.get(kind) ?? 0) + 1);
+}
+---
+
+<Layout
+  title="Gap coverage"
+  section="findings"
+  description="Which appropriated-against-actual gaps are computable, and what blocks the rest."
+>
+  <p class="eyebrow">Finding</p>
+  <h1>What the central question can and cannot answer yet</h1>
+
+  <p class="lede">
+    The repository exists to difference authority against disbursement. It can do so for
+    {counts.computed} of the {coverage.length} line item and period pairs it holds both sides
+    for. This page is the inventory of the rest — not as a shortfall, but as the list of what
+    extraction has to deliver next.
+  </p>
+
+  <Figure
+    title={`Coverage across ${coverage.length} pairs`}
+    svg={coverageBar(coverage)}
+    caption="Computed, refused, and unavailable are three different things. Only the first is a number; the other two are reasons."
+  >
+    <div class="legend">
+      {
+        COVERAGE_ORDER.map((s) => (
+          <span>
+            <i class="swatch" style={`background:${COVERAGE_FILL[s]}`} />
+            {s} ({counts[s]})
+          </span>
+        ))
+      }
+    </div>
+  </Figure>
+
+  <h2>The distinction that matters</h2>
+
+  <p>
+    <strong>Unavailable</strong> means the corpus does not hold a figure. An
+    <span class="claim claim--open">[open]</span> amount is absence, never zero, and the
+    calculator will not treat it as one. {counts.unavailable} pairs are blocked this way,
+    almost all of them waiting on the same two connectors.
+  </p>
+
+  <p>
+    <strong>Refused</strong> is the more interesting state: both figures are present and the
+    subtraction was declined anyway. Each refusal is a comparison that would have produced a
+    plausible-looking number meaning nothing.
+  </p>
+
+  {
+    refusalKinds.size > 0 && (
+      <ul>
+        {[...refusalKinds].map(([kind, n]) => (
+          <li>
+            {kind} — {n} pair(s)
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <h2>Every pair</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Line item</th>
+          <th>Period</th>
+          <th>Status</th>
+          <th class="num">Variance</th>
+          <th>Figure, or the reason there is none</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          coverage.map((c) => (
+            <tr>
+              <td>
+                <a href={`/wiki/line-item/${c.line_item}`}>{humanize(c.line_item)}</a>
+              </td>
+              <td class="num">{c.period}</td>
+              <td>
+                <span class="badge" style={`border-color:${COVERAGE_FILL[c.outcome.status]}`}>
+                  {c.outcome.status}
+                </span>
+              </td>
+              <td class="num">
+                {c.outcome.status === 'computed' ? exact(c.outcome.variance_cents) : '—'}
+              </td>
+              <td>
+                {c.outcome.status === 'computed' ? (
+                  <>
+                    {dollars(c.outcome.appropriated_cents)} appropriated,{' '}
+                    {exact(c.outcome.spent_cents)} spent on a {c.outcome.basis} basis —{' '}
+                    {percent(c.outcome.variance_pct)}.
+                    {c.outcome.provisional && ' In-year figures; the books will still move.'}
+                    <div class="rel">{c.outcome.character.how_to_read}</div>
+                  </>
+                ) : (
+                  c.outcome.reason
+                )}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <hr />
+
+  <p style="font-size:var(--text-sm);color:var(--text-secondary)">
+    Computed by <a href="/methods#skill-gap">gap</a>, which runs over every pair the corpus
+    holds an expenditure for. The refusals are its rules, not this site's:
+    a recipient's share against a whole line item, expenditures summed across bases, and any
+    cross-period comparison without a deflator.
+  </p>
+</Layout>

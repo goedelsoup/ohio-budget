@@ -1,0 +1,215 @@
+---
+import Layout from '../../components/Layout.astro';
+import Figure from '../../components/Figure.astro';
+import { loadFeed } from '../../lib/feed.ts';
+import { stageDeltas, stageLevels } from '../../lib/charts.ts';
+import { decompositionFor, stageLabel, stagePoints } from '../../lib/derive.ts';
+import { delta, dollars } from '../../lib/money.ts';
+
+const feed = await loadFeed();
+const d = decompositionFor(feed, 'foundation-funding', 'FY2026');
+const points = d ? stagePoints(d) : undefined;
+
+const attributed = d?.steps.filter((s) => s.is_attributed) ?? [];
+const unattributed = d?.steps.filter((s) => !s.is_attributed && s.delta_cents !== 0) ?? [];
+const anomalies = d?.steps.filter((s) => s.anomaly !== null) ?? [];
+---
+
+<Layout
+  title="HB 96 stage movement"
+  section="findings"
+  description="How Foundation Funding for FY2026 moved between introduction and enactment, and who moved it."
+>
+  <p class="eyebrow">Finding</p>
+  <h1>What HB 96 did to school funding, one stage at a time</h1>
+
+  {
+    !d || !points ? (
+      <div class="refusal">
+        <div class="refusal__label">Nothing to report</div>
+        <p style="margin:0">
+          The corpus holds no decomposable stage series for Foundation Funding in FY2026.
+        </p>
+      </div>
+    ) : (
+      <>
+        <p class="lede">
+          An appropriation is not one number. HB 96 stated a figure for Foundation Funding
+          {' '}{d.steps.length + 1} times before it became law, and the differences between
+          those statements are the record of who wanted what.
+        </p>
+
+        <p>
+          The corpus holds an amount at every stage in the sequence, which is what makes
+          attribution possible at all. Where a stage is missing, the delta across the gap
+          spans everything that happened inside it — chamber action, conference, and any
+          executive edit at once — and the calculator reports it as aggregate movement
+          rather than crediting it to whichever actor happens to be nearby.
+          {d.is_complete
+            ? ' No stage is missing from this series.'
+            : ` ${d.missing_stages.length} stage(s) are missing from this series.`}
+        </p>
+
+        <dl class="figures">
+          <div>
+            <dt>As introduced</dt>
+            <dd>{dollars(points.ok ? (points.data[0]?.cents ?? 0) : 0)}</dd>
+          </div>
+          <div>
+            <dt>As enacted</dt>
+            <dd>
+              {dollars(points.ok ? (points.data[points.data.length - 1]?.cents ?? 0) : 0)}
+            </dd>
+          </div>
+          <div>
+            <dt>Net movement</dt>
+            <dd>
+              {delta(d.net_cents)}
+              <small>{attributed.length} of {d.steps.length} steps attributed</small>
+            </dd>
+          </div>
+        </dl>
+
+        <Figure
+          title="The figure at each stage"
+          refusal={points}
+          svg={points.ok ? stageLevels(points.data) : undefined}
+          caption="Vertical axis does not start at zero — the series moves within about one percent of itself. Read the shape, not the height."
+        />
+
+        <Figure
+          title="What each step changed"
+          refusal={points}
+          svg={points.ok ? stageDeltas(points.data) : undefined}
+          caption="Each bar is one transition, differenced against the stage before it. The two largest are labelled; the table below carries every figure."
+        >
+          <div class="legend">
+            <span><i class="swatch" style="background:#9c7800" /> money added</span>
+            <span><i class="swatch" style="background:#2254a4" /> money removed</span>
+          </div>
+        </Figure>
+
+        <h2>Every step</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Transition</th>
+                <th class="num">From</th>
+                <th class="num">To</th>
+                <th class="num">Change</th>
+                <th>Attributed to</th>
+              </tr>
+            </thead>
+            <tbody>
+              {d.steps.map((s) => (
+                <tr>
+                  <td>
+                    {stageLabel(s.from)} → {stageLabel(s.to)}
+                    {s.skipped.length > 0 && (
+                      <div class="rel">
+                        spans {s.skipped.length} missing stage(s) — aggregate, not attributable
+                      </div>
+                    )}
+                  </td>
+                  <td class="num">{dollars(s.from_cents)}</td>
+                  <td class="num">{dollars(s.to_cents)}</td>
+                  <td class="num">{s.delta_cents === 0 ? '—' : delta(s.delta_cents)}</td>
+                  <td>
+                    {s.is_attributed ? (
+                      s.attributions.map((a) => (
+                        <div>
+                          <a href={`/wiki/actor/${a.actor}`}>{a.actor?.replace(/-/g, ' ')}</a>
+                          <div class="rel">{a.action_type}</div>
+                        </div>
+                      ))
+                    ) : s.delta_cents === 0 ? (
+                      <span style="color:var(--text-tertiary)">no movement</span>
+                    ) : (
+                      <span style="color:var(--text-tertiary)">
+                        no action in the corpus accounts for this
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {attributed.length > 0 && (
+          <>
+            <h2>What was said about it</h2>
+            <p>
+              The stated justification and the motive are not the same thing, and the corpus
+              records only the first. These are the reasons given, as the source gives them.
+            </p>
+            {attributed.map((s) =>
+              s.attributions.map((a) => (
+                <div class="card" style="margin-bottom:var(--space-4)">
+                  <div class="card__path">
+                    {stageLabel(s.from)} → {stageLabel(s.to)} · {delta(s.delta_cents)}
+                  </div>
+                  <div class="card__title" style="font-size:var(--text-lg)">
+                    <a href={`/wiki/budget-action/${a.action}`}>{a.action.replace(/-/g, ' ')}</a>
+                  </div>
+                  <p style="margin:0;font-size:var(--text-sm);color:var(--text-secondary)">
+                    {a.stated_justification || 'The source records no stated reason.'}
+                  </p>
+                </div>
+              )),
+            )}
+          </>
+        )}
+
+        {unattributed.length > 0 && (
+          <>
+            <h2>Movement nothing accounts for</h2>
+            <p>
+              {unattributed.length} step(s) changed the figure without any action in the
+              corpus applying to them. That is a gap in the record rather than a finding
+              about the legislature: an amendment exists somewhere for each of these, and
+              the corpus has not yet reached it.
+            </p>
+            <ul>
+              {unattributed.map((s) => (
+                <li>
+                  {stageLabel(s.from)} → {stageLabel(s.to)}: {delta(s.delta_cents)}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {anomalies.length > 0 && (
+          <>
+            <h2>Movement that contradicts the power exercised</h2>
+            <p>
+              The calculator flags a step whose direction the acting power cannot produce —
+              an item veto, for instance, can only reduce or eliminate, so an increase
+              between passage and enactment means a version is missing rather than that a
+              veto added money.
+            </p>
+            <ul>
+              {anomalies.map((s) => (
+                <li>
+                  {stageLabel(s.from)} → {stageLabel(s.to)}: {s.anomaly}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        <hr />
+
+        <p style="font-size:var(--text-sm);color:var(--text-secondary)">
+          Computed by <a href="/methods#skill-stage-delta">stage-delta</a> over the
+          appropriation nodes for <a href="/wiki/line-item/foundation-funding">Foundation
+          Funding</a>. Every figure on this page is a stage amount the corpus holds, or a
+          difference between two of them.
+        </p>
+      </>
+    )
+  }
+</Layout>

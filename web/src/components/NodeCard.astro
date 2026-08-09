@@ -1,0 +1,25 @@
+---
+import { excerpt } from '../lib/prose.ts';
+import type { NodeView } from '../lib/types.ts';
+
+interface Props {
+  node: NodeView;
+}
+
+const { node } = Astro.props;
+const outgoing = node.links.filter((l) => l.relationship !== 'instance-of').length;
+---
+
+<a class="card" href={`/wiki/${node.class}/${node.slug}`}>
+  <div class="card__path">
+    {node.is_open_question && <span style="color:var(--open-fg)">? </span>}
+    {node.path}
+  </div>
+  <div class="card__title">{node.label}</div>
+  {node.description && <div class="card__excerpt">{excerpt(node.description, 190)}</div>}
+  <div class="card__meta">
+    {node.claims.map((c) => <span class={`claim claim--${c}`}>[{c}]</span>)}
+    <span title="Outgoing edges">{outgoing} out</span>
+    <span title="Incoming edges">{node.backlinks.length} in</span>
+  </div>
+</a>

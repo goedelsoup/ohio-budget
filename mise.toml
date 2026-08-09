@@ -64,6 +64,44 @@ run = "cargo run -q --manifest-path crates/Cargo.toml --bin stage-delta -- ."
 description = "Check corpus instances against their class definitions. Exits non-zero on errors."
 run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- ."
 
+# ── web interface (web/) ──────────────────────────────────────────────────
+# The site renders the corpus and the calculators' output; it computes nothing
+# itself. `export` is the seam: it runs the calculators and writes their verdicts
+# to web/src/data/*.json, which is generated and gitignored. A second committed
+# copy of the corpus is exactly the contradiction the pre-commit hook exists to
+# catch, so the web build depends on this task rather than on checked-in data.
+
+[tasks.export]
+description = "Emit the corpus and the calculators' results as JSON for the web layer."
+run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-export -- ."
+
+[tasks.web-install]
+description = "Install the web layer's dependencies."
+dir = "web"
+run = "npm install"
+
+[tasks.web-dev]
+description = "Serve the web interface with live reload."
+depends = ["export"]
+dir = "web"
+run = "npm run dev"
+
+[tasks.web-build]
+description = "Build the static site into web/dist."
+depends = ["export"]
+dir = "web"
+run = "npm run build"
+
+[tasks.web-test]
+description = "Run the web layer's unit tests."
+dir = "web"
+run = "npm run test"
+
+[tasks.web-check]
+description = "Typecheck the web layer."
+dir = "web"
+run = "npm run check"
+
 # ── gate ──────────────────────────────────────────────────────────────────
 # `validate` catches what `yidam graph-check` cannot: relationships an instance
 # asserts that its class never declared. Both run; they check different things.
@@ -80,6 +118,12 @@ run = [
   "git diff --exit-code -- .yidam/schemas",
   "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- .",
   "yidam graph-check",
+  # The web layer's own gate. `web-build` depends on `export`, so a change to the
+  # corpus or a calculator that the site cannot render fails here rather than at
+  # deploy time.
+  "mise run web-test",
+  "mise run web-check",
+  "mise run web-build",
 ]
 
 [tasks.install-hooks]

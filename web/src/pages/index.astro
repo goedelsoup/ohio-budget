@@ -1,0 +1,219 @@
+---
+import Layout from '../components/Layout.astro';
+import Figure from '../components/Figure.astro';
+import { loadFeed } from '../lib/feed.ts';
+import {
+  claimStates,
+  coverageBar,
+  COVERAGE_FILL,
+  COVERAGE_ORDER,
+  gapMeter,
+  stageDeltas,
+  stageLevels,
+} from '../lib/charts.ts';
+import { computedGaps, decompositionFor, landingSubjects, stagePoints } from '../lib/derive.ts';
+import { dollars, exact, percent } from '../lib/money.ts';
+
+const feed = await loadFeed();
+const { manifest, findings } = feed;
+
+const computed = computedGaps(feed);
+const headline = computed[0];
+const headlineGap = headline?.outcome.status === 'computed' ? headline.outcome : undefined;
+
+const hb96 = decompositionFor(feed, 'foundation-funding', 'FY2026');
+const hb96Points = hb96 ? stagePoints(hb96) : undefined;
+
+const subjects = landingSubjects(feed);
+const attributedSteps = hb96?.steps.filter((s) => s.is_attributed).length ?? 0;
+---
+
+<Layout
+  title="Findings"
+  section="findings"
+  description="What the record shows about the gap between what Ohio appropriates and what Ohio spends."
+>
+  <p class="eyebrow">Ohio state budget · FY2010–FY2026</p>
+  <h1>Where the gap lies</h1>
+
+  <p class="lede">
+    This repository tracks Ohio's budget as a connected system — the line items, the bills
+    that move them, the actors who move them, and the money that eventually leaves the
+    treasury. The question it exists to answer is where the distance falls between what the
+    state appropriates and what the state actually spends.
+  </p>
+
+  <p>
+    Most of that distance is not yet measurable, and this page says so where it applies.
+    Of the {findings.gap.length} line item and period pairs the corpus holds both sides for,{' '}
+    {computed.length} yields a figure. What follows is that figure, the one bill whose
+    movement can be attributed step by step, and an account of what blocks the rest.
+  </p>
+
+  {
+    headlineGap && (
+      <>
+        <h2>A formula line landed above its authority</h2>
+
+        <dl class="figures">
+          <div>
+            <dt>Appropriated</dt>
+            <dd>
+              {dollars(headlineGap.appropriated_cents)}
+              <small>{headlineGap.line_item.replace(/-/g, ' ')}, {headlineGap.period}</small>
+            </dd>
+          </div>
+          <div>
+            <dt>Disbursed</dt>
+            <dd>
+              {exact(headlineGap.spent_cents)}
+              <small>basis: {headlineGap.basis}</small>
+            </dd>
+          </div>
+          <div>
+            {/* gap's sign convention is positive-when-authority-exceeded-spending, which
+                inverts the everyday reading of "variance". Name the direction instead. */}
+            <dt>{headlineGap.variance_cents < 0 ? 'Overspent by' : 'Left unspent'}</dt>
+            <dd>
+              {exact(Math.abs(headlineGap.variance_cents))}
+              <small>{percent(headlineGap.variance_pct)} of authority</small>
+            </dd>
+          </div>
+        </dl>
+
+        <p>
+          Foundation Funding — the line through which the state pays its share of school
+          district operating costs — spent {exact(Math.abs(headlineGap.variance_cents))} more
+          in {headlineGap.period} than it was appropriated, on an authority of{' '}
+          {dollars(headlineGap.appropriated_cents)}. That is{' '}
+          {percent(headlineGap.variance_pct)}, and the figure rests on closed books rather
+          than in-year reporting, so it will not move.
+        </p>
+
+        <Figure
+          title={`Disbursement against authority — ${headlineGap.line_item.replace(/-/g, ' ')}, ${headlineGap.period}`}
+          caption="The track is the authority granted; the fill is money out the door. Drawn as a meter rather than as two bars because at this scale two bars are visually identical, and a reader would take that for no difference."
+          svg={gapMeter(headlineGap)}
+        />
+
+        <p>
+          How to read it is not obvious from the number, and the calculator declines to
+          collapse it into a verdict.{' '}
+          <em>{headlineGap.character.how_to_read}</em>. Foundation Funding distributes under
+          the school funding formula, so a district count or a per-pupil input landing
+          differently from forecast moves the total without anyone deciding to spend more.
+        </p>
+      </>
+    )
+  }
+
+  <h2>One bill, nine stages, and who moved the money</h2>
+
+  <p>
+    HB 96 set Foundation Funding for FY2026 nine separate times between introduction and
+    enactment. Because the corpus holds a figure at every one of those stages, each step can
+    be differenced against the last and attributed to the action that caused it —{' '}
+    {attributedSteps} of them to a named actor.
+  </p>
+
+  {
+    hb96 && hb96Points && (
+      <>
+        <Figure
+          title="Foundation Funding, FY2026 — the figure at each stage"
+          refusal={hb96Points}
+          svg={hb96Points.ok ? stageLevels(hb96Points.data) : undefined}
+          caption="Vertical axis does not start at zero: the whole series sits within about one percent of itself, and a zero baseline would draw it as a flat line. Read the shape, not the height."
+        />
+
+        <Figure
+          title="What each step changed"
+          refusal={hb96Points}
+          svg={hb96Points.ok ? stageDeltas(hb96Points.data) : undefined}
+          caption="Gold adds, blue removes. The two largest movements are labelled; every step is listed in full on the finding page."
+        >
+          <div class="legend">
+            <span><i class="swatch" style="background:#9c7800"></i> money added</span>
+            <span><i class="swatch" style="background:#2254a4"></i> money removed</span>
+          </div>
+        </Figure>
+
+        <p>
+          <a href="/findings/hb96-stage-movement">
+            Read the full decomposition, step by step, with the justification given for each →
+          </a>
+        </p>
+      </>
+    )
+  }
+
+  <h2>What blocks the rest</h2>
+
+  <p>
+    The calculator distinguishes two kinds of silence, and the difference matters. A pair is
+    <strong> unavailable</strong> when the corpus does not hold one of the figures — the
+    connectors have not run, or the source has not been committed. A pair is
+    <strong> refused</strong> when both figures are present and the subtraction was declined
+    anyway, because the result would have looked entirely plausible and meant nothing.
+  </p>
+
+  <Figure
+    title={`Gap coverage across ${findings.gap.length} line item and period pairs`}
+    svg={coverageBar(findings.gap)}
+    caption="Every pair is listed with its reason on the coverage page."
+  >
+    <div class="legend">
+      {
+        COVERAGE_ORDER.map((s) => (
+          <span>
+            <i class="swatch" style={`background:${COVERAGE_FILL[s]}`} />
+            {s}
+          </span>
+        ))
+      }
+    </div>
+  </Figure>
+
+  <p>
+    <a href="/findings/gap-coverage">See every pair and what blocks it →</a>
+  </p>
+
+  <h2>What the corpus knows</h2>
+
+  <p>
+    {manifest.counts.nodes} nodes across {manifest.counts.classes} classes, drawn from{' '}
+    {manifest.counts.catalog} catalogued sources. A claim is only marked
+    <span class="claim claim--verified">[verified]</span> once the source it rests on has
+    been committed to the repository — registering a source is not the same as reading it.
+  </p>
+
+  <Figure
+    title="Claim state across the corpus"
+    svg={claimStates(manifest.counts, manifest.counts.nodes)}
+    caption="The counts overlap: a node commonly carries a verified figure and an open question about that figure at the same time. They are three independent counts, not a partition."
+  />
+
+  {
+    subjects.length > 0 && (
+      <>
+        <h2>Follow a line item</h2>
+        <p>
+          {subjects.length} line items carry enough around them to be worth reading as a
+          whole — their appropriations at each stage, what was spent against them, and the
+          programs and agencies they run through.
+        </p>
+        <ul>
+          {subjects.slice(0, 8).map((s) => (
+            <li>
+              <a href={`/wiki/subjects/${s.slug}`}>{s.label}</a>
+              {' — '}
+              {s.relatedCount} related nodes
+              {s.hasStageSeries && ', stage movement available'}
+              {s.hasComputedGap && ', gap computable'}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+</Layout>

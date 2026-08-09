@@ -5,7 +5,7 @@ description: Compute appropriated authority against actual disbursement for a li
 
 # Skill: gap
 
-**Status:** stub. Not runnable — every `amount` in the seed corpus is `[open]`.
+**Status:** implemented in [`crates/gap`](../../crates/gap/). Run `mise run gap`.
 
 The repository's central calculation. Differences authority granted against money actually
 spent, which is the question the whole ontology was shaped to make answerable.

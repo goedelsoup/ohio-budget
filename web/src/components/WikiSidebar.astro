@@ -1,0 +1,54 @@
+---
+import { loadFeed } from '../lib/feed.ts';
+import { landingSubjects } from '../lib/derive.ts';
+
+interface Props {
+  /** Class page currently shown, if any. */
+  current?: string;
+  /** Subject landing currently shown, if any. */
+  currentSubject?: string;
+}
+
+const { current, currentSubject } = Astro.props;
+const feed = await loadFeed();
+
+// Ordered by size: the classes carrying the most instances are the ones a reader is most
+// likely to be after, and alphabetical order would bury `appropriation` in the middle.
+const classes = [...feed.corpus.classes].sort(
+  (a, b) => b.instance_count - a.instance_count || a.class.localeCompare(b.class),
+);
+const subjects = landingSubjects(feed);
+---
+
+<aside class="wiki__sidebar">
+  <h2>Subjects</h2>
+  <ul>
+    {
+      subjects.map((s) => (
+        <li>
+          <a
+            href={`/wiki/subjects/${s.slug}`}
+            aria-current={currentSubject === s.slug ? 'page' : undefined}
+          >
+            <span>{s.label}</span>
+            <span class="count">{s.relatedCount}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Classes</h2>
+  <ul>
+    {
+      classes.map((c) => (
+        <li>
+          <a href={`/wiki/${c.class}`} aria-current={current === c.class ? 'page' : undefined}>
+            <span>{c.label}</span>
+            <span class="count">{c.instance_count}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</aside>

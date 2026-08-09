@@ -1,0 +1,40 @@
+---
+/**
+ * A figure, or the stated reason there is none.
+ *
+ * Taking `Chartable` rather than markup means a page cannot accidentally render an empty
+ * frame: either the derivation produced data and the caller passes SVG, or it refused and
+ * the refusal is what shows.
+ */
+import type { Chartable } from '../lib/derive.ts';
+
+interface Props {
+  title: string;
+  caption?: string;
+  /** Present when the figure could not be drawn. */
+  refusal?: Chartable<unknown>;
+  /** Serialized SVG from `renderPlot`. Ignored when `refusal` is a refusal. */
+  svg?: string;
+}
+
+const { title, caption, refusal, svg } = Astro.props;
+const refused = refusal !== undefined && refusal.ok === false;
+---
+
+<figure>
+  <div class={refused ? '' : 'figure__frame'}>
+    <div class="figure__title">{title}</div>
+    {
+      refused ? (
+        <div class="refusal">
+          <div class="refusal__label">No figure drawn</div>
+          <p style="margin:0">{refusal.reason}</p>
+        </div>
+      ) : (
+        <Fragment set:html={svg} />
+      )
+    }
+    {!refused && <slot />}
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

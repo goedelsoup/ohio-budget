@@ -1,0 +1,233 @@
+---
+import Layout from '../../../components/Layout.astro';
+import WikiSidebar from '../../../components/WikiSidebar.astro';
+import Prose from '../../../components/Prose.astro';
+import Figure from '../../../components/Figure.astro';
+import NodeCard from '../../../components/NodeCard.astro';
+import { loadFeed } from '../../../lib/feed.ts';
+import { stageDeltas, stageLevels } from '../../../lib/charts.ts';
+import {
+  decompositionFor,
+  enactedByPeriod,
+  gapsForLineItem,
+  landingSubjects,
+  stagePoints,
+  trendable,
+} from '../../../lib/derive.ts';
+import type { Subject } from '../../../lib/derive.ts';
+import { dollars, exact, percent } from '../../../lib/money.ts';
+import type { Feed, NodeView } from '../../../lib/types.ts';
+
+export async function getStaticPaths() {
+  const feed = await loadFeed();
+  return landingSubjects(feed).map((subject) => ({
+    params: { slug: subject.slug },
+    props: { subject },
+  }));
+}
+
+interface Props {
+  subject: Subject;
+}
+
+const { subject } = Astro.props;
+const feed: Feed = await loadFeed();
+const node = subject.node;
+
+const decomposition = decompositionFor(feed, subject.slug);
+const points = decomposition ? stagePoints(decomposition) : undefined;
+const enacted = enactedByPeriod(feed.corpus, subject.slug);
+const trend = trendable(feed, enacted);
+const gaps = gapsForLineItem(feed, subject.slug);
+
+// Everything pointing at this line item, grouped by the class it comes from — the shape a
+// reader actually wants, rather than one flat list of 30 backlinks.
+const related = new Map<string, NodeView[]>();
+for (const b of node.backlinks) {
+  const n = feed.corpus.nodes.find((x) => x.class === b.class && x.slug === b.slug);
+  if (!n) continue;
+  const bucket = related.get(b.class) ?? [];
+  bucket.push(n);
+  related.set(b.class, bucket);
+}
+const relatedGroups = [...related.entries()].sort(
+  (a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]),
+);
+
+const computedGap = gaps.find((g) => g.outcome.status === 'computed');
+---
+
+<Layout title={node.label} section="wiki" wide description={node.description.slice(0, 180)}>
+  <div class="wiki">
+    <WikiSidebar currentSubject={subject.slug} />
+
+    <div>
+      <div class="node__header">
+        <div class="node__path">{node.path}</div>
+        <p class="eyebrow">Subject</p>
+        <h1>{node.label}</h1>
+      </div>
+
+      <div class="column">
+        <Prose text={node.description} from={node.path} />
+      </div>
+
+      <dl class="figures">
+        <div>
+          <dt>Related nodes</dt>
+          <dd>{subject.relatedCount}</dd>
+        </div>
+        <div>
+          <dt>Carrying a figure</dt>
+          <dd>{subject.figureCount}</dd>
+        </div>
+        {
+          computedGap?.outcome.status === 'computed' && (
+            <div>
+              <dt>Variance, {computedGap.period}</dt>
+              <dd>
+                {exact(computedGap.outcome.variance_cents)}
+                <small>{percent(computedGap.outcome.variance_pct)} of authority</small>
+              </dd>
+            </div>
+          )
+        }
+      </dl>
+
+      {
+        decomposition && points && (
+          <>
+            <h2>Movement across bill stages, {decomposition.period}</h2>
+            <Figure
+              title={`${node.label} — the figure at each stage`}
+              refusal={points}
+              svg={points.ok ? stageLevels(points.data) : undefined}
+              caption="All points stand in one fiscal period, so this comparison needs no deflator. The vertical axis does not start at zero."
+            />
+            <Figure
+              title="What each step changed"
+              refusal={points}
+              svg={points.ok ? stageDeltas(points.data) : undefined}
+              caption="Gold adds, blue removes. The two largest movements are labelled."
+            >
+              <div class="legend">
+                <span><i class="swatch" style="background:#9c7800" /> money added</span>
+                <span><i class="swatch" style="background:#2254a4" /> money removed</span>
+              </div>
+            </Figure>
+          </>
+        )
+      }
+
+      <h2>Enacted figures</h2>
+      {
+        enacted.length === 0 ? (
+          <div class="refusal">
+            <div class="refusal__label">No figures</div>
+            <p style="margin:0">
+              The corpus holds no enacted appropriation carrying an amount for this line item.
+              Every one it holds is <span class="claim claim--open">[open]</span>.
+            </p>
+          </div>
+        ) : (
+          <>
+            {!trend.ok && (
+              <div class="refusal" style="margin-bottom:var(--space-6)">
+                <div class="refusal__label">Not drawn as a trend</div>
+                <p style="margin:0">{trend.reason}</p>
+              </div>
+            )}
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Period</th>
+                    <th class="num">Enacted</th>
+                    <th>Node</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {enacted.map((p) => (
+                    <tr>
+                      <td class="num">{p.period}</td>
+                      <td class="num">{dollars(p.cents)}</td>
+                      <td>
+                        <a href={`/wiki/appropriation/${p.slug}`}>{p.slug}</a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
+      }
+
+      {
+        gaps.length > 0 && (
+          <>
+            <h2>Appropriated against actual</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Period</th>
+                    <th>Status</th>
+                    <th class="num">Variance</th>
+                    <th>Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {gaps.map((g) => (
+                    <tr>
+                      <td class="num">{g.period}</td>
+                      <td><span class="badge">{g.outcome.status}</span></td>
+                      <td class="num">
+                        {g.outcome.status === 'computed' ? exact(g.outcome.variance_cents) : '—'}
+                      </td>
+                      <td>
+                        {g.outcome.status === 'computed' ? (
+                          <>
+                            {dollars(g.outcome.appropriated_cents)} appropriated,{' '}
+                            {exact(g.outcome.spent_cents)} spent ({g.outcome.basis})
+                            <div class="rel">{g.outcome.character.how_to_read}</div>
+                          </>
+                        ) : (
+                          g.outcome.reason
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
+      }
+
+      <h2>Everything attached to this line item</h2>
+      {
+        relatedGroups.map(([cls, nodes]) => (
+          <>
+            <h3>
+              <a href={`/wiki/${cls}`}>{cls}</a> · {nodes.length}
+            </h3>
+            <div class="grid">
+              {nodes.map((n) => (
+                <NodeCard node={n} />
+              ))}
+            </div>
+          </>
+        ))
+      }
+
+      <hr />
+      <p class="column" style="font-size:var(--text-sm);color:var(--text-secondary)">
+        This page is assembled, not authored. It gathers the line item's own node with
+        everything pointing at it, and shows a figure only where the calculators produced
+        one. See <a href={`/wiki/line-item/${subject.slug}`}>the node itself</a> for the
+        file as written.
+      </p>
+    </div>
+  </div>
+</Layout>

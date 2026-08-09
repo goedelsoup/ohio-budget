@@ -1,0 +1,131 @@
+---
+import Layout from '../../components/Layout.astro';
+import WikiSidebar from '../../components/WikiSidebar.astro';
+import { loadFeed } from '../../lib/feed.ts';
+import { landingSubjects } from '../../lib/derive.ts';
+import { excerpt } from '../../lib/prose.ts';
+
+const feed = await loadFeed();
+const { corpus, manifest } = feed;
+
+const classes = [...corpus.classes].sort(
+  (a, b) => b.instance_count - a.instance_count || a.class.localeCompare(b.class),
+);
+const subjects = landingSubjects(feed);
+const openQuestions = corpus.nodes.filter((n) => n.is_open_question);
+const dangling = corpus.nodes.flatMap((n) =>
+  n.links.filter((l) => l.kind === 'unresolved').map((l) => ({ node: n, link: l })),
+);
+---
+
+<Layout title="Corpus" section="wiki" wide description="The knowledge graph behind the findings.">
+  <div class="wiki">
+    <WikiSidebar />
+
+    <div>
+      <p class="eyebrow">Corpus</p>
+      <h1>The graph the findings are drawn from</h1>
+
+      <p class="lede" style="max-width:42rem">
+        {manifest.counts.nodes} nodes across {manifest.counts.classes} classes. Every node is
+        a file in the repository, every link is an edge, and every page here carries the path
+        of the file it renders so a claim can be checked against its source.
+      </p>
+
+      <h2>Classes</h2>
+      <p style="max-width:42rem">
+        The ontology defines what kinds of thing exist and how they may connect. A class
+        declares its own properties and edges, and the validator rejects an instance that
+        asserts a relationship its class never declared.
+      </p>
+
+      <div class="grid">
+        {
+          classes.map((c) => (
+            <a class="card" href={`/wiki/${c.class}`}>
+              <div class="card__path">{c.class}.ont.yml</div>
+              <div class="card__title">{c.label}</div>
+              <div class="card__excerpt">{excerpt(c.description, 160)}</div>
+              <div class="card__meta">
+                <span>{c.instance_count} instances</span>
+                <span>{c.edges.length} declared edges</span>
+                {c.foundational_type && <span class="badge">{c.foundational_type}</span>}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      {
+        subjects.length > 0 && (
+          <>
+            <h2>Subjects</h2>
+            <p style="max-width:42rem">
+              A line item with enough around it to read as a whole. These pages are derived,
+              not curated: a line item appears here once the corpus holds enough
+              appropriations, expenditures and programs attached to it to be worth
+              assembling in one place.
+            </p>
+            <div class="grid">
+              {subjects.map((s) => (
+                <a class="card" href={`/wiki/subjects/${s.slug}`}>
+                  <div class="card__path">{s.node.path}</div>
+                  <div class="card__title">{s.label}</div>
+                  <div class="card__excerpt">{excerpt(s.node.description, 160)}</div>
+                  <div class="card__meta">
+                    <span>{s.relatedCount} related</span>
+                    <span>{s.figureCount} with figures</span>
+                    {s.hasStageSeries && <span class="badge badge--accent">stage movement</span>}
+                    {s.hasComputedGap && <span class="badge badge--accent">gap computed</span>}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </>
+        )
+      }
+
+      {
+        openQuestions.length > 0 && (
+          <>
+            <h2>Open questions</h2>
+            <p style="max-width:42rem">
+              Nodes written as questions rather than statements. The corpus records what it
+              does not know in the same place and the same form as what it does.
+            </p>
+            <ul style="max-width:42rem">
+              {openQuestions.map((n) => (
+                <li>
+                  <a href={`/wiki/${n.class}/${n.slug}`}>{n.label}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      {
+        dangling.length > 0 && (
+          <>
+            <h2>Edges that do not resolve</h2>
+            <p style="max-width:42rem">
+              {dangling.length} link(s) point at a file the corpus does not hold. Shown rather
+              than hidden — a dangling edge is a fact about the graph, and suppressing it here
+              would make the corpus look healthier than it is.
+            </p>
+            <ul style="max-width:42rem">
+              {dangling.map(({ node, link }) => (
+                <li>
+                  <a href={`/wiki/${node.class}/${node.slug}`}>{node.label}</a>{' '}
+                  <span class="rel" style="display:inline">
+                    {link.relationship} → <code class="path">{link.raw}</code>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+    </div>
+  </div>
+</Layout>

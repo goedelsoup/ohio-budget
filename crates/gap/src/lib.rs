@@ -26,6 +26,7 @@
 use anyhow::Result;
 use corpus_validate::{normalize_join, Corpus, LoadedInstance};
 use real_dollars::Deflator;
+use serde::Serialize;
 
 fn slug_of(rel_path: &str) -> &str {
     rel_path
@@ -66,7 +67,7 @@ enum AmountState {
 }
 
 /// What the corpus knows about how a gap on this line should be read.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct Character {
     /// Policy areas of the programs funding this line item.
     pub policy_areas: Vec<String>,
@@ -95,7 +96,21 @@ impl Character {
     }
 }
 
-#[derive(Debug, Clone, PartialEq)]
+/// Serializes a [`Character`] together with the reading it implies.
+///
+/// `how_to_read` is emitted rather than left for the consumer to re-derive: a downstream
+/// reimplementation of the mapping is a second definition of it, and the two would drift.
+fn character_with_reading<S: serde::Serializer>(c: &Character, s: S) -> Result<S::Ok, S::Error> {
+    use serde::ser::SerializeStruct;
+    let mut st = s.serialize_struct("Character", 4)?;
+    st.serialize_field("policy_areas", &c.policy_areas)?;
+    st.serialize_field("formula_driven", &c.formula_driven)?;
+    st.serialize_field("federally_matched", &c.federally_matched)?;
+    st.serialize_field("how_to_read", c.how_to_read())?;
+    st.end()
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct GapResult {
     pub line_item: String,
     pub period: String,
@@ -108,10 +123,17 @@ pub struct GapResult {
     pub basis: String,
     /// True when the figures rest on in-year reporting and the books will still move.
     pub provisional: bool,
+    #[serde(serialize_with = "character_with_reading")]
     pub character: Character,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+/// The three answers the calculator can give.
+///
+/// Serialized internally tagged, so a consumer reads `status` and gets either a figure or the
+/// reason there is none. A refusal is content: it says the corpus holds both sides and the
+/// subtraction was still declined, which is a different statement from having no data.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+#[serde(tag = "status", rename_all = "lowercase")]
 pub enum Outcome {
     Computed(Box<GapResult>),
     /// The corpus does not yet hold the figures.
@@ -312,6 +334,58 @@ pub fn gap_trend(
         (other, Outcome::Computed(_)) | (Outcome::Computed(_), other) => Ok(other),
         (other, _) => Ok(other),
     }
+}
+
+/// Every (line item, period) pair the corpus holds an expenditure for.
+///
+/// The only pairs where a gap could exist at all — an appropriation with no expenditure
+/// beside it is not a gap of unknown size, it is a question the corpus has not reached.
+pub fn coverage(corpus: &Corpus) -> Vec<(String, String)> {
+    let mut pairs: Vec<(String, String)> = Vec::new();
+    for e in class(corpus, "expenditure") {
+        let Some(period) = prop(e, "period_label") else {
+            continue;
+        };
+        let dir = e.abs_path.parent().unwrap_or(&e.abs_path);
+        for l in e
+            .inst
+            .links
+            .iter()
+            .filter(|l| l.relationship == "disburses-against")
+        {
+            let t = normalize_join(dir, &l.target);
+            if let Some(name) = t.file_stem().and_then(|s| s.to_str()) {
+                pairs.push((name.to_string(), period.trim().to_string()));
+            }
+        }
+    }
+    pairs.sort();
+    pairs.dedup();
+    pairs
+}
+
+/// One outcome per pair in [`coverage`], in the same order.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct Coverage {
+    pub line_item: String,
+    pub period: String,
+    pub outcome: Outcome,
+}
+
+/// Runs the calculator over every pair the corpus could support.
+pub fn all(repo_root: &std::path::Path) -> Result<Vec<Coverage>> {
+    let corpus = corpus_validate::load(repo_root)?;
+    Ok(coverage(&corpus)
+        .into_iter()
+        .map(|(line_item, period)| {
+            let outcome = gap_for(&corpus, &line_item, &period);
+            Coverage {
+                line_item,
+                period,
+                outcome,
+            }
+        })
+        .collect())
 }
 
 #[cfg(test)]

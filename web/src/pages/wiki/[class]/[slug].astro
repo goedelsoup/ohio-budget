@@ -1,0 +1,283 @@
+---
+import Layout from '../../../components/Layout.astro';
+import WikiSidebar from '../../../components/WikiSidebar.astro';
+import Prose from '../../../components/Prose.astro';
+import Figure from '../../../components/Figure.astro';
+import { loadFeed } from '../../../lib/feed.ts';
+import { stageDeltas, stageLevels } from '../../../lib/charts.ts';
+import {
+  decompositionFor,
+  enactedByPeriod,
+  gapsForLineItem,
+  humanize,
+  stagePoints,
+  trendable,
+} from '../../../lib/derive.ts';
+import { dollars, exact, percent } from '../../../lib/money.ts';
+import { renderInlineText } from '../../../lib/prose.ts';
+import type { Feed, NodeView } from '../../../lib/types.ts';
+
+export async function getStaticPaths() {
+  const feed = await loadFeed();
+  return feed.corpus.nodes.map((node) => ({
+    params: { class: node.class, slug: node.slug },
+    props: { node },
+  }));
+}
+
+interface Props {
+  node: NodeView;
+}
+
+const { node } = Astro.props;
+const feed: Feed = await loadFeed();
+
+const domainLinks = node.links.filter((l) => l.relationship !== 'instance-of');
+
+function hrefFor(kind: string, slug: string | null, cls: string | null): string | null {
+  if (slug === null) return null;
+  if (kind === 'node' && cls) return `/wiki/${cls}/${slug}`;
+  if (kind === 'class') return `/wiki/${slug}`;
+  if (kind === 'catalog') return `/sources/${slug}`;
+  return null;
+}
+
+// ── charts, only where the node's own data supports one ────────────────────
+//
+// A figure is drawn when the corpus holds enough to draw it and refused, in writing, when
+// it does not. Most of the 193 nodes here fall in the second case, which is the honest
+// state of a corpus whose extraction has covered one bill in depth and little else.
+
+const isLineItem = node.class === 'line-item';
+const decomposition = isLineItem ? decompositionFor(feed, node.slug) : undefined;
+const points = decomposition ? stagePoints(decomposition) : undefined;
+
+const enacted = isLineItem ? enactedByPeriod(feed.corpus, node.slug) : [];
+const trend = isLineItem ? trendable(feed, enacted) : undefined;
+const gaps = isLineItem ? gapsForLineItem(feed, node.slug) : [];
+
+// An appropriation belongs to a stage series; point at it rather than redrawing it.
+const parentSeries =
+  node.class === 'appropriation'
+    ? feed.findings.stage_delta.find(
+        (d) =>
+          d.period === node.properties['period_label']?.trim() &&
+          node.links.some((l) => l.relationship === 'grants-authority-for' && l.slug === d.line_item),
+      )
+    : undefined;
+---
+
+<Layout title={node.label} section="wiki" wide description={node.description.slice(0, 180)}>
+  <div class="wiki">
+    <WikiSidebar current={node.class} />
+
+    <div>
+      <div class="node__header">
+        <div class="node__path">{node.path}</div>
+        <p class="eyebrow">
+          <a href={`/wiki/${node.class}`}>{node.class}</a>
+        </p>
+        <h1>{node.label}</h1>
+        {
+          node.claims.length > 0 && (
+            <p style="margin-top:var(--space-3);display:flex;gap:var(--space-2)">
+              {node.claims.map((c) => (
+                <span class={`claim claim--${c}`}>[{c}]</span>
+              ))}
+            </p>
+          )
+        }
+      </div>
+
+      <div class="column">
+        <Prose text={node.description} from={node.path} />
+      </div>
+
+      {
+        Object.keys(node.properties).length > 0 && (
+          <>
+            <h2>Properties</h2>
+            <div class="table-wrap">
+              <table>
+                <tbody>
+                  {Object.entries(node.properties).map(([k, v]) => (
+                    <tr>
+                      <th style="width:14rem;vertical-align:top">{k}</th>
+                      <td>
+                        {node.money_cents[k] !== undefined ? (
+                          <span class="mono">{exact(node.money_cents[k] as number)}</span>
+                        ) : (
+                          <Fragment set:html={renderInlineText(v, node.path)} />
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
+      }
+
+      {
+        isLineItem && decomposition && points && (
+          <>
+            <h2>Movement across bill stages</h2>
+            <Figure
+              title={`${node.label} — ${decomposition.period}, stage by stage`}
+              refusal={points}
+              svg={points.ok ? stageLevels(points.data) : undefined}
+              caption="Vertical axis does not start at zero; the series moves within a narrow band. All points stand in one fiscal period, so no deflator is required."
+            />
+            <Figure
+              title="What each step changed"
+              refusal={points}
+              svg={points.ok ? stageDeltas(points.data) : undefined}
+              caption="Gold adds, blue removes."
+            >
+              <div class="legend">
+                <span><i class="swatch" style="background:#9c7800" /> money added</span>
+                <span><i class="swatch" style="background:#2254a4" /> money removed</span>
+              </div>
+            </Figure>
+            <p>
+              <a href="/findings/hb96-stage-movement">
+                The full decomposition, with what was said about each step →
+              </a>
+            </p>
+          </>
+        )
+      }
+
+      {
+        isLineItem && enacted.length > 0 && (
+          <>
+            <h2>Enacted figures by period</h2>
+            {trend && !trend.ok ? (
+              <div class="refusal" style="margin-bottom:var(--space-6)">
+                <div class="refusal__label">Not drawn as a trend</div>
+                <p style="margin:0">{trend.reason}</p>
+              </div>
+            ) : null}
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Period</th>
+                    <th class="num">Enacted</th>
+                    <th>Node</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {enacted.map((p) => (
+                    <tr>
+                      <td class="num">{p.period}</td>
+                      <td class="num">{dollars(p.cents)}</td>
+                      <td>
+                        <a href={`/wiki/appropriation/${p.slug}`}>{p.slug}</a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
+      }
+
+      {
+        isLineItem && gaps.length > 0 && (
+          <>
+            <h2>Appropriated against actual</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Period</th>
+                    <th>Status</th>
+                    <th class="num">Variance</th>
+                    <th>Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {gaps.map((g) => (
+                    <tr>
+                      <td class="num">{g.period}</td>
+                      <td><span class="badge">{g.outcome.status}</span></td>
+                      <td class="num">
+                        {g.outcome.status === 'computed' ? exact(g.outcome.variance_cents) : '—'}
+                      </td>
+                      <td>
+                        {g.outcome.status === 'computed'
+                          ? `${dollars(g.outcome.appropriated_cents)} appropriated, ${exact(g.outcome.spent_cents)} spent (${g.outcome.basis}) — ${percent(g.outcome.variance_pct)}`
+                          : g.outcome.reason}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )
+      }
+
+      {
+        parentSeries && (
+          <p class="column" style="margin-top:var(--space-8)">
+            This figure is one stage in a series the calculator can decompose in full —{' '}
+            <a href={`/wiki/line-item/${parentSeries.line_item}`}>
+              {humanize(parentSeries.line_item)}, {parentSeries.period}
+            </a>
+            .
+          </p>
+        )
+      }
+
+      <h2>Edges</h2>
+      <div class="edges">
+        <div>
+          <h3>Outgoing · {domainLinks.length}</h3>
+          <ul>
+            {
+              domainLinks.map((l) => {
+                const href = hrefFor(l.kind, l.slug, l.class);
+                return (
+                  <li>
+                    <span class="rel">{l.relationship} →</span>
+                    {href ? (
+                      <a href={href}>{l.slug}</a>
+                    ) : (
+                      <span class="unresolved">
+                        <code class="path">{l.raw}</code> — no such node
+                      </span>
+                    )}
+                    {l.kind === 'catalog' && <span class="badge" style="margin-left:6px">source</span>}
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+        <div>
+          <h3>Incoming · {node.backlinks.length}</h3>
+          {
+            node.backlinks.length === 0 ? (
+              <p style="color:var(--text-tertiary);font-size:var(--text-sm)">
+                Nothing points here yet.
+              </p>
+            ) : (
+              <ul>
+                {node.backlinks.map((b) => (
+                  <li>
+                    <span class="rel">← {b.relationship}</span>
+                    <a href={`/wiki/${b.class}/${b.slug}`}>{b.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
