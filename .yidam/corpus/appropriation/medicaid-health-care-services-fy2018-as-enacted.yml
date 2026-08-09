@@ -1,0 +1,46 @@
+class: appropriation
+label: Medicaid Health Care Services — FY2018, As Enacted
+description: |
+  $13,492,852,269.00 for line item 651525 in FY2018, appropriated by
+  [HB 49](../bill/hb49-132nd.yml). [verified]
+
+  From the column HB 49's workbook heads `Appropriation FY 2018`. Unlike every later
+  workbook, these name no stage; that the column is the enacted figure was established against
+  the same biennium's OAKS adjusted-appropriation sheet rather than assumed. See
+  [the catalog entry](../../catalog/lsc-hb49-budget-in-detail.md).
+
+  **A $4.36 billion fall from FY2017 that is not a spending cut.** Over the same step, ALI
+  651623 `Medicaid Services - Federal`, drawn on a federal fund rather than the GRF, rises from
+  $3,456,139,022 to $6,353,919,469, and a new line item 651684 appears at $593,195,389.
+  [verified]
+
+  This node is the **general revenue line item**, and reading its series as Medicaid spending
+  would repeat the error recorded in
+  [appropriation is not distribution](../../decisions/appropriation-is-not-distribution.yml):
+  a line item is a slice of a programme, by fund, exactly as foundation funding is three ALIs.
+
+  [open] The full reconciliation across 651525, 651623, 651639, 651656 and 651684 is not done,
+  and until it is, no statement about total Medicaid authority should rest on this series.
+
+properties:
+  amount: "$13,492,852,269.00"
+  period_label: FY2018
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC budget in detail, HB 49 as enrolled, sheet EN, ALI 651525
+    "Medicaid/Health Care Services", column "Appropriation FY 2018". Committed at .yidam/sources/lsc/ with
+    sha256 964f0734. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-health-care-services.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2018.yml
+    relationship: covers
+  - target: ../bill-version/hb49-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb49-budget-in-detail.md
+    relationship: cites

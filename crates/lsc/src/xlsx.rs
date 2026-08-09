@@ -13,7 +13,7 @@
 //! unchanged. Three input formats, one downstream path.
 
 use anyhow::{anyhow, bail, Context, Result};
-use calamine::{open_workbook_auto, Data, Reader};
+use calamine::{open_workbook_auto_from_rs, Data, Reader};
 
 use crate::RawTable;
 
@@ -69,9 +69,25 @@ pub fn find_header_row(rows: &[Vec<String>], search_depth: usize) -> Option<usiz
         .map(|(i, _)| i)
 }
 
+/// Opens a workbook by what it contains rather than by what it is called.
+///
+/// `open_workbook_auto` dispatches on the file extension, which is right until a publisher is
+/// careless. LSC serves the 129th General Assembly's budget workbook at a `.xlsx` URL and the
+/// file is a legacy OLE2 `.xls`: the extension picks the zip reader, which reports
+/// `Could not find EOCD` — a message about zip central directories that says nothing about the
+/// actual problem, on a file that opens fine in a spreadsheet program.
+///
+/// Reading the bytes and letting calamine sniff them costs one buffer per workbook, which at
+/// these sizes is under a megabyte, and removes a whole class of confusing failure.
+fn open(path: &std::path::Path) -> Result<calamine::Sheets<std::io::Cursor<Vec<u8>>>> {
+    let bytes = std::fs::read(path).with_context(|| format!("reading {}", path.display()))?;
+    open_workbook_auto_from_rs(std::io::Cursor::new(bytes))
+        .with_context(|| format!("opening {}", path.display()))
+}
+
 /// Reads one worksheet into a table, detecting which row carries the headers.
 pub fn sheet_to_table(path: &std::path::Path, sheet: &str) -> Result<RawTable> {
-    let mut wb = open_workbook_auto(path).with_context(|| format!("opening {}", path.display()))?;
+    let mut wb = open(path)?;
     let range = wb
         .worksheet_range(sheet)
         .map_err(|e| anyhow!("worksheet {sheet}: {e}"))?;
@@ -105,7 +121,7 @@ pub fn sheet_to_table(path: &std::path::Path, sheet: &str) -> Result<RawTable> {
 
 /// Sheet names published in the appropriation spreadsheet.
 pub fn sheet_names(path: &std::path::Path) -> Result<Vec<String>> {
-    let wb = open_workbook_auto(path).with_context(|| format!("opening {}", path.display()))?;
+    let wb = open(path)?;
     Ok(wb.sheet_names().to_vec())
 }
 
@@ -153,5 +169,21 @@ mod tests {
             row(&["Agency", "ALI", "FY 2024"]),
         ];
         assert_eq!(find_header_row(&rows, 10), Some(0));
+    }
+
+    #[test]
+    fn a_workbook_is_opened_by_content_not_by_extension() {
+        // LSC serves the 129th General Assembly's workbook at a `.xlsx` URL and the file is a
+        // legacy OLE2 `.xls`. Dispatching on the extension picks the zip reader, which fails
+        // with `Could not find EOCD` — a message about zip central directories, on a file that
+        // opens fine in any spreadsheet program. Committed under its true extension; this reads
+        // it regardless.
+        let p = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../.yidam/sources/lsc/hb153-budget-in-detail-as-enrolled-129th.xls");
+        let names = sheet_names(&p).expect("legacy .xls must open");
+        assert!(
+            names.iter().any(|n| n == "All Funds without Summary"),
+            "got {names:?}"
+        );
     }
 }

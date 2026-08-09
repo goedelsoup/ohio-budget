@@ -71,30 +71,40 @@ description: |
   sign, because deflation multiplies a period's figures by one positive number; it changes only
   how the four rows rank against each other.
 
-  ## What the whole series does in constant dollars
+  ## Fifteen years in constant dollars
 
-  The seven enacted figures below, restated in FY2025 dollars using the state and local
-  government purchases deflator: [verified]
+  Enacted appropriations FY2012 through FY2026, restated in FY2025 dollars: [verified]
 
-  | fiscal year | as enacted | in FY2025 dollars |
-  |---|---|---|
-  | FY2020 | $6,942,880,845 | $8,539,062,383 |
-  | FY2021 | $6,774,618,845 | $7,987,305,649 |
-  | FY2022 | $6,937,998,712 | $7,536,733,622 |
-  | FY2023 | $7,079,848,712 | $7,340,748,033 |
-  | FY2024 | $7,967,250,000 | $8,116,577,890 |
-  | FY2025 | $8,269,497,000 | $8,269,497,000 |
-  | FY2026 | $8,457,598,772 | $8,127,920,017 |
+  | fiscal year | as enacted | in FY2025 dollars | | fiscal year | as enacted | in FY2025 dollars |
+  |---|---|---|---|---|---|---|
+  | FY2012 | $5,536,347,861 | $7,958,168,203 | | FY2020 | $6,942,880,845 | $8,539,062,383 |
+  | FY2013 | $5,610,290,686 | $7,843,234,563 | | FY2021 | $6,774,618,845 | $7,987,305,649 |
+  | FY2014 | $5,808,098,389 | $7,884,218,676 | | FY2022 | $6,937,998,712 | $7,536,733,622 |
+  | FY2015 | $6,151,463,768 | $8,272,919,534 | | FY2023 | $7,079,848,712 | $7,340,748,033 |
+  | FY2016 | $6,398,844,920 | $8,644,907,566 | | FY2024 | $7,967,250,000 | $8,116,577,890 |
+  | FY2017 | $6,655,755,799 | $8,880,502,302 | | FY2025 | $8,269,497,000 | $8,269,497,000 |
+  | FY2018 | $6,799,882,816 | $8,764,521,089 | | FY2026 | $8,457,598,772 | $8,127,920,017 |
+  | FY2019 | $6,937,228,845 | $8,688,306,809 | | | | |
 
-  **Nominal +21.8%; real -4.8%.** The two disagree about direction, and the disagreement is not
-  marginal — this line item bought less in FY2026 than in FY2020 while its appropriation rose by
-  a billion and a half dollars. The real series also has a shape the nominal one hides: it falls
-  for four consecutive years to a FY2023 trough, recovers through FY2025, and turns down again.
+  **Nominal +52.8% across fourteen years; real +2.1%.** [verified] The state's largest education
+  line item bought about as much in FY2026 as in FY2012, having risen by $2.92 billion.
 
-  The [Fair School Funding Plan](../program/fair-school-funding-plan.yml) was enacted in HB 110
-  and phased in across the two budgets after it. [open] Whether the FY2023-25 real recovery is
-  the phase-in and the FY2026 turn is the phase-in ending is not answerable from this line item
-  alone, and the corpus should not assert it.
+  The window matters, and it is worth being explicit that a shorter one says something different
+  and equally true: **FY2020 to FY2026 is +21.8% nominal and -4.8% real.** Neither figure is the
+  honest one on its own. Which is quoted decides whether this line item looks flat or falling.
+
+  The real series has a shape the nominal one has nowhere:
+
+  - It **peaks at FY2017** ($8.88B) — the high-water mark of the whole window, four years before
+    the Fair School Funding Plan.
+  - It **falls for six consecutive years** to a FY2023 trough of $7.34B, 17.3% below that peak.
+  - It **recovers sharply at FY2024** (+10.6%, the largest annual real move in the series) and
+    turns down again at FY2026.
+
+  [open] The FY2024 step coincides with the plan's phase-in, and the corpus should not assert
+  the connection from this series alone — the plan is one of several things that changed. What
+  the series does establish is that the recovery starts from a trough rather than from the
+  FY2017 level, so the plan's first two budgets restored ground rather than breaking new.
 
   The programme total behaves the same way: the three foundation-funding line items together
   come to $9.84B in FY2024 and $10.49B in FY2026, **+6.6% nominal and +0.6% real**. [verified]

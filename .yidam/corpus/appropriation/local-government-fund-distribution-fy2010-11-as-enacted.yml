@@ -4,7 +4,7 @@ description: |
   The last biennial local government fund figure before the reduction.
 
   Its only job is to be the *before* half of a pair. Differenced against the
-  [FY2012-13 figure](./local-government-fund-distribution-fy2012-13-as-enacted.yml) it measures
+  [FY2012 figure](./local-government-fund-distribution-fy2012-as-enacted.yml) it measures
   the largest single shift of fiscal weight from the state to local government inside the corpus
   window — and the comparison is only valid in constant dollars, which makes this the pair that
   most clearly justifies [`real-dollars`](../../skills/real-dollars.md) as a prerequisite rather

@@ -1,0 +1,26 @@
+class: fiscal-period
+label: Fiscal Year 2018
+description: |
+  The state fiscal year running 2017-07-01 through 2018-06-30.
+
+  Seeded when the 132nd General Assembly's budget workbook was committed and the FY2018-19
+  appropriations were split per year, per
+  [period-granularity](../../decisions/period-granularity.yml).
+
+  Splitting these was not tidying. A biennial label cannot be restated in constant dollars —
+  the price index is keyed by single fiscal year, and averaging two into one is a modelling
+  decision nobody has taken — so every figure carried under one was outside the reach of
+  [the deflator](../../decisions/nominal-growth-is-mostly-price-level.yml).
+
+  [open] No committed source carries FY2018 actuals.
+properties:
+  label: FY2018
+  period_type: fiscal-year
+  start_date: 2017-07-01
+  end_date: 2018-06-30
+  general_assembly: 132nd
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2018-19.yml
+    relationship: contained-by

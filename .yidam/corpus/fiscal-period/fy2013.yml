@@ -1,0 +1,26 @@
+class: fiscal-period
+label: Fiscal Year 2013
+description: |
+  The state fiscal year running 2012-07-01 through 2013-06-30.
+
+  Seeded when the 129th General Assembly's budget workbook was committed and the FY2012-13
+  appropriations were split per year, per
+  [period-granularity](../../decisions/period-granularity.yml).
+
+  Splitting these was not tidying. A biennial label cannot be restated in constant dollars —
+  the price index is keyed by single fiscal year, and averaging two into one is a modelling
+  decision nobody has taken — so every figure carried under one was outside the reach of
+  [the deflator](../../decisions/nominal-growth-is-mostly-price-level.yml).
+
+  [open] No committed source carries FY2013 actuals.
+properties:
+  label: FY2013
+  period_type: fiscal-year
+  start_date: 2012-07-01
+  end_date: 2013-06-30
+  general_assembly: 129th
+links:
+  - target: ../fiscal-period.ont.yml
+    relationship: instance-of
+  - target: ./fy2012-13.yml
+    relationship: contained-by

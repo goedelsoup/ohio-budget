@@ -1,0 +1,33 @@
+class: appropriation
+label: Foundation Funding — FY2014, As Enacted
+description: |
+  $5,808,098,389.00 for line item 200550 in FY2014, appropriated by
+  [HB 59](../bill/hb59-130th.yml). [verified]
+
+  From the column HB 59's workbook heads `Appropriation FY 2014`. Unlike every later
+  workbook, these name no stage; that the column is the enacted figure was established against
+  the same biennium's OAKS adjusted-appropriation sheet rather than assumed. See
+  [the catalog entry](../../catalog/lsc-hb59-budget-in-detail.md).
+
+properties:
+  amount: "$5,808,098,389.00"
+  period_label: FY2014
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC budget in detail, HB 59 as enrolled, sheet EN, ALI 200550
+    "Foundation Funding", column "Appropriation FY 2014". Committed at .yidam/sources/lsc/ with
+    sha256 e68ff534. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2014.yml
+    relationship: covers
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites

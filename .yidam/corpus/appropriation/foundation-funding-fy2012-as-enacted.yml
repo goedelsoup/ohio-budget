@@ -1,0 +1,33 @@
+class: appropriation
+label: Foundation Funding — FY2012, As Enacted
+description: |
+  $5,536,347,861.00 for line item 200550 in FY2012, appropriated by
+  [HB 153](../bill/hb153-129th.yml). [verified]
+
+  From the column HB 153's workbook heads `Appropriation FY 2012`. Unlike every later
+  workbook, these name no stage; that the column is the enacted figure was established against
+  the same biennium's OAKS adjusted-appropriation sheet rather than assumed. See
+  [the catalog entry](../../catalog/lsc-hb153-budget-in-detail.md).
+
+properties:
+  amount: "$5,536,347,861.00"
+  period_label: FY2012
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC budget in detail, HB 153 as enrolled, sheet All Funds without Summary, ALI 200550
+    "Foundation Funding", column "Appropriation FY 2012". Committed at .yidam/sources/lsc/ with
+    sha256 0916adca. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/foundation-funding.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2012.yml
+    relationship: covers
+  - target: ../bill-version/hb153-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb153-budget-in-detail.md
+    relationship: cites

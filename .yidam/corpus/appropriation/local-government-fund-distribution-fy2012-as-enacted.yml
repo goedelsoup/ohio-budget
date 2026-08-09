@@ -1,0 +1,33 @@
+class: appropriation
+label: Local Government Fund Distribution — FY2012, As Enacted
+description: |
+  $577,000,000.00 for line item 110969 in FY2012, appropriated by
+  [HB 153](../bill/hb153-129th.yml). [verified]
+
+  From the column HB 153's workbook heads `Appropriation FY 2012`. Unlike every later
+  workbook, these name no stage; that the column is the enacted figure was established against
+  the same biennium's OAKS adjusted-appropriation sheet rather than assumed. See
+  [the catalog entry](../../catalog/lsc-hb153-budget-in-detail.md).
+
+properties:
+  amount: "$577,000,000.00"
+  period_label: FY2012
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC budget in detail, HB 153 as enrolled, sheet All Funds without Summary, ALI 110969
+    "Local Government Fund", column "Appropriation FY 2012". Committed at .yidam/sources/lsc/ with
+    sha256 0916adca. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2012.yml
+    relationship: covers
+  - target: ../bill-version/hb153-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb153-budget-in-detail.md
+    relationship: cites

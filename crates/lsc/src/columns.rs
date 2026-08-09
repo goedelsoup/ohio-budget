@@ -175,6 +175,20 @@ pub fn classify_header(h: &str) -> ColumnKind {
             issuer: label,
         };
     }
+    // `Appropriation FY 2018`, unqualified — the 129th through 132nd "budget in detail"
+    // workbooks, which carry no stage columns at all. Every later workbook names its final
+    // column (`As Enacted`, `As Enacted after Governor's Vetoes`); these name nothing, and the
+    // stage had to be established rather than assumed.
+    //
+    // It is the enacted figure. Checked against the same biennium's OAKS adjusted-appropriation
+    // workbook, which records operative authority inside the fiscal year and therefore already
+    // reflects any veto: see `lsc-hb49-budget-in-detail`.
+    if label == "appropriation" || label == "appropriations" {
+        return ColumnKind::Appropriation {
+            stage: BillStage::AsEnacted,
+            fiscal_year,
+        };
+    }
     match BillStage::parse_label(&label) {
         Some(stage) => ColumnKind::Appropriation { stage, fiscal_year },
         None => ColumnKind::UnknownStage { fiscal_year, label },
@@ -378,6 +392,39 @@ mod tests {
                 "{h}"
             );
         }
+    }
+
+    #[test]
+    fn an_unqualified_appropriation_column_is_the_enacted_figure() {
+        // The 129th-132nd "budget in detail" workbooks carry no stage columns at all: two
+        // appropriation columns, one prior-year actual, one estimate. Every later workbook names
+        // its final column, so this label appears nowhere after the 132nd General Assembly.
+        assert_eq!(
+            classify_header("Appropriation\r\nFY 2018"),
+            ColumnKind::Appropriation {
+                stage: BillStage::AsEnacted,
+                fiscal_year: "FY2018".into()
+            }
+        );
+        // HB 153 spells it plural.
+        assert_eq!(
+            classify_header("Appropriations\nFY 2012"),
+            ColumnKind::Appropriation {
+                stage: BillStage::AsEnacted,
+                fiscal_year: "FY2012".into()
+            }
+        );
+    }
+
+    #[test]
+    fn an_adjusted_appropriation_is_still_not_an_appropriation() {
+        // Guards the ordering: `adjusted appropriation` contains `appropriation`, and matching
+        // the bare label first would reclassify in-year authority as the enacted figure — the
+        // exact confusion `AdjustedAppropriation` exists to prevent.
+        assert!(matches!(
+            classify_header("Adjusted Appropriations\r\nFY 2021"),
+            ColumnKind::AdjustedAppropriation { .. }
+        ));
     }
 
     #[test]

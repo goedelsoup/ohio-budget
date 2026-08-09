@@ -1,0 +1,33 @@
+class: appropriation
+label: Local Government Fund Distribution — FY2017, As Enacted
+description: |
+  $399,310,000.00 for line item 110969 in FY2017, appropriated by
+  [HB 64](../bill/hb64-131st.yml). [verified]
+
+  From the column HB 64's workbook heads `Appropriation FY 2017`. Unlike every later
+  workbook, these name no stage; that the column is the enacted figure was established against
+  the same biennium's OAKS adjusted-appropriation sheet rather than assumed. See
+  [the catalog entry](../../catalog/lsc-hb64-budget-in-detail.md).
+
+properties:
+  amount: "$399,310,000.00"
+  period_label: FY2017
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC budget in detail, HB 64 as enrolled, sheet EN, ALI 110969
+    "Local Government Fund", column "Appropriation FY 2017". Committed at .yidam/sources/lsc/ with
+    sha256 6c4c7beb. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2017.yml
+    relationship: covers
+  - target: ../bill-version/hb64-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb64-budget-in-detail.md
+    relationship: cites

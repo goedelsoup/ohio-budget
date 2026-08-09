@@ -50,6 +50,33 @@ decision: |
   Seven of the corpus's twenty-two line items restate; the rest hold one figure or none. Five
   of twenty-four adjacent-period gap comparisons are refused, four because a biennial period
   label has no entry in an annually-keyed index and one because the later figure is `[open]`.
+
+  ## Extended to FY2012, and the case strengthens
+
+  The 129th through 132nd General Assemblies' workbooks were committed afterwards, carrying
+  annual enacted figures back to FY2012. Restated over the longer window: [verified]
+
+  | line item | window | nominal | real |
+  |---|---|---|---|
+  | [Local Government Fund](../corpus/line-item/local-government-fund-distribution.yml) | FY2012-FY2025 | -8.1% | **-36.1%** |
+  | [Foundation Funding](../corpus/line-item/foundation-funding.yml) | FY2012-FY2026 | +52.8% | **+2.1%** |
+  | Medicaid Health Care Services | FY2014-FY2026 | +47.4% | +4.3% |
+
+  Fourteen years of the state's largest education line item come to **+2.1% in real terms**, on
+  a nominal rise of $2.92 billion. The local government fund, whose amount follows a statutory
+  percentage rather than any discretionary decision, lost **more than a third** of its purchasing
+  power and never recovered: its best post-cut year is still 36% below FY2012.
+
+  The extension also sharpens the point about windows. Foundation funding is **-4.8% real over
+  FY2020-FY2026 and +2.1% over FY2012-FY2026**. Both are correct, and a reader given one without
+  the other cannot tell whether the line item is falling or flat. Its real series peaks at FY2017
+  — before the Fair School Funding Plan existed — falls for six years to a FY2023 trough, and
+  recovers from there rather than from the peak.
+
+  This is also what splitting biennial periods bought. The old FY2012-13 local government fund
+  node recorded $925,000,000 for two years. Split, it is $577.0M and $348.0M — **a 41.3% real
+  fall inside one biennium**, the single largest annual move anywhere in the corpus, and it did
+  not exist as an observable quantity until the label changed.
 rationale: |
   The single-line-item result could have been a property of school funding — a formula keyed to
   enrollment and local capacity has its own reasons to lag prices, and one observation cannot
@@ -81,7 +108,7 @@ rationale: |
   is the number this corpus is least willing to defend. A medical care price index would test it
   and is not committed.
 
-  [open] Four biennial period labels cannot be restated at all, because averaging two fiscal
-  years into one index value is a modelling decision nobody has taken. They are the corpus's
-  oldest figures — FY2010-11 through FY2018-19 — and they are exactly the ones a long series
-  would want.
+  [open] FY2010-11 remains unrestatable and now stands alone: the 128th General Assembly
+  published no workbook at all, only greenbooks and per-agency comparison PDFs, so those two
+  figures cannot be split into annual periods and therefore cannot be deflated. Every other
+  biennial label in the corpus has been converted.

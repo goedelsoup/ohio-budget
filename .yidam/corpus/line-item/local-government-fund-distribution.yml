@@ -17,6 +17,44 @@ description: |
   finance, and why it is nearly invisible to an analysis that reads appropriation figures
   alone. It shows up as a smaller number with no apparent decision attached.
 
+  ## Fourteen years, and the cut never reversed
+
+  Enacted appropriations FY2012 through FY2025, restated in FY2025 dollars: [verified]
+
+  | fiscal year | as enacted | in FY2025 dollars | real change |
+  |---|---|---|---|
+  | FY2012 | $577,000,000 | $829,402,915 | |
+  | FY2013 | $348,000,000 | $486,506,989 | **-41.3%** |
+  | FY2014 | $363,600,000 | $493,569,791 | +1.5% |
+  | FY2015 | $376,400,000 | $506,209,096 | +2.6% |
+  | FY2016 | $383,520,000 | $518,139,600 | +2.4% |
+  | FY2017 | $399,310,000 | $532,782,975 | +2.8% |
+  | FY2018 | $381,800,000 | $492,110,562 | -7.6% |
+  | FY2019 | $393,500,000 | $492,826,286 | +0.1% |
+  | FY2020 | $417,300,000 | $513,238,065 | +4.1% |
+  | FY2021 | $424,900,000 | $500,958,984 | -2.4% |
+  | FY2022 | $428,000,000 | $464,935,513 | -7.2% |
+  | FY2023 | $443,000,000 | $459,324,982 | -1.2% |
+  | FY2024 | $505,000,000 | $514,465,071 | +12.0% |
+  | FY2025 | $530,000,000 | $530,000,000 | +3.0% |
+
+  **Nominal -8.1%; real -36.1%.** [verified] Nominally the line item nearly recovers — $530.0M
+  against $577.0M, a shortfall a reader could call modest. In constant dollars it lost more than
+  a third of its purchasing power and never came back: **the highest post-cut year, FY2025, is
+  still 36% below FY2012**, and no year after FY2013 comes within $290M of it.
+
+  Three things this makes visible that the biennial nodes could not:
+
+  1. **The cut is one year, not one biennium.** FY2012 to FY2013 is -41.3% in real terms. Under
+     the old FY2012-13 label the figure was $925,000,000 and the step did not exist.
+  2. **The thirteen years since are drift, not recovery.** Every annual real change after FY2013
+     is between -7.6% and +12.0%, and they very nearly cancel.
+  3. **The nominal series tells the opposite story.** It rises in nine of thirteen years.
+
+  This is the corpus's sharpest case for deflating, and it lands on the line item least able to
+  argue with it — the amount follows a statutory percentage, so there is no discretionary
+  decision anywhere in the series to explain the shape away.
+
   [open] The code, and the percentage by biennium across the window, are unverified.
   ALI 110969. The source assigns it to agency `RDF`, revenue distribution funds, not to
   the Department of Taxation as this node asserted. [verified] RDF is an accounting

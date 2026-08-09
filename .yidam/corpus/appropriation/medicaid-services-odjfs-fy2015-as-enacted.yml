@@ -1,0 +1,41 @@
+class: appropriation
+label: Medicaid Services (ODJFS) — FY2015, As Enacted
+description: |
+  **$0.00** for line item 600525 in FY2015. [verified]
+
+  Zero is a figure here, not an absence. [HB 59](../bill/hb59-130th.yml) retained the Job and
+  Family Services Medicaid line item and appropriated nothing to it, while ALI 651525 under the
+  new `MCD` agency carried the money — $13,701,114,114 in FY2014 and $14,599,795,041 in FY2015.
+
+  That is what makes the
+  [agency transfer](../budget-action/hb59-medicaid-agency-transfer.yml) checkable in one
+  document rather than inferred from two. A line item that simply disappeared between
+  workbooks would be consistent with a transfer, a repeal, or an extraction failure; one
+  carried forward at zero beside its successor is consistent with only the first.
+
+  Its item number survives the move: 600**525** under `JFS` becomes 651**525** under `MCD`.
+  [verified] The corpus does not generalise from a single case — [open] whether Ohio's ALI
+  numbering preserves the item across an agency change as a rule is unestablished, and the
+  [lineage](../../../crates/lineage/) calculator exists to raise exactly this question.
+properties:
+  amount: "$0.00"
+  period_label: FY2015
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC budget in detail, HB 59 as enrolled, sheet EN, ALI 600525 "Health Care/Medicaid",
+    column "Appropriation FY 2015". Committed at .yidam/sources/lsc/ with sha256 e68ff534.
+    [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-odjfs.yml
+    relationship: grants-authority-for
+  - target: ../fund/general-revenue-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2015.yml
+    relationship: covers
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites

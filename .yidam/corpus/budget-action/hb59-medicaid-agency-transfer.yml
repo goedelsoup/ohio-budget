@@ -9,8 +9,14 @@ description: |
   it marks the FY2014 discontinuity in every Medicaid series as organizational rather than
   fiscal, which is precisely the distinction a code-keyed query cannot make.
 
-  This is the action behind the corpus's largest lineage assertion, and confirming that
-  assertion means reading the version this applies to.
+  **The assertion is now confirmed from a committed source.** HB 59's workbook carries both
+  codes: ALI 600525 under `JFS` at $0.00 in FY2014 and FY2015, and ALI 651525 under `MCD` at
+  $13,701,114,114 and $14,599,795,041. [verified] The predecessor was retained at zero rather
+  than removed, so the succession is legible in one document instead of inferred from the
+  absence of a row in the next.
+
+  The item number is preserved across the move — 600**525** to 651**525** — and the agency
+  prefix is what changes.
 properties:
   action_type: technical-correction
   action_date: 2013-06-30
@@ -24,7 +30,11 @@ links:
     relationship: instance-of
   - target: ../bill-version/hb59-as-enacted.yml
     relationship: applies-to
-  - target: ../appropriation/medicaid-services-odjfs-fy2012-13-as-enacted.yml
+  - target: ../appropriation/medicaid-services-odjfs-fy2014-as-enacted.yml
+    relationship: modifies
+  - target: ../appropriation/medicaid-services-odjfs-fy2015-as-enacted.yml
     relationship: modifies
   - target: ../../catalog/ga-bill-record.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
     relationship: cites

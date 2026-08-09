@@ -7,7 +7,7 @@ description: |
 
   This is where the corpus's local finance thread reaches a specific recipient. The chain runs
   from a statutory percentage changed in [HB 153](../bill/hb153-129th.yml), through a
-  [reduced appropriation](../appropriation/local-government-fund-distribution-fy2012-13-as-enacted.yml),
+  [reduced appropriation](../appropriation/local-government-fund-distribution-fy2013-as-enacted.yml),
   to money a named county did not receive — and every hop is a node that can be checked
   separately.
 

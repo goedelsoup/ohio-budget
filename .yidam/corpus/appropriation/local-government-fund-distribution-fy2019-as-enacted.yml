@@ -1,0 +1,33 @@
+class: appropriation
+label: Local Government Fund Distribution — FY2019, As Enacted
+description: |
+  $393,500,000.00 for line item 110969 in FY2019, appropriated by
+  [HB 49](../bill/hb49-132nd.yml). [verified]
+
+  From the column HB 49's workbook heads `Appropriation FY 2019`. Unlike every later
+  workbook, these name no stage; that the column is the enacted figure was established against
+  the same biennium's OAKS adjusted-appropriation sheet rather than assumed. See
+  [the catalog entry](../../catalog/lsc-hb49-budget-in-detail.md).
+
+properties:
+  amount: "$393,500,000.00"
+  period_label: FY2019
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC budget in detail, HB 49 as enrolled, sheet EN, ALI 110969
+    "Local Government Fund", column "Appropriation FY 2019". Committed at .yidam/sources/lsc/ with
+    sha256 964f0734. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/local-government-fund-distribution.yml
+    relationship: grants-authority-for
+  - target: ../fund/local-government-fund.yml
+    relationship: draws-from
+  - target: ../fiscal-period/fy2019.yml
+    relationship: covers
+  - target: ../bill-version/hb49-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb49-budget-in-detail.md
+    relationship: cites

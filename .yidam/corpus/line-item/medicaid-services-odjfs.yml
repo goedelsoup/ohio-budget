@@ -15,18 +15,47 @@ description: |
   successor is what repairs it — and it is an assertion, made by a person, not a computed
   result.
 
-  [open] Both codes, and the precise set of line items that moved, are unverified.
+  ## The codes, and how the succession was confirmed
+
+  **ALI 600525, `Health Care/Medicaid`, agency `JFS`, general revenue fund.** [verified] It
+  carried $11,843,769,396 in FY2012 and $13,118,813,544 in FY2013.
+
+  Both codes were `[open] pending verification` until the 129th and 130th General Assemblies'
+  budget workbooks were committed. What settled it was not finding the old code in one document
+  and the new code in another — that pattern is equally consistent with a transfer, a repeal, or
+  an extraction that missed a row.
+
+  **HB 59 carries both at once.** ALI 600525 under `JFS` is present and appropriated
+  [$0.00 in FY2014](../appropriation/medicaid-services-odjfs-fy2014-as-enacted.yml) and
+  [$0.00 in FY2015](../appropriation/medicaid-services-odjfs-fy2015-as-enacted.yml), while ALI
+  651525 under `MCD` carries $13,701,114,114 and $14,599,795,041. [verified] The predecessor was
+  retained at zero rather than deleted, and a line item held at zero beside its successor is
+  consistent with succession and with nothing else.
+
+  The item number survives the move — 600**525** becomes 651**525** — and only the agency prefix
+  changes. [verified]
+
+  [open] One case is not a rule. Whether Ohio's ALI numbering preserves the item number across
+  an agency change generally is unestablished, and it is the kind of regularity that would make
+  [`lineage`](../../../crates/lineage/) propose candidates rather than merely raise questions.
+
+  [open] The precise set of *other* line items that moved with it is still unverified. This node
+  confirms one, and JFS carried several Medicaid-adjacent lines in FY2012-13.
 properties:
-  name: Medicaid Services (Job and Family Services)
-  current_code: "[open] pending verification"
+  name: Health Care/Medicaid [verified]
+  current_code: "600525"
   historical_codes: "[open] not yet reconstructed"
-  agency_code: "[open] pending verification"
+  agency_code: "JFS"
   purpose: |
     Payment for Medicaid-covered services under Job and Family Services administration.
   first_period: "[open] predates the corpus window"
-  last_period: "approximately FY2013"
+  last_period: "FY2013; carried at $0.00 through FY2015 and absent thereafter [verified]"
   status: superseded
 links:
+  - target: ../../catalog/lsc-hb153-budget-in-detail.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites
   - target: ../line-item.ont.yml
     relationship: instance-of
   - target: ../agency/job-and-family-services.yml

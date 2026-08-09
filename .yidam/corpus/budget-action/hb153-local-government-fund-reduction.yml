@@ -5,10 +5,23 @@ description: |
   in [HB 153](../bill/hb153-129th.yml), which cut the statutory percentage of general revenue
   tax receipts distributed to counties, municipalities, and townships. [inference]
 
-  This node is the corpus's answer to a question its own data raises and cannot otherwise settle.
-  The [FY2010-11](../appropriation/local-government-fund-distribution-fy2010-11-as-enacted.yml)
-  and [FY2012-13](../appropriation/local-government-fund-distribution-fy2012-13-as-enacted.yml)
-  appropriations differ sharply, and nothing in either figure says why. This is why.
+  This node is the corpus's answer to a question its own data raises and cannot otherwise settle:
+  the appropriation falls sharply and nothing in the figure says why. This is why.
+
+  **The fall is now visible inside the biennium, and it is a phase-in.** [verified]
+
+  | fiscal year | local government fund |
+  |---|---|
+  | FY2012 | $577,000,000 |
+  | FY2013 | $348,000,000 |
+
+  Both figures are set by this bill, which is why `modifies` names both. A reader looking only
+  at the biennium would see $925,000,000 and no step at all — the reduction would be a
+  difference between two biennia with a two-year gap in the middle of it, rather than a change
+  landing in a particular year.
+
+  [open] Whether FY2012 is itself already reduced against FY2011 cannot be said here: no
+  committed source carries FY2010-11, and the 128th General Assembly published no workbook.
 
   **No actor is attributed.** The reduction appeared in the executive proposal and was enacted
   by the General Assembly, and the corpus cannot yet say at which stage the percentage took its
@@ -32,7 +45,9 @@ links:
     relationship: instance-of
   - target: ../bill-version/hb153-as-enacted.yml
     relationship: applies-to
-  - target: ../appropriation/local-government-fund-distribution-fy2012-13-as-enacted.yml
+  - target: ../appropriation/local-government-fund-distribution-fy2012-as-enacted.yml
+    relationship: modifies
+  - target: ../appropriation/local-government-fund-distribution-fy2013-as-enacted.yml
     relationship: modifies
   - target: ../../catalog/ga-bill-record.md
     relationship: cites
