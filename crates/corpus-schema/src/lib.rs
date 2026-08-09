@@ -489,6 +489,13 @@ pub enum DeletionExtent {
     Text { text: String },
     /// A span given by its opening and closing words.
     Range { begins: String, ends: String },
+    /// A span from its opening words to the end of the bill page, which the message states
+    /// positionally rather than by quoting the closing words.
+    ///
+    /// Distinct from `Range` because the endpoint is not recoverable from this document: it
+    /// depends on where the enrolled bill's page breaks fall. Recording it as a `Range` with an
+    /// invented endpoint would assert a boundary nobody wrote down.
+    RangeToPageEnd { begins: String },
     /// A form this connector does not recognise. Kept rather than guessed at, because a
     /// misread extent understates or overstates what the governor struck.
     Unrecognised,

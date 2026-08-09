@@ -51,6 +51,24 @@ const RANGE_CONNECTORS: [&str; 3] = [
     "and continuing through",
 ];
 
+/// Phrases that end a range at the page boundary instead of at quoted words.
+///
+/// HB 33's message uses these and HB 96's does not, which is the argument for running a
+/// connector against a second document before believing it handles the format. The endpoint is
+/// positional — where the enrolled bill's page happens to break — and is deliberately not
+/// modelled as a `Range`, because inventing closing words would assert a boundary the message
+/// never states.
+const PAGE_END_CONNECTORS: [&str; 7] = [
+    "and continuing to the bottom of the page",
+    "and continuing through the end of the page",
+    "and continuing to the end of the page",
+    "to the bottom of the page",
+    "through the end of the page",
+    "to the end of the page",
+    // "to the end of a page" — a slip for "the", once.
+    "to the end of a page",
+];
+
 /// Rejoins a line that the text extraction broke mid-word.
 ///
 /// The extractor preserves the document's visual line breaks, so a word hyphenated by
@@ -127,9 +145,23 @@ fn is_running_foot(line: &str) -> bool {
 
 // ─── deletion instructions ───────────────────────────────────────────────────
 
+/// Collapses runs of whitespace, so justified spacing does not hide the grammar.
+///
+/// The text layer preserves the document's visual spacing, and HB 33's is justified: `On  page
+/// 2701,  delete  the  boxed  text`. Every phrase this module matches on — `on page`, `beginning
+/// with`, `and ending with` — is written with single spaces, so a doubled space makes an
+/// instruction invisible to the parser while looking perfectly ordinary to a reader.
+///
+/// It cost one instruction its own identity before it was found: the line was not recognised as
+/// starting a new deletion, so it was absorbed into the previous one along with its page number.
+fn collapse_spaces(s: &str) -> String {
+    s.split_whitespace().collect::<Vec<_>>().join(" ")
+}
+
 fn starts_instruction(line: &str) -> bool {
-    let l = line.trim().to_ascii_lowercase();
-    l.starts_with("on page")
+    collapse_spaces(line)
+        .to_ascii_lowercase()
+        .starts_with("on page")
 }
 
 /// Is this accumulated instruction a complete sentence?
@@ -146,17 +178,60 @@ fn starts_instruction(line: &str) -> bool {
 /// closed it is unfinished whatever its punctuation says.
 fn is_complete(acc: &str) -> bool {
     let lower = acc.to_ascii_lowercase();
+    // An opened range is unfinished until it is closed, either by quoted words or by a page
+    // boundary. Omitting the page-boundary forms here left those instructions absorbing the
+    // item's heading, because they never looked closed.
     if RANGE_OPENERS.iter().any(|o| lower.contains(o))
         && !RANGE_CONNECTORS.iter().any(|c| lower.contains(c))
+        && !PAGE_END_CONNECTORS.iter().any(|c| lower.contains(c))
     {
         return false;
     }
-    let s = acc.trim_end();
-    let s = s.trim_end_matches(CLOSE_QUOTES).trim_end();
+    let t = acc.trim_end();
+    // A closed quotation ends the instruction whether or not a period follows it. HB 33 writes
+    // `delete the following boxed text, “5747.025,”` with no sentence period at all; requiring
+    // one left that instruction open, so it absorbed the item's heading and the heading's line
+    // became part of a deletion.
+    if t.ends_with(CLOSE_QUOTES) {
+        return true;
+    }
+    let s = t.trim_end_matches(CLOSE_QUOTES).trim_end();
     if s.ends_with("...") || s.ends_with('\u{2026}') {
         return false;
     }
     s.ends_with('.')
+}
+
+/// Splits an accumulated instruction wherever a second one begins on the same line.
+///
+/// HB 33's message runs two together without a line break — `…"5747.025," On page 2701,
+/// delete…`. Read as one instruction, the second one's page number and quoted text are handed
+/// to the first.
+///
+/// The split requires `On page <digits>` with `delete` somewhere after it, so the phrase
+/// occurring inside quoted bill text does not trigger a cut.
+fn split_embedded(instruction: &str) -> Vec<String> {
+    let lower = instruction.to_ascii_lowercase();
+    let mut cuts = vec![0usize];
+    let mut from = 1usize;
+    while let Some(rel) = lower[from..].find("on page") {
+        let at = from + rel;
+        let rest = &lower[at + "on page".len()..];
+        let digits: String = rest
+            .trim_start()
+            .chars()
+            .take_while(|c| c.is_ascii_digit())
+            .collect();
+        if !digits.is_empty() && rest.contains("delete") {
+            cuts.push(at);
+        }
+        from = at + "on page".len();
+    }
+    cuts.push(instruction.len());
+    cuts.windows(2)
+        .map(|w| instruction[w[0]..w[1]].trim().to_string())
+        .filter(|s| !s.is_empty())
+        .collect()
 }
 
 /// Splits the leading run of deletion instructions from the rest of an item.
@@ -167,7 +242,8 @@ pub fn deletion_block(lines: &[&str]) -> (Vec<String>, usize) {
     let mut acc = String::new();
     let mut i = 0;
     while i < lines.len() {
-        let line = lines[i].trim();
+        let line = &collapse_spaces(lines[i]);
+        let line = line.as_str();
         if line.is_empty() {
             i += 1;
             continue;
@@ -190,6 +266,7 @@ pub fn deletion_block(lines: &[&str]) -> (Vec<String>, usize) {
     if !acc.is_empty() {
         out.push(acc);
     }
+    let out = out.iter().flat_map(|s| split_embedded(s)).collect();
     (out, i)
 }
 
@@ -256,6 +333,24 @@ pub fn parse_deletion(instruction: &str) -> Deletion {
     let extent = match find_any(&lower, &RANGE_OPENERS) {
         Some((at, len)) => {
             let after = &instruction[at + len..];
+            // Checked before RANGE_CONNECTORS: `and continuing through the end of the page`
+            // also contains `and continuing through`, and matching that looks for quoted
+            // closing words that are not there.
+            if let Some((c, _)) = find_any(&after.to_ascii_lowercase(), &PAGE_END_CONNECTORS) {
+                let extent = match outermost_quoted(&after[..c]) {
+                    Some((begins, r)) => {
+                        quotes_repaired = r;
+                        DeletionExtent::RangeToPageEnd { begins }
+                    }
+                    None => DeletionExtent::Unrecognised,
+                };
+                return Deletion {
+                    bill_page,
+                    extent,
+                    quotes_repaired,
+                    instruction: instruction.split_whitespace().collect::<Vec<_>>().join(" "),
+                };
+            }
             match find_any(&after.to_ascii_lowercase(), &RANGE_CONNECTORS) {
                 Some((c, clen)) => {
                     match (
@@ -739,5 +834,103 @@ This item would require additional steps. Therefore, a veto of this item is in t
             .unwrap_err()
             .to_string();
         assert!(e.contains("not a veto message"), "{e}");
+    }
+}
+
+#[cfg(test)]
+mod hb33_forms {
+    use super::*;
+
+    #[test]
+    fn a_range_ending_at_the_page_boundary_is_its_own_extent() {
+        // HB 33 uses this 21 times and HB 96 not once. The endpoint is positional, so it is
+        // not a Range: inventing closing words would assert a boundary nobody wrote down.
+        for s in [
+            "On page 284, delete the boxed text beginning with \u{201c}When awarding financial...\u{201d} and continuing to the bottom of the page.",
+            "On page 28, delete the following boxed text beginning with \u{201c}Sec. 9.681. (A)...\u{201d} and continuing through the end of the page.",
+            "On page 406, delete the boxed text beginning with \u{201c}Sec. 173.39. (A) As used in...\u{201d} to the end of the page.",
+        ] {
+            match parse_deletion(s).extent {
+                DeletionExtent::RangeToPageEnd { begins } => assert!(!begins.is_empty(), "{s}"),
+                other => panic!("{s}\n  -> {other:?}"),
+            }
+        }
+    }
+
+    #[test]
+    fn a_page_boundary_ending_closes_the_instruction() {
+        // Before PAGE_END_CONNECTORS were added to the completeness test, an instruction that
+        // ended this way never looked closed and went on to swallow the item's heading.
+        let lines = vec![
+            "On page 2150, delete the boxed text beginning with \u{201c}Sec. 4928.85. As used...\u{201d}",
+            "and continuing to the bottom of the page.",
+            "Electric Vehicle Charging",
+            "This item would ... is in the public interest.",
+        ];
+        let (dels, after) = deletion_block(&lines);
+        assert_eq!(dels.len(), 1, "{dels:?}");
+        assert_eq!(after, 2, "heading swallowed");
+    }
+
+    #[test]
+    fn two_instructions_on_one_line_are_separated() {
+        // `…"5747.025," On page 2701, delete…` — read as one instruction, the second one's
+        // page number and quoted text are attributed to the first.
+        let one = "On page 27, delete the following boxed text, \u{201c}5747.025,\u{201d} \
+                   On page 2701, delete the boxed text \u{201c}and division (A)(6)\u{201d}.";
+        let parts = split_embedded(one);
+        assert_eq!(parts.len(), 2, "{parts:#?}");
+        assert_eq!(parse_deletion(&parts[0]).bill_page, Some(27));
+        assert_eq!(parse_deletion(&parts[1]).bill_page, Some(2701));
+    }
+
+    #[test]
+    fn the_phrase_inside_quoted_bill_text_does_not_split_an_instruction() {
+        let one = "On page 5, delete the following boxed text, \u{201c}as printed on page 9 of the report\u{201d}.";
+        assert_eq!(split_embedded(one).len(), 1, "split on quoted prose");
+    }
+}
+
+#[cfg(test)]
+mod justified_spacing {
+    use super::*;
+
+    #[test]
+    fn justified_spacing_does_not_hide_an_instruction() {
+        // HB 33's text layer preserves justification: `On  page  2701,  delete`. Matching on
+        // single-spaced phrases missed it, so the line was absorbed into the previous
+        // instruction along with its page number.
+        assert!(starts_instruction(
+            "On  page  2701,  delete  the  boxed  text  \u{201c}x\u{201d}."
+        ));
+        assert!(starts_instruction("On page 27, delete the boxed text."));
+        assert!(!starts_instruction(
+            "This item would require the commissioner to act."
+        ));
+    }
+
+    #[test]
+    fn a_closed_quotation_ends_an_instruction_without_a_period() {
+        // `delete the following boxed text, \u{201c}5747.025,\u{201d}` has no sentence period at
+        // all. Requiring one left it open, and it swallowed the item's heading — which then
+        // took the heading's place and left the item reporting no stated reason.
+        let lines = vec![
+            "On page 2772, delete the following boxed text, \u{201c}5747.025,\u{201d}",
+            "Income Tax Rate Reduction",
+            "This item requires the Tax Commissioner to set rates. Therefore, the veto of this \
+             item is in the public interest.",
+        ];
+        let (dels, after) = deletion_block(&lines);
+        assert_eq!(dels.len(), 1, "{dels:?}");
+        assert_eq!(after, 1, "the heading was absorbed into the deletion block");
+    }
+
+    #[test]
+    fn an_unclosed_range_still_keeps_the_instruction_open() {
+        // The quote-closes-it rule must not override the range check: this line closes a
+        // quotation but has not said where the range ends.
+        assert!(!is_complete(
+            "On page 5, delete the boxed text beginning with \u{201c}Sec. 1.01\u{201d}"
+        ));
     }
 }

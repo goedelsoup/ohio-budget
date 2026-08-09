@@ -17,7 +17,14 @@ properties:
   direction: decrease
   amount_delta: "[open] aggregate effect not reconstructed"
   stated_justification: |
-    [open] The veto message states a rationale per item. Not catalogued.
+    Each of the 44 items states its own reason, closing with the standard formula. The
+    [veto message](../../catalog/governor-hb33-veto-messages.md) is committed. [verified]
+
+    Item 13, striking a provision that would have had the Tax Commissioner set personal income
+    tax rates and brackets: "The Ohio Constitution specifically grants the power to set tax
+    rates to the legislative branch... As such, this provision is unconstitutional." [verified]
+
+    [open] The remaining 43 are not transcribed here. They belong in one node per item.
   phase: executive
 links:
   - target: ../budget-action.ont.yml
@@ -27,4 +34,6 @@ links:
   - target: ../actor/governor.yml
     relationship: taken-by
   - target: ../../catalog/ga-bill-record.md
+    relationship: cites
+  - target: ../../catalog/governor-hb33-veto-messages.md
     relationship: cites
