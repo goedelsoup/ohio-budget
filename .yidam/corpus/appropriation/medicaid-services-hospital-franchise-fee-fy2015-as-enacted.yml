@@ -1,0 +1,23 @@
+class: appropriation
+label: Medicaid Services — Hospital Franchise Fee — FY2015, As Enacted
+description: |
+  $531,273,601.00 for line item 651656 in FY2015, appropriated by
+  [HB 59](../bill-version/hb59-as-enacted.yml). [verified]
+properties:
+  amount: "$531,273,601.00"
+  period_label: FY2015
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 59, sheet EN, ALI 651656, enacted column for FY2015. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-hospital-franchise-fee.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2015.yml
+    relationship: covers
+  - target: ../bill-version/hb59-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb59-budget-in-detail.md
+    relationship: cites

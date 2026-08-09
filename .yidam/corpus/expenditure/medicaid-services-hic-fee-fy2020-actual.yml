@@ -1,0 +1,20 @@
+class: expenditure
+label: Medicaid Services — HIC Fee — FY2020, Actual
+description: |
+  $834,564,060.00 disbursed against line item 651684 in FY2020, on a closed-book basis. [verified] Reported identically by 3 independent workbooks.
+properties:
+  amount: "$834,564,060.00"
+  basis: actual-closed
+  period_label: FY2020
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 110, sheet EN, ALI 651684, actual column for FY2020. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-hic-fee.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2020.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

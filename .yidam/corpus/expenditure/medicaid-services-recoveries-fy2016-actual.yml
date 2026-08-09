@@ -1,0 +1,20 @@
+class: expenditure
+label: Medicaid Services — Recoveries — FY2016, Actual
+description: |
+  $537,876,341.17 disbursed against line item 651639 in FY2016, on a closed-book basis. [verified] Reported identically by 2 independent workbooks.
+properties:
+  amount: "$537,876,341.17"
+  basis: actual-closed
+  period_label: FY2016
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 49, sheet EN, ALI 651639, actual column for FY2016. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-recoveries.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2016.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb49-budget-in-detail.md
+    relationship: cites

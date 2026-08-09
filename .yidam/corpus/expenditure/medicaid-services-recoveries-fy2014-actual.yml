@@ -1,0 +1,20 @@
+class: expenditure
+label: Medicaid Services — Recoveries — FY2014, Actual
+description: |
+  $461,475,246.25 disbursed against line item 651639 in FY2014, on a closed-book basis. [verified] Reported identically by 2 independent workbooks.
+properties:
+  amount: "$461,475,246.25"
+  basis: actual-closed
+  period_label: FY2014
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 64, sheet EN, ALI 651639, actual column for FY2014. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-recoveries.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2014.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb64-budget-in-detail.md
+    relationship: cites

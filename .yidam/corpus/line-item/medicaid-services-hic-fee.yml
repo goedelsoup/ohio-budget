@@ -1,0 +1,36 @@
+class: line-item
+label: Medicaid Services — HIC Fee
+description: |
+  Spending authority backed by the franchise fee on health insuring corporations — the managed
+  care organisations through which most Ohio Medicaid benefits are delivered. [inference]
+
+  **ALI 651684, agency MCD, dedicated purpose fund.** [verified] One of the five line items
+  through which Ohio appropriates Medicaid benefits, and one of the three that
+  [the reconciliation](./medicaid-health-care-services.yml) named and the corpus did not model.
+  Enacted $593,195,389.00 in FY2018 and $869,039,656.00 in FY2027. [verified]
+
+  It draws on a dedicated purpose fund and carries no `draws-from` edge: the corpus models eight
+  funds and the budget has hundreds, and seeding one to satisfy an edge is
+  [recorded as the wrong move](./foundation-funding-dpf.yml).
+
+  [open] The mechanism — what is assessed, at what rate, and how the proceeds return — lives in
+  statute rather than in an appropriation table, per
+  [bill-text-on-demand](../../decisions/bill-text-on-demand.yml). The gloss above is
+  `[inference]` from the line item's name and fund group.
+properties:
+  name: "Medicaid Services-HIC Fee [verified]"
+  current_code: "651684"
+  historical_codes: "[open] not reconstructed before FY2018"
+  agency_code: "MCD"
+  purpose: |
+    Medicaid benefit payments from a dedicated purpose fund.
+  first_period: "FY2018 in the committed workbooks [verified]"
+  last_period: current
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-medicaid.yml
+    relationship: belongs-to
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites

@@ -1,0 +1,23 @@
+class: appropriation
+label: Medicaid Services — HIC Fee — FY2020, As Enacted
+description: |
+  $834,564,060.00 for line item 651684 in FY2020, appropriated by
+  [HB 166](../bill-version/hb166-as-enacted.yml). [verified]
+properties:
+  amount: "$834,564,060.00"
+  period_label: FY2020
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 166, sheet EN, ALI 651684, enacted column for FY2020. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-hic-fee.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2020.yml
+    relationship: covers
+  - target: ../bill-version/hb166-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

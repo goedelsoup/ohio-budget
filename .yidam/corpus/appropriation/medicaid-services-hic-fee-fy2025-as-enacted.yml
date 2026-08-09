@@ -1,0 +1,23 @@
+class: appropriation
+label: Medicaid Services — HIC Fee — FY2025, As Enacted
+description: |
+  $1,138,441,200.00 for line item 651684 in FY2025, appropriated by
+  [HB 33](../bill-version/hb33-as-enacted.yml). [verified]
+properties:
+  amount: "$1,138,441,200.00"
+  period_label: FY2025
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 33, sheet EN, ALI 651684, enacted column for FY2025. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-hic-fee.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2025.yml
+    relationship: covers
+  - target: ../bill-version/hb33-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

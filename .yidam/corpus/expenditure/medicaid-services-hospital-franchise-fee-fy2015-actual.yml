@@ -1,0 +1,20 @@
+class: expenditure
+label: Medicaid Services — Hospital Franchise Fee — FY2015, Actual
+description: |
+  $554,871,802.09 disbursed against line item 651656 in FY2015, on a closed-book basis. [verified]
+properties:
+  amount: "$554,871,802.09"
+  basis: actual-closed
+  period_label: FY2015
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 64, sheet EN, ALI 651656, actual column for FY2015. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-hospital-franchise-fee.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2015.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb64-budget-in-detail.md
+    relationship: cites

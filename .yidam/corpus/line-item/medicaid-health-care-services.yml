@@ -62,9 +62,25 @@ description: |
   and the same variety as the third: a line item that is a slice of a programme *by fund*,
   exactly as foundation funding is three ALIs.
 
-  [open] The five ALIs are read but not modelled — only 651525 and 651623 have nodes. The three
-  dedicated-purpose lines carry $4.45B in FY2026 between them and nothing in the corpus
-  represents them.
+  ### All five are now modelled, and the corpus reproduces the total independently
+
+  [Recoveries](./medicaid-services-recoveries.yml),
+  [the hospital franchise fee](./medicaid-services-hospital-franchise-fee.yml) and
+  [the HIC fee](./medicaid-services-hic-fee.yml) carry nodes with fifteen years of figures each.
+  Summing the five line items' *nodes* gives $17.66B in FY2014 and $37.22B in FY2026 —
+  **+110.7% nominal and +49.2% real**, to the digit the same as the reconciliation computed
+  directly from the workbooks above. [verified]
+
+  That agreement is the check, not a coincidence. The two paths share only the source: one reads
+  the spreadsheet columns and sums them, the other passes every figure through node creation,
+  YAML, the money parser and the deflator. A units error anywhere in the second would show up
+  here as a total that does not match, and on the first attempt it did — every seeded figure was
+  a hundredfold too small, because the extraction printed dollars and the generator stored them
+  as cents. Nothing in the node text looked wrong; `$9,389,075.75` is a plausible line item. The
+  total was what failed.
+
+  [open] The three dedicated-purpose lines carry no `draws-from` edge and their funds are
+  unmodelled, so the corpus can say what they appropriate and not where the money comes from.
 properties:
   name: "Medicaid Health Care Services [verified]"
   current_code: "651525"

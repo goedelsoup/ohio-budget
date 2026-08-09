@@ -1,0 +1,20 @@
+class: expenditure
+label: Medicaid Services — Recoveries — FY2023, Actual
+description: |
+  $614,999,593.85 disbursed against line item 651639 in FY2023, on a closed-book basis. [verified]
+properties:
+  amount: "$614,999,593.85"
+  basis: actual-closed
+  period_label: FY2023
+  reversion: "[open] not separately reported by this source"
+  reporting_source: |
+    LSC appropriation detail, HB 33, sheet EN, ALI 651639, actual column for FY2023. [verified]
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-recoveries.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2023.yml
+    relationship: occurs-in
+  - target: ../../catalog/lsc-hb33-appropriation-spreadsheet.md
+    relationship: cites

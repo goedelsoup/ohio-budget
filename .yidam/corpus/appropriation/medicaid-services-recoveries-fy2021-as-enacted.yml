@@ -1,0 +1,23 @@
+class: appropriation
+label: Medicaid Services — Recoveries — FY2021, As Enacted
+description: |
+  $781,970,233.00 for line item 651639 in FY2021, appropriated by
+  [HB 166](../bill-version/hb166-as-enacted.yml). [verified]
+properties:
+  amount: "$781,970,233.00"
+  period_label: FY2021
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 166, sheet EN, ALI 651639, enacted column for FY2021. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-recoveries.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2021.yml
+    relationship: covers
+  - target: ../bill-version/hb166-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites

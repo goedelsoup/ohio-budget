@@ -1,0 +1,23 @@
+class: appropriation
+label: Medicaid Services — HIC Fee — FY2023, As Enacted
+description: |
+  $951,000,000.00 for line item 651684 in FY2023, appropriated by
+  [HB 110](../bill-version/hb110-as-enacted.yml). [verified]
+properties:
+  amount: "$951,000,000.00"
+  period_label: FY2023
+  stage: as-enacted
+  measure: appropriated
+  source_document: |
+    LSC appropriation detail, HB 110, sheet EN, ALI 651684, enacted column for FY2023. [verified]
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/medicaid-services-hic-fee.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2023.yml
+    relationship: covers
+  - target: ../bill-version/hb110-as-enacted.yml
+    relationship: stated-in
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
+    relationship: cites

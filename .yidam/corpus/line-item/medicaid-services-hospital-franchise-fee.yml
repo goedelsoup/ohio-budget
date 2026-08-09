@@ -1,0 +1,44 @@
+class: line-item
+label: Medicaid Services — Hospital Franchise Fee
+description: |
+  Spending authority backed by the assessment levied on hospitals, which the state uses to
+  draw federal match and returns to hospitals as supplemental payments. [inference]
+
+  **ALI 651656, agency MCD, dedicated purpose fund.** [verified] One of the five line items
+  through which Ohio appropriates Medicaid benefits, and one of the three that
+  [the reconciliation](./medicaid-health-care-services.yml) named and the corpus did not model.
+  Enacted $531,273,601.00 in FY2014 and $3,030,014,270.00 in FY2027. [verified]
+
+  **The name changes twice under one code.** `Medicaid Services - Hospitals/UPL` in the 130th and
+  131st, `Medicaid Services - Hospital Upper Payment Limit` in the 132nd, and `Medicaid Services -
+  Hospital Franchise Fee` from the 133rd. [verified] Nothing in the workbooks marks the change and
+  the figures run continuously through it, which is why this corpus matches on the ALI and treats
+  the name as a label rather than as an identity — the discipline that
+  [five different line items called "Early Childhood Education"](./early-childhood-education.yml)
+  made necessary.
+
+  It draws on a dedicated purpose fund and carries no `draws-from` edge: the corpus models eight
+  funds and the budget has hundreds, and seeding one to satisfy an edge is
+  [recorded as the wrong move](./foundation-funding-dpf.yml).
+
+  [open] The mechanism — what is assessed, at what rate, and how the proceeds return — lives in
+  statute rather than in an appropriation table, per
+  [bill-text-on-demand](../../decisions/bill-text-on-demand.yml). The gloss above is
+  `[inference]` from the line item's name and fund group.
+properties:
+  name: "Medicaid Services - Hospitals/UPL [verified]"
+  current_code: "651656"
+  historical_codes: "[open] not reconstructed before FY2014"
+  agency_code: "MCD"
+  purpose: |
+    Medicaid benefit payments from a dedicated purpose fund.
+  first_period: "FY2014 in the committed workbooks [verified]"
+  last_period: current
+  status: active
+links:
+  - target: ../line-item.ont.yml
+    relationship: instance-of
+  - target: ../agency/department-of-medicaid.yml
+    relationship: belongs-to
+  - target: ../../catalog/lsc-hb96-appropriation-spreadsheet.md
+    relationship: cites
