@@ -120,8 +120,15 @@ rationale: |
   already signed. [verified] The corpus models disbursement as `expenditure` and lapse as
   `reversion`, and models encumbrance nowhere.
 
-  So an unknown share of the +1.01% is money **committed and not yet paid** rather than money not
-  used. That does not change the arithmetic and it changes what the arithmetic means, on a line
+  **That paragraph was written before the basis was checked and overstates the problem.** Ohio's
+  audited annual report states that on the non-GAAP budgetary basis, "actual" expenditures
+  include cash disbursements *and outstanding encumbrances*. [verified] If LSC reports on that
+  basis — [inference], and untested — the encumbrance is already inside these figures and the
+  +1.01% is not understating spending at all.
+
+  What survives is that the corpus cannot *separate* the two, so it cannot say how much of an
+  underspend is a signed contract. An unknown share of the +1.01% may be money **committed and
+  not yet paid** rather than money not used. That does not change the arithmetic and it changes what the arithmetic means, on a line
   item whose spending runs through contracts more than one whose spending is a formula
   distribution — which is to say, unevenly across exactly the split this record reports.
 

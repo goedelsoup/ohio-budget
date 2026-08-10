@@ -61,6 +61,43 @@ Three consequences, and the third is structural:
 That is a real limit on what this repository can ever answer, and it is better stated than
 discovered by a reader wondering why the newest year is missing.
 
+## The audited annual report: no line items either, and a correction
+
+| File | sha256 | Contents |
+|---|---|---|
+| [`acfr-2024.pdf`](../sources/obm/acfr-2024.pdf) | `88b05006…` | Annual Comprehensive Financial Report, fiscal year ended 30 June 2024 |
+
+**It carries no appropriation line item detail.** Same test as the monthly report and the same
+result: zero occurrences of 200550, 651525, 110969, 235501, 501321 or 110965 in 1.2 million
+characters. [verified] Budget-to-actual comparisons are presented per governmental fund. So
+nothing in OBM's reporting reaches line-item granularity, and the corpus's line-item actuals
+depend on LSC alone — which is the structural limit recorded above, now confirmed against both
+documents rather than one.
+
+**And it corrects something this corpus recorded.** The
+[`expenditure`](../corpus/expenditure.ont.yml) class was annotated with the claim that authority
+resolves three ways — disbursed, encumbered, lapsed — and that the corpus models the first and
+third but not the second, so an apparent underspend might be money committed and not yet paid.
+The ACFR says otherwise about the basis these figures are kept on:
+
+> in the non-GAAP budgetary basis schedules, "actual" budgetary expenditures include cash
+> disbursements **and outstanding encumbrances**, as of June 30
+
+[verified] On the budgetary basis an encumbrance *is* an expenditure. That is also why OBM's
+glossary can say a closed-year adjusted appropriation equals disbursements plus outstanding
+encumbrances: the two definitions describe one quantity.
+
+[inference] LSC's workbooks report against the same appropriation control the state uses, so
+their `actual` columns are budgetary basis and already include encumbrances — which would mean
+the corpus's figures were never missing them and the gap is not understating spending by the
+encumbered amount.
+
+[open] That last step is an inference and the corpus should not rest on it. LSC does not state a
+basis anywhere in the workbooks. What would settle it: aggregating the corpus's General Revenue
+Fund actuals for FY2024 and comparing against the ACFR's General Fund budgetary expenditure for
+the same year — they should agree if both are budgetary basis, and differ by roughly the $2.08
+billion of General Fund encumbrances the ACFR reports at 30 June 2024 if they are not.
+
 ## The URL convention, which the controlling board lacks
 
 `archives.obm.ohio.gov/Files/Budget_and_Planning/Monthly_Financial_Report/YYYY-MM-mfr.pdf`,

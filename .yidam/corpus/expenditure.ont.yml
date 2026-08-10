@@ -8,7 +8,27 @@ description: |
   rather than a state, and irreducibly distinct from the appropriation that authorized it,
   because authority granted and money spent routinely differ.
 
-  **This is a disbursement, and the state's accounting has one more step than this class does.**
+  **Probably not only a disbursement, though the class is written as if it were.**
+
+  An earlier version of this note said authority resolves three ways — disbursed, encumbered,
+  lapsed — and that this class models the first while nothing models the second, so a line item
+  that committed its authority to a contract would appear here as an underspend. Ohio's audited
+  annual report says the basis matters more than the count: *"in the non-GAAP budgetary basis
+  schedules, 'actual' budgetary expenditures include cash disbursements **and outstanding
+  encumbrances**, as of June 30"*. [verified] On the budgetary basis an encumbrance *is* an
+  expenditure, which is also why a closed-year adjusted appropriation equals disbursements plus
+  outstanding encumbrances — the two definitions describe one quantity.
+
+  [inference] LSC's workbooks report against the same appropriation control the state uses, so
+  their `actual` columns are budgetary basis and these figures already include encumbrances.
+  [open] LSC states no basis anywhere in the workbooks, and the corpus should not rest on the
+  inference. The test is named in
+  [the catalog entry](../catalog/obm-annual-report.md): aggregate this corpus's general revenue
+  actuals for FY2024 against the ACFR's General Fund budgetary expenditure, which agree if both
+  are budgetary basis and differ by roughly $2.08 billion if they are not.
+
+  What follows was written before that and is kept because the distinction it draws is real
+  even where the conclusion was premature.
   OBM's own definitions: a *disbursement* is "a payment made for any purpose"; an *encumbrance*
   is "an OAKS spending document that legally reserves appropriation from an agency's available
   appropriation balance", representing purchase orders and contracts already entered into.
