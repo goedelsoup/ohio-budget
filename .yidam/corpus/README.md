@@ -49,61 +49,351 @@ Sorted by: kind, then alphabetically.
 | Instance | Class | Label | Links out | Lines |
 |---|---|---|---|---|
 | [auditor-of-state.yml](.yidam/corpus/actor/auditor-of-state.yml) | actor | Auditor of State | 1 | 27 |
-| [conference-committee.yml](.yidam/corpus/actor/conference-committee.yml) | actor | Conference Committee | 2 | 35 |
+| [conference-committee.yml](.yidam/corpus/actor/conference-committee.yml) | actor | Conference Committee | 2 | 101 |
 | [controlling-board.yml](.yidam/corpus/actor/controlling-board.yml) | actor | Controlling Board | 1 | 31 |
-| [governor.yml](.yidam/corpus/actor/governor.yml) | actor | Governor of Ohio | 2 | 44 |
-| [house-finance-committee.yml](.yidam/corpus/actor/house-finance-committee.yml) | actor | House Finance Committee | 2 | 46 |
+| [general-assembly.yml](.yidam/corpus/actor/general-assembly.yml) | actor | Ohio General Assembly | 2 | 45 |
+| [governor.yml](.yidam/corpus/actor/governor.yml) | actor | Governor of Ohio | 4 | 90 |
+| [house-finance-committee.yml](.yidam/corpus/actor/house-finance-committee.yml) | actor | House Finance Committee | 2 | 107 |
 | [legislative-service-commission.yml](.yidam/corpus/actor/legislative-service-commission.yml) | actor | Legislative Service Commission | 2 | 29 |
 | [office-of-budget-and-management.yml](.yidam/corpus/actor/office-of-budget-and-management.yml) | actor | Office of Budget and Management | 1 | 33 |
-| [senate-finance-committee.yml](.yidam/corpus/actor/senate-finance-committee.yml) | actor | Senate Finance Committee | 2 | 36 |
-| [department-of-education-and-workforce.yml](.yidam/corpus/agency/department-of-education-and-workforce.yml) | agency | Ohio Department of Education and Workforce | 3 | 35 |
+| [president-of-the-senate.yml](.yidam/corpus/actor/president-of-the-senate.yml) | actor | President of the Ohio Senate | 2 | 32 |
+| [senate-finance-committee.yml](.yidam/corpus/actor/senate-finance-committee.yml) | actor | Senate Finance Committee | 2 | 88 |
+| [speaker-of-the-house.yml](.yidam/corpus/actor/speaker-of-the-house.yml) | actor | Speaker of the Ohio House of Representatives | 2 | 43 |
+| [department-of-children-and-youth.yml](.yidam/corpus/agency/department-of-children-and-youth.yml) | agency | Department of Children and Youth | 2 | 29 |
+| [department-of-education-and-workforce.yml](.yidam/corpus/agency/department-of-education-and-workforce.yml) | agency | Ohio Department of Education and Workforce | 5 | 39 |
 | [department-of-education.yml](.yidam/corpus/agency/department-of-education.yml) | agency | Ohio Department of Education | 1 | 29 |
 | [department-of-higher-education.yml](.yidam/corpus/agency/department-of-higher-education.yml) | agency | Ohio Department of Higher Education | 2 | 26 |
 | [department-of-medicaid.yml](.yidam/corpus/agency/department-of-medicaid.yml) | agency | Ohio Department of Medicaid | 3 | 36 |
 | [department-of-natural-resources.yml](.yidam/corpus/agency/department-of-natural-resources.yml) | agency | Ohio Department of Natural Resources | 1 | 21 |
 | [department-of-public-safety.yml](.yidam/corpus/agency/department-of-public-safety.yml) | agency | Ohio Department of Public Safety | 1 | 21 |
-| [department-of-taxation.yml](.yidam/corpus/agency/department-of-taxation.yml) | agency | Ohio Department of Taxation | 4 | 36 |
+| [department-of-taxation.yml](.yidam/corpus/agency/department-of-taxation.yml) | agency | Ohio Department of Taxation | 5 | 38 |
 | [department-of-transportation.yml](.yidam/corpus/agency/department-of-transportation.yml) | agency | Ohio Department of Transportation | 2 | 26 |
 | [developmental-disabilities.yml](.yidam/corpus/agency/developmental-disabilities.yml) | agency | Ohio Department of Developmental Disabilities | 2 | 28 |
 | [job-and-family-services.yml](.yidam/corpus/agency/job-and-family-services.yml) | agency | Ohio Department of Job and Family Services | 1 | 29 |
 | [mental-health-and-addiction-services.yml](.yidam/corpus/agency/mental-health-and-addiction-services.yml) | agency | Ohio Department of Mental Health and Addiction Services | 2 | 24 |
 | [rehabilitation-and-correction.yml](.yidam/corpus/agency/rehabilitation-and-correction.yml) | agency | Ohio Department of Rehabilitation and Correction | 2 | 28 |
-| [foundation-funding-fy2014-15-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2014-15-as-enacted.yml) | appropriation | Foundation Funding — FY2014-15, As Enacted | 6 | 29 |
-| [foundation-funding-fy2016-17-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2016-17-as-enacted.yml) | appropriation | Foundation Funding — FY2016-17, As Enacted | 6 | 29 |
-| [foundation-funding-fy2018-19-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2018-19-as-enacted.yml) | appropriation | Foundation Funding — FY2018-19, As Enacted | 6 | 29 |
-| [foundation-funding-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-21-as-enacted.yml) | appropriation | Foundation Funding — FY2020-21, As Enacted | 7 | 34 |
-| [foundation-funding-fy2022-23-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-23-as-enacted.yml) | appropriation | Foundation Funding — FY2022-23, As Enacted | 7 | 33 |
-| [foundation-funding-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-25-as-enacted.yml) | appropriation | Foundation Funding — FY2024-25, As Enacted | 6 | 45 |
-| [foundation-funding-fy2024-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-as-enacted.yml) | appropriation | Foundation Funding — FY2024, As Enacted | 7 | 38 |
-| [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 8 | 47 |
-| [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 7 | 39 |
+| [community-schools-funding-fy2012-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2012-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2012, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2013-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2013-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2013, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2014-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2014-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2014, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2015-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2015-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2015, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2016-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2016-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2016, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2017-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2017-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2017, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2018-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2018-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2018, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2019-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2019-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2019, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2020-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2020-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2020, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2021-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2021-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2021, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2022-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2022-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2022, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2023-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2023-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2023, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2024-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2024-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2024, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2025-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2025-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2025, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2026-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2026, As Enacted | 6 | 30 |
+| [community-schools-funding-fy2027-as-enacted.yml](.yidam/corpus/appropriation/community-schools-funding-fy2027-as-enacted.yml) | appropriation | Community Schools and Choice Programs — FY2027, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2012-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2012-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2012, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2013-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2013-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2013, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2014-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2014-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2014, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2015-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2015-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2015, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2016-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2016-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2016, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2017-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2017-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2017, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2018-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2018-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2018, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2019-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2019-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2019, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2020-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2020-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2020, As Enacted | 6 | 30 |
+| [disability-financial-assistance-fy2021-as-enacted.yml](.yidam/corpus/appropriation/disability-financial-assistance-fy2021-as-enacted.yml) | appropriation | Disability Financial Assistance — FY2021, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2012-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2012-as-enacted.yml) | appropriation | Early Childhood Education — FY2012, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2013-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2013-as-enacted.yml) | appropriation | Early Childhood Education — FY2013, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2014-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2014-as-enacted.yml) | appropriation | Early Childhood Education — FY2014, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2015-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2015-as-enacted.yml) | appropriation | Early Childhood Education — FY2015, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2016-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2016-as-enacted.yml) | appropriation | Early Childhood Education — FY2016, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2017-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2017-as-enacted.yml) | appropriation | Early Childhood Education — FY2017, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2018-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2018-as-enacted.yml) | appropriation | Early Childhood Education — FY2018, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2019-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2019-as-enacted.yml) | appropriation | Early Childhood Education — FY2019, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2020-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2020-as-enacted.yml) | appropriation | Early Childhood Education — FY2020, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2021-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2021-as-enacted.yml) | appropriation | Early Childhood Education — FY2021, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2022-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2022-as-enacted.yml) | appropriation | Early Childhood Education — FY2022, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2023-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2023-as-enacted.yml) | appropriation | Early Childhood Education — FY2023, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2024-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2024-as-enacted.yml) | appropriation | Early Childhood Education — FY2024, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2025-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2025-as-enacted.yml) | appropriation | Early Childhood Education — FY2025, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2026-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2026-as-enacted.yml) | appropriation | Early Childhood Education — FY2026, As Enacted | 6 | 30 |
+| [early-childhood-education-fy2027-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-fy2027-as-enacted.yml) | appropriation | Early Childhood Education — FY2027, As Enacted | 6 | 30 |
+| [early-childhood-education-kid-fy2024-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-kid-fy2024-as-enacted.yml) | appropriation | Early Childhood Education (Children and Youth) — FY2024, As Enacted | 6 | 30 |
+| [early-childhood-education-kid-fy2025-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-kid-fy2025-as-enacted.yml) | appropriation | Early Childhood Education (Children and Youth) — FY2025, As Enacted | 6 | 30 |
+| [early-childhood-education-kid-fy2026-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-kid-fy2026-as-enacted.yml) | appropriation | Early Childhood Education (Children and Youth) — FY2026, As Enacted | 6 | 30 |
+| [early-childhood-education-kid-fy2027-as-enacted.yml](.yidam/corpus/appropriation/early-childhood-education-kid-fy2027-as-enacted.yml) | appropriation | Early Childhood Education (Children and Youth) — FY2027, As Enacted | 6 | 30 |
+| [foundation-funding-dpf-fy2020-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2020-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2020, As Enacted | 5 | 28 |
+| [foundation-funding-dpf-fy2021-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2021-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2021, As Enacted | 5 | 28 |
+| [foundation-funding-dpf-fy2022-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2022-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2022, As Enacted | 5 | 28 |
+| [foundation-funding-dpf-fy2023-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2023-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2023, As Enacted | 5 | 28 |
+| [foundation-funding-dpf-fy2024-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2024-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2024, As Enacted | 5 | 29 |
+| [foundation-funding-dpf-fy2025-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2025-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2025, As Enacted | 5 | 28 |
+| [foundation-funding-dpf-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2026-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2026, As Enacted | 5 | 28 |
+| [foundation-funding-dpf-fy2027-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-dpf-fy2027-as-enacted.yml) | appropriation | Foundation Funding (5VS0) — FY2027, As Enacted | 5 | 28 |
+| [foundation-funding-fy2012-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2012-as-enacted.yml) | appropriation | Foundation Funding — FY2012, As Enacted | 6 | 33 |
+| [foundation-funding-fy2013-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2013-as-enacted.yml) | appropriation | Foundation Funding — FY2013, As Enacted | 6 | 33 |
+| [foundation-funding-fy2014-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2014-as-enacted.yml) | appropriation | Foundation Funding — FY2014, As Enacted | 6 | 33 |
+| [foundation-funding-fy2015-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2015-as-enacted.yml) | appropriation | Foundation Funding — FY2015, As Enacted | 6 | 33 |
+| [foundation-funding-fy2016-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2016-as-enacted.yml) | appropriation | Foundation Funding — FY2016, As Enacted | 6 | 33 |
+| [foundation-funding-fy2017-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2017-as-enacted.yml) | appropriation | Foundation Funding — FY2017, As Enacted | 6 | 33 |
+| [foundation-funding-fy2018-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2018-as-enacted.yml) | appropriation | Foundation Funding — FY2018, As Enacted | 6 | 33 |
+| [foundation-funding-fy2019-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2019-as-enacted.yml) | appropriation | Foundation Funding — FY2019, As Enacted | 6 | 33 |
+| [foundation-funding-fy2020-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-as-enacted.yml) | appropriation | Foundation Funding — FY2020, As Enacted | 7 | 35 |
+| [foundation-funding-fy2020-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-as-introduced.yml) | appropriation | Foundation Funding — FY2020, As Introduced | 6 | 29 |
+| [foundation-funding-fy2020-as-passed-house.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-as-passed-house.yml) | appropriation | Foundation Funding — FY2020, As Passed By House | 6 | 29 |
+| [foundation-funding-fy2020-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-as-passed-senate.yml) | appropriation | Foundation Funding — FY2020, As Passed By Senate | 6 | 29 |
+| [foundation-funding-fy2020-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-conference-report.yml) | appropriation | Foundation Funding — FY2020, Conference Report | 6 | 29 |
+| [foundation-funding-fy2020-house-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-house-reported.yml) | appropriation | Foundation Funding — FY2020, House Reported | 6 | 29 |
+| [foundation-funding-fy2020-house-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-house-substitute.yml) | appropriation | Foundation Funding — FY2020, House Substitute | 6 | 29 |
+| [foundation-funding-fy2020-senate-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-senate-reported.yml) | appropriation | Foundation Funding — FY2020, Senate Reported | 6 | 29 |
+| [foundation-funding-fy2020-senate-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2020-senate-substitute.yml) | appropriation | Foundation Funding — FY2020, Senate Substitute | 6 | 29 |
+| [foundation-funding-fy2021-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2021-as-enacted.yml) | appropriation | Foundation Funding — FY2021, As Enacted | 6 | 33 |
+| [foundation-funding-fy2022-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-as-enacted.yml) | appropriation | Foundation Funding — FY2022, As Enacted | 6 | 33 |
+| [foundation-funding-fy2022-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-as-introduced.yml) | appropriation | Foundation Funding — FY2022, As Introduced | 6 | 29 |
+| [foundation-funding-fy2022-as-passed-house.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-as-passed-house.yml) | appropriation | Foundation Funding — FY2022, As Passed By House | 6 | 29 |
+| [foundation-funding-fy2022-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-as-passed-senate.yml) | appropriation | Foundation Funding — FY2022, As Passed By Senate | 6 | 29 |
+| [foundation-funding-fy2022-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-conference-report.yml) | appropriation | Foundation Funding — FY2022, Conference Report | 6 | 29 |
+| [foundation-funding-fy2022-house-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-house-reported.yml) | appropriation | Foundation Funding — FY2022, House Reported | 6 | 29 |
+| [foundation-funding-fy2022-house-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-house-substitute.yml) | appropriation | Foundation Funding — FY2022, House Substitute | 6 | 29 |
+| [foundation-funding-fy2022-senate-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-senate-reported.yml) | appropriation | Foundation Funding — FY2022, Senate Reported | 6 | 29 |
+| [foundation-funding-fy2022-senate-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2022-senate-substitute.yml) | appropriation | Foundation Funding — FY2022, Senate Substitute | 6 | 29 |
+| [foundation-funding-fy2023-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2023-as-enacted.yml) | appropriation | Foundation Funding — FY2023, As Enacted | 5 | 31 |
+| [foundation-funding-fy2024-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-as-enacted.yml) | appropriation | Foundation Funding — FY2024, As Enacted | 7 | 49 |
+| [foundation-funding-fy2024-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-as-introduced.yml) | appropriation | Foundation Funding — FY2024, As Introduced | 6 | 32 |
+| [foundation-funding-fy2024-as-passed-house.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-as-passed-house.yml) | appropriation | Foundation Funding — FY2024, As Passed By House | 6 | 33 |
+| [foundation-funding-fy2024-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-as-passed-senate.yml) | appropriation | Foundation Funding — FY2024, As Passed By Senate | 6 | 32 |
+| [foundation-funding-fy2024-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-conference-report.yml) | appropriation | Foundation Funding — FY2024, Conference Report | 6 | 35 |
+| [foundation-funding-fy2024-house-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-house-reported.yml) | appropriation | Foundation Funding — FY2024, House Reported | 6 | 32 |
+| [foundation-funding-fy2024-house-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-house-substitute.yml) | appropriation | Foundation Funding — FY2024, House Substitute | 6 | 34 |
+| [foundation-funding-fy2024-senate-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-senate-reported.yml) | appropriation | Foundation Funding — FY2024, Senate Reported | 6 | 32 |
+| [foundation-funding-fy2024-senate-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2024-senate-substitute.yml) | appropriation | Foundation Funding — FY2024, Senate Substitute | 6 | 33 |
+| [foundation-funding-fy2025-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2025-as-enacted.yml) | appropriation | Foundation Funding — FY2025, As Enacted | 6 | 34 |
+| [foundation-funding-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-enacted.yml) | appropriation | Foundation Funding — FY2026, As Enacted | 8 | 54 |
+| [foundation-funding-fy2026-as-introduced.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-introduced.yml) | appropriation | Foundation Funding — FY2026, As Introduced | 6 | 41 |
 | [foundation-funding-fy2026-as-passed-house.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-house.yml) | appropriation | Foundation Funding — FY2026, As Passed by the House | 6 | 29 |
-| [foundation-funding-fy2026-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-senate.yml) | appropriation | Foundation Funding — FY2026, As Passed by the Senate | 7 | 34 |
-| [foundation-funding-fy2026-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-conference-report.yml) | appropriation | Foundation Funding — FY2026, Conference Report | 7 | 34 |
+| [foundation-funding-fy2026-as-passed-senate.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-as-passed-senate.yml) | appropriation | Foundation Funding — FY2026, As Passed by the Senate | 6 | 32 |
+| [foundation-funding-fy2026-conference-report.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-conference-report.yml) | appropriation | Foundation Funding — FY2026, Conference Report | 6 | 32 |
 | [foundation-funding-fy2026-house-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-house-reported.yml) | appropriation | Foundation Funding — FY2026, House Reported | 6 | 29 |
 | [foundation-funding-fy2026-house-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-house-substitute.yml) | appropriation | Foundation Funding — FY2026, House Substitute | 6 | 29 |
 | [foundation-funding-fy2026-senate-reported.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-senate-reported.yml) | appropriation | Foundation Funding — FY2026, Senate Reported | 6 | 29 |
 | [foundation-funding-fy2026-senate-substitute.yml](.yidam/corpus/appropriation/foundation-funding-fy2026-senate-substitute.yml) | appropriation | Foundation Funding — FY2026, Senate Substitute | 6 | 29 |
-| [institutional-operations-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2020-21-as-enacted.yml) | appropriation | Institutional Operations — FY2020-21, As Enacted | 7 | 31 |
-| [institutional-operations-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2024-25-as-enacted.yml) | appropriation | Institutional Operations — FY2024-25, As Enacted | 7 | 32 |
-| [local-government-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2010-11, As Enacted | 5 | 31 |
-| [local-government-fund-distribution-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2012-13-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2012-13, As Enacted | 7 | 33 |
-| [local-government-fund-distribution-fy2014-15-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2014-15-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2014-15, As Enacted | 6 | 31 |
-| [local-government-fund-distribution-fy2016-17-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2016-17-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2016-17, As Enacted | 6 | 31 |
-| [local-government-fund-distribution-fy2018-19-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2018-19-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2018-19, As Enacted | 6 | 31 |
-| [local-government-fund-distribution-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2020-21-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2020-21, As Enacted | 6 | 31 |
-| [local-government-fund-distribution-fy2022-23-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2022-23-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2022-23, As Enacted | 6 | 31 |
-| [local-government-fund-distribution-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2024-25-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2024-25, As Enacted | 6 | 31 |
-| [medicaid-health-care-services-fy2016-17-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2016-17-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2016-17, As Enacted | 6 | 29 |
-| [medicaid-health-care-services-fy2018-19-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2018-19-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2018-19, As Enacted | 6 | 29 |
-| [medicaid-health-care-services-fy2020-21-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2020-21-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2020-21, As Enacted | 7 | 34 |
-| [medicaid-health-care-services-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2024-25-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2024-25, As Enacted | 7 | 35 |
-| [medicaid-health-care-services-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2026-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2026, As Enacted | 7 | 46 |
-| [medicaid-services-odjfs-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-odjfs-fy2012-13-as-enacted.yml) | appropriation | Medicaid Services (JFS) — FY2012-13, As Enacted | 6 | 32 |
-| [public-library-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2010-11, As Enacted | 7 | 32 |
-| [public-library-fund-distribution-fy2012-13-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2012-13-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2012-13, As Enacted | 6 | 31 |
-| [state-share-of-instruction-fy2024-25-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2024-25-as-enacted.yml) | appropriation | State Share of Instruction — FY2024-25, As Enacted | 7 | 31 |
+| [foundation-funding-fy2027-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-fy2027-as-enacted.yml) | appropriation | Foundation Funding — FY2027, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2012-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2012-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2012, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2013-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2013-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2013, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2014-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2014-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2014, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2015-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2015-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2015, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2016-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2016-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2016, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2017-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2017-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2017, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2018-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2018-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2018, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2019-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2019-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2019, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2020-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2020-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2020, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2021-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2021-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2021, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2022-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2022-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2022, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2023-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2023-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2023, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2024-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2024-as-enacted.yml) | appropriation | Foundation Funding (7017) — FY2024, As Enacted | 6 | 31 |
+| [foundation-funding-lottery-fy2025-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2025-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2025, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2026-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2026-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2026, As Enacted | 6 | 30 |
+| [foundation-funding-lottery-fy2027-as-enacted.yml](.yidam/corpus/appropriation/foundation-funding-lottery-fy2027-as-enacted.yml) | appropriation | Foundation Funding (Lottery) — FY2027, As Enacted | 6 | 30 |
+| [highway-patrol-operations-fy2024-as-enacted.yml](.yidam/corpus/appropriation/highway-patrol-operations-fy2024-as-enacted.yml) | appropriation | Highway Patrol Operations — FY2024, As Enacted | 6 | 30 |
+| [highway-patrol-operations-fy2025-as-enacted.yml](.yidam/corpus/appropriation/highway-patrol-operations-fy2025-as-enacted.yml) | appropriation | Highway Patrol Operations — FY2025, As Enacted | 6 | 30 |
+| [highway-patrol-operations-fy2026-as-enacted.yml](.yidam/corpus/appropriation/highway-patrol-operations-fy2026-as-enacted.yml) | appropriation | Highway Patrol Operations — FY2026, As Enacted | 6 | 30 |
+| [highway-patrol-operations-fy2027-as-enacted.yml](.yidam/corpus/appropriation/highway-patrol-operations-fy2027-as-enacted.yml) | appropriation | Highway Patrol Operations — FY2027, As Enacted | 6 | 30 |
+| [institutional-operations-fy2012-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2012-as-enacted.yml) | appropriation | Institutional Operations — FY2012, As Enacted | 6 | 30 |
+| [institutional-operations-fy2013-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2013-as-enacted.yml) | appropriation | Institutional Operations — FY2013, As Enacted | 6 | 30 |
+| [institutional-operations-fy2014-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2014-as-enacted.yml) | appropriation | Institutional Operations — FY2014, As Enacted | 6 | 30 |
+| [institutional-operations-fy2015-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2015-as-enacted.yml) | appropriation | Institutional Operations — FY2015, As Enacted | 6 | 30 |
+| [institutional-operations-fy2016-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2016-as-enacted.yml) | appropriation | Institutional Operations — FY2016, As Enacted | 6 | 30 |
+| [institutional-operations-fy2017-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2017-as-enacted.yml) | appropriation | Institutional Operations — FY2017, As Enacted | 6 | 30 |
+| [institutional-operations-fy2018-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2018-as-enacted.yml) | appropriation | Institutional Operations — FY2018, As Enacted | 6 | 30 |
+| [institutional-operations-fy2019-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2019-as-enacted.yml) | appropriation | Institutional Operations — FY2019, As Enacted | 6 | 30 |
+| [institutional-operations-fy2020-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2020-as-enacted.yml) | appropriation | Institutional Operations — FY2020, As Enacted | 6 | 33 |
+| [institutional-operations-fy2021-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2021-as-enacted.yml) | appropriation | Institutional Operations — FY2021, As Enacted | 6 | 33 |
+| [institutional-operations-fy2022-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2022-as-enacted.yml) | appropriation | Institutional Operations — FY2022, As Enacted | 5 | 31 |
+| [institutional-operations-fy2023-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2023-as-enacted.yml) | appropriation | Institutional Operations — FY2023, As Enacted | 5 | 31 |
+| [institutional-operations-fy2024-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2024-as-enacted.yml) | appropriation | Institutional Operations — FY2024, As Enacted | 7 | 36 |
+| [institutional-operations-fy2025-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2025-as-enacted.yml) | appropriation | Institutional Operations — FY2025, As Enacted | 6 | 34 |
+| [institutional-operations-fy2026-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2026-as-enacted.yml) | appropriation | Institutional Operations — FY2026, As Enacted | 6 | 30 |
+| [institutional-operations-fy2027-as-enacted.yml](.yidam/corpus/appropriation/institutional-operations-fy2027-as-enacted.yml) | appropriation | Institutional Operations — FY2027, As Enacted | 6 | 30 |
+| [local-government-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2010-11, As Enacted | 5 | 35 |
+| [local-government-fund-distribution-fy2012-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2012-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2012, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2013-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2013-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2013, As Enacted | 6 | 45 |
+| [local-government-fund-distribution-fy2014-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2014-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2014, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2015-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2015-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2015, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2016-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2016-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2016, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2017-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2017-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2017, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2018-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2018-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2018, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2019-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2019-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2019, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2020-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2020-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2020, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2021-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2021-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2021, As Enacted | 6 | 33 |
+| [local-government-fund-distribution-fy2022-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2022-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2022, As Enacted | 5 | 31 |
+| [local-government-fund-distribution-fy2023-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2023-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2023, As Enacted | 5 | 31 |
+| [local-government-fund-distribution-fy2024-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2024-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2024, As Enacted | 7 | 36 |
+| [local-government-fund-distribution-fy2025-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2025-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2025, As Enacted | 6 | 34 |
+| [local-government-fund-distribution-fy2026-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2026-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2026, As Enacted | 6 | 30 |
+| [local-government-fund-distribution-fy2027-as-enacted.yml](.yidam/corpus/appropriation/local-government-fund-distribution-fy2027-as-enacted.yml) | appropriation | Local Government Fund Distribution — FY2027, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2014-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2014-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2014, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2015-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2015-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2015, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2016-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2016-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2016, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2017-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2017-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2017, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2018-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2018-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2018, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2019-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2019-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2019, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2020-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2020-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2020, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2021-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2021-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2021, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2022-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2022-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2022, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2023-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2023-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2023, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2024-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2024-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2024, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2025-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2025-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2025, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2026-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2026, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-federal-fy2027-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-federal-fy2027-as-enacted.yml) | appropriation | Medicaid Services — Federal — FY2027, As Enacted | 6 | 30 |
+| [medicaid-health-care-services-fy2014-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2014-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2014, As Enacted | 6 | 33 |
+| [medicaid-health-care-services-fy2015-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2015-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2015, As Enacted | 6 | 33 |
+| [medicaid-health-care-services-fy2016-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2016-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2016, As Enacted | 6 | 33 |
+| [medicaid-health-care-services-fy2017-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2017-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2017, As Enacted | 6 | 33 |
+| [medicaid-health-care-services-fy2018-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2018-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2018, As Enacted | 6 | 46 |
+| [medicaid-health-care-services-fy2019-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2019-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2019, As Enacted | 6 | 33 |
+| [medicaid-health-care-services-fy2020-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2020-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2020, As Enacted | 6 | 33 |
+| [medicaid-health-care-services-fy2021-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2021-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2021, As Enacted | 6 | 33 |
+| [medicaid-health-care-services-fy2022-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2022-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2022, As Enacted | 5 | 31 |
+| [medicaid-health-care-services-fy2023-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2023-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2023, As Enacted | 5 | 31 |
+| [medicaid-health-care-services-fy2024-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2024-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2024, As Enacted | 7 | 36 |
+| [medicaid-health-care-services-fy2025-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2025-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2025, As Enacted | 6 | 34 |
+| [medicaid-health-care-services-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2026-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2026, As Enacted | 6 | 49 |
+| [medicaid-health-care-services-fy2027-as-enacted.yml](.yidam/corpus/appropriation/medicaid-health-care-services-fy2027-as-enacted.yml) | appropriation | Medicaid Health Care Services — FY2027, As Enacted | 6 | 30 |
+| [medicaid-services-hic-fee-fy2018-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2018-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2018, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2019-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2019-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2019, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2020-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2020-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2020, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2021-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2021-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2021, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2022-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2022-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2022, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2023-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2023-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2023, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2024-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2024-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2024, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2025-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2025-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2025, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2026-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2026, As Enacted | 5 | 23 |
+| [medicaid-services-hic-fee-fy2027-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hic-fee-fy2027-as-enacted.yml) | appropriation | Medicaid Services — HIC Fee — FY2027, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2014-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2014-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2014, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2015-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2015-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2015, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2016-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2016-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2016, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2017-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2017-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2017, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2018-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2018-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2018, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2019-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2019-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2019, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2020-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2020-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2020, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2021-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2021-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2021, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2022-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2022-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2022, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2023-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2023-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2023, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2024-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2024-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2024, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2025-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2025-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2025, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2026-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2026, As Enacted | 5 | 23 |
+| [medicaid-services-hospital-franchise-fee-fy2027-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-hospital-franchise-fee-fy2027-as-enacted.yml) | appropriation | Medicaid Services — Hospital Franchise Fee — FY2027, As Enacted | 5 | 23 |
+| [medicaid-services-odjfs-fy2012-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-odjfs-fy2012-as-enacted.yml) | appropriation | Medicaid Services (ODJFS) — FY2012, As Enacted | 6 | 33 |
+| [medicaid-services-odjfs-fy2013-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-odjfs-fy2013-as-enacted.yml) | appropriation | Medicaid Services (ODJFS) — FY2013, As Enacted | 6 | 40 |
+| [medicaid-services-odjfs-fy2014-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-odjfs-fy2014-as-enacted.yml) | appropriation | Medicaid Services (ODJFS) — FY2014, As Enacted | 6 | 41 |
+| [medicaid-services-odjfs-fy2015-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-odjfs-fy2015-as-enacted.yml) | appropriation | Medicaid Services (ODJFS) — FY2015, As Enacted | 6 | 41 |
+| [medicaid-services-recoveries-fy2014-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2014-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2014, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2015-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2015-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2015, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2016-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2016-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2016, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2017-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2017-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2017, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2018-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2018-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2018, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2019-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2019-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2019, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2020-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2020-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2020, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2021-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2021-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2021, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2022-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2022-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2022, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2023-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2023-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2023, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2024-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2024-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2024, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2025-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2025-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2025, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2026-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2026-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2026, As Enacted | 5 | 23 |
+| [medicaid-services-recoveries-fy2027-as-enacted.yml](.yidam/corpus/appropriation/medicaid-services-recoveries-fy2027-as-enacted.yml) | appropriation | Medicaid Services — Recoveries — FY2027, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2012-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2012-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2012, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2013-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2013-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2013, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2014-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2014-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2014, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2015-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2015-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2015, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2016-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2016-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2016, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2017-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2017-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2017, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2018-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2018-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2018, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2019-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2019-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2019, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2020-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2020-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2020, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2021-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2021-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2021, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2022-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2022-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2022, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2023-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2023-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2023, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2024-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2024-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2024, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2025-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2025-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2025, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2026-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2026-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2026, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-education-fy2027-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-education-fy2027-as-enacted.yml) | appropriation | Property Tax Reimbursement (Education) — FY2027, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2012-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2012-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2012, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2013-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2013-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2013, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2014-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2014-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2014, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2015-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2015-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2015, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2016-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2016-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2016, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2017-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2017-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2017, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2018-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2018-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2018, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2019-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2019-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2019, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2020-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2020-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2020, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2021-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2021-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2021, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2022-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2022-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2022, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2023-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2023-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2023, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2024-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2024-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2024, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2025-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2025-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2025, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2026-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2026-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2026, As Enacted | 5 | 23 |
+| [property-tax-rollback-reimbursement-fy2027-as-enacted.yml](.yidam/corpus/appropriation/property-tax-rollback-reimbursement-fy2027-as-enacted.yml) | appropriation | Property Tax Reimbursement (Local Government) — FY2027, As Enacted | 5 | 23 |
+| [public-library-fund-distribution-fy2010-11-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2010-11-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2010-11, As Enacted | 7 | 36 |
+| [public-library-fund-distribution-fy2012-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2012-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2012, As Enacted | 6 | 33 |
+| [public-library-fund-distribution-fy2013-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2013-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2013, As Enacted | 6 | 33 |
+| [public-library-fund-distribution-fy2014-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2014-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2014, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2015-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2015-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2015, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2016-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2016-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2016, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2017-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2017-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2017, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2018-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2018-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2018, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2019-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2019-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2019, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2020-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2020-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2020, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2021-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2021-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2021, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2022-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2022-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2022, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2023-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2023-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2023, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2024-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2024-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2024, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2025-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2025-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2025, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2026-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2026-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2026, As Enacted | 6 | 30 |
+| [public-library-fund-distribution-fy2027-as-enacted.yml](.yidam/corpus/appropriation/public-library-fund-distribution-fy2027-as-enacted.yml) | appropriation | Public Library Fund Distribution — FY2027, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2012-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2012-as-enacted.yml) | appropriation | Pupil Transportation — FY2012, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2013-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2013-as-enacted.yml) | appropriation | Pupil Transportation — FY2013, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2014-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2014-as-enacted.yml) | appropriation | Pupil Transportation — FY2014, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2015-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2015-as-enacted.yml) | appropriation | Pupil Transportation — FY2015, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2016-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2016-as-enacted.yml) | appropriation | Pupil Transportation — FY2016, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2017-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2017-as-enacted.yml) | appropriation | Pupil Transportation — FY2017, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2018-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2018-as-enacted.yml) | appropriation | Pupil Transportation — FY2018, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2019-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2019-as-enacted.yml) | appropriation | Pupil Transportation — FY2019, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2020-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2020-as-enacted.yml) | appropriation | Pupil Transportation — FY2020, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2021-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2021-as-enacted.yml) | appropriation | Pupil Transportation — FY2021, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2022-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2022-as-enacted.yml) | appropriation | Pupil Transportation — FY2022, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2023-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2023-as-enacted.yml) | appropriation | Pupil Transportation — FY2023, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2024-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2024-as-enacted.yml) | appropriation | Pupil Transportation — FY2024, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2025-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2025-as-enacted.yml) | appropriation | Pupil Transportation — FY2025, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2026-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2026-as-enacted.yml) | appropriation | Pupil Transportation — FY2026, As Enacted | 6 | 30 |
+| [pupil-transportation-fy2027-as-enacted.yml](.yidam/corpus/appropriation/pupil-transportation-fy2027-as-enacted.yml) | appropriation | Pupil Transportation — FY2027, As Enacted | 6 | 30 |
+| [special-education-fy2012-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2012-as-enacted.yml) | appropriation | Special Education Enhancements — FY2012, As Enacted | 6 | 30 |
+| [special-education-fy2013-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2013-as-enacted.yml) | appropriation | Special Education Enhancements — FY2013, As Enacted | 6 | 30 |
+| [special-education-fy2014-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2014-as-enacted.yml) | appropriation | Special Education Enhancements — FY2014, As Enacted | 6 | 30 |
+| [special-education-fy2015-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2015-as-enacted.yml) | appropriation | Special Education Enhancements — FY2015, As Enacted | 6 | 30 |
+| [special-education-fy2016-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2016-as-enacted.yml) | appropriation | Special Education Enhancements — FY2016, As Enacted | 6 | 30 |
+| [special-education-fy2017-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2017-as-enacted.yml) | appropriation | Special Education Enhancements — FY2017, As Enacted | 6 | 30 |
+| [special-education-fy2018-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2018-as-enacted.yml) | appropriation | Special Education Enhancements — FY2018, As Enacted | 6 | 30 |
+| [special-education-fy2019-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2019-as-enacted.yml) | appropriation | Special Education Enhancements — FY2019, As Enacted | 6 | 30 |
+| [special-education-fy2020-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2020-as-enacted.yml) | appropriation | Special Education Enhancements — FY2020, As Enacted | 6 | 30 |
+| [special-education-fy2021-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2021-as-enacted.yml) | appropriation | Special Education Enhancements — FY2021, As Enacted | 6 | 30 |
+| [special-education-fy2022-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2022-as-enacted.yml) | appropriation | Special Education Enhancements — FY2022, As Enacted | 6 | 30 |
+| [special-education-fy2023-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2023-as-enacted.yml) | appropriation | Special Education Enhancements — FY2023, As Enacted | 6 | 30 |
+| [special-education-fy2024-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2024-as-enacted.yml) | appropriation | Special Education Enhancements — FY2024, As Enacted | 6 | 30 |
+| [special-education-fy2025-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2025-as-enacted.yml) | appropriation | Special Education Enhancements — FY2025, As Enacted | 6 | 30 |
+| [special-education-fy2026-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2026-as-enacted.yml) | appropriation | Special Education Enhancements — FY2026, As Enacted | 6 | 30 |
+| [special-education-fy2027-as-enacted.yml](.yidam/corpus/appropriation/special-education-fy2027-as-enacted.yml) | appropriation | Special Education Enhancements — FY2027, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2012-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2012-as-enacted.yml) | appropriation | State Share of Instruction — FY2012, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2013-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2013-as-enacted.yml) | appropriation | State Share of Instruction — FY2013, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2014-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2014-as-enacted.yml) | appropriation | State Share of Instruction — FY2014, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2015-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2015-as-enacted.yml) | appropriation | State Share of Instruction — FY2015, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2016-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2016-as-enacted.yml) | appropriation | State Share of Instruction — FY2016, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2017-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2017-as-enacted.yml) | appropriation | State Share of Instruction — FY2017, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2018-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2018-as-enacted.yml) | appropriation | State Share of Instruction — FY2018, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2019-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2019-as-enacted.yml) | appropriation | State Share of Instruction — FY2019, As Enacted | 6 | 30 |
+| [state-share-of-instruction-fy2020-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2020-as-enacted.yml) | appropriation | State Share of Instruction — FY2020, As Enacted | 5 | 31 |
+| [state-share-of-instruction-fy2021-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2021-as-enacted.yml) | appropriation | State Share of Instruction — FY2021, As Enacted | 5 | 31 |
+| [state-share-of-instruction-fy2022-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2022-as-enacted.yml) | appropriation | State Share of Instruction — FY2022, As Enacted | 5 | 31 |
+| [state-share-of-instruction-fy2023-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2023-as-enacted.yml) | appropriation | State Share of Instruction — FY2023, As Enacted | 5 | 31 |
+| [state-share-of-instruction-fy2024-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2024-as-enacted.yml) | appropriation | State Share of Instruction — FY2024, As Enacted | 7 | 36 |
+| [state-share-of-instruction-fy2025-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2025-as-enacted.yml) | appropriation | State Share of Instruction — FY2025, As Enacted | 6 | 34 |
 | [state-share-of-instruction-fy2026-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2026-as-enacted.yml) | appropriation | State Share of Instruction — FY2026, As Enacted | 7 | 32 |
+| [state-share-of-instruction-fy2027-as-enacted.yml](.yidam/corpus/appropriation/state-share-of-instruction-fy2027-as-enacted.yml) | appropriation | State Share of Instruction — FY2027, As Enacted | 6 | 30 |
 | [hb1-128th.yml](.yidam/corpus/bill/hb1-128th.yml) | bill | House Bill 1 (128th General Assembly) | 3 | 29 |
 | [hb110-134th.yml](.yidam/corpus/bill/hb110-134th.yml) | bill | House Bill 110 (134th General Assembly) | 3 | 30 |
 | [hb153-129th.yml](.yidam/corpus/bill/hb153-129th.yml) | bill | House Bill 153 (129th General Assembly) | 3 | 31 |
@@ -117,61 +407,349 @@ Sorted by: kind, then alphabetically.
 | [hb1-as-enacted.yml](.yidam/corpus/bill-version/hb1-as-enacted.yml) | bill-version | HB 1 As Enacted | 3 | 24 |
 | [hb110-as-enacted.yml](.yidam/corpus/bill-version/hb110-as-enacted.yml) | bill-version | HB 110 As Enacted | 3 | 27 |
 | [hb110-as-introduced.yml](.yidam/corpus/bill-version/hb110-as-introduced.yml) | bill-version | HB 110 As Introduced | 3 | 27 |
+| [hb110-as-passed-house.yml](.yidam/corpus/bill-version/hb110-as-passed-house.yml) | bill-version | HB 110 As Passed By House | 5 | 28 |
+| [hb110-as-passed-senate.yml](.yidam/corpus/bill-version/hb110-as-passed-senate.yml) | bill-version | HB 110 As Passed By Senate | 5 | 28 |
+| [hb110-conference-report.yml](.yidam/corpus/bill-version/hb110-conference-report.yml) | bill-version | HB 110 Conference Report | 5 | 28 |
+| [hb110-house-reported.yml](.yidam/corpus/bill-version/hb110-house-reported.yml) | bill-version | HB 110 House Reported | 5 | 28 |
+| [hb110-house-substitute.yml](.yidam/corpus/bill-version/hb110-house-substitute.yml) | bill-version | HB 110 House Substitute | 5 | 31 |
+| [hb110-senate-reported.yml](.yidam/corpus/bill-version/hb110-senate-reported.yml) | bill-version | HB 110 Senate Reported | 5 | 28 |
+| [hb110-senate-substitute.yml](.yidam/corpus/bill-version/hb110-senate-substitute.yml) | bill-version | HB 110 Senate Substitute | 5 | 31 |
 | [hb153-as-enacted.yml](.yidam/corpus/bill-version/hb153-as-enacted.yml) | bill-version | HB 153 As Enacted | 3 | 29 |
 | [hb153-as-introduced.yml](.yidam/corpus/bill-version/hb153-as-introduced.yml) | bill-version | HB 153 As Introduced | 3 | 25 |
 | [hb166-as-enacted.yml](.yidam/corpus/bill-version/hb166-as-enacted.yml) | bill-version | HB 166 As Enacted | 3 | 35 |
-| [hb33-as-enacted.yml](.yidam/corpus/bill-version/hb33-as-enacted.yml) | bill-version | HB 33 As Enacted | 3 | 31 |
+| [hb166-as-introduced.yml](.yidam/corpus/bill-version/hb166-as-introduced.yml) | bill-version | HB 166 As Introduced | 4 | 26 |
+| [hb166-as-passed-house.yml](.yidam/corpus/bill-version/hb166-as-passed-house.yml) | bill-version | HB 166 As Passed By House | 5 | 28 |
+| [hb166-as-passed-senate.yml](.yidam/corpus/bill-version/hb166-as-passed-senate.yml) | bill-version | HB 166 As Passed By Senate | 5 | 28 |
+| [hb166-conference-report.yml](.yidam/corpus/bill-version/hb166-conference-report.yml) | bill-version | HB 166 Conference Report | 5 | 28 |
+| [hb166-house-reported.yml](.yidam/corpus/bill-version/hb166-house-reported.yml) | bill-version | HB 166 House Reported | 5 | 28 |
+| [hb166-house-substitute.yml](.yidam/corpus/bill-version/hb166-house-substitute.yml) | bill-version | HB 166 House Substitute | 5 | 31 |
+| [hb166-senate-reported.yml](.yidam/corpus/bill-version/hb166-senate-reported.yml) | bill-version | HB 166 Senate Reported | 5 | 28 |
+| [hb166-senate-substitute.yml](.yidam/corpus/bill-version/hb166-senate-substitute.yml) | bill-version | HB 166 Senate Substitute | 5 | 31 |
+| [hb33-as-enacted.yml](.yidam/corpus/bill-version/hb33-as-enacted.yml) | bill-version | HB 33 As Enacted | 4 | 49 |
+| [hb33-as-introduced.yml](.yidam/corpus/bill-version/hb33-as-introduced.yml) | bill-version | HB 33 As Introduced | 4 | 27 |
+| [hb33-as-passed-house.yml](.yidam/corpus/bill-version/hb33-as-passed-house.yml) | bill-version | HB 33 As Passed By House | 5 | 29 |
+| [hb33-as-passed-senate.yml](.yidam/corpus/bill-version/hb33-as-passed-senate.yml) | bill-version | HB 33 As Passed By Senate | 5 | 29 |
+| [hb33-conference-report.yml](.yidam/corpus/bill-version/hb33-conference-report.yml) | bill-version | HB 33 Conference Report | 5 | 29 |
+| [hb33-house-reported.yml](.yidam/corpus/bill-version/hb33-house-reported.yml) | bill-version | HB 33 House Reported | 5 | 29 |
+| [hb33-house-substitute.yml](.yidam/corpus/bill-version/hb33-house-substitute.yml) | bill-version | HB 33 House Substitute | 5 | 33 |
+| [hb33-senate-reported.yml](.yidam/corpus/bill-version/hb33-senate-reported.yml) | bill-version | HB 33 Senate Reported | 5 | 29 |
+| [hb33-senate-substitute.yml](.yidam/corpus/bill-version/hb33-senate-substitute.yml) | bill-version | HB 33 Senate Substitute | 5 | 33 |
 | [hb49-as-enacted.yml](.yidam/corpus/bill-version/hb49-as-enacted.yml) | bill-version | HB 49 As Enacted | 3 | 24 |
 | [hb54-as-enacted.yml](.yidam/corpus/bill-version/hb54-as-enacted.yml) | bill-version | HB 54 As Enacted | 3 | 28 |
 | [hb59-as-enacted.yml](.yidam/corpus/bill-version/hb59-as-enacted.yml) | bill-version | HB 59 As Enacted | 3 | 26 |
 | [hb64-as-enacted.yml](.yidam/corpus/bill-version/hb64-as-enacted.yml) | bill-version | HB 64 As Enacted | 3 | 24 |
-| [hb96-as-enacted.yml](.yidam/corpus/bill-version/hb96-as-enacted.yml) | bill-version | HB 96 As Enacted | 3 | 31 |
+| [hb96-as-enacted.yml](.yidam/corpus/bill-version/hb96-as-enacted.yml) | bill-version | HB 96 As Enacted | 3 | 33 |
 | [hb96-as-introduced.yml](.yidam/corpus/bill-version/hb96-as-introduced.yml) | bill-version | HB 96 As Introduced | 2 | 29 |
 | [hb96-as-passed-house.yml](.yidam/corpus/bill-version/hb96-as-passed-house.yml) | bill-version | HB 96 As Passed by the House | 4 | 33 |
-| [hb96-as-passed-senate.yml](.yidam/corpus/bill-version/hb96-as-passed-senate.yml) | bill-version | HB 96 As Passed by the Senate | 4 | 31 |
-| [hb96-conference-report.yml](.yidam/corpus/bill-version/hb96-conference-report.yml) | bill-version | HB 96 Conference Report | 4 | 33 |
+| [hb96-as-passed-senate.yml](.yidam/corpus/bill-version/hb96-as-passed-senate.yml) | bill-version | HB 96 As Passed by the Senate | 4 | 36 |
+| [hb96-conference-report.yml](.yidam/corpus/bill-version/hb96-conference-report.yml) | bill-version | HB 96 Conference Report | 4 | 36 |
 | [hb96-house-reported.yml](.yidam/corpus/bill-version/hb96-house-reported.yml) | bill-version | HB 96 House Reported | 4 | 27 |
-| [hb96-house-substitute.yml](.yidam/corpus/bill-version/hb96-house-substitute.yml) | bill-version | HB 96 House Substitute | 4 | 27 |
+| [hb96-house-substitute.yml](.yidam/corpus/bill-version/hb96-house-substitute.yml) | bill-version | HB 96 House Substitute | 4 | 32 |
 | [hb96-senate-reported.yml](.yidam/corpus/bill-version/hb96-senate-reported.yml) | bill-version | HB 96 Senate Reported | 4 | 27 |
-| [hb96-senate-substitute.yml](.yidam/corpus/bill-version/hb96-senate-substitute.yml) | bill-version | HB 96 Senate Substitute | 4 | 27 |
+| [hb96-senate-substitute.yml](.yidam/corpus/bill-version/hb96-senate-substitute.yml) | bill-version | HB 96 Senate Substitute | 4 | 32 |
 | [controlling-board-fy2024-medicaid-transfer.yml](.yidam/corpus/budget-action/controlling-board-fy2024-medicaid-transfer.yml) | budget-action | Controlling Board Transfer — Medicaid, FY2024 | 5 | 31 |
 | [controlling-board-medicaid-transfer.yml](.yidam/corpus/budget-action/controlling-board-medicaid-transfer.yml) | budget-action | Controlling Board Transfer — Medicaid | 5 | 45 |
 | [fy2020-executive-reduction.yml](.yidam/corpus/budget-action/fy2020-executive-reduction.yml) | budget-action | Executive Spending Reduction, FY2020 | 5 | 39 |
 | [hb110-fair-school-funding-enactment.yml](.yidam/corpus/budget-action/hb110-fair-school-funding-enactment.yml) | budget-action | Fair School Funding Plan Enactment, HB 110 | 4 | 37 |
 | [hb110-line-item-veto.yml](.yidam/corpus/budget-action/hb110-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 110 | 4 | 28 |
-| [hb153-local-government-fund-reduction.yml](.yidam/corpus/budget-action/hb153-local-government-fund-reduction.yml) | budget-action | Local Government Fund Share Reduction, HB 153 | 4 | 38 |
+| [hb153-local-government-fund-reduction.yml](.yidam/corpus/budget-action/hb153-local-government-fund-reduction.yml) | budget-action | Local Government Fund Share Reduction, HB 153 | 5 | 53 |
 | [hb153-tpp-reimbursement-acceleration.yml](.yidam/corpus/budget-action/hb153-tpp-reimbursement-acceleration.yml) | budget-action | Acceleration of Tangible Personal Property Reimbursement Phase-Out, HB 153 | 3 | 29 |
 | [hb166-line-item-veto.yml](.yidam/corpus/budget-action/hb166-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 166 | 4 | 27 |
-| [hb33-line-item-veto.yml](.yidam/corpus/budget-action/hb33-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 33 | 4 | 30 |
-| [hb59-medicaid-agency-transfer.yml](.yidam/corpus/budget-action/hb59-medicaid-agency-transfer.yml) | budget-action | Medicaid Transfer to a Separate Department, HB 59 | 4 | 30 |
-| [hb96-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-house-amendment-foundation-funding.yml) | budget-action | House Substitute Amendment to Foundation Funding, HB 96 | 5 | 44 |
-| [hb96-line-item-veto.yml](.yidam/corpus/budget-action/hb96-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 96 | 4 | 46 |
-| [hb96-senate-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-senate-amendment-foundation-funding.yml) | budget-action | Senate Substitute Amendment to Foundation Funding, HB 96 | 5 | 40 |
-| [foundation-funding-fy2020-21-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2020-21-actual.yml) | expenditure | Foundation Funding — FY2020-21 Actual | 4 | 28 |
-| [foundation-funding-fy2022-23-disbursed-cleveland.yml](.yidam/corpus/expenditure/foundation-funding-fy2022-23-disbursed-cleveland.yml) | expenditure | Foundation Funding Disbursement to Cleveland Metropolitan Schools — FY2022-23 | 5 | 33 |
+| [hb33-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb33-house-amendment-foundation-funding.yml) | budget-action | House Substitute Amendment to Foundation Funding, HB 33 | 6 | 51 |
+| [hb33-line-item-veto.yml](.yidam/corpus/budget-action/hb33-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 33 | 5 | 49 |
+| [hb33-senate-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb33-senate-amendment-foundation-funding.yml) | budget-action | Senate Substitute Amendment to Foundation Funding, HB 33 | 6 | 44 |
+| [hb59-medicaid-agency-transfer.yml](.yidam/corpus/budget-action/hb59-medicaid-agency-transfer.yml) | budget-action | Medicaid Transfer to a Separate Department, HB 59 | 6 | 40 |
+| [hb96-house-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-house-amendment-foundation-funding.yml) | budget-action | House Substitute Amendment to Foundation Funding, HB 96 | 6 | 70 |
+| [hb96-line-item-veto.yml](.yidam/corpus/budget-action/hb96-line-item-veto.yml) | budget-action | Line-Item Vetoes, HB 96 | 6 | 121 |
+| [hb96-senate-amendment-foundation-funding.yml](.yidam/corpus/budget-action/hb96-senate-amendment-foundation-funding.yml) | budget-action | Senate Substitute Amendment to Foundation Funding, HB 96 | 6 | 71 |
+| [hb96-veto-override-item-66.yml](.yidam/corpus/budget-action/hb96-veto-override-item-66.yml) | budget-action | Veto Override, Item 66, HB 96 | 5 | 65 |
+| [community-schools-funding-fy2010-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2010-actual.yml) | expenditure | Community Schools and Choice Programs — FY2010, Actual | 4 | 25 |
+| [community-schools-funding-fy2012-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2012-actual.yml) | expenditure | Community Schools and Choice Programs — FY2012, Actual | 4 | 25 |
+| [community-schools-funding-fy2013-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2013-actual.yml) | expenditure | Community Schools and Choice Programs — FY2013, Actual | 4 | 25 |
+| [community-schools-funding-fy2014-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2014-actual.yml) | expenditure | Community Schools and Choice Programs — FY2014, Actual | 4 | 25 |
+| [community-schools-funding-fy2015-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2015-actual.yml) | expenditure | Community Schools and Choice Programs — FY2015, Actual | 4 | 25 |
+| [community-schools-funding-fy2016-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2016-actual.yml) | expenditure | Community Schools and Choice Programs — FY2016, Actual | 4 | 25 |
+| [community-schools-funding-fy2017-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2017-actual.yml) | expenditure | Community Schools and Choice Programs — FY2017, Actual | 4 | 25 |
+| [community-schools-funding-fy2018-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2018-actual.yml) | expenditure | Community Schools and Choice Programs — FY2018, Actual | 4 | 25 |
+| [community-schools-funding-fy2019-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2019-actual.yml) | expenditure | Community Schools and Choice Programs — FY2019, Actual | 4 | 25 |
+| [community-schools-funding-fy2020-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2020-actual.yml) | expenditure | Community Schools and Choice Programs — FY2020, Actual | 4 | 25 |
+| [community-schools-funding-fy2021-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2021-actual.yml) | expenditure | Community Schools and Choice Programs — FY2021, Actual | 4 | 25 |
+| [community-schools-funding-fy2022-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2022-actual.yml) | expenditure | Community Schools and Choice Programs — FY2022, Actual | 4 | 25 |
+| [community-schools-funding-fy2023-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2023-actual.yml) | expenditure | Community Schools and Choice Programs — FY2023, Actual | 4 | 25 |
+| [community-schools-funding-fy2024-actual.yml](.yidam/corpus/expenditure/community-schools-funding-fy2024-actual.yml) | expenditure | Community Schools and Choice Programs — FY2024, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2010-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2010-actual.yml) | expenditure | Disability Financial Assistance — FY2010, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2012-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2012-actual.yml) | expenditure | Disability Financial Assistance — FY2012, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2013-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2013-actual.yml) | expenditure | Disability Financial Assistance — FY2013, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2014-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2014-actual.yml) | expenditure | Disability Financial Assistance — FY2014, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2015-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2015-actual.yml) | expenditure | Disability Financial Assistance — FY2015, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2016-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2016-actual.yml) | expenditure | Disability Financial Assistance — FY2016, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2017-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2017-actual.yml) | expenditure | Disability Financial Assistance — FY2017, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2018-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2018-actual.yml) | expenditure | Disability Financial Assistance — FY2018, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2019-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2019-actual.yml) | expenditure | Disability Financial Assistance — FY2019, Actual | 4 | 25 |
+| [disability-financial-assistance-fy2020-actual.yml](.yidam/corpus/expenditure/disability-financial-assistance-fy2020-actual.yml) | expenditure | Disability Financial Assistance — FY2020, Actual | 4 | 25 |
+| [early-childhood-education-fy2010-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2010-actual.yml) | expenditure | Early Childhood Education — FY2010, Actual | 4 | 25 |
+| [early-childhood-education-fy2012-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2012-actual.yml) | expenditure | Early Childhood Education — FY2012, Actual | 4 | 25 |
+| [early-childhood-education-fy2013-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2013-actual.yml) | expenditure | Early Childhood Education — FY2013, Actual | 4 | 25 |
+| [early-childhood-education-fy2014-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2014-actual.yml) | expenditure | Early Childhood Education — FY2014, Actual | 4 | 25 |
+| [early-childhood-education-fy2015-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2015-actual.yml) | expenditure | Early Childhood Education — FY2015, Actual | 4 | 25 |
+| [early-childhood-education-fy2016-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2016-actual.yml) | expenditure | Early Childhood Education — FY2016, Actual | 4 | 25 |
+| [early-childhood-education-fy2017-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2017-actual.yml) | expenditure | Early Childhood Education — FY2017, Actual | 4 | 25 |
+| [early-childhood-education-fy2018-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2018-actual.yml) | expenditure | Early Childhood Education — FY2018, Actual | 4 | 25 |
+| [early-childhood-education-fy2019-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2019-actual.yml) | expenditure | Early Childhood Education — FY2019, Actual | 4 | 25 |
+| [early-childhood-education-fy2020-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2020-actual.yml) | expenditure | Early Childhood Education — FY2020, Actual | 4 | 25 |
+| [early-childhood-education-fy2021-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2021-actual.yml) | expenditure | Early Childhood Education — FY2021, Actual | 4 | 25 |
+| [early-childhood-education-fy2022-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2022-actual.yml) | expenditure | Early Childhood Education — FY2022, Actual | 4 | 25 |
+| [early-childhood-education-fy2023-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2023-actual.yml) | expenditure | Early Childhood Education — FY2023, Actual | 4 | 25 |
+| [early-childhood-education-fy2024-actual.yml](.yidam/corpus/expenditure/early-childhood-education-fy2024-actual.yml) | expenditure | Early Childhood Education — FY2024, Actual | 4 | 25 |
+| [early-childhood-education-kid-fy2022-actual.yml](.yidam/corpus/expenditure/early-childhood-education-kid-fy2022-actual.yml) | expenditure | Early Childhood Education (Children and Youth) — FY2022, Actual | 4 | 25 |
+| [early-childhood-education-kid-fy2023-actual.yml](.yidam/corpus/expenditure/early-childhood-education-kid-fy2023-actual.yml) | expenditure | Early Childhood Education (Children and Youth) — FY2023, Actual | 4 | 25 |
+| [early-childhood-education-kid-fy2024-actual.yml](.yidam/corpus/expenditure/early-childhood-education-kid-fy2024-actual.yml) | expenditure | Early Childhood Education (Children and Youth) — FY2024, Actual | 4 | 27 |
+| [foundation-funding-dpf-fy2018-actual.yml](.yidam/corpus/expenditure/foundation-funding-dpf-fy2018-actual.yml) | expenditure | Foundation Funding (5VS0) — FY2018, Actual | 4 | 25 |
+| [foundation-funding-dpf-fy2019-actual.yml](.yidam/corpus/expenditure/foundation-funding-dpf-fy2019-actual.yml) | expenditure | Foundation Funding (5VS0) — FY2019, Actual | 4 | 25 |
+| [foundation-funding-dpf-fy2020-actual.yml](.yidam/corpus/expenditure/foundation-funding-dpf-fy2020-actual.yml) | expenditure | Foundation Funding (5VS0) — FY2020, Actual | 4 | 25 |
+| [foundation-funding-dpf-fy2021-actual.yml](.yidam/corpus/expenditure/foundation-funding-dpf-fy2021-actual.yml) | expenditure | Foundation Funding (5VS0) — FY2021, Actual | 4 | 25 |
+| [foundation-funding-dpf-fy2022-actual.yml](.yidam/corpus/expenditure/foundation-funding-dpf-fy2022-actual.yml) | expenditure | Foundation Funding (5VS0) — FY2022, Actual | 4 | 25 |
+| [foundation-funding-dpf-fy2023-actual.yml](.yidam/corpus/expenditure/foundation-funding-dpf-fy2023-actual.yml) | expenditure | Foundation Funding (5VS0) — FY2023, Actual | 4 | 25 |
+| [foundation-funding-dpf-fy2024-actual.yml](.yidam/corpus/expenditure/foundation-funding-dpf-fy2024-actual.yml) | expenditure | Foundation Funding (5VS0) — FY2024, Actual | 4 | 32 |
+| [foundation-funding-fy2010-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2010-actual.yml) | expenditure | Foundation Funding — FY2010, Actual | 4 | 25 |
+| [foundation-funding-fy2012-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2012-actual.yml) | expenditure | Foundation Funding — FY2012, Actual | 4 | 25 |
+| [foundation-funding-fy2013-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2013-actual.yml) | expenditure | Foundation Funding — FY2013, Actual | 4 | 25 |
+| [foundation-funding-fy2014-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2014-actual.yml) | expenditure | Foundation Funding — FY2014, Actual | 4 | 25 |
+| [foundation-funding-fy2015-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2015-actual.yml) | expenditure | Foundation Funding — FY2015, Actual | 4 | 25 |
+| [foundation-funding-fy2016-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2016-actual.yml) | expenditure | Foundation Funding — FY2016, Actual | 4 | 25 |
+| [foundation-funding-fy2017-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2017-actual.yml) | expenditure | Foundation Funding — FY2017, Actual | 4 | 25 |
+| [foundation-funding-fy2018-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2018-actual.yml) | expenditure | Foundation Funding — FY2018, Actual | 4 | 25 |
+| [foundation-funding-fy2019-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2019-actual.yml) | expenditure | Foundation Funding — FY2019, Actual | 4 | 25 |
+| [foundation-funding-fy2020-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2020-actual.yml) | expenditure | Foundation Funding — FY2020, Actual | 4 | 22 |
+| [foundation-funding-fy2021-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2021-actual.yml) | expenditure | Foundation Funding — FY2021, Actual | 4 | 26 |
+| [foundation-funding-fy2022-23-disbursed-cleveland.yml](.yidam/corpus/expenditure/foundation-funding-fy2022-23-disbursed-cleveland.yml) | expenditure | Foundation Funding Disbursement to Cleveland Metropolitan Schools — FY2022-23 | 5 | 37 |
+| [foundation-funding-fy2022-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2022-actual.yml) | expenditure | Foundation Funding — FY2022, Actual | 4 | 26 |
+| [foundation-funding-fy2023-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2023-actual.yml) | expenditure | Foundation Funding — FY2023, Actual | 4 | 26 |
 | [foundation-funding-fy2024-actual.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-actual.yml) | expenditure | Foundation Funding — FY2024 Actual | 4 | 38 |
-| [foundation-funding-fy2024-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-disbursed.yml) | expenditure | Foundation Funding Disbursement to Columbus City Schools — FY2024-25 | 5 | 45 |
+| [foundation-funding-fy2024-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2024-disbursed.yml) | expenditure | Foundation Funding Disbursement to Columbus City Schools — FY2024 | 5 | 50 |
 | [foundation-funding-fy2026-disbursed.yml](.yidam/corpus/expenditure/foundation-funding-fy2026-disbursed.yml) | expenditure | Foundation Funding — FY2026 Disbursed | 4 | 28 |
-| [institutional-operations-fy2020-21-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2020-21-actual.yml) | expenditure | Institutional Operations — FY2020-21 Actual | 5 | 29 |
-| [institutional-operations-fy2024-25-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2024-25-actual.yml) | expenditure | Institutional Operations — FY2024-25 Actual | 5 | 33 |
-| [local-government-fund-fy2010-11-disbursed-cuyahoga.yml](.yidam/corpus/expenditure/local-government-fund-fy2010-11-disbursed-cuyahoga.yml) | expenditure | Local Government Fund Disbursement to Cuyahoga County — FY2010-11 | 5 | 28 |
-| [local-government-fund-fy2012-13-disbursed-cuyahoga.yml](.yidam/corpus/expenditure/local-government-fund-fy2012-13-disbursed-cuyahoga.yml) | expenditure | Local Government Fund Disbursement to Cuyahoga County — FY2012-13 | 5 | 33 |
-| [medicaid-health-care-services-fy2020-21-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2020-21-actual.yml) | expenditure | Medicaid Health Care Services — FY2020-21 Actual | 4 | 26 |
-| [medicaid-health-care-services-fy2024-25-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2024-25-actual.yml) | expenditure | Medicaid Health Care Services — FY2024-25 Actual | 4 | 27 |
-| [public-library-fund-fy2012-13-disbursed-columbus.yml](.yidam/corpus/expenditure/public-library-fund-fy2012-13-disbursed-columbus.yml) | expenditure | Public Library Fund Disbursement to Columbus Metropolitan Library — FY2012-13 | 5 | 28 |
-| [state-share-of-instruction-fy2024-25-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2024-25-actual.yml) | expenditure | State Share of Instruction — FY2024-25 Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2010-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2010-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2010, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2012-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2012-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2012, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2013-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2013-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2013, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2014-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2014-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2014, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2015-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2015-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2015, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2016-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2016-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2016, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2017-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2017-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2017, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2018-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2018-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2018, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2019-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2019-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2019, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2020-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2020-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2020, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2021-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2021-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2021, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2022-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2022-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2022, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2023-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2023-actual.yml) | expenditure | Foundation Funding (Lottery) — FY2023, Actual | 4 | 25 |
+| [foundation-funding-lottery-fy2024-actual.yml](.yidam/corpus/expenditure/foundation-funding-lottery-fy2024-actual.yml) | expenditure | Foundation Funding (7017) — FY2024, Actual | 4 | 32 |
+| [highway-patrol-operations-fy2022-actual.yml](.yidam/corpus/expenditure/highway-patrol-operations-fy2022-actual.yml) | expenditure | Highway Patrol Operations — FY2022, Actual | 4 | 25 |
+| [highway-patrol-operations-fy2023-actual.yml](.yidam/corpus/expenditure/highway-patrol-operations-fy2023-actual.yml) | expenditure | Highway Patrol Operations — FY2023, Actual | 4 | 25 |
+| [highway-patrol-operations-fy2024-actual.yml](.yidam/corpus/expenditure/highway-patrol-operations-fy2024-actual.yml) | expenditure | Highway Patrol Operations — FY2024, Actual | 4 | 25 |
+| [institutional-operations-fy2010-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2010-actual.yml) | expenditure | Institutional Operations — FY2010, Actual | 4 | 25 |
+| [institutional-operations-fy2012-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2012-actual.yml) | expenditure | Institutional Operations — FY2012, Actual | 4 | 25 |
+| [institutional-operations-fy2013-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2013-actual.yml) | expenditure | Institutional Operations — FY2013, Actual | 4 | 25 |
+| [institutional-operations-fy2014-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2014-actual.yml) | expenditure | Institutional Operations — FY2014, Actual | 4 | 25 |
+| [institutional-operations-fy2015-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2015-actual.yml) | expenditure | Institutional Operations — FY2015, Actual | 4 | 25 |
+| [institutional-operations-fy2016-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2016-actual.yml) | expenditure | Institutional Operations — FY2016, Actual | 4 | 25 |
+| [institutional-operations-fy2017-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2017-actual.yml) | expenditure | Institutional Operations — FY2017, Actual | 4 | 25 |
+| [institutional-operations-fy2018-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2018-actual.yml) | expenditure | Institutional Operations — FY2018, Actual | 4 | 25 |
+| [institutional-operations-fy2019-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2019-actual.yml) | expenditure | Institutional Operations — FY2019, Actual | 4 | 25 |
+| [institutional-operations-fy2020-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2020-actual.yml) | expenditure | Institutional Operations — FY2020, Actual | 4 | 22 |
+| [institutional-operations-fy2021-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2021-actual.yml) | expenditure | Institutional Operations — FY2021, Actual | 4 | 26 |
+| [institutional-operations-fy2022-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2022-actual.yml) | expenditure | Institutional Operations — FY2022, Actual | 4 | 26 |
+| [institutional-operations-fy2023-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2023-actual.yml) | expenditure | Institutional Operations — FY2023, Actual | 4 | 26 |
+| [institutional-operations-fy2024-actual.yml](.yidam/corpus/expenditure/institutional-operations-fy2024-actual.yml) | expenditure | Institutional Operations — FY2024, Actual | 4 | 27 |
+| [local-government-fund-distribution-fy2010-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2010-actual.yml) | expenditure | Local Government Fund Distribution — FY2010, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2012-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2012-actual.yml) | expenditure | Local Government Fund Distribution — FY2012, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2013-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2013-actual.yml) | expenditure | Local Government Fund Distribution — FY2013, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2014-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2014-actual.yml) | expenditure | Local Government Fund Distribution — FY2014, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2015-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2015-actual.yml) | expenditure | Local Government Fund Distribution — FY2015, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2016-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2016-actual.yml) | expenditure | Local Government Fund Distribution — FY2016, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2017-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2017-actual.yml) | expenditure | Local Government Fund Distribution — FY2017, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2018-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2018-actual.yml) | expenditure | Local Government Fund Distribution — FY2018, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2019-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2019-actual.yml) | expenditure | Local Government Fund Distribution — FY2019, Actual | 4 | 25 |
+| [local-government-fund-distribution-fy2020-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2020-actual.yml) | expenditure | Local Government Fund Distribution — FY2020, Actual | 4 | 22 |
+| [local-government-fund-distribution-fy2021-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2021-actual.yml) | expenditure | Local Government Fund Distribution — FY2021, Actual | 4 | 26 |
+| [local-government-fund-distribution-fy2022-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2022-actual.yml) | expenditure | Local Government Fund Distribution — FY2022, Actual | 4 | 26 |
+| [local-government-fund-distribution-fy2023-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2023-actual.yml) | expenditure | Local Government Fund Distribution — FY2023, Actual | 4 | 26 |
+| [local-government-fund-distribution-fy2024-actual.yml](.yidam/corpus/expenditure/local-government-fund-distribution-fy2024-actual.yml) | expenditure | Local Government Fund Distribution — FY2024, Actual | 4 | 27 |
+| [local-government-fund-fy2010-11-disbursed-cuyahoga.yml](.yidam/corpus/expenditure/local-government-fund-fy2010-11-disbursed-cuyahoga.yml) | expenditure | Local Government Fund Disbursement to Cuyahoga County — FY2010-11 | 5 | 32 |
+| [local-government-fund-fy2012-13-disbursed-cuyahoga.yml](.yidam/corpus/expenditure/local-government-fund-fy2012-13-disbursed-cuyahoga.yml) | expenditure | Local Government Fund Disbursement to Cuyahoga County — FY2012-13 | 5 | 37 |
+| [medicaid-health-care-services-federal-fy2012-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2012-actual.yml) | expenditure | Medicaid Services — Federal — FY2012, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2013-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2013-actual.yml) | expenditure | Medicaid Services — Federal — FY2013, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2014-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2014-actual.yml) | expenditure | Medicaid Services — Federal — FY2014, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2015-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2015-actual.yml) | expenditure | Medicaid Services — Federal — FY2015, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2016-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2016-actual.yml) | expenditure | Medicaid Services — Federal — FY2016, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2017-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2017-actual.yml) | expenditure | Medicaid Services — Federal — FY2017, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2018-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2018-actual.yml) | expenditure | Medicaid Services — Federal — FY2018, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2019-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2019-actual.yml) | expenditure | Medicaid Services — Federal — FY2019, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2020-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2020-actual.yml) | expenditure | Medicaid Services — Federal — FY2020, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2021-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2021-actual.yml) | expenditure | Medicaid Services — Federal — FY2021, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2022-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2022-actual.yml) | expenditure | Medicaid Services — Federal — FY2022, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2023-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2023-actual.yml) | expenditure | Medicaid Services — Federal — FY2023, Actual | 4 | 25 |
+| [medicaid-health-care-services-federal-fy2024-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-federal-fy2024-actual.yml) | expenditure | Medicaid Services — Federal — FY2024, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2012-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2012-actual.yml) | expenditure | Medicaid Health Care Services — FY2012, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2013-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2013-actual.yml) | expenditure | Medicaid Health Care Services — FY2013, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2014-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2014-actual.yml) | expenditure | Medicaid Health Care Services — FY2014, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2015-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2015-actual.yml) | expenditure | Medicaid Health Care Services — FY2015, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2016-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2016-actual.yml) | expenditure | Medicaid Health Care Services — FY2016, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2017-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2017-actual.yml) | expenditure | Medicaid Health Care Services — FY2017, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2018-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2018-actual.yml) | expenditure | Medicaid Health Care Services — FY2018, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2019-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2019-actual.yml) | expenditure | Medicaid Health Care Services — FY2019, Actual | 4 | 25 |
+| [medicaid-health-care-services-fy2020-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2020-actual.yml) | expenditure | Medicaid Health Care Services — FY2020, Actual | 4 | 34 |
+| [medicaid-health-care-services-fy2021-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2021-actual.yml) | expenditure | Medicaid Health Care Services — FY2021, Actual | 4 | 26 |
+| [medicaid-health-care-services-fy2022-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2022-actual.yml) | expenditure | Medicaid Health Care Services — FY2022, Actual | 4 | 26 |
+| [medicaid-health-care-services-fy2023-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2023-actual.yml) | expenditure | Medicaid Health Care Services — FY2023, Actual | 4 | 26 |
+| [medicaid-health-care-services-fy2024-actual.yml](.yidam/corpus/expenditure/medicaid-health-care-services-fy2024-actual.yml) | expenditure | Medicaid Health Care Services — FY2024, Actual | 4 | 27 |
+| [medicaid-services-hic-fee-fy2016-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2016-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2016, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2017-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2017-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2017, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2018-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2018-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2018, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2019-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2019-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2019, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2020-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2020-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2020, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2021-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2021-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2021, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2022-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2022-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2022, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2023-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2023-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2023, Actual | 4 | 20 |
+| [medicaid-services-hic-fee-fy2024-actual.yml](.yidam/corpus/expenditure/medicaid-services-hic-fee-fy2024-actual.yml) | expenditure | Medicaid Services — HIC Fee — FY2024, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2012-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2012-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2012, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2013-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2013-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2013, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2014-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2014-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2014, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2015-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2015-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2015, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2016-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2016-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2016, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2017-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2017-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2017, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2018-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2018-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2018, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2019-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2019-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2019, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2020-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2020-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2020, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2021-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2021-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2021, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2022-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2022-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2022, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2023-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2023-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2023, Actual | 4 | 20 |
+| [medicaid-services-hospital-franchise-fee-fy2024-actual.yml](.yidam/corpus/expenditure/medicaid-services-hospital-franchise-fee-fy2024-actual.yml) | expenditure | Medicaid Services — Hospital Franchise Fee — FY2024, Actual | 4 | 20 |
+| [medicaid-services-odjfs-fy2010-actual.yml](.yidam/corpus/expenditure/medicaid-services-odjfs-fy2010-actual.yml) | expenditure | Medicaid Services (ODJFS) — FY2010, Actual | 4 | 25 |
+| [medicaid-services-odjfs-fy2012-actual.yml](.yidam/corpus/expenditure/medicaid-services-odjfs-fy2012-actual.yml) | expenditure | Medicaid Services (ODJFS) — FY2012, Actual | 4 | 25 |
+| [medicaid-services-odjfs-fy2013-actual.yml](.yidam/corpus/expenditure/medicaid-services-odjfs-fy2013-actual.yml) | expenditure | Medicaid Services (ODJFS) — FY2013, Actual | 4 | 25 |
+| [medicaid-services-recoveries-fy2012-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2012-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2012, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2013-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2013-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2013, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2014-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2014-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2014, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2015-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2015-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2015, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2016-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2016-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2016, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2017-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2017-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2017, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2018-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2018-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2018, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2019-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2019-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2019, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2020-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2020-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2020, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2021-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2021-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2021, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2022-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2022-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2022, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2023-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2023-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2023, Actual | 4 | 20 |
+| [medicaid-services-recoveries-fy2024-actual.yml](.yidam/corpus/expenditure/medicaid-services-recoveries-fy2024-actual.yml) | expenditure | Medicaid Services — Recoveries — FY2024, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2010-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2010-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2010, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2012-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2012-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2012, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2013-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2013-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2013, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2014-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2014-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2014, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2015-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2015-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2015, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2016-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2016-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2016, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2017-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2017-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2017, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2018-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2018-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2018, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2019-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2019-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2019, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2020-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2020-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2020, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2021-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2021-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2021, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2022-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2022-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2022, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2023-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2023-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2023, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-education-fy2024-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-education-fy2024-actual.yml) | expenditure | Property Tax Reimbursement (Education) — FY2024, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2010-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2010-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2010, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2012-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2012-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2012, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2013-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2013-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2013, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2014-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2014-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2014, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2015-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2015-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2015, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2016-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2016-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2016, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2017-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2017-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2017, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2018-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2018-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2018, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2019-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2019-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2019, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2020-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2020-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2020, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2021-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2021-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2021, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2022-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2022-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2022, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2023-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2023-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2023, Actual | 4 | 20 |
+| [property-tax-rollback-reimbursement-fy2024-actual.yml](.yidam/corpus/expenditure/property-tax-rollback-reimbursement-fy2024-actual.yml) | expenditure | Property Tax Reimbursement (Local Government) — FY2024, Actual | 4 | 20 |
+| [public-library-fund-distribution-fy2010-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2010-actual.yml) | expenditure | Public Library Fund Distribution — FY2010, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2012-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2012-actual.yml) | expenditure | Public Library Fund Distribution — FY2012, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2013-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2013-actual.yml) | expenditure | Public Library Fund Distribution — FY2013, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2014-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2014-actual.yml) | expenditure | Public Library Fund Distribution — FY2014, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2015-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2015-actual.yml) | expenditure | Public Library Fund Distribution — FY2015, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2016-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2016-actual.yml) | expenditure | Public Library Fund Distribution — FY2016, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2017-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2017-actual.yml) | expenditure | Public Library Fund Distribution — FY2017, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2018-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2018-actual.yml) | expenditure | Public Library Fund Distribution — FY2018, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2019-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2019-actual.yml) | expenditure | Public Library Fund Distribution — FY2019, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2020-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2020-actual.yml) | expenditure | Public Library Fund Distribution — FY2020, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2021-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2021-actual.yml) | expenditure | Public Library Fund Distribution — FY2021, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2022-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2022-actual.yml) | expenditure | Public Library Fund Distribution — FY2022, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2023-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2023-actual.yml) | expenditure | Public Library Fund Distribution — FY2023, Actual | 4 | 25 |
+| [public-library-fund-distribution-fy2024-actual.yml](.yidam/corpus/expenditure/public-library-fund-distribution-fy2024-actual.yml) | expenditure | Public Library Fund Distribution — FY2024, Actual | 4 | 25 |
+| [public-library-fund-fy2012-13-disbursed-columbus.yml](.yidam/corpus/expenditure/public-library-fund-fy2012-13-disbursed-columbus.yml) | expenditure | Public Library Fund Disbursement to Columbus Metropolitan Library — FY2012-13 | 5 | 32 |
+| [pupil-transportation-fy2010-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2010-actual.yml) | expenditure | Pupil Transportation — FY2010, Actual | 4 | 25 |
+| [pupil-transportation-fy2012-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2012-actual.yml) | expenditure | Pupil Transportation — FY2012, Actual | 4 | 25 |
+| [pupil-transportation-fy2013-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2013-actual.yml) | expenditure | Pupil Transportation — FY2013, Actual | 4 | 25 |
+| [pupil-transportation-fy2014-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2014-actual.yml) | expenditure | Pupil Transportation — FY2014, Actual | 4 | 25 |
+| [pupil-transportation-fy2015-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2015-actual.yml) | expenditure | Pupil Transportation — FY2015, Actual | 4 | 25 |
+| [pupil-transportation-fy2016-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2016-actual.yml) | expenditure | Pupil Transportation — FY2016, Actual | 4 | 25 |
+| [pupil-transportation-fy2017-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2017-actual.yml) | expenditure | Pupil Transportation — FY2017, Actual | 4 | 25 |
+| [pupil-transportation-fy2018-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2018-actual.yml) | expenditure | Pupil Transportation — FY2018, Actual | 4 | 25 |
+| [pupil-transportation-fy2019-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2019-actual.yml) | expenditure | Pupil Transportation — FY2019, Actual | 4 | 25 |
+| [pupil-transportation-fy2020-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2020-actual.yml) | expenditure | Pupil Transportation — FY2020, Actual | 4 | 25 |
+| [pupil-transportation-fy2021-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2021-actual.yml) | expenditure | Pupil Transportation — FY2021, Actual | 4 | 25 |
+| [pupil-transportation-fy2022-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2022-actual.yml) | expenditure | Pupil Transportation — FY2022, Actual | 4 | 25 |
+| [pupil-transportation-fy2023-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2023-actual.yml) | expenditure | Pupil Transportation — FY2023, Actual | 4 | 25 |
+| [pupil-transportation-fy2024-actual.yml](.yidam/corpus/expenditure/pupil-transportation-fy2024-actual.yml) | expenditure | Pupil Transportation — FY2024, Actual | 4 | 25 |
+| [special-education-fy2010-actual.yml](.yidam/corpus/expenditure/special-education-fy2010-actual.yml) | expenditure | Special Education Enhancements — FY2010, Actual | 4 | 25 |
+| [special-education-fy2012-actual.yml](.yidam/corpus/expenditure/special-education-fy2012-actual.yml) | expenditure | Special Education Enhancements — FY2012, Actual | 4 | 25 |
+| [special-education-fy2013-actual.yml](.yidam/corpus/expenditure/special-education-fy2013-actual.yml) | expenditure | Special Education Enhancements — FY2013, Actual | 4 | 25 |
+| [special-education-fy2014-actual.yml](.yidam/corpus/expenditure/special-education-fy2014-actual.yml) | expenditure | Special Education Enhancements — FY2014, Actual | 4 | 25 |
+| [special-education-fy2015-actual.yml](.yidam/corpus/expenditure/special-education-fy2015-actual.yml) | expenditure | Special Education Enhancements — FY2015, Actual | 4 | 25 |
+| [special-education-fy2016-actual.yml](.yidam/corpus/expenditure/special-education-fy2016-actual.yml) | expenditure | Special Education Enhancements — FY2016, Actual | 4 | 25 |
+| [special-education-fy2017-actual.yml](.yidam/corpus/expenditure/special-education-fy2017-actual.yml) | expenditure | Special Education Enhancements — FY2017, Actual | 4 | 25 |
+| [special-education-fy2018-actual.yml](.yidam/corpus/expenditure/special-education-fy2018-actual.yml) | expenditure | Special Education Enhancements — FY2018, Actual | 4 | 25 |
+| [special-education-fy2019-actual.yml](.yidam/corpus/expenditure/special-education-fy2019-actual.yml) | expenditure | Special Education Enhancements — FY2019, Actual | 4 | 25 |
+| [special-education-fy2020-actual.yml](.yidam/corpus/expenditure/special-education-fy2020-actual.yml) | expenditure | Special Education Enhancements — FY2020, Actual | 4 | 25 |
+| [special-education-fy2021-actual.yml](.yidam/corpus/expenditure/special-education-fy2021-actual.yml) | expenditure | Special Education Enhancements — FY2021, Actual | 4 | 25 |
+| [special-education-fy2022-actual.yml](.yidam/corpus/expenditure/special-education-fy2022-actual.yml) | expenditure | Special Education Enhancements — FY2022, Actual | 4 | 25 |
+| [special-education-fy2023-actual.yml](.yidam/corpus/expenditure/special-education-fy2023-actual.yml) | expenditure | Special Education Enhancements — FY2023, Actual | 4 | 25 |
+| [special-education-fy2024-actual.yml](.yidam/corpus/expenditure/special-education-fy2024-actual.yml) | expenditure | Special Education Enhancements — FY2024, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2010-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2010-actual.yml) | expenditure | State Share of Instruction — FY2010, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2012-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2012-actual.yml) | expenditure | State Share of Instruction — FY2012, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2013-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2013-actual.yml) | expenditure | State Share of Instruction — FY2013, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2014-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2014-actual.yml) | expenditure | State Share of Instruction — FY2014, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2015-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2015-actual.yml) | expenditure | State Share of Instruction — FY2015, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2016-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2016-actual.yml) | expenditure | State Share of Instruction — FY2016, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2017-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2017-actual.yml) | expenditure | State Share of Instruction — FY2017, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2018-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2018-actual.yml) | expenditure | State Share of Instruction — FY2018, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2019-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2019-actual.yml) | expenditure | State Share of Instruction — FY2019, Actual | 4 | 25 |
+| [state-share-of-instruction-fy2020-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2020-actual.yml) | expenditure | State Share of Instruction — FY2020, Actual | 4 | 26 |
+| [state-share-of-instruction-fy2021-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2021-actual.yml) | expenditure | State Share of Instruction — FY2021, Actual | 4 | 26 |
+| [state-share-of-instruction-fy2022-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2022-actual.yml) | expenditure | State Share of Instruction — FY2022, Actual | 4 | 26 |
+| [state-share-of-instruction-fy2023-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2023-actual.yml) | expenditure | State Share of Instruction — FY2023, Actual | 4 | 26 |
+| [state-share-of-instruction-fy2024-actual.yml](.yidam/corpus/expenditure/state-share-of-instruction-fy2024-actual.yml) | expenditure | State Share of Instruction — FY2024, Actual | 4 | 27 |
 | [fy2010-11.yml](.yidam/corpus/fiscal-period/fy2010-11.yml) | fiscal-period | FY2010-11 Biennium | 2 | 19 |
+| [fy2010.yml](.yidam/corpus/fiscal-period/fy2010.yml) | fiscal-period | Fiscal Year 2010 | 3 | 30 |
 | [fy2012-13.yml](.yidam/corpus/fiscal-period/fy2012-13.yml) | fiscal-period | FY2012-13 Biennium | 2 | 22 |
+| [fy2012.yml](.yidam/corpus/fiscal-period/fy2012.yml) | fiscal-period | Fiscal Year 2012 | 2 | 26 |
+| [fy2013.yml](.yidam/corpus/fiscal-period/fy2013.yml) | fiscal-period | Fiscal Year 2013 | 2 | 26 |
 | [fy2014-15.yml](.yidam/corpus/fiscal-period/fy2014-15.yml) | fiscal-period | FY2014-15 Biennium | 2 | 22 |
+| [fy2014.yml](.yidam/corpus/fiscal-period/fy2014.yml) | fiscal-period | Fiscal Year 2014 | 2 | 26 |
+| [fy2015.yml](.yidam/corpus/fiscal-period/fy2015.yml) | fiscal-period | Fiscal Year 2015 | 2 | 26 |
 | [fy2016-17.yml](.yidam/corpus/fiscal-period/fy2016-17.yml) | fiscal-period | FY2016-17 Biennium | 2 | 17 |
+| [fy2016.yml](.yidam/corpus/fiscal-period/fy2016.yml) | fiscal-period | Fiscal Year 2016 | 2 | 26 |
+| [fy2017.yml](.yidam/corpus/fiscal-period/fy2017.yml) | fiscal-period | Fiscal Year 2017 | 2 | 26 |
 | [fy2018-19.yml](.yidam/corpus/fiscal-period/fy2018-19.yml) | fiscal-period | FY2018-19 Biennium | 2 | 18 |
-| [fy2020-21.yml](.yidam/corpus/fiscal-period/fy2020-21.yml) | fiscal-period | FY2020-21 Biennium | 2 | 22 |
+| [fy2018.yml](.yidam/corpus/fiscal-period/fy2018.yml) | fiscal-period | Fiscal Year 2018 | 2 | 26 |
+| [fy2019.yml](.yidam/corpus/fiscal-period/fy2019.yml) | fiscal-period | Fiscal Year 2019 | 2 | 26 |
+| [fy2020-21.yml](.yidam/corpus/fiscal-period/fy2020-21.yml) | fiscal-period | FY2020-21 Biennium | 4 | 26 |
 | [fy2020.yml](.yidam/corpus/fiscal-period/fy2020.yml) | fiscal-period | Fiscal Year 2020 | 2 | 19 |
-| [fy2022-23.yml](.yidam/corpus/fiscal-period/fy2022-23.yml) | fiscal-period | FY2022-23 Biennium | 2 | 23 |
+| [fy2021.yml](.yidam/corpus/fiscal-period/fy2021.yml) | fiscal-period | Fiscal Year 2021 | 2 | 22 |
+| [fy2022-23.yml](.yidam/corpus/fiscal-period/fy2022-23.yml) | fiscal-period | FY2022-23 Biennium | 4 | 27 |
+| [fy2022.yml](.yidam/corpus/fiscal-period/fy2022.yml) | fiscal-period | Fiscal Year 2022 | 2 | 20 |
+| [fy2023.yml](.yidam/corpus/fiscal-period/fy2023.yml) | fiscal-period | Fiscal Year 2023 | 2 | 20 |
 | [fy2024-25.yml](.yidam/corpus/fiscal-period/fy2024-25.yml) | fiscal-period | FY2024-25 Biennium | 2 | 22 |
 | [fy2024.yml](.yidam/corpus/fiscal-period/fy2024.yml) | fiscal-period | Fiscal Year 2024 | 2 | 19 |
+| [fy2025.yml](.yidam/corpus/fiscal-period/fy2025.yml) | fiscal-period | Fiscal Year 2025 | 2 | 24 |
 | [fy2026-27.yml](.yidam/corpus/fiscal-period/fy2026-27.yml) | fiscal-period | FY2026-27 Biennium | 2 | 23 |
 | [fy2026.yml](.yidam/corpus/fiscal-period/fy2026.yml) | fiscal-period | Fiscal Year 2026 | 2 | 22 |
+| [fy2027.yml](.yidam/corpus/fiscal-period/fy2027.yml) | fiscal-period | Fiscal Year 2027 | 2 | 24 |
 | [medicaid-caseload-fy2014.yml](.yidam/corpus/forecast/medicaid-caseload-fy2014.yml) | forecast | Medicaid Caseload Projection — FY2014-15 | 4 | 29 |
 | [medicaid-caseload-fy2020.yml](.yidam/corpus/forecast/medicaid-caseload-fy2020.yml) | forecast | Medicaid Caseload Projection — FY2020-21 | 4 | 28 |
 | [medicaid-caseload-fy2024.yml](.yidam/corpus/forecast/medicaid-caseload-fy2024.yml) | forecast | Medicaid Caseload Projection — FY2024-25 | 4 | 32 |
@@ -199,35 +777,43 @@ Sorted by: kind, then alphabetically.
 | [franklin-county.yml](.yidam/corpus/jurisdiction/franklin-county.yml) | jurisdiction | Franklin County | 1 | 34 |
 | [hamilton-county.yml](.yidam/corpus/jurisdiction/hamilton-county.yml) | jurisdiction | Hamilton County | 1 | 18 |
 | [montgomery-county.yml](.yidam/corpus/jurisdiction/montgomery-county.yml) | jurisdiction | Montgomery County | 1 | 17 |
-| [behavioral-health-medicaid.yml](.yidam/corpus/line-item/behavioral-health-medicaid.yml) | line-item | Behavioral Health Medicaid Services | 3 | 28 |
+| [behavioral-health-medicaid.yml](.yidam/corpus/line-item/behavioral-health-medicaid.yml) | line-item | Behavioral Health Medicaid Services | 5 | 47 |
 | [community-schools-funding.yml](.yidam/corpus/line-item/community-schools-funding.yml) | line-item | Community Schools Funding | 4 | 30 |
-| [developmental-disabilities-services.yml](.yidam/corpus/line-item/developmental-disabilities-services.yml) | line-item | Developmental Disabilities Medicaid Services | 3 | 31 |
-| [disability-financial-assistance.yml](.yidam/corpus/line-item/disability-financial-assistance.yml) | line-item | Disability Financial Assistance | 3 | 27 |
-| [early-childhood-education.yml](.yidam/corpus/line-item/early-childhood-education.yml) | line-item | Early Childhood Education | 3 | 30 |
-| [foundation-funding.yml](.yidam/corpus/line-item/foundation-funding.yml) | line-item | Foundation Funding | 4 | 45 |
-| [highway-construction.yml](.yidam/corpus/line-item/highway-construction.yml) | line-item | Highway Construction | 3 | 37 |
-| [highway-maintenance.yml](.yidam/corpus/line-item/highway-maintenance.yml) | line-item | Highway Maintenance | 3 | 30 |
-| [highway-patrol-operations.yml](.yidam/corpus/line-item/highway-patrol-operations.yml) | line-item | Highway Patrol Operations | 3 | 26 |
+| [developmental-disabilities-services.yml](.yidam/corpus/line-item/developmental-disabilities-services.yml) | line-item | Developmental Disabilities Medicaid Services | 5 | 78 |
+| [disability-financial-assistance.yml](.yidam/corpus/line-item/disability-financial-assistance.yml) | line-item | Disability Financial Assistance | 5 | 53 |
+| [early-childhood-education-kid.yml](.yidam/corpus/line-item/early-childhood-education-kid.yml) | line-item | Early Childhood Education (Children and Youth) | 6 | 59 |
+| [early-childhood-education.yml](.yidam/corpus/line-item/early-childhood-education.yml) | line-item | Early Childhood Education | 6 | 66 |
+| [foundation-funding-dpf.yml](.yidam/corpus/line-item/foundation-funding-dpf.yml) | line-item | Foundation Funding — All Students (Fund 5VS0) | 4 | 39 |
+| [foundation-funding-lottery.yml](.yidam/corpus/line-item/foundation-funding-lottery.yml) | line-item | Foundation Funding — All Students (Lottery) | 4 | 36 |
+| [foundation-funding.yml](.yidam/corpus/line-item/foundation-funding.yml) | line-item | Foundation Funding | 4 | 146 |
+| [highway-construction.yml](.yidam/corpus/line-item/highway-construction.yml) | line-item | Highway Construction | 5 | 57 |
+| [highway-maintenance.yml](.yidam/corpus/line-item/highway-maintenance.yml) | line-item | Highway Maintenance | 5 | 43 |
+| [highway-patrol-operations.yml](.yidam/corpus/line-item/highway-patrol-operations.yml) | line-item | Highway Patrol Operations | 5 | 30 |
 | [institutional-operations.yml](.yidam/corpus/line-item/institutional-operations.yml) | line-item | Institutional Operations | 4 | 32 |
-| [local-government-fund-distribution.yml](.yidam/corpus/line-item/local-government-fund-distribution.yml) | line-item | Local Government Fund Distribution | 4 | 46 |
-| [medicaid-health-care-services-federal.yml](.yidam/corpus/line-item/medicaid-health-care-services-federal.yml) | line-item | Medicaid Health Care Services (Federal Share) | 3 | 34 |
-| [medicaid-health-care-services.yml](.yidam/corpus/line-item/medicaid-health-care-services.yml) | line-item | Medicaid Health Care Services | 5 | 46 |
-| [medicaid-services-odjfs.yml](.yidam/corpus/line-item/medicaid-services-odjfs.yml) | line-item | Medicaid Services (Job and Family Services) | 4 | 37 |
-| [property-tax-rollback-reimbursement.yml](.yidam/corpus/line-item/property-tax-rollback-reimbursement.yml) | line-item | Property Tax Rollback Reimbursement | 3 | 34 |
+| [local-government-fund-distribution.yml](.yidam/corpus/line-item/local-government-fund-distribution.yml) | line-item | Local Government Fund Distribution | 4 | 92 |
+| [medicaid-health-care-services-federal.yml](.yidam/corpus/line-item/medicaid-health-care-services-federal.yml) | line-item | Medicaid Health Care Services (Federal Share) | 5 | 50 |
+| [medicaid-health-care-services.yml](.yidam/corpus/line-item/medicaid-health-care-services.yml) | line-item | Medicaid Health Care Services | 5 | 136 |
+| [medicaid-services-hic-fee.yml](.yidam/corpus/line-item/medicaid-services-hic-fee.yml) | line-item | Medicaid Services — HIC Fee | 3 | 36 |
+| [medicaid-services-hospital-franchise-fee.yml](.yidam/corpus/line-item/medicaid-services-hospital-franchise-fee.yml) | line-item | Medicaid Services — Hospital Franchise Fee | 3 | 44 |
+| [medicaid-services-odjfs.yml](.yidam/corpus/line-item/medicaid-services-odjfs.yml) | line-item | Medicaid Services (Job and Family Services) | 6 | 66 |
+| [medicaid-services-recoveries.yml](.yidam/corpus/line-item/medicaid-services-recoveries.yml) | line-item | Medicaid Services — Recoveries | 3 | 36 |
+| [property-tax-rollback-reimbursement-education.yml](.yidam/corpus/line-item/property-tax-rollback-reimbursement-education.yml) | line-item | Property Tax Reimbursement — Education | 4 | 66 |
+| [property-tax-rollback-reimbursement.yml](.yidam/corpus/line-item/property-tax-rollback-reimbursement.yml) | line-item | Property Tax Reimbursement — Local Government | 4 | 67 |
 | [public-library-fund-distribution.yml](.yidam/corpus/line-item/public-library-fund-distribution.yml) | line-item | Public Library Fund Distribution | 4 | 32 |
 | [pupil-transportation.yml](.yidam/corpus/line-item/pupil-transportation.yml) | line-item | Pupil Transportation | 4 | 34 |
 | [special-education.yml](.yidam/corpus/line-item/special-education.yml) | line-item | Special Education Enhancements | 4 | 30 |
-| [state-share-of-instruction.yml](.yidam/corpus/line-item/state-share-of-instruction.yml) | line-item | State Share of Instruction | 4 | 35 |
-| [tangible-personal-property-reimbursement.yml](.yidam/corpus/line-item/tangible-personal-property-reimbursement.yml) | line-item | Tangible Personal Property Tax Reimbursement | 3 | 31 |
+| [state-share-of-instruction.yml](.yidam/corpus/line-item/state-share-of-instruction.yml) | line-item | State Share of Instruction | 4 | 68 |
+| [tangible-personal-property-reimbursement.yml](.yidam/corpus/line-item/tangible-personal-property-reimbursement.yml) | line-item | Tangible Personal Property Tax Reimbursement | 5 | 63 |
 | [adult-corrections.yml](.yidam/corpus/program/adult-corrections.yml) | program | Adult Corrections | 2 | 30 |
 | [behavioral-health-services.yml](.yidam/corpus/program/behavioral-health-services.yml) | program | Behavioral Health Services | 2 | 25 |
 | [community-schools.yml](.yidam/corpus/program/community-schools.yml) | program | Community Schools | 2 | 23 |
 | [developmental-disabilities-services.yml](.yidam/corpus/program/developmental-disabilities-services.yml) | program | Developmental Disabilities Services | 2 | 31 |
-| [fair-school-funding-plan.yml](.yidam/corpus/program/fair-school-funding-plan.yml) | program | Fair School Funding Plan | 5 | 45 |
+| [fair-school-funding-plan.yml](.yidam/corpus/program/fair-school-funding-plan.yml) | program | Fair School Funding Plan | 7 | 49 |
 | [highway-system-preservation.yml](.yidam/corpus/program/highway-system-preservation.yml) | program | Highway System Preservation | 3 | 37 |
 | [local-government-distribution.yml](.yidam/corpus/program/local-government-distribution.yml) | program | Local Government Fund Distribution | 6 | 51 |
-| [medicaid.yml](.yidam/corpus/program/medicaid.yml) | program | Ohio Medicaid | 4 | 40 |
-| [public-library-fund-distribution.yml](.yidam/corpus/program/public-library-fund-distribution.yml) | program | Public Library Fund Distribution | 5 | 38 |
+| [medicaid.yml](.yidam/corpus/program/medicaid.yml) | program | Ohio Medicaid | 10 | 74 |
+| [property-tax-relief.yml](.yidam/corpus/program/property-tax-relief.yml) | program | Property Tax Relief and Reimbursement | 4 | 40 |
+| [public-library-fund-distribution.yml](.yidam/corpus/program/public-library-fund-distribution.yml) | program | Public Library Fund Distribution | 6 | 43 |
 | [special-education.yml](.yidam/corpus/program/special-education.yml) | program | Special Education | 3 | 26 |
 | [state-share-of-instruction.yml](.yidam/corpus/program/state-share-of-instruction.yml) | program | State Share of Instruction | 2 | 26 |
 | [casino-tax.yml](.yidam/corpus/revenue-source/casino-tax.yml) | revenue-source | Gross Casino Revenue Tax | 1 | 29 |

@@ -4,12 +4,23 @@ Domain-specific agent definitions. Generic agents inherited from yidam live in
 [`.yidam/.vendor/prelude/`](../.yidam/.vendor/prelude/); agents whose purpose is specific
 to this domain live here.
 
-No domain-specific agents are defined at genesis. The prelude's conduct norms direct that
-nodes and definitions be added when a need is concrete rather than in anticipation of one,
-and no phase has yet run that would establish what an Ohio budget agent should specialize
-in. The first agent is expected to emerge from the first extraction phase against
-Legislative Service Commission documents, where the repeatable procedure is currently
-performed by hand.
+No domain-specific agents are defined. The prelude's conduct norms direct that definitions be
+added when a need is concrete rather than in anticipation of one.
+
+**The anticipated first agent turned out to be a crate.** The genesis note here expected one to
+emerge from the first extraction phase against Legislative Service Commission documents, where
+the repeatable procedure was then performed by hand. That phase has since run, across several
+biennia. The repeatable part — recovering tables from PDF and workbook layouts, deciding which
+rows are line items, and proposing corpus updates — proved to be geometry and matching rather
+than judgement, and it lives in [`lsc`](../crates/lsc/) and
+[`corpus-promote`](../crates/corpus-promote/). Something that must do the same thing every time
+is better written as code than as a prompt.
+
+What remains judgement is deciding whether a proposed change is right: reading a promote report,
+and confirming a [`lineage`](../crates/lineage/) candidate, which
+[proposals](../.yidam/decisions/proposals.yml) requires a contributor to do rather than the
+calculator. That is what a first agent would take on, and it is not yet repeatable enough to
+specify.
 
 ## Registry
 

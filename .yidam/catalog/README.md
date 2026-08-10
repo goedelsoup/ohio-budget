@@ -21,12 +21,24 @@ Sorted by: type, then slug.
 | Entry | Description | Citations |
 |---|---|---|
 | [controlling-board-minutes.md](controlling-board-minutes.md) | — | 3 |
-| [ga-bill-record.md](ga-bill-record.md) | — | 49 |
-| [lsc-hb33-actuals.md](lsc-hb33-actuals.md) | — | 1 |
-| [lsc-hb33-appropriation-spreadsheet.md](lsc-hb33-appropriation-spreadsheet.md) | — | 1 |
-| [lsc-hb96-appropriation-spreadsheet.md](lsc-hb96-appropriation-spreadsheet.md) | — | 32 |
+| [fred-price-indices.md](fred-price-indices.md) | — | 0 |
+| [ga-bill-record.md](ga-bill-record.md) | — | 53 |
+| [governor-hb33-veto-messages.md](governor-hb33-veto-messages.md) | — | 2 |
+| [governor-hb96-veto-messages.md](governor-hb96-veto-messages.md) | — | 6 |
+| [lsc-hb110-appropriation-spreadsheet.md](lsc-hb110-appropriation-spreadsheet.md) | — | 96 |
+| [lsc-hb153-budget-in-detail.md](lsc-hb153-budget-in-detail.md) | — | 46 |
+| [lsc-hb166-appropriation-spreadsheet.md](lsc-hb166-appropriation-spreadsheet.md) | — | 106 |
+| [lsc-hb33-actuals.md](lsc-hb33-actuals.md) | — | 7 |
+| [lsc-hb33-appropriation-spreadsheet.md](lsc-hb33-appropriation-spreadsheet.md) | — | 86 |
+| [lsc-hb33-comparison.md](lsc-hb33-comparison.md) | — | 3 |
+| [lsc-hb49-budget-in-detail.md](lsc-hb49-budget-in-detail.md) | — | 72 |
+| [lsc-hb59-budget-in-detail.md](lsc-hb59-budget-in-detail.md) | — | 83 |
+| [lsc-hb64-budget-in-detail.md](lsc-hb64-budget-in-detail.md) | — | 68 |
+| [lsc-hb96-appropriation-spreadsheet.md](lsc-hb96-appropriation-spreadsheet.md) | — | 101 |
 | [lsc-hb96-comparison.md](lsc-hb96-comparison.md) | — | 8 |
-| [obm-annual-report.md](obm-annual-report.md) | — | 22 |
+| [obm-annual-report.md](obm-annual-report.md) | — | 17 |
+| [obm-controlling-board-manual.md](obm-controlling-board-manual.md) | — | 0 |
+| [ohio-general-assembly-leadership.md](ohio-general-assembly-leadership.md) | — | 2 |
 | [orc-chapter-131.md](orc-chapter-131.md) | — | 5 |
 <!-- /REGEN -->
 

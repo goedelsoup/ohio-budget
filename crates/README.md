@@ -41,6 +41,7 @@ Fields per crate: name, capability type (connector/calculator/feature-engineerin
 | Crate | Description |
 |---|---|
 | [—](crates/) | — |
+| [corpus-export](corpus-export/) | Emits the corpus and the calculators' results as a versioned JSON feed for the web layer |
 | [corpus-promote](corpus-promote/) | Proposes corpus updates from validated connector extraction records |
 | [corpus-schema](corpus-schema/) | Typed definitions for Ohio budget corpus files and connector extraction records |
 | [corpus-validate](corpus-validate/) | Validates the Ohio budget corpus against its own ontology |
@@ -48,6 +49,7 @@ Fields per crate: name, capability type (connector/calculator/feature-engineerin
 | [governor](governor/) | Connector for Ohio governor's veto messages |
 | [legislature](legislature/) | Connector for the Ohio General Assembly bill record |
 | [lineage](lineage/) | Proposes line item succession candidates across renumberings |
+| [local-finance](local-finance/) | Separates state support to local government from local revenue the state merely collects |
 | [lsc](lsc/) | Connector for Legislative Service Commission budget publications |
 | [real-dollars](real-dollars/) | Restates nominal budget amounts in constant dollars |
 | [stage-delta](stage-delta/) | Decomposes an appropriation's movement across bill stages and attributes each step |

@@ -1,5 +1,0 @@
-
-[[bin]]
-name = "governor-vetoes"
-path = "src/bin/governor-vetoes.rs"
-required-features = ["pdf"]
