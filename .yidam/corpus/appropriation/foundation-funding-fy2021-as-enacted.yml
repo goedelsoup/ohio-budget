@@ -4,7 +4,7 @@ description: |
   $6,774,618,845.00 for line item 200550 in FY2021, appropriated by
   [HB 166](../bill/hb166-133rd.yml). [verified]
 
-  [open] FY2021 actuals are not carried by any committed source; HB 110's with-actuals workbook would close it.
+  Against the $6,703,103,300.93 actually spent, a variance of $71,515,544.07 — 1.06%. [verified]
 
   From the column HB 166 heads `As Enacted after Governor's Vetoes` — the workbook that
   settled whether LSC's enacted figure is taken before or after the executive acts. It is
@@ -28,4 +28,6 @@ links:
   - target: ../fiscal-period/fy2021.yml
     relationship: covers
   - target: ../../catalog/lsc-hb166-appropriation-spreadsheet.md
+    relationship: cites
+  - target: ../../catalog/lsc-hb110-appropriation-spreadsheet.md
     relationship: cites

@@ -135,6 +135,24 @@ fn target_class_of(path: &Path) -> Option<(String, bool)> {
     Some((parent.to_string(), false))
 }
 
+/// The (line item, fiscal period) pair a node attaches to, if it names both.
+///
+/// Keyed on the *target class* rather than the relationship name. `grants-authority-for` and
+/// `disburses-against` name the same subject from the authority side and the outturn side, and
+/// pinning this to those two spellings would silently stop working the day either is renamed.
+fn subject_of(inst: &CorpusInstance, dir: &Path) -> Option<(PathBuf, PathBuf)> {
+    let (mut line_item, mut period) = (None, None);
+    for link in inst.domain_links() {
+        let target = normalize_join(dir, &link.target);
+        match target_class_of(&target) {
+            Some((c, false)) if c == "line-item" => line_item = Some(target),
+            Some((c, false)) if c == "fiscal-period" => period = Some(target),
+            _ => {}
+        }
+    }
+    Some((line_item?, period?))
+}
+
 /// Provenance slug carried by every record under `.yidam/fixtures/`.
 pub const FIXTURE_MARKER: &str = "synthetic-fixture";
 
@@ -198,6 +216,32 @@ fn says_value_is_unfilled(body: &str) -> Option<&'static str> {
         "figure is unfilled",
         "amount is not yet filled",
         "amount is still unfilled",
+    ];
+    let lower = body.to_ascii_lowercase();
+    PHRASES.into_iter().find(|p| lower.contains(p))
+}
+
+/// Does the body claim no source carries the outturn for this appropriation's year?
+///
+/// Narrow on purpose, and a sibling of [`says_value_is_unfilled`] — same defect, one level out.
+/// That rule catches a node contradicting its own property; this one catches a node
+/// contradicting a *different node* that has since been extracted.
+///
+/// The instance: four FY2021 appropriations each said "FY2021 actuals are not carried by any
+/// committed source; HB 110's with-actuals workbook would close it." The workbook was catalogued,
+/// its actuals were extracted, and `gap` was computing all four variances — while the
+/// appropriations still told the reader the figure did not exist. The claim went stale in the
+/// commit that falsified it, which is the shape this whole family of rules exists to catch.
+///
+/// Deliberately not a general "no source carries X" matcher: the corpus says that truthfully in
+/// many places, about figures nothing has extracted. This fires only where the corpus itself
+/// holds the counterpart, so it cannot argue with a claim it has no evidence against.
+fn says_no_outturn_exists(body: &str) -> Option<&'static str> {
+    const PHRASES: [&str; 4] = [
+        "actuals are not carried by any committed source",
+        "actual is not carried by any committed source",
+        "no committed source carries its actuals",
+        "no committed source carries the actuals",
     ];
     let lower = body.to_ascii_lowercase();
     PHRASES.into_iter().find(|p| lower.contains(p))
@@ -445,6 +489,23 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
         }
     }
 
+    // Outturn nodes keyed by the (line item, period) they report on. An appropriation claiming
+    // no source carries its year's actuals is checked against this and nothing else: the corpus
+    // either holds the counterpart or it does not.
+    let mut outturn_by_subject: BTreeMap<(PathBuf, PathBuf), Vec<String>> = BTreeMap::new();
+    for inst in instances {
+        if inst.inst.class != "expenditure" {
+            continue;
+        }
+        let dir = inst.abs_path.parent().unwrap_or(&inst.abs_path);
+        if let Some(key) = subject_of(&inst.inst, dir) {
+            outturn_by_subject
+                .entry(key)
+                .or_default()
+                .push(inst.rel_path.clone());
+        }
+    }
+
     for inst in instances {
         let p = &inst.rel_path;
         let dir = inst
@@ -537,6 +598,32 @@ pub fn check(corpus: &Corpus) -> Vec<Finding> {
                         message: format!(
                             "property '{key}' holds a value but the body still says {phrase:?}; \
                              one of the two is wrong and a reader has no way to tell which"
+                        ),
+                    });
+                }
+            }
+        }
+
+        if let Some(phrase) = says_no_outturn_exists(&inst.inst.description) {
+            if let Some(key) = subject_of(&inst.inst, &dir) {
+                let holders: Vec<&str> = outturn_by_subject
+                    .get(&key)
+                    .map(|v| {
+                        v.iter()
+                            .filter(|h| *h != p)
+                            .map(String::as_str)
+                            .collect::<Vec<_>>()
+                    })
+                    .unwrap_or_default();
+                if !holders.is_empty() {
+                    findings.push(Finding {
+                        path: p.clone(),
+                        rule: "stale-no-outturn-claim",
+                        severity: Severity::Error,
+                        message: format!(
+                            "says {phrase:?}, but the corpus holds the outturn for the same line \
+                             item and period ({}); the claim went stale when it was extracted",
+                            holders.join(", ")
                         ),
                     });
                 }
@@ -1374,6 +1461,174 @@ links:
             findings
                 .iter()
                 .any(|f| f.rule == "body-contradicts-filled-property"),
+            "{findings:?}"
+        );
+    }
+
+    /// [`fixture`] plus the three classes the outturn rule traverses, and an `expenditure`
+    /// that declares the two edges tying it to a line item and a period.
+    fn outturn_fixture() -> (BTreeMap<String, ClassDefinition>, BTreeSet<PathBuf>) {
+        let (mut classes, mut paths) = fixture();
+        for (name, yaml) in [
+            (
+                "appropriation",
+                r#"
+class: appropriation
+label: Appropriation
+description: d
+edges:
+  - relationship: grants-authority-for
+    target: line-item
+    direction: out
+  - relationship: covers
+    target: fiscal-period
+    direction: out
+"#,
+            ),
+            (
+                "expenditure",
+                r#"
+class: expenditure
+label: Expenditure
+description: d
+edges:
+  - relationship: disburses-against
+    target: line-item
+    direction: out
+  - relationship: occurs-in
+    target: fiscal-period
+    direction: out
+"#,
+            ),
+            (
+                "line-item",
+                r#"
+class: line-item
+label: Line Item
+description: d
+edges:
+  - relationship: grants-authority-for
+    target: appropriation
+    direction: in
+"#,
+            ),
+            (
+                "fiscal-period",
+                r#"
+class: fiscal-period
+label: Fiscal Period
+description: d
+edges:
+  - relationship: covers
+    target: appropriation
+    direction: in
+"#,
+            ),
+        ] {
+            classes.insert(name.to_string(), class(yaml));
+            paths.insert(PathBuf::from(format!("corpus/{name}.ont.yml")));
+        }
+        (classes, paths)
+    }
+
+    fn appropriation_claiming_no_outturn() -> LoadedInstance {
+        instance(
+            "corpus/appropriation/a-fy2021.yml",
+            r#"
+class: appropriation
+label: A FY2021
+description: |
+  $100.00 appropriated in FY2021. [verified]
+
+  [open] FY2021 actuals are not carried by any committed source.
+properties:
+  amount: "$100.00"
+links:
+  - target: ../appropriation.ont.yml
+    relationship: instance-of
+  - target: ../line-item/a.yml
+    relationship: grants-authority-for
+  - target: ../fiscal-period/fy2021.yml
+    relationship: covers
+"#,
+        )
+    }
+
+    #[test]
+    fn an_appropriation_denying_an_outturn_the_corpus_holds_is_rejected() {
+        // The real defect: four FY2021 appropriations kept saying the actuals were not carried
+        // by any committed source after HB 110's workbook was catalogued and extracted. `gap`
+        // was computing all four variances at the time, from the very nodes being denied.
+        let (classes, paths) = outturn_fixture();
+        let insts = vec![
+            appropriation_claiming_no_outturn(),
+            instance(
+                "corpus/expenditure/a-fy2021-actual.yml",
+                r#"
+class: expenditure
+label: A FY2021 Actual
+description: |
+  $90.00 charged in FY2021, on closed books. [verified]
+properties:
+  amount: "$90.00"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/a.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2021.yml
+    relationship: occurs-in
+"#,
+            ),
+        ];
+        let findings = run(classes, paths, insts);
+        assert!(
+            findings.iter().any(|f| f.rule == "stale-no-outturn-claim"),
+            "{findings:?}"
+        );
+    }
+
+    #[test]
+    fn an_appropriation_denying_an_outturn_nothing_holds_is_fine() {
+        // The same sentence is true wherever extraction has not reached, and the corpus says it
+        // in many places. The rule must argue only where it has the counterpart in hand.
+        let (classes, paths) = outturn_fixture();
+        let insts = vec![appropriation_claiming_no_outturn()];
+        let findings = run(classes, paths, insts);
+        assert!(
+            !findings.iter().any(|f| f.rule == "stale-no-outturn-claim"),
+            "{findings:?}"
+        );
+    }
+
+    #[test]
+    fn an_outturn_for_a_different_period_does_not_close_the_claim() {
+        // The pair is (line item, period). An actual for a neighbouring year says nothing about
+        // the year the claim is about, and matching on the line item alone would silence it.
+        let (classes, paths) = outturn_fixture();
+        let insts = vec![
+            appropriation_claiming_no_outturn(),
+            instance(
+                "corpus/expenditure/a-fy2022-actual.yml",
+                r#"
+class: expenditure
+label: A FY2022 Actual
+description: d
+properties:
+  amount: "$90.00"
+links:
+  - target: ../expenditure.ont.yml
+    relationship: instance-of
+  - target: ../line-item/a.yml
+    relationship: disburses-against
+  - target: ../fiscal-period/fy2022.yml
+    relationship: occurs-in
+"#,
+            ),
+        ];
+        let findings = run(classes, paths, insts);
+        assert!(
+            !findings.iter().any(|f| f.rule == "stale-no-outturn-claim"),
             "{findings:?}"
         );
     }
