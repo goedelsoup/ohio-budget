@@ -472,17 +472,25 @@ Lists all corpus nodes whose title begins with `?` or whose content contains `[o
 ## Working in this repository
 
 ```
-mise run install-hooks   # once, per clone
-mise run ci              # the full gate
+mise run yidam-build   # once, per clone — the gate calls the `yidam` binary by name
+mise run ci            # the full gate
 ```
 
-`install-hooks` wires `hooks/pre-commit`, which validates the corpus whenever a commit touches
-`.yidam/corpus`, `.yidam/catalog`, `.yidam/decisions`, or the validator. It catches the failure
-this repository keeps having: a node asserting something about the repository that stopped being
-true — a source described as uncatalogued after it was catalogued, an amount described as
-unfilled after it was filled. Both halves of such a contradiction look correct in isolation, and
-the stale half is usually written in the same commit that falsifies it. See
-[claims-about-repository-state](.yidam/decisions/claims-about-repository-state.yml).
+Run the gate before opening a pull request. [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
+installs the toolchain and then runs `mise run ci` — the same command, from the same definition in
+[`mise.toml`](mise.toml) — so the workflow reports nothing that was not already visible locally.
+Adding a check means editing `[tasks.ci]` and nothing in the workflow. Agents working here are
+given the same instruction in [CLAUDE.md](CLAUDE.md).
 
-The hook does not run tests or clippy. A gate slow enough to be bypassed protects nothing; those
-stay in `mise run ci`.
+There is no commit-time hook. `mise run ci` compiles the workspace, runs every test, and builds the
+site, which is the right cost once per pull request and the wrong cost per commit; and a hook lives
+in `.git/hooks`, which is not tracked, so it only ever ran in the clones where someone had
+remembered to install it.
+
+While writing, `mise run validate` is the fast subset worth running by hand. It checks the corpus
+rules alone — no compile, no tests — and catches the failure this repository keeps having: a node
+asserting something about the repository that stopped being true, a source described as
+uncatalogued after it was catalogued, an amount described as unfilled after it was filled. Both
+halves of such a contradiction look correct in isolation, and the stale half is usually written in
+the same commit that falsifies it. See
+[claims-about-repository-state](.yidam/decisions/claims-about-repository-state.yml).

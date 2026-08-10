@@ -38,12 +38,11 @@ decision: |
   - `body-contradicts-filled-property` (Error) — the body says an amount is unfilled while the
     property holds one.
 
-  **Hook.** `hooks/pre-commit`, installed by `mise run install-hooks`, runs `mise run validate`
-  when a commit touches the corpus, catalog, decisions, or the validator itself.
-
-  The hook deliberately does not run the full `mise run ci`. Compiling and testing the workspace
-  on every commit trains people to pass `--no-verify`, and a gate that gets bypassed protects
-  nothing. Formatting, clippy, and tests stay in CI.
+  **Gate.** The rules run inside `mise run ci`, which `.github/workflows/ci.yml` runs on every
+  pull request and on every push to `main`. Contributors and agents are told to run that same
+  command before opening a pull request — in `README.md` and in `CLAUDE.md` respectively.
+  `mise run validate` runs the rules alone, without the compile and the test suite, and is the
+  one to run while writing prose into a node.
 rationale: |
   Two earlier attempts inform this, and the difference between them is the whole argument.
 
@@ -61,6 +60,21 @@ rationale: |
   subject is a small cost at writing time that converts an unfalsifiable sentence into a checked
   one. The rule that ships fires on a contradiction the repository can see, not on an assumption
   about how it ought to be arranged — which is the same test the `feeds` rule failed.
+
+  **The commit-time hook was removed.** These rules were first enforced by `hooks/pre-commit`,
+  installed per clone by `mise run install-hooks`, running `mise run validate` when a commit
+  touched the corpus, catalog, decisions, or the validator. It deliberately did not run the full
+  `mise run ci`, on the argument that compiling and testing the workspace on every commit trains
+  people to pass `--no-verify`, and a gate that gets bypassed protects nothing.
+
+  That argument was right and it applies to the hook itself. A git hook lives in `.git/hooks`,
+  which is not tracked, so it ran only in the clones where someone had remembered the install
+  task, and `--no-verify` skipped it in those. It could report a state of affairs no one else
+  could see. The gate that survives is the one that runs where the result is visible: CI, on the
+  pull request, from the same `[tasks.ci]` definition a contributor runs locally.
+
+  The rules did not change. Where they are enforced did, and the enforcement moved from a place
+  that was optional and invisible to one that is neither.
 
   **Catalogued is not committed.** The vocabulary confusion this exposed is worth keeping
   separate. A catalog *entry* registers a source; `content_committed` says its bytes are in the

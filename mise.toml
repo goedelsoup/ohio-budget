@@ -72,8 +72,8 @@ run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- .
 # The site renders the corpus and the calculators' output; it computes nothing
 # itself. `export` is the seam: it runs the calculators and writes their verdicts
 # to web/src/data/*.json, which is generated and gitignored. A second committed
-# copy of the corpus is exactly the contradiction the pre-commit hook exists to
-# catch, so the web build depends on this task rather than on checked-in data.
+# copy of the corpus is exactly the contradiction the gate exists to catch, so
+# the web build depends on this task rather than on checked-in data.
 
 [tasks.export]
 description = "Emit the corpus and the calculators' results as JSON for the web layer."
@@ -139,15 +139,3 @@ run = [
   "mise run web-check",
   "mise run web-build",
 ]
-
-[tasks.install-hooks]
-description = "Install the repository's git hooks into .git/hooks."
-run = """
-set -e
-root=$(git rev-parse --show-toplevel)
-for h in "$root"/hooks/*; do
-  name=$(basename "$h")
-  ln -sf ../../hooks/"$name" "$root/.git/hooks/$name"
-  echo "installed $name"
-done
-"""
