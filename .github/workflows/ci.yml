@@ -1,0 +1,67 @@
+# The gate, run where it can be seen.
+#
+# This workflow deliberately does not restate the checks. It installs what the checks need
+# and then runs `mise run ci` — the same command a contributor runs locally, from the same
+# definition in mise.toml. A workflow that listed the steps itself would be a second copy of
+# the gate, and the failure this repository keeps having is two descriptions of one thing
+# drifting apart while both look right in isolation.
+#
+# So: adding a check means editing `[tasks.ci]` in mise.toml, and nothing here.
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A superseded run tells you about a commit nobody is looking at any more.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Installs rust and node at the versions mise.toml pins, and picks up the yidam tasks
+      # through the tracked .config/mise/conf.d/yidam.toml symlink.
+      - uses: jdx/mise-action@v2
+
+      # `cargo install` puts the yidam binary here, and `mise run ci` calls it by name.
+      - run: echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: crates
+
+      - name: Cache the web layer's dependencies
+        uses: actions/cache@v4
+        with:
+          path: web/node_modules
+          key: npm-${{ runner.os }}-${{ hashFiles('web/package-lock.json') }}
+
+      # Building the vendored CLI is a full `cargo install` and dominates the run, so it is
+      # keyed on the CLI's own sources rather than rebuilt every time. `yidam graph-check`
+      # is part of the gate and checks what corpus-validate cannot.
+      - name: Restore the yidam binary
+        id: yidam
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/yidam
+          key: yidam-${{ runner.os }}-${{ hashFiles('.yidam/.vendor/cli/**/*.rs', '.yidam/.vendor/cli/Cargo.lock') }}
+
+      - if: steps.yidam.outputs.cache-hit != 'true'
+        run: mise run yidam-build
+
+      # Not `web-install`: that resolves against the lockfile and may rewrite it, which CI
+      # must never do. This installs exactly what the lockfile states, and fails if the
+      # lockfile and package.json disagree — which is a defect worth failing on.
+      - run: mise run web-install-locked
+
+      - run: mise run ci

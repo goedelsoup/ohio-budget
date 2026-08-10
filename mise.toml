@@ -11,6 +11,10 @@
 
 [tools]
 rust = { version = "1.88.0", components = "rustfmt,clippy" }
+# The web layer's runtime. Declared here rather than left to whatever the machine has,
+# because CI runs the same `mise run ci` this file defines, and a toolchain named in two
+# places is a toolchain that drifts in one of them.
+node = "24"
 
 # Override. mise.yidam.toml ships `cargo install --path yidam/cli`, but the
 # bootstrap vendor step moves yidam/ to .yidam/.vendor/, so that path is dead in
@@ -79,6 +83,15 @@ run = "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-export -- ."
 description = "Install the web layer's dependencies."
 dir = "web"
 run = "npm install"
+
+# `npm install` is free to rewrite the lockfile, and different npm versions disagree about
+# what belongs in it — node 24's drops the `libc` hints node 26's writes, so whichever
+# machine ran last wins and the diff flips back and forth. CI has no business editing the
+# lockfile at all, so it installs from the lockfile instead of resolving against it.
+[tasks.web-install-locked]
+description = "Install the web layer's dependencies exactly as the lockfile states."
+dir = "web"
+run = "npm ci"
 
 [tasks.web-dev]
 description = "Serve the web interface with live reload."
