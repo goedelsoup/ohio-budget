@@ -19,6 +19,7 @@ import type {
   Decomposition,
   Feed,
   GapCoverage,
+  GapResult,
   NodeView,
   RealSeries,
   TrendCoverage,
@@ -407,6 +408,72 @@ export function blockedGaps(feed: Feed): GapCoverage[] {
 /** Gap outcomes touching one line item, whatever their status. */
 export function gapsForLineItem(feed: Feed, lineItemSlug: string): GapCoverage[] {
   return feed.findings.gap.filter((c) => c.line_item === lineItemSlug);
+}
+
+// ─── the headline gap ────────────────────────────────────────────────────────
+
+/**
+ * The one gap outcome the landing page leads with, and everything a reader may be told
+ * about it.
+ *
+ * It carries the label and the direction rather than leaving the page to supply them,
+ * because the page supplying them is the defect this replaced. The selector was
+ * `computedGaps(feed)[0]` — feed order, which is alphabetical by line item and so arbitrary
+ * — while the prose beside it named Foundation Funding in hardcoded text and asserted an
+ * overspend in hardcoded words. Extraction reaching FY2012 moved a $2.2M community schools
+ * line into slot 0 and the page went on calling it Foundation Funding, a line that runs
+ * $5.5–7.1B, and calling a 23% underspend an overspend. Both halves rendered fine.
+ *
+ * Nothing about this figure should be written into prose that the object does not carry.
+ */
+export interface Headline {
+  gap: GapResult;
+  /** The line item's label as the corpus states it. */
+  label: string;
+  /** Spending exceeded authority. `variance_cents` is positive when it did *not*. */
+  overspent: boolean;
+}
+
+/**
+ * Selected on the largest divergence in dollars, because "where does the gap lie" is the
+ * question the page exists to answer and that is its answer. Deliberate and stable: the
+ * subject changes only when a bigger divergence enters the corpus, which is a change worth
+ * having the page follow.
+ */
+export function headlineGap(feed: Feed): Headline | undefined {
+  const computed: GapResult[] = [];
+  for (const c of feed.findings.gap) {
+    if (c.outcome.status === 'computed') computed.push(c.outcome);
+  }
+
+  // Dollars first; period and line item break ties so the build is reproducible.
+  computed.sort(
+    (a, b) =>
+      Math.abs(b.variance_cents) - Math.abs(a.variance_cents) ||
+      a.period.localeCompare(b.period) ||
+      a.line_item.localeCompare(b.line_item),
+  );
+
+  const gap = computed[0];
+  if (!gap) return undefined;
+
+  return {
+    gap,
+    label: lineItemLabel(feed, gap.line_item),
+    overspent: gap.variance_cents < 0,
+  };
+}
+
+/**
+ * A line item's label as the corpus states it.
+ *
+ * Falls back to the slug read as words. A slug is close enough to a name to pass review and
+ * is not one: `medicaid-health-care-services-federal` is titled "Medicaid Health Care
+ * Services (Federal Share)", and only one of those says which share.
+ */
+export function lineItemLabel(feed: Feed, slug: string): string {
+  const node = feed.corpus.nodes.find((n) => n.class === 'line-item' && n.slug === slug);
+  return node?.label ?? humanize(slug);
 }
 
 // ─── subjects ────────────────────────────────────────────────────────────────

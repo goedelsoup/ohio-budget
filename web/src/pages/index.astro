@@ -11,15 +11,20 @@ import {
   stageDeltas,
   stageLevels,
 } from '../lib/charts.ts';
-import { computedGaps, decompositionFor, landingSubjects, stagePoints } from '../lib/derive.ts';
-import { dollars, exact, percent, percentOrNone } from '../lib/money.ts';
+import {
+  computedGaps,
+  decompositionFor,
+  headlineGap,
+  landingSubjects,
+  stagePoints,
+} from '../lib/derive.ts';
+import { dollars, exact, percentOrNone } from '../lib/money.ts';
 
 const feed = await loadFeed();
 const { manifest, findings } = feed;
 
 const computed = computedGaps(feed);
-const headline = computed[0];
-const headlineGap = headline?.outcome.status === 'computed' ? headline.outcome : undefined;
+const headline = headlineGap(feed);
 
 const hb96 = decompositionFor(feed, 'foundation-funding', 'FY2026');
 const hb96Points = hb96 ? stagePoints(hb96) : undefined;
@@ -51,57 +56,64 @@ const attributedSteps = hb96?.steps.filter((s) => s.is_attributed).length ?? 0;
   </p>
 
   {
-    headlineGap && (
+    headline && (
       <>
-        <h2>A formula line landed above its authority</h2>
+        {/* Every word about this figure comes off `headline`. The subject is whichever line
+            item currently holds the widest divergence, and it changes as extraction runs —
+            so naming it in prose here is how this section last went wrong. */}
+        <h2>Where the gap is widest</h2>
 
         <dl class="figures">
           <div>
             <dt>Appropriated</dt>
             <dd>
-              {dollars(headlineGap.appropriated_cents)}
-              <small>{headlineGap.line_item.replace(/-/g, ' ')}, {headlineGap.period}</small>
+              {dollars(headline.gap.appropriated_cents)}
+              <small>{headline.label}, {headline.gap.period}</small>
             </dd>
           </div>
           <div>
             <dt>Disbursed</dt>
             <dd>
-              {exact(headlineGap.spent_cents)}
-              <small>basis: {headlineGap.basis}</small>
+              {exact(headline.gap.spent_cents)}
+              <small>basis: {headline.gap.basis}</small>
             </dd>
           </div>
           <div>
             {/* gap's sign convention is positive-when-authority-exceeded-spending, which
                 inverts the everyday reading of "variance". Name the direction instead. */}
-            <dt>{headlineGap.variance_cents < 0 ? 'Overspent by' : 'Left unspent'}</dt>
+            <dt>{headline.overspent ? 'Overspent by' : 'Left unspent'}</dt>
             <dd>
-              {exact(Math.abs(headlineGap.variance_cents))}
-              <small>{percentOrNone(headlineGap.variance_pct)} of authority</small>
+              {exact(Math.abs(headline.gap.variance_cents))}
+              <small>{percentOrNone(headline.gap.variance_pct)} of authority</small>
             </dd>
           </div>
         </dl>
 
         <p>
-          Foundation Funding — the line through which the state pays its share of school
-          district operating costs — spent {exact(Math.abs(headlineGap.variance_cents))} more
-          in {headlineGap.period} than it was appropriated, on an authority of{' '}
-          {dollars(headlineGap.appropriated_cents)}. That is{' '}
-          {percentOrNone(headlineGap.variance_pct)}, and the figure rests on closed books rather
-          than in-year reporting, so it will not move.
+          <a href={`/wiki/line-item/${headline.gap.line_item}`}>{headline.label}</a> is the
+          widest divergence between authority and outturn the corpus can compute. In{' '}
+          {headline.gap.period} it{' '}
+          {headline.overspent
+            ? `spent ${exact(Math.abs(headline.gap.variance_cents))} more than it was appropriated`
+            : `left ${exact(Math.abs(headline.gap.variance_cents))} of its authority unspent`}
+          , against an authority of {dollars(headline.gap.appropriated_cents)} —{' '}
+          {percentOrNone(headline.gap.variance_pct)} of authority.{' '}
+          {headline.gap.basis === 'actual-closed' && !headline.gap.provisional
+            ? 'The figure rests on closed books rather than in-year reporting, so it will not move.'
+            : `The figure rests on ${headline.gap.basis} reporting${headline.gap.provisional ? ', and is provisional' : ''}.`}
         </p>
 
         <Figure
-          title={`Disbursement against authority — ${headlineGap.line_item.replace(/-/g, ' ')}, ${headlineGap.period}`}
+          title={`Disbursement against authority — ${headline.label}, ${headline.gap.period}`}
           caption="The track is the authority granted; the fill is money out the door. Drawn as a meter rather than as two bars because at this scale two bars are visually identical, and a reader would take that for no difference."
-          svg={gapMeter(headlineGap)}
+          svg={gapMeter(headline.gap)}
         />
 
         <p>
           How to read it is not obvious from the number, and the calculator declines to
-          collapse it into a verdict.{' '}
-          <em>{headlineGap.character.how_to_read}</em>. Foundation Funding distributes under
-          the school funding formula, so a district count or a per-pupil input landing
-          differently from forecast moves the total without anyone deciding to spend more.
+          collapse it into a verdict. It returns the line item's character alongside the
+          variance, because a divergence means different things on different kinds of line:{' '}
+          <em>{headline.gap.character.how_to_read}</em>.
         </p>
       </>
     )

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   enactedByPeriod,
+  headlineGap,
   indexSensitivity,
   landingSubjects,
   periodKind,
@@ -10,9 +11,11 @@ import {
   stagePoints,
 } from './derive.ts';
 import type {
+  Character,
   Corpus,
   Decomposition,
   Feed,
+  GapCoverage,
   Manifest,
   NodeView,
   SeriesCoverage,
@@ -68,10 +71,45 @@ function manifest(deflator: boolean): Manifest {
   };
 }
 
+const CHARACTER: Character = {
+  policy_areas: [],
+  formula_driven: false,
+  federally_matched: false,
+  how_to_read: 'a reading the calculator supplied',
+};
+
+/** A computed gap outcome as `crates/gap` emits one. */
+function computedGap(
+  line_item: string,
+  period: string,
+  appropriated_cents: number,
+  spent_cents: number,
+): GapCoverage {
+  const variance_cents = appropriated_cents - spent_cents;
+  return {
+    line_item,
+    period,
+    outcome: {
+      status: 'computed',
+      line_item,
+      period,
+      appropriated_cents,
+      spent_cents,
+      variance_cents,
+      variance_pct: appropriated_cents === 0 ? null : (variance_cents / appropriated_cents) * 100,
+      reversion_cents: null,
+      basis: 'actual-closed',
+      provisional: false,
+      character: CHARACTER,
+    },
+  };
+}
+
 function feed(
   corpus: Corpus,
   opts: {
     deflator?: boolean;
+    gap?: GapCoverage[];
     stageDelta?: Decomposition[];
     realTerms?: SeriesCoverage[];
   } = {},
@@ -83,7 +121,7 @@ function feed(
     decisions: [],
     skills: [],
     findings: {
-      gap: [],
+      gap: opts.gap ?? [],
       gap_summary: {
         computed: 0,
         appropriated_cents: 0,
@@ -391,6 +429,79 @@ describe('seriesChange', () => {
     );
     if (!out.ok) throw new Error('expected a series');
     expect(seriesChange(out.data)?.reversesSign).toBe(false);
+  });
+});
+
+// ─── the headline gap ────────────────────────────────────────────────────────
+
+describe('headlineGap', () => {
+  const corpus: Corpus = {
+    classes: [],
+    nodes: [
+      node({
+        slug: 'medicaid-health-care-services-federal',
+        class: 'line-item',
+        label: 'Medicaid Health Care Services (Federal Share)',
+      }),
+      node({ slug: 'community-schools-funding', class: 'line-item', label: 'Community Schools Funding' }),
+    ],
+  };
+
+  // Feed order is alphabetical by line item, so the small line comes first. Selecting on
+  // position rather than on size is what put a $2.2M line under prose about a $7B one.
+  const small = computedGap('community-schools-funding', 'FY2012', 220_000_000, 168_324_841);
+  const large = computedGap(
+    'medicaid-health-care-services-federal',
+    'FY2023',
+    866_158_538_300,
+    1_049_693_074_163,
+  );
+
+  it('leads with the widest divergence rather than the first in feed order', () => {
+    const out = headlineGap(feed(corpus, { gap: [small, large] }));
+    expect(out?.gap.line_item).toBe('medicaid-health-care-services-federal');
+    expect(out?.gap.period).toBe('FY2023');
+  });
+
+  it('reads the direction off the sign, not off the page', () => {
+    const over = headlineGap(feed(corpus, { gap: [large] }));
+    expect(over?.overspent).toBe(true);
+    expect(over?.gap.variance_cents).toBeLessThan(0);
+
+    const under = headlineGap(feed(corpus, { gap: [small] }));
+    expect(under?.overspent).toBe(false);
+    expect(under?.gap.variance_cents).toBeGreaterThan(0);
+  });
+
+  it('names the line item as the corpus labels it', () => {
+    const out = headlineGap(feed(corpus, { gap: [large] }));
+    expect(out?.label).toBe('Medicaid Health Care Services (Federal Share)');
+  });
+
+  it('falls back to the slug when the corpus holds no node for the line item', () => {
+    const out = headlineGap(feed({ classes: [], nodes: [] }, { gap: [large] }));
+    expect(out?.label).toBe('Medicaid health care services federal');
+  });
+
+  it('considers only outcomes that computed', () => {
+    const blocked: GapCoverage = {
+      line_item: 'pupil-transportation',
+      period: 'FY2011',
+      outcome: { status: 'unavailable', reason: 'no expenditure committed' },
+    };
+    const out = headlineGap(feed(corpus, { gap: [blocked, small] }));
+    expect(out?.gap.line_item).toBe('community-schools-funding');
+  });
+
+  it('has no headline when nothing computes', () => {
+    expect(headlineGap(feed(corpus, { gap: [] }))).toBeUndefined();
+  });
+
+  it('breaks a tie on period and line item, so the build is reproducible', () => {
+    const a = computedGap('b-line', 'FY2020', 1_000, 2_000);
+    const b = computedGap('a-line', 'FY2020', 5_000, 4_000);
+    expect(headlineGap(feed(corpus, { gap: [a, b] }))?.gap.line_item).toBe('a-line');
+    expect(headlineGap(feed(corpus, { gap: [b, a] }))?.gap.line_item).toBe('a-line');
   });
 });
 
