@@ -73,6 +73,43 @@ fn obm_fixtures_parse_and_cover_both_bases() {
 }
 
 #[test]
+fn dasf_fixtures_reconcile_and_cover_the_shapes_that_break_parsers() {
+    // Kept in a subdirectory rather than beside the monthly-report fixtures because the two
+    // have different shapes and `yaml_files` does not recurse — the test above would try to
+    // read these as `ObmExpenditureRow` and fail.
+    let rows: Vec<ObmBudgetaryRow> = parse_all("obm/dasf");
+    assert!(rows.len() >= 3);
+    for row in &rows {
+        assert_eq!(
+            row.unspent_cents(),
+            row.final_cents - row.actual_cents,
+            "the three figures must reconcile: {row:?}"
+        );
+        assert!(
+            row.final_cents >= 0 && row.actual_cents >= 0,
+            "a fixture with a negative figure would assert something about Ohio: {row:?}"
+        );
+    }
+    assert!(
+        rows.iter().any(|r| r.original_cents != r.final_cents),
+        "authority moving during the year is the case this report exists to show"
+    );
+    assert!(
+        rows.iter().any(|r| r.original_cents == r.final_cents),
+        "a line untouched all year must be exercised too"
+    );
+    assert!(
+        rows.iter().any(|r| r.final_cents == r.actual_cents),
+        "spending the whole appropriation is a real outcome and leaves nothing unspent"
+    );
+    assert!(
+        rows.iter()
+            .any(|r| r.line_item_code.chars().any(|c| c.is_ascii_alphabetic())),
+        "alphanumeric line item codes are real; a six-digit rule would drop them silently"
+    );
+}
+
+#[test]
 fn controlling_board_fixtures_include_a_non_approved_disposition() {
     let rows: Vec<ControllingBoardRequest> = parse_all("controlling-board");
     assert!(
@@ -107,19 +144,44 @@ fn legislature_fixtures_include_an_incomplete_stage_chain() {
 #[test]
 fn every_fixture_is_marked_synthetic() {
     // The guard that keeps fabricated values from being mistaken for extracted ones.
-    for sub in ["lsc", "obm", "controlling-board", "legislature"] {
-        for path in yaml_files(sub) {
-            let text = std::fs::read_to_string(&path).unwrap();
-            assert!(
-                text.contains("synthetic-fixture"),
-                "{} must carry synthetic provenance",
-                path.display()
-            );
-            assert!(
-                !text.contains("retrieved: \"20"),
-                "{} carries a real-looking retrieval date",
-                path.display()
-            );
+    //
+    // Walks the whole tree rather than a list of known subdirectories. The list was the bug:
+    // it covered `obm` but not `obm/dasf`, so the first fixture placed in a subdirectory left
+    // the guard silently — which is the same shape of defect as a stale claim, a check that
+    // reads correct while no longer covering what it names.
+    let files = all_yaml(&fixtures_dir());
+    assert!(files.len() >= 5, "the tree should not have shrunk");
+    for path in files {
+        let text = std::fs::read_to_string(&path).unwrap();
+        assert!(
+            text.contains("synthetic-fixture"),
+            "{} must carry synthetic provenance",
+            path.display()
+        );
+        assert!(
+            !text.contains("retrieved: \"20"),
+            "{} carries a real-looking retrieval date",
+            path.display()
+        );
+    }
+}
+
+/// Every `.yml` under `dir`, at any depth.
+fn all_yaml(dir: &Path) -> Vec<PathBuf> {
+    let mut out = Vec::new();
+    let mut stack = vec![dir.to_path_buf()];
+    while let Some(d) = stack.pop() {
+        for entry in
+            std::fs::read_dir(&d).unwrap_or_else(|e| panic!("reading {}: {e}", d.display()))
+        {
+            let path = entry.expect("a readable entry").path();
+            if path.is_dir() {
+                stack.push(path);
+            } else if path.extension().is_some_and(|x| x == "yml") {
+                out.push(path);
+            }
         }
     }
+    out.sort();
+    out
 }

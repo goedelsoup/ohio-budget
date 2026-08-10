@@ -13,6 +13,7 @@ members = [
     "stage-delta",
     "governor",
     "local-finance",
+    "obm",
 ]
 
 [workspace.package]

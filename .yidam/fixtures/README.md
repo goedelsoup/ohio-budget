@@ -24,6 +24,7 @@ string `synthetic-fixture` appears anywhere in a corpus instance.
 ```
 lsc/                 appropriation figures by line item and stage
 obm/                 disbursement figures, disbursed and actual-closed
+obm/dasf/            year-end budgetary rows: original, final, and actual together
 controlling-board/   execution-phase requests and their disposition
 legislature/         bill metadata and stage history
 ```

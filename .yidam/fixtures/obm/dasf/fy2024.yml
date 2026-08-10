@@ -1,0 +1,70 @@
+# SYNTHETIC — not real Ohio budget data. See ../README.md.
+#
+# Rows of the Detailed Appropriation Summary by Fund, whose shape differs from the monthly
+# report in ../obm/fy2024-25-foundation-funding.yml: four figures per row rather than one.
+# The three money columns only mean anything together, so they are extracted together.
+
+# The ordinary case: authority raised during the year, and most of it spent. `final` minus
+# `actual` is the unspent remainder — lapsed, or encumbered and not yet paid, which this
+# report does not separate.
+- agency_name: DEPARTMENT OF SYNTHETIC AFFAIRS
+  fund_code: "7069"
+  line_item_code: "110969"
+  line_item_name: SYNTHETIC DISTRIBUTION
+  fiscal_year: FY2024
+  original_cents: 42490000000
+  final_cents: 45155961978
+  actual_cents: 45147495144
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-dasf-fy2024
+    locator: "page 3, general fund type"
+    retrieved: "1970-01-01"
+
+# Authority untouched all year: original equals final. A connector that assumed every line is
+# adjusted would have no case exercising the equality.
+- agency_name: DEPARTMENT OF SYNTHETIC CORRECTIONS
+  fund_code: GRF
+  line_item_code: "501321"
+  line_item_name: SYNTHETIC OPERATIONS
+  fiscal_year: FY2024
+  original_cents: 118417042291
+  final_cents: 118417042291
+  actual_cents: 116752770452
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-dasf-fy2024
+    locator: "page 12, general fund type"
+    retrieved: "1970-01-01"
+
+# An alphanumeric line item code and a fund code that is not numeric either. A rule requiring
+# six digits would drop this row silently, which is why it is here.
+- agency_name: DEPARTMENT OF SYNTHETIC EDUCATION
+  fund_code: 5AD1
+  line_item_code: 2006A2
+  line_item_name: SYNTHETIC EQUIPMENT
+  fiscal_year: FY2024
+  original_cents: 5000000000
+  final_cents: 9775075560
+  actual_cents: 9775075460
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-dasf-fy2024
+    locator: "page 4, general fund type"
+    retrieved: "1970-01-01"
+
+# Spent to the cent, leaving nothing. Zero is a real outcome on a formula distribution and is
+# not the same claim as an absent figure.
+- agency_name: DEPARTMENT OF SYNTHETIC EDUCATION
+  fund_code: 5VS0
+  line_item_code: "200604"
+  line_item_name: SYNTHETIC FOUNDATION
+  fiscal_year: FY2024
+  original_cents: 60000000000
+  final_cents: 60000000000
+  actual_cents: 60000000000
+  provenance:
+    catalog_slug: synthetic-fixture
+    document_ref: SYNTHETIC-dasf-fy2024
+    locator: "page 4, general fund type"
+    retrieved: "1970-01-01"

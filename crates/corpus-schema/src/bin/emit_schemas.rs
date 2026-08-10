@@ -43,6 +43,7 @@ fn main() -> Result<()> {
     emit::<LscComparisonRow>(&extraction, "lsc-comparison-row")?;
     emit::<LscProvisionRow>(&extraction, "lsc-provision-row")?;
     emit::<ObmExpenditureRow>(&extraction, "obm-expenditure-row")?;
+    emit::<ObmBudgetaryRow>(&extraction, "obm-budgetary-row")?;
     emit::<ControllingBoardRequest>(&extraction, "controlling-board-request")?;
     emit::<LegislatureBill>(&extraction, "legislature-bill")?;
     emit::<VetoItemRow>(&extraction, "veto-item-row")?;

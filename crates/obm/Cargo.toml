@@ -1,0 +1,29 @@
+[package]
+name = "obm"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Connector for Office of Budget and Management budgetary reporting"
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_yaml.workspace = true
+corpus-schema = { path = "../corpus-schema" }
+# For the PDF-to-table step only. Recovering a table from positioned glyphs is not an LSC
+# problem — it is a PDF problem — but the algorithm was written in `lsc::geometry` when LSC
+# was the only source that needed it, and duplicating five hundred tested lines to avoid an
+# awkward-looking edge would be worse than the edge. See "On depending on lsc" in README.md.
+lsc = { path = "../lsc", default-features = false }
+
+[features]
+default = ["pdf"]
+# Same split as `lsc`: reading PDF bytes pulls the font and CMap stack, while the row parsing
+# is pure and stays testable under `--no-default-features`.
+pdf = ["lsc/pdf"]
+
+[[bin]]
+name = "obm-dasf"
+path = "src/bin/obm-dasf.rs"
+required-features = ["pdf"]

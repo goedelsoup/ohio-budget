@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ObmBudgetaryRow",
+  "description": "One row of OBM's Detailed Appropriation Summary by Fund — the year-end budgetary report drawn from OAKS.\n\nFour figures per row rather than one, and they are kept together deliberately. The monthly reports model a single disbursement figure, which is what [`ObmExpenditureRow`] captures; this report states the authority as loaded, the authority as it stood at year end, and the outturn, and the three are only interpretable against each other. Splitting them at extraction time would discard the fact that they came from one row of one document and reconcile exactly — which is the property that makes the row checkable at all.\n\n`final_cents` is the figure the corpus has recorded as carried by no committed source: the appropriation as it stood after transfers and reductions, for a year that has closed.",
+  "type": "object",
+  "required": [
+    "actual_cents",
+    "agency_name",
+    "final_cents",
+    "fiscal_year",
+    "fund_code",
+    "line_item_code",
+    "line_item_name",
+    "original_cents",
+    "provenance"
+  ],
+  "properties": {
+    "actual_cents": {
+      "description": "Charged against the line item, on the budgetary basis this report uses.",
+      "type": "integer",
+      "format": "int64"
+    },
+    "agency_name": {
+      "type": "string"
+    },
+    "final_cents": {
+      "description": "Authority as it stood at year end, after transfers and reductions.",
+      "type": "integer",
+      "format": "int64"
+    },
+    "fiscal_year": {
+      "type": "string"
+    },
+    "fund_code": {
+      "type": "string"
+    },
+    "line_item_code": {
+      "type": "string"
+    },
+    "line_item_name": {
+      "type": "string"
+    },
+    "original_cents": {
+      "description": "Authority as OAKS was originally loaded for the year. Not necessarily the enacted figure — reappropriations and carried encumbrances may be included, which is why this is named for the column rather than for the concept.",
+      "type": "integer",
+      "format": "int64"
+    },
+    "provenance": {
+      "$ref": "#/definitions/Provenance"
+    }
+  },
+  "definitions": {
+    "Provenance": {
+      "description": "Where an extracted value came from, carried on every extraction record.\n\nWithout this a value cannot be promoted from `[inference]` to `[verified]`, since verification is defined as resting on a committed, citable source.",
+      "type": "object",
+      "required": [
+        "catalog_slug",
+        "document_ref",
+        "retrieved"
+      ],
+      "properties": {
+        "catalog_slug": {
+          "description": "Slug of the catalog entry describing the source, e.g. `lsc-hb96-comparison`.",
+          "type": "string"
+        },
+        "document_ref": {
+          "description": "Stable locator for the document itself.",
+          "type": "string"
+        },
+        "locator": {
+          "description": "Where inside the document — page, table, or row identifier.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved": {
+          "description": "ISO-8601 date the source was retrieved.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

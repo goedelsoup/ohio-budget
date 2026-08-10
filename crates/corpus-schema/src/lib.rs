@@ -597,6 +597,45 @@ pub struct ObmExpenditureRow {
     pub provenance: Provenance,
 }
 
+/// One row of OBM's Detailed Appropriation Summary by Fund — the year-end budgetary report
+/// drawn from OAKS.
+///
+/// Four figures per row rather than one, and they are kept together deliberately. The monthly
+/// reports model a single disbursement figure, which is what [`ObmExpenditureRow`] captures;
+/// this report states the authority as loaded, the authority as it stood at year end, and the
+/// outturn, and the three are only interpretable against each other. Splitting them at
+/// extraction time would discard the fact that they came from one row of one document and
+/// reconcile exactly — which is the property that makes the row checkable at all.
+///
+/// `final_cents` is the figure the corpus has recorded as carried by no committed source: the
+/// appropriation as it stood after transfers and reductions, for a year that has closed.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+pub struct ObmBudgetaryRow {
+    pub agency_name: String,
+    pub fund_code: String,
+    pub line_item_code: String,
+    pub line_item_name: String,
+    pub fiscal_year: String,
+    /// Authority as OAKS was originally loaded for the year. Not necessarily the enacted
+    /// figure — reappropriations and carried encumbrances may be included, which is why this
+    /// is named for the column rather than for the concept.
+    pub original_cents: Cents,
+    /// Authority as it stood at year end, after transfers and reductions.
+    pub final_cents: Cents,
+    /// Charged against the line item, on the budgetary basis this report uses.
+    pub actual_cents: Cents,
+    pub provenance: Provenance,
+}
+
+impl ObmBudgetaryRow {
+    /// Authority that resolved as something other than a cash disbursement — lapsed, or
+    /// encumbered and not yet paid. The report publishes this as its fourth column, and an
+    /// extractor should check the published figure against this rather than trust either.
+    pub fn unspent_cents(&self) -> Cents {
+        self.final_cents - self.actual_cents
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "kebab-case")]
 pub enum ControllingBoardDisposition {
