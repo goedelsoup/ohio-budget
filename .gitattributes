@@ -1,7 +1,18 @@
 # Language statistics should describe what is written here.
 #
-# `.yidam/.vendor/` is not. It is the yidam template layer — prelude, CLI, SDKs, test harness —
-# copied in by `yidam overlay` and replaced wholesale the next time overlay runs. It is tracked
-# so a clone is self-contained, not because it is authored in this repository. Left unmarked it
-# dominates the language breakdown with Rust, TypeScript, and Python that nobody here wrote.
+# Two trees are not. `.yidam/.vendor/` is the yidam template layer, tracked so a clone is
+# self-contained rather than because it is authored in this repository. `.yidam/sources/` is
+# archived primary source material — legislature and encyclopedia pages downloaded and
+# committed so the claims resting on them cannot silently change. Between them they hold most
+# of the bytes a language breakdown counts, and none of those bytes were written here.
+#
+# `linguist-vendored` also collapses these paths by default in pull request review. Neither
+# tree is edited by hand, so that is usually right — but it does mean an accidental edit under
+# `.vendor/` arrives folded shut, and nothing else in the gate looks for one.
 .yidam/.vendor/** linguist-vendored=true
+.yidam/sources/** linguist-vendored=true
+
+# `.yidam/catalog/` records a sha256 for each committed source and says the corpus's claims
+# rest on those exact bytes. Line-ending normalization on checkout would falsify every digest
+# without anyone touching the repository.
+.yidam/sources/** -text

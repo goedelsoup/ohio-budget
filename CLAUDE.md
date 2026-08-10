@@ -9,6 +9,10 @@ here rather than decorative.
 
 `.yidam/.vendor/` is vendored template infrastructure, replaced wholesale the next time
 `yidam overlay` runs. Do not edit anything under it; changes there are lost, not merged.
+[`.gitattributes`](.gitattributes) marks it, and `.yidam/sources/`, as vendored: neither counts
+toward the repository's language statistics, and both arrive collapsed in a pull request diff.
+That is the intent — but it also means an accidental edit under `.vendor/` is folded shut in the
+one place anyone would see it, so the rule against editing there is worth more than it looks.
 
 ## Before opening a pull request
 
