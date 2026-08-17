@@ -7,12 +7,19 @@ output lives in `web/`. Before adding or editing nodes, read
 in particular the claim-confidence tags (`[verified]`, `[inference]`, `[open]`), which are load-bearing
 here rather than decorative.
 
-`.yidam/.vendor/` is vendored template infrastructure, replaced wholesale the next time
-`yidam overlay` runs. Do not edit anything under it; changes there are lost, not merged.
+`.yidam/.vendor/` is vendored template infrastructure — the yidam template layer, put here by the
+bootstrap step that moved `yidam/` under `.yidam/.vendor/`. Do not edit anything under it. Note
+that the reason is not the obvious one: `yidam overlay` refuses to run against a repository that
+already has `.yidam/`, and it writes `yidam/` rather than `.yidam/.vendor/`, so nothing re-syncs
+this directory in place today. An edit here is therefore not overwritten but stranded — carried
+forward as a private fork of the template that no upstream change will reconcile.
+
 [`.gitattributes`](.gitattributes) marks it, and `.yidam/sources/`, as vendored: neither counts
 toward the repository's language statistics, and both arrive collapsed in a pull request diff.
-That is the intent — but it also means an accidental edit under `.vendor/` is folded shut in the
-one place anyone would see it, so the rule against editing there is worth more than it looks.
+For `.vendor/` that hides exactly the edit worth seeing, so `mise run ci` pins the directory's git
+tree hash in [`.yidam/.vendor.tree`](.yidam/.vendor.tree) and fails if it moves. Refreshing the
+layer on purpose means moving that pin in the same commit; `mise run vendor-check` prints the
+command.
 
 ## Before opening a pull request
 
