@@ -1,8 +1,10 @@
 # mise.toml — task and toolchain entry point for this yidam-derived repository.
 #
 # The yidam CLI tasks (yidam-build, regen, graph-check, bundle, …) live in
-# mise.yidam.toml, placed at the repo root by `yidam overlay` and re-synced
-# whenever overlay runs again. Do not edit that file — edit this one.
+# mise.yidam.toml, copied to the repo root by `yidam overlay` during bootstrap.
+# Overlay refuses to run against a repository that already has .yidam/, so
+# nothing re-syncs that file in place today. Treat it as vendored anyway and
+# edit this one, so a future refresh finds nothing here to clobber.
 #
 # mise has no config-level `extends`/`include`, so mise.yidam.toml is wired in
 # as a config fragment: .config/mise/conf.d/yidam.toml symlinks to it. mise
@@ -18,8 +20,9 @@ node = "24"
 
 # Override. mise.yidam.toml ships `cargo install --path yidam/cli`, but the
 # bootstrap vendor step moves yidam/ to .yidam/.vendor/, so that path is dead in
-# every bootstrapped repo. Overridden here rather than edited there because
-# re-running overlay replaces mise.yidam.toml wholesale.
+# every bootstrapped repo. Overridden here rather than edited there so the fix
+# is not lost if that file is ever refreshed, and because repo-specific tasks
+# belong in this file regardless.
 [tasks.yidam-build]
 description = "Compile and install the yidam binary from the vendored CLI to ~/.cargo/bin."
 run = "cargo install --path .yidam/.vendor/cli"
@@ -119,6 +122,44 @@ run = "npm run check"
 # `validate` catches what `yidam graph-check` cannot: relationships an instance
 # asserts that its class never declared. Both run; they check different things.
 
+# .yidam/.vendor/ is not authored here and, since it was marked vendored, its diffs
+# arrive collapsed in pull request review — which hides precisely the edit worth
+# seeing. Nothing else looks for one: there is no commit hook, and no upstream pin
+# to compare against. So compare against ourselves. `.yidam/.vendor.tree` holds the
+# git tree hash of the directory, which is a content hash of the whole subtree, and
+# an edit anywhere under it moves that hash.
+#
+# This reads HEAD rather than the working tree: the gate is the pull request, and a
+# pull request's edits are committed. It also means the check needs no base ref and
+# no history, which matters because the workflow checks out shallow.
+[tasks.vendor-check]
+description = "Fail if .yidam/.vendor/ has been edited away from its pinned tree hash."
+run = '''
+pinned=$(tr -d '[:space:]' < .yidam/.vendor.tree)
+actual=$(git rev-parse HEAD:.yidam/.vendor)
+if [ "$pinned" != "$actual" ]; then
+  echo "error: .yidam/.vendor/ differs from the tree pinned in .yidam/.vendor.tree" >&2
+  echo "  pinned:  $pinned" >&2
+  echo "  at HEAD: $actual" >&2
+  echo >&2
+  echo "The vendor layer is template infrastructure, not written in this repository," >&2
+  echo "and its diffs are collapsed in review. To see what moved:" >&2
+  echo "    git diff $pinned $actual" >&2
+  echo >&2
+  echo "If the edit was an accident, drop the commit that made it:" >&2
+  echo "    git log --oneline -- .yidam/.vendor/" >&2
+  echo >&2
+  echo "Do not try to restore from the pin directly. It is the hash of the subtree," >&2
+  echo "so repo-relative paths do not resolve inside it, and the forms that look like" >&2
+  echo "they should work delete the directory instead." >&2
+  echo >&2
+  echo "If the layer was refreshed on purpose, move the pin in the same commit:" >&2
+  echo "    git rev-parse HEAD:.yidam/.vendor > .yidam/.vendor.tree" >&2
+  exit 1
+fi
+echo "vendor layer matches its pin ($pinned)"
+'''
+
 [tasks.ci]
 description = "Full gate: format, lint, test, validate the corpus, and check graph integrity."
 run = [
@@ -132,6 +173,7 @@ run = [
   "git diff --exit-code -- .yidam/schemas",
   "cargo run -q --manifest-path crates/Cargo.toml --bin corpus-validate -- .",
   "yidam graph-check",
+  "mise run vendor-check",
   # The web layer's own gate. `web-build` depends on `export`, so a change to the
   # corpus or a calculator that the site cannot render fails here rather than at
   # deploy time.
